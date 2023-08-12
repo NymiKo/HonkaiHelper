@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.HeroesListFragment">
+    tools:context=".fragments.HeroesListFragment"
+    android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/buttonChangeView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:background="?selectableItemBackground"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_grid" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPagerHeroes"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewHeroes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp"/>
+        android:padding="8dp"
+        android:visibility="gone"/>
 
-</FrameLayout>
+</LinearLayout>

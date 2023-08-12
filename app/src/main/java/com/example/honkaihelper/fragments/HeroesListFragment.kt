@@ -13,6 +13,7 @@ class HeroesListFragment : BaseFragment<FragmentHeroesListBinding>(FragmentHeroe
 
     private lateinit var mAdapterViewPager: HeroesListAdapter
     private lateinit var mAdapterRecyclerView: HeroesListRecyclerViewAdapter
+    private var viewHeroes: Boolean = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -20,8 +21,23 @@ class HeroesListFragment : BaseFragment<FragmentHeroesListBinding>(FragmentHeroe
     }
 
     private fun setupView() {
-        //setupViewPager()
+        setupViewPager()
         setupRecyclerView()
+
+        binding.buttonChangeView.setOnClickListener {
+            viewHeroes = !viewHeroes
+            changeViewHeroes()
+        }
+    }
+
+    private fun changeViewHeroes() {
+        if (viewHeroes) {
+            binding.viewPagerHeroes.visibility = View.VISIBLE
+            binding.recyclerViewHeroes.visibility = View.GONE
+        } else {
+            binding.recyclerViewHeroes.visibility = View.VISIBLE
+            binding.viewPagerHeroes.visibility = View.GONE
+        }
     }
 
     private fun setupViewPager() {
