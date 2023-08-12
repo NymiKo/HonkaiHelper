@@ -22,6 +22,7 @@ class HeroesListFragment : BaseFragment<FragmentHeroesListBinding>(FragmentHeroe
 
     private fun setupViewPager() {
         mAdapter = HeroesListAdapter()
+
         binding.viewPagerHeroes.apply {
             setPageTransformer(ZoomOutPageTransformer())
 
