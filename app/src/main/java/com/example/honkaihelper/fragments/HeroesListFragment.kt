@@ -48,9 +48,9 @@ class HeroesListFragment : BaseFragment<FragmentHeroesListBinding>(FragmentHeroe
 
             adapter = mAdapterViewPager.apply {
                 mHeroesList = listOf(
-                    Hero(0, "Вельт", "https://static.wikia.nocookie.net/honkai-star-rail/images/c/c3/Персонаж_Вельт_Сплэш-арт.png/revision/latest/scale-to-width-down/1000?cb=20230213151457&path-prefix=ru"),
-                    Hero(1, "Цзинь Юань", "https://static.wikia.nocookie.net/houkai-star-rail/images/4/48/Character_Jing_Yuan_Splash_Art.png/revision/latest/scale-to-width-down/1000?cb=20230210115809"),
-                    Hero(2, "Сервал", "https://static.wikia.nocookie.net/honkai-star-rail/images/5/52/Персонаж_Сервал_Сплэш-арт.png/revision/latest/scale-to-width-down/1000?cb=20230213151537&path-prefix=ru")
+                    Hero(0, "Блэйд", "https://static.wikia.nocookie.net/honkai-star-rail/images/a/a0/Персонаж_Блэйд_Сплэш-арт.png/revision/latest/scale-to-width-down/1000?cb=20230502132146&path-prefix=ru", true),
+                    Hero(1, "Цзинь Юань", "https://static.wikia.nocookie.net/houkai-star-rail/images/4/48/Character_Jing_Yuan_Splash_Art.png/revision/latest/scale-to-width-down/1000?cb=20230210115809", true),
+                    Hero(2, "Сервал", "https://static.wikia.nocookie.net/honkai-star-rail/images/5/52/Персонаж_Сервал_Сплэш-арт.png/revision/latest/scale-to-width-down/1000?cb=20230213151537&path-prefix=ru", false)
                 )
             }
         }
@@ -60,9 +60,9 @@ class HeroesListFragment : BaseFragment<FragmentHeroesListBinding>(FragmentHeroe
         binding.recyclerViewHeroes.layoutManager = GridLayoutManager(requireContext(), 3)
         mAdapterRecyclerView = HeroesListRecyclerViewAdapter()
         mAdapterRecyclerView.mHeroesList = listOf(
-            Hero(0, "Вельт", "https://static.wikia.nocookie.net/honkai-star-rail/images/c/c3/Персонаж_Вельт_Сплэш-арт.png/revision/latest/scale-to-width-down/1000?cb=20230213151457&path-prefix=ru"),
-            Hero(1, "Цзинь Юань", "https://static.wikia.nocookie.net/houkai-star-rail/images/4/48/Character_Jing_Yuan_Splash_Art.png/revision/latest/scale-to-width-down/1000?cb=20230210115809"),
-            Hero(2, "Сервал", "https://static.wikia.nocookie.net/honkai-star-rail/images/5/52/Персонаж_Сервал_Сплэш-арт.png/revision/latest/scale-to-width-down/1000?cb=20230213151537&path-prefix=ru")
+            Hero(0, "Блэйд>", "https://static.wikia.nocookie.net/honkai-star-rail/images/4/47/Персонаж_Блэйд_Иконка.png/revision/latest?cb=20230721132650&path-prefix=ru", true),
+            Hero(1, "Цзинь Юань", "https://static.wikia.nocookie.net/honkai-star-rail/images/1/10/Персонаж_Цзин_Юань_Иконка.png/revision/latest?cb=20230219133939&path-prefix=ru", true),
+            Hero(2, "Сервал", "https://static.wikia.nocookie.net/honkai-star-rail/images/f/f3/Персонаж_Сервал_Иконка.png/revision/latest?cb=20230219133911&path-prefix=ru", false)
         )
         binding.recyclerViewHeroes.adapter = mAdapterRecyclerView
     }

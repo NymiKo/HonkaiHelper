@@ -1,9 +1,12 @@
 package com.example.honkaihelper.adapters
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.ItemHeroRecyclerViewBinding
 import com.example.honkaihelper.models.Hero
 import com.example.honkaihelper.utils.load
@@ -35,6 +38,11 @@ class HeroesListRecyclerViewAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(hero: Hero) {
             binding.imageHeroAvatar.load(hero.avatar)
+            if (hero.rarity) {
+                binding.cardHeroIcon.strokeColor = ContextCompat.getColor(binding.cardHeroIcon.context, R.color.orange)
+            } else {
+                binding.cardHeroIcon.strokeColor = ContextCompat.getColor(binding.cardHeroIcon.context, R.color.violet)
+            }
         }
     }
 }
