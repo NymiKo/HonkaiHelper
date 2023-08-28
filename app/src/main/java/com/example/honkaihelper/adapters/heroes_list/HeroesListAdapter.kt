@@ -1,4 +1,4 @@
-package com.example.honkaihelper.adapters
+package com.example.honkaihelper.adapters.heroes_list
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

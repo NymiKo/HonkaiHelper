@@ -9,5 +9,19 @@
         android:id="@+id/heroesListFragment"
         android:name="com.example.honkaihelper.fragments.HeroesListFragment"
         android:label="fragment_heroes_list"
-        tools:layout="@layout/fragment_heroes_list" />
+        tools:layout="@layout/fragment_heroes_list" >
+        <action
+            android:id="@+id/action_heroesListFragment_to_teamsListFragment"
+            app:destination="@id/teamsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teamsListFragment"
+        android:name="com.example.honkaihelper.fragments.TeamsListFragment"
+        android:label="fragment_teams_list"
+        tools:layout="@layout/fragment_teams_list" >
+        <argument
+            android:name="id_hero"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>

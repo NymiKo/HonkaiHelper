@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="8dp"
+    android:padding="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="hero_avatar_in_team_1, hero_name_in_team_1" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/hero_avatar_in_team_1"
+            android:layout_width="80dp"
+            android:layout_height="120dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/hero_avatar_in_team_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:strokeColor="@color/gray"
+            app:strokeWidth="1dp" />
+
+        <TextView
+            android:id="@+id/hero_name_in_team_1"
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:background="@color/gray"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/hero_avatar_in_team_1"
+            app:layout_constraintEnd_toEndOf="@+id/hero_avatar_in_team_1"
+            app:layout_constraintStart_toStartOf="@+id/hero_avatar_in_team_1" />
+
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="hero_avatar_in_team_2, hero_name_in_team_2" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/hero_avatar_in_team_2"
+            android:layout_width="80dp"
+            android:layout_height="120dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/hero_avatar_in_team_3"
+            app:layout_constraintStart_toEndOf="@+id/hero_avatar_in_team_1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:strokeColor="@color/gray"
+            app:strokeWidth="1dp" />
+
+        <TextView
+            android:id="@+id/hero_name_in_team_2"
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:background="@color/gray"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/hero_avatar_in_team_2"
+            app:layout_constraintEnd_toEndOf="@+id/hero_avatar_in_team_2"
+            app:layout_constraintStart_toStartOf="@+id/hero_avatar_in_team_2" />
+
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="hero_avatar_in_team_3, hero_name_in_team_3" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/hero_avatar_in_team_3"
+            android:layout_width="80dp"
+            android:layout_height="120dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/hero_avatar_in_team_4"
+            app:layout_constraintStart_toEndOf="@+id/hero_avatar_in_team_2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:strokeColor="@color/gray"
+            app:strokeWidth="2dp" />
+
+        <TextView
+            android:id="@+id/hero_name_in_team_3"
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:background="@color/gray"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/hero_avatar_in_team_3"
+            app:layout_constraintEnd_toEndOf="@+id/hero_avatar_in_team_3"
+            app:layout_constraintStart_toStartOf="@+id/hero_avatar_in_team_3" />
+
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="hero_avatar_in_team_4, hero_name_in_team_4" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/hero_avatar_in_team_4"
+            android:layout_width="80dp"
+            android:layout_height="120dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/hero_avatar_in_team_3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:strokeColor="@color/gray"
+            app:strokeWidth="1dp" />
+
+        <TextView
+            android:id="@+id/hero_name_in_team_4"
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:background="@color/gray"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/hero_avatar_in_team_4"
+            app:layout_constraintEnd_toEndOf="@+id/hero_avatar_in_team_4"
+            app:layout_constraintStart_toStartOf="@+id/hero_avatar_in_team_4" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

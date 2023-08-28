@@ -2,9 +2,12 @@ package com.example.honkaihelper.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.honkaihelper.adapters.HeroesListAdapter
-import com.example.honkaihelper.adapters.HeroesListRecyclerViewAdapter
+import com.example.honkaihelper.R
+import com.example.honkaihelper.adapters.heroes_list.HeroesListActionListener
+import com.example.honkaihelper.adapters.heroes_list.HeroesListAdapter
+import com.example.honkaihelper.adapters.heroes_list.HeroesListRecyclerViewAdapter
 import com.example.honkaihelper.databinding.FragmentHeroesListBinding
 import com.example.honkaihelper.models.Hero
 import com.example.honkaihelper.utils.ZoomOutPageTransformer
@@ -59,7 +62,11 @@ class HeroesListFragment : BaseFragment<FragmentHeroesListBinding>(FragmentHeroe
     private fun setupRecyclerView() {
         binding.recyclerViewHeroes.setHasFixedSize(true)
         binding.recyclerViewHeroes.layoutManager = GridLayoutManager(requireContext(), 3)
-        mAdapterRecyclerView = HeroesListRecyclerViewAdapter()
+        mAdapterRecyclerView = HeroesListRecyclerViewAdapter(object : HeroesListActionListener {
+            override fun onClick(idHero: Int) {
+                findNavController().navigate(R.id.action_heroesListFragment_to_teamsListFragment, TeamsListFragment.newInstance(idHero))
+            }
+        })
         mAdapterRecyclerView.mHeroesList = listOf(
             Hero(0, "Блэйд>", "https://static.wikia.nocookie.net/honkai-star-rail/images/4/47/Персонаж_Блэйд_Иконка.png/revision/latest?cb=20230721132650&path-prefix=ru", true),
             Hero(1, "Цзинь Юань", "https://static.wikia.nocookie.net/honkai-star-rail/images/1/10/Персонаж_Цзин_Юань_Иконка.png/revision/latest?cb=20230219133939&path-prefix=ru", true),

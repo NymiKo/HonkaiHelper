@@ -2,4 +2,5 @@
 <resources>
     <dimen name="text_very_large">24sp</dimen>
     <dimen name="card_corner_radius_large">20dp</dimen>
+    <dimen name="corner_radius_hero_avatar_in_team">20dp</dimen>
 </resources>
