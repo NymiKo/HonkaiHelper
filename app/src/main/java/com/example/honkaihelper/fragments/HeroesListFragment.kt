@@ -57,6 +57,7 @@ class HeroesListFragment : BaseFragment<FragmentHeroesListBinding>(FragmentHeroe
     }
 
     private fun setupRecyclerView() {
+        binding.recyclerViewHeroes.setHasFixedSize(true)
         binding.recyclerViewHeroes.layoutManager = GridLayoutManager(requireContext(), 3)
         mAdapterRecyclerView = HeroesListRecyclerViewAdapter()
         mAdapterRecyclerView.mHeroesList = listOf(
@@ -69,6 +70,7 @@ class HeroesListFragment : BaseFragment<FragmentHeroesListBinding>(FragmentHeroe
 
     override fun onDestroyView() {
         binding.viewPagerHeroes.adapter = null
+        binding.recyclerViewHeroes.adapter = null
         super.onDestroyView()
     }
 }
