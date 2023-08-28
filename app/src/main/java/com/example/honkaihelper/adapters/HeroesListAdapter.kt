@@ -3,7 +3,9 @@ package com.example.honkaihelper.adapters
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.ItemHeroViewPagerBinding
 import com.example.honkaihelper.models.Hero
 import com.example.honkaihelper.utils.load
@@ -26,15 +28,26 @@ class HeroesListAdapter : RecyclerView.Adapter<HeroesListAdapter.HeroesViewHolde
 
     override fun onBindViewHolder(holder: HeroesViewHolder, position: Int) {
         val hero = mHeroesList[position]
-        with(holder.binding) {
-            imageHeroAvatar.load(hero.avatar)
-            textHeroName.text = hero.name
-            cardHero.tag = hero
-        }
+        holder.bind(hero)
     }
 
     override fun getItemCount(): Int = mHeroesList.size
 
     class HeroesViewHolder(val binding: ItemHeroViewPagerBinding) :
-        RecyclerView.ViewHolder(binding.root)
+        RecyclerView.ViewHolder(binding.root) {
+
+            fun bind(hero: Hero) {
+                binding.apply {
+                    imageHeroAvatar.load(hero.avatar)
+                    textHeroName.text = hero.name
+                    cardHero.tag = hero
+
+                    if (hero.rarity) {
+                        cardHero.strokeColor = ContextCompat.getColor(binding.cardHero.context, R.color.orange)
+                    } else {
+                        cardHero.strokeColor = ContextCompat.getColor(binding.cardHero.context, R.color.violet)
+                    }
+                }
+            }
+        }
 }
