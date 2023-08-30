@@ -23,5 +23,13 @@
             android:name="id_hero"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/action_teamsListFragment_to_createTeamFragment"
+            app:destination="@id/createTeamFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/createTeamFragment"
+        android:name="com.example.honkaihelper.fragments.CreateTeamFragment"
+        android:label="fragment_create_team"
+        tools:layout="@layout/fragment_create_team" />
 </navigation>

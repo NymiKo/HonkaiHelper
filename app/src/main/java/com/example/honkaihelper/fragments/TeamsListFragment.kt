@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.honkaihelper.R
 import com.example.honkaihelper.adapters.HeroTeamsListAdapter
 import com.example.honkaihelper.adapters.heroes_list.HeroesListActionListener
 import com.example.honkaihelper.databinding.FragmentTeamsListBinding
@@ -24,6 +26,13 @@ class TeamsListFragment :
 
     private fun setupView() {
         setupRecyclerView()
+        openCreateTeamFragment()
+    }
+
+    private fun openCreateTeamFragment() {
+        binding.buttonCreateTeam.setOnClickListener {
+            findNavController().navigate(R.id.action_teamsListFragment_to_createTeamFragment)
+        }
     }
 
     private fun setupRecyclerView() {
