@@ -30,17 +30,10 @@
 
         <TextView
             android:id="@+id/hero_name_in_team_1"
-            android:layout_width="80dp"
-            android:layout_height="25dp"
-            android:background="@color/gray"
-            android:fontFamily="sans-serif-medium"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="11sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/hero_avatar_in_team_1"
             app:layout_constraintEnd_toEndOf="@+id/hero_avatar_in_team_1"
-            app:layout_constraintStart_toStartOf="@+id/hero_avatar_in_team_1" />
+            app:layout_constraintStart_toStartOf="@+id/hero_avatar_in_team_1"
+            style="@style/name_hero_in_team" />
 
         <androidx.constraintlayout.widget.Group
             android:layout_width="wrap_content"
@@ -60,17 +53,10 @@
 
         <TextView
             android:id="@+id/hero_name_in_team_2"
-            android:layout_width="80dp"
-            android:layout_height="25dp"
-            android:background="@color/gray"
-            android:fontFamily="sans-serif-medium"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="11sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/hero_avatar_in_team_2"
             app:layout_constraintEnd_toEndOf="@+id/hero_avatar_in_team_2"
-            app:layout_constraintStart_toStartOf="@+id/hero_avatar_in_team_2" />
+            app:layout_constraintStart_toStartOf="@+id/hero_avatar_in_team_2"
+            style="@style/name_hero_in_team"/>
 
         <androidx.constraintlayout.widget.Group
             android:layout_width="wrap_content"
@@ -90,17 +76,10 @@
 
         <TextView
             android:id="@+id/hero_name_in_team_3"
-            android:layout_width="80dp"
-            android:layout_height="25dp"
-            android:background="@color/gray"
-            android:fontFamily="sans-serif-medium"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="11sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/hero_avatar_in_team_3"
             app:layout_constraintEnd_toEndOf="@+id/hero_avatar_in_team_3"
-            app:layout_constraintStart_toStartOf="@+id/hero_avatar_in_team_3" />
+            app:layout_constraintStart_toStartOf="@+id/hero_avatar_in_team_3"
+            style="@style/name_hero_in_team"/>
 
         <androidx.constraintlayout.widget.Group
             android:layout_width="wrap_content"
@@ -120,17 +99,10 @@
 
         <TextView
             android:id="@+id/hero_name_in_team_4"
-            android:layout_width="80dp"
-            android:layout_height="25dp"
-            android:background="@color/gray"
-            android:fontFamily="sans-serif-medium"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="11sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/hero_avatar_in_team_4"
             app:layout_constraintEnd_toEndOf="@+id/hero_avatar_in_team_4"
-            app:layout_constraintStart_toStartOf="@+id/hero_avatar_in_team_4" />
+            app:layout_constraintStart_toStartOf="@+id/hero_avatar_in_team_4"
+            style="@style/name_hero_in_team"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
