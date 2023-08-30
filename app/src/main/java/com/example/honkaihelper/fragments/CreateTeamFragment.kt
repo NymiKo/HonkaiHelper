@@ -6,9 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.honkaihelper.R
+import com.example.honkaihelper.databinding.FragmentCreateTeamBinding
 import com.example.honkaihelper.models.Hero
 
-class CreateTeamFragment : Fragment() {
+class CreateTeamFragment : BaseFragment<FragmentCreateTeamBinding>(FragmentCreateTeamBinding::inflate) {
 
     private var hero: Hero? = null
 
