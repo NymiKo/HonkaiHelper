@@ -9,17 +9,30 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_viewing_command"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="@dimen/small_margin"
+        android:layout_marginVertical="@dimen/medium_margin"
+        tools:listitem="@layout/item_hero_create_team"
+        tools:itemCount="4"/>
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_margin="16dp"/>
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="@dimen/medium_margin"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_heroes_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="4"
+        android:layout_margin="@dimen/medium_margin"
+        tools:itemCount="29"
+        tools:listitem="@layout/item_hero_create_team_list"/>
 
 </LinearLayout>
