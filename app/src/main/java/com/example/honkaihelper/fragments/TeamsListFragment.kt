@@ -23,6 +23,7 @@ class TeamsListFragment :
     }
 
     private fun setupView() {
+        setupToolbar()
         setupRecyclerView()
         openCreateTeamFragment()
     }
@@ -39,6 +40,10 @@ class TeamsListFragment :
         binding.recyclerViewTeamsHero.adapter = mAdapter
     }
 
+    private fun setupToolbar() {
+        binding.toolbarCreateTeam.title = resources.getString(R.string.team_for_hero, nameHero)
+    }
+
     override fun onDestroyView() {
         binding.recyclerViewTeamsHero.adapter = null
         super.onDestroyView()
@@ -50,7 +55,7 @@ class TeamsListFragment :
 
         @JvmStatic
         fun newInstance(idHero: Int, nameHero: String): Bundle {
-            return bundleOf(ARG_ID_HERO to idHero, nameHero to ARG_NAME_HERO)
+            return bundleOf(ARG_ID_HERO to idHero, ARG_NAME_HERO to nameHero)
         }
     }
 
