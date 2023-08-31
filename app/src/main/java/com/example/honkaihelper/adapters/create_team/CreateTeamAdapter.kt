@@ -1,4 +1,4 @@
-package com.example.honkaihelper.adapters
+package com.example.honkaihelper.adapters.create_team
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -10,12 +10,17 @@ import com.example.honkaihelper.utils.load
 
 class CreateTeamAdapter: RecyclerView.Adapter<CreateTeamAdapter.CreateTeamViewHolder>() {
 
-    var mHeroInTeamList: List<Hero> = emptyList()
-        @SuppressLint("NotifyDataSetChanged")
-        set(newValue) {
-            field = newValue
-            notifyDataSetChanged()
-        }
+    var mHeroInTeamList = arrayListOf<Hero>()
+
+    fun addHero(hero: Hero) {
+        if (mHeroInTeamList.size != 4) mHeroInTeamList.add(hero)
+        notifyItemInserted(mHeroInTeamList.size)
+    }
+
+    fun removeHero(hero: Hero) {
+        if (mHeroInTeamList.size != 0) mHeroInTeamList.remove(hero)
+        notifyItemRemoved(mHeroInTeamList.size)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CreateTeamViewHolder {
         val inflater = LayoutInflater.from(parent.context)
