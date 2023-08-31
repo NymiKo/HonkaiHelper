@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.ItemHeroCreateTeamListBinding
 import com.example.honkaihelper.models.ActiveHeroInTeam
+import com.example.honkaihelper.models.Hero
 import com.example.honkaihelper.utils.load
+import com.example.honkaihelper.utils.loadImageWithRounded
 
 class HeroListInCreateTeamAdapter(private val actionListener: HeroListInCreateTeamListener) :
     RecyclerView.Adapter<HeroListInCreateTeamAdapter.HeroListInCreateTeamViewHolder>(), OnClickListener {
@@ -53,6 +56,7 @@ class HeroListInCreateTeamAdapter(private val actionListener: HeroListInCreateTe
             } else {
                 changeStrokeActiveHero(ContextCompat.getColor(binding.cardHeroIconTeam.context, R.color.gray), 1, 0F)
             }
+            backgroundHero(activeHeroInTeam.hero)
             binding.cardHeroIconTeam.tag = activeHeroInTeam
         }
 
@@ -61,6 +65,15 @@ class HeroListInCreateTeamAdapter(private val actionListener: HeroListInCreateTe
                 strokeColor = color
                 strokeWidth = width
                 radius = radiusCard
+            }
+        }
+
+        private fun backgroundHero(hero: Hero) {
+            binding.heroAvatarInCreateTeamList.loadImageWithRounded(hero.avatar)
+            if (hero.rarity) {
+                binding.heroAvatarInCreateTeamList.background = ContextCompat.getDrawable(binding.heroAvatarInCreateTeamList.context, R.color.orange)
+            } else {
+                binding.heroAvatarInCreateTeamList.background = ContextCompat.getDrawable(binding.heroAvatarInCreateTeamList.context, R.color.violet)
             }
         }
     }

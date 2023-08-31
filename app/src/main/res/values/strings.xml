@@ -3,4 +3,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="team_for_hero">Команды для героя %1$s</string>
+    <string name="creating_a_team">Создание команды</string>
+    <string name="add_the_created_command">Добавить созданную команду?</string>
+    <string name="add">Добавить</string>
+    <string name="cancellation">Отмена</string>
 </resources>

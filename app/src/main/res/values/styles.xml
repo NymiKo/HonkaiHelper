@@ -27,4 +27,9 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="toolbar">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
 </resources>

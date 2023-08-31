@@ -1,6 +1,5 @@
 package com.example.honkaihelper.adapters.create_team
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,7 +7,7 @@ import com.example.honkaihelper.databinding.ItemHeroCreateTeamBinding
 import com.example.honkaihelper.models.Hero
 import com.example.honkaihelper.utils.load
 
-class CreateTeamAdapter: RecyclerView.Adapter<CreateTeamAdapter.CreateTeamViewHolder>() {
+class CreateTeamAdapter : RecyclerView.Adapter<CreateTeamAdapter.CreateTeamViewHolder>() {
 
     var mHeroInTeamList = arrayListOf<Hero>()
 
@@ -18,8 +17,9 @@ class CreateTeamAdapter: RecyclerView.Adapter<CreateTeamAdapter.CreateTeamViewHo
     }
 
     fun removeHero(hero: Hero) {
+        val index = mHeroInTeamList.indexOf(hero)
         if (mHeroInTeamList.size != 0) mHeroInTeamList.remove(hero)
-        notifyItemRemoved(mHeroInTeamList.size)
+        notifyItemRemoved(index)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CreateTeamViewHolder {
@@ -35,7 +35,8 @@ class CreateTeamAdapter: RecyclerView.Adapter<CreateTeamAdapter.CreateTeamViewHo
         holder.bind(hero)
     }
 
-    class CreateTeamViewHolder(private val binding: ItemHeroCreateTeamBinding): RecyclerView.ViewHolder(binding.root) {
+    class CreateTeamViewHolder(private val binding: ItemHeroCreateTeamBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(hero: Hero) {
             binding.heroAvatarInCreateTeam.load(hero.avatar)
         }

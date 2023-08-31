@@ -2,17 +2,18 @@ package com.example.honkaihelper.fragments
 
 import android.os.Bundle
 import android.view.View
-import androidx.recyclerview.widget.DefaultItemAnimator
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import com.example.honkaihelper.R
 import com.example.honkaihelper.adapters.create_team.CreateTeamAdapter
 import com.example.honkaihelper.adapters.create_team.HeroListInCreateTeamAdapter
 import com.example.honkaihelper.adapters.create_team.HeroListInCreateTeamListener
 import com.example.honkaihelper.databinding.FragmentCreateTeamBinding
 import com.example.honkaihelper.models.ActiveHeroInTeam
 import com.example.honkaihelper.models.Hero
-import kotlin.random.Random
-import kotlin.random.nextInt
 
-class CreateTeamFragment : BaseFragment<FragmentCreateTeamBinding>(FragmentCreateTeamBinding::inflate) {
+class CreateTeamFragment :
+    BaseFragment<FragmentCreateTeamBinding>(FragmentCreateTeamBinding::inflate) {
 
     private var hero: Hero? = null
     private lateinit var mAdapterForViewTeam: CreateTeamAdapter
@@ -25,6 +26,7 @@ class CreateTeamFragment : BaseFragment<FragmentCreateTeamBinding>(FragmentCreat
     }
 
     private fun setupView() {
+        setupButtonSaveTeam()
         setupRecyclerViewForViewTeam()
         setupRecyclerViewHeroList()
     }
@@ -50,6 +52,26 @@ class CreateTeamFragment : BaseFragment<FragmentCreateTeamBinding>(FragmentCreat
         binding.recyclerHeroesList.itemAnimator = null
     }
 
+    private fun setupButtonSaveTeam() {
+        binding.buttonSaveTeam.setOnClickListener {
+            showSaveDialog()
+        }
+    }
+
+    private fun showSaveDialog() {
+        val dialog = AlertDialog.Builder(requireContext())
+            .setMessage(R.string.add_the_created_command)
+            .setPositiveButton(R.string.add) { _, _ ->
+                Toast.makeText(requireContext(), "Команда добавлена", Toast.LENGTH_SHORT).show()
+            }
+            .setNegativeButton(R.string.cancellation) { dialog, _ ->
+                dialog.cancel()
+            }
+            .create()
+
+        dialog.show()
+    }
+
     override fun onDestroyView() {
         binding.recyclerHeroesList.adapter = null
         binding.recyclerViewingCommand.adapter = null
@@ -59,6 +81,7 @@ class CreateTeamFragment : BaseFragment<FragmentCreateTeamBinding>(FragmentCreat
     companion object {
 
         private const val ARG_PARAM1 = "param1"
+
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             CreateTeamFragment().apply {
@@ -107,7 +130,7 @@ class CreateTeamFragment : BaseFragment<FragmentCreateTeamBinding>(FragmentCreat
                 "Гепард",
                 "https://static.wikia.nocookie.net/honkai-star-rail/images/6/6b/Персонаж_Гепард_Иконка.png/revision/latest?cb=20230219133835&path-prefix=ru",
                 true
-            ),false
+            ), false
         ),
         ActiveHeroInTeam(
             Hero(
