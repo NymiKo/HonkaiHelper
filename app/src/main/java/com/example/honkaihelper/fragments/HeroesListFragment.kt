@@ -63,8 +63,8 @@ class HeroesListFragment : BaseFragment<FragmentHeroesListBinding>(FragmentHeroe
         binding.recyclerViewHeroes.setHasFixedSize(true)
         binding.recyclerViewHeroes.layoutManager = GridLayoutManager(requireContext(), 3)
         mAdapterRecyclerView = HeroesListRecyclerViewAdapter(object : HeroesListActionListener {
-            override fun onClick(idHero: Int) {
-                findNavController().navigate(R.id.action_heroesListFragment_to_teamsListFragment, TeamsListFragment.newInstance(idHero))
+            override fun onClick(idHero: Int, nameHero: String) {
+                findNavController().navigate(R.id.action_heroesListFragment_to_teamsListFragment, TeamsListFragment.newInstance(idHero, nameHero))
             }
         })
         mAdapterRecyclerView.mHeroesList = listOf(

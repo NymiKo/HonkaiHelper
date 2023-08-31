@@ -54,6 +54,6 @@ class HeroesListRecyclerViewAdapter(
 
     override fun onClick(view: View?) {
         val hero = view?.tag as Hero
-        actionListener.onClick(hero.id)
+        actionListener.onClick(hero.id, hero.name)
     }
 }
