@@ -2,15 +2,19 @@ package com.example.honkaihelper.adapters.heroes_list
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.honkaihelper.R
-import com.example.honkaihelper.databinding.ItemHeroViewPagerBinding
+import com.example.honkaihelper.databinding.ItemHeroRecyclerViewBinding
 import com.example.honkaihelper.models.Hero
 import com.example.honkaihelper.utils.load
 
-class HeroesListAdapter : RecyclerView.Adapter<HeroesListAdapter.HeroesViewHolder>() {
+class HeroesListAdapter(
+    private val actionListener: HeroesListActionListener
+) : RecyclerView.Adapter<HeroesListAdapter.HeroesViewHolder>(), OnClickListener {
 
     var mHeroesList: List<Hero> = emptyList()
         @SuppressLint("NotifyDataSetChanged")
@@ -21,33 +25,35 @@ class HeroesListAdapter : RecyclerView.Adapter<HeroesListAdapter.HeroesViewHolde
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeroesViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemHeroViewPagerBinding.inflate(inflater, parent, false)
+        val binding = ItemHeroRecyclerViewBinding.inflate(inflater, parent, false)
+
+        binding.cardHeroIcon.setOnClickListener(this)
 
         return HeroesViewHolder(binding)
     }
+
+    override fun getItemCount(): Int = mHeroesList.size
 
     override fun onBindViewHolder(holder: HeroesViewHolder, position: Int) {
         val hero = mHeroesList[position]
         holder.bind(hero)
     }
 
-    override fun getItemCount(): Int = mHeroesList.size
-
-    class HeroesViewHolder(val binding: ItemHeroViewPagerBinding) :
+    class HeroesViewHolder(private val binding: ItemHeroRecyclerViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
-            fun bind(hero: Hero) {
-                binding.apply {
-                    imageHeroAvatar.load(hero.avatar)
-                    textHeroName.text = hero.name
-                    cardHero.tag = hero
-
-                    if (hero.rarity) {
-                        cardHero.strokeColor = ContextCompat.getColor(binding.cardHero.context, R.color.orange)
-                    } else {
-                        cardHero.strokeColor = ContextCompat.getColor(binding.cardHero.context, R.color.violet)
-                    }
-                }
+        fun bind(hero: Hero) {
+            binding.imageHeroAvatar.load(hero.avatar)
+            if (hero.rarity) {
+                binding.cardHeroIcon.strokeColor = ContextCompat.getColor(binding.cardHeroIcon.context, R.color.orange)
+            } else {
+                binding.cardHeroIcon.strokeColor = ContextCompat.getColor(binding.cardHeroIcon.context, R.color.violet)
             }
+            binding.cardHeroIcon.tag = hero
         }
+    }
+
+    override fun onClick(view: View?) {
+        val hero = view?.tag as Hero
+        actionListener.onClick(hero.id, hero.name)
+    }
 }

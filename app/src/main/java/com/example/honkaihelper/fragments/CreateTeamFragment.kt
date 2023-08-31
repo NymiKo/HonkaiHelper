@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.navigation.fragment.findNavController
 import com.example.honkaihelper.R
 import com.example.honkaihelper.adapters.create_team.CreateTeamAdapter
 import com.example.honkaihelper.adapters.create_team.HeroListInCreateTeamAdapter
@@ -54,7 +55,11 @@ class CreateTeamFragment :
 
     private fun setupButtonSaveTeam() {
         binding.buttonSaveTeam.setOnClickListener {
-            showSaveDialog()
+            if (mAdapterForViewTeam.mHeroInTeamList.size == 4) {
+                showSaveDialog()
+            } else {
+                Toast.makeText(requireContext(), "В команде должно быть 4 героя", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -63,6 +68,7 @@ class CreateTeamFragment :
             .setMessage(R.string.add_the_created_command)
             .setPositiveButton(R.string.add) { _, _ ->
                 Toast.makeText(requireContext(), "Команда добавлена", Toast.LENGTH_SHORT).show()
+                findNavController().popBackStack()
             }
             .setNegativeButton(R.string.cancellation) { dialog, _ ->
                 dialog.cancel()

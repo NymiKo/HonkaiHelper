@@ -7,21 +7,6 @@
     android:orientation="vertical"
     tools:context=".fragments.HeroesListFragment">
 
-    <ImageButton
-        android:id="@+id/buttonChangeView"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="end"
-        android:background="?selectableItemBackground"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_grid" />
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPagerHeroes"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewHeroes"
         android:layout_width="wrap_content"
@@ -29,7 +14,6 @@
         android:layout_gravity="center_horizontal"
         android:clickable="true"
         android:focusable="true"
-        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="3" />
 
