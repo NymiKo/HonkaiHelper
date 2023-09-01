@@ -33,7 +33,7 @@ class HeroesListFragment : BaseFragment<FragmentHeroesListBinding>(FragmentHeroe
         })
         mAdapterRecyclerView.mHeroesList = listOf(
             Hero(0, "Блэйд", "https://static.wikia.nocookie.net/honkai-star-rail/images/4/47/Персонаж_Блэйд_Иконка.png/revision/latest?cb=20230721132650&path-prefix=ru", true),
-            Hero(1, "Цзинь Юань", "https://static.wikia.nocookie.net/honkai-star-rail/images/1/10/Персонаж_Цзин_Юань_Иконка.png/revision/latest?cb=20230219133939&path-prefix=ru", true),
+            Hero(1, "Цзинь Юань", "https://i.ibb.co/fMwpQCr/Upscales-ai-1693505854653.jpg", true),
             Hero(2, "Сервал", "https://static.wikia.nocookie.net/honkai-star-rail/images/f/f3/Персонаж_Сервал_Иконка.png/revision/latest?cb=20230219133911&path-prefix=ru", false)
         )
         binding.recyclerViewHeroes.adapter = mAdapterRecyclerView

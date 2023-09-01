@@ -7,4 +7,5 @@
     <string name="add_the_created_command">Добавить созданную команду?</string>
     <string name="add">Добавить</string>
     <string name="cancellation">Отмена</string>
+    <string name="list_of_heroes">Список героев</string>
 </resources>

@@ -7,6 +7,12 @@
     android:orientation="vertical"
     tools:context=".fragments.HeroesListFragment">
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:title="@string/list_of_heroes"
+        app:titleTextAppearance="@style/toolbar"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewHeroes"
         android:layout_width="wrap_content"
