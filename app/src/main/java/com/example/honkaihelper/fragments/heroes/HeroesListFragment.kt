@@ -1,17 +1,22 @@
-package com.example.honkaihelper.fragments
+package com.example.honkaihelper.fragments.heroes
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.honkaihelper.R
 import com.example.honkaihelper.adapters.heroes_list.HeroesListActionListener
 import com.example.honkaihelper.adapters.heroes_list.HeroesListAdapter
 import com.example.honkaihelper.databinding.FragmentHeroesListBinding
+import com.example.honkaihelper.fragments.BaseFragment
+import com.example.honkaihelper.fragments.teams.TeamsListFragment
 import com.example.honkaihelper.models.Hero
+import javax.inject.Inject
 
 class HeroesListFragment : BaseFragment<FragmentHeroesListBinding>(FragmentHeroesListBinding::inflate) {
 
+    private val viewModel by viewModels<HeroesListViewModel>()
     private lateinit var mAdapterRecyclerView: HeroesListAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -28,7 +33,9 @@ class HeroesListFragment : BaseFragment<FragmentHeroesListBinding>(FragmentHeroe
         binding.recyclerViewHeroes.layoutManager = GridLayoutManager(requireContext(), 3)
         mAdapterRecyclerView = HeroesListAdapter(object : HeroesListActionListener {
             override fun onClick(idHero: Int, nameHero: String) {
-                findNavController().navigate(R.id.action_heroesListFragment_to_teamsListFragment, TeamsListFragment.newInstance(idHero, nameHero))
+                findNavController().navigate(R.id.action_heroesListFragment_to_teamsListFragment,
+                    TeamsListFragment.newInstance(idHero, nameHero)
+                )
             }
         })
         mAdapterRecyclerView.mHeroesList = listOf(
