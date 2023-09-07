@@ -2,7 +2,7 @@ package com.example.honkaihelper
 
 import android.app.Application
 import com.example.honkaihelper.di.AppComponent
-import com.example.honkaihelper.di.components.DaggerAppComponent
+import com.example.honkaihelper.di.DaggerAppComponent
 
 class App: Application() {
 

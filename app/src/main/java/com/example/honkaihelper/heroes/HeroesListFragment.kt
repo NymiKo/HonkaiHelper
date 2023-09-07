@@ -1,10 +1,13 @@
 package com.example.honkaihelper.heroes
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.heroes.adapter.HeroesListActionListener
 import com.example.honkaihelper.heroes.adapter.HeroesListAdapter
@@ -12,11 +15,19 @@ import com.example.honkaihelper.databinding.FragmentHeroesListBinding
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.teams.TeamsListFragment
 import com.example.honkaihelper.models.Hero
+import javax.inject.Inject
 
 class HeroesListFragment : BaseFragment<FragmentHeroesListBinding>(FragmentHeroesListBinding::inflate) {
 
-    private val viewModel by viewModels<HeroesListViewModel>()
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel by viewModels<HeroesListViewModel> { viewModelFactory }
     private lateinit var mAdapterRecyclerView: HeroesListAdapter
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as App).appComponent.heroesListComponent().create().inject(this)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,11 +48,9 @@ class HeroesListFragment : BaseFragment<FragmentHeroesListBinding>(FragmentHeroe
                 )
             }
         })
-        mAdapterRecyclerView.mHeroesList = listOf(
-            Hero(0, "Блэйд", "https://static.wikia.nocookie.net/honkai-star-rail/images/4/47/Персонаж_Блэйд_Иконка.png/revision/latest?cb=20230721132650&path-prefix=ru", true),
-            Hero(1, "Цзинь Юань", "https://i.ibb.co/fMwpQCr/Upscales-ai-1693505854653.jpg", true),
-            Hero(2, "Сервал", "https://static.wikia.nocookie.net/honkai-star-rail/images/f/f3/Персонаж_Сервал_Иконка.png/revision/latest?cb=20230219133911&path-prefix=ru", false)
-        )
+        viewModel.heroesList.observe(viewLifecycleOwner) { heroesList ->
+            mAdapterRecyclerView.mHeroesList = heroesList
+        }
         binding.recyclerViewHeroes.adapter = mAdapterRecyclerView
     }
 
