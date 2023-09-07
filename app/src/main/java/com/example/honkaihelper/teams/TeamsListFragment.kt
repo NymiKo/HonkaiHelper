@@ -1,11 +1,11 @@
-package com.example.honkaihelper.fragments.teams
+package com.example.honkaihelper.teams
 
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.honkaihelper.R
-import com.example.honkaihelper.adapters.HeroTeamsListAdapter
+import com.example.honkaihelper.teams.adapter.HeroTeamsListAdapter
 import com.example.honkaihelper.databinding.FragmentTeamsListBinding
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.models.Hero

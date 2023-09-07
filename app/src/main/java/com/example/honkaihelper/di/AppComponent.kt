@@ -1,4 +1,4 @@
-package com.example.honkaihelper.di.components
+package com.example.honkaihelper.di
 
 import android.content.Context
 import com.example.honkaihelper.activity.MainActivity

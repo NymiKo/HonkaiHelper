@@ -1,4 +1,4 @@
-package com.example.honkaihelper.fragments.heroes
+package com.example.honkaihelper.heroes
 
 import androidx.lifecycle.ViewModel
 import javax.inject.Inject

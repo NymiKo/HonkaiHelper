@@ -1,7 +1,7 @@
-package com.example.honkaihelper.di
+package com.example.honkaihelper
 
 import android.app.Application
-import com.example.honkaihelper.di.components.AppComponent
+import com.example.honkaihelper.di.AppComponent
 import com.example.honkaihelper.di.components.DaggerAppComponent
 
 class App: Application() {

@@ -1,4 +1,4 @@
-package com.example.honkaihelper.di.components
+package com.example.honkaihelper.heroes.di
 
 import dagger.Component
 

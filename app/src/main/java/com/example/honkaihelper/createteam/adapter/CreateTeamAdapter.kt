@@ -1,4 +1,4 @@
-package com.example.honkaihelper.adapters.create_team
+package com.example.honkaihelper.createteam.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

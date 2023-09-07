@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/heroesListFragment"
-        android:name="com.example.honkaihelper.fragments.heroes.HeroesListFragment"
+        android:name="com.example.honkaihelper.heroes.HeroesListFragment"
         android:label="fragment_heroes_list"
         tools:layout="@layout/fragment_heroes_list" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/teamsListFragment"
-        android:name="com.example.honkaihelper.fragments.teams.TeamsListFragment"
+        android:name="com.example.honkaihelper.teams.TeamsListFragment"
         android:label="fragment_teams_list"
         tools:layout="@layout/fragment_teams_list" >
         <argument
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/createTeamFragment"
-        android:name="com.example.honkaihelper.fragments.create_team.CreateTeamFragment"
+        android:name="com.example.honkaihelper.createteam.CreateTeamFragment"
         android:label="fragment_create_team"
         tools:layout="@layout/fragment_create_team" />
 </navigation>

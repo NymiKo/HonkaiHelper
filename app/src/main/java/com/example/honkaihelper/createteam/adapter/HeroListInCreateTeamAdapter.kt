@@ -1,11 +1,10 @@
-package com.example.honkaihelper.adapters.create_team
+package com.example.honkaihelper.createteam.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.honkaihelper.R

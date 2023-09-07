@@ -1,4 +1,4 @@
-package com.example.honkaihelper.fragments.create_team
+package com.example.honkaihelper.createteam
 
 import android.os.Bundle
 import android.view.View
@@ -6,9 +6,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.example.honkaihelper.R
-import com.example.honkaihelper.adapters.create_team.CreateTeamAdapter
-import com.example.honkaihelper.adapters.create_team.HeroListInCreateTeamAdapter
-import com.example.honkaihelper.adapters.create_team.HeroListInCreateTeamListener
+import com.example.honkaihelper.createteam.adapter.CreateTeamAdapter
+import com.example.honkaihelper.createteam.adapter.HeroListInCreateTeamAdapter
+import com.example.honkaihelper.createteam.adapter.HeroListInCreateTeamListener
 import com.example.honkaihelper.databinding.FragmentCreateTeamBinding
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.models.ActiveHeroInTeam

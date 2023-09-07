@@ -1,4 +1,4 @@
-package com.example.honkaihelper.fragments.heroes
+package com.example.honkaihelper.heroes
 
 import android.os.Bundle
 import android.view.View
@@ -6,13 +6,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.honkaihelper.R
-import com.example.honkaihelper.adapters.heroes_list.HeroesListActionListener
-import com.example.honkaihelper.adapters.heroes_list.HeroesListAdapter
+import com.example.honkaihelper.heroes.adapter.HeroesListActionListener
+import com.example.honkaihelper.heroes.adapter.HeroesListAdapter
 import com.example.honkaihelper.databinding.FragmentHeroesListBinding
 import com.example.honkaihelper.fragments.BaseFragment
-import com.example.honkaihelper.fragments.teams.TeamsListFragment
+import com.example.honkaihelper.teams.TeamsListFragment
 import com.example.honkaihelper.models.Hero
-import javax.inject.Inject
 
 class HeroesListFragment : BaseFragment<FragmentHeroesListBinding>(FragmentHeroesListBinding::inflate) {
 
