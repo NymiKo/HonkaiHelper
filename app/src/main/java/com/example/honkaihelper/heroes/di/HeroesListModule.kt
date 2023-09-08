@@ -11,7 +11,6 @@ import dagger.multibindings.IntoMap
 interface HeroesListModule {
 
     @Binds
-    @IntoMap
-    @ViewModelKey(HeroesListViewModel::class)
+    @[IntoMap ViewModelKey(HeroesListViewModel::class)]
     fun bindViewModel(viewModel: HeroesListViewModel): ViewModel
 }
