@@ -1,5 +1,7 @@
 package com.example.honkaihelper.di
 
+import com.example.honkaihelper.createteam.data.CreateTeamRepository
+import com.example.honkaihelper.createteam.data.CreateTeamRepositoryImpl
 import com.example.honkaihelper.heroes.data.HeroesListRepository
 import com.example.honkaihelper.heroes.data.HeroesListRepositoryImpl
 import com.example.honkaihelper.teams.data.TeamsListRepository
@@ -14,4 +16,7 @@ interface RepositoryModule {
 
     @Binds
     fun bindTeamsListRepository(repository: TeamsListRepositoryImpl): TeamsListRepository
+
+    @Binds
+    fun bindCreateTeamRepository(repository: CreateTeamRepositoryImpl): CreateTeamRepository
 }

@@ -2,6 +2,7 @@ package com.example.honkaihelper.di
 
 import android.content.Context
 import com.example.honkaihelper.activity.MainActivity
+import com.example.honkaihelper.createteam.data.CreateTeamRepository
 import com.example.honkaihelper.createteam.di.CreateTeamComponent
 import com.example.honkaihelper.heroes.data.HeroesListRepository
 import com.example.honkaihelper.heroes.di.HeroesListComponent
@@ -27,4 +28,5 @@ interface AppComponent {
 
     val heroesListRepository: HeroesListRepository
     val teamsListRepository: TeamsListRepository
+    val createTeamRepository: CreateTeamRepository
 }
