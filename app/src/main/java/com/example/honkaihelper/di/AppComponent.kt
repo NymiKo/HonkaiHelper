@@ -3,6 +3,7 @@ package com.example.honkaihelper.di
 import android.content.Context
 import com.example.honkaihelper.activity.MainActivity
 import com.example.honkaihelper.createteam.di.CreateTeamComponent
+import com.example.honkaihelper.heroes.data.HeroesListRepository
 import com.example.honkaihelper.heroes.di.HeroesListComponent
 import com.example.honkaihelper.teams.di.TeamsListComponent
 import dagger.BindsInstance
@@ -10,7 +11,8 @@ import dagger.Component
 import dagger.Module
 
 @Component(modules = [
-    ViewModelFactoryModule::class
+    ViewModelFactoryModule::class,
+    RepositoryModule::class
 ])
 interface AppComponent {
 
@@ -22,4 +24,5 @@ interface AppComponent {
     fun teamsListComponent(): TeamsListComponent.Factory
     fun createTeamComponent(): CreateTeamComponent.Factory
 
+    val heroesListRepository: HeroesListRepository
 }
