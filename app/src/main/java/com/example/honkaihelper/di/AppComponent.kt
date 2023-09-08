@@ -5,6 +5,7 @@ import com.example.honkaihelper.activity.MainActivity
 import com.example.honkaihelper.createteam.di.CreateTeamComponent
 import com.example.honkaihelper.heroes.data.HeroesListRepository
 import com.example.honkaihelper.heroes.di.HeroesListComponent
+import com.example.honkaihelper.teams.data.TeamsListRepository
 import com.example.honkaihelper.teams.di.TeamsListComponent
 import dagger.BindsInstance
 import dagger.Component
@@ -25,4 +26,5 @@ interface AppComponent {
     fun createTeamComponent(): CreateTeamComponent.Factory
 
     val heroesListRepository: HeroesListRepository
+    val teamsListRepository: TeamsListRepository
 }
