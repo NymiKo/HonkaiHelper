@@ -11,8 +11,11 @@ import com.example.honkaihelper.teams.di.TeamsListComponent
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
+import javax.inject.Singleton
 
+@Singleton
 @Component(modules = [
+    AppModule::class,
     ViewModelFactoryModule::class,
     RepositoryModule::class
 ])

@@ -8,15 +8,19 @@ import com.example.honkaihelper.teams.data.TeamsListRepository
 import com.example.honkaihelper.teams.data.TeamsListRepositoryImpl
 import dagger.Binds
 import dagger.Module
+import javax.inject.Singleton
 
 @Module
 interface RepositoryModule {
+    @Singleton
     @Binds
     fun bindHeroesListRepository(repository: HeroesListRepositoryImpl): HeroesListRepository
 
+    @Singleton
     @Binds
     fun bindTeamsListRepository(repository: TeamsListRepositoryImpl): TeamsListRepository
 
+    @Singleton
     @Binds
     fun bindCreateTeamRepository(repository: CreateTeamRepositoryImpl): CreateTeamRepository
 }
