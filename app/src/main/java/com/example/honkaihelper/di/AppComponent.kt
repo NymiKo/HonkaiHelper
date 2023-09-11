@@ -1,7 +1,6 @@
 package com.example.honkaihelper.di
 
 import android.content.Context
-import com.example.honkaihelper.activity.MainActivity
 import com.example.honkaihelper.createteam.data.CreateTeamRepository
 import com.example.honkaihelper.createteam.di.CreateTeamComponent
 import com.example.honkaihelper.heroes.data.HeroesListRepository
@@ -10,21 +9,24 @@ import com.example.honkaihelper.teams.data.TeamsListRepository
 import com.example.honkaihelper.teams.di.TeamsListComponent
 import dagger.BindsInstance
 import dagger.Component
-import dagger.Module
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [
-    AppModule::class,
-    ViewModelFactoryModule::class,
-    RepositoryModule::class
-])
+@Component(
+    modules = [
+        AppModule::class,
+        ViewModelFactoryModule::class,
+        RepositoryModule::class,
+        NetworkModule::class
+    ]
+)
 interface AppComponent {
 
     @Component.Factory
     interface Factory {
         fun create(@BindsInstance applicationContext: Context): AppComponent
     }
+
     fun heroesListComponent(): HeroesListComponent.Factory
     fun teamsListComponent(): TeamsListComponent.Factory
     fun createTeamComponent(): CreateTeamComponent.Factory

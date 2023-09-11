@@ -3,7 +3,6 @@ package com.example.honkaihelper.di
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
@@ -16,5 +15,4 @@ interface AppModule {
         @Provides
         fun provideIoDispatcher() = Dispatchers.IO
     }
-
 }

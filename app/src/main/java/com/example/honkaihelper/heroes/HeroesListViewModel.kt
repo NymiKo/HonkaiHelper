@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class HeroesListViewModel @Inject constructor(
     private val repository: HeroesListRepository
-): ViewModel() {
+) : ViewModel() {
 
     private val _heroesList = MutableLiveData<List<Hero>>(emptyList())
     val heroesList: LiveData<List<Hero>> = _heroesList
