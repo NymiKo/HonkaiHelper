@@ -1,6 +1,7 @@
 package com.example.honkaihelper.di
 
 import com.example.honkaihelper.heroes.data.HeroesListService
+import com.example.honkaihelper.teams.data.TeamsListService
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -9,17 +10,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-interface NetworkModule {
+object NetworkModule {
 
-    companion object {
-        @Provides
-        @Singleton
-        fun provideRetrofit(): Retrofit = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("http://f0862137.xsph.ru")
-            .build()
+    @Provides
+    @Singleton
+    fun provideRetrofit(): Retrofit = Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create())
+        .baseUrl("http://f0862137.xsph.ru")
+        .build()
 
-        @Provides
-        fun providesHeroesListService(retrofit: Retrofit): HeroesListService = retrofit.create(HeroesListService::class.java)
-    }
+    @Provides
+    fun providesHeroesListService(retrofit: Retrofit): HeroesListService = retrofit.create(HeroesListService::class.java)
+
+    @Provides
+    fun provideTeamsListService(retrofit: Retrofit): TeamsListService = retrofit.create(TeamsListService::class.java)
 }
