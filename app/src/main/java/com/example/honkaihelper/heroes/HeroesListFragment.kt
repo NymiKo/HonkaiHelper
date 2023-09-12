@@ -41,7 +41,7 @@ class HeroesListFragment :
 
     private fun setupRecyclerView() {
         binding.recyclerViewHeroes.setHasFixedSize(true)
-        binding.recyclerViewHeroes.layoutManager = GridLayoutManager(requireContext(), 3)
+        binding.recyclerViewHeroes.layoutManager = GridLayoutManager(requireContext(), 2)
         mAdapterRecyclerView = HeroesListAdapter(object : HeroesListActionListener {
             override fun onClick(idHero: Int, nameHero: String) {
                 findNavController().navigate(

@@ -48,6 +48,7 @@ class HeroesListAdapter(
             } else {
                 binding.cardHeroIcon.strokeColor = ContextCompat.getColor(binding.cardHeroIcon.context, R.color.violet)
             }
+            binding.textHeroName.text = hero.name
             binding.cardHeroIcon.tag = hero
         }
     }
