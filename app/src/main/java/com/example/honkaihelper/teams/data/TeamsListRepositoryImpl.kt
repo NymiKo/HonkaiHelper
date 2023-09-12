@@ -16,10 +16,10 @@ class TeamsListRepositoryImpl @Inject constructor(
     override suspend fun getTeamsList(idHero: Int): List<TeamHero> {
         return withContext(ioDispatcher) {
             return@withContext try {
-                Log.e("TAG", teamsListService.getTeamsList(idHero).toString())
                 teamsListService.getTeamsList(idHero)
             } catch (e: Exception) {
-                Log.e("EMPTY", e.message.toString())
+                // TODO: Добавить обработку ошибок
+                Log.e("TEAMS_LIST_EMPTY", e.message.toString())
                 emptyList<TeamHero>()
             }
         }

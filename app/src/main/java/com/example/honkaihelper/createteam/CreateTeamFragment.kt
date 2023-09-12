@@ -84,6 +84,8 @@ class CreateTeamFragment :
         val dialog = AlertDialog.Builder(requireContext())
             .setMessage(R.string.add_the_created_command)
             .setPositiveButton(R.string.add) { _, _ ->
+                // TODO: Добавить загрузку до подтверждения ответа с сервера
+                viewModel.saveTeam(mAdapterForViewTeam.mHeroInTeamList)
                 Toast.makeText(requireContext(), "Команда добавлена", Toast.LENGTH_SHORT).show()
                 findNavController().popBackStack()
             }

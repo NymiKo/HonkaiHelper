@@ -1,5 +1,6 @@
 package com.example.honkaihelper.di
 
+import com.example.honkaihelper.createteam.data.CreateTeamService
 import com.example.honkaihelper.heroes.data.HeroesListService
 import com.example.honkaihelper.teams.data.TeamsListService
 import dagger.Binds
@@ -7,6 +8,7 @@ import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -24,4 +26,7 @@ object NetworkModule {
 
     @Provides
     fun provideTeamsListService(retrofit: Retrofit): TeamsListService = retrofit.create(TeamsListService::class.java)
+
+    @Provides
+    fun provideCreateTeamService(retrofit: Retrofit): CreateTeamService = retrofit.create(CreateTeamService::class.java)
 }
