@@ -20,9 +20,7 @@ class CreateTeamViewModel @Inject constructor(
         getHeroesList()
     }
 
-    private fun getHeroesList() {
-        viewModelScope.launch {
-            _heroesList.value = repository.getHeroesList()
-        }
+    private fun getHeroesList() = viewModelScope.launch {
+        _heroesList.value = repository.getHeroesList()
     }
 }
