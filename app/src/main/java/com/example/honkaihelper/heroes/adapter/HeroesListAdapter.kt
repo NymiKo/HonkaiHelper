@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.honkaihelper.R
-import com.example.honkaihelper.databinding.ItemHeroRecyclerViewBinding
+import com.example.honkaihelper.databinding.ItemHeroBinding
 import com.example.honkaihelper.models.Hero
 import com.example.honkaihelper.utils.load
 
@@ -25,7 +25,7 @@ class HeroesListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeroesViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemHeroRecyclerViewBinding.inflate(inflater, parent, false)
+        val binding = ItemHeroBinding.inflate(inflater, parent, false)
 
         binding.cardHeroIcon.setOnClickListener(this)
 
@@ -39,7 +39,7 @@ class HeroesListAdapter(
         holder.bind(hero)
     }
 
-    class HeroesViewHolder(private val binding: ItemHeroRecyclerViewBinding) :
+    class HeroesViewHolder(private val binding: ItemHeroBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(hero: Hero) {
             binding.imageHeroAvatar.load(hero.avatar)
