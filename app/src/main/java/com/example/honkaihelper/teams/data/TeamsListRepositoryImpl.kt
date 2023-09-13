@@ -5,6 +5,7 @@ import com.example.honkaihelper.models.Hero
 import com.example.honkaihelper.models.TeamHero
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -13,7 +14,7 @@ class TeamsListRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher
 ): TeamsListRepository {
 
-    override suspend fun getTeamsList(idHero: Int): List<TeamHero> {
+    override suspend fun getTeamsList(idHero: Int, onComplete: () -> Unit): List<TeamHero> {
         return withContext(ioDispatcher) {
             return@withContext try {
                 teamsListService.getTeamsList(idHero)
@@ -21,6 +22,8 @@ class TeamsListRepositoryImpl @Inject constructor(
                 // TODO: Добавить обработку ошибок
                 Log.e("TEAMS_LIST_EMPTY", e.message.toString())
                 emptyList<TeamHero>()
+            } finally {
+                withContext(Dispatchers.Main){ onComplete() }
             }
         }
     }

@@ -53,7 +53,7 @@ class HeroListInCreateTeamAdapter(private val actionListener: HeroListInCreateTe
             if (activeHeroInTeam.active) {
                 changeStrokeActiveHero(ContextCompat.getColor(binding.cardHeroIconTeam.context, R.color.green), 10, 25F)
             } else {
-                changeStrokeActiveHero(ContextCompat.getColor(binding.cardHeroIconTeam.context, R.color.gray), 1, 0F)
+                changeStrokeActiveHero(ContextCompat.getColor(binding.cardHeroIconTeam.context, R.color.dark_gray), 1, 0F)
             }
             backgroundHero(activeHeroInTeam.hero)
             binding.cardHeroIconTeam.tag = activeHeroInTeam

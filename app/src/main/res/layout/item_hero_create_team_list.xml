@@ -6,13 +6,13 @@
     android:id="@+id/card_hero_icon_team"
     app:cardCornerRadius="0dp"
     app:strokeWidth="1dp"
-    app:strokeColor="@color/gray"
+    app:strokeColor="@color/dark_gray"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
         android:id="@+id/hero_avatar_in_create_team_list"
         app:shapeAppearanceOverlay="@style/roundedTopRightCornerImageView"
-        app:strokeColor="@color/gray"
+        app:strokeColor="@color/dark_gray"
         app:strokeWidth="1dp"
         style="@style/image_hero_in_team" />
 

@@ -17,6 +17,8 @@ import com.example.honkaihelper.di.ViewModelFactory
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.models.Hero
 import com.example.honkaihelper.models.TeamHero
+import com.example.honkaihelper.utils.gone
+import com.example.honkaihelper.utils.visible
 import javax.inject.Inject
 
 class TeamsListFragment :
@@ -52,8 +54,26 @@ class TeamsListFragment :
 
     private fun setupView() {
         setupToolbar()
+        setupLoading()
         setupRecyclerView()
         openCreateTeamFragment()
+    }
+
+    private fun setupLoading() {
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                startShimming()
+            } else {
+                stopShimming()
+            }
+        }
+    }
+
+    private fun startShimming() = binding.shimmerLayoutTeamsList.startShimmer()
+
+    private fun stopShimming() {
+        binding.shimmerLayoutTeamsList.stopShimmer()
+        binding.shimmerLayoutTeamsList.gone()
     }
 
     private fun openCreateTeamFragment() {

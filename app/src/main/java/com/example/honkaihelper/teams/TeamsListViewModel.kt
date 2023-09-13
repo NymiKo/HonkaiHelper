@@ -16,8 +16,14 @@ class TeamsListViewModel @Inject constructor(
     private val _teamsList = MutableLiveData<List<TeamHero>>(emptyList())
     val teamsList: LiveData<List<TeamHero>> = _teamsList
 
+    private val _isLoading = MutableLiveData(true)
+    val isLoading: LiveData<Boolean> = _isLoading
+
     fun getTeamsList(idHero: Int) = viewModelScope.launch {
-        _teamsList.value = repository.getTeamsList(idHero)
+        _teamsList.value = repository.getTeamsList(
+            idHero = idHero,
+            onComplete = { _isLoading.value = false }
+        )
     }
 
 }
