@@ -2,6 +2,7 @@ package com.example.honkaihelper.teams
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
+import com.example.honkaihelper.databinding.DialogRetryBottomSheetBinding
 import com.example.honkaihelper.teams.adapter.HeroTeamsListAdapter
 import com.example.honkaihelper.databinding.FragmentTeamsListBinding
 import com.example.honkaihelper.di.ViewModelFactory
@@ -18,11 +20,15 @@ import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.models.Hero
 import com.example.honkaihelper.models.TeamHero
 import com.example.honkaihelper.utils.gone
+import com.example.honkaihelper.utils.toast
 import com.example.honkaihelper.utils.visible
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import javax.inject.Inject
 
 class TeamsListFragment :
-    BaseFragment<FragmentTeamsListBinding>(FragmentTeamsListBinding::inflate) {
+    BaseFragment<FragmentTeamsListBinding>(FragmentTeamsListBinding::inflate),
+    RetryBottomSheetDialog.RetryDialogCallback {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -57,6 +63,26 @@ class TeamsListFragment :
         setupLoading()
         setupRecyclerView()
         openCreateTeamFragment()
+        setupError()
+    }
+
+    private fun setupError() {
+        viewModel.isError.observe(viewLifecycleOwner) { isError ->
+            if (isError) {
+                showErrorDialog()
+                Log.e("ERROR", "TRUE")
+                binding.groupList.gone()
+            } else {
+                Log.e("ERROR", "FALSE")
+                binding.groupList.visible()
+            }
+        }
+    }
+
+    private fun showErrorDialog()  {
+        val retryBottomSheetDialog = RetryBottomSheetDialog()
+        retryBottomSheetDialog.show(parentFragmentManager, RetryBottomSheetDialog.TAG)
+        retryBottomSheetDialog.setCallback(this)
     }
 
     private fun setupLoading() {
@@ -69,7 +95,12 @@ class TeamsListFragment :
         }
     }
 
-    private fun startShimming() = binding.shimmerLayoutTeamsList.startShimmer()
+    private fun startShimming() {
+        binding.shimmerLayoutTeamsList.apply {
+            startShimmer()
+            visible()
+        }
+    }
 
     private fun stopShimming() {
         binding.shimmerLayoutTeamsList.stopShimmer()
@@ -92,6 +123,10 @@ class TeamsListFragment :
 
     private fun setupToolbar() {
         binding.toolbarCreateTeam.title = resources.getString(R.string.team_for_hero, nameHero)
+    }
+
+    override fun onRetryClick() {
+        viewModel.getTeamsList(idHero)
     }
 
     override fun onDestroyView() {

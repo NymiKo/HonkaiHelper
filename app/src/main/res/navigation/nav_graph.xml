@@ -26,10 +26,17 @@
         <action
             android:id="@+id/action_teamsListFragment_to_createTeamFragment"
             app:destination="@id/createTeamFragment" />
+        <action
+            android:id="@+id/action_teamsListFragment_to_retryBottomSheetDialog"
+            app:destination="@id/retryBottomSheetDialog" />
     </fragment>
     <fragment
         android:id="@+id/createTeamFragment"
         android:name="com.example.honkaihelper.createteam.CreateTeamFragment"
         android:label="fragment_create_team"
         tools:layout="@layout/fragment_create_team" />
+    <dialog
+        android:id="@+id/retryBottomSheetDialog"
+        android:name="com.example.honkaihelper.teams.RetryBottomSheetDialog"
+        android:label="RetryBottomSheetDialog" />
 </navigation>

@@ -1,6 +1,7 @@
 package com.example.honkaihelper.teams.data
 
 import android.util.Log
+import com.example.honkaihelper.data.handleApi
 import com.example.honkaihelper.models.Hero
 import com.example.honkaihelper.models.TeamHero
 import kotlinx.coroutines.CoroutineDispatcher
@@ -14,17 +15,9 @@ class TeamsListRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher
 ): TeamsListRepository {
 
-    override suspend fun getTeamsList(idHero: Int, onComplete: () -> Unit): List<TeamHero> {
+    override suspend fun getTeamsList(idHero: Int): Result<List<TeamHero>> {
         return withContext(ioDispatcher) {
-            return@withContext try {
-                teamsListService.getTeamsList(idHero)
-            } catch (e: Exception) {
-                // TODO: Добавить обработку ошибок
-                Log.e("TEAMS_LIST_EMPTY", e.message.toString())
-                emptyList<TeamHero>()
-            } finally {
-                withContext(Dispatchers.Main){ onComplete() }
-            }
+            return@withContext handleApi { teamsListService.getTeamsList(idHero) }
         }
     }
 }

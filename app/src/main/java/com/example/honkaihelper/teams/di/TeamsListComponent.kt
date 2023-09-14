@@ -1,6 +1,6 @@
 package com.example.honkaihelper.teams.di
 
-import com.example.honkaihelper.heroes.HeroesListFragment
+import com.example.honkaihelper.teams.RetryBottomSheetDialog
 import com.example.honkaihelper.teams.TeamsListFragment
 import dagger.Subcomponent
 
