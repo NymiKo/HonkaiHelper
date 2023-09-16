@@ -1,6 +1,5 @@
 package com.example.honkaihelper.teams
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,18 +13,17 @@ class TeamsListViewModel @Inject constructor(
     private val repository: TeamsListRepository
 ): ViewModel() {
 
-    private val _uiState = MutableLiveData(TeamsUiState())
-    val uiState: LiveData<TeamsUiState> = _uiState
+    private val _uiState = MutableLiveData<TeamsUiState<List<TeamHero>>>(TeamsUiState.IDLE)
+    val uiState: LiveData<TeamsUiState<List<TeamHero>>> = _uiState
 
     fun getTeamsList(idHero: Int) = viewModelScope.launch {
-        _uiState.value = _uiState.value?.copy(isLoading = true)
+        _uiState.value = TeamsUiState.LOADING
         val result = repository.getTeamsList(idHero)
         result.onSuccess {
-            _uiState.value = _uiState.value?.copy(teamsList = it)
+            _uiState.value = TeamsUiState.SUCCESS(it)
         }.onFailure {
-
+            _uiState.value = TeamsUiState.ERROR
         }
-        _uiState.value = _uiState.value?.copy(isLoading = false)
     }
 
 }

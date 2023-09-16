@@ -55,21 +55,36 @@ class TeamsListFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        uiStateHandle()
         setupViewState()
     }
 
     private fun setupViewState() {
-        viewModel.uiState.observe(viewLifecycleOwner) {
-            if (it.isLoading) showLoading()
-            else stopShimming()
-        }
         setupToolbar()
         setupRecyclerView()
         openCreateTeamFragment()
     }
 
-    private fun showLoading() {
-        startShimming()
+    private fun uiStateHandle() {
+        viewModel.uiState.observe(viewLifecycleOwner) {
+            when(it) {
+                is TeamsUiState.LOADING -> {
+                    startShimming()
+                    binding.groupList.gone()
+                }
+                is TeamsUiState.SUCCESS -> {
+                    mAdapter.mTeamsHeroList = it.teamsLIst
+                    stopShimming()
+                    binding.groupList.visible()
+                }
+                is TeamsUiState.ERROR -> {
+                    stopShimming()
+                    binding.groupList.gone()
+                    showErrorDialog()
+                }
+                is TeamsUiState.IDLE -> {}
+            }
+        }
     }
 
     private fun showErrorDialog()  {
@@ -98,9 +113,6 @@ class TeamsListFragment :
 
     private fun setupRecyclerView() {
         mAdapter = HeroTeamsListAdapter()
-        viewModel.uiState.observe(viewLifecycleOwner) { state ->
-            mAdapter.mTeamsHeroList = state.teamsList
-        }
         binding.recyclerViewTeamsHero.adapter = mAdapter
     }
 

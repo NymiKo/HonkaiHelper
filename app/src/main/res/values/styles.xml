@@ -32,4 +32,11 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <style name="shimmer_item_hero_style">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">150dp</item>
+        <item name="android:layout_marginStart">@dimen/medium_margin</item>
+        <item name="android:layout_marginEnd">@dimen/medium_margin</item>
+    </style>
+
 </resources>

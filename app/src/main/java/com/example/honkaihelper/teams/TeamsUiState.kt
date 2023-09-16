@@ -1,8 +1,8 @@
 package com.example.honkaihelper.teams
 
-import com.example.honkaihelper.models.TeamHero
-
-data class TeamsUiState(
-    val isLoading: Boolean = false,
-    val teamsList: List<TeamHero> = listOf()
-)
+sealed class TeamsUiState<out T> {
+    object IDLE: TeamsUiState<Nothing>()
+    object LOADING: TeamsUiState<Nothing>()
+    data class SUCCESS<out T>(val teamsLIst: T): TeamsUiState<T>()
+    object ERROR: TeamsUiState<Nothing>()
+}

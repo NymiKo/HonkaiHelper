@@ -21,7 +21,37 @@
         android:paddingBottom="@dimen/medium_margin"
         android:clickable="true"
         android:focusable="true"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="3" />
+        app:spanCount="2"
+        tools:listitem="@layout/item_hero"/>
+    
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView"
+                style="@style/shimmer_item_hero_style"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeWidth="4dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/shimmer_item_hero_style"
+                android:layout_marginStart="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/materialCardView"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeWidth="4dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 </LinearLayout>
