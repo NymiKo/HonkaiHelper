@@ -69,12 +69,6 @@
 
             <include layout="@layout/shimmer_item_team" />
 
-            <include layout="@layout/shimmer_item_team" />
-
-            <include layout="@layout/shimmer_item_team" />
-
-            <include layout="@layout/shimmer_item_team" />
-
         </LinearLayout>
 
     </com.facebook.shimmer.ShimmerFrameLayout>

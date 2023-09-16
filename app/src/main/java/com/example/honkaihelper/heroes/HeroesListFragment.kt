@@ -14,6 +14,8 @@ import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.heroes.adapter.HeroesListActionListener
 import com.example.honkaihelper.heroes.adapter.HeroesListAdapter
 import com.example.honkaihelper.teams.TeamsListFragment
+import com.example.honkaihelper.utils.gone
+import com.example.honkaihelper.utils.visible
 import javax.inject.Inject
 
 class HeroesListFragment :
@@ -32,11 +34,31 @@ class HeroesListFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        uiStateHandle()
         setupView()
     }
 
     private fun setupView() {
         setupRecyclerView()
+    }
+
+    private fun uiStateHandle() {
+        viewModel.uiState.observe(viewLifecycleOwner) {
+            when(it) {
+                is HeroesUiState.ERROR -> TODO()
+                is HeroesUiState.IDLE -> {}
+                is HeroesUiState.LOADING -> {
+                    binding.shimmerLayoutHeroesList.startShimmer()
+                    binding.recyclerViewHeroes.gone()
+                }
+                is HeroesUiState.SUCCESS -> {
+                    mAdapterRecyclerView.mHeroesList = it.heroesList
+                    binding.recyclerViewHeroes.visible()
+                    binding.shimmerLayoutHeroesList.stopShimmer()
+                    binding.shimmerLayoutHeroesList.gone()
+                }
+            }
+        }
     }
 
     private fun setupRecyclerView() {
@@ -50,9 +72,6 @@ class HeroesListFragment :
                 )
             }
         })
-        viewModel.heroesList.observe(viewLifecycleOwner) { heroesList ->
-            mAdapterRecyclerView.mHeroesList = heroesList
-        }
         binding.recyclerViewHeroes.adapter = mAdapterRecyclerView
     }
 
