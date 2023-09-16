@@ -14,28 +14,18 @@ class TeamsListViewModel @Inject constructor(
     private val repository: TeamsListRepository
 ): ViewModel() {
 
-    private val _uiState = MutableLiveData<TeamsUiState>()
+    private val _uiState = MutableLiveData(TeamsUiState())
     val uiState: LiveData<TeamsUiState> = _uiState
 
-    private val _teamsList = MutableLiveData<List<TeamHero>>(emptyList())
-    val teamsList: LiveData<List<TeamHero>> = _teamsList
-
-    private val _isLoading = MutableLiveData(true)
-    val isLoading: LiveData<Boolean> = _isLoading
-
-    private val _isError = MutableLiveData(false)
-    val isError: LiveData<Boolean> = _isError
-
     fun getTeamsList(idHero: Int) = viewModelScope.launch {
-        _isLoading.value = true
+        _uiState.value = _uiState.value?.copy(isLoading = true)
         val result = repository.getTeamsList(idHero)
         result.onSuccess {
             _uiState.value = _uiState.value?.copy(teamsList = it)
-            _isError.value = false
         }.onFailure {
-            _isError.value = true
+
         }
-        _isLoading.value = false
+        _uiState.value = _uiState.value?.copy(isLoading = false)
     }
 
 }

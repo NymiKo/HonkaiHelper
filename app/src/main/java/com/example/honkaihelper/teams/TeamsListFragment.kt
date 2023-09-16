@@ -55,44 +55,27 @@ class TeamsListFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupView()
+        setupViewState()
     }
 
-    private fun setupView() {
+    private fun setupViewState() {
+        viewModel.uiState.observe(viewLifecycleOwner) {
+            if (it.isLoading) showLoading()
+            else stopShimming()
+        }
         setupToolbar()
-        setupLoading()
         setupRecyclerView()
         openCreateTeamFragment()
-        setupError()
     }
 
-    private fun setupError() {
-        viewModel.isError.observe(viewLifecycleOwner) { isError ->
-            if (isError) {
-                showErrorDialog()
-                Log.e("ERROR", "TRUE")
-                binding.groupList.gone()
-            } else {
-                Log.e("ERROR", "FALSE")
-                binding.groupList.visible()
-            }
-        }
+    private fun showLoading() {
+        startShimming()
     }
 
     private fun showErrorDialog()  {
         val retryBottomSheetDialog = RetryBottomSheetDialog()
         retryBottomSheetDialog.show(parentFragmentManager, RetryBottomSheetDialog.TAG)
         retryBottomSheetDialog.setCallback(this)
-    }
-
-    private fun setupLoading() {
-        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            if (isLoading) {
-                startShimming()
-            } else {
-                stopShimming()
-            }
-        }
     }
 
     private fun startShimming() {
@@ -115,8 +98,8 @@ class TeamsListFragment :
 
     private fun setupRecyclerView() {
         mAdapter = HeroTeamsListAdapter()
-        viewModel.teamsList.observe(viewLifecycleOwner) {teamsList ->
-            mAdapter.mTeamsHeroList = teamsList
+        viewModel.uiState.observe(viewLifecycleOwner) { state ->
+            mAdapter.mTeamsHeroList = state.teamsList
         }
         binding.recyclerViewTeamsHero.adapter = mAdapter
     }
