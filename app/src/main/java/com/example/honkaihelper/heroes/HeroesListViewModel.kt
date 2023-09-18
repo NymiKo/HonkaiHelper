@@ -19,6 +19,9 @@ class HeroesListViewModel @Inject constructor(
     private val _uiState = MutableLiveData<HeroesUiState<List<Hero>>>(HeroesUiState.IDLE)
     val uiState: LiveData<HeroesUiState<List<Hero>>> = _uiState
 
+    private val _heroesList = MutableLiveData<List<Hero>>()
+    val heroesList: LiveData<List<Hero>> = _heroesList
+
     init {
         getHeroesList()
     }
@@ -27,5 +30,6 @@ class HeroesListViewModel @Inject constructor(
         _uiState.value = HeroesUiState.LOADING
         val result = repository.getHeroesList()
         _uiState.value = HeroesUiState.SUCCESS(result)
+        _heroesList.value = result
     }
 }

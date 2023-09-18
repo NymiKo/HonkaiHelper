@@ -9,4 +9,5 @@
     <string name="list_of_heroes">Список героев</string>
     <string name="error">Что-то пошло не так...</string>
     <string name="retry">Повторить</string>
+    <string name="search">Поиск</string>
 </resources>

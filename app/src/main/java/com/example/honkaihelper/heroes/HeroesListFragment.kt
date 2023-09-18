@@ -1,8 +1,14 @@
 package com.example.honkaihelper.heroes
 
+import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -39,6 +45,7 @@ class HeroesListFragment :
     }
 
     private fun setupView() {
+        addMenu()
         setupRecyclerView()
     }
 
@@ -59,6 +66,31 @@ class HeroesListFragment :
                 }
             }
         }
+    }
+
+    private fun addMenu() {
+        val manager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchItem = binding.heroesListToolbar.menu.findItem(R.id.search)
+        val searchView = searchItem.actionView as SearchView
+        searchView.setSearchableInfo(manager.getSearchableInfo(requireActivity().componentName))
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchView.clearFocus()
+                searchView.setQuery("", false)
+                searchItem.collapseActionView()
+                viewModel.heroesList.observe(viewLifecycleOwner) {
+                    mAdapterRecyclerView.mHeroesList = it
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.heroesList.observe(viewLifecycleOwner) {
+                    mAdapterRecyclerView.mHeroesList = it.filter { hero -> hero.name.contains(newText as CharSequence) }
+                }
+                return false
+            }
+        })
     }
 
     private fun setupRecyclerView() {

@@ -8,9 +8,11 @@
     tools:context=".heroes.HeroesListFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/heroes_list_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:title="@string/list_of_heroes"
+        app:menu="@menu/heroes_list_menu"
         app:titleTextAppearance="@style/toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
