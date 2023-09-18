@@ -19,14 +19,14 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/hero_avatar_in_team_1"
+            style="@style/image_hero_in_team"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/hero_avatar_in_team_2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/roundedTopRightCornerImageView"
             app:strokeColor="@color/dark_gray"
-            app:strokeWidth="1dp"
-            style="@style/image_hero_in_team" />
+            app:strokeWidth="1dp" />
 
         <TextView
             android:id="@+id/hero_name_in_team_1"

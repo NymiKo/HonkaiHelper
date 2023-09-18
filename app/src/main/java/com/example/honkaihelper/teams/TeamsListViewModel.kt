@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class TeamsListViewModel @Inject constructor(
     private val repository: TeamsListRepository
-): ViewModel() {
+) : ViewModel() {
 
     private val _uiState = MutableLiveData<TeamsUiState<List<TeamHero>>>(TeamsUiState.IDLE)
     val uiState: LiveData<TeamsUiState<List<TeamHero>>> = _uiState

@@ -17,7 +17,7 @@ class TeamsListRepositoryImpl @Inject constructor(
 
     override suspend fun getTeamsList(idHero: Int): Result<List<TeamHero>> {
         return withContext(ioDispatcher) {
-            return@withContext handleApi { teamsListService.getTeamsList(idHero) }
+            return@withContext handleApi { teamsListService.getTeamsList(idHero).sortedBy { it.idTeam } }
         }
     }
 }

@@ -28,7 +28,7 @@
         android:id="@+id/group_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="recycler_view_teams_hero, button_create_team"/>
+        app:constraint_referenced_ids="recycler_view_teams_hero, button_create_team" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_teams_hero"
@@ -57,6 +57,7 @@
         android:id="@+id/shimmer_layout_teams_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:animateLayoutChanges="true"
         android:paddingHorizontal="@dimen/medium_margin"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_create_team">
 

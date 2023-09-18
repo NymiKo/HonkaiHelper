@@ -11,26 +11,27 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:title="@string/list_of_heroes"
-        app:titleTextAppearance="@style/toolbar"/>
+        app:titleTextAppearance="@style/toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewHeroes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:paddingBottom="@dimen/medium_margin"
         android:clickable="true"
         android:focusable="true"
+        android:paddingBottom="@dimen/medium_margin"
         android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2"
-        tools:listitem="@layout/item_hero"/>
-    
+        tools:listitem="@layout/item_hero" />
+
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_layout_heroes_list"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:animateLayoutChanges="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
@@ -70,7 +71,7 @@
                 app:strokeWidth="4dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-        
+
     </com.facebook.shimmer.ShimmerFrameLayout>
 
 </LinearLayout>
