@@ -49,7 +49,6 @@
     <style name="EditTextLogin">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:drawablePadding">@dimen/DP8</item>
         <item name="android:padding">8dp</item>
         <item name="android:textColor">?attr/colorSecondary</item>
     </style>
