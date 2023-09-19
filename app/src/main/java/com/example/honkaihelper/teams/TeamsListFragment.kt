@@ -53,13 +53,8 @@ class TeamsListFragment :
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun setupView() {
         uiStateHandle()
-        setupViewState()
-    }
-
-    private fun setupViewState() {
         setupToolbar()
         setupRecyclerView()
         openCreateTeamFragment()

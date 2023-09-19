@@ -12,13 +12,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class ContainerFragment : BaseFragment<FragmentContainerBinding>(FragmentContainerBinding::inflate) {
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupView()
-    }
-
-    private fun setupView() {
+    override fun setupView() {
         setupViewPager()
         setupTabLayout()
     }

@@ -39,13 +39,8 @@ class HeroesListFragment :
             .inject(this)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun setupView() {
         uiStateHandle()
-        setupView()
-    }
-
-    private fun setupView() {
         addMenu()
         setupRecyclerView()
     }

@@ -14,13 +14,9 @@
             android:id="@+id/action_containerFragment_to_heroes_list_nav_graph"
             app:destination="@id/heroes_list_nav_graph" />
         <action
-            android:id="@+id/action_containerFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            android:id="@+id/action_containerFragment_to_login_nav_graph"
+            app:destination="@id/login_nav_graph" />
     </fragment>
     <include app:graph="@navigation/heroes_list_nav_graph" />
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.example.honkaihelper.profile.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+    <include app:graph="@navigation/login_nav_graph" />
 </navigation>

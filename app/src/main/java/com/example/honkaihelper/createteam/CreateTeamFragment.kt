@@ -39,12 +39,7 @@ class CreateTeamFragment :
         (requireActivity().application as App).appComponent.createTeamComponent().create().inject(this)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupView()
-    }
-
-    private fun setupView() {
+    override fun setupView() {
         setupButtonSaveTeam()
         setupRecyclerViewForViewTeam()
         setupRecyclerViewHeroList()

@@ -26,6 +26,13 @@ abstract class BaseFragment<T: ViewBinding>(private val bindingInflater: (Layout
         return  binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupView()
+    }
+
+    abstract fun setupView()
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
