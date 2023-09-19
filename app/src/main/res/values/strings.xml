@@ -14,4 +14,8 @@
     <string name="login">Логин</string>
     <string name="password">Пароль</string>
     <string name="log_in">Авторизоваться</string>
+    <string name="heroes">Герои</string>
+    <string name="profile">Профиль</string>
+    <string name="not_authorized">Вы не авторизованы</string>
+    <string name="enter">Войти</string>
 </resources>

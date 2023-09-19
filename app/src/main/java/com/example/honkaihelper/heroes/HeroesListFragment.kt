@@ -12,7 +12,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
@@ -100,8 +100,8 @@ class HeroesListFragment :
         binding.recyclerViewHeroes.layoutManager = GridLayoutManager(requireContext(), 2)
         mAdapterRecyclerView = HeroesListAdapter(object : HeroesListActionListener {
             override fun onClick(idHero: Int, nameHero: String) {
-                findNavController().navigate(
-                    R.id.action_heroesListFragment_to_teamsListFragment,
+                findNavController(requireActivity(), R.id.navHostFragment).navigate(
+                    R.id.action_containerFragment_to_heroes_list_nav_graph,
                     TeamsListFragment.newInstance(idHero, nameHero)
                 )
             }

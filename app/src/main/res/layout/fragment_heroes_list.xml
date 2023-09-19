@@ -23,7 +23,6 @@
         android:layout_gravity="center_horizontal"
         android:clickable="true"
         android:focusable="true"
-        android:paddingBottom="@dimen/DP16"
         android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2"
