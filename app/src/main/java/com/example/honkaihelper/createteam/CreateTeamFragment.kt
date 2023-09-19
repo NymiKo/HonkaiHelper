@@ -17,6 +17,9 @@ import com.example.honkaihelper.databinding.FragmentCreateTeamBinding
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.models.ActiveHeroInTeam
 import com.example.honkaihelper.models.Hero
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 import javax.inject.Inject
 
 class CreateTeamFragment :
@@ -66,6 +69,11 @@ class CreateTeamFragment :
         viewModel.heroesList.observe(viewLifecycleOwner) { activeHeroInTeamList ->
             mAdapterHeroList.mHeroList = activeHeroInTeamList
         }
+        val layoutManager = FlexboxLayoutManager(requireContext()).apply {
+            justifyContent = JustifyContent.CENTER
+            flexDirection = FlexDirection.ROW
+        }
+        binding.recyclerViewingCommand.layoutManager = layoutManager
         binding.recyclerHeroesList.adapter = mAdapterHeroList
         binding.recyclerHeroesList.itemAnimator = null
     }

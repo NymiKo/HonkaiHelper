@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
+        android:visibility="gone"
         android:src="@drawable/background" />
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -22,7 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:titleTextAppearance="@style/toolbar"
-        app:titleTextColor="@color/white" />
+        app:titleTextColor="?attr/colorSecondary" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_list"
@@ -51,7 +52,7 @@
         android:src="@drawable/ic_create_team"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:tint="?attr/colorPrimary" />
+        app:tint="?attr/colorOnSecondary" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_layout_teams_list"

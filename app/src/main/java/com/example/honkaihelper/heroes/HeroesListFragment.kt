@@ -2,6 +2,7 @@ package com.example.honkaihelper.heroes
 
 import android.app.SearchManager
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -72,6 +73,7 @@ class HeroesListFragment :
         val manager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchItem = binding.heroesListToolbar.menu.findItem(R.id.search)
         val searchView = searchItem.actionView as SearchView
+        searchView.queryHint = getString(R.string.search)
         searchView.setSearchableInfo(manager.getSearchableInfo(requireActivity().componentName))
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {

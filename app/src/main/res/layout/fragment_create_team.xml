@@ -15,16 +15,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/creating_a_team"
-        app:titleTextAppearance="@style/toolbar" />
+        app:titleTextAppearance="@style/toolbar"
+        app:titleTextColor="?attr/colorSecondary" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_viewing_command"
         android:layout_width="match_parent"
         android:layout_height="90dp"
-        android:layout_gravity="center_horizontal"
         android:layout_marginHorizontal="@dimen/small_margin"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/materialDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,11 +60,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/small_margin"
-        android:backgroundTint="?attr/colorPrimary"
+        android:backgroundTint="?attr/colorSecondary"
         android:src="@drawable/ic_save"
         app:fabSize="mini"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:tint="?attr/colorSecondary" />
+        app:tint="?attr/colorOnSecondary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
