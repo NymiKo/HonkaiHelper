@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:backgroundTint="@android:color/transparent"
-    android:paddingHorizontal="@dimen/medium_margin"
-    android:paddingVertical="@dimen/medium_margin">
+    android:paddingHorizontal="@dimen/DP16"
+    android:paddingVertical="@dimen/DP16">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
                 android:id="@+id/text_error"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/medium_margin"
+                android:layout_marginHorizontal="@dimen/DP16"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/error"
                 android:textColor="@color/white"
@@ -38,7 +38,7 @@
                 android:id="@+id/button_retry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/small_margin"
+                android:layout_marginEnd="@dimen/DP8"
                 android:backgroundTint="@android:color/transparent"
                 android:text="@string/retry"
                 android:textAllCaps="true"

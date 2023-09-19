@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="text_very_large">24sp</dimen>
-    <dimen name="card_corner_radius_large">20dp</dimen>
-    <dimen name="corner_radius_hero_avatar_in_team">20dp</dimen>
-    <dimen name="medium_margin">16dp</dimen>
-    <dimen name="small_margin">8dp</dimen>
+    <dimen name="SP18">18sp</dimen>
+    <dimen name="SP24">24sp</dimen>
+    <dimen name="SP36">36sp</dimen>
+
+    <dimen name="DP2">2dp</dimen>
+    <dimen name="DP8">8dp</dimen>
+    <dimen name="DP16">16dp</dimen>
+    <dimen name="DP20">20dp</dimen>
+    <dimen name="DP24">24dp</dimen>
+    <dimen name="DP30">30dp</dimen>
+    <dimen name="DP40">40dp</dimen>
 </resources>

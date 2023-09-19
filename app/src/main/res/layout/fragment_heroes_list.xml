@@ -23,7 +23,7 @@
         android:layout_gravity="center_horizontal"
         android:clickable="true"
         android:focusable="true"
-        android:paddingBottom="@dimen/medium_margin"
+        android:paddingBottom="@dimen/DP16"
         android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2"
@@ -59,7 +59,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView3"
                 style="@style/shimmer_item_hero_style"
-                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/DP16"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView"
                 app:strokeWidth="4dp" />
@@ -67,7 +67,7 @@
             <com.google.android.material.card.MaterialCardView
                 style="@style/shimmer_item_hero_style"
                 android:layout_marginStart="40dp"
-                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/DP16"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/materialCardView3"
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView2"

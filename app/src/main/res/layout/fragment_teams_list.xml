@@ -59,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:animateLayoutChanges="true"
-        android:paddingHorizontal="@dimen/medium_margin"
+        android:paddingHorizontal="@dimen/DP16"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_create_team">
 
         <LinearLayout
