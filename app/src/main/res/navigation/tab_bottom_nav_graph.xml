@@ -11,6 +11,12 @@
         android:label="fragment_container"
         tools:layout="@layout/fragment_container" >
         <action
+            android:id="@+id/action_containerFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_containerFragment_to_heroesListFragment"
+            app:destination="@id/heroesListFragment" />
+        <action
             android:id="@+id/action_containerFragment_to_heroes_list_nav_graph"
             app:destination="@id/heroes_list_nav_graph" />
         <action
@@ -19,4 +25,22 @@
     </fragment>
     <include app:graph="@navigation/heroes_list_nav_graph" />
     <include app:graph="@navigation/login_nav_graph" />
+    <fragment
+        android:id="@+id/heroesListFragment"
+        android:name="com.example.honkaihelper.heroes.HeroesListFragment"
+        android:label="fragment_heroes_list"
+        tools:layout="@layout/fragment_heroes_list" >
+        <action
+            android:id="@+id/action_heroesListFragment_to_heroes_list_nav_graph"
+            app:destination="@id/heroes_list_nav_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.honkaihelper.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_login_nav_graph"
+            app:destination="@id/login_nav_graph" />
+    </fragment>
 </navigation>

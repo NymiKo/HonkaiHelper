@@ -25,4 +25,6 @@
     <string name="registration_underline"><u>Регистрация</u></string>
     <string name="register">Зарегистрироваться</string>
     <string name="registration_success">Регистрация прошла успешно. теперь вы можете авторизоваться</string>
+    <string name="exit_of_account">Вы действительно хотите выйти из аккаунта?</string>
+    <string name="yes">Да</string>
 </resources>

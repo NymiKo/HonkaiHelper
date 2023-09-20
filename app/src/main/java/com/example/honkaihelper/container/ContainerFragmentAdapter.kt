@@ -7,7 +7,7 @@ import com.example.honkaihelper.heroes.HeroesListFragment
 import com.example.honkaihelper.profile.ProfileFragment
 
 class ContainerFragmentAdapter(
-    private val fragmentActivity: FragmentActivity
+    fragmentActivity: FragmentActivity
 ): FragmentStateAdapter(fragmentActivity) {
     override fun getItemCount(): Int = 2
 

@@ -10,9 +10,11 @@ import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentLoginBinding
 import com.example.honkaihelper.fragments.BaseFragment
+import com.example.honkaihelper.profile.ProfileFragment
 import com.example.honkaihelper.utils.TOKEN
 import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone
+import com.example.honkaihelper.utils.setNavigationResult
 import com.example.honkaihelper.utils.toast
 import com.example.honkaihelper.utils.visible
 import javax.inject.Inject
@@ -63,7 +65,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 }
                 is LoginUiState.SUCCESS -> {
                     getSharedPrefUser().edit().putString(TOKEN, it.token).apply()
-                    findNavController().popBackStack()
+                    findNavController().popBackStack(R.id.containerFragment, true)
                 }
             }
         }

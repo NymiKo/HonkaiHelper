@@ -37,15 +37,32 @@
         app:layout_constraintStart_toStartOf="@+id/text_no_login"
         app:layout_constraintTop_toBottomOf="@+id/text_no_login" />
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_user_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="image_user_avatar, button_exit_of_account"/>
+
     <ImageView
         android:id="@+id/image_user_avatar"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="@dimen/DP40"
         android:src="@drawable/ic_login"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/button_exit_of_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_exit_account"
+        android:scaleType="centerCrop"
+        android:layout_margin="@dimen/DP8"
+        android:background="?selectableItemBackground"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,7 @@
 package com.example.honkaihelper.profile
 
+import android.util.Log
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.Navigation.findNavController
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentProfileBinding
@@ -14,21 +16,47 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     override fun setupView() {
         checkToken()
         setupEnterButton()
+        exitAccount()
     }
 
     private fun setupEnterButton() {
         binding.buttonGoLogin.setOnClickListener {
             findNavController(requireActivity(), R.id.navHostFragment)
-                .navigate(R.id.action_containerFragment_to_login_nav_graph)
+                .navigate(R.id.login_nav_graph)
         }
     }
 
     private fun checkToken() {
-        if (!getSharedPrefUser().getString(TOKEN, "").isNullOrBlank()) {
-            binding.groupNoLogin.gone()
-            binding.imageUserAvatar.visible()
+        if (getSharedPrefUser().getString(TOKEN, "").isNullOrBlank()) {
+            hideProfile()
         } else {
-            binding.groupNoLogin.visible()
+            showProfile()
         }
+    }
+
+    private fun exitAccount() {
+        binding.buttonExitOfAccount.setOnClickListener {
+            AlertDialog.Builder(requireActivity())
+                .setMessage(R.string.exit_of_account)
+                .setPositiveButton(R.string.yes) { _, _ ->
+                    getSharedPrefUser().edit().putString(TOKEN, "").apply()
+                    hideProfile()
+                }
+                .setNegativeButton(R.string.cancellation) { dialog, _ ->
+                    dialog.cancel()
+                }
+                .create()
+                .show()
+        }
+    }
+
+    private fun showProfile() {
+        binding.groupNoLogin.gone()
+        binding.groupUserProfile.visible()
+    }
+
+    private fun hideProfile() {
+        binding.groupNoLogin.visible()
+        binding.groupUserProfile.gone()
     }
 }

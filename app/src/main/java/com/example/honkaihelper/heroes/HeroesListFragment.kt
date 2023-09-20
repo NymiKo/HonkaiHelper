@@ -96,7 +96,7 @@ class HeroesListFragment :
         mAdapterRecyclerView = HeroesListAdapter(object : HeroesListActionListener {
             override fun onClick(idHero: Int, nameHero: String) {
                 findNavController(requireActivity(), R.id.navHostFragment).navigate(
-                    R.id.action_containerFragment_to_heroes_list_nav_graph,
+                    R.id.heroes_list_nav_graph,
                     TeamsListFragment.newInstance(idHero, nameHero)
                 )
             }
