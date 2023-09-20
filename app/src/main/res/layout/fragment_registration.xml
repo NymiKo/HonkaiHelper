@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login.LoginFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".registration.RegistrationFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/authorization"
+                android:text="@string/registration"
                 android:textAlignment="center"
                 android:textColor="?attr/colorSecondary"
                 android:textSize="@dimen/SP36"
@@ -80,10 +80,10 @@
                 android:layout_marginTop="@dimen/DP30">
 
                 <Button
-                    android:id="@+id/button_login"
+                    android:id="@+id/button_register"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/log_in"
+                    android:text="@string/register"
                     android:textSize="@dimen/SP18"
                     app:cornerRadius="@dimen/DP20"
                     android:textColor="?attr/colorOnSecondary"/>
@@ -96,13 +96,6 @@
                     android:visibility="gone"/>
 
             </FrameLayout>
-
-            <TextView
-                android:id="@+id/text_registration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/registration_underline" />
 
         </LinearLayout>
 

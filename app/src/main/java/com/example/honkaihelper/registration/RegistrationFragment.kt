@@ -1,66 +1,61 @@
-package com.example.honkaihelper.login
+package com.example.honkaihelper.registration
 
 import android.content.Context
-import android.util.Log
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
-import com.example.honkaihelper.databinding.FragmentLoginBinding
+import com.example.honkaihelper.databinding.FragmentRegistrationBinding
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.utils.gone
-import com.example.honkaihelper.utils.toast
 import com.example.honkaihelper.utils.visible
 import javax.inject.Inject
 
-class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
+class RegistrationFragment :
+    BaseFragment<FragmentRegistrationBinding>(FragmentRegistrationBinding::inflate) {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel by viewModels<LoginViewModel> { viewModelFactory }
+    private val viewModel by viewModels<RegistrationViewModel> { viewModelFactory }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as App).appComponent.loginComponent().create()
-            .inject(this)
+        (requireActivity().application as App).appComponent.registrationComponent().create().inject(this)
     }
 
     override fun setupView() {
         uiStateHandle()
-        openRegistrationFragment()
-        binding.buttonLogin.setOnClickListener {
-            viewModel.login(binding.editTextLogin.text.toString(), binding.editTextPassword.text.toString())
+        binding.buttonRegister.setOnClickListener {
+            viewModel.registration(binding.editTextLogin.text.toString(), binding.editTextPassword.text.toString())
         }
     }
 
     private fun uiStateHandle() {
         viewModel.uiState.observe(viewLifecycleOwner) {
             when(it) {
-                is LoginUiState.EMPTY_LOGIN -> {
+                is RegistrationUiState.EMPTY_LOGIN -> {
                     showErrorLogin()
-                    showButtonLogin()
+                    showButtonRegister()
                 }
-                is LoginUiState.EMPTY_PASSWORD -> {
+                is RegistrationUiState.EMPTY_PASSWORD -> {
                     showErrorPassword(R.string.empty_password)
-                    showButtonLogin()
+                    showButtonRegister()
                 }
-                is LoginUiState.ERROR -> {
+                is RegistrationUiState.ERROR -> {
 
                 }
-                is LoginUiState.IDLE -> {
+                is RegistrationUiState.IDLE -> {
                     hideError()
                 }
-                is LoginUiState.INCORRECT_PASSWORD -> {
+                is RegistrationUiState.INCORRECT_PASSWORD -> {
                     showErrorPassword(R.string.incorrect_password)
-                    showButtonLogin()
+                    showButtonRegister()
                 }
-                is LoginUiState.LOADING -> {
+                is RegistrationUiState.LOADING -> {
                     showProgress()
                 }
-                is LoginUiState.SUCCESS -> {
-                    Toast.makeText(requireContext(), "Авторизация прошла успешно", Toast.LENGTH_SHORT).show()
+                is RegistrationUiState.SUCCESS -> {
+
                 }
             }
         }
@@ -81,21 +76,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         binding.editLayoutLogin.error = getString(R.string.empty_login)
     }
 
-    private fun showButtonLogin() {
-        binding.buttonLogin.visible()
+    private fun showButtonRegister() {
+        binding.buttonRegister.visible()
         binding.progressLogin.gone()
-        binding.textRegistration.visible()
     }
 
     private fun showProgress() {
         binding.progressLogin.visible()
-        binding.buttonLogin.gone()
-        binding.textRegistration.gone()
+        binding.buttonRegister.gone()
     }
 
-    private fun openRegistrationFragment() {
-        binding.textRegistration.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_registrationFragment)
-        }
-    }
 }
