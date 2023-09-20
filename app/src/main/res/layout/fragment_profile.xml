@@ -1,25 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".profile.ProfileFragment"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".profile.ProfileFragment">
 
-    <TextView
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_no_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/not_authorized"
+        app:constraint_referenced_ids="button_go_login, text_no_login" />
+
+    <TextView
+        android:id="@+id/text_no_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
-        android:textSize="@dimen/SP18"/>
+        android:text="@string/not_authorized"
+        android:textSize="@dimen/SP18"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_go_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/DP20"
+        android:layout_marginTop="@dimen/DP8"
         android:text="@string/enter"
-        android:textColor="?attr/colorOnSecondary"/>
+        android:textColor="?attr/colorOnSecondary"
+        app:layout_constraintEnd_toEndOf="@+id/text_no_login"
+        app:layout_constraintStart_toStartOf="@+id/text_no_login"
+        app:layout_constraintTop_toBottomOf="@+id/text_no_login" />
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/image_user_avatar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="@dimen/DP40"
+        android:src="@drawable/ic_login"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

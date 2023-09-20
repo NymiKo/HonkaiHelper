@@ -10,6 +10,8 @@ import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentLoginBinding
 import com.example.honkaihelper.fragments.BaseFragment
+import com.example.honkaihelper.utils.TOKEN
+import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.toast
 import com.example.honkaihelper.utils.visible
@@ -60,7 +62,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                     showProgress()
                 }
                 is LoginUiState.SUCCESS -> {
-                    Toast.makeText(requireContext(), "Авторизация прошла успешно", Toast.LENGTH_SHORT).show()
+                    getSharedPrefUser().edit().putString(TOKEN, it.token).apply()
+                    findNavController().popBackStack()
                 }
             }
         }
