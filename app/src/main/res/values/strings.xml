@@ -21,4 +21,5 @@
     <string name="empty_login">Логин не может быть пустым</string>
     <string name="empty_password">Пароль не может быть пустым</string>
     <string name="incorrect_password">Пароль должен содержать не менее 4 символов</string>
+    <string name="registration">Регистрация</string>
 </resources>

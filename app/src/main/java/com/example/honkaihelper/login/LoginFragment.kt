@@ -35,35 +35,54 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         viewModel.uiState.observe(viewLifecycleOwner) {
             when(it) {
                 is LoginUiState.EMPTY_LOGIN -> {
-                    binding.editLayoutLogin.isErrorEnabled = true
-                    binding.editLayoutLogin.error = getString(R.string.empty_login)
-                    binding.buttonLogin.visible()
-                    binding.progressLogin.gone()
+                    showErrorLogin()
+                    showButtonLogin()
                 }
                 is LoginUiState.EMPTY_PASSWORD -> {
-                    binding.editLayoutPassword.isErrorEnabled = true
-                    binding.editLayoutPassword.error = getString(R.string.empty_password)
-                    binding.buttonLogin.visible()
-                    binding.progressLogin.gone()
+                    showErrorPassword(R.string.empty_password)
+                    showButtonLogin()
                 }
                 is LoginUiState.ERROR -> {
 
                 }
                 is LoginUiState.IDLE -> {
-
+                    hideError()
                 }
                 is LoginUiState.INCORRECT_PASSWORD -> {
-                    binding.editLayoutPassword.isErrorEnabled = true
-                    binding.editLayoutPassword.error = getString(R.string.incorrect_password)
+                    showErrorPassword(R.string.incorrect_password)
                 }
                 is LoginUiState.LOADING -> {
-                    binding.progressLogin.visible()
-                    binding.buttonLogin.gone()
+                    showProgress()
                 }
                 is LoginUiState.SUCCESS -> {
 
                 }
             }
         }
+    }
+
+    private fun showErrorPassword(message: Int) {
+        binding.editLayoutPassword.isErrorEnabled = true
+        binding.editLayoutPassword.error = getString(message)
+    }
+
+    private fun hideError() {
+        binding.editLayoutLogin.isErrorEnabled = false
+        binding.editLayoutPassword.isErrorEnabled = false
+    }
+
+    private fun showErrorLogin() {
+        binding.editLayoutLogin.isErrorEnabled = true
+        binding.editLayoutLogin.error = getString(R.string.empty_login)
+    }
+
+    private fun showButtonLogin() {
+        binding.buttonLogin.visible()
+        binding.progressLogin.gone()
+    }
+
+    private fun showProgress() {
+        binding.progressLogin.visible()
+        binding.buttonLogin.gone()
     }
 }

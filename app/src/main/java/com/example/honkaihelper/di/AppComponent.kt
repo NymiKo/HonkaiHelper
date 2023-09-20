@@ -5,6 +5,7 @@ import com.example.honkaihelper.createteam.data.CreateTeamRepository
 import com.example.honkaihelper.createteam.di.CreateTeamComponent
 import com.example.honkaihelper.heroes.data.HeroesListRepository
 import com.example.honkaihelper.heroes.di.HeroesListComponent
+import com.example.honkaihelper.login.data.LoginRepository
 import com.example.honkaihelper.login.di.LoginComponent
 import com.example.honkaihelper.teams.data.TeamsListRepository
 import com.example.honkaihelper.teams.di.TeamsListComponent
@@ -36,4 +37,5 @@ interface AppComponent {
     val heroesListRepository: HeroesListRepository
     val teamsListRepository: TeamsListRepository
     val createTeamRepository: CreateTeamRepository
+    val loginRepository: LoginRepository
 }

@@ -18,7 +18,6 @@ class HeroesListRepositoryImpl @Inject constructor(
                 heroesListService.getHeroesList()
             } catch (e: Exception) {
                 // TODO: Добавить обработку ошибок
-                Log.e("HEROES_LIST_EMPTY", e.message.toString())
                 emptyList<Hero>()
             }
         }
