@@ -74,15 +74,28 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:id="@+id/button_login"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="@string/log_in"
-                android:textSize="@dimen/SP18"
-                android:layout_marginTop="@dimen/DP30"
-                app:cornerRadius="@dimen/DP20"
-                android:textColor="?attr/colorOnSecondary"/>
+                android:layout_marginTop="@dimen/DP30">
+
+                <Button
+                    android:id="@+id/button_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/log_in"
+                    android:textSize="@dimen/SP18"
+                    app:cornerRadius="@dimen/DP20"
+                    android:textColor="?attr/colorOnSecondary"/>
+
+                <ProgressBar
+                    android:id="@+id/progress_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/DP30"
+                    android:layout_gravity="center"
+                    android:visibility="gone"/>
+
+            </FrameLayout>
 
         </LinearLayout>
 

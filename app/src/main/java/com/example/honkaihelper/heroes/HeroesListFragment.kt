@@ -48,7 +48,7 @@ class HeroesListFragment :
     private fun uiStateHandle() {
         viewModel.uiState.observe(viewLifecycleOwner) {
             when(it) {
-                is HeroesUiState.ERROR -> TODO()
+                is HeroesUiState.ERROR -> {}
                 is HeroesUiState.IDLE -> {}
                 is HeroesUiState.LOADING -> {
                     binding.shimmerLayoutHeroesList.startShimmer()

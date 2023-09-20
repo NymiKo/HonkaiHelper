@@ -42,13 +42,13 @@
 
     <style name="EditTextLayoutLogin" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">55dp</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/DP40</item>
     </style>
 
     <style name="EditTextLogin">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">8dp</item>
         <item name="android:textColor">?attr/colorSecondary</item>
     </style>
