@@ -8,7 +8,7 @@ import com.example.honkaihelper.profile.ProfileFragment
 
 class ContainerFragmentAdapter(
     fragmentActivity: FragmentActivity
-): FragmentStateAdapter(fragmentActivity) {
+): FragmentStateAdapter(fragmentActivity, ) {
     override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment {

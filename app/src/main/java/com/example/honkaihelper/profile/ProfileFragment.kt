@@ -1,6 +1,5 @@
 package com.example.honkaihelper.profile
 
-import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.Navigation.findNavController
 import com.example.honkaihelper.R
@@ -14,9 +13,8 @@ import com.example.honkaihelper.utils.visible
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
 
     override fun setupView() {
-        checkToken()
         setupEnterButton()
-        exitAccount()
+        menuItemClickHandler()
     }
 
     private fun setupEnterButton() {
@@ -24,6 +22,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             findNavController(requireActivity(), R.id.navHostFragment)
                 .navigate(R.id.login_nav_graph)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkToken()
     }
 
     private fun checkToken() {
@@ -34,29 +37,40 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         }
     }
 
-    private fun exitAccount() {
-        binding.buttonExitOfAccount.setOnClickListener {
-            AlertDialog.Builder(requireActivity())
-                .setMessage(R.string.exit_of_account)
-                .setPositiveButton(R.string.yes) { _, _ ->
-                    getSharedPrefUser().edit().putString(TOKEN, "").apply()
-                    hideProfile()
+    private fun menuItemClickHandler() {
+        binding.toolbarProfile.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.exit_of_account -> {
+                    showDialogExitOfAccount()
                 }
-                .setNegativeButton(R.string.cancellation) { dialog, _ ->
-                    dialog.cancel()
-                }
-                .create()
-                .show()
+            }
+            true
         }
+    }
+
+    private fun showDialogExitOfAccount() {
+        AlertDialog.Builder(requireActivity())
+            .setMessage(R.string.want_to_logout_of_your_account)
+            .setPositiveButton(R.string.yes) { _, _ ->
+                getSharedPrefUser().edit().putString(TOKEN, "").apply()
+                hideProfile()
+            }
+            .setNegativeButton(R.string.cancellation) { dialog, _ ->
+                dialog.cancel()
+            }
+            .create()
+            .show()
     }
 
     private fun showProfile() {
         binding.groupNoLogin.gone()
         binding.groupUserProfile.visible()
+        binding.toolbarProfile.visible()
     }
 
     private fun hideProfile() {
         binding.groupNoLogin.visible()
         binding.groupUserProfile.gone()
+        binding.toolbarProfile.gone()
     }
 }
