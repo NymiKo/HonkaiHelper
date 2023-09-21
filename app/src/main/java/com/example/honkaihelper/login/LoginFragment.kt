@@ -11,6 +11,7 @@ import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentLoginBinding
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.profile.ProfileFragment
+import com.example.honkaihelper.teams.RetryBottomSheetDialog
 import com.example.honkaihelper.utils.TOKEN
 import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone
@@ -51,7 +52,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                     showButtonLogin()
                 }
                 is LoginUiState.ERROR -> {
-
+                    toast(requireActivity(), R.string.error_login)
+                    showButtonLogin()
                 }
                 is LoginUiState.IDLE -> {
                     hideError()
@@ -65,7 +67,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 }
                 is LoginUiState.SUCCESS -> {
                     getSharedPrefUser().edit().putString(TOKEN, it.token).apply()
-                    findNavController().popBackStack(R.id.containerFragment, true)
+                    findNavController().previousBackStackEntry?.savedStateHandle?.set("login", true)
+                    findNavController().popBackStack(R.id.containerFragment, false)
                 }
             }
         }

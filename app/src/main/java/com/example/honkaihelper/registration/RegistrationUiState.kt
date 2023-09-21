@@ -7,5 +7,5 @@ sealed class RegistrationUiState<out T> {
     object EMPTY_PASSWORD: RegistrationUiState<Nothing>()
     object INCORRECT_PASSWORD: RegistrationUiState<Nothing>()
     data class SUCCESS(val token: String): RegistrationUiState<String>()
-    object ERROR: RegistrationUiState<Nothing>()
+    data class ERROR(val message: String): RegistrationUiState<Nothing>()
 }

@@ -51,7 +51,7 @@ class RegistrationViewModel @Inject constructor(
             result.onSuccess {
                 _uiState.value = RegistrationUiState.SUCCESS(it.token)
             }.onFailure {
-                _uiState.value = RegistrationUiState.ERROR
+                _uiState.value = RegistrationUiState.ERROR(it.message.toString())
             }
         }
     }

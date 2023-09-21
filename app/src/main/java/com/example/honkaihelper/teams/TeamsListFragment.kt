@@ -69,8 +69,8 @@ class TeamsListFragment :
                 }
                 is TeamsUiState.SUCCESS -> {
                     mAdapter.mTeamsHeroList = it.teamsLIst
-                    stopShimming()
                     binding.groupList.visible()
+                    stopShimming()
                 }
                 is TeamsUiState.ERROR -> {
                     stopShimming()
