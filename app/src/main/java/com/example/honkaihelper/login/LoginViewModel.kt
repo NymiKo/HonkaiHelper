@@ -4,7 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.honkaihelper.R
+import com.example.honkaihelper.data.NetworkResult
 import com.example.honkaihelper.login.data.LoginRepository
+import com.example.honkaihelper.login.data.LoginService
+import com.example.honkaihelper.registration.RegistrationUiState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -14,8 +18,8 @@ class LoginViewModel @Inject constructor(
     private val repository: LoginRepository
 ): ViewModel() {
 
-    private val _uiState = MutableLiveData<LoginUiState<String>>(LoginUiState.IDLE)
-    val uiState: LiveData<LoginUiState<String>> = _uiState
+    private val _uiState = MutableLiveData<LoginUiState<Any>>(LoginUiState.IDLE)
+    val uiState: LiveData<LoginUiState<Any>> = _uiState
 
     fun login(login: String, password: String) {
         _uiState.value = LoginUiState.IDLE
@@ -49,11 +53,18 @@ class LoginViewModel @Inject constructor(
     private fun loginUser(login: String, password: String) {
         viewModelScope.launch {
             val result = repository.login(login, password)
-            result.onSuccess {
-                _uiState.value = LoginUiState.SUCCESS(it.token)
-            }.onFailure {
-                _uiState.value = LoginUiState.ERROR
+            when(result) {
+                is NetworkResult.Error -> errorHandler(result.code)
+                is NetworkResult.Success -> _uiState.value = LoginUiState.SUCCESS(result.data.token)
             }
+        }
+    }
+
+    private fun errorHandler(errorCode: Int) {
+        when(errorCode) {
+            105 -> _uiState.value = LoginUiState.ERROR(R.string.check_your_internet_connection)
+            400 -> _uiState.value = LoginUiState.ERROR(R.string.unknown_user)
+            else -> _uiState.value = LoginUiState.ERROR(R.string.unknown_error)
         }
     }
 }

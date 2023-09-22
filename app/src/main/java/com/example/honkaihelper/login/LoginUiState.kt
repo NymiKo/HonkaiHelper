@@ -9,5 +9,5 @@ sealed class LoginUiState<out T> {
     object EMPTY_LOGIN: LoginUiState<Nothing>()
     object EMPTY_PASSWORD: LoginUiState<Nothing>()
     data class SUCCESS<out T>(val token: String): LoginUiState<T>()
-    object ERROR: LoginUiState<Nothing>()
+    data class ERROR(val message: Int): LoginUiState<Nothing>()
 }

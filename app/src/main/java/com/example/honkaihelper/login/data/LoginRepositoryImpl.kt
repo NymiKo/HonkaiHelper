@@ -1,5 +1,6 @@
 package com.example.honkaihelper.login.data
 
+import com.example.honkaihelper.data.NetworkResult
 import com.example.honkaihelper.data.handleApi
 import com.example.honkaihelper.login.data.models.LoginRequest
 import com.example.honkaihelper.login.data.models.LoginResponse
@@ -11,7 +12,7 @@ class LoginRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher,
     private val loginService: LoginService
 ) : LoginRepository {
-    override suspend fun login(login: String, password: String): Result<LoginResponse> {
+    override suspend fun login(login: String, password: String): NetworkResult<LoginResponse> {
         return withContext(ioDispatcher) {
             handleApi { loginService.login(LoginRequest(login, password)) }
         }

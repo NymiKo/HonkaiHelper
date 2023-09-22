@@ -1,12 +1,11 @@
 package com.example.honkaihelper.registration.data
 
 import com.example.honkaihelper.data.NetworkResult
+import com.example.honkaihelper.data.handleApi
 import com.example.honkaihelper.registration.data.model.RegistrationRequest
 import com.example.honkaihelper.registration.data.model.RegistrationResponse
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import retrofit2.Response
-import java.net.UnknownHostException
 import javax.inject.Inject
 
 class RegistrationRepositoryImpl @Inject constructor(
@@ -18,23 +17,9 @@ class RegistrationRepositoryImpl @Inject constructor(
         password: String
     ): NetworkResult<RegistrationResponse> {
         return withContext(ioDispatcher) {
-            handleApiTest {
+            handleApi {
                 registrationService.registration(RegistrationRequest(login, password))
             }
         }
-    }
-}
-
-suspend fun <T> handleApiTest(apiCall: suspend () -> Response<T>): NetworkResult<T> {
-    return try {
-        val response = apiCall()
-        val body = response.body()
-        if (response.isSuccessful && body != null) {
-            NetworkResult.Success(body)
-        } else {
-            NetworkResult.Error(response.code())
-        }
-    } catch (e: UnknownHostException) {
-        NetworkResult.Error(105)
     }
 }

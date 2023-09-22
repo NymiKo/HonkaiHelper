@@ -1,14 +1,18 @@
 package com.example.honkaihelper.data
 
-import retrofit2.HttpException
+import retrofit2.Response
 import java.net.UnknownHostException
 
-suspend fun <T> handleApi(apiCall: suspend () -> T): Result<T> {
+suspend fun <T> handleApi(apiCall: suspend () -> Response<T>): NetworkResult<T> {
     return try {
-        Result.success(apiCall.invoke())
+        val response = apiCall()
+        val body = response.body()
+        if (response.isSuccessful && body != null) {
+            NetworkResult.Success(body)
+        } else {
+            NetworkResult.Error(response.code())
+        }
     } catch (e: UnknownHostException) {
-        Result.failure(e)
-    } catch (e: HttpException) {
-        Result.failure(e)
+        NetworkResult.Error(105)
     }
 }
