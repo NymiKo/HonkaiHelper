@@ -9,29 +9,24 @@
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/heroes_list_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/heroes_list_menu"
         app:title="@string/list_of_heroes"
         app:titleTextAppearance="@style/toolbar"
-        app:titleTextColor="?attr/colorSecondary" />
+        app:titleTextColor="?attr/colorSecondary"
+        style="@style/base_toolbar_style" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewHeroes"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:clickable="true"
-        android:focusable="true"
-        android:visibility="gone"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        android:layout_height="0dp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/heroes_list_toolbar"
-        app:spanCount="2"
         tools:listitem="@layout/item_hero" />
 
     <androidx.constraintlayout.widget.Group
