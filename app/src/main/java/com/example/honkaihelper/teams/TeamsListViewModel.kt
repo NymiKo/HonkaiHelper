@@ -20,9 +20,10 @@ class TeamsListViewModel @Inject constructor(
     fun getTeamsList(idHero: Int) = viewModelScope.launch {
         _uiState.value = TeamsUiState.LOADING
         val result = repository.getTeamsList(idHero)
-        when(result) {
+        when (result) {
             is NetworkResult.Error -> _uiState.value = TeamsUiState.ERROR
-            is NetworkResult.Success -> _uiState.value = TeamsUiState.SUCCESS(result.data.sortedBy { it.idTeam })
+            is NetworkResult.Success -> _uiState.value =
+                TeamsUiState.SUCCESS(result.data.sortedBy { it.idTeam })
         }
     }
 

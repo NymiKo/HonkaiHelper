@@ -1,24 +1,21 @@
 package com.example.honkaihelper.heroes.data
 
-import android.util.Log
+import com.example.honkaihelper.data.NetworkResult
+import com.example.honkaihelper.data.handleApi
 import com.example.honkaihelper.models.Hero
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import kotlin.Exception
 
 class HeroesListRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher,
     private val heroesListService: HeroesListService
-): HeroesListRepository {
+) : HeroesListRepository {
 
-    override suspend fun getHeroesList(): List<Hero> {
+    override suspend fun getHeroesList(): NetworkResult<List<Hero>> {
         return withContext(ioDispatcher) {
-            return@withContext try {
+            handleApi {
                 heroesListService.getHeroesList()
-            } catch (e: Exception) {
-                // TODO: Добавить обработку ошибок
-                emptyList<Hero>()
             }
         }
     }

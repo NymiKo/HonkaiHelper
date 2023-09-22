@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.honkaihelper.data.NetworkResult
 import com.example.honkaihelper.heroes.data.HeroesListRepository
 import com.example.honkaihelper.models.Hero
 import com.example.honkaihelper.models.TeamHero
@@ -29,7 +30,12 @@ class HeroesListViewModel @Inject constructor(
     private fun getHeroesList() = viewModelScope.launch {
         _uiState.value = HeroesUiState.LOADING
         val result = repository.getHeroesList()
-        _uiState.value = HeroesUiState.SUCCESS(result)
-        _heroesList.value = result
+        when(result) {
+            is NetworkResult.Error -> _uiState.value = HeroesUiState.ERROR
+            is NetworkResult.Success -> {
+                _uiState.value = HeroesUiState.SUCCESS(result.data)
+                _heroesList.value = result.data!!
+            }
+        }
     }
 }
