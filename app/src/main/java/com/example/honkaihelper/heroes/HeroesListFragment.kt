@@ -2,16 +2,8 @@ package com.example.honkaihelper.heroes
 
 import android.app.SearchManager
 import android.content.Context
-import android.graphics.Color
-import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.honkaihelper.App
@@ -24,7 +16,6 @@ import com.example.honkaihelper.models.Hero
 import com.example.honkaihelper.teams.TeamsListFragment
 import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.visible
-import javax.inject.Inject
 
 class HeroesListFragment :
     BaseFragment<FragmentHeroesListBinding>(FragmentHeroesListBinding::inflate) {
@@ -41,21 +32,20 @@ class HeroesListFragment :
     override fun setupView() {
         addMenu()
         setupRecyclerView()
-        onRetryClick()
+        setupRetryButtonClickListener()
     }
 
     override fun uiStateHandle() {
         viewModel.uiState.observe(viewLifecycleOwner) {
-            when(it) {
+            when (it) {
                 is HeroesUiState.ERROR -> {
                     showRetryView()
                 }
-                is HeroesUiState.IDLE -> {
 
-                }
                 is HeroesUiState.LOADING -> {
                     showLoading()
                 }
+
                 is HeroesUiState.SUCCESS -> {
                     showHeroesList(it.heroesList)
                 }
@@ -72,6 +62,7 @@ class HeroesListFragment :
 
     private fun showLoading() {
         binding.shimmerLayoutHeroesList.startShimmer()
+        binding.shimmerLayoutHeroesList.visible()
         binding.recyclerViewHeroes.gone()
         binding.groupRetry.gone()
     }
@@ -84,7 +75,7 @@ class HeroesListFragment :
         binding.groupRetry.gone()
     }
 
-    private fun onRetryClick() {
+    private fun setupRetryButtonClickListener() {
         binding.buttonRetry.setOnClickListener {
             viewModel.getHeroesList()
         }
@@ -109,7 +100,8 @@ class HeroesListFragment :
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 viewModel.heroesList.observe(viewLifecycleOwner) {
-                    mAdapterRecyclerView.mHeroesList = it.filter { hero -> hero.name.contains(newText as CharSequence) }
+                    mAdapterRecyclerView.mHeroesList =
+                        it.filter { hero -> hero.name.contains(newText as CharSequence) }
                 }
                 return false
             }
