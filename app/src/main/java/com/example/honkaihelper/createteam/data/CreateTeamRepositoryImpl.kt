@@ -1,6 +1,8 @@
 package com.example.honkaihelper.createteam.data
 
 import android.util.Log
+import com.example.honkaihelper.data.NetworkResult
+import com.example.honkaihelper.data.handleApi
 import com.example.honkaihelper.heroes.data.HeroesListService
 import com.example.honkaihelper.models.ActiveHeroInTeam
 import com.example.honkaihelper.models.Hero
@@ -16,14 +18,10 @@ class CreateTeamRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher
 ) : CreateTeamRepository {
 
-    override suspend fun getHeroesList(): List<ActiveHeroInTeam> {
+    override suspend fun getHeroesList(): NetworkResult<List<Hero>> {
         return withContext(ioDispatcher) {
-            return@withContext try {
-                heroesListService.getHeroesList().map { hero -> ActiveHeroInTeam.toActiveHero(hero) }
-            } catch (e: Exception) {
-                // TODO: Добавить обработку ошибок
-                Log.e("CREATE_TEAM_EMPTY", e.message.toString())
-                emptyList<ActiveHeroInTeam>()
+            handleApi {
+                heroesListService.getHeroesList()
             }
         }
     }

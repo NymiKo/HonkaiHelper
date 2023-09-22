@@ -5,15 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.honkaihelper.createteam.data.CreateTeamRepository
+import com.example.honkaihelper.data.NetworkResult
 import com.example.honkaihelper.models.ActiveHeroInTeam
 import com.example.honkaihelper.models.Hero
-import com.example.honkaihelper.models.TeamHero
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CreateTeamViewModel @Inject constructor(
     private val repository: CreateTeamRepository
-): ViewModel() {
+) : ViewModel() {
 
     private val _heroesList = MutableLiveData<List<ActiveHeroInTeam>>(emptyList())
     val heroesList: LiveData<List<ActiveHeroInTeam>> = _heroesList
@@ -23,7 +23,12 @@ class CreateTeamViewModel @Inject constructor(
     }
 
     private fun getHeroesList() = viewModelScope.launch {
-        _heroesList.value = repository.getHeroesList()
+        val result = repository.getHeroesList()
+        when (result) {
+            is NetworkResult.Error -> {}
+            is NetworkResult.Success -> _heroesList.value =
+                result.data.map { hero -> ActiveHeroInTeam.toActiveHero(hero) }
+        }
     }
 
     fun saveTeam(heroesList: List<Hero>) = viewModelScope.launch {
