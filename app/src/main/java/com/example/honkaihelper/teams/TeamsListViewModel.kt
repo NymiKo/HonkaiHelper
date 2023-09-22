@@ -14,7 +14,7 @@ class TeamsListViewModel @Inject constructor(
     private val repository: TeamsListRepository
 ) : ViewModel() {
 
-    private val _uiState = MutableLiveData<TeamsUiState<List<TeamHero>>>(TeamsUiState.IDLE)
+    private val _uiState = MutableLiveData<TeamsUiState<List<TeamHero>>>(TeamsUiState.LOADING)
     val uiState: LiveData<TeamsUiState<List<TeamHero>>> = _uiState
 
     fun getTeamsList(idHero: Int) = viewModelScope.launch {

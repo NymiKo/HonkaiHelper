@@ -1,24 +1,17 @@
 package com.example.honkaihelper.login
 
 import android.content.Context
-import android.util.Log
-import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentLoginBinding
 import com.example.honkaihelper.fragments.BaseFragment
-import com.example.honkaihelper.profile.ProfileFragment
-import com.example.honkaihelper.teams.RetryBottomSheetDialog
 import com.example.honkaihelper.utils.TOKEN
 import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone
-import com.example.honkaihelper.utils.setNavigationResult
 import com.example.honkaihelper.utils.toast
 import com.example.honkaihelper.utils.visible
-import javax.inject.Inject
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 

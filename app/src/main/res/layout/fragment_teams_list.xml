@@ -17,13 +17,12 @@
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar_create_team"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:titleTextAppearance="@style/toolbar"
-        app:titleTextColor="?attr/colorSecondary" />
+        app:titleTextColor="?attr/colorSecondary"
+        style="@style/base_toolbar_style"/>
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_list"
@@ -35,10 +34,12 @@
         android:id="@+id/recycler_view_teams_hero"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
         android:paddingHorizontal="16dp"
         android:paddingBottom="8dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_create_team"
         tools:itemCount="5"
         tools:listitem="@layout/item_team" />
@@ -53,6 +54,28 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="?attr/colorOnSecondary" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_retry"
+        app:constraint_referenced_ids="button_retry, text_retry"
+        style="@style/group_message_style" />
+
+    <TextView
+        android:id="@+id/text_retry"
+        android:text="@string/error"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/text_view_message_style" />
+
+    <Button
+        android:id="@+id/button_retry"
+        android:text="@string/retry"
+        app:layout_constraintEnd_toEndOf="@+id/text_retry"
+        app:layout_constraintStart_toStartOf="@+id/text_retry"
+        app:layout_constraintTop_toBottomOf="@+id/text_retry"
+        style="@style/button_message_style" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_layout_teams_list"

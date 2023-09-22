@@ -2,33 +2,24 @@ package com.example.honkaihelper.teams
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
-import com.example.honkaihelper.databinding.DialogRetryBottomSheetBinding
-import com.example.honkaihelper.teams.adapter.HeroTeamsListAdapter
 import com.example.honkaihelper.databinding.FragmentTeamsListBinding
-import com.example.honkaihelper.di.ViewModelFactory
 import com.example.honkaihelper.fragments.BaseFragment
-import com.example.honkaihelper.models.Hero
 import com.example.honkaihelper.models.TeamHero
+import com.example.honkaihelper.teams.adapter.HeroTeamsListAdapter
 import com.example.honkaihelper.utils.gone
-import com.example.honkaihelper.utils.toast
 import com.example.honkaihelper.utils.visible
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import javax.inject.Inject
 
 class TeamsListFragment :
-    BaseFragment<FragmentTeamsListBinding>(FragmentTeamsListBinding::inflate),
-    RetryBottomSheetDialog.RetryDialogCallback {
+    BaseFragment<FragmentTeamsListBinding>(FragmentTeamsListBinding::inflate) {
 
     private val viewModel by viewModels<TeamsListViewModel> { viewModelFactory }
 
@@ -39,7 +30,8 @@ class TeamsListFragment :
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as App).appComponent.teamsListComponent().create().inject(this)
+        (requireActivity().application as App).appComponent.teamsListComponent().create()
+            .inject(this)
     }
 
     override fun onCreateView(
@@ -59,61 +51,58 @@ class TeamsListFragment :
 
     override fun uiStateHandle() {
         viewModel.uiState.observe(viewLifecycleOwner) {
-            when(it) {
+            when (it) {
                 is TeamsUiState.LOADING -> {
-                    startShimming()
-                    binding.groupList.gone()
+                    showLoading()
                 }
+
                 is TeamsUiState.SUCCESS -> {
-                    mAdapter.mTeamsHeroList = it.teamsLIst
-                    binding.groupList.visible()
-                    stopShimming()
+                    showTeamsList(it.teamsList)
                 }
+
                 is TeamsUiState.ERROR -> {
-                    stopShimming()
-                    binding.groupList.gone()
-                    showErrorDialog()
+                    showRetryView()
                 }
-                is TeamsUiState.IDLE -> {}
             }
         }
     }
 
-    private fun showErrorDialog()  {
-        val retryBottomSheetDialog = RetryBottomSheetDialog()
-        retryBottomSheetDialog.show(parentFragmentManager, RetryBottomSheetDialog.TAG)
-        retryBottomSheetDialog.setCallback(this)
+    private fun showRetryView() {
+        binding.groupRetry.visible()
+        binding.shimmerLayoutTeamsList.stopShimmer()
+        binding.shimmerLayoutTeamsList.gone()
+        binding.groupList.gone()
     }
 
-    private fun startShimming() {
-        binding.shimmerLayoutTeamsList.apply {
-            startShimmer()
-            visible()
-        }
-    }
-
-    private fun stopShimming() {
+    private fun showTeamsList(teamsList: List<TeamHero>) {
+        mAdapter.mTeamsHeroList = teamsList
+        binding.groupList.visible()
         binding.shimmerLayoutTeamsList.stopShimmer()
         binding.shimmerLayoutTeamsList.gone()
     }
 
+    private fun showLoading() {
+        binding.shimmerLayoutTeamsList.startShimmer()
+        binding.shimmerLayoutTeamsList.visible()
+        binding.groupRetry.gone()
+    }
+
     private fun openCreateTeamFragment() {
         binding.buttonCreateTeam.setOnClickListener {
-            findNavController().navigate(R.id.action_teamsListFragment_to_createTeamFragment)
+            findNavController().navigate(R.id.createTeamFragment)
         }
     }
 
     private fun setupRecyclerView() {
         mAdapter = HeroTeamsListAdapter()
-        binding.recyclerViewTeamsHero.adapter = mAdapter
+        binding.recyclerViewTeamsHero.apply {
+            layoutManager = LinearLayoutManager(requireActivity())
+            adapter = mAdapter
+        }
     }
 
     private fun setupToolbar() {
         binding.toolbarCreateTeam.title = resources.getString(R.string.team_for_hero, nameHero)
-    }
-
-    override fun onRetryClick() {
-        viewModel.getTeamsList(idHero)
     }
 
     override fun onDestroyView() {
