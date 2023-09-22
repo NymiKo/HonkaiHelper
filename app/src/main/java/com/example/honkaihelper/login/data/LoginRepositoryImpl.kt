@@ -10,7 +10,7 @@ import javax.inject.Inject
 class LoginRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher,
     private val loginService: LoginService
-): LoginRepository {
+) : LoginRepository {
     override suspend fun login(login: String, password: String): Result<LoginResponse> {
         return withContext(ioDispatcher) {
             handleApi { loginService.login(LoginRequest(login, password)) }

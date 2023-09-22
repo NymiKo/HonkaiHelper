@@ -9,8 +9,6 @@ import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentRegistrationBinding
 import com.example.honkaihelper.fragments.BaseFragment
-import com.example.honkaihelper.utils.TOKEN
-import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.toast
 import com.example.honkaihelper.utils.visible
@@ -25,40 +23,51 @@ class RegistrationFragment :
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as App).appComponent.registrationComponent().create().inject(this)
+        (requireActivity().application as App).appComponent.registrationComponent().create()
+            .inject(this)
     }
 
     override fun setupView() {
         uiStateHandle()
         binding.buttonRegister.setOnClickListener {
-            viewModel.registration(binding.editTextLogin.text.toString(), binding.editTextPassword.text.toString())
+            viewModel.registration(
+                binding.editTextLogin.text.toString(),
+                binding.editTextPassword.text.toString()
+            )
         }
     }
 
     private fun uiStateHandle() {
         viewModel.uiState.observe(viewLifecycleOwner) {
-            when(it) {
+            when (it) {
                 is RegistrationUiState.EMPTY_LOGIN -> {
                     showErrorLogin()
                     showButtonRegister()
                 }
+
                 is RegistrationUiState.EMPTY_PASSWORD -> {
                     showErrorPassword(R.string.empty_password)
                     showButtonRegister()
                 }
-                is RegistrationUiState.ERROR -> {
 
+                is RegistrationUiState.ERROR -> {
+                    Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
+                    showButtonRegister()
                 }
+
                 is RegistrationUiState.IDLE -> {
                     hideError()
                 }
+
                 is RegistrationUiState.INCORRECT_PASSWORD -> {
                     showErrorPassword(R.string.incorrect_password)
                     showButtonRegister()
                 }
+
                 is RegistrationUiState.LOADING -> {
                     showProgress()
                 }
+
                 is RegistrationUiState.SUCCESS -> {
                     toast(requireActivity(), R.string.registration_success)
                     findNavController().popBackStack()

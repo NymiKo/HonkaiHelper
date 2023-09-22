@@ -29,4 +29,7 @@
     <string name="logout_of_your_account">Выход из аккаунта</string>
     <string name="yes">Да</string>
     <string name="error_login">Произошла ошибка. Повторите попытку.</string>
+    <string name="check_your_internet_connection">Проверьте подключение к интернету</string>
+    <string name="login_already_exists">Пользователь с таким логином уже существует</string>
+    <string name="unknown_error">Неизвестная ошибка</string>
 </resources>
