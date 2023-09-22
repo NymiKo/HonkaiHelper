@@ -47,6 +47,7 @@ class TeamsListFragment :
         setupToolbar()
         setupRecyclerView()
         openCreateTeamFragment()
+        setupRetryButtonClickListener()
     }
 
     override fun uiStateHandle() {
@@ -85,6 +86,12 @@ class TeamsListFragment :
         binding.shimmerLayoutTeamsList.startShimmer()
         binding.shimmerLayoutTeamsList.visible()
         binding.groupRetry.gone()
+    }
+
+    private fun setupRetryButtonClickListener() {
+        binding.buttonRetry.setOnClickListener {
+            viewModel.getTeamsList(idHero)
+        }
     }
 
     private fun openCreateTeamFragment() {

@@ -9,14 +9,19 @@
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/materialToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        style="@style/base_toolbar_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/creating_a_team"
         app:titleTextAppearance="@style/toolbar"
         app:titleTextColor="?attr/colorSecondary" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_team_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="recycler_viewing_command, materialDivider"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_viewing_command"
@@ -40,31 +45,82 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recycler_viewing_command" />
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_create_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="recycler_heroes_list, button_save_team"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_heroes_list"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_margin="@dimen/DP16"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialDivider"
-        app:spanCount="4"
-        tools:itemCount="29"
+        tools:itemCount="4"
         tools:listitem="@layout/item_hero_create_team_list" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_save_team"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/DP8"
-        android:backgroundTint="?attr/colorSecondary"
+        style="@style/base_floating_button"
         android:src="@drawable/ic_save"
         app:fabSize="mini"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="?attr/colorOnSecondary" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_retry"
+        android:visibility="gone"
+        app:constraint_referenced_ids="button_retry, text_retry"
+        style="@style/group_message_style" />
+
+    <TextView
+        android:id="@+id/text_retry"
+        style="@style/text_view_message_style"
+        android:text="@string/error"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_retry"
+        android:text="@string/retry"
+        app:layout_constraintEnd_toEndOf="@+id/text_retry"
+        app:layout_constraintStart_toStartOf="@+id/text_retry"
+        app:layout_constraintTop_toBottomOf="@+id/text_retry"
+        style="@style/button_message_style" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_layout_heroes_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/DP16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/materialDivider">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <include layout="@layout/shimmer_item_hero_in_create_team" />
+
+            <include layout="@layout/shimmer_item_hero_in_create_team" />
+
+            <include layout="@layout/shimmer_item_hero_in_create_team" />
+
+            <include layout="@layout/shimmer_item_hero_in_create_team" />
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

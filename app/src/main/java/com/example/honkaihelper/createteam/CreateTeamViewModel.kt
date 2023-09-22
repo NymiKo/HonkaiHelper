@@ -15,19 +15,22 @@ class CreateTeamViewModel @Inject constructor(
     private val repository: CreateTeamRepository
 ) : ViewModel() {
 
-    private val _heroesList = MutableLiveData<List<ActiveHeroInTeam>>(emptyList())
-    val heroesList: LiveData<List<ActiveHeroInTeam>> = _heroesList
+    private val _uiState = MutableLiveData<CreateTeamUIState<Any>>(CreateTeamUIState.LOADING)
+    val uiState: LiveData<CreateTeamUIState<Any>> = _uiState
 
     init {
         getHeroesList()
     }
 
-    private fun getHeroesList() = viewModelScope.launch {
+    fun getHeroesList() = viewModelScope.launch {
+        _uiState.value = CreateTeamUIState.LOADING
         val result = repository.getHeroesList()
         when (result) {
-            is NetworkResult.Error -> {}
-            is NetworkResult.Success -> _heroesList.value =
-                result.data.map { hero -> ActiveHeroInTeam.toActiveHero(hero) }
+            is NetworkResult.Error -> _uiState.value = CreateTeamUIState.ERROR
+            is NetworkResult.Success -> _uiState.value =
+                CreateTeamUIState.SUCCESS(result.data.map { hero ->
+                    ActiveHeroInTeam.toActiveHero(hero)
+                })
         }
     }
 

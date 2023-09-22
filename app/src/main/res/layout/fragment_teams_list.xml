@@ -46,14 +46,11 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_create_team"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:backgroundTint="?attr/colorSecondary"
         android:src="@drawable/ic_create_team"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:tint="?attr/colorOnSecondary" />
+        app:tint="?attr/colorOnSecondary"
+        style="@style/base_floating_button" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_retry"

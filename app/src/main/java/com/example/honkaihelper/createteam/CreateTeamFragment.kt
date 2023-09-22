@@ -1,13 +1,11 @@
 package com.example.honkaihelper.createteam
 
 import android.content.Context
-import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.createteam.adapter.CreateTeamAdapter
@@ -17,39 +15,87 @@ import com.example.honkaihelper.databinding.FragmentCreateTeamBinding
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.models.ActiveHeroInTeam
 import com.example.honkaihelper.models.Hero
+import com.example.honkaihelper.utils.gone
+import com.example.honkaihelper.utils.visible
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
-import javax.inject.Inject
 
 class CreateTeamFragment :
     BaseFragment<FragmentCreateTeamBinding>(FragmentCreateTeamBinding::inflate) {
 
-    private val viewModel by viewModels<CreateTeamViewModel>{ viewModelFactory }
+    private val viewModel by viewModels<CreateTeamViewModel> { viewModelFactory }
 
-    private var hero: Hero? = null
     private lateinit var mAdapterForViewTeam: CreateTeamAdapter
     private lateinit var mAdapterHeroList: HeroListInCreateTeamAdapter
     private val heroesInTeamList = arrayListOf<Hero>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as App).appComponent.createTeamComponent().create().inject(this)
+        (requireActivity().application as App).appComponent.createTeamComponent().create()
+            .inject(this)
     }
 
     override fun setupView() {
         setupButtonSaveTeam()
         setupRecyclerViewForViewTeam()
         setupRecyclerViewHeroList()
+        setupRetryButtonClickListener()
     }
 
     override fun uiStateHandle() {
+        viewModel.uiState.observe(viewLifecycleOwner) {
+            when (it) {
+                is CreateTeamUIState.ERROR -> {
+                    showRetryView()
+                }
 
+                is CreateTeamUIState.LOADING -> {
+                    showLoading()
+                }
+
+                is CreateTeamUIState.SUCCESS -> {
+                    showCreateTeamView(it.heroesList)
+                }
+            }
+        }
+    }
+
+    private fun showRetryView() {
+        binding.shimmerLayoutHeroesList.stopShimmer()
+        binding.shimmerLayoutHeroesList.gone()
+        binding.groupRetry.visible()
+        binding.groupTeamView.gone()
+    }
+
+    private fun showCreateTeamView(heroesList: List<ActiveHeroInTeam>) {
+        mAdapterHeroList.mHeroList = heroesList
+        binding.shimmerLayoutHeroesList.stopShimmer()
+        binding.shimmerLayoutHeroesList.gone()
+        binding.groupCreateTeam.visible()
+    }
+
+    private fun showLoading() {
+        binding.groupRetry.gone()
+        binding.groupTeamView.visible()
+        binding.shimmerLayoutHeroesList.startShimmer()
+        binding.shimmerLayoutHeroesList.visible()
+    }
+
+    private fun setupRetryButtonClickListener() {
+        binding.buttonRetry.setOnClickListener {
+            viewModel.getHeroesList()
+        }
     }
 
     private fun setupRecyclerViewForViewTeam() {
         mAdapterForViewTeam = CreateTeamAdapter()
         mAdapterForViewTeam.mHeroInTeamList = heroesInTeamList
+        val layoutManager = FlexboxLayoutManager(requireActivity()).apply {
+            justifyContent = JustifyContent.CENTER
+            flexDirection = FlexDirection.ROW
+        }
+        binding.recyclerViewingCommand.layoutManager = layoutManager
         binding.recyclerViewingCommand.adapter = mAdapterForViewTeam
     }
 
@@ -63,16 +109,11 @@ class CreateTeamFragment :
                 }
             }
         })
-        viewModel.heroesList.observe(viewLifecycleOwner) { activeHeroInTeamList ->
-            mAdapterHeroList.mHeroList = activeHeroInTeamList
+        binding.recyclerHeroesList.apply {
+            layoutManager = GridLayoutManager(requireActivity(), 4)
+            adapter = mAdapterHeroList
+            itemAnimator = null
         }
-        val layoutManager = FlexboxLayoutManager(requireContext()).apply {
-            justifyContent = JustifyContent.CENTER
-            flexDirection = FlexDirection.ROW
-        }
-        binding.recyclerViewingCommand.layoutManager = layoutManager
-        binding.recyclerHeroesList.adapter = mAdapterHeroList
-        binding.recyclerHeroesList.itemAnimator = null
     }
 
     private fun setupButtonSaveTeam() {
@@ -80,7 +121,11 @@ class CreateTeamFragment :
             if (mAdapterForViewTeam.mHeroInTeamList.size == 4) {
                 showSaveDialog()
             } else {
-                Toast.makeText(requireContext(), "В команде должно быть 4 героя", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "В команде должно быть 4 героя",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
@@ -106,18 +151,5 @@ class CreateTeamFragment :
         binding.recyclerHeroesList.adapter = null
         binding.recyclerViewingCommand.adapter = null
         super.onDestroyView()
-    }
-
-    companion object {
-
-        private const val ARG_PARAM1 = "param1"
-
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CreateTeamFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                }
-            }
     }
 }
