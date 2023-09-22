@@ -25,8 +25,6 @@ import javax.inject.Inject
 class CreateTeamFragment :
     BaseFragment<FragmentCreateTeamBinding>(FragmentCreateTeamBinding::inflate) {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<CreateTeamViewModel>{ viewModelFactory }
 
     private var hero: Hero? = null
@@ -43,6 +41,10 @@ class CreateTeamFragment :
         setupButtonSaveTeam()
         setupRecyclerViewForViewTeam()
         setupRecyclerViewHeroList()
+    }
+
+    override fun uiStateHandle() {
+
     }
 
     private fun setupRecyclerViewForViewTeam() {

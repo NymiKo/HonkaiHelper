@@ -20,6 +20,7 @@ import com.example.honkaihelper.databinding.FragmentHeroesListBinding
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.heroes.adapter.HeroesListActionListener
 import com.example.honkaihelper.heroes.adapter.HeroesListAdapter
+import com.example.honkaihelper.models.Hero
 import com.example.honkaihelper.teams.TeamsListFragment
 import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.visible
@@ -28,8 +29,6 @@ import javax.inject.Inject
 class HeroesListFragment :
     BaseFragment<FragmentHeroesListBinding>(FragmentHeroesListBinding::inflate) {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<HeroesListViewModel> { viewModelFactory }
     private lateinit var mAdapterRecyclerView: HeroesListAdapter
 
@@ -40,27 +39,54 @@ class HeroesListFragment :
     }
 
     override fun setupView() {
-        uiStateHandle()
         addMenu()
         setupRecyclerView()
+        onRetryClick()
     }
 
-    private fun uiStateHandle() {
+    override fun uiStateHandle() {
         viewModel.uiState.observe(viewLifecycleOwner) {
             when(it) {
-                is HeroesUiState.ERROR -> {}
-                is HeroesUiState.IDLE -> {}
+                is HeroesUiState.ERROR -> {
+                    showRetryView()
+                }
+                is HeroesUiState.IDLE -> {
+
+                }
                 is HeroesUiState.LOADING -> {
-                    binding.shimmerLayoutHeroesList.startShimmer()
-                    binding.recyclerViewHeroes.gone()
+                    showLoading()
                 }
                 is HeroesUiState.SUCCESS -> {
-                    mAdapterRecyclerView.mHeroesList = it.heroesList
-                    binding.recyclerViewHeroes.visible()
-                    binding.shimmerLayoutHeroesList.stopShimmer()
-                    binding.shimmerLayoutHeroesList.gone()
+                    showHeroesList(it.heroesList)
                 }
             }
+        }
+    }
+
+    private fun showRetryView() {
+        binding.groupRetry.visible()
+        binding.recyclerViewHeroes.gone()
+        binding.shimmerLayoutHeroesList.stopShimmer()
+        binding.shimmerLayoutHeroesList.gone()
+    }
+
+    private fun showLoading() {
+        binding.shimmerLayoutHeroesList.startShimmer()
+        binding.recyclerViewHeroes.gone()
+        binding.groupRetry.gone()
+    }
+
+    private fun showHeroesList(heroesList: List<Hero>) {
+        mAdapterRecyclerView.mHeroesList = heroesList
+        binding.recyclerViewHeroes.visible()
+        binding.shimmerLayoutHeroesList.stopShimmer()
+        binding.shimmerLayoutHeroesList.gone()
+        binding.groupRetry.gone()
+    }
+
+    private fun onRetryClick() {
+        binding.buttonRetry.setOnClickListener {
+            viewModel.getHeroesList()
         }
     }
 

@@ -42,7 +42,7 @@ class LoginViewModel @Inject constructor(
                 _uiState.value = LoginUiState.EMPTY_PASSWORD
                 false
             }
-            password.length <= 4 -> {
+            password.length < 4 -> {
                 _uiState.value = LoginUiState.INCORRECT_PASSWORD
                 false
             }

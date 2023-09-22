@@ -17,6 +17,9 @@ abstract class BaseFragment<T: ViewBinding>(private val bindingInflater: (Layout
     private var _binding: T? = null
     protected val binding get() = _binding!!
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,10 +31,13 @@ abstract class BaseFragment<T: ViewBinding>(private val bindingInflater: (Layout
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        uiStateHandle()
         setupView()
     }
 
     abstract fun setupView()
+
+    abstract fun uiStateHandle()
 
     override fun onDestroyView() {
         super.onDestroyView()

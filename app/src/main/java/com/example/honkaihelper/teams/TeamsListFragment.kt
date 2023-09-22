@@ -30,8 +30,6 @@ class TeamsListFragment :
     BaseFragment<FragmentTeamsListBinding>(FragmentTeamsListBinding::inflate),
     RetryBottomSheetDialog.RetryDialogCallback {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<TeamsListViewModel> { viewModelFactory }
 
     private val idHero get() = requireArguments().getInt(ARG_ID_HERO)
@@ -54,13 +52,12 @@ class TeamsListFragment :
     }
 
     override fun setupView() {
-        uiStateHandle()
         setupToolbar()
         setupRecyclerView()
         openCreateTeamFragment()
     }
 
-    private fun uiStateHandle() {
+    override fun uiStateHandle() {
         viewModel.uiState.observe(viewLifecycleOwner) {
             when(it) {
                 is TeamsUiState.LOADING -> {

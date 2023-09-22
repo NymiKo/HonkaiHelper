@@ -20,6 +20,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         menuItemClickHandler()
     }
 
+    override fun uiStateHandle() {
+
+    }
+
     private fun setupEnterButton() {
         binding.buttonGoLogin.setOnClickListener {
             findNavController().navigate(R.id.login_nav_graph)

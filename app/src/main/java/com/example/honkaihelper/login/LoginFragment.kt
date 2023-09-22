@@ -22,8 +22,6 @@ import javax.inject.Inject
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<LoginViewModel> { viewModelFactory }
 
     override fun onAttach(context: Context) {
@@ -33,14 +31,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     override fun setupView() {
-        uiStateHandle()
         openRegistrationFragment()
         binding.buttonLogin.setOnClickListener {
             viewModel.login(binding.editTextLogin.text.toString(), binding.editTextPassword.text.toString())
         }
     }
 
-    private fun uiStateHandle() {
+    override fun uiStateHandle() {
         viewModel.uiState.observe(viewLifecycleOwner) {
             when(it) {
                 is LoginUiState.EMPTY_LOGIN -> {
@@ -52,7 +49,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                     showButtonLogin()
                 }
                 is LoginUiState.ERROR -> {
-                    toast(requireActivity(), R.string.error_login)
+                    toast(requireActivity(), it.message)
                     showButtonLogin()
                 }
                 is LoginUiState.IDLE -> {

@@ -17,8 +17,6 @@ import javax.inject.Inject
 class RegistrationFragment :
     BaseFragment<FragmentRegistrationBinding>(FragmentRegistrationBinding::inflate) {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<RegistrationViewModel> { viewModelFactory }
 
     override fun onAttach(context: Context) {
@@ -28,7 +26,6 @@ class RegistrationFragment :
     }
 
     override fun setupView() {
-        uiStateHandle()
         binding.buttonRegister.setOnClickListener {
             viewModel.registration(
                 binding.editTextLogin.text.toString(),
@@ -37,7 +34,7 @@ class RegistrationFragment :
         }
     }
 
-    private fun uiStateHandle() {
+    override fun uiStateHandle() {
         viewModel.uiState.observe(viewLifecycleOwner) {
             when (it) {
                 is RegistrationUiState.EMPTY_LOGIN -> {

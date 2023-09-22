@@ -19,33 +19,25 @@
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_no_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:constraint_referenced_ids="button_go_login, text_no_login" />
+        app:constraint_referenced_ids="button_go_login, text_no_login"
+        style="@style/group_message_style" />
 
     <TextView
         android:id="@+id/text_no_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-medium"
         android:text="@string/not_authorized"
-        android:textSize="@dimen/SP18"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/text_view_message_style" />
 
     <Button
         android:id="@+id/button_go_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/DP8"
         android:text="@string/enter"
-        android:textColor="?attr/colorOnSecondary"
         app:layout_constraintEnd_toEndOf="@+id/text_no_login"
         app:layout_constraintStart_toStartOf="@+id/text_no_login"
-        app:layout_constraintTop_toBottomOf="@+id/text_no_login" />
+        app:layout_constraintTop_toBottomOf="@+id/text_no_login"
+        style="@style/button_message_style" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_user_profile"

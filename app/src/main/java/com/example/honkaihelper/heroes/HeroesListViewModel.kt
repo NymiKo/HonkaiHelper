@@ -27,7 +27,7 @@ class HeroesListViewModel @Inject constructor(
         getHeroesList()
     }
 
-    private fun getHeroesList() = viewModelScope.launch {
+    fun getHeroesList() = viewModelScope.launch {
         _uiState.value = HeroesUiState.LOADING
         val result = repository.getHeroesList()
         when(result) {
