@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.honkaihelper.data.NetworkResult
 import com.example.honkaihelper.models.TeamHero
 import com.example.honkaihelper.teams.data.TeamsListRepository
 import kotlinx.coroutines.launch
@@ -19,10 +20,9 @@ class TeamsListViewModel @Inject constructor(
     fun getTeamsList(idHero: Int) = viewModelScope.launch {
         _uiState.value = TeamsUiState.LOADING
         val result = repository.getTeamsList(idHero)
-        result.onSuccess {
-            _uiState.value = TeamsUiState.SUCCESS(it)
-        }.onFailure {
-            _uiState.value = TeamsUiState.ERROR
+        when(result) {
+            is NetworkResult.Error -> _uiState.value = TeamsUiState.ERROR
+            is NetworkResult.Success -> _uiState.value = TeamsUiState.SUCCESS(result.data.sortedBy { it.idTeam })
         }
     }
 
