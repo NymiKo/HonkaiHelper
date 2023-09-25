@@ -15,7 +15,10 @@ import com.example.honkaihelper.databinding.FragmentCreateTeamBinding
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.models.ActiveHeroInTeam
 import com.example.honkaihelper.models.Hero
+import com.example.honkaihelper.utils.TOKEN
+import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone
+import com.example.honkaihelper.utils.toast
 import com.example.honkaihelper.utils.visible
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -121,22 +124,19 @@ class CreateTeamFragment :
             if (mAdapterForViewTeam.mHeroInTeamList.size == 4) {
                 showSaveDialog()
             } else {
-                Toast.makeText(
-                    requireContext(),
-                    "В команде должно быть 4 героя",
-                    Toast.LENGTH_SHORT
-                ).show()
+                toast(requireActivity(), R.string.should_be_4_heroes_in_the_team)
             }
         }
     }
 
     private fun showSaveDialog() {
         val dialog = AlertDialog.Builder(requireContext())
-            .setMessage(R.string.add_the_created_command)
+            .setTitle(R.string.attention)
+            .setMessage(setMessageDialog())
             .setPositiveButton(R.string.add) { _, _ ->
                 // TODO: Добавить загрузку до подтверждения ответа с сервера
                 viewModel.saveTeam(mAdapterForViewTeam.mHeroInTeamList)
-                Toast.makeText(requireContext(), "Команда добавлена", Toast.LENGTH_SHORT).show()
+                toast(requireActivity(), R.string.command_has_been_added)
                 findNavController().popBackStack()
             }
             .setNegativeButton(R.string.cancellation) { dialog, _ ->
@@ -145,6 +145,14 @@ class CreateTeamFragment :
             .create()
 
         dialog.show()
+    }
+
+    private fun setMessageDialog(): Int {
+        return if (getSharedPrefUser().getString(TOKEN, "").isNullOrBlank()) {
+            R.string.you_are_not_logged_in
+        } else {
+            R.string.add_the_created_command
+        }
     }
 
     override fun onDestroyView() {
