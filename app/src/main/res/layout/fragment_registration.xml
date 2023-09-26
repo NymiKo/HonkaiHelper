@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".registration.RegistrationFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:backgroundTint="?attr/colorOnSecondary"
         android:layout_margin="@dimen/DP30"
+        android:backgroundTint="?attr/colorOnSecondary"
         app:cardCornerRadius="@dimen/DP20"
         app:cardElevation="@dimen/DP20"
         app:strokeColor="?attr/colorSecondary"
@@ -37,40 +37,42 @@
                 android:id="@+id/edit_layout_login"
                 style="@style/EditTextLayoutLogin"
                 android:hint="@string/login"
-                app:startIconDrawable="@drawable/ic_login"
-                app:startIconTint="?attr/colorSecondary"
                 app:boxCornerRadiusBottomEnd="@dimen/DP30"
                 app:boxCornerRadiusBottomStart="@dimen/DP30"
                 app:boxCornerRadiusTopEnd="@dimen/DP30"
                 app:boxCornerRadiusTopStart="@dimen/DP30"
                 app:boxStrokeColor="?attr/colorSecondary"
-                app:boxStrokeWidth="@dimen/DP2">
+                app:boxStrokeWidth="@dimen/DP2"
+                app:hintTextColor="?attr/colorSecondary"
+                app:startIconDrawable="@drawable/ic_login"
+                app:startIconTint="?attr/colorSecondary">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_text_login"
-                    android:inputType="textPersonName"
-                    style="@style/EditTextLogin" />
+                    style="@style/EditTextLogin"
+                    android:inputType="textPersonName" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edit_layout_password"
                 style="@style/EditTextLayoutLogin"
-                android:hint="@string/password"
                 android:layout_marginTop="20dp"
-                app:startIconDrawable="@drawable/ic_password"
-                app:startIconTint="?attr/colorSecondary"
+                android:hint="@string/password"
                 app:boxCornerRadiusBottomEnd="@dimen/DP30"
                 app:boxCornerRadiusBottomStart="@dimen/DP30"
                 app:boxCornerRadiusTopEnd="@dimen/DP30"
                 app:boxCornerRadiusTopStart="@dimen/DP30"
                 app:boxStrokeColor="?attr/colorSecondary"
-                app:boxStrokeWidth="@dimen/DP2">
+                app:boxStrokeWidth="@dimen/DP2"
+                app:hintTextColor="?attr/colorSecondary"
+                app:startIconDrawable="@drawable/ic_password"
+                app:startIconTint="?attr/colorSecondary">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_text_password"
-                    android:inputType="textPassword"
-                    style="@style/EditTextLogin" />
+                    style="@style/EditTextLogin"
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,17 +85,18 @@
                     android:id="@+id/button_register"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:backgroundTint="?attr/colorSecondary"
                     android:text="@string/register"
+                    android:textColor="?attr/colorOnSecondary"
                     android:textSize="@dimen/SP18"
-                    app:cornerRadius="@dimen/DP20"
-                    android:textColor="?attr/colorOnSecondary"/>
+                    app:cornerRadius="@dimen/DP20" />
 
                 <ProgressBar
                     android:id="@+id/progress_login"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/DP30"
                     android:layout_gravity="center"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
             </FrameLayout>
 

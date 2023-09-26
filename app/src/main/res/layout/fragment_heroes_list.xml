@@ -46,6 +46,7 @@
     <Button
         android:id="@+id/button_retry"
         android:text="@string/retry"
+        android:backgroundTint="?attr/colorSecondary"
         app:layout_constraintEnd_toEndOf="@+id/text_retry"
         app:layout_constraintStart_toStartOf="@+id/text_retry"
         app:layout_constraintTop_toBottomOf="@+id/text_retry"

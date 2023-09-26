@@ -34,6 +34,7 @@
     <Button
         android:id="@+id/button_go_login"
         android:text="@string/enter"
+        android:backgroundTint="?attr/colorSecondary"
         app:layout_constraintEnd_toEndOf="@+id/text_no_login"
         app:layout_constraintStart_toStartOf="@+id/text_no_login"
         app:layout_constraintTop_toBottomOf="@+id/text_no_login"
