@@ -9,7 +9,6 @@ import com.example.honkaihelper.createteam.data.CreateTeamRepository
 import com.example.honkaihelper.data.NetworkResult
 import com.example.honkaihelper.models.ActiveHeroInTeam
 import com.example.honkaihelper.models.Hero
-import com.example.honkaihelper.registration.RegistrationUiState
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -39,12 +38,12 @@ class CreateTeamViewModel @Inject constructor(
     }
 
     fun saveTeam(heroesList: List<Hero>) = viewModelScope.launch {
-        _uiState.value = CreateTeamUIState.LOADING_COMMAND_CREATION
+        _uiState.value = CreateTeamUIState.LOADING_TEAM_CREATION
         val result = repository.saveTeam(heroesList)
         when(result) {
-            is NetworkResult.Error -> errorHandlerCommandCreation(result.code)
+            is NetworkResult.Error -> errorHandlerTeamCreation(result.code)
             is NetworkResult.Success -> {
-                _uiState.value = CreateTeamUIState.SUCCESS_COMMAND_CREATION
+                _uiState.value = CreateTeamUIState.SUCCESS_TEAM_CREATION
             }
         }
     }
@@ -56,11 +55,11 @@ class CreateTeamViewModel @Inject constructor(
         }
     }
 
-    private fun errorHandlerCommandCreation(errorCode: Int) {
+    private fun errorHandlerTeamCreation(errorCode: Int) {
         when(errorCode) {
-            105 -> _uiState.value = CreateTeamUIState.ERROR_COMMAND_CREATION(R.string.check_your_internet_connection)
-            400 -> _uiState.value = CreateTeamUIState.ERROR_COMMAND_CREATION(R.string.command_already_exists)
-            else -> _uiState.value = CreateTeamUIState.ERROR_COMMAND_CREATION(R.string.unknown_error)
+            105 -> _uiState.value = CreateTeamUIState.ERROR_TEAM_CREATION(R.string.check_your_internet_connection)
+            400 -> _uiState.value = CreateTeamUIState.ERROR_TEAM_CREATION(R.string.team_already_exists)
+            else -> _uiState.value = CreateTeamUIState.ERROR_TEAM_CREATION(R.string.unknown_error)
         }
     }
 }

@@ -51,27 +51,20 @@ class CreateTeamFragment :
                 is CreateTeamUIState.ERROR -> {
                     showRetryView()
                 }
-
                 is CreateTeamUIState.LOADING -> {
                     showLoading()
                 }
-
                 is CreateTeamUIState.SUCCESS -> {
                     showCreateTeamView(it.heroesList)
                 }
-
-                is CreateTeamUIState.ERROR_COMMAND_CREATION -> {
-                    binding.progressCommandCreation.gone()
-                    binding.groupCreateTeam.visible()
-                    toast(requireActivity(), it.message)
+                is CreateTeamUIState.ERROR_TEAM_CREATION -> {
+                    showErrorTeamCreation(it.message)
                 }
-                is CreateTeamUIState.SUCCESS_COMMAND_CREATION -> {
-                    toast(requireActivity(), R.string.command_has_been_added)
-                    findNavController().popBackStack()
+                is CreateTeamUIState.SUCCESS_TEAM_CREATION -> {
+                    successCreatingTeam()
                 }
-                is CreateTeamUIState.LOADING_COMMAND_CREATION -> {
-                    binding.progressCommandCreation.visible()
-                    binding.groupCreateTeam.gone()
+                is CreateTeamUIState.LOADING_TEAM_CREATION -> {
+                    showCommandCreationLoading()
                 }
             }
         }
@@ -82,7 +75,7 @@ class CreateTeamFragment :
         binding.shimmerLayoutHeroesList.gone()
         binding.groupRetry.visible()
         binding.groupTeamView.gone()
-        binding.progressCommandCreation.gone()
+        binding.progressTeamCreation.gone()
     }
 
     private fun showCreateTeamView(heroesList: List<ActiveHeroInTeam>) {
@@ -103,6 +96,22 @@ class CreateTeamFragment :
         binding.buttonRetry.setOnClickListener {
             viewModel.getHeroesList()
         }
+    }
+
+    private fun showCommandCreationLoading() {
+        binding.progressTeamCreation.visible()
+        binding.groupCreateTeam.gone()
+    }
+
+    private fun successCreatingTeam() {
+        toast(requireActivity(), R.string.command_has_been_added)
+        findNavController().popBackStack()
+    }
+
+    private fun showErrorTeamCreation(message: Int) {
+        binding.progressTeamCreation.gone()
+        binding.groupCreateTeam.visible()
+        toast(requireActivity(), message)
     }
 
     private fun setupRecyclerViewForViewTeam() {

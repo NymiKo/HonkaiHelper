@@ -9,6 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentTeamsListBinding
@@ -105,6 +106,22 @@ class TeamsListFragment :
         binding.recyclerViewTeamsHero.apply {
             layoutManager = LinearLayoutManager(requireActivity())
             adapter = mAdapter
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    if (dy > 6 && binding.buttonCreateTeam.isShown) {
+                        binding.buttonCreateTeam.hide()
+                    }
+
+                    if(dy < -6 && !binding.buttonCreateTeam.isShown) {
+                        binding.buttonCreateTeam.show()
+                    }
+
+                    if (!recyclerView.canScrollVertically(-1)) {
+                        binding.buttonCreateTeam.show()
+                    }
+                }
+            })
         }
     }
 

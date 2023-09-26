@@ -98,7 +98,7 @@
         style="@style/button_message_style" />
 
     <ProgressBar
-        android:id="@+id/progress_command_creation"
+        android:id="@+id/progress_team_creation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
