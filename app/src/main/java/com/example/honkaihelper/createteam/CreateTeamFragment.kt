@@ -1,7 +1,6 @@
 package com.example.honkaihelper.createteam
 
 import android.content.Context
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -60,6 +59,20 @@ class CreateTeamFragment :
                 is CreateTeamUIState.SUCCESS -> {
                     showCreateTeamView(it.heroesList)
                 }
+
+                is CreateTeamUIState.ERROR_COMMAND_CREATION -> {
+                    binding.progressCommandCreation.gone()
+                    binding.groupCreateTeam.visible()
+                    toast(requireActivity(), it.message)
+                }
+                is CreateTeamUIState.SUCCESS_COMMAND_CREATION -> {
+                    toast(requireActivity(), R.string.command_has_been_added)
+                    findNavController().popBackStack()
+                }
+                is CreateTeamUIState.LOADING_COMMAND_CREATION -> {
+                    binding.progressCommandCreation.visible()
+                    binding.groupCreateTeam.gone()
+                }
             }
         }
     }
@@ -69,6 +82,7 @@ class CreateTeamFragment :
         binding.shimmerLayoutHeroesList.gone()
         binding.groupRetry.visible()
         binding.groupTeamView.gone()
+        binding.progressCommandCreation.gone()
     }
 
     private fun showCreateTeamView(heroesList: List<ActiveHeroInTeam>) {
@@ -122,28 +136,24 @@ class CreateTeamFragment :
     private fun setupButtonSaveTeam() {
         binding.buttonSaveTeam.setOnClickListener {
             if (mAdapterForViewTeam.mHeroInTeamList.size == 4) {
-                showSaveDialog()
+                createSaveDialog()
             } else {
                 toast(requireActivity(), R.string.should_be_4_heroes_in_the_team)
             }
         }
     }
 
-    private fun showSaveDialog() {
+    private fun createSaveDialog() {
         val dialog = AlertDialog.Builder(requireContext())
-            .setTitle(R.string.attention)
+            .setTitle(R.string.adding_a_command)
             .setMessage(setMessageDialog())
             .setPositiveButton(R.string.add) { _, _ ->
-                // TODO: Добавить загрузку до подтверждения ответа с сервера
                 viewModel.saveTeam(mAdapterForViewTeam.mHeroInTeamList)
-                toast(requireActivity(), R.string.command_has_been_added)
-                findNavController().popBackStack()
             }
             .setNegativeButton(R.string.cancellation) { dialog, _ ->
                 dialog.cancel()
             }
             .create()
-
         dialog.show()
     }
 

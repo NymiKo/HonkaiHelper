@@ -36,5 +36,6 @@
     <string name="should_be_4_heroes_in_the_team">В команде должно быть 4 героя"</string>
     <string name="command_has_been_added">Команда добавлена</string>
     <string name="you_are_not_logged_in">Вы не авторизованы, это не позволит изменить команду после создания, продолжить?</string>
-    <string name="attention">Внимание</string>
+    <string name="adding_a_command">Добавление команды</string>
+    <string name="command_already_exists">Такая команда уже существует.</string>
 </resources>

@@ -52,7 +52,7 @@ class RegistrationViewModel @Inject constructor(
         viewModelScope.launch {
             val result = repository.register(login, password)
             when(result) {
-                is NetworkResult.Success -> _uiState.value = RegistrationUiState.SUCCESS(result.data.token)
+                is NetworkResult.Success -> _uiState.value = RegistrationUiState.SUCCESS
                 is NetworkResult.Error -> errorHandler(result.code)
             }
         }

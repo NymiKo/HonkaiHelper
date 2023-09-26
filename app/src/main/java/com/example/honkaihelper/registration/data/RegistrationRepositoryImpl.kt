@@ -6,6 +6,7 @@ import com.example.honkaihelper.registration.data.model.RegistrationRequest
 import com.example.honkaihelper.registration.data.model.RegistrationResponse
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
+import retrofit2.Response
 import javax.inject.Inject
 
 class RegistrationRepositoryImpl @Inject constructor(
@@ -15,7 +16,7 @@ class RegistrationRepositoryImpl @Inject constructor(
     override suspend fun register(
         login: String,
         password: String
-    ): NetworkResult<RegistrationResponse> {
+    ): NetworkResult<Unit> {
         return withContext(ioDispatcher) {
             handleApi {
                 registrationService.registration(RegistrationRequest(login, password))

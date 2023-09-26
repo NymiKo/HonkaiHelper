@@ -6,6 +6,6 @@ sealed class RegistrationUiState<out T> {
     object EMPTY_LOGIN : RegistrationUiState<Nothing>()
     object EMPTY_PASSWORD : RegistrationUiState<Nothing>()
     object INCORRECT_PASSWORD : RegistrationUiState<Nothing>()
-    data class SUCCESS(val token: String) : RegistrationUiState<String>()
+    object SUCCESS : RegistrationUiState<Nothing>()
     data class ERROR(val message: Int) : RegistrationUiState<Int>()
 }

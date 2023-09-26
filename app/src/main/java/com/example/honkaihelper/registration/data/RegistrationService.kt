@@ -8,5 +8,5 @@ import retrofit2.http.POST
 
 interface RegistrationService {
     @POST("/registration.php")
-    suspend fun registration(@Body registrationRequest: RegistrationRequest): Response<RegistrationResponse>
+    suspend fun registration(@Body registrationRequest: RegistrationRequest): Response<Unit>
 }
