@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.honkaihelper.data.NetworkResult
-import com.example.honkaihelper.models.TeamHero
+import com.example.honkaihelper.teams.model.TeamHero
 import com.example.honkaihelper.teams.data.TeamsListRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject

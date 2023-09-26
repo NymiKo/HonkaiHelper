@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.ItemHeroBinding
-import com.example.honkaihelper.models.Hero
+import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.utils.load
 
 class HeroesListAdapter(

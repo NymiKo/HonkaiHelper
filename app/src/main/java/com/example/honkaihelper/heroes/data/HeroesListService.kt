@@ -1,6 +1,6 @@
 package com.example.honkaihelper.heroes.data
 
-import com.example.honkaihelper.models.Hero
+import com.example.honkaihelper.heroes.data.model.Hero
 import retrofit2.Response
 import retrofit2.http.GET
 

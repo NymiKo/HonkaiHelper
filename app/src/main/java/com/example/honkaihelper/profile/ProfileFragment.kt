@@ -58,7 +58,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         AlertDialog.Builder(requireActivity())
             .setMessage(R.string.want_to_logout_of_your_account)
             .setPositiveButton(R.string.yes) { _, _ ->
-                getSharedPrefUser().edit().putString(TOKEN, "").apply()
+                getSharedPrefUser().edit().putString(TOKEN, null).apply()
                 hideProfile()
             }
             .setNegativeButton(R.string.cancellation) { dialog, _ ->

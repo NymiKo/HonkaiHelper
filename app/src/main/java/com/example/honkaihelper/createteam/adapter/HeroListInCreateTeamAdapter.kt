@@ -9,8 +9,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.ItemHeroCreateTeamListBinding
-import com.example.honkaihelper.models.ActiveHeroInTeam
-import com.example.honkaihelper.models.Hero
+import com.example.honkaihelper.createteam.data.model.ActiveHeroInTeam
+import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.utils.load
 import com.example.honkaihelper.utils.loadImageWithRounded
 

@@ -1,6 +1,8 @@
 package com.example.honkaihelper.di
 
+import android.content.Context
 import com.example.honkaihelper.createteam.data.CreateTeamService
+import com.example.honkaihelper.data.AuthInterceptor
 import com.example.honkaihelper.heroes.data.HeroesListService
 import com.example.honkaihelper.login.data.LoginService
 import com.example.honkaihelper.registration.data.RegistrationService
@@ -20,13 +22,18 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+    fun provideInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
 
     @Provides
     @Singleton
-    fun provideClient(logginInterceptor: HttpLoggingInterceptor): OkHttpClient =
+    fun provideAuthInterceptor(context: Context): AuthInterceptor = AuthInterceptor(context)
+
+    @Provides
+    @Singleton
+    fun provideClient(logginInterceptor: HttpLoggingInterceptor, authInterceptor: AuthInterceptor): OkHttpClient =
         OkHttpClient.Builder()
             .addInterceptor(logginInterceptor)
+            .addInterceptor(authInterceptor)
             .build()
 
     @Provides

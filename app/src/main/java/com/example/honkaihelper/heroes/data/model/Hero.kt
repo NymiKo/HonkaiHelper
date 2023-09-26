@@ -1,4 +1,4 @@
-package com.example.honkaihelper.models
+package com.example.honkaihelper.heroes.data.model
 
 data class Hero(
     val id: Int,

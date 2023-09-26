@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.honkaihelper.data.NetworkResult
 import com.example.honkaihelper.heroes.data.HeroesListRepository
-import com.example.honkaihelper.models.Hero
+import com.example.honkaihelper.heroes.data.model.Hero
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

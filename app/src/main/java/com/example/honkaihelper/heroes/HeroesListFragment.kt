@@ -12,7 +12,7 @@ import com.example.honkaihelper.databinding.FragmentHeroesListBinding
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.heroes.adapter.HeroesListActionListener
 import com.example.honkaihelper.heroes.adapter.HeroesListAdapter
-import com.example.honkaihelper.models.Hero
+import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.teams.TeamsListFragment
 import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.visible

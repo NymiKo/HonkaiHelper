@@ -1,6 +1,6 @@
 package com.example.honkaihelper.teams.data
 
-import com.example.honkaihelper.models.TeamHero
+import com.example.honkaihelper.teams.model.TeamHero
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

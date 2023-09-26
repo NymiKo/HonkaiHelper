@@ -8,8 +8,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.ItemTeamBinding
-import com.example.honkaihelper.models.Hero
-import com.example.honkaihelper.models.TeamHero
+import com.example.honkaihelper.heroes.data.model.Hero
+import com.example.honkaihelper.teams.model.TeamHero
 import com.example.honkaihelper.utils.loadImageWithRounded
 
 class HeroTeamsListAdapter: RecyclerView.Adapter<HeroTeamsListAdapter.HeroTeamsListViewHolder>() {

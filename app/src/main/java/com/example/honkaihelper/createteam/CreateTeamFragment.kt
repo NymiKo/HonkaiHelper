@@ -12,8 +12,8 @@ import com.example.honkaihelper.createteam.adapter.HeroListInCreateTeamAdapter
 import com.example.honkaihelper.createteam.adapter.HeroListInCreateTeamListener
 import com.example.honkaihelper.databinding.FragmentCreateTeamBinding
 import com.example.honkaihelper.fragments.BaseFragment
-import com.example.honkaihelper.models.ActiveHeroInTeam
-import com.example.honkaihelper.models.Hero
+import com.example.honkaihelper.createteam.data.model.ActiveHeroInTeam
+import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.utils.TOKEN
 import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone

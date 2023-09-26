@@ -1,6 +1,6 @@
 package com.example.honkaihelper.createteam
 
-import com.example.honkaihelper.models.ActiveHeroInTeam
+import com.example.honkaihelper.createteam.data.model.ActiveHeroInTeam
 
 sealed class CreateTeamUIState<out T> {
     object LOADING : CreateTeamUIState<Nothing>()

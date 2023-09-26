@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.honkaihelper.R
 import com.example.honkaihelper.createteam.data.CreateTeamRepository
 import com.example.honkaihelper.data.NetworkResult
-import com.example.honkaihelper.models.ActiveHeroInTeam
-import com.example.honkaihelper.models.Hero
+import com.example.honkaihelper.createteam.data.model.ActiveHeroInTeam
+import com.example.honkaihelper.heroes.data.model.Hero
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

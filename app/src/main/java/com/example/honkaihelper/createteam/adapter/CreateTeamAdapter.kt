@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.honkaihelper.databinding.ItemHeroCreateTeamBinding
-import com.example.honkaihelper.models.Hero
+import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.utils.load
 
 class CreateTeamAdapter : RecyclerView.Adapter<CreateTeamAdapter.CreateTeamViewHolder>() {
