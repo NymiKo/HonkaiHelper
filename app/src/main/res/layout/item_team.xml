@@ -115,13 +115,11 @@
             app:layout_constraintTop_toTopOf="@+id/button_like_team"
             tools:text="Команда от:" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/button_like_team"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginTop="@dimen/DP8"
-            android:background="?selectableItemBackground"
-            android:scaleType="centerCrop"
             android:src="@drawable/ic_thumb_up"
             app:layout_constraintEnd_toEndOf="@+id/hero_avatar_in_team_4"
             app:layout_constraintStart_toStartOf="@+id/hero_avatar_in_team_4"

@@ -4,13 +4,16 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.ItemTeamBinding
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.teams.data.model.TeamHero
 import com.example.honkaihelper.utils.invisible
+import com.example.honkaihelper.utils.load
 import com.example.honkaihelper.utils.loadImageWithRounded
 import com.example.honkaihelper.utils.visible
 
@@ -54,6 +57,16 @@ class HeroTeamsListAdapter: RecyclerView.Adapter<HeroTeamsListAdapter.HeroTeamsL
                     textTeamFrom.text = textTeamFrom.context.getString(R.string.team_from, teamHero.nickname)
                 } else {
                     textTeamFrom.invisible()
+                }
+
+                buttonLikeTeam.setOnClickListener {
+                    if (teamHero.like) {
+                        buttonLikeTeam.load(R.drawable.ic_thumb_up)
+                        teamHero.like = false
+                    } else {
+                        buttonLikeTeam.load(R.drawable.ic_thumb_up_alt)
+                        teamHero.like = true
+                    }
                 }
             }
         }
