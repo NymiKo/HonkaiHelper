@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.ItemTeamBinding
 import com.example.honkaihelper.heroes.data.model.Hero
-import com.example.honkaihelper.teams.model.TeamHero
+import com.example.honkaihelper.teams.data.model.TeamHero
+import com.example.honkaihelper.utils.invisible
 import com.example.honkaihelper.utils.loadImageWithRounded
+import com.example.honkaihelper.utils.visible
 
 class HeroTeamsListAdapter: RecyclerView.Adapter<HeroTeamsListAdapter.HeroTeamsListViewHolder>() {
 
@@ -47,6 +49,12 @@ class HeroTeamsListAdapter: RecyclerView.Adapter<HeroTeamsListAdapter.HeroTeamsL
                 heroNameInTeam2.text = teamHero.heroTwo.name
                 heroNameInTeam3.text = teamHero.heroThree.name
                 heroNameInTeam4.text = teamHero.heroFour.name
+
+                if (!teamHero.nickname.isNullOrEmpty()) {
+                    textTeamFrom.text = textTeamFrom.context.getString(R.string.team_from, teamHero.nickname)
+                } else {
+                    textTeamFrom.invisible()
+                }
             }
         }
     }

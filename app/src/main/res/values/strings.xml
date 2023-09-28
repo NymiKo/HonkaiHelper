@@ -34,8 +34,9 @@
     <string name="unknown_error">Неизвестная ошибка</string>
     <string name="unknown_user">Пользователя с таким логином и паролем не существует</string>
     <string name="should_be_4_heroes_in_the_team">В команде должно быть 4 героя"</string>
-    <string name="command_has_been_added">Команда добавлена</string>
+    <string name="team_has_been_added">Команда добавлена</string>
     <string name="you_are_not_logged_in">Вы не авторизованы, это не позволит изменить команду после создания, продолжить?</string>
     <string name="adding_a_command">Добавление команды</string>
     <string name="team_already_exists">Такая команда уже существует.</string>
+    <string name="team_from">Команда от: <b>%1$s</b></string>
 </resources>

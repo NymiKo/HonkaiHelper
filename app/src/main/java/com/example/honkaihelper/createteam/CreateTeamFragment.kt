@@ -104,7 +104,7 @@ class CreateTeamFragment :
     }
 
     private fun successCreatingTeam() {
-        toast(requireActivity(), R.string.command_has_been_added)
+        toast(requireActivity(), R.string.team_has_been_added)
         findNavController().popBackStack()
     }
 

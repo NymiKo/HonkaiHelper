@@ -14,7 +14,7 @@ import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentTeamsListBinding
 import com.example.honkaihelper.fragments.BaseFragment
-import com.example.honkaihelper.teams.model.TeamHero
+import com.example.honkaihelper.teams.data.model.TeamHero
 import com.example.honkaihelper.teams.adapter.HeroTeamsListAdapter
 import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.visible

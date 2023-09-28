@@ -1,4 +1,4 @@
-package com.example.honkaihelper.teams.model
+package com.example.honkaihelper.teams.data.model
 
 import com.example.honkaihelper.heroes.data.model.Hero
 
@@ -8,5 +8,5 @@ data class TeamHero(
     val heroTwo: Hero,
     val heroThree: Hero,
     val heroFour: Hero,
-    val idUser: Long
+    val nickname: String?
 )
