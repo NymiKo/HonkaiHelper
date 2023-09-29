@@ -108,36 +108,11 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/text_like_count"
-            app:layout_constraintEnd_toStartOf="@+id/text_like_count"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="@id/hero_avatar_in_team_1"
-            app:layout_constraintTop_toTopOf="@+id/button_like_team"
-            tools:text="Команда от:" />
-
-        <ImageView
-            android:id="@+id/button_like_team"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
             android:layout_marginTop="@dimen/DP8"
-            android:src="@drawable/ic_thumb_up"
-            app:layout_constraintEnd_toEndOf="@+id/hero_avatar_in_team_4"
-            app:layout_constraintStart_toStartOf="@+id/hero_avatar_in_team_4"
-            app:layout_constraintTop_toBottomOf="@+id/hero_avatar_in_team_4"
-            app:tint="@color/green" />
-
-        <TextView
-            android:id="@+id/text_like_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:textColor="@color/green"
-            android:textSize="14sp"
-            android:layout_marginEnd="@dimen/DP8"
-            app:layout_constraintBottom_toBottomOf="@+id/button_like_team"
-            app:layout_constraintEnd_toStartOf="@+id/button_like_team"
-            app:layout_constraintTop_toTopOf="@+id/button_like_team"
-            tools:text="660" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/hero_avatar_in_team_1"
+            app:layout_constraintTop_toBottomOf="@+id/hero_avatar_in_team_1"
+            tools:text="Команда от:" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

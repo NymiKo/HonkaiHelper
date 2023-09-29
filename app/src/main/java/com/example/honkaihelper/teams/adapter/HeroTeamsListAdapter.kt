@@ -12,6 +12,7 @@ import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.ItemTeamBinding
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.teams.data.model.TeamHero
+import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.invisible
 import com.example.honkaihelper.utils.load
 import com.example.honkaihelper.utils.loadImageWithRounded
@@ -56,17 +57,7 @@ class HeroTeamsListAdapter: RecyclerView.Adapter<HeroTeamsListAdapter.HeroTeamsL
                 if (!teamHero.nickname.isNullOrEmpty()) {
                     textTeamFrom.text = textTeamFrom.context.getString(R.string.team_from, teamHero.nickname)
                 } else {
-                    textTeamFrom.invisible()
-                }
-
-                buttonLikeTeam.setOnClickListener {
-                    if (teamHero.like) {
-                        buttonLikeTeam.load(R.drawable.ic_thumb_up)
-                        teamHero.like = false
-                    } else {
-                        buttonLikeTeam.load(R.drawable.ic_thumb_up_alt)
-                        teamHero.like = true
-                    }
+                    textTeamFrom.gone()
                 }
             }
         }

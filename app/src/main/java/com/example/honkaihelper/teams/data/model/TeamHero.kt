@@ -8,6 +8,5 @@ data class TeamHero(
     val heroTwo: Hero,
     val heroThree: Hero,
     val heroFour: Hero,
-    val nickname: String?,
-    var like: Boolean = false
+    val nickname: String?
 )
