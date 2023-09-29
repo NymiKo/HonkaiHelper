@@ -5,6 +5,7 @@ import com.example.honkaihelper.createteam.data.CreateTeamService
 import com.example.honkaihelper.data.AuthInterceptor
 import com.example.honkaihelper.heroes.data.HeroesListService
 import com.example.honkaihelper.login.data.LoginService
+import com.example.honkaihelper.profile.data.ProfileService
 import com.example.honkaihelper.registration.data.RegistrationService
 import com.example.honkaihelper.teams.data.TeamsListService
 import dagger.Binds
@@ -58,4 +59,7 @@ object NetworkModule {
 
     @Provides
     fun provideRegistrationService(retrofit: Retrofit): RegistrationService = retrofit.create(RegistrationService::class.java)
+
+    @Provides
+    fun provideProfileService(retrofit: Retrofit): ProfileService = retrofit.create(ProfileService::class.java)
 }

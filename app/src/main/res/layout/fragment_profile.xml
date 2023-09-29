@@ -18,13 +18,13 @@
         app:menu="@menu/profile_menu" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_no_login"
+        android:id="@+id/group_not_authorized"
         style="@style/group_message_style"
-        app:constraint_referenced_ids="button_go_login, text_no_login"
+        app:constraint_referenced_ids="button_go_to_authorization, text_not_authorized"
         tools:visibility="gone" />
 
     <TextView
-        android:id="@+id/text_no_login"
+        android:id="@+id/text_not_authorized"
         style="@style/text_view_message_style"
         android:text="@string/not_authorized"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,20 +33,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_go_login"
+        android:id="@+id/button_go_to_authorization"
         style="@style/button_message_style"
         android:backgroundTint="?attr/colorSecondary"
         android:text="@string/enter"
-        app:layout_constraintEnd_toEndOf="@+id/text_no_login"
-        app:layout_constraintStart_toStartOf="@+id/text_no_login"
-        app:layout_constraintTop_toBottomOf="@+id/text_no_login" />
+        app:layout_constraintEnd_toEndOf="@+id/text_not_authorized"
+        app:layout_constraintStart_toStartOf="@+id/text_not_authorized"
+        app:layout_constraintTop_toBottomOf="@+id/text_not_authorized" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_user_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="image_user_avatar"
+        app:constraint_referenced_ids="image_user_avatar, text_user_login"
         tools:visibility="visible" />
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -79,7 +79,6 @@
         android:id="@+id/shimmer_layout_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_profile">
 
         <include layout="@layout/shimmer_profile" />

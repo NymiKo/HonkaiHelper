@@ -1,6 +1,5 @@
 package com.example.honkaihelper.di
 
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers

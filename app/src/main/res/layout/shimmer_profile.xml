@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/DP16"
         android:layout_marginTop="@dimen/DP8"
+        android:layout_marginEnd="@dimen/DP20"
         android:fontFamily="sans-serif-medium"
         android:textColor="?attr/colorSecondary"
         android:textSize="@dimen/SP24"
