@@ -44,7 +44,7 @@
                 app:boxStrokeColor="?attr/colorSecondary"
                 app:boxStrokeWidth="@dimen/DP2"
                 app:hintTextColor="?attr/colorSecondary"
-                app:startIconDrawable="@drawable/ic_login"
+                app:startIconDrawable="@drawable/ic_person"
                 app:startIconTint="?attr/colorSecondary">
 
                 <com.google.android.material.textfield.TextInputEditText

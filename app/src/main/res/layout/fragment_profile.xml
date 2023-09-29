@@ -19,42 +19,71 @@
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_no_login"
+        style="@style/group_message_style"
         app:constraint_referenced_ids="button_go_login, text_no_login"
-        style="@style/group_message_style" />
+        tools:visibility="gone" />
 
     <TextView
         android:id="@+id/text_no_login"
+        style="@style/text_view_message_style"
         android:text="@string/not_authorized"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/text_view_message_style" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_go_login"
-        android:text="@string/enter"
+        style="@style/button_message_style"
         android:backgroundTint="?attr/colorSecondary"
+        android:text="@string/enter"
         app:layout_constraintEnd_toEndOf="@+id/text_no_login"
         app:layout_constraintStart_toStartOf="@+id/text_no_login"
-        app:layout_constraintTop_toBottomOf="@+id/text_no_login"
-        style="@style/button_message_style" />
+        app:layout_constraintTop_toBottomOf="@+id/text_no_login" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_user_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="image_user_avatar" />
+        app:constraint_referenced_ids="image_user_avatar"
+        tools:visibility="visible" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/image_user_avatar"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="@dimen/DP40"
-        android:src="@drawable/ic_login"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/DP20"
+        android:background="?attr/colorSecondary"
+        android:src="@drawable/ic_person"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_profile" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar_profile"
+        app:shapeAppearanceOverlay="@style/roundedCornersImageView"
+        app:tint="?attr/colorOnSecondary" />
+
+    <TextView
+        android:id="@+id/text_user_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/DP16"
+        android:layout_marginTop="@dimen/DP8"
+        android:textSize="@dimen/SP24"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="?attr/colorSecondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/image_user_avatar"
+        app:layout_constraintTop_toTopOf="@+id/image_user_avatar"
+        tools:text="Nymiko"/>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_layout_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_profile">
+
+        <include layout="@layout/shimmer_profile" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
