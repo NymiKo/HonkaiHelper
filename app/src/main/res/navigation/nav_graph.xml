@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/heroes_list_nav_graph"
+    app:startDestination="@id/heroesListFragment">
+
+    <fragment
+        android:id="@+id/teamsListFragment"
+        android:name="com.example.honkaihelper.teams.TeamsListFragment"
+        android:label="fragment_teams_list"
+        tools:layout="@layout/fragment_teams_list" >
+        <action
+            android:id="@+id/action_teamsListFragment_to_createTeamFragment"
+            app:destination="@id/createTeamFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createTeamFragment"
+        android:name="com.example.honkaihelper.createteam.CreateTeamFragment"
+        android:label="fragment_create_team"
+        tools:layout="@layout/fragment_create_team" />
+    <fragment
+        android:id="@+id/heroesListFragment"
+        android:name="com.example.honkaihelper.heroes.HeroesListFragment"
+        android:label="fragment_heroes_list"
+        tools:layout="@layout/fragment_heroes_list" >
+        <action
+            android:id="@+id/action_heroesListFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_heroesListFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.honkaihelper.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.example.honkaihelper.registration.RegistrationFragment"
+        android:label="fragment_registration"
+        tools:layout="@layout/fragment_registration" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.honkaihelper.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_teamsListFragment"
+            app:destination="@id/teamsListFragment" />
+    </fragment>
+</navigation>

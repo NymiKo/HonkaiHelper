@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
@@ -33,6 +34,7 @@ class HeroesListFragment :
         addMenu()
         setupRecyclerView()
         setupRetryButtonClickListener()
+        setupProfileButtonClickListener()
     }
 
     override fun uiStateHandle() {
@@ -81,6 +83,12 @@ class HeroesListFragment :
         }
     }
 
+    private fun setupProfileButtonClickListener() {
+        binding.buttonProfile.setOnClickListener {
+            findNavController().navigate(R.id.profileFragment)
+        }
+    }
+
     private fun addMenu() {
         val manager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchItem = binding.heroesListToolbar.menu.findItem(R.id.search)
@@ -113,8 +121,8 @@ class HeroesListFragment :
         binding.recyclerViewHeroes.layoutManager = GridLayoutManager(requireContext(), 2)
         mAdapterRecyclerView = HeroesListAdapter(object : HeroesListActionListener {
             override fun onClick(idHero: Int, nameHero: String) {
-                findNavController(requireActivity(), R.id.navHostFragment).navigate(
-                    R.id.heroes_list_nav_graph,
+                findNavController().navigate(
+                    R.id.teamsListFragment,
                     TeamsListFragment.newInstance(idHero, nameHero)
                 )
             }

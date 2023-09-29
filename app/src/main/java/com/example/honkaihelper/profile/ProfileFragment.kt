@@ -1,13 +1,10 @@
 package com.example.honkaihelper.profile
 
 import androidx.appcompat.app.AlertDialog
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentProfileBinding
 import com.example.honkaihelper.fragments.BaseFragment
-import com.example.honkaihelper.login.LoginCallback
-import com.example.honkaihelper.login.LoginFragment
 import com.example.honkaihelper.utils.TOKEN
 import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone
@@ -26,7 +23,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
     private fun setupEnterButton() {
         binding.buttonGoLogin.setOnClickListener {
-            findNavController().navigate(R.id.login_nav_graph)
+            findNavController().navigate(R.id.loginFragment)
         }
     }
 

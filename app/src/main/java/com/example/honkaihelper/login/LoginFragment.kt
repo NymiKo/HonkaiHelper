@@ -57,8 +57,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 }
                 is LoginUiState.SUCCESS -> {
                     getSharedPrefUser().edit().putString(TOKEN, it.token).apply()
-                    findNavController().previousBackStackEntry?.savedStateHandle?.set("login", true)
-                    findNavController().popBackStack(R.id.containerFragment, false)
+                    findNavController().popBackStack(R.id.heroesListFragment, false)
                 }
             }
         }
