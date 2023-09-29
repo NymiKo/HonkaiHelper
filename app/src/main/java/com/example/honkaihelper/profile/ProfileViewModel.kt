@@ -20,12 +20,15 @@ class ProfileViewModel @Inject constructor(
 
     fun getProfile() = viewModelScope.launch {
         _uiState.value = ProfileUiState.LOADING
-        delay(3000)
         val result = repository.getProfile()
         when(result) {
             is NetworkResult.Error -> _uiState.value = ProfileUiState.ERROR(R.string.unknown_error)
             is NetworkResult.Success -> _uiState.value = ProfileUiState.SUCCESS(result.data)
         }
+    }
+
+    fun logoutAccount() = viewModelScope.launch {
+        _uiState.value = ProfileUiState.NOT_AUTHORIZED
     }
 
 }

@@ -3,16 +3,21 @@ package com.example.honkaihelper.profile
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentProfileBinding
 import com.example.honkaihelper.fragments.BaseFragment
+import com.example.honkaihelper.profile.data.model.User
 import com.example.honkaihelper.utils.TOKEN
+import com.example.honkaihelper.utils.getDrawable
 import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.invisible
+import com.example.honkaihelper.utils.load
+import com.example.honkaihelper.utils.loadWithPlaceholder
 import com.example.honkaihelper.utils.toast
 import com.example.honkaihelper.utils.visible
 
@@ -49,7 +54,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                     showUiNotAuthorized()
                 }
                 is ProfileUiState.SUCCESS -> {
-                    showProfile()
+                    showUiProfile()
+                    loadProfile(it.user)
                 }
             }
         }
@@ -70,12 +76,17 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         binding.groupNotAuthorized.visible()
     }
 
-    private fun showProfile() {
+    private fun showUiProfile() {
         binding.toolbarProfile.visible()
         binding.groupUserProfile.visible()
         binding.shimmerLayoutProfile.gone()
         binding.shimmerLayoutProfile.stopShimmer()
         binding.groupNotAuthorized.gone()
+    }
+
+    private fun loadProfile(user: User) {
+        binding.imageUserAvatar.loadWithPlaceholder(user.avatar, R.drawable.ic_person)
+        binding.textUserLogin.text = user.login
     }
 
     private fun setupEnterButton() {
@@ -100,7 +111,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             .setMessage(R.string.want_to_logout_of_your_account)
             .setPositiveButton(R.string.yes) { _, _ ->
                 getSharedPrefUser().edit().putString(TOKEN, null).apply()
-
+                viewModel.logoutAccount()
             }
             .setNegativeButton(R.string.cancellation) { dialog, _ ->
                 dialog.cancel()
