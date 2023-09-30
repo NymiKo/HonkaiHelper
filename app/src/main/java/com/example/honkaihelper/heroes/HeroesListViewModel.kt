@@ -20,6 +20,9 @@ class HeroesListViewModel @Inject constructor(
     private val _heroesList = MutableLiveData<List<Hero>>()
     val heroesList: LiveData<List<Hero>> = _heroesList
 
+    private val _avatar = MutableLiveData<String>()
+    val avatar: LiveData<String> = _avatar
+
     init {
         getHeroesList()
     }
@@ -32,6 +35,18 @@ class HeroesListViewModel @Inject constructor(
             is NetworkResult.Success -> {
                 _uiState.value = HeroesUiState.SUCCESS(result.data)
                 _heroesList.value = result.data!!
+            }
+        }
+    }
+
+    fun getAvatar() = viewModelScope.launch {
+        val result = repository.getAvatar()
+        when(result) {
+            is NetworkResult.Error -> {
+
+            }
+            is NetworkResult.Success -> {
+                _avatar.value = result.data!!
             }
         }
     }

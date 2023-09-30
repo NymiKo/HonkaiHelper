@@ -15,7 +15,10 @@ import com.example.honkaihelper.heroes.adapter.HeroesListActionListener
 import com.example.honkaihelper.heroes.adapter.HeroesListAdapter
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.teams.TeamsListFragment
+import com.example.honkaihelper.utils.TOKEN
+import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone
+import com.example.honkaihelper.utils.loadWithPlaceholder
 import com.example.honkaihelper.utils.visible
 
 class HeroesListFragment :
@@ -50,6 +53,11 @@ class HeroesListFragment :
 
                 is HeroesUiState.SUCCESS -> {
                     showHeroesList(it.heroesList)
+                    getSharedPrefUser().getString(TOKEN, "").let {
+                        viewModel.getAvatar()
+                        binding.buttonProfile.imageTintList = null
+                    }
+                    loadAvatar()
                 }
             }
         }
@@ -86,6 +94,12 @@ class HeroesListFragment :
     private fun setupProfileButtonClickListener() {
         binding.buttonProfile.setOnClickListener {
             findNavController().navigate(R.id.profileFragment)
+        }
+    }
+
+    private fun loadAvatar() {
+        viewModel.avatar.observe(viewLifecycleOwner) { avatarUrl ->
+            binding.buttonProfile.loadWithPlaceholder(avatarUrl, R.drawable.ic_person)
         }
     }
 

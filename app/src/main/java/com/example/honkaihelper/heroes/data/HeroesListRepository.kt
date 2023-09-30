@@ -5,4 +5,5 @@ import com.example.honkaihelper.heroes.data.model.Hero
 
 interface HeroesListRepository {
     suspend fun getHeroesList(): NetworkResult<List<Hero>>
+    suspend fun getAvatar(): NetworkResult<String>
 }

@@ -19,4 +19,12 @@ class HeroesListRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun getAvatar(): NetworkResult<String> {
+        return withContext(ioDispatcher) {
+            handleApi {
+                heroesListService.getAvatar()
+            }
+        }
+    }
 }
