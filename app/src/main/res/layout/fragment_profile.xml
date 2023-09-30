@@ -78,7 +78,8 @@
         android:id="@+id/text_teams"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/DP16"
+        android:layout_marginTop="@dimen/DP30"
+        android:layout_marginHorizontal="@dimen/DP16"
         android:fontFamily="sans-serif-medium"
         android:textColor="?attr/colorSecondary"
         android:textSize="@dimen/SP18"
@@ -86,9 +87,12 @@
         tools:layout_editor_absoluteX="16dp" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_teams_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="@dimen/DP16"
+        android:layout_marginTop="@dimen/DP8"
+        android:layout_marginHorizontal="@dimen/DP16"
+        android:layout_marginBottom="@dimen/DP16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

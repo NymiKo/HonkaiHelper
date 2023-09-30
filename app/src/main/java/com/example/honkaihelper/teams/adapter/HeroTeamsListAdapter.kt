@@ -55,6 +55,7 @@ class HeroTeamsListAdapter: RecyclerView.Adapter<HeroTeamsListAdapter.HeroTeamsL
                 heroNameInTeam4.text = teamHero.heroFour.name
 
                 if (!teamHero.nickname.isNullOrEmpty()) {
+                    textTeamFrom.visible()
                     textTeamFrom.text = textTeamFrom.context.getString(R.string.team_from, teamHero.nickname)
                 } else {
                     textTeamFrom.gone()

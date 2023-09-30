@@ -3,15 +3,18 @@ package com.example.honkaihelper.profile
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentProfileBinding
 import com.example.honkaihelper.fragments.BaseFragment
+import com.example.honkaihelper.profile.adapter.ProfileTeamsListAdapter
 import com.example.honkaihelper.profile.data.model.User
 import com.example.honkaihelper.utils.TOKEN
 import com.example.honkaihelper.utils.getFileName
@@ -29,6 +32,7 @@ import java.io.FileOutputStream
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
 
     private val viewModel by viewModels<ProfileViewModel> { viewModelFactory }
+    private lateinit var mAdapter: ProfileTeamsListAdapter
     private val selectImageIntent: ActivityResultLauncher<String> =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
             uri?.let {
@@ -70,6 +74,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
                 is ProfileUiState.SUCCESS -> {
                     showUiProfile()
+                    setupRecyclerView()
                     loadProfile(it.user)
                 }
             }
@@ -104,10 +109,17 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         binding.imageUserAvatar.imageTintList = null
         binding.textUserLogin.text = user.login
         binding.textTeams.text = getString(R.string.my_teams)
+        mAdapter.mTeamsList = user.teamsList ?: emptyList()
+        Log.e("TEAMS", user.teamsList.toString())
     }
 
     private fun setupRecyclerView() {
-
+        mAdapter = ProfileTeamsListAdapter()
+        binding.recyclerTeamsList.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(requireActivity())
+            adapter = mAdapter
+        }
     }
 
     private fun setupAvatarImageClickListener() {
