@@ -46,14 +46,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="image_user_avatar, text_user_login"
+        app:constraint_referenced_ids="image_user_avatar, text_user_login, text_teams"
         tools:visibility="visible" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/image_user_avatar"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginStart="@dimen/DP20"
+        android:layout_marginStart="@dimen/DP16"
         android:background="?attr/colorSecondary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_profile"
@@ -73,6 +73,26 @@
         app:layout_constraintStart_toEndOf="@+id/image_user_avatar"
         app:layout_constraintTop_toTopOf="@+id/image_user_avatar"
         tools:text="Nymiko"/>
+
+    <TextView
+        android:id="@+id/text_teams"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/DP16"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="?attr/colorSecondary"
+        android:textSize="@dimen/SP18"
+        app:layout_constraintTop_toBottomOf="@+id/image_user_avatar"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/DP16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_teams" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_layout_profile"

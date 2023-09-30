@@ -9,6 +9,7 @@ import com.example.honkaihelper.data.NetworkResult
 import com.example.honkaihelper.profile.data.ProfileRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.io.File
 import javax.inject.Inject
 
 class ProfileViewModel @Inject constructor(
@@ -31,4 +32,7 @@ class ProfileViewModel @Inject constructor(
         _uiState.value = ProfileUiState.NOT_AUTHORIZED
     }
 
+    fun loadAvatar(file: File) = viewModelScope.launch {
+        repository.loadAvatar(file)
+    }
 }

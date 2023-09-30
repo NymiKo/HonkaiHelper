@@ -1,9 +1,11 @@
 package com.example.honkaihelper.profile
 
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.honkaihelper.App
@@ -12,7 +14,7 @@ import com.example.honkaihelper.databinding.FragmentProfileBinding
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.profile.data.model.User
 import com.example.honkaihelper.utils.TOKEN
-import com.example.honkaihelper.utils.getDrawable
+import com.example.honkaihelper.utils.getFileName
 import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.invisible
@@ -20,10 +22,19 @@ import com.example.honkaihelper.utils.load
 import com.example.honkaihelper.utils.loadWithPlaceholder
 import com.example.honkaihelper.utils.toast
 import com.example.honkaihelper.utils.visible
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
 
     private val viewModel by viewModels<ProfileViewModel> { viewModelFactory }
+    private val selectImageIntent: ActivityResultLauncher<String> =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            uri?.let {
+                loadAvatar(uri)
+            }
+        }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -39,20 +50,24 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     override fun setupView() {
         setupEnterButton()
         menuItemClickHandler()
+        setupAvatarImageClickListener()
     }
 
     override fun uiStateHandle() {
         viewModel.uiState.observe(viewLifecycleOwner) {
-            when(it) {
+            when (it) {
                 is ProfileUiState.ERROR -> {
                     toast(requireActivity(), it.message)
                 }
+
                 is ProfileUiState.LOADING -> {
                     showLoading()
                 }
+
                 is ProfileUiState.NOT_AUTHORIZED -> {
                     showUiNotAuthorized()
                 }
+
                 is ProfileUiState.SUCCESS -> {
                     showUiProfile()
                     loadProfile(it.user)
@@ -85,14 +100,38 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     }
 
     private fun loadProfile(user: User) {
-        binding.imageUserAvatar.loadWithPlaceholder(user.avatar, R.drawable.ic_person)
+        binding.imageUserAvatar.loadWithPlaceholder(user.avatarUrl, R.drawable.ic_person)
+        binding.imageUserAvatar.imageTintList = null
         binding.textUserLogin.text = user.login
+        binding.textTeams.text = getString(R.string.my_teams)
+    }
+
+    private fun setupRecyclerView() {
+
+    }
+
+    private fun setupAvatarImageClickListener() {
+        binding.imageUserAvatar.setOnClickListener {
+            selectImageIntent.launch("image/*")
+        }
     }
 
     private fun setupEnterButton() {
         binding.buttonGoToAuthorization.setOnClickListener {
             findNavController().navigate(R.id.loginFragment)
         }
+    }
+
+    private fun loadAvatar(uri: Uri) {
+        binding.imageUserAvatar.load(uri)
+        val parcelFileDescriptor =
+            requireActivity().contentResolver.openFileDescriptor(uri, "r", null)
+        val inputStream = FileInputStream(parcelFileDescriptor?.fileDescriptor)
+        val file =
+            File(requireActivity().cacheDir, requireActivity().contentResolver.getFileName(uri))
+        val outputStream = FileOutputStream(file)
+        inputStream.copyTo(outputStream)
+        viewModel.loadAvatar(file)
     }
 
     private fun menuItemClickHandler() {

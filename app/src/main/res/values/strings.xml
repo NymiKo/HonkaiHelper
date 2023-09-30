@@ -39,4 +39,5 @@
     <string name="adding_a_command">Добавление команды</string>
     <string name="team_already_exists">Такая команда уже существует.</string>
     <string name="team_from">Команда от: <b>%1$s</b></string>
+    <string name="my_teams">Мои команды</string>
 </resources>
