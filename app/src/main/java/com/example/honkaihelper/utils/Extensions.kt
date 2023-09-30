@@ -30,6 +30,9 @@ fun <T> ImageView.loadImageWithRounded(image: T) {
 fun Fragment.getSharedPrefUser() =
     requireActivity().getSharedPreferences("USER", Context.MODE_PRIVATE)
 
+fun Fragment.getSharedPrefToken() =
+    requireActivity().getSharedPreferences("USER", Context.MODE_PRIVATE).getString(TOKEN, "")
+
 fun ContentResolver.getFileName(fileUri: Uri): String {
     var name = ""
     val returnCursor = this.query(fileUri, null, null, null, null)

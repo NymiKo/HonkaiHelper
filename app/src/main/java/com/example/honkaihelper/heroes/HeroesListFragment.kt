@@ -16,6 +16,7 @@ import com.example.honkaihelper.heroes.adapter.HeroesListAdapter
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.teams.TeamsListFragment
 import com.example.honkaihelper.utils.TOKEN
+import com.example.honkaihelper.utils.getSharedPrefToken
 import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.loadWithPlaceholder
@@ -53,11 +54,12 @@ class HeroesListFragment :
 
                 is HeroesUiState.SUCCESS -> {
                     showHeroesList(it.heroesList)
-                    getSharedPrefUser().getString(TOKEN, "").let {
+                    val token = getSharedPrefToken()
+                    if (!token.isNullOrEmpty()) {
                         viewModel.getAvatar()
                         binding.buttonProfile.imageTintList = null
+                        loadAvatar()
                     }
-                    loadAvatar()
                 }
             }
         }
