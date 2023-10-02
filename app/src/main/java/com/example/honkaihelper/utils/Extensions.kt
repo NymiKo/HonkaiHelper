@@ -44,3 +44,5 @@ fun ContentResolver.getFileName(fileUri: Uri): String {
     }
     return name
 }
+
+fun String.uppercaseFirstChar() = this.replaceFirstChar { it.uppercase() }

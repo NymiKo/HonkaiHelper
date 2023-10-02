@@ -2,6 +2,7 @@ package com.example.honkaihelper.heroes
 
 import android.app.SearchManager
 import android.content.Context
+import android.util.Log
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation.findNavController
@@ -20,6 +21,7 @@ import com.example.honkaihelper.utils.getSharedPrefToken
 import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.loadWithPlaceholder
+import com.example.honkaihelper.utils.uppercaseFirstChar
 import com.example.honkaihelper.utils.visible
 
 class HeroesListFragment :
@@ -125,7 +127,7 @@ class HeroesListFragment :
             override fun onQueryTextChange(newText: String?): Boolean {
                 viewModel.heroesList.observe(viewLifecycleOwner) {
                     mAdapterRecyclerView.mHeroesList =
-                        it.filter { hero -> hero.name.contains(newText as CharSequence) }
+                        it.filter { hero -> hero.name.contains(newText?.lowercase()?.uppercaseFirstChar() as CharSequence) }
                 }
                 return false
             }

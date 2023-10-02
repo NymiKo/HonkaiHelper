@@ -39,7 +39,7 @@ class RegistrationViewModel @Inject constructor(
                 false
             }
 
-            password.length <= 4 -> {
+            password.length < 4 -> {
                 _uiState.value = RegistrationUiState.INCORRECT_PASSWORD
                 false
             }
