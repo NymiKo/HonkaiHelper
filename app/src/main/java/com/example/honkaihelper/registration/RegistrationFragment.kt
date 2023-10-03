@@ -38,7 +38,7 @@ class RegistrationFragment :
         viewModel.uiState.observe(viewLifecycleOwner) {
             when (it) {
                 is RegistrationUiState.EMPTY_LOGIN -> {
-                    showErrorLogin()
+                    showErrorLogin(R.string.empty_login)
                     showButtonRegister()
                 }
 
@@ -69,6 +69,11 @@ class RegistrationFragment :
                     toast(requireActivity(), R.string.registration_success)
                     findNavController().popBackStack()
                 }
+
+                is RegistrationUiState.INCORRECT_LOGIN -> {
+                    showErrorLogin(R.string.incorrect_login)
+                    showButtonRegister()
+                }
             }
         }
     }
@@ -83,9 +88,9 @@ class RegistrationFragment :
         binding.editLayoutPassword.isErrorEnabled = false
     }
 
-    private fun showErrorLogin() {
+    private fun showErrorLogin(error: Int) {
         binding.editLayoutLogin.isErrorEnabled = true
-        binding.editLayoutLogin.error = getString(R.string.empty_login)
+        binding.editLayoutLogin.error = getString(error)
     }
 
     private fun showButtonRegister() {

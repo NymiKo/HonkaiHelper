@@ -26,10 +26,19 @@ class RegistrationViewModel @Inject constructor(
     }
 
     private fun checkLogin(login: String): Boolean {
-        return if (login.isEmpty()) {
-            _uiState.value = RegistrationUiState.EMPTY_LOGIN
-            false
-        } else true
+        return when {
+            login.isEmpty() -> {
+                _uiState.value = RegistrationUiState.EMPTY_LOGIN
+                false
+            }
+
+            login.length > 20 -> {
+                _uiState.value = RegistrationUiState.INCORRECT_LOGIN
+                false
+            }
+
+            else -> true
+        }
     }
 
     private fun checkPassword(password: String): Boolean {

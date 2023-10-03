@@ -40,4 +40,5 @@
     <string name="team_already_exists">Такая команда уже существует.</string>
     <string name="team_from">Команда от: <b>%1$s</b></string>
     <string name="my_teams">Мои команды</string>
+    <string name="incorrect_login">Логин должен содержать не более 20 символов</string>
 </resources>
