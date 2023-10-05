@@ -2,10 +2,8 @@ package com.example.honkaihelper.heroes
 
 import android.app.SearchManager
 import android.content.Context
-import android.util.Log
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.honkaihelper.App
@@ -16,9 +14,7 @@ import com.example.honkaihelper.heroes.adapter.HeroesListActionListener
 import com.example.honkaihelper.heroes.adapter.HeroesListAdapter
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.teams.TeamsListFragment
-import com.example.honkaihelper.utils.TOKEN
 import com.example.honkaihelper.utils.getSharedPrefToken
-import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.loadWithPlaceholder
 import com.example.honkaihelper.utils.uppercaseFirstChar
@@ -27,7 +23,7 @@ import com.example.honkaihelper.utils.visible
 class HeroesListFragment :
     BaseFragment<FragmentHeroesListBinding>(FragmentHeroesListBinding::inflate) {
 
-    private val viewModel by viewModels<HeroesListViewModel> { viewModelFactory }
+    private val viewModel by viewModels<HeroesListViewModelImpl> { viewModelFactory }
     private lateinit var mAdapterRecyclerView: HeroesListAdapter
 
     override fun onAttach(context: Context) {
