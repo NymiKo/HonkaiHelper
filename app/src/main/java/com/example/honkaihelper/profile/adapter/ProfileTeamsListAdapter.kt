@@ -10,6 +10,7 @@ import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.ItemTeamBinding
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.teams.data.model.TeamHero
+import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.loadImageWithRounded
 
 class ProfileTeamsListAdapter :
@@ -49,6 +50,9 @@ class ProfileTeamsListAdapter :
                 heroNameInTeam2.text = teamHero.heroTwo.name
                 heroNameInTeam3.text = teamHero.heroThree.name
                 heroNameInTeam4.text = teamHero.heroFour.name
+
+                textTeamFrom.gone()
+                imageProfile.gone()
             }
         }
     }

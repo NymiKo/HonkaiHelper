@@ -16,7 +16,10 @@ import com.example.honkaihelper.databinding.FragmentTeamsListBinding
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.teams.data.model.TeamHero
 import com.example.honkaihelper.teams.adapter.HeroTeamsListAdapter
+import com.example.honkaihelper.utils.TOKEN
+import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone
+import com.example.honkaihelper.utils.toast
 import com.example.honkaihelper.utils.visible
 
 class TeamsListFragment :
@@ -35,8 +38,8 @@ class TeamsListFragment :
             .inject(this)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel.getTeamsList(idHero)
     }
 
@@ -93,7 +96,11 @@ class TeamsListFragment :
 
     private fun openCreateTeamFragment() {
         binding.buttonCreateTeam.setOnClickListener {
-            findNavController().navigate(R.id.createTeamFragment)
+            if (getSharedPrefUser().getString(TOKEN, "").isNullOrEmpty()) {
+                toast(requireActivity(), R.string.you_need_login)
+            } else {
+                findNavController().navigate(R.id.createTeamFragment)
+            }
         }
     }
 
