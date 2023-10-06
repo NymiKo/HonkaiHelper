@@ -8,5 +8,6 @@ data class TeamHero(
     val heroTwo: Hero,
     val heroThree: Hero,
     val heroFour: Hero,
-    val nickname: String?
+    val nickname: String?,
+    val avatar: String?
 )

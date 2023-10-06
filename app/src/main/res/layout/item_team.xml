@@ -12,7 +12,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="@dimen/DP16">
+        android:paddingTop="@dimen/DP16"
+        android:paddingBottom="@dimen/DP8">
 
         <androidx.constraintlayout.widget.Group
             android:layout_width="wrap_content"
@@ -106,14 +107,25 @@
             android:id="@+id/text_team_from"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/DP8"
             android:fontFamily="sans-serif-medium"
             android:textColor="@color/white"
-            android:layout_marginTop="@dimen/DP8"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/hero_avatar_in_team_1"
             app:layout_constraintTop_toBottomOf="@+id/hero_avatar_in_team_1"
-            tools:text="Команда от:" />
+            tools:text="Команда от:"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_profile"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="@dimen/DP8"
+            android:background="@color/white"
+            android:src="@drawable/ic_person"
+            app:layout_constraintBottom_toBottomOf="@+id/text_team_from"
+            app:layout_constraintStart_toEndOf="@+id/text_team_from"
+            app:layout_constraintTop_toTopOf="@+id/text_team_from"
+            app:shapeAppearanceOverlay="@style/roundedImageView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -159,7 +159,7 @@ class CreateTeamFragment :
     private fun createSaveDialog() {
         val dialog = AlertDialog.Builder(requireContext(), R.style.AlertDialogStyle)
             .setTitle(R.string.adding_a_command)
-            .setMessage(setMessageDialog())
+            .setMessage(R.string.add_the_created_command)
             .setPositiveButton(R.string.add) { _, _ ->
                 viewModel.saveTeam(mAdapterForViewTeam.mHeroInTeamList)
             }
@@ -169,14 +169,6 @@ class CreateTeamFragment :
             .create()
 
         dialog.show()
-    }
-
-    private fun setMessageDialog(): Int {
-        return if (getSharedPrefUser().getString(TOKEN, "").isNullOrBlank()) {
-            R.string.you_are_not_logged_in
-        } else {
-            R.string.add_the_created_command
-        }
     }
 
     override fun onDestroyView() {

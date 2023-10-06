@@ -23,49 +23,49 @@
         android:id="@+id/button_profile"
         android:layout_width="@dimen/DP30"
         android:layout_height="@dimen/DP30"
-        android:src="@drawable/ic_person"
         android:layout_marginEnd="@dimen/DP8"
-        app:tint="?attr/colorOnSecondary"
         android:background="?attr/colorSecondary"
-        app:shapeAppearanceOverlay="@style/roundedImageView"
+        android:src="@drawable/ic_person"
         app:layout_constraintBottom_toBottomOf="@+id/heroes_list_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/heroes_list_toolbar" />
+        app:layout_constraintTop_toTopOf="@+id/heroes_list_toolbar"
+        app:shapeAppearanceOverlay="@style/roundedImageView"
+        app:tint="?attr/colorOnSecondary" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewHeroes"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:visibility="gone"
         android:paddingBottom="@dimen/DP8"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/heroes_list_toolbar"
         tools:listitem="@layout/item_hero" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_retry"
-        app:constraint_referenced_ids="button_retry, text_retry"
-        style="@style/group_message_style" />
+        style="@style/group_message_style"
+        app:constraint_referenced_ids="button_retry, text_retry" />
 
     <TextView
         android:id="@+id/text_retry"
+        style="@style/text_view_message_style"
         android:text="@string/error"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/text_view_message_style" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_retry"
-        android:text="@string/retry"
+        style="@style/button_message_style"
         android:backgroundTint="?attr/colorSecondary"
+        android:text="@string/retry"
         app:layout_constraintEnd_toEndOf="@+id/text_retry"
         app:layout_constraintStart_toStartOf="@+id/text_retry"
-        app:layout_constraintTop_toBottomOf="@+id/text_retry"
-        style="@style/button_message_style" />
+        app:layout_constraintTop_toBottomOf="@+id/text_retry" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_layout_heroes_list"

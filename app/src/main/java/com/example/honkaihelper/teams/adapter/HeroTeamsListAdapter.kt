@@ -16,6 +16,7 @@ import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.invisible
 import com.example.honkaihelper.utils.load
 import com.example.honkaihelper.utils.loadImageWithRounded
+import com.example.honkaihelper.utils.loadWithPlaceholder
 import com.example.honkaihelper.utils.visible
 
 class HeroTeamsListAdapter: RecyclerView.Adapter<HeroTeamsListAdapter.HeroTeamsListViewHolder>() {
@@ -54,12 +55,8 @@ class HeroTeamsListAdapter: RecyclerView.Adapter<HeroTeamsListAdapter.HeroTeamsL
                 heroNameInTeam3.text = teamHero.heroThree.name
                 heroNameInTeam4.text = teamHero.heroFour.name
 
-                if (!teamHero.nickname.isNullOrEmpty()) {
-                    textTeamFrom.visible()
-                    textTeamFrom.text = textTeamFrom.context.getString(R.string.team_from, teamHero.nickname)
-                } else {
-                    textTeamFrom.gone()
-                }
+                textTeamFrom.text = textTeamFrom.context.getString(R.string.team_from, teamHero.nickname)
+                imageProfile.loadWithPlaceholder(teamHero.avatar, R.drawable.ic_person)
             }
         }
     }
