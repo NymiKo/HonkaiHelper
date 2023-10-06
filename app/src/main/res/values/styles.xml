@@ -95,4 +95,18 @@
         <item name="cornerSize">15dp</item>
     </style>
 
+    <style name="AlertDialogStyle" parent="Theme.AppCompat.DayNight.Dialog.Alert">
+        <item name="buttonBarPositiveButtonStyle">@style/positiveDialogTextColor</item>
+        <item name="buttonBarNegativeButtonStyle">@style/negativeDialogTextColor</item>
+    </style>
+    
+    <style name="positiveDialogTextColor">
+        <item name="android:textColor">?attr/colorSecondary</item>
+        <item name="android:backgroundTint">@null</item>
+    </style>
+
+    <style name="negativeDialogTextColor">
+        <item name="android:textColor">?attr/colorSecondary</item>
+    </style>
+
 </resources>

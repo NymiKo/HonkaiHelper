@@ -35,13 +35,9 @@ class TeamsListFragment :
             .inject(this)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         viewModel.getTeamsList(idHero)
-        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun setupView() {

@@ -1,6 +1,9 @@
 package com.example.honkaihelper.createteam
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.ColorStateList
+import android.content.res.Resources.Theme
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -22,6 +25,7 @@ import com.example.honkaihelper.utils.visible
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
+import com.google.android.material.R.*
 
 class CreateTeamFragment :
     BaseFragment<FragmentCreateTeamBinding>(FragmentCreateTeamBinding::inflate) {
@@ -153,7 +157,7 @@ class CreateTeamFragment :
     }
 
     private fun createSaveDialog() {
-        val dialog = AlertDialog.Builder(requireContext())
+        val dialog = AlertDialog.Builder(requireContext(), R.style.AlertDialogStyle)
             .setTitle(R.string.adding_a_command)
             .setMessage(setMessageDialog())
             .setPositiveButton(R.string.add) { _, _ ->
@@ -163,6 +167,7 @@ class CreateTeamFragment :
                 dialog.cancel()
             }
             .create()
+
         dialog.show()
     }
 
