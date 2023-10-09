@@ -21,7 +21,7 @@
         android:id="@+id/group_team_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="recycler_viewing_command, materialDivider"/>
+        app:constraint_referenced_ids="recycler_viewing_command, materialDivider" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_viewing_command"
@@ -50,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="recycler_heroes_list, button_save_team"/>
+        app:constraint_referenced_ids="recycler_heroes_list, button_go_setup_team" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_heroes_list"
@@ -66,9 +66,9 @@
         tools:listitem="@layout/item_hero_create_team_list" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button_save_team"
+        android:id="@+id/button_go_setup_team"
         style="@style/base_floating_button"
-        android:src="@drawable/ic_save"
+        android:src="@drawable/ic_arrow_forward"
         app:fabSize="mini"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,9 +76,9 @@
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_retry"
+        style="@style/group_message_style"
         android:visibility="gone"
-        app:constraint_referenced_ids="button_retry, text_retry"
-        style="@style/group_message_style" />
+        app:constraint_referenced_ids="button_retry, text_retry" />
 
     <TextView
         android:id="@+id/text_retry"
@@ -91,12 +91,12 @@
 
     <Button
         android:id="@+id/button_retry"
-        android:text="@string/retry"
+        style="@style/button_message_style"
         android:backgroundTint="?attr/colorSecondary"
+        android:text="@string/retry"
         app:layout_constraintEnd_toEndOf="@+id/text_retry"
         app:layout_constraintStart_toStartOf="@+id/text_retry"
-        app:layout_constraintTop_toBottomOf="@+id/text_retry"
-        style="@style/button_message_style" />
+        app:layout_constraintTop_toBottomOf="@+id/text_retry" />
 
     <ProgressBar
         android:id="@+id/progress_team_creation"

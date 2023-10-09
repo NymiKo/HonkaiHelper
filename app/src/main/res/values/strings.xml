@@ -41,4 +41,6 @@
     <string name="my_teams">Мои команды</string>
     <string name="incorrect_login">Логин должен содержать не более 20 символов</string>
     <string name="you_need_login">Необходимо авторизоваться</string>
+    <string name="level_hero">Уровень героя:</string>
+    <string name="eidolon_hero">Эйдолон героя:</string>
 </resources>

@@ -147,9 +147,9 @@ class CreateTeamFragment :
     }
 
     private fun setupButtonSaveTeam() {
-        binding.buttonSaveTeam.setOnClickListener {
+        binding.buttonGoSetupTeam.setOnClickListener {
             if (mAdapterForViewTeam.mHeroInTeamList.size == 4) {
-                createSaveDialog()
+                findNavController().navigate(R.id.setupTeamFragment)
             } else {
                 toast(requireActivity(), R.string.should_be_4_heroes_in_the_team)
             }

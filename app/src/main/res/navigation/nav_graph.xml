@@ -18,7 +18,11 @@
         android:id="@+id/createTeamFragment"
         android:name="com.example.honkaihelper.createteam.CreateTeamFragment"
         android:label="fragment_create_team"
-        tools:layout="@layout/fragment_create_team" />
+        tools:layout="@layout/fragment_create_team" >
+        <action
+            android:id="@+id/action_createTeamFragment_to_setupTeamFragment"
+            app:destination="@id/setupTeamFragment" />
+    </fragment>
     <fragment
         android:id="@+id/heroesListFragment"
         android:name="com.example.honkaihelper.heroes.HeroesListFragment"
@@ -54,4 +58,9 @@
             android:id="@+id/action_profileFragment_to_teamsListFragment"
             app:destination="@id/teamsListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/setupTeamFragment"
+        android:name="com.example.honkaihelper.setupteam.SetupTeamFragment"
+        android:label="fragment_setup_team"
+        tools:layout="@layout/fragment_setup_team" />
 </navigation>

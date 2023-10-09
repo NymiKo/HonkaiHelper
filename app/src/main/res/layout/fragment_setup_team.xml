@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".setupteam.SetupTeamFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_setup_team"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/DP16"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_save_team"
+        style="@style/base_floating_button"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_save"
+        app:tint="?attr/colorOnSecondary"
+        app:fabSize="mini" />
+
+</FrameLayout>
