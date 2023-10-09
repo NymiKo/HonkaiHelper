@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Resources.Theme
 import androidx.appcompat.app.AlertDialog
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,6 +18,7 @@ import com.example.honkaihelper.databinding.FragmentCreateTeamBinding
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.createteam.data.model.ActiveHeroInTeam
 import com.example.honkaihelper.heroes.data.model.Hero
+import com.example.honkaihelper.setupteam.SetupTeamFragment
 import com.example.honkaihelper.utils.TOKEN
 import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone
@@ -149,26 +151,11 @@ class CreateTeamFragment :
     private fun setupButtonSaveTeam() {
         binding.buttonGoSetupTeam.setOnClickListener {
             if (mAdapterForViewTeam.mHeroInTeamList.size == 4) {
-                findNavController().navigate(R.id.setupTeamFragment)
+                findNavController().navigate(R.id.setupTeamFragment, SetupTeamFragment.newInstance(mAdapterForViewTeam.mHeroInTeamList))
             } else {
                 toast(requireActivity(), R.string.should_be_4_heroes_in_the_team)
             }
         }
-    }
-
-    private fun createSaveDialog() {
-        val dialog = AlertDialog.Builder(requireContext(), R.style.AlertDialogStyle)
-            .setTitle(R.string.adding_a_command)
-            .setMessage(R.string.add_the_created_command)
-            .setPositiveButton(R.string.add) { _, _ ->
-                viewModel.saveTeam(mAdapterForViewTeam.mHeroInTeamList)
-            }
-            .setNegativeButton(R.string.cancellation) { dialog, _ ->
-                dialog.cancel()
-            }
-            .create()
-
-        dialog.show()
     }
 
     override fun onDestroyView() {

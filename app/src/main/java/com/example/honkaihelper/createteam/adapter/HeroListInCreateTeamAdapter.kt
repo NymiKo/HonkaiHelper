@@ -55,7 +55,8 @@ class HeroListInCreateTeamAdapter(private val actionListener: HeroListInCreateTe
             } else {
                 changeStrokeActiveHero(ContextCompat.getColor(binding.cardHeroIconTeam.context, R.color.dark_gray), 1, 0F)
             }
-            backgroundHero(activeHeroInTeam.hero)
+            backgroundHero(activeHeroInTeam.hero.rarity)
+            binding.heroAvatarInCreateTeamList.loadImageWithRounded(activeHeroInTeam.hero.avatar)
             binding.cardHeroIconTeam.tag = activeHeroInTeam
         }
 
@@ -67,9 +68,8 @@ class HeroListInCreateTeamAdapter(private val actionListener: HeroListInCreateTe
             }
         }
 
-        private fun backgroundHero(hero: Hero) {
-            binding.heroAvatarInCreateTeamList.loadImageWithRounded(hero.avatar)
-            if (hero.rarity) {
+        private fun backgroundHero(rarity: Boolean) {
+            if (rarity) {
                 binding.heroAvatarInCreateTeamList.background = ContextCompat.getDrawable(binding.heroAvatarInCreateTeamList.context, R.color.orange)
             } else {
                 binding.heroAvatarInCreateTeamList.background = ContextCompat.getDrawable(binding.heroAvatarInCreateTeamList.context, R.color.violet)

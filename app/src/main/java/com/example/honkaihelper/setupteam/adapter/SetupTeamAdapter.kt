@@ -3,7 +3,9 @@ package com.example.honkaihelper.setupteam.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.ItemSetupTeamBinding
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.utils.load
@@ -37,6 +39,15 @@ class SetupTeamAdapter : RecyclerView.Adapter<SetupTeamAdapter.SetupTeamViewHold
             binding.apply {
                 imageHeroAvatarInSetupTeam.load(hero.avatar)
                 textHeroNameInSetupTeam.text = hero.name
+                backgroundHero(hero.rarity)
+            }
+        }
+
+        private fun backgroundHero(rarity: Boolean) {
+            if (rarity) {
+                binding.imageHeroAvatarInSetupTeam.background = ContextCompat.getDrawable(binding.imageHeroAvatarInSetupTeam.context, R.color.orange)
+            } else {
+                binding.imageHeroAvatarInSetupTeam.background = ContextCompat.getDrawable(binding.imageHeroAvatarInSetupTeam.context, R.color.violet)
             }
         }
     }
