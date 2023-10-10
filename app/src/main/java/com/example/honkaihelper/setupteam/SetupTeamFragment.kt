@@ -2,8 +2,10 @@ package com.example.honkaihelper.setupteam
 
 import android.os.Build
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentSetupTeamBinding
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.heroes.data.model.Hero
@@ -35,6 +37,10 @@ class SetupTeamFragment :
             recyclerSetupTeam.setHasFixedSize(true)
             recyclerSetupTeam.adapter = mAdapter
         }
+    }
+
+    private fun setupHeroLevelSpinner() {
+
     }
 
     companion object {

@@ -3,6 +3,7 @@ package com.example.honkaihelper.setupteam.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.honkaihelper.R
@@ -40,6 +41,16 @@ class SetupTeamAdapter : RecyclerView.Adapter<SetupTeamAdapter.SetupTeamViewHold
                 imageHeroAvatarInSetupTeam.load(hero.avatar)
                 textHeroNameInSetupTeam.text = hero.name
                 backgroundHero(hero.rarity)
+
+                ArrayAdapter.createFromResource(binding.spinnerHeroLevel.context, R.array.hero_level, android.R.layout.simple_spinner_item).also { adapter ->
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    binding.spinnerHeroLevel.adapter = adapter
+                }
+
+                ArrayAdapter.createFromResource(binding.spinnerHeroEidolon.context, R.array.hero_eidolon, android.R.layout.simple_spinner_item).also { adapter ->
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    binding.spinnerHeroEidolon.adapter = adapter
+                }
             }
         }
 
