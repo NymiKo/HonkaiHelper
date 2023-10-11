@@ -2,6 +2,8 @@ package com.example.honkaihelper.setupteam.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
@@ -11,7 +13,9 @@ import com.example.honkaihelper.databinding.ItemSetupTeamBinding
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.utils.load
 
-class SetupTeamAdapter : RecyclerView.Adapter<SetupTeamAdapter.SetupTeamViewHolder>() {
+class SetupTeamAdapter(
+    private val weaponActionListener: SetupTeamListener
+) : RecyclerView.Adapter<SetupTeamAdapter.SetupTeamViewHolder>(), OnClickListener {
 
     var heroesList: List<Hero> = emptyList()
         @SuppressLint("NotifyDataSetChanged")
@@ -23,6 +27,11 @@ class SetupTeamAdapter : RecyclerView.Adapter<SetupTeamAdapter.SetupTeamViewHold
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SetupTeamViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemSetupTeamBinding.inflate(layoutInflater, parent, false)
+
+        binding.imageHeroWeapon.setOnClickListener(this)
+        binding.imageHeroRelic.setOnClickListener(this)
+        binding.imageHeroDecoration.setOnClickListener(this)
+
         return SetupTeamViewHolder(binding)
     }
 
@@ -51,6 +60,8 @@ class SetupTeamAdapter : RecyclerView.Adapter<SetupTeamAdapter.SetupTeamViewHold
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                     binding.spinnerHeroEidolon.adapter = adapter
                 }
+
+                imageHeroWeapon.tag = hero.path
             }
         }
 
@@ -60,6 +71,17 @@ class SetupTeamAdapter : RecyclerView.Adapter<SetupTeamAdapter.SetupTeamViewHold
             } else {
                 binding.imageHeroAvatarInSetupTeam.background = ContextCompat.getDrawable(binding.imageHeroAvatarInSetupTeam.context, R.color.violet)
             }
+        }
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id) {
+            R.id.image_hero_weapon -> {
+                val heroPath = v.tag as Int
+                weaponActionListener.onWeaponClick(heroPath)
+            }
+            R.id.image_hero_relic -> weaponActionListener.onRelicClick()
+            R.id.image_hero_decoration -> weaponActionListener.onDecorationClick()
         }
     }
 }

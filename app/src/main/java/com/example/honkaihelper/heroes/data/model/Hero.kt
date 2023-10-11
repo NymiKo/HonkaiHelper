@@ -8,5 +8,6 @@ data class Hero(
     val id: Int,
     val name: String,
     val avatar: String,
-    val rarity: Boolean
+    val rarity: Boolean,
+    val path: Int
 ): Parcelable
