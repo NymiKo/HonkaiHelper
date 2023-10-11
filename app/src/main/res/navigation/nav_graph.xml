@@ -62,5 +62,14 @@
         android:id="@+id/setupTeamFragment"
         android:name="com.example.honkaihelper.setupteam.SetupTeamFragment"
         android:label="fragment_setup_team"
-        tools:layout="@layout/fragment_setup_team" />
+        tools:layout="@layout/fragment_setup_team" >
+        <action
+            android:id="@+id/action_setupTeamFragment_to_equipmentFragment"
+            app:destination="@id/equipmentFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/equipmentFragment"
+        android:name="com.example.honkaihelper.equipment.EquipmentFragment"
+        android:label="fragment_equipment"
+        tools:layout="@layout/fragment_equipment" />
 </navigation>

@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentSetupTeamBinding
+import com.example.honkaihelper.equipment.EquipmentFragment
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.setupteam.adapter.SetupTeamAdapter
@@ -45,15 +47,15 @@ class SetupTeamFragment :
     private fun setupRecyclerViewAdapter() {
         mAdapter = SetupTeamAdapter(object : SetupTeamListener {
             override fun onWeaponClick(heroPath: Int) {
-                toast(requireActivity(), R.string.level_hero)
+                findNavController().navigate(R.id.equipmentFragment, EquipmentFragment.newInstance(heroPath))
             }
 
             override fun onRelicClick() {
-                toast(requireActivity(), R.string.eidolon_hero)
+                findNavController().navigate(R.id.equipmentFragment)
             }
 
             override fun onDecorationClick() {
-                toast(requireActivity(), R.string.you_need_login)
+                findNavController().navigate(R.id.equipmentFragment)
             }
         })
     }
