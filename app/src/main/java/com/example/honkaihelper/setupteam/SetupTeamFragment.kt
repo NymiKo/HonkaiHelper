@@ -60,6 +60,11 @@ class SetupTeamFragment :
         })
     }
 
+    override fun onDestroyView() {
+        binding.recyclerSetupTeam.adapter = null
+        super.onDestroyView()
+    }
+
     companion object {
 
         private const val ARG_HEROES_LIST = "heroes_list"

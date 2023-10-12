@@ -1,5 +1,6 @@
 package com.example.honkaihelper.createteam
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,6 +19,9 @@ class CreateTeamViewModel @Inject constructor(
 
     private val _uiState = MutableLiveData<CreateTeamUIState<Any>>(CreateTeamUIState.LOADING)
     val uiState: LiveData<CreateTeamUIState<Any>> = _uiState
+
+    private val _heroListInTeam = MutableLiveData<List<Hero>>()
+    val heroListInTeam: LiveData<List<Hero>> = _heroListInTeam
 
     init {
         getHeroesList()
@@ -60,6 +64,21 @@ class CreateTeamViewModel @Inject constructor(
             105 -> _uiState.value = CreateTeamUIState.ERROR_TEAM_CREATION(R.string.check_your_internet_connection)
             400 -> _uiState.value = CreateTeamUIState.ERROR_TEAM_CREATION(R.string.team_already_exists)
             else -> _uiState.value = CreateTeamUIState.ERROR_TEAM_CREATION(R.string.unknown_error)
+        }
+    }
+
+    fun addHeroInTeam(hero: Hero) {
+        if (_heroListInTeam.value?.size != 4) {
+            val currentList = _heroListInTeam.value ?: emptyList()
+            val newList = currentList.toMutableList()
+            newList.add(hero)
+            _heroListInTeam.value = newList
+        }
+    }
+
+    fun removeHeroInTeam(hero: Hero) {
+        if (_heroListInTeam.value?.size != 0) {
+            _heroListInTeam.value = _heroListInTeam.value?.minus(hero)
         }
     }
 }

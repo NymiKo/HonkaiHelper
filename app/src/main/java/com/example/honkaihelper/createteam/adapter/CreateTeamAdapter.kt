@@ -1,5 +1,6 @@
 package com.example.honkaihelper.createteam.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,18 +10,12 @@ import com.example.honkaihelper.utils.load
 
 class CreateTeamAdapter : RecyclerView.Adapter<CreateTeamAdapter.CreateTeamViewHolder>() {
 
-    var mHeroInTeamList = arrayListOf<Hero>()
-
-    fun addHero(hero: Hero) {
-        if (mHeroInTeamList.size != 4) mHeroInTeamList.add(hero)
-        notifyItemInserted(mHeroInTeamList.size)
-    }
-
-    fun removeHero(hero: Hero) {
-        val index = mHeroInTeamList.indexOf(hero)
-        if (mHeroInTeamList.size != 0) mHeroInTeamList.remove(hero)
-        notifyItemRemoved(index)
-    }
+    var mHeroListInTeam = emptyList<Hero>()
+        @SuppressLint("NotifyDataSetChanged")
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CreateTeamViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -28,10 +23,10 @@ class CreateTeamAdapter : RecyclerView.Adapter<CreateTeamAdapter.CreateTeamViewH
         return CreateTeamViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = mHeroInTeamList.size
+    override fun getItemCount(): Int = mHeroListInTeam.size
 
     override fun onBindViewHolder(holder: CreateTeamViewHolder, position: Int) {
-        val hero = mHeroInTeamList[position]
+        val hero = mHeroListInTeam[position]
         holder.bind(hero)
     }
 

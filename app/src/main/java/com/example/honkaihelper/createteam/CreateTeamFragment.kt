@@ -1,11 +1,6 @@
 package com.example.honkaihelper.createteam
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.ColorStateList
-import android.content.res.Resources.Theme
-import androidx.appcompat.app.AlertDialog
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,17 +12,13 @@ import com.example.honkaihelper.createteam.adapter.HeroListInCreateTeamListener
 import com.example.honkaihelper.databinding.FragmentCreateTeamBinding
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.createteam.data.model.ActiveHeroInTeam
-import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.setupteam.SetupTeamFragment
-import com.example.honkaihelper.utils.TOKEN
-import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.toast
 import com.example.honkaihelper.utils.visible
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
-import com.google.android.material.R.*
 
 class CreateTeamFragment :
     BaseFragment<FragmentCreateTeamBinding>(FragmentCreateTeamBinding::inflate) {
@@ -36,7 +27,6 @@ class CreateTeamFragment :
 
     private lateinit var mAdapterForViewTeam: CreateTeamAdapter
     private lateinit var mAdapterHeroList: HeroListInCreateTeamAdapter
-    private val heroesInTeamList = arrayListOf<Hero>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -122,7 +112,9 @@ class CreateTeamFragment :
 
     private fun setupRecyclerViewForViewTeam() {
         mAdapterForViewTeam = CreateTeamAdapter()
-        mAdapterForViewTeam.mHeroInTeamList = heroesInTeamList
+        viewModel.heroListInTeam.observe(viewLifecycleOwner) {
+            mAdapterForViewTeam.mHeroListInTeam = it
+        }
         val layoutManager = FlexboxLayoutManager(requireActivity()).apply {
             justifyContent = JustifyContent.CENTER
             flexDirection = FlexDirection.ROW
@@ -135,9 +127,9 @@ class CreateTeamFragment :
         mAdapterHeroList = HeroListInCreateTeamAdapter(object : HeroListInCreateTeamListener {
             override fun onClick(activeHeroInTeam: ActiveHeroInTeam) {
                 if (!activeHeroInTeam.active) {
-                    mAdapterForViewTeam.addHero(activeHeroInTeam.hero)
+                    viewModel.addHeroInTeam(activeHeroInTeam.hero)
                 } else {
-                    mAdapterForViewTeam.removeHero(activeHeroInTeam.hero)
+                    viewModel.removeHeroInTeam(activeHeroInTeam.hero)
                 }
             }
         })
@@ -150,8 +142,8 @@ class CreateTeamFragment :
 
     private fun setupButtonSaveTeam() {
         binding.buttonGoSetupTeam.setOnClickListener {
-            if (mAdapterForViewTeam.mHeroInTeamList.size == 4) {
-                findNavController().navigate(R.id.setupTeamFragment, SetupTeamFragment.newInstance(mAdapterForViewTeam.mHeroInTeamList))
+            if (mAdapterForViewTeam.mHeroListInTeam.size == 4) {
+                findNavController().navigate(R.id.setupTeamFragment, SetupTeamFragment.newInstance(mAdapterForViewTeam.mHeroListInTeam))
             } else {
                 toast(requireActivity(), R.string.should_be_4_heroes_in_the_team)
             }
