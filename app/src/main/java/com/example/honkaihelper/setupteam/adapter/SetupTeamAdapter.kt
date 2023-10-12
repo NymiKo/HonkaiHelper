@@ -61,7 +61,9 @@ class SetupTeamAdapter(
                     binding.spinnerHeroEidolon.adapter = adapter
                 }
 
-                imageHeroWeapon.tag = hero.path
+                imageHeroWeapon.tag = hero
+                imageHeroRelic.tag = hero
+                imageHeroDecoration.tag = hero
             }
         }
 
@@ -75,13 +77,15 @@ class SetupTeamAdapter(
     }
 
     override fun onClick(v: View?) {
-        when(v?.id) {
+        val hero = v?.tag as Hero
+        val idItem = heroesList.indexOf(hero)
+
+        when(v.id) {
             R.id.image_hero_weapon -> {
-                val heroPath = v.tag as Int
-                weaponActionListener.onWeaponClick(heroPath)
+                weaponActionListener.onWeaponClick(hero.path, idItem)
             }
-            R.id.image_hero_relic -> weaponActionListener.onRelicClick()
-            R.id.image_hero_decoration -> weaponActionListener.onDecorationClick()
+            R.id.image_hero_relic -> weaponActionListener.onRelicClick(idItem)
+            R.id.image_hero_decoration -> weaponActionListener.onDecorationClick(idItem)
         }
     }
 }
