@@ -3,6 +3,7 @@ package com.example.honkaihelper.di
 import android.content.Context
 import com.example.honkaihelper.createteam.data.CreateTeamRepository
 import com.example.honkaihelper.createteam.di.CreateTeamComponent
+import com.example.honkaihelper.equipment.di.EquipmentComponent
 import com.example.honkaihelper.heroes.data.HeroesListRepository
 import com.example.honkaihelper.heroes.di.HeroesListComponent
 import com.example.honkaihelper.login.data.LoginRepository
@@ -39,6 +40,7 @@ interface AppComponent {
     fun loginComponent(): LoginComponent.Factory
     fun registrationComponent(): RegistrationComponent.Factory
     fun profileComponent(): ProfileComponent.Factory
+    fun equipmentComponent(): EquipmentComponent.Factory
 
     val heroesListRepository: HeroesListRepository
     val teamsListRepository: TeamsListRepository

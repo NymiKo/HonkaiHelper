@@ -10,10 +10,10 @@
         style="@style/ModalBottomSheetDialog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:enableEdgeToEdge="true"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_equipment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/DP16" />

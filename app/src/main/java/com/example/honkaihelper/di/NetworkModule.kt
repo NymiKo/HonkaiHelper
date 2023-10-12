@@ -3,6 +3,7 @@ package com.example.honkaihelper.di
 import android.content.Context
 import com.example.honkaihelper.createteam.data.CreateTeamService
 import com.example.honkaihelper.data.AuthInterceptor
+import com.example.honkaihelper.equipment.data.EquipmentService
 import com.example.honkaihelper.heroes.data.HeroesListService
 import com.example.honkaihelper.login.data.LoginService
 import com.example.honkaihelper.profile.data.ProfileService
@@ -62,4 +63,7 @@ object NetworkModule {
 
     @Provides
     fun provideProfileService(retrofit: Retrofit): ProfileService = retrofit.create(ProfileService::class.java)
+
+    @Provides
+    fun providesEquipmentService(retrofit: Retrofit): EquipmentService = retrofit.create(EquipmentService::class.java)
 }

@@ -1,6 +1,7 @@
 package com.example.honkaihelper.setupteam.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
@@ -64,6 +65,7 @@ class SetupTeamAdapter(
                 imageHeroWeapon.tag = hero
                 imageHeroRelic.tag = hero
                 imageHeroDecoration.tag = hero
+                Log.e("PATH", hero.toString())
             }
         }
 
