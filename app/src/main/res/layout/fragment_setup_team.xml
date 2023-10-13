@@ -1,23 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".setupteam.SetupTeamFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar_setup_team"
+        style="@style/base_toolbar_style"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/setup_hero"
+        app:titleTextAppearance="@style/toolbar"
+        app:titleTextColor="?attr/colorSecondary" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_setup_team"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/DP16"/>
+        android:layout_height="0dp"
+        android:paddingHorizontal="@dimen/DP16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_setup_team" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_save_team"
         style="@style/base_floating_button"
         android:layout_gravity="end|bottom"
         android:src="@drawable/ic_save"
-        app:tint="?attr/colorOnSecondary"
-        app:fabSize="mini" />
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="?attr/colorOnSecondary" />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

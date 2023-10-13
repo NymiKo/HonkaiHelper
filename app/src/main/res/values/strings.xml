@@ -43,6 +43,7 @@
     <string name="you_need_login">Необходимо авторизоваться</string>
     <string name="level_hero">Уровень героя:</string>
     <string name="eidolon_hero">Эйдолон героя:</string>
+    <string name="setup_hero">Настройка героев</string>
 
     <string-array name="hero_level">
         <item>20</item>
