@@ -1,6 +1,7 @@
 package com.example.honkaihelper.createteam
 
 import android.content.Context
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -39,6 +40,7 @@ class CreateTeamFragment :
         setupRecyclerViewForViewTeam()
         setupRecyclerViewHeroList()
         setupRetryButtonClickListener()
+        selectHero()
     }
 
     override fun uiStateHandle() {
@@ -127,9 +129,9 @@ class CreateTeamFragment :
         mAdapterHeroList = HeroListInCreateTeamAdapter(object : HeroListInCreateTeamListener {
             override fun onClick(activeHeroInTeam: ActiveHeroInTeam) {
                 if (!activeHeroInTeam.active) {
-                    viewModel.addHeroInTeam(activeHeroInTeam.hero)
+                    viewModel.addHeroInTeam(activeHeroInTeam)
                 } else {
-                    viewModel.removeHeroInTeam(activeHeroInTeam.hero)
+                    viewModel.removeHeroFromTeam(activeHeroInTeam)
                 }
             }
         })
@@ -137,6 +139,12 @@ class CreateTeamFragment :
             layoutManager = GridLayoutManager(requireActivity(), 4)
             adapter = mAdapterHeroList
             itemAnimator = null
+        }
+    }
+
+    private fun selectHero() {
+        viewModel.selectedHero.observe(viewLifecycleOwner) {
+            if (it != null) mAdapterHeroList.selectHero(it)
         }
     }
 

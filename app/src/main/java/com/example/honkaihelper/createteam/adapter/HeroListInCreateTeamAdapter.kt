@@ -24,7 +24,9 @@ class HeroListInCreateTeamAdapter(private val actionListener: HeroListInCreateTe
             notifyDataSetChanged()
         }
 
-    private val mActiveHeroesList = ArrayList<ActiveHeroInTeam>()
+    fun selectHero(activeHeroInTeam: ActiveHeroInTeam) {
+        notifyItemChanged(mHeroList.indexOf(activeHeroInTeam))
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -80,13 +82,5 @@ class HeroListInCreateTeamAdapter(private val actionListener: HeroListInCreateTe
     override fun onClick(v: View?) {
         val activeHeroInTeam = v?.tag as ActiveHeroInTeam
         actionListener.onClick(activeHeroInTeam)
-        if (!activeHeroInTeam.active && mActiveHeroesList.size != 4) {
-            activeHeroInTeam.active = true
-            mActiveHeroesList.add(activeHeroInTeam)
-        } else {
-            activeHeroInTeam.active = false
-            mActiveHeroesList.remove(activeHeroInTeam)
-        }
-        notifyItemChanged(mHeroList.indexOf(activeHeroInTeam))
     }
 }

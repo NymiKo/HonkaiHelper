@@ -4,20 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".equipment.EquipmentFragment">
 
-    <FrameLayout
-        style="@style/ModalBottomSheetDialog"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_equipment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_equipment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/DP16" />
-
-    </FrameLayout>
+        android:layout_margin="@dimen/DP16" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
