@@ -2,8 +2,8 @@ package com.example.honkaihelper.setupteam
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.honkaihelper.R
@@ -12,10 +12,12 @@ import com.example.honkaihelper.equipment.EquipmentFragment
 import com.example.honkaihelper.equipment.KEY_DECORATION
 import com.example.honkaihelper.equipment.KEY_RELIC
 import com.example.honkaihelper.equipment.KEY_WEAPON
+import com.example.honkaihelper.equipment.data.model.Equipment
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.setupteam.adapter.SetupTeamAdapter
 import com.example.honkaihelper.setupteam.adapter.SetupTeamListener
+import com.example.honkaihelper.setupteam.data.model.SetupHero
 
 class SetupTeamFragment :
     BaseFragment<FragmentSetupTeamBinding>(FragmentSetupTeamBinding::inflate) {
@@ -28,6 +30,19 @@ class SetupTeamFragment :
             requireArguments().getParcelableArrayList(ARG_HEROES_LIST)
         }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setFragmentResultListener("equipment_key") { key, bundle ->
+            val setupHero = mAdapter.heroesList[bundle.getInt("id_item")]
+            setupHero.weapon = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                bundle.getParcelable("equipment", Equipment::class.java)
+            } else {
+                bundle.getParcelable("equipment")
+            }
+            mAdapter.updateHero(setupHero)
+        }
+    }
+
     override fun setupView() {
         setupRecyclerView()
     }
@@ -38,7 +53,7 @@ class SetupTeamFragment :
 
     private fun setupRecyclerView() {
         setupRecyclerViewAdapter()
-        mAdapter.heroesList = heroesList?.toList() ?: emptyList()
+        mAdapter.heroesList = heroesList!!.map { SetupHero(hero = it, weapon = null) }
         binding.apply {
             recyclerSetupTeam.layoutManager = LinearLayoutManager(requireActivity())
             recyclerSetupTeam.setHasFixedSize(true)

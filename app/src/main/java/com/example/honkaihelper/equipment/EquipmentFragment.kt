@@ -2,22 +2,20 @@ package com.example.honkaihelper.equipment
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.honkaihelper.App
-import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentEquipmentBinding
 import com.example.honkaihelper.equipment.adapter.EquipmentAdapter
-import com.example.honkaihelper.utils.toast
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.example.honkaihelper.equipment.adapter.EquipmentListener
+import com.example.honkaihelper.equipment.data.model.Equipment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import javax.inject.Inject
 
@@ -41,7 +39,8 @@ class EquipmentFragment : BottomSheetDialogFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as App).appComponent.equipmentComponent().create().inject(this)
+        (requireActivity().application as App).appComponent.equipmentComponent().create()
+            .inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,13 +70,15 @@ class EquipmentFragment : BottomSheetDialogFragment() {
 
     private fun uiStateHandle() {
         viewModel.uiState.observe(viewLifecycleOwner) {
-            when(it) {
+            when (it) {
                 is EquipmentUiState.ERROR -> {
 
                 }
+
                 is EquipmentUiState.LOADING -> {
 
                 }
+
                 is EquipmentUiState.SUCCESS -> {
                     mAdapter.mEquipmentList = it.data
                 }
@@ -86,13 +87,15 @@ class EquipmentFragment : BottomSheetDialogFragment() {
     }
 
     private fun getEquipmentByKey() {
-        when(equipmentClick) {
+        when (equipmentClick) {
             KEY_WEAPON -> {
                 viewModel.getWeapon(heroPath)
             }
+
             KEY_RELIC -> {
                 viewModel.getRelic()
             }
+
             KEY_DECORATION -> {
                 viewModel.getDecoration()
             }
@@ -100,7 +103,12 @@ class EquipmentFragment : BottomSheetDialogFragment() {
     }
 
     private fun setupAdapter() {
-        mAdapter = EquipmentAdapter()
+        mAdapter = EquipmentAdapter(object : EquipmentListener {
+            override fun onClick(equipment: Equipment) {
+                setFragmentResult("equipment_key", bundleOf(ARG_ID_ITEM to idItem, ARG_EQUIPMENT to equipment))
+                findNavController().popBackStack()
+            }
+        })
     }
 
     private fun setupRecyclerView() {
@@ -118,7 +126,11 @@ class EquipmentFragment : BottomSheetDialogFragment() {
 
         @JvmStatic
         fun newInstance(heroPath: Int = 1, idItem: Int, equipmentClick: String): Bundle {
-            return bundleOf(ARG_HERO_PATH to heroPath, ARG_ID_ITEM to idItem, ARG_EQUIPMENT to equipmentClick)
+            return bundleOf(
+                ARG_HERO_PATH to heroPath,
+                ARG_ID_ITEM to idItem,
+                ARG_EQUIPMENT to equipmentClick
+            )
         }
     }
 }
