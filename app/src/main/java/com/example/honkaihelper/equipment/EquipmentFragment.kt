@@ -125,7 +125,7 @@ class EquipmentFragment : BottomSheetDialogFragment() {
         private const val ARG_EQUIPMENT = "equipment"
 
         @JvmStatic
-        fun newInstance(heroPath: Int = 1, idItem: Int, equipmentClick: String): Bundle {
+        fun newInstance(heroPath: Int, idItem: Int, equipmentClick: String): Bundle {
             return bundleOf(
                 ARG_HERO_PATH to heroPath,
                 ARG_ID_ITEM to idItem,

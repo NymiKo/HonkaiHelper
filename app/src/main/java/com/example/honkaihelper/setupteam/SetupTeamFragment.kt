@@ -3,11 +3,13 @@ package com.example.honkaihelper.setupteam
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LOGGER
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
@@ -45,14 +47,16 @@ class SetupTeamFragment :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setFragmentResultListener("equipment_key") { key, bundle ->
-            val setupHero = mAdapter.heroesList[bundle.getInt("id_item")]
+            val setupHero = mAdapter.currentList[bundle.getInt("id_item")]
             setupHero.weapon = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 bundle.getParcelable("equipment", Equipment::class.java)
             } else {
                 bundle.getParcelable("equipment")
             }
-            mAdapter.updateHero(setupHero)
+            viewModel.updateHero(setupHero)
         }
+
+        viewModel.setHeroesList(heroesList!!.toList())
     }
 
     override fun setupView() {
@@ -65,7 +69,6 @@ class SetupTeamFragment :
 
     private fun setupRecyclerView() {
         setupRecyclerViewAdapter()
-        mAdapter.heroesList = heroesList!!.map { SetupHero(hero = it, level = null, weapon = null) }
         binding.apply {
             recyclerSetupTeam.layoutManager = LinearLayoutManager(requireActivity())
             recyclerSetupTeam.setHasFixedSize(true)
@@ -76,26 +79,29 @@ class SetupTeamFragment :
     private fun setupRecyclerViewAdapter() {
         mAdapter = SetupTeamAdapter(object : SetupTeamListener {
             override fun onWeaponClick(heroPath: Int, idItem: Int) {
-                findNavController().navigate(
-                    R.id.equipmentFragment,
-                    EquipmentFragment.newInstance(heroPath, idItem, KEY_WEAPON)
-                )
+                navigateToEquipmentFragment(idItem, KEY_WEAPON, heroPath)
             }
 
             override fun onRelicClick(idItem: Int) {
-                findNavController().navigate(
-                    R.id.equipmentFragment,
-                    EquipmentFragment.newInstance(idItem = idItem, equipmentClick = KEY_RELIC)
-                )
+                navigateToEquipmentFragment(idItem, KEY_RELIC)
             }
 
             override fun onDecorationClick(idItem: Int) {
-                findNavController().navigate(
-                    R.id.equipmentFragment,
-                    EquipmentFragment.newInstance(idItem = idItem, equipmentClick = KEY_DECORATION)
-                )
+                navigateToEquipmentFragment(idItem, KEY_DECORATION)
             }
         })
+
+        viewModel.heroesList.observe(viewLifecycleOwner) {
+            mAdapter.submitList(it)
+            Log.e("LIST", it.toString())
+        }
+    }
+
+    private fun navigateToEquipmentFragment(idItem: Int, equipmentClick: String, heroPath: Int = 1) {
+        findNavController().navigate(
+            R.id.equipmentFragment,
+            EquipmentFragment.newInstance(idItem = idItem, equipmentClick = equipmentClick, heroPath = heroPath)
+        )
     }
 
     override fun onDestroyView() {
