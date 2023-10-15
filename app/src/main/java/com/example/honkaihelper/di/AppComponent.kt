@@ -12,6 +12,7 @@ import com.example.honkaihelper.profile.data.ProfileRepository
 import com.example.honkaihelper.profile.di.ProfileComponent
 import com.example.honkaihelper.registration.data.RegistrationRepository
 import com.example.honkaihelper.registration.di.RegistrationComponent
+import com.example.honkaihelper.setupteam.di.SetupTeamComponent
 import com.example.honkaihelper.teams.data.TeamsListRepository
 import com.example.honkaihelper.teams.di.TeamsListComponent
 import dagger.BindsInstance
@@ -41,6 +42,7 @@ interface AppComponent {
     fun registrationComponent(): RegistrationComponent.Factory
     fun profileComponent(): ProfileComponent.Factory
     fun equipmentComponent(): EquipmentComponent.Factory
+    fun setupTeamComponent(): SetupTeamComponent.Factory
 
     val heroesListRepository: HeroesListRepository
     val teamsListRepository: TeamsListRepository

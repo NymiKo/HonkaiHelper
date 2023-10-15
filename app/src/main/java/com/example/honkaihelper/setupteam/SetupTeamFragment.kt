@@ -1,11 +1,15 @@
 package com.example.honkaihelper.setupteam
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResultListener
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentSetupTeamBinding
 import com.example.honkaihelper.equipment.EquipmentFragment
@@ -18,9 +22,12 @@ import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.setupteam.adapter.SetupTeamAdapter
 import com.example.honkaihelper.setupteam.adapter.SetupTeamListener
 import com.example.honkaihelper.setupteam.data.model.SetupHero
+import javax.inject.Inject
 
 class SetupTeamFragment :
     BaseFragment<FragmentSetupTeamBinding>(FragmentSetupTeamBinding::inflate) {
+
+    private val viewModel by viewModels<SetupTeamViewModel> { viewModelFactory }
 
     private lateinit var mAdapter: SetupTeamAdapter
     private val heroesList
@@ -29,6 +36,11 @@ class SetupTeamFragment :
         } else {
             requireArguments().getParcelableArrayList(ARG_HEROES_LIST)
         }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as App).appComponent.setupTeamComponent().create().inject(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +65,7 @@ class SetupTeamFragment :
 
     private fun setupRecyclerView() {
         setupRecyclerViewAdapter()
-        mAdapter.heroesList = heroesList!!.map { SetupHero(hero = it, weapon = null) }
+        mAdapter.heroesList = heroesList!!.map { SetupHero(hero = it, level = null, weapon = null) }
         binding.apply {
             recyclerSetupTeam.layoutManager = LinearLayoutManager(requireActivity())
             recyclerSetupTeam.setHasFixedSize(true)

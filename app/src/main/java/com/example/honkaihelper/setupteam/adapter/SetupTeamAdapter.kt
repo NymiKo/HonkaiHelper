@@ -54,13 +54,13 @@ class SetupTeamAdapter(
     class SetupTeamViewHolder(private val binding: ItemSetupTeamBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        val spinnerHeroLevel = binding.spinnerHeroLevel
-
         fun bind(setupHero: SetupHero) {
             binding.apply {
                 imageHeroAvatarInSetupTeam.load(setupHero.hero.avatar)
                 textHeroNameInSetupTeam.text = setupHero.hero.name
                 backgroundHero(setupHero.hero.rarity)
+
+                spinnerHeroLevel.setSelection(setupHero.level ?: 0)
 
                 imageHeroWeapon.loadWithPlaceholder(setupHero.weapon?.image, R.drawable.ic_add)
                 if (setupHero.weapon != null) imageHeroWeapon.imageTintList = null
@@ -68,6 +68,7 @@ class SetupTeamAdapter(
                 imageHeroWeapon.tag = setupHero
                 imageHeroRelic.tag = setupHero
                 imageHeroDecoration.tag = setupHero
+                spinnerHeroLevel.tag = setupHero
             }
         }
 
@@ -90,7 +91,6 @@ class SetupTeamAdapter(
             }
             R.id.image_hero_relic -> weaponActionListener.onRelicClick(idItem)
             R.id.image_hero_decoration -> weaponActionListener.onDecorationClick(idItem)
-            R.id.spinner_hero_level -> updateHero(setupHero)
         }
     }
 }
