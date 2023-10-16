@@ -34,6 +34,12 @@
         <action
             android:id="@+id/action_heroesListFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_heroesListFragment_to_teamsListFragment"
+            app:destination="@id/teamsListFragment" />
+        <action
+            android:id="@+id/action_heroesListFragment_to_buildsHeroListFragment"
+            app:destination="@id/buildsHeroListFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -53,11 +59,7 @@
         android:id="@+id/profileFragment"
         android:name="com.example.honkaihelper.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
-        <action
-            android:id="@+id/action_profileFragment_to_teamsListFragment"
-            app:destination="@id/teamsListFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/setupTeamFragment"
         android:name="com.example.honkaihelper.setupteam.SetupTeamFragment"
@@ -72,4 +74,9 @@
         android:name="com.example.honkaihelper.equipment.EquipmentFragment"
         android:label="fragment_equipment"
         tools:layout="@layout/fragment_equipment" />
+    <fragment
+        android:id="@+id/buildsHeroListFragment"
+        android:name="com.example.honkaihelper.builds_hero.BuildsHeroListFragment"
+        android:label="fragment_builds_hero_list"
+        tools:layout="@layout/fragment_builds_hero_list" />
 </navigation>

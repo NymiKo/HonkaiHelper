@@ -1,6 +1,7 @@
 package com.example.honkaihelper.di
 
 import android.content.Context
+import com.example.honkaihelper.builds_hero.di.BuildsHeroListComponent
 import com.example.honkaihelper.createteam.data.CreateTeamRepository
 import com.example.honkaihelper.createteam.di.CreateTeamComponent
 import com.example.honkaihelper.equipment.di.EquipmentComponent
@@ -43,6 +44,7 @@ interface AppComponent {
     fun profileComponent(): ProfileComponent.Factory
     fun equipmentComponent(): EquipmentComponent.Factory
     fun setupTeamComponent(): SetupTeamComponent.Factory
+    fun buildsHeroListComponent(): BuildsHeroListComponent.Factory
 
     val heroesListRepository: HeroesListRepository
     val teamsListRepository: TeamsListRepository
