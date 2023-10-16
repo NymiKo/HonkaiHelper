@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginVertical="@dimen/DP8"
+    app:cardElevation="2dp"
+    app:strokeWidth="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/DP16">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_hero_avatar_in_builds_hero"
+            style="@style/image_hero_in_team"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/roundedTopRightCornerImageView"
+            app:strokeColor="@color/dark_gray"
+            app:strokeWidth="1dp" />
+
+        <TextView
+            android:id="@+id/text_hero_name_in_builds_hero"
+            style="@style/name_hero_in_team"
+            android:layout_width="80dp"
+            android:layout_gravity="bottom"
+            app:layout_constraintBottom_toBottomOf="@+id/image_hero_avatar_in_builds_hero"
+            app:layout_constraintEnd_toEndOf="@+id/image_hero_avatar_in_builds_hero"
+            app:layout_constraintStart_toStartOf="@+id/image_hero_avatar_in_builds_hero" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_hero_weapon"
+            android:layout_width="65dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/DP20"
+            android:layout_marginBottom="@dimen/DP16"
+            app:layout_constraintBottom_toTopOf="@+id/text_build_from"
+            app:layout_constraintStart_toEndOf="@+id/image_hero_avatar_in_builds_hero"
+            app:layout_constraintTop_toTopOf="@+id/image_hero_avatar_in_builds_hero"
+            app:shapeAppearance="@style/roundedCornersImageView"
+            app:strokeWidth="2dp"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_hero_relic"
+            android:layout_width="65dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/DP20"
+            app:layout_constraintBottom_toBottomOf="@+id/image_hero_weapon"
+            app:layout_constraintStart_toEndOf="@+id/image_hero_weapon"
+            app:layout_constraintTop_toTopOf="@+id/image_hero_weapon"
+            app:shapeAppearance="@style/roundedCornersImageView"
+            app:strokeWidth="2dp"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_hero_decoration"
+            android:layout_width="65dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/DP20"
+            app:layout_constraintBottom_toBottomOf="@+id/image_hero_relic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@+id/image_hero_relic"
+            app:layout_constraintTop_toTopOf="@+id/image_hero_relic"
+            app:shapeAppearance="@style/roundedCornersImageView"
+            app:strokeWidth="2dp"/>
+
+        <TextView
+            android:id="@+id/text_build_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginStart="@dimen/DP20"
+            android:textColor="?attr/colorSecondary"
+            app:layout_constraintBottom_toBottomOf="@+id/image_hero_avatar_in_builds_hero"
+            app:layout_constraintStart_toEndOf="@+id/image_hero_avatar_in_builds_hero"
+            tools:text="Сборка от:" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_profile"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="@dimen/DP8"
+            android:background="@color/white"
+            android:src="@drawable/ic_person"
+            app:layout_constraintBottom_toBottomOf="@+id/text_build_from"
+            app:layout_constraintStart_toEndOf="@+id/text_build_from"
+            app:layout_constraintTop_toTopOf="@+id/text_build_from"
+            app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
