@@ -44,6 +44,8 @@
     <string name="level_hero">Уровень героя:</string>
     <string name="eidolon_hero">Эйдолон героя:</string>
     <string name="setup_hero">Настройка героев</string>
+    <string name="build_from">Сборка от: %1$s</string>
+    <string name="builds_for_hero">Сборки для героя: %1$s</string>
 
     <string-array name="hero_level">
         <item>20</item>
