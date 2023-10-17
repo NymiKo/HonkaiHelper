@@ -1,0 +1,95 @@
+package com.example.honkaihelper.create_build_hero.adapter
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.View.OnClickListener
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.example.honkaihelper.R
+import com.example.honkaihelper.databinding.ItemCreateBuildEquipmentBinding
+import com.example.honkaihelper.equipment.data.model.Equipment
+import com.example.honkaihelper.utils.backgroundEquipment
+import com.example.honkaihelper.utils.gone
+import com.example.honkaihelper.utils.load
+import com.example.honkaihelper.utils.loadWithPlaceholder
+
+class CreateBuildEquipmentAdapter(
+    private val actionListener: CreateBuildEquipmentListener
+): RecyclerView.Adapter<ViewHolder>(), OnClickListener {
+
+    private val equipmentList = arrayListOf<Equipment>()
+
+    fun addEquipment(equipment: Equipment) {
+        equipmentList.add(equipment)
+        notifyItemInserted(equipmentList.size - 1)
+    }
+
+    private fun removeEquipment(position: Int) {
+        notifyItemRemoved(position)
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (position == equipmentList.size) VIEW_TYPE_ADD_BUTTON else VIEW_TYPE_DATA
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = ItemCreateBuildEquipmentBinding.inflate(layoutInflater, parent, false)
+
+        binding.imageHeroEquipment.setOnClickListener(this)
+        binding.imageRemoveEquipment.setOnClickListener(this)
+
+        return if (viewType == VIEW_TYPE_DATA) CreateBuildEquipmentViewHolder(binding) else AddEquipmentViewHolder(binding)
+    }
+
+    override fun getItemCount(): Int = equipmentList.size + 1
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        when(holder) {
+            is CreateBuildEquipmentViewHolder -> {
+                val equipment = equipmentList[position]
+                holder.bind(equipment, position)
+            }
+            is AddEquipmentViewHolder -> {
+                holder.bind(position)
+            }
+        }
+    }
+
+    class CreateBuildEquipmentViewHolder(private val binding: ItemCreateBuildEquipmentBinding): ViewHolder(binding.root) {
+        fun bind(equipment: Equipment, position: Int) {
+            binding.imageHeroEquipment.load(equipment.image)
+            binding.imageHeroEquipment.backgroundEquipment(equipment)
+
+            binding.imageHeroEquipment.tag = position
+        }
+    }
+
+    class AddEquipmentViewHolder(private val binding: ItemCreateBuildEquipmentBinding): ViewHolder(binding.root) {
+        fun bind(position: Int) {
+            binding.imageHeroEquipment.loadWithPlaceholder("", R.drawable.ic_add)
+            binding.imageHeroEquipment.imageTintList = null
+            binding.imageRemoveEquipment.gone()
+
+            binding.imageHeroEquipment.tag = position
+        }
+    }
+
+    override fun onClick(v: View?) {
+        val position = v?.tag as Int
+        when(v.id) {
+            R.id.image_hero_equipment -> {
+                if (position == equipmentList.size) actionListener.onAddEquipmentClick()
+            }
+            R.id.image_remove_equipment -> {
+                removeEquipment(position)
+            }
+        }
+    }
+
+    companion object {
+        private const val VIEW_TYPE_DATA = 0
+        private const val VIEW_TYPE_ADD_BUTTON = 1
+    }
+}

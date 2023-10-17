@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/DP16"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_remove_equipment"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:background="@color/red"
+        android:elevation="2dp"
+        android:src="@drawable/ic_remove"
+        app:layout_constraintEnd_toEndOf="@+id/image_hero_equipment"
+        app:layout_constraintTop_toTopOf="@+id/image_hero_equipment"
+        app:shapeAppearanceOverlay="@style/roundedImageView"
+        app:tint="@color/white" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_hero_equipment"
+        android:layout_width="80dp"
+        android:layout_height="120dp"
+        app:tint="?attr/colorSecondary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance="@style/roundedCornersImageView"
+        app:strokeWidth="2dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
