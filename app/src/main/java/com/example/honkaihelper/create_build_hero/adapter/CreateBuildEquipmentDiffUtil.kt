@@ -5,7 +5,7 @@ import com.example.honkaihelper.equipment.data.model.Equipment
 
 class CreateBuildEquipmentDiffUtil: DiffUtil.ItemCallback<Equipment>() {
     override fun areItemsTheSame(oldItem: Equipment, newItem: Equipment): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem == newItem
     }
 
     override fun areContentsTheSame(oldItem: Equipment, newItem: Equipment): Boolean {

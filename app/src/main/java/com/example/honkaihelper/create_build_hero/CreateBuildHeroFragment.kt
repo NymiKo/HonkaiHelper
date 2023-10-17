@@ -3,8 +3,10 @@ package com.example.honkaihelper.create_build_hero
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResultListener
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,7 +27,8 @@ import com.example.honkaihelper.utils.toast
 class CreateBuildHeroFragment :
     BaseFragment<FragmentCreateBuildHeroBinding>(FragmentCreateBuildHeroBinding::inflate) {
 
-    lateinit var mAdapterWeapon: CreateBuildEquipmentAdapter
+    private val viewModel by viewModels<CreateBuildHeroViewModel> { viewModelFactory }
+    private lateinit var mAdapterWeapon: CreateBuildEquipmentAdapter
 
     private val hero get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         requireArguments().getParcelable(ARG_HERO, Hero::class.java)
@@ -47,9 +50,7 @@ class CreateBuildHeroFragment :
                 bundle.getParcelable("equipment")
             }
             if (equipment != null) {
-                val list = mAdapterWeapon.currentList.toMutableList()
-                list.add(equipment)
-                mAdapterWeapon.submitList(list)
+                viewModel.addWeapon(equipment)
             }
         }
     }
@@ -76,7 +77,14 @@ class CreateBuildHeroFragment :
             override fun onAddEquipmentClick() {
                 findNavController().navigate(R.id.equipmentFragment, EquipmentFragment.newInstance(hero!!.path, equipmentClick = KEY_WEAPON))
             }
+
+            override fun onRemoveEquipmentClick(position: Int) {
+                viewModel.removeWeapon(position)
+            }
         })
+        viewModel.weaponList.observe(viewLifecycleOwner) {
+            mAdapterWeapon.submitList(it)
+        }
     }
 
     private fun setupRecyclerViewWeapon() {

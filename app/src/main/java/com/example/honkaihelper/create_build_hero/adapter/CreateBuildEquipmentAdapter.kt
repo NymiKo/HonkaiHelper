@@ -53,7 +53,7 @@ class CreateBuildEquipmentAdapter(
             binding.imageHeroEquipment.backgroundEquipment(equipment)
             binding.imageHeroEquipment.imageTintList = null
 
-            binding.imageRemoveEquipment.tag = bindingAdapterPosition
+            binding.imageRemoveEquipment.tag = equipment.id
         }
     }
 
@@ -61,19 +61,17 @@ class CreateBuildEquipmentAdapter(
         fun bind() {
             binding.imageHeroEquipment.loadWithPlaceholder("", R.drawable.ic_add)
             binding.imageRemoveEquipment.gone()
-
-            binding.imageHeroEquipment.tag = bindingAdapterPosition
         }
     }
 
     override fun onClick(v: View?) {
-        val position = v?.tag as Int
-        when(v.id) {
+        when(v?.id) {
             R.id.image_hero_equipment -> {
-                if (position == currentList.size) actionListener.onAddEquipmentClick()
+                actionListener.onAddEquipmentClick()
             }
             R.id.image_remove_equipment -> {
-                notifyItemRemoved(position)
+                val idEquipment = v.tag as Int
+                actionListener.onRemoveEquipmentClick(idEquipment)
             }
         }
     }
