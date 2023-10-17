@@ -1,6 +1,7 @@
 package com.example.honkaihelper.builds_hero
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
@@ -10,6 +11,7 @@ import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.builds_hero.adapter.BuildsHeroListAdapter
 import com.example.honkaihelper.builds_hero.data.model.BuildHero
+import com.example.honkaihelper.create_build_hero.CreateBuildHeroFragment
 import com.example.honkaihelper.databinding.FragmentBuildsHeroListBinding
 import com.example.honkaihelper.equipment.data.model.Equipment
 import com.example.honkaihelper.fragments.BaseFragment
@@ -23,8 +25,11 @@ class BuildsHeroListFragment :
     private val viewModel by viewModels<BuildsHeroListViewModel> { viewModelFactory }
     private lateinit var mAdapter: BuildsHeroListAdapter
 
-    private val idHero get() = requireArguments().getInt(ARG_ID_HERO)
-    private val nameHero get() = requireArguments().getString(ARG_NAME_HERO)
+    private val hero get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        requireArguments().getParcelable(ARG_HERO, Hero::class.java)
+    } else {
+        requireArguments().getParcelable(ARG_HERO)
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -61,22 +66,21 @@ class BuildsHeroListFragment :
     }
 
     private fun setupToolbar() {
-        binding.toolbarBuildsHeroList.title = resources.getString(R.string.builds_for_hero, nameHero)
+        binding.toolbarBuildsHeroList.title = resources.getString(R.string.builds_for_hero, hero?.name)
     }
 
     private fun navigateToCreateBuild() {
         binding.buttonCreate.setOnClickListener {
-            findNavController().navigate(R.id.createBuildHeroFragment)
+            findNavController().navigate(R.id.createBuildHeroFragment, CreateBuildHeroFragment.newInstance(hero))
         }
     }
 
     companion object {
-        private const val ARG_ID_HERO = "id_hero"
-        private const val ARG_NAME_HERO = "name_hero"
+        private const val ARG_HERO = "hero"
 
         @JvmStatic
-        fun newInstance(idHero: Int, nameHero: String): Bundle {
-            return bundleOf(ARG_ID_HERO to idHero, ARG_NAME_HERO to nameHero)
+        fun newInstance(hero: Hero): Bundle {
+            return bundleOf(ARG_HERO to hero)
         }
     }
 }

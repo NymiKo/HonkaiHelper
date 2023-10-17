@@ -55,6 +55,6 @@ class HeroesListAdapter(
 
     override fun onClick(view: View?) {
         val hero = view?.tag as Hero
-        actionListener.onClick(hero.id, hero.name)
+        actionListener.onClick(hero)
     }
 }

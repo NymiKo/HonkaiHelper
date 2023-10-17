@@ -7,7 +7,7 @@
     tools:context=".create_build_hero.CreateBuildHeroFragment">
 
     <ImageView
-        android:id="@+id/hero_avatar_in_team_1"
+        android:id="@+id/image_hero_avatar_in_create_buildr"
         style="@style/image_hero_in_team"
         android:layout_height="170dp"
         android:layout_width="120dp"
@@ -16,19 +16,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/hero_name_in_team_1"
+        android:id="@+id/text_hero_name_in_create_build"
         style="@style/name_hero_in_team"
         android:layout_height="35dp"
         android:textSize="@dimen/SP18"
-        app:layout_constraintBottom_toBottomOf="@+id/hero_avatar_in_team_1"
-        app:layout_constraintEnd_toEndOf="@+id/hero_avatar_in_team_1"
-        app:layout_constraintStart_toStartOf="@+id/hero_avatar_in_team_1"
+        app:layout_constraintBottom_toBottomOf="@+id/image_hero_avatar_in_create_buildr"
+        app:layout_constraintEnd_toEndOf="@+id/image_hero_avatar_in_create_buildr"
+        app:layout_constraintStart_toStartOf="@+id/image_hero_avatar_in_create_buildr"
         tools:text="Блэйд"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_weapon_in_create_build"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/DP16"
-        app:layout_constraintTop_toBottomOf="@+id/hero_avatar_in_team_1" />
+        app:layout_constraintTop_toBottomOf="@+id/image_hero_avatar_in_create_buildr" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
