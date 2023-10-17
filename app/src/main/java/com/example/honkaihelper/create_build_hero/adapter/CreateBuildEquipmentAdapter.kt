@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.honkaihelper.R
@@ -16,21 +17,10 @@ import com.example.honkaihelper.utils.loadWithPlaceholder
 
 class CreateBuildEquipmentAdapter(
     private val actionListener: CreateBuildEquipmentListener
-): RecyclerView.Adapter<ViewHolder>(), OnClickListener {
-
-    private val equipmentList = arrayListOf<Equipment>()
-
-    fun addEquipment(equipment: Equipment) {
-        equipmentList.add(equipment)
-        notifyItemInserted(equipmentList.size - 1)
-    }
-
-    private fun removeEquipment(position: Int) {
-        notifyItemRemoved(position)
-    }
+): ListAdapter<Equipment, ViewHolder>(CreateBuildEquipmentDiffUtil()), OnClickListener {
 
     override fun getItemViewType(position: Int): Int {
-        return if (position == equipmentList.size) VIEW_TYPE_ADD_BUTTON else VIEW_TYPE_DATA
+        return if (position == currentList.size) VIEW_TYPE_ADD_BUTTON else VIEW_TYPE_DATA
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -43,36 +33,36 @@ class CreateBuildEquipmentAdapter(
         return if (viewType == VIEW_TYPE_DATA) CreateBuildEquipmentViewHolder(binding) else AddEquipmentViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = equipmentList.size + 1
+    override fun getItemCount(): Int = currentList.size + 1
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         when(holder) {
             is CreateBuildEquipmentViewHolder -> {
-                val equipment = equipmentList[position]
-                holder.bind(equipment, position)
+                val equipment = currentList[position]
+                holder.bind(equipment)
             }
             is AddEquipmentViewHolder -> {
-                holder.bind(position)
+                holder.bind()
             }
         }
     }
 
     class CreateBuildEquipmentViewHolder(private val binding: ItemCreateBuildEquipmentBinding): ViewHolder(binding.root) {
-        fun bind(equipment: Equipment, position: Int) {
+        fun bind(equipment: Equipment) {
             binding.imageHeroEquipment.load(equipment.image)
             binding.imageHeroEquipment.backgroundEquipment(equipment)
+            binding.imageHeroEquipment.imageTintList = null
 
-            binding.imageHeroEquipment.tag = position
+            binding.imageRemoveEquipment.tag = bindingAdapterPosition
         }
     }
 
     class AddEquipmentViewHolder(private val binding: ItemCreateBuildEquipmentBinding): ViewHolder(binding.root) {
-        fun bind(position: Int) {
+        fun bind() {
             binding.imageHeroEquipment.loadWithPlaceholder("", R.drawable.ic_add)
-            binding.imageHeroEquipment.imageTintList = null
             binding.imageRemoveEquipment.gone()
 
-            binding.imageHeroEquipment.tag = position
+            binding.imageHeroEquipment.tag = bindingAdapterPosition
         }
     }
 
@@ -80,10 +70,10 @@ class CreateBuildEquipmentAdapter(
         val position = v?.tag as Int
         when(v.id) {
             R.id.image_hero_equipment -> {
-                if (position == equipmentList.size) actionListener.onAddEquipmentClick()
+                if (position == currentList.size) actionListener.onAddEquipmentClick()
             }
             R.id.image_remove_equipment -> {
-                removeEquipment(position)
+                notifyItemRemoved(position)
             }
         }
     }
