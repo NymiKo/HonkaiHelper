@@ -10,6 +10,7 @@ import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.ItemTeamBinding
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.teams.data.model.TeamHero
+import com.example.honkaihelper.utils.backgroundHero
 import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.loadImageWithRounded
 
@@ -41,10 +42,10 @@ class ProfileTeamsListAdapter :
 
         fun bind(teamHero: TeamHero) {
             binding.apply {
-                backgroundHero(heroAvatarInTeam1, teamHero.heroOne)
-                backgroundHero(heroAvatarInTeam2, teamHero.heroTwo)
-                backgroundHero(heroAvatarInTeam3, teamHero.heroThree)
-                backgroundHero(heroAvatarInTeam4, teamHero.heroFour)
+                heroAvatarInTeam1.backgroundHero(teamHero.heroOne)
+                heroAvatarInTeam2.backgroundHero(teamHero.heroTwo)
+                heroAvatarInTeam3.backgroundHero(teamHero.heroThree)
+                heroAvatarInTeam4.backgroundHero(teamHero.heroFour)
 
                 heroNameInTeam1.text = teamHero.heroOne.name
                 heroNameInTeam2.text = teamHero.heroTwo.name
@@ -56,14 +57,4 @@ class ProfileTeamsListAdapter :
             }
         }
     }
-
-    private fun backgroundHero(view: ImageView, hero: Hero) {
-        view.loadImageWithRounded(hero.avatar)
-        if (hero.rarity) {
-            view.background = ContextCompat.getDrawable(view.context, R.color.orange)
-        } else {
-            view.background = ContextCompat.getDrawable(view.context, R.color.violet)
-        }
-    }
-
 }

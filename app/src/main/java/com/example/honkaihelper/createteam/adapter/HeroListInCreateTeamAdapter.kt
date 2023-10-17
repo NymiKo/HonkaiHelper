@@ -11,6 +11,7 @@ import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.ItemHeroCreateTeamListBinding
 import com.example.honkaihelper.createteam.data.model.ActiveHeroInTeam
 import com.example.honkaihelper.heroes.data.model.Hero
+import com.example.honkaihelper.utils.backgroundHero
 import com.example.honkaihelper.utils.load
 import com.example.honkaihelper.utils.loadImageWithRounded
 
@@ -57,8 +58,7 @@ class HeroListInCreateTeamAdapter(private val actionListener: HeroListInCreateTe
             } else {
                 changeStrokeActiveHero(ContextCompat.getColor(binding.cardHeroIconTeam.context, R.color.dark_gray), 1, 0F)
             }
-            backgroundHero(activeHeroInTeam.hero.rarity)
-            binding.heroAvatarInCreateTeamList.loadImageWithRounded(activeHeroInTeam.hero.avatar)
+            binding.heroAvatarInCreateTeamList.backgroundHero(activeHeroInTeam.hero)
             binding.cardHeroIconTeam.tag = activeHeroInTeam
         }
 
@@ -67,14 +67,6 @@ class HeroListInCreateTeamAdapter(private val actionListener: HeroListInCreateTe
                 strokeColor = color
                 strokeWidth = width
                 radius = radiusCard
-            }
-        }
-
-        private fun backgroundHero(rarity: Boolean) {
-            if (rarity) {
-                binding.heroAvatarInCreateTeamList.background = ContextCompat.getDrawable(binding.heroAvatarInCreateTeamList.context, R.color.orange)
-            } else {
-                binding.heroAvatarInCreateTeamList.background = ContextCompat.getDrawable(binding.heroAvatarInCreateTeamList.context, R.color.violet)
             }
         }
     }

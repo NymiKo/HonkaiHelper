@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.ItemEquipmentBinding
 import com.example.honkaihelper.equipment.data.model.Equipment
+import com.example.honkaihelper.utils.backgroundEquipment
+import com.example.honkaihelper.utils.backgroundHero
 import com.example.honkaihelper.utils.load
 
 class EquipmentAdapter(
@@ -42,17 +44,9 @@ class EquipmentAdapter(
     class EquipmentViewHolder(private val binding: ItemEquipmentBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(equipment: Equipment) {
             binding.imageEquipment.load(equipment.image)
-            backgroundHero(equipment.rarity)
+            binding.imageEquipment.backgroundEquipment(equipment)
 
             binding.imageEquipment.tag = equipment
-        }
-
-        private fun backgroundHero(rarity: Byte) {
-            when(rarity.toInt()) {
-                0 -> binding.imageEquipment.background = ContextCompat.getDrawable(binding.imageEquipment.context, R.color.blue)
-                1 -> binding.imageEquipment.background = ContextCompat.getDrawable(binding.imageEquipment.context, R.color.violet)
-                2 -> binding.imageEquipment.background = ContextCompat.getDrawable(binding.imageEquipment.context, R.color.orange)
-            }
         }
     }
 

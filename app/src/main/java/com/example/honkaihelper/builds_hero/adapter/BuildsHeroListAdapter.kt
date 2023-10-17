@@ -11,6 +11,8 @@ import com.example.honkaihelper.builds_hero.data.model.BuildHero
 import com.example.honkaihelper.databinding.ItemBuildsHeroBinding
 import com.example.honkaihelper.equipment.data.model.Equipment
 import com.example.honkaihelper.heroes.data.model.Hero
+import com.example.honkaihelper.utils.backgroundEquipment
+import com.example.honkaihelper.utils.backgroundHero
 import com.example.honkaihelper.utils.load
 
 class BuildsHeroListAdapter :
@@ -42,31 +44,13 @@ class BuildsHeroListAdapter :
 
         fun bind(buildHero: BuildHero) {
             binding.apply {
-                backgroundHero(imageHeroAvatarInBuildsHero, buildHero.hero)
+                imageHeroAvatarInBuildsHero.backgroundHero(buildHero.hero)
                 textHeroNameInBuildsHero.text = buildHero.hero.name
-                backgroundEquipment(imageHeroWeapon, buildHero.weapon)
-                backgroundEquipment(imageHeroRelic, buildHero.relic)
-                backgroundEquipment(imageHeroDecoration, buildHero.decoration)
+                imageHeroWeapon.backgroundEquipment(buildHero.weapon)
+                imageHeroRelic.backgroundEquipment(buildHero.relic)
+                imageHeroDecoration.backgroundEquipment(buildHero.decoration)
                 textBuildFrom.text = textBuildFrom.context.getString(R.string.build_from, buildHero.user.login)
                 imageProfile.load(buildHero.user.avatarUrl)
-            }
-        }
-
-        private fun backgroundHero(view: ImageView, hero: Hero) {
-            view.load(hero.avatar)
-            if (hero.rarity) {
-                view.background = ContextCompat.getDrawable(view.context, R.color.orange)
-            } else {
-                view.background = ContextCompat.getDrawable(view.context, R.color.violet)
-            }
-        }
-
-        private fun backgroundEquipment(view: ImageView, equipment: Equipment) {
-            view.load(equipment.image)
-            when (equipment.rarity.toInt()) {
-                0 -> view.background = ContextCompat.getDrawable(view.context, R.color.blue)
-                1 -> view.background = ContextCompat.getDrawable(view.context, R.color.violet)
-                2 -> view.background = ContextCompat.getDrawable(view.context, R.color.orange)
             }
         }
     }

@@ -1,17 +1,15 @@
 package com.example.honkaihelper.setupteam.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.ItemSetupTeamBinding
 import com.example.honkaihelper.setupteam.data.model.SetupHero
-import com.example.honkaihelper.utils.load
+import com.example.honkaihelper.utils.backgroundHero
 import com.example.honkaihelper.utils.loadWithPlaceholder
 
 class SetupTeamAdapter(
@@ -41,9 +39,8 @@ class SetupTeamAdapter(
 
         fun bind(setupHero: SetupHero) {
             binding.apply {
-                imageHeroAvatarInSetupTeam.load(setupHero.hero.avatar)
+                imageHeroAvatarInSetupTeam.backgroundHero(setupHero.hero)
                 textHeroNameInSetupTeam.text = setupHero.hero.name
-                backgroundHero(setupHero.hero.rarity)
 
                 spinnerHeroLevel.setSelection(setupHero.level ?: 0)
 
@@ -56,20 +53,6 @@ class SetupTeamAdapter(
                 spinnerHeroLevel.tag = setupHero
             }
         }
-
-        private fun backgroundHero(rarity: Boolean) {
-            if (rarity) {
-                binding.imageHeroAvatarInSetupTeam.background = ContextCompat.getDrawable(
-                    binding.imageHeroAvatarInSetupTeam.context,
-                    R.color.orange
-                )
-            } else {
-                binding.imageHeroAvatarInSetupTeam.background = ContextCompat.getDrawable(
-                    binding.imageHeroAvatarInSetupTeam.context,
-                    R.color.violet
-                )
-            }
-        }
     }
 
     override fun onClick(v: View?) {
@@ -77,9 +60,10 @@ class SetupTeamAdapter(
         val idItem = currentList.indexOf(setupHero)
 
         when (v.id) {
-            R.id.image_hero_weapon -> {
-                weaponActionListener.onWeaponClick(setupHero.hero.path, idItem)
-            }
+            R.id.image_hero_weapon -> weaponActionListener.onWeaponClick(
+                setupHero.hero.path,
+                idItem
+            )
 
             R.id.image_hero_relic -> weaponActionListener.onRelicClick(idItem)
             R.id.image_hero_decoration -> weaponActionListener.onDecorationClick(idItem)
