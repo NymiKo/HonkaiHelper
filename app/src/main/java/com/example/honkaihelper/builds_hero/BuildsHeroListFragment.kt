@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
@@ -34,6 +35,7 @@ class BuildsHeroListFragment :
         setupToolbar()
         setupAdapter()
         setupRecyclerView()
+        navigateToCreateBuild()
     }
 
     override fun uiStateHandle() {
@@ -60,6 +62,12 @@ class BuildsHeroListFragment :
 
     private fun setupToolbar() {
         binding.toolbarBuildsHeroList.title = resources.getString(R.string.builds_for_hero, nameHero)
+    }
+
+    private fun navigateToCreateBuild() {
+        binding.buttonCreate.setOnClickListener {
+            findNavController().navigate(R.id.createBuildHeroFragment)
+        }
     }
 
     companion object {

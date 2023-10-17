@@ -78,5 +78,14 @@
         android:id="@+id/buildsHeroListFragment"
         android:name="com.example.honkaihelper.builds_hero.BuildsHeroListFragment"
         android:label="fragment_builds_hero_list"
-        tools:layout="@layout/fragment_builds_hero_list" />
+        tools:layout="@layout/fragment_builds_hero_list" >
+        <action
+            android:id="@+id/action_buildsHeroListFragment_to_createBuildHeroFragment"
+            app:destination="@id/createBuildHeroFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createBuildHeroFragment"
+        android:name="com.example.honkaihelper.create_build_hero.CreateBuildHeroFragment"
+        android:label="fragment_create_build_hero"
+        tools:layout="@layout/fragment_create_build_hero" />
 </navigation>
