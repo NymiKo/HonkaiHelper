@@ -29,12 +29,10 @@ class HeroesListViewModelImpl @Inject constructor(
     override fun getHeroesList() = viewModelScope.launch {
         _uiState.value = HeroesUiState.LOADING
         val result = repository.getHeroesList()
-        when (result) {
-            is NetworkResult.Error -> _uiState.value = HeroesUiState.ERROR
-            is NetworkResult.Success -> {
-                _uiState.value = HeroesUiState.SUCCESS(result.data)
-                _heroesList.value = result.data!!
-            }
+        if (result.isNotEmpty()) {
+            _uiState.value = HeroesUiState.SUCCESS(result)
+        } else {
+            _uiState.value = HeroesUiState.ERROR
         }
     }
 

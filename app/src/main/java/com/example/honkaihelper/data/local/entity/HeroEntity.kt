@@ -3,6 +3,7 @@ package com.example.honkaihelper.data.local.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.honkaihelper.data.local.contract.RoomContract
+import com.example.honkaihelper.heroes.data.model.Hero
 
 @Entity(
     tableName = RoomContract.tableHeroes
@@ -11,7 +12,24 @@ data class HeroEntity(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
     val name: String,
-    val avatar: String,
     val rarity: Boolean,
-    val idPath: Int
-)
+    val idPath: Int,
+    val localAvatarPath: String = ""
+) {
+    companion object {
+        fun toHeroEntity(hero: Hero) = HeroEntity(
+            id = hero.id,
+            name = hero.name,
+            rarity = hero.rarity,
+            idPath = hero.path
+        )
+    }
+
+    fun toHero() = Hero(
+        id = id,
+        name = name,
+        avatar = localAvatarPath,
+        rarity = rarity,
+        path = idPath
+    )
+}
