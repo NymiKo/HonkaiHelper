@@ -5,6 +5,8 @@ import com.example.honkaihelper.createteam.data.CreateTeamService
 import com.example.honkaihelper.data.AuthInterceptor
 import com.example.honkaihelper.equipment.data.EquipmentService
 import com.example.honkaihelper.heroes.data.HeroesListService
+import com.example.honkaihelper.heroes.data.ImageLoader
+import com.example.honkaihelper.heroes.data.ImageLoaderImpl
 import com.example.honkaihelper.login.data.LoginService
 import com.example.honkaihelper.profile.data.ProfileService
 import com.example.honkaihelper.registration.data.RegistrationService
@@ -45,6 +47,9 @@ object NetworkModule {
         .baseUrl("http://f0862137.xsph.ru")
         .client(okHttpClient)
         .build()
+
+    @Provides
+    fun provideImageLoader(context: Context): ImageLoader = ImageLoaderImpl(context)
 
     @Provides
     fun providesHeroesListService(retrofit: Retrofit): HeroesListService = retrofit.create(HeroesListService::class.java)
