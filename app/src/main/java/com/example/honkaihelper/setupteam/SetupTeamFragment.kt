@@ -7,9 +7,7 @@ import android.util.Log
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.paging.LOGGER
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
@@ -23,8 +21,6 @@ import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.setupteam.adapter.SetupTeamAdapter
 import com.example.honkaihelper.setupteam.adapter.SetupTeamListener
-import com.example.honkaihelper.setupteam.data.model.SetupHero
-import javax.inject.Inject
 
 class SetupTeamFragment :
     BaseFragment<FragmentSetupTeamBinding>(FragmentSetupTeamBinding::inflate) {
@@ -41,7 +37,8 @@ class SetupTeamFragment :
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as App).appComponent.setupTeamComponent().create().inject(this)
+        (requireActivity().application as App).appComponent.setupTeamComponent().create()
+            .inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,14 +90,21 @@ class SetupTeamFragment :
 
         viewModel.heroesList.observe(viewLifecycleOwner) {
             mAdapter.submitList(it)
-            Log.e("LIST", it.toString())
         }
     }
 
-    private fun navigateToEquipmentFragment(idItem: Int, equipmentClick: String, heroPath: Int = 1) {
+    private fun navigateToEquipmentFragment(
+        idItem: Int,
+        equipmentClick: String,
+        heroPath: Int = 1
+    ) {
         findNavController().navigate(
             R.id.equipmentFragment,
-            EquipmentFragment.newInstance(idItem = idItem, equipmentClick = equipmentClick, heroPath = heroPath)
+            EquipmentFragment.newInstance(
+                idItem = idItem,
+                equipmentClick = equipmentClick,
+                heroPath = heroPath
+            )
         )
     }
 

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.honkaihelper.equipment.data.model.Equipment
 import javax.inject.Inject
 
-class CreateBuildHeroViewModel @Inject constructor(): ViewModel() {
+class CreateBuildHeroViewModel @Inject constructor() : ViewModel() {
 
     private val _weaponList = MutableLiveData<List<Equipment>>()
     val weaponList: LiveData<List<Equipment>> = _weaponList

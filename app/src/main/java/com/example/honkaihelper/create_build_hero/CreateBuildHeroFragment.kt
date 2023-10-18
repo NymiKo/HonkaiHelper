@@ -3,7 +3,6 @@ package com.example.honkaihelper.create_build_hero
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
-import com.example.honkaihelper.builds_hero.BuildsHeroListFragment
 import com.example.honkaihelper.create_build_hero.adapter.CreateBuildEquipmentAdapter
 import com.example.honkaihelper.create_build_hero.adapter.CreateBuildEquipmentListener
 import com.example.honkaihelper.databinding.FragmentCreateBuildHeroBinding
@@ -22,7 +20,6 @@ import com.example.honkaihelper.equipment.data.model.Equipment
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.utils.backgroundHero
-import com.example.honkaihelper.utils.toast
 
 class CreateBuildHeroFragment :
     BaseFragment<FragmentCreateBuildHeroBinding>(FragmentCreateBuildHeroBinding::inflate) {
@@ -30,15 +27,17 @@ class CreateBuildHeroFragment :
     private val viewModel by viewModels<CreateBuildHeroViewModel> { viewModelFactory }
     private lateinit var mAdapterWeapon: CreateBuildEquipmentAdapter
 
-    private val hero get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        requireArguments().getParcelable(ARG_HERO, Hero::class.java)
-    } else {
-        requireArguments().getParcelable(ARG_HERO)
-    }
+    private val hero
+        get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requireArguments().getParcelable(ARG_HERO, Hero::class.java)
+        } else {
+            requireArguments().getParcelable(ARG_HERO)
+        }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as App).appComponent.createBuildHeroComponent().create().inject(this)
+        (requireActivity().application as App).appComponent.createBuildHeroComponent().create()
+            .inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,7 +74,10 @@ class CreateBuildHeroFragment :
     private fun setupAdapter() {
         mAdapterWeapon = CreateBuildEquipmentAdapter(object : CreateBuildEquipmentListener {
             override fun onAddEquipmentClick() {
-                findNavController().navigate(R.id.equipmentFragment, EquipmentFragment.newInstance(hero!!.path, equipmentClick = KEY_WEAPON))
+                findNavController().navigate(
+                    R.id.equipmentFragment,
+                    EquipmentFragment.newInstance(hero!!.path, equipmentClick = KEY_WEAPON)
+                )
             }
 
             override fun onRemoveEquipmentClick(position: Int) {
@@ -89,7 +91,8 @@ class CreateBuildHeroFragment :
 
     private fun setupRecyclerViewWeapon() {
         binding.recyclerWeaponInCreateBuild.adapter = mAdapterWeapon
-        binding.recyclerWeaponInCreateBuild.layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
+        binding.recyclerWeaponInCreateBuild.layoutManager =
+            LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
     }
 
     companion object {
