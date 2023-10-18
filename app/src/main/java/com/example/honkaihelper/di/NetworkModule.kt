@@ -5,20 +5,18 @@ import com.example.honkaihelper.createteam.data.CreateTeamService
 import com.example.honkaihelper.data.AuthInterceptor
 import com.example.honkaihelper.equipment.data.EquipmentService
 import com.example.honkaihelper.heroes.data.HeroesListService
-import com.example.honkaihelper.heroes.data.ImageLoader
-import com.example.honkaihelper.heroes.data.ImageLoaderImpl
+import com.example.honkaihelper.data.image_loader.ImageLoader
+import com.example.honkaihelper.data.image_loader.ImageLoaderImpl
 import com.example.honkaihelper.login.data.LoginService
 import com.example.honkaihelper.profile.data.ProfileService
 import com.example.honkaihelper.registration.data.RegistrationService
 import com.example.honkaihelper.teams.data.TeamsListService
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module

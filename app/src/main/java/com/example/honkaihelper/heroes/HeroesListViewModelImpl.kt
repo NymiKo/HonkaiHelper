@@ -31,6 +31,7 @@ class HeroesListViewModelImpl @Inject constructor(
         val result = repository.getHeroesList()
         if (result.isNotEmpty()) {
             _uiState.value = HeroesUiState.SUCCESS(result)
+            _heroesList.value = result
         } else {
             _uiState.value = HeroesUiState.ERROR
         }

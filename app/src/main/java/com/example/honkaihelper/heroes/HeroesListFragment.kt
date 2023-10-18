@@ -2,12 +2,14 @@ package com.example.honkaihelper.heroes
 
 import android.app.SearchManager
 import android.content.Context
+import android.util.Log
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
+import com.example.honkaihelper.base_build_hero.BaseBuildHeroFragment
 import com.example.honkaihelper.builds_hero.BuildsHeroListFragment
 import com.example.honkaihelper.databinding.FragmentHeroesListBinding
 import com.example.honkaihelper.fragments.BaseFragment
@@ -137,8 +139,8 @@ class HeroesListFragment :
         mAdapterRecyclerView = HeroesListAdapter(object : HeroesListActionListener {
             override fun onClick(hero: Hero) {
                 findNavController().navigate(
-                    R.id.buildsHeroListFragment,
-                    BuildsHeroListFragment.newInstance(hero)
+                    R.id.baseBuildHeroFragment,
+                    BaseBuildHeroFragment.newInstance(hero)
                 )
             }
         })

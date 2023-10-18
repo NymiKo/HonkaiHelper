@@ -2,13 +2,13 @@ package com.example.honkaihelper.heroes.data
 
 import com.example.honkaihelper.data.NetworkResult
 import com.example.honkaihelper.data.handleApi
+import com.example.honkaihelper.data.image_loader.ImageLoader
 import com.example.honkaihelper.data.local.dao.HeroDao
 import com.example.honkaihelper.data.local.entity.HeroEntity
 import com.example.honkaihelper.heroes.data.model.Hero
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import kotlin.Exception
 
 class HeroesListRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher,
@@ -31,11 +31,15 @@ class HeroesListRepositoryImpl @Inject constructor(
                 is NetworkResult.Success -> {
                     val heroes = resultApi.data
                     val localAvatarPaths = heroes.map { hero ->
-                        imageLoader.downloadAndSaveImage(hero.avatar)
+                        imageLoader.downloadAndSaveImage(hero.avatar, CHILD_HEROES_AVATARS)
+                    }
+
+                    val localSplashArtsPaths = heroes.map { hero ->
+                        imageLoader.downloadAndSaveImage(hero.splashArt, CHILD_HEROES_SPLASH_ARTS)
                     }
 
                     val heroEntities = heroes.mapIndexed { index, hero ->
-                        HeroEntity.toHeroEntity(hero).copy(localAvatarPath = localAvatarPaths[index])
+                        HeroEntity.toHeroEntity(hero).copy(localAvatarPath = localAvatarPaths[index], localSplashArtPath = localSplashArtsPaths[index])
                     }
                     insertHeroesIntoLocalStorage(heroEntities)
 
@@ -61,5 +65,10 @@ class HeroesListRepositoryImpl @Inject constructor(
                 heroesListService.getAvatar()
             }
         }
+    }
+
+    companion object {
+        const val CHILD_HEROES_AVATARS = "heroes_avatars"
+        const val CHILD_HEROES_SPLASH_ARTS = "heroes_splash_arts"
     }
 }

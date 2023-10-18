@@ -14,7 +14,8 @@ data class HeroEntity(
     val name: String,
     val rarity: Boolean,
     val idPath: Int,
-    val localAvatarPath: String = ""
+    val localAvatarPath: String = "",
+    val localSplashArtPath: String =""
 ) {
     companion object {
         fun toHeroEntity(hero: Hero) = HeroEntity(
@@ -29,6 +30,7 @@ data class HeroEntity(
         id = id,
         name = name,
         avatar = localAvatarPath,
+        splashArt = localSplashArtPath,
         rarity = rarity,
         path = idPath
     )
