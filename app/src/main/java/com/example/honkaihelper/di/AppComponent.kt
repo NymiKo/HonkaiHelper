@@ -10,6 +10,8 @@ import com.example.honkaihelper.createteam.di.CreateTeamComponent
 import com.example.honkaihelper.equipment.di.EquipmentComponent
 import com.example.honkaihelper.heroes.data.HeroesListRepository
 import com.example.honkaihelper.heroes.di.HeroesListComponent
+import com.example.honkaihelper.load_data.data.LoadDataRepository
+import com.example.honkaihelper.load_data.di.LoadDataComponent
 import com.example.honkaihelper.login.data.LoginRepository
 import com.example.honkaihelper.login.di.LoginComponent
 import com.example.honkaihelper.profile.data.ProfileRepository
@@ -51,6 +53,7 @@ interface AppComponent {
     fun buildsHeroListComponent(): BuildsHeroListComponent.Factory
     fun createBuildHeroComponent(): CreateBuildHeroComponent.Factory
     fun baseBuildHeroComponent(): BaseBuildHeroComponent.Factory
+    fun loadDataComponent(): LoadDataComponent.Factory
 
     val heroesListRepository: HeroesListRepository
     val teamsListRepository: TeamsListRepository
@@ -59,4 +62,5 @@ interface AppComponent {
     val registrationRepository: RegistrationRepository
     val profileRepository: ProfileRepository
     val baseBuildHeroRepository: BaseBuildHeroRepository
+    val loadDataRepository: LoadDataRepository
 }

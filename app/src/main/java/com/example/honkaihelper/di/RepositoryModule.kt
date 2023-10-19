@@ -8,6 +8,8 @@ import com.example.honkaihelper.equipment.data.EquipmentRepository
 import com.example.honkaihelper.equipment.data.EquipmentRepositoryImpl
 import com.example.honkaihelper.heroes.data.HeroesListRepository
 import com.example.honkaihelper.heroes.data.HeroesListRepositoryImpl
+import com.example.honkaihelper.load_data.data.LoadDataRepository
+import com.example.honkaihelper.load_data.data.LoadDataRepositoryImpl
 import com.example.honkaihelper.login.data.LoginRepository
 import com.example.honkaihelper.login.data.LoginRepositoryImpl
 import com.example.honkaihelper.profile.data.ProfileRepository
@@ -53,4 +55,8 @@ interface RepositoryModule {
     @Singleton
     @Binds
     fun bindBaseBuildHeroRepository(repository: BaseBuildHeroRepositoryImpl): BaseBuildHeroRepository
+
+    @Singleton
+    @Binds
+    fun bindLoadDataRepository(repository: LoadDataRepositoryImpl): LoadDataRepository
 }
