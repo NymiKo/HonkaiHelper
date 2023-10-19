@@ -7,6 +7,7 @@ import com.example.honkaihelper.data.local.dao.HeroDao
 import com.example.honkaihelper.data.local.entity.HeroEntity
 import com.example.honkaihelper.heroes.data.model.Hero
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -30,17 +31,14 @@ class HeroesListRepositoryImpl @Inject constructor(
                 }
                 is NetworkResult.Success -> {
                     val heroes = resultApi.data
-                    val localAvatarPaths = heroes.map { hero ->
-                        imageLoader.downloadAndSaveImage(hero.avatar, CHILD_HEROES_AVATARS)
-                    }
+                    val localAvatarPaths = downloadAvatars(heroes).await()
 
-                    val localSplashArtsPaths = heroes.map { hero ->
-                        imageLoader.downloadAndSaveImage(hero.splashArt, CHILD_HEROES_SPLASH_ARTS)
-                    }
+                    val localSplashArtsPaths = downloadSplashArts(heroes).await()
 
                     val heroEntities = heroes.mapIndexed { index, hero ->
                         HeroEntity.toHeroEntity(hero).copy(localAvatarPath = localAvatarPaths[index], localSplashArtPath = localSplashArtsPaths[index])
                     }
+
                     insertHeroesIntoLocalStorage(heroEntities)
 
                     return@withContext heroes.sortedBy { it.name }
@@ -57,6 +55,22 @@ class HeroesListRepositoryImpl @Inject constructor(
 
     private suspend fun insertHeroesIntoLocalStorage(heroEntities: List<HeroEntity>) {
         heroDao.insertHeroes(heroEntities)
+    }
+
+    private suspend fun downloadAvatars(heroes: List<Hero>) = withContext(ioDispatcher) {
+        async {
+            heroes.map { hero ->
+                imageLoader.downloadAndSaveImage(hero.avatar, CHILD_HEROES_AVATARS)
+            }
+        }
+    }
+
+    private suspend fun downloadSplashArts(heroes: List<Hero>) = withContext(ioDispatcher) {
+        async {
+            heroes.map { hero ->
+                imageLoader.downloadAndSaveImage(hero.splashArt, CHILD_HEROES_SPLASH_ARTS)
+            }
+        }
     }
 
     override suspend fun getAvatar(): NetworkResult<String> {
