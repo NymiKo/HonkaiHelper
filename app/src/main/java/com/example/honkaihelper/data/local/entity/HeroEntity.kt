@@ -14,6 +14,7 @@ data class HeroEntity(
     val name: String,
     val rarity: Boolean,
     val idPath: Int,
+    val idElement: Int,
     val localAvatarPath: String = "",
     val localSplashArtPath: String =""
 ) {
@@ -22,7 +23,8 @@ data class HeroEntity(
             id = hero.id,
             name = hero.name,
             rarity = hero.rarity,
-            idPath = hero.path
+            idPath = hero.path,
+            idElement = hero.element
         )
     }
 
@@ -32,6 +34,7 @@ data class HeroEntity(
         avatar = localAvatarPath,
         splashArt = localSplashArtPath,
         rarity = rarity,
-        path = idPath
+        path = idPath,
+        element = idElement
     )
 }

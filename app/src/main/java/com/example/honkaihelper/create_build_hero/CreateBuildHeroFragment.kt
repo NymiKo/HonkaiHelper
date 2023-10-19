@@ -20,6 +20,7 @@ import com.example.honkaihelper.equipment.data.model.Equipment
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.utils.backgroundHero
+import com.example.honkaihelper.utils.getParcelable
 
 class CreateBuildHeroFragment :
     BaseFragment<FragmentCreateBuildHeroBinding>(FragmentCreateBuildHeroBinding::inflate) {
@@ -27,12 +28,7 @@ class CreateBuildHeroFragment :
     private val viewModel by viewModels<CreateBuildHeroViewModel> { viewModelFactory }
     private lateinit var mAdapterWeapon: CreateBuildEquipmentAdapter
 
-    private val hero
-        get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            requireArguments().getParcelable(ARG_HERO, Hero::class.java)
-        } else {
-            requireArguments().getParcelable(ARG_HERO)
-        }
+    private val hero get() = getParcelable(ARG_HERO, Hero::class.java)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

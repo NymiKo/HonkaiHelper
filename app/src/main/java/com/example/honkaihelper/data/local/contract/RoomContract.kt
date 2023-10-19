@@ -5,4 +5,6 @@ object RoomContract {
     const val databaseApp = "Honkai.db"
 
     const val tableHeroes = "heroes"
+    const val tablePaths = "paths"
+    const val tableElements = "elements"
 }

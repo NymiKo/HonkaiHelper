@@ -3,16 +3,11 @@ package com.example.honkaihelper.profile.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.ItemTeamBinding
-import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.teams.data.model.TeamHero
 import com.example.honkaihelper.utils.backgroundHero
 import com.example.honkaihelper.utils.gone
-import com.example.honkaihelper.utils.loadImageWithRounded
 
 class ProfileTeamsListAdapter :
     RecyclerView.Adapter<ProfileTeamsListAdapter.ProfileTeamsListViewHolder>() {

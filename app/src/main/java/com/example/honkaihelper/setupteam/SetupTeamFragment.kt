@@ -21,6 +21,7 @@ import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.setupteam.adapter.SetupTeamAdapter
 import com.example.honkaihelper.setupteam.adapter.SetupTeamListener
+import com.example.honkaihelper.utils.getParcelableArrayList
 
 class SetupTeamFragment :
     BaseFragment<FragmentSetupTeamBinding>(FragmentSetupTeamBinding::inflate) {
@@ -28,12 +29,7 @@ class SetupTeamFragment :
     private val viewModel by viewModels<SetupTeamViewModel> { viewModelFactory }
 
     private lateinit var mAdapter: SetupTeamAdapter
-    private val heroesList
-        get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            requireArguments().getParcelableArrayList(ARG_HEROES_LIST, Hero::class.java)
-        } else {
-            requireArguments().getParcelableArrayList(ARG_HEROES_LIST)
-        }
+    private val heroesList get() = getParcelableArrayList(ARG_HEROES_LIST, Hero::class.java)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

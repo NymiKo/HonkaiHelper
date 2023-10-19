@@ -31,9 +31,9 @@ class HeroesListRepositoryImpl @Inject constructor(
                 }
                 is NetworkResult.Success -> {
                     val heroes = resultApi.data
-                    val localAvatarPaths = downloadAvatars(heroes).await()
+                    val localAvatarPaths = downloadImages(heroes, { it.avatar }, CHILD_HEROES_AVATARS).await()
 
-                    val localSplashArtsPaths = downloadSplashArts(heroes).await()
+                    val localSplashArtsPaths = downloadImages(heroes, { it.splashArt }, CHILD_HEROES_SPLASH_ARTS).await()
 
                     val heroEntities = heroes.mapIndexed { index, hero ->
                         HeroEntity.toHeroEntity(hero).copy(localAvatarPath = localAvatarPaths[index], localSplashArtPath = localSplashArtsPaths[index])
@@ -57,18 +57,11 @@ class HeroesListRepositoryImpl @Inject constructor(
         heroDao.insertHeroes(heroEntities)
     }
 
-    private suspend fun downloadAvatars(heroes: List<Hero>) = withContext(ioDispatcher) {
+    private suspend fun downloadImages(heroes: List<Hero>, propertySelector: (Hero) -> String, folder: String) = withContext(ioDispatcher) {
         async {
             heroes.map { hero ->
-                imageLoader.downloadAndSaveImage(hero.avatar, CHILD_HEROES_AVATARS)
-            }
-        }
-    }
-
-    private suspend fun downloadSplashArts(heroes: List<Hero>) = withContext(ioDispatcher) {
-        async {
-            heroes.map { hero ->
-                imageLoader.downloadAndSaveImage(hero.splashArt, CHILD_HEROES_SPLASH_ARTS)
+                val fileName = "hero_${hero.id}_${System.currentTimeMillis()}.webp"
+                imageLoader.downloadAndSaveImage(propertySelector(hero), folder, fileName)
             }
         }
     }

@@ -2,14 +2,14 @@ package com.example.honkaihelper.utils
 
 import android.content.ContentResolver
 import android.content.Context
-import android.media.Image
 import android.net.Uri
+import android.os.Build
+import android.os.Parcelable
 import android.provider.OpenableColumns
 import android.widget.ImageView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.honkaihelper.R
@@ -29,8 +29,8 @@ fun <T> ImageView.loadWithPlaceholder(image: T, placeholder: Int) =
 fun Fragment.getDrawable(drawable: Int) =
     AppCompatResources.getDrawable(requireActivity(), drawable)
 
-fun <T> ImageView.loadImageWithRounded(image: T) {
-    Glide.with(this).load(image).centerCrop().into(this)
+fun <T> ImageView.loadImageWithoutScale(image: T) {
+    Glide.with(this).load(image).into(this)
 }
 
 fun Fragment.getSharedPrefUser() =
@@ -70,3 +70,17 @@ fun ImageView.backgroundEquipment(equipment: Equipment) {
         2 -> this.background = ContextCompat.getDrawable(this.context, R.color.orange)
     }
 }
+
+fun <T: Parcelable> Fragment.getParcelable(arg: String, clazz: Class<T>) =
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        requireArguments().getParcelable(arg, clazz)
+    } else {
+        requireArguments().getParcelable(arg)
+    }
+
+fun <T: Parcelable> Fragment.getParcelableArrayList(arg: String, clazz: Class<T>) =
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        requireArguments().getParcelableArrayList(arg, clazz)
+    } else {
+        requireArguments().getParcelableArrayList(arg)
+    }

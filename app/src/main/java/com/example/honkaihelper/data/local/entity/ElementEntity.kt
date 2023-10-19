@@ -1,0 +1,31 @@
+package com.example.honkaihelper.data.local.entity
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.example.honkaihelper.base_build_hero.data.model.Element
+import com.example.honkaihelper.base_build_hero.data.model.Path
+import com.example.honkaihelper.data.local.contract.RoomContract
+
+@Entity(
+    tableName = RoomContract.tableElements
+)
+data class ElementEntity(
+    @PrimaryKey(autoGenerate = false)
+    val idElement: Int,
+    val title: String,
+    val image: String
+) {
+    companion object {
+        fun toPathEntity(element: Element) = ElementEntity(
+            idElement = element.idElement,
+            title = element.title,
+            image = element.image
+        )
+    }
+
+    fun toPath(elementEntity: ElementEntity) = Element(
+        idElement = elementEntity.idElement,
+        title = elementEntity.title,
+        image = elementEntity.image
+    )
+}
