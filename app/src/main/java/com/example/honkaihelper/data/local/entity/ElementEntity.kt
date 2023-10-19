@@ -23,9 +23,9 @@ data class ElementEntity(
         )
     }
 
-    fun toPath(elementEntity: ElementEntity) = Element(
-        idElement = elementEntity.idElement,
-        title = elementEntity.title,
-        image = elementEntity.image
+    fun toPath() = Element(
+        idElement = idElement,
+        title = title,
+        image = image
     )
 }

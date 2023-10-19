@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/heroes_list_nav_graph"
-    app:startDestination="@id/heroesListFragment">
+    app:startDestination="@id/loadDataFragment">
 
     <fragment
         android:id="@+id/teamsListFragment"
@@ -96,5 +96,14 @@
         <action
             android:id="@+id/action_baseBuildHeroFragment_to_buildsHeroListFragment"
             app:destination="@id/buildsHeroListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loadDataFragment"
+        android:name="com.example.honkaihelper.load_data.LoadDataFragment"
+        android:label="fragment_load_data"
+        tools:layout="@layout/fragment_load_data" >
+        <action
+            android:id="@+id/action_loadDataFragment_to_heroesListFragment"
+            app:destination="@id/heroesListFragment" />
     </fragment>
 </navigation>

@@ -1,6 +1,7 @@
 package com.example.honkaihelper.di
 
 import android.content.Context
+import com.example.honkaihelper.base_build_hero.data.BaseBuildHeroRepository
 import com.example.honkaihelper.base_build_hero.di.BaseBuildHeroComponent
 import com.example.honkaihelper.builds_hero.di.BuildsHeroListComponent
 import com.example.honkaihelper.create_build_hero.di.CreateBuildHeroComponent
@@ -57,4 +58,5 @@ interface AppComponent {
     val loginRepository: LoginRepository
     val registrationRepository: RegistrationRepository
     val profileRepository: ProfileRepository
+    val baseBuildHeroRepository: BaseBuildHeroRepository
 }

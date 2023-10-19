@@ -3,7 +3,7 @@ package com.example.honkaihelper.base_build_hero.di
 import com.example.honkaihelper.base_build_hero.BaseBuildHeroFragment
 import dagger.Subcomponent
 
-@Subcomponent
+@Subcomponent(modules = [BaseBuildHeroModule::class])
 interface BaseBuildHeroComponent {
     @Subcomponent.Factory
     interface Factory {

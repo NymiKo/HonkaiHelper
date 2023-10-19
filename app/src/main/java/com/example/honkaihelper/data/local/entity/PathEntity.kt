@@ -14,7 +14,6 @@ data class PathEntity (
     val title: String,
     val image: String
 ) {
-
     companion object {
         fun toPathEntity(path: Path) = PathEntity(
             idPath = path.idPath,
@@ -23,9 +22,9 @@ data class PathEntity (
         )
     }
 
-    fun toPath(pathEntity: PathEntity) = Path(
-        idPath = pathEntity.idPath,
-        title = pathEntity.title,
-        image = pathEntity.image
+    fun toPath() = Path(
+        idPath = idPath,
+        title = title,
+        image = image
     )
 }
