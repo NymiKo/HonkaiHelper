@@ -1,12 +1,14 @@
 package com.example.honkaihelper.di
 
 import android.content.Context
+import com.example.honkaihelper.activity.data.MainService
 import com.example.honkaihelper.createteam.data.CreateTeamService
 import com.example.honkaihelper.data.AuthInterceptor
 import com.example.honkaihelper.equipment.data.EquipmentService
 import com.example.honkaihelper.heroes.data.HeroesListService
 import com.example.honkaihelper.data.image_loader.ImageLoader
 import com.example.honkaihelper.data.image_loader.ImageLoaderImpl
+import com.example.honkaihelper.load_data.data.LoadDataService
 import com.example.honkaihelper.login.data.LoginService
 import com.example.honkaihelper.profile.data.ProfileService
 import com.example.honkaihelper.registration.data.RegistrationService
@@ -69,4 +71,10 @@ object NetworkModule {
 
     @Provides
     fun providesEquipmentService(retrofit: Retrofit): EquipmentService = retrofit.create(EquipmentService::class.java)
+
+    @Provides
+    fun providesLoadDataService(retrofit: Retrofit): LoadDataService = retrofit.create(LoadDataService::class.java)
+
+    @Provides
+    fun providesMainService(retrofit: Retrofit): MainService = retrofit.create(MainService::class.java)
 }

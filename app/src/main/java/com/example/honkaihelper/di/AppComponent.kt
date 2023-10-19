@@ -1,6 +1,8 @@
 package com.example.honkaihelper.di
 
 import android.content.Context
+import com.example.honkaihelper.activity.data.MainRepository
+import com.example.honkaihelper.activity.di.MainComponent
 import com.example.honkaihelper.base_build_hero.data.BaseBuildHeroRepository
 import com.example.honkaihelper.base_build_hero.di.BaseBuildHeroComponent
 import com.example.honkaihelper.builds_hero.di.BuildsHeroListComponent
@@ -42,6 +44,7 @@ interface AppComponent {
         fun create(@BindsInstance applicationContext: Context): AppComponent
     }
 
+    fun mainComponent(): MainComponent.Factory
     fun heroesListComponent(): HeroesListComponent.Factory
     fun teamsListComponent(): TeamsListComponent.Factory
     fun createTeamComponent(): CreateTeamComponent.Factory
@@ -63,4 +66,5 @@ interface AppComponent {
     val profileRepository: ProfileRepository
     val baseBuildHeroRepository: BaseBuildHeroRepository
     val loadDataRepository: LoadDataRepository
+    val mainRepository: MainRepository
 }

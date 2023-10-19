@@ -6,5 +6,9 @@ import javax.inject.Inject
 
 class LoadDataViewModel @Inject constructor(
     private val repository: LoadDataRepository
-): ViewModel(){
+): ViewModel() {
+
+    fun getRemoteVersionDB(oldVersion: String) {
+        
+    }
 }
