@@ -1,5 +1,6 @@
 package com.example.honkaihelper.utils
 
+import android.app.Activity
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
@@ -17,6 +18,8 @@ import com.example.honkaihelper.equipment.data.model.Equipment
 import com.example.honkaihelper.heroes.data.model.Hero
 
 const val TOKEN = "token"
+const val USER = "USER"
+const val DB = "DB"
 
 fun <T> ImageView.load(image: T) = Glide.with(this).load(image).fitCenter().centerCrop().into(this)
 
@@ -34,10 +37,12 @@ fun <T> ImageView.loadImageWithoutScale(image: T) {
 }
 
 fun Fragment.getSharedPrefUser() =
-    requireActivity().getSharedPreferences("USER", Context.MODE_PRIVATE)
+    requireActivity().getSharedPreferences(USER, Context.MODE_PRIVATE)
 
 fun Fragment.getSharedPrefToken() =
-    requireActivity().getSharedPreferences("USER", Context.MODE_PRIVATE).getString(TOKEN, "")
+    requireActivity().getSharedPreferences(USER, Context.MODE_PRIVATE).getString(TOKEN, "")
+
+fun Activity.getSharedPrefVersion() = getSharedPreferences(DB, Context.MODE_PRIVATE)
 
 fun ContentResolver.getFileName(fileUri: Uri): String {
     var name = ""
