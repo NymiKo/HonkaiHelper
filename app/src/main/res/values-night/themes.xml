@@ -15,4 +15,8 @@
     <style name="ThemeOverlay.App.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/ModalBottomSheetDialog</item>
     </style>
+
+    <style name="Theme.HonkaiHelper.SplashScreen" parent="Theme.SplashScreen">
+        <item name="postSplashScreenTheme">@style/Theme.HonkaiHelper</item>
+    </style>
 </resources>

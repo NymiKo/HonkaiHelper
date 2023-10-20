@@ -2,7 +2,9 @@ package com.example.honkaihelper.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.ViewTreeObserver
 import androidx.activity.viewModels
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.honkaihelper.App
@@ -21,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private val viewModel by viewModels<MainViewModel> { viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
 
@@ -35,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.uiState.observe(this) {
             when(it) {
                 MainUiState.DATA_CORRECTLY -> {
-                    findNavController(R.id.navHostFragment).navigate(R.id.heroesListFragment)
+
                 }
                 is MainUiState.DATA_NOT_CORRECTLY -> {
                     getSharedPrefVersion().edit().putString(KEY_VERSION_DB, it.version).apply()
