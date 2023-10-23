@@ -15,6 +15,7 @@ import com.example.honkaihelper.registration.data.RegistrationService
 import com.example.honkaihelper.teams.data.TeamsListService
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.CoroutineDispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -49,7 +50,7 @@ object NetworkModule {
         .build()
 
     @Provides
-    fun provideImageLoader(context: Context): ImageLoader = ImageLoaderImpl(context)
+    fun provideImageLoader(context: Context, ioDispatcher: CoroutineDispatcher): ImageLoader = ImageLoaderImpl(context, ioDispatcher)
 
     @Provides
     fun providesHeroesListService(retrofit: Retrofit): HeroesListService = retrofit.create(HeroesListService::class.java)
