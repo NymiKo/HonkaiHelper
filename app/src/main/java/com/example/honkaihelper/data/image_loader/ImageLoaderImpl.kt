@@ -10,40 +10,44 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 import javax.inject.Inject
 
 class ImageLoaderImpl @Inject constructor(
-    private val context: Context
+    private val context: Context,
+    private val ioDispatcher: CoroutineDispatcher
 ): ImageLoader {
-    override fun downloadAndSaveImage(imageUrl: String, child: String, fileName: String): String {
+    override suspend fun downloadAndSaveImage(imageUrl: String, child: String, fileName: String): String = withContext(ioDispatcher) {
         val directory = File(context.getExternalFilesDir(null), child)
         directory.mkdirs()
         val file = File(directory, fileName)
 
-        Glide.with(context)
-            .asBitmap()
-            .load(imageUrl)
-            .apply(RequestOptions().skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE))
-            .into(object : CustomTarget<Bitmap>() {
-                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    try {
-                        val outputStream = FileOutputStream(file)
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                            resource.compress(Bitmap.CompressFormat.WEBP_LOSSY, 100, outputStream)
-                        } else {
-                            resource.compress(Bitmap.CompressFormat.WEBP, 100, outputStream)
-                        }
-                        outputStream.close()
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
-                }
+        val result = try {
+            val resource = Glide.with(context)
+                .asBitmap()
+                .load(imageUrl)
+                .apply(RequestOptions().skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE))
+                .submit()
+                .get()
 
-                override fun onLoadCleared(placeholder: Drawable?) {}
-            })
+            val compressFormat = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                Bitmap.CompressFormat.WEBP_LOSSY
+            } else {
+                Bitmap.CompressFormat.WEBP
+            }
 
-        return file.absolutePath
+            FileOutputStream(file).use { outputStream ->
+                resource.compress(compressFormat, 100, outputStream)
+            }
+
+            file.absolutePath
+        } catch (e: Exception) {
+            null
+        }
+
+        return@withContext result ?: ""
     }
 }
