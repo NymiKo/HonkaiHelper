@@ -19,7 +19,7 @@ class LoadDataViewModel @Inject constructor(
         getNewData()
     }
 
-    private fun getNewData() = viewModelScope.launch {
+    fun getNewData() = viewModelScope.launch {
         _dataLoaded.value = repository.getHeroesList()
     }
 }

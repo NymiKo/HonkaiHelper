@@ -13,6 +13,8 @@ import com.example.honkaihelper.databinding.FragmentLoadDataBinding
 import com.example.honkaihelper.equipment.EquipmentFragment
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.heroes.HeroesListFragment
+import com.example.honkaihelper.utils.gone
+import com.example.honkaihelper.utils.visible
 
 const val DATA_UPLOADED_KEY = "data_uploaded"
 
@@ -26,7 +28,8 @@ class LoadDataFragment : BaseFragment<FragmentLoadDataBinding>(FragmentLoadDataB
     }
 
     override fun setupView() {
-
+        setupButtonRetryDownloadData()
+        setupButtonGoBack()
     }
 
     override fun uiStateHandle() {
@@ -37,9 +40,24 @@ class LoadDataFragment : BaseFragment<FragmentLoadDataBinding>(FragmentLoadDataB
                     findNavController().popBackStack()
                 }
                 false -> {
-
+                    binding.groupDownloadData.gone()
+                    binding.groupUnexpectedError.visible()
                 }
             }
+        }
+    }
+
+    private fun setupButtonRetryDownloadData() {
+        binding.buttonRetryDownloadData.setOnClickListener {
+            binding.groupDownloadData.visible()
+            binding.groupUnexpectedError.gone()
+            viewModel.getNewData()
+        }
+    }
+
+    private fun setupButtonGoBack() {
+        binding.buttonGoBack.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 }

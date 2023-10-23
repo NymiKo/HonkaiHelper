@@ -52,7 +52,7 @@
     <TextView
         android:id="@+id/text_retry"
         style="@style/text_view_message_style"
-        android:text="@string/error"
+        android:text="@string/empty_data"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +62,7 @@
         android:id="@+id/button_retry"
         style="@style/button_message_style"
         android:backgroundTint="?attr/colorSecondary"
-        android:text="@string/retry"
+        android:text="@string/download"
         app:layout_constraintEnd_toEndOf="@+id/text_retry"
         app:layout_constraintStart_toStartOf="@+id/text_retry"
         app:layout_constraintTop_toBottomOf="@+id/text_retry" />

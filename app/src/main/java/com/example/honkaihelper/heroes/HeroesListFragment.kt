@@ -103,7 +103,7 @@ class HeroesListFragment :
 
     private fun setupRetryButtonClickListener() {
         binding.buttonRetry.setOnClickListener {
-            viewModel.getHeroesList()
+            findNavController().navigate(R.id.loadDataFragment)
         }
     }
 
