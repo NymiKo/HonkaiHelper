@@ -14,55 +14,12 @@ import javax.inject.Inject
 class HeroesListRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher,
     private val heroDao: HeroDao,
-    private val heroesListService: HeroesListService,
-    private val imageLoader: ImageLoader
+    private val heroesListService: HeroesListService
 ) : HeroesListRepository {
 
     override suspend fun getHeroesList(): List<Hero> {
         return withContext(ioDispatcher) {
-            val cachedHeroes = getHeroesFromCache()
-            if (cachedHeroes.isNotEmpty()) {
-                return@withContext cachedHeroes
-            }
-
-            when(val resultApi = getRemoteHeroesList()) {
-                is NetworkResult.Error -> {
-                    return@withContext emptyList()
-                }
-                is NetworkResult.Success -> {
-                    val heroes = resultApi.data
-                    val localAvatarPaths = downloadImages(heroes, { it.avatar }, CHILD_HEROES_AVATARS).await()
-
-                    val localSplashArtsPaths = downloadImages(heroes, { it.splashArt }, CHILD_HEROES_SPLASH_ARTS).await()
-
-                    val heroEntities = heroes.mapIndexed { index, hero ->
-                        HeroEntity.toHeroEntity(hero).copy(localAvatarPath = localAvatarPaths[index], localSplashArtPath = localSplashArtsPaths[index])
-                    }
-
-                    insertHeroesIntoLocalStorage(heroEntities)
-
-                    return@withContext heroes.sortedBy { it.name }
-                }
-            }
-        }
-    }
-
-    private suspend fun getRemoteHeroesList() = handleApi { heroesListService.getHeroesList() }
-
-    private suspend fun getHeroesFromCache(): List<Hero> {
-        return heroDao.getHeroes().map { it.toHero() }.sortedBy { it.name }
-    }
-
-    private suspend fun insertHeroesIntoLocalStorage(heroEntities: List<HeroEntity>) {
-        heroDao.insertHeroes(heroEntities)
-    }
-
-    private suspend fun downloadImages(heroes: List<Hero>, propertySelector: (Hero) -> String, folder: String) = withContext(ioDispatcher) {
-        async {
-            heroes.map { hero ->
-                val fileName = "hero_${hero.id}_${System.currentTimeMillis()}.webp"
-                imageLoader.downloadAndSaveImage(propertySelector(hero), folder, fileName)
-            }
+            heroDao.getHeroes().map { it.toHero() }.sortedBy { it.name }
         }
     }
 
@@ -72,10 +29,5 @@ class HeroesListRepositoryImpl @Inject constructor(
                 heroesListService.getAvatar()
             }
         }
-    }
-
-    companion object {
-        const val CHILD_HEROES_AVATARS = "heroes_avatars"
-        const val CHILD_HEROES_SPLASH_ARTS = "heroes_splash_arts"
     }
 }

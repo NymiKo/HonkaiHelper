@@ -2,6 +2,7 @@ package com.example.honkaihelper.load_data
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.honkaihelper.App
@@ -23,6 +24,16 @@ class LoadDataFragment : BaseFragment<FragmentLoadDataBinding>(FragmentLoadDataB
     }
 
     override fun uiStateHandle() {
-
+        viewModel.dataLoaded.observe(viewLifecycleOwner) {
+            when(it) {
+                true -> {
+                    Log.e("TAG", it.toString())
+                    findNavController().popBackStack()
+                }
+                false -> {
+                    Log.e("TAG", it.toString())
+                }
+            }
+        }
     }
 }

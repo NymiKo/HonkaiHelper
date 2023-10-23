@@ -20,6 +20,6 @@ interface HeroDao {
     suspend fun getHeroWithPathAndElement(idHero: Int): HeroWithPathAndElement
 
     @Insert
-    suspend fun insertHeroes(heroes: List<HeroEntity>)
+    suspend fun insertHeroes(heroes: List<HeroEntity>): List<Long>
 
 }

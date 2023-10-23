@@ -37,9 +37,6 @@ class MainActivity : AppCompatActivity() {
     private fun uiStateHandle() {
         viewModel.uiState.observe(this) {
             when(it) {
-                MainUiState.DATA_CORRECTLY -> {
-
-                }
                 is MainUiState.DATA_NOT_CORRECTLY -> {
                     getSharedPrefVersion().edit().putString(KEY_VERSION_DB, it.version).apply()
                     findNavController(R.id.navHostFragment).navigate(R.id.loadDataFragment)

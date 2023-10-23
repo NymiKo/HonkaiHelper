@@ -24,9 +24,7 @@ class MainViewModel @Inject constructor(
             }
             is NetworkResult.Success -> {
                 val version = result.data
-                if (version == currentVersion) {
-                    _uiState.value = MainUiState.DATA_CORRECTLY
-                } else {
+                if (version != currentVersion) {
                     _uiState.value = MainUiState.DATA_NOT_CORRECTLY(version)
                 }
             }
