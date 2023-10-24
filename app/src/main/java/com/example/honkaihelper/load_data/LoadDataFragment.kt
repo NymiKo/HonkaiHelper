@@ -35,13 +35,17 @@ class LoadDataFragment : BaseFragment<FragmentLoadDataBinding>(FragmentLoadDataB
     override fun uiStateHandle() {
         viewModel.dataLoaded.observe(viewLifecycleOwner) {
             when(it) {
-                true -> {
-                    setFragmentResult(DATA_UPLOADED_KEY, HeroesListFragment.newInstance(it))
-                    findNavController().popBackStack()
-                }
-                false -> {
+                LoadDataUiState.ERROR -> {
                     binding.groupDownloadData.gone()
                     binding.groupUnexpectedError.visible()
+                }
+                LoadDataUiState.LOADING -> {
+                    binding.groupDownloadData.visible()
+                    binding.groupUnexpectedError.gone()
+                }
+                LoadDataUiState.SUCCESS -> {
+                    setFragmentResult(DATA_UPLOADED_KEY, HeroesListFragment.newInstance(true))
+                    findNavController().popBackStack()
                 }
             }
         }
@@ -49,8 +53,6 @@ class LoadDataFragment : BaseFragment<FragmentLoadDataBinding>(FragmentLoadDataB
 
     private fun setupButtonRetryDownloadData() {
         binding.buttonRetryDownloadData.setOnClickListener {
-            binding.groupDownloadData.visible()
-            binding.groupUnexpectedError.gone()
             viewModel.getNewData()
         }
     }

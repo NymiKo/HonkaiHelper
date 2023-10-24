@@ -12,14 +12,23 @@ class LoadDataViewModel @Inject constructor(
     private val repository: LoadDataRepository
 ): ViewModel() {
 
-    private val _dataLoaded = MutableLiveData<Boolean>()
-    val dataLoaded: LiveData<Boolean> = _dataLoaded
+    private val _dataLoaded = MutableLiveData<LoadDataUiState>()
+    val dataLoaded: LiveData<LoadDataUiState> = _dataLoaded
 
     init {
         getNewData()
     }
 
     fun getNewData() = viewModelScope.launch {
-        _dataLoaded.value = repository.getHeroesList()
+        _dataLoaded.value = LoadDataUiState.LOADING
+        val result = repository.downloadingData()
+        when(result) {
+            true -> {
+                _dataLoaded.value = LoadDataUiState.SUCCESS
+            }
+            false -> {
+                _dataLoaded.value = LoadDataUiState.ERROR
+            }
+        }
     }
 }
