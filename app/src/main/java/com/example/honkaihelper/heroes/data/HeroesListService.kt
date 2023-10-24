@@ -6,7 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface HeroesListService {
-
     @GET("/getHeroes.php")
     suspend fun getHeroesList(): Response<List<Hero>>
 

@@ -6,10 +6,10 @@ import com.example.honkaihelper.di.DaggerAppComponent
 
 class TestApp: App() {
 
-    override val appComponent: AppComponent by lazy { initializeComponent() }
-
-    private fun initializeComponent(): AppComponent {
-        return DaggerTestAppComponent.factory().create(InstrumentationRegistry.getInstrumentation().targetContext)
-    }
+//    override val appComponent: AppComponent by lazy { initializeComponent() }
+//
+//    private fun initializeComponent(): AppComponent {
+//        return DaggerTestAppComponent.factory().create(InstrumentationRegistry.getInstrumentation().targetContext)
+//    }
 
 }

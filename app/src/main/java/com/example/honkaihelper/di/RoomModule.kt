@@ -19,4 +19,10 @@ object RoomModule {
 
     @Provides
     fun bindHeroDao(database: RoomDatabaseApp) = database.heroDao()
+
+    @Provides
+    fun bindPathDao(database: RoomDatabaseApp) = database.pathDao()
+
+    @Provides
+    fun bindElementDao(database: RoomDatabaseApp) = database.elementDao()
 }

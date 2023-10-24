@@ -18,16 +18,16 @@
 
     <ImageView
         android:id="@+id/image_element_hero"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_margin="@dimen/DP16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_base_build_hero" />
 
     <ImageView
         android:id="@+id/image_path_hero"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_margin="@dimen/DP16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_base_build_hero" />
