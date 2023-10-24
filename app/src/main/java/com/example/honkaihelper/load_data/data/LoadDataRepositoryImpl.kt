@@ -3,10 +3,12 @@ package com.example.honkaihelper.load_data.data
 import com.example.honkaihelper.data.NetworkResult
 import com.example.honkaihelper.data.handleApi
 import com.example.honkaihelper.data.image_loader.ImageLoader
+import com.example.honkaihelper.data.local.dao.ElementDao
 import com.example.honkaihelper.data.local.dao.HeroDao
+import com.example.honkaihelper.data.local.dao.PathDao
+import com.example.honkaihelper.data.local.entity.ElementEntity
 import com.example.honkaihelper.data.local.entity.HeroEntity
-import com.example.honkaihelper.heroes.data.HeroesListService
-import com.example.honkaihelper.heroes.data.model.Hero
+import com.example.honkaihelper.data.local.entity.PathEntity
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -18,11 +20,79 @@ import javax.inject.Inject
 class LoadDataRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher,
     private val heroDao: HeroDao,
-    private val heroesListService: HeroesListService,
+    private val pathDao: PathDao,
+    private val elementDao: ElementDao,
+    private val loadDataService: LoadDataService,
     private val imageLoader: ImageLoader
 ) : LoadDataRepository {
 
-    override suspend fun getHeroesList(): Boolean {
+    override suspend fun downloadingData(): Boolean {
+        return getPathsHeroes() && getHeroesList() && getElementsHeroes()
+    }
+
+    private suspend fun getElementsHeroes(): Boolean {
+        return withContext(ioDispatcher) {
+            when (val resultApi = getRemoteElementsList()) {
+                is NetworkResult.Error -> {
+                    return@withContext false
+                }
+
+                is NetworkResult.Success -> {
+                    val remoteElements = resultApi.data
+                    val localElements = getLocalElements()
+                    val newElements = remoteElements.filter { element ->
+                        localElements.none { it.idElement == element.idElement && it.title == element.image }
+                    }
+
+                    val localImageElements =
+                        downloadImages(newElements, { it.image }, CHILD_PATHS_IMAGE).await()
+
+                    val elementEntities = newElements.mapIndexed { index, element ->
+                        ElementEntity.toPathEntity(element).copy(
+                            image = localImageElements[index]
+                        )
+                    }
+
+                    insertElementsIntoLocalStorage(elementEntities).join()
+
+                    return@withContext true
+                }
+            }
+        }
+    }
+
+    private suspend fun getPathsHeroes(): Boolean {
+        return withContext(ioDispatcher) {
+            when (val resultApi = getRemotePathsList()) {
+                is NetworkResult.Error -> {
+                    return@withContext false
+                }
+
+                is NetworkResult.Success -> {
+                    val remotePaths = resultApi.data
+                    val localPaths = getLocalPaths()
+                    val newPaths = remotePaths.filter { path ->
+                        localPaths.none { it.idPath == path.idPath && it.title == path.title }
+                    }
+
+                    val localImagePaths =
+                        downloadImages(newPaths, { it.image }, CHILD_PATHS_IMAGE).await()
+
+                    val heroEntities = newPaths.mapIndexed { index, path ->
+                        PathEntity.toPathEntity(path).copy(
+                            image = localImagePaths[index]
+                        )
+                    }
+
+                    insertPathsIntoLocalStorage(heroEntities).join()
+
+                    return@withContext true
+                }
+            }
+        }
+    }
+
+    private suspend fun getHeroesList(): Boolean {
         return withContext(ioDispatcher) {
             when (val resultApi = getRemoteHeroesList()) {
                 is NetworkResult.Error -> {
@@ -58,11 +128,27 @@ class LoadDataRepositoryImpl @Inject constructor(
         }
     }
 
-    private suspend fun getRemoteHeroesList() = handleApi { heroesListService.getHeroesList() }
+    private suspend fun getRemoteHeroesList() = handleApi { loadDataService.getHeroesList() }
+
+    private suspend fun getRemotePathsList() = handleApi { loadDataService.getPathsList() }
+
+    private suspend fun getRemoteElementsList() = handleApi { loadDataService.getElementsList() }
 
     private suspend fun insertHeroesIntoLocalStorage(heroEntities: List<HeroEntity>): Job {
         return CoroutineScope(ioDispatcher).launch {
             heroDao.insertHeroes(heroEntities)
+        }
+    }
+
+    private suspend fun insertPathsIntoLocalStorage(pathEntity: List<PathEntity>): Job {
+        return CoroutineScope(ioDispatcher).launch {
+            pathDao.insertPaths(pathEntity)
+        }
+    }
+
+    private suspend fun insertElementsIntoLocalStorage(elementEntity: List<ElementEntity>): Job {
+        return CoroutineScope(ioDispatcher).launch {
+            elementDao.insertElements(elementEntity)
         }
     }
 
@@ -72,13 +158,25 @@ class LoadDataRepositoryImpl @Inject constructor(
         }
     }
 
-    private suspend fun downloadImages(
-        heroes: List<Hero>, propertySelector: (Hero) -> String, folder: String
+    private suspend fun getLocalPaths(): List<PathEntity> {
+        return withContext(ioDispatcher) {
+            pathDao.getPaths()
+        }
+    }
+
+    private suspend fun getLocalElements(): List<ElementEntity> {
+        return withContext(ioDispatcher) {
+            elementDao.getElements()
+        }
+    }
+
+    private suspend fun <T> downloadImages(
+        list: List<T>, propertySelector: (T) -> String, folder: String
     ) = withContext(ioDispatcher) {
         async {
-            heroes.map { hero ->
-                val fileName = "hero_${hero.id}_${System.currentTimeMillis()}.webp"
-                imageLoader.downloadAndSaveImage(propertySelector(hero), folder, fileName)
+            list.mapIndexed { index, item ->
+                val fileName = "hero_${index}_${System.currentTimeMillis()}.webp"
+                imageLoader.downloadAndSaveImage(propertySelector(item), folder, fileName)
             }
         }
     }
@@ -86,5 +184,7 @@ class LoadDataRepositoryImpl @Inject constructor(
     companion object {
         const val CHILD_HEROES_AVATARS = "heroes_avatars"
         const val CHILD_HEROES_SPLASH_ARTS = "heroes_splash_arts"
+        const val CHILD_PATHS_IMAGE = "paths_image"
+        const val CHILD_ELEMENTS_IMAGE = "elements_image"
     }
 }
