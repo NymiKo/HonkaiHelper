@@ -30,14 +30,20 @@ class LoadDataRepositoryImpl @Inject constructor(
                 }
 
                 is NetworkResult.Success -> {
-                    val heroes = resultApi.data
+                    val remoteHeroes = resultApi.data
+                    val localHeroes = getLocalHeroes()
+                    val newHeroes = remoteHeroes.filter { hero ->
+                        localHeroes.none { it.id == hero.id && it.name == hero.name && it.rarity == hero.rarity && it.idPath == hero.path && it.idElement == hero.element }
+                    }
+
                     val localAvatarPaths =
-                        downloadImages(heroes, { it.avatar }, CHILD_HEROES_AVATARS).await()
+                        downloadImages(newHeroes, { it.avatar }, CHILD_HEROES_AVATARS).await()
 
-                    val localSplashArtsPaths =
-                        downloadImages(heroes, { it.splashArt }, CHILD_HEROES_SPLASH_ARTS).await()
+                    val localSplashArtsPaths = downloadImages(
+                        newHeroes, { it.splashArt }, CHILD_HEROES_SPLASH_ARTS
+                    ).await()
 
-                    val heroEntities = heroes.mapIndexed { index, hero ->
+                    val heroEntities = newHeroes.mapIndexed { index, hero ->
                         HeroEntity.toHeroEntity(hero).copy(
                             localAvatarPath = localAvatarPaths[index],
                             localSplashArtPath = localSplashArtsPaths[index]
@@ -60,10 +66,14 @@ class LoadDataRepositoryImpl @Inject constructor(
         }
     }
 
+    private suspend fun getLocalHeroes(): List<HeroEntity> {
+        return withContext(ioDispatcher) {
+            heroDao.getHeroes()
+        }
+    }
+
     private suspend fun downloadImages(
-        heroes: List<Hero>,
-        propertySelector: (Hero) -> String,
-        folder: String
+        heroes: List<Hero>, propertySelector: (Hero) -> String, folder: String
     ) = withContext(ioDispatcher) {
         async {
             heroes.map { hero ->

@@ -12,7 +12,7 @@ class LoadDataViewModel @Inject constructor(
     private val repository: LoadDataRepository
 ): ViewModel() {
 
-    private val _dataLoaded = MutableLiveData<Boolean>(false)
+    private val _dataLoaded = MutableLiveData<Boolean>()
     val dataLoaded: LiveData<Boolean> = _dataLoaded
 
     init {

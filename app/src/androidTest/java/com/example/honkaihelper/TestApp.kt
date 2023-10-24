@@ -3,7 +3,6 @@ package com.example.honkaihelper
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.honkaihelper.di.AppComponent
 import com.example.honkaihelper.di.DaggerAppComponent
-import com.example.honkaihelper.di.DaggerTestAppComponent
 
 class TestApp: App() {
 
