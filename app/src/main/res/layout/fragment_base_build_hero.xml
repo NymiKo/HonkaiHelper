@@ -9,12 +9,12 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar_base_build_hero"
         style="@style/base_toolbar_style"
-        app:titleTextColor="?attr/colorSecondary"
-        app:titleCentered="true"
-        app:titleTextAppearance="@style/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleCentered="true"
+        app:titleTextAppearance="@style/toolbar"
+        app:titleTextColor="?attr/colorSecondary" />
 
     <ImageView
         android:id="@+id/image_element_hero"
@@ -41,6 +41,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_base_build_hero" />
 
-
+    <TextView
+        android:id="@+id/text_story_hero"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/DP16"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="?attr/colorSecondary"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_hero_avatar_base_build" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

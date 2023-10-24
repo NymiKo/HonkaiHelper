@@ -48,7 +48,7 @@ class BuildsHeroListFragment :
         mAdapter = BuildsHeroListAdapter()
         mAdapter.buildsHeroList = listOf(
             BuildHero(
-                Hero(1, "Блэйд", "http://f0862137.xsph.ru/images/hero_icon/blade.webp", "",true, 1, 1),
+                Hero(1, "Блэйд", "", "http://f0862137.xsph.ru/images/hero_icon/blade.webp", "",true, 1, 1),
                 Equipment(1, "https://static.wikia.nocookie.net/honkai-star-rail/images/a/a7/Световой_конус_Кроты_приветствуют_тебя_Карточка.png/revision/latest?cb=20230710214741&path-prefix=ru", 2),
                 Equipment(1, "https://static.wikia.nocookie.net/honkai-star-rail/images/a/a7/Световой_конус_Кроты_приветствуют_тебя_Карточка.png/revision/latest?cb=20230710214741&path-prefix=ru", 0),
                 Equipment(1, "https://static.wikia.nocookie.net/honkai-star-rail/images/a/a7/Световой_конус_Кроты_приветствуют_тебя_Карточка.png/revision/latest?cb=20230710214741&path-prefix=ru", 1),

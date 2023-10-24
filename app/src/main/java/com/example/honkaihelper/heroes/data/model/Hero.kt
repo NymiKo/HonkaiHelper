@@ -7,6 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class Hero(
     val id: Int,
     val name: String,
+    val story: String,
     val avatar: String,
     val splashArt: String,
     val rarity: Boolean,

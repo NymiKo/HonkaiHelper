@@ -35,6 +35,7 @@ class BaseBuildHeroFragment :
 
     override fun uiStateHandle() {
         viewModel.heroInfo.observe(viewLifecycleOwner) {
+            binding.textStoryHero.text = it.heroEntity.story
             binding.imageElementHero.load(it.elementEntity.image)
             binding.imagePathHero.load(it.pathEntity.image)
         }

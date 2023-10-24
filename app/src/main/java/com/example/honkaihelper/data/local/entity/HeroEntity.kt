@@ -12,6 +12,7 @@ data class HeroEntity(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
     val name: String,
+    val story: String,
     val rarity: Boolean,
     val idPath: Int,
     val idElement: Int,
@@ -22,6 +23,7 @@ data class HeroEntity(
         fun toHeroEntity(hero: Hero) = HeroEntity(
             id = hero.id,
             name = hero.name,
+            story = hero.story,
             rarity = hero.rarity,
             idPath = hero.path,
             idElement = hero.element
@@ -31,6 +33,7 @@ data class HeroEntity(
     fun toHero() = Hero(
         id = id,
         name = name,
+        story = story,
         avatar = localAvatarPath,
         splashArt = localSplashArtPath,
         rarity = rarity,
