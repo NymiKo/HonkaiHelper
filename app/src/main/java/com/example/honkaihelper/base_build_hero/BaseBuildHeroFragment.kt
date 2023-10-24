@@ -9,6 +9,7 @@ import com.example.honkaihelper.databinding.FragmentBaseBuildHeroBinding
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.utils.getParcelable
+import com.example.honkaihelper.utils.load
 import com.example.honkaihelper.utils.loadImageWithoutScale
 
 class BaseBuildHeroFragment :
@@ -22,13 +23,21 @@ class BaseBuildHeroFragment :
         (requireActivity().application as App).appComponent.baseBuildHeroComponent().create().inject(this)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.getHeroInfo(hero!!.id)
+    }
+
     override fun setupView() {
         setupToolbar()
         binding.imageHeroAvatarBaseBuild.loadImageWithoutScale(hero?.splashArt)
     }
 
     override fun uiStateHandle() {
-
+        viewModel.heroInfo.observe(viewLifecycleOwner) {
+            binding.imageElementHero.load(it.elementEntity.image)
+            binding.imagePathHero.load(it.pathEntity.image)
+        }
     }
 
     private fun setupToolbar() {
