@@ -51,7 +51,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                         downloadImages(newElements, { it.image }, CHILD_ELEMENTS_IMAGE).await()
 
                     val elementEntities = newElements.mapIndexed { index, element ->
-                        ElementEntity.toPathEntity(element).copy(
+                        ElementEntity.toElementEntity(element).copy(
                             image = localImageElements[index]
                         )
                     }

@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">HonkaiHelper</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="team_for_hero">Команды для героя %1$s</string>
     <string name="creating_a_team">Создание команды</string>
     <string name="add_the_created_command">Добавить созданную команду?</string>
@@ -52,6 +51,7 @@
     <string name="download">Загрузить</string>
     <string name="unexpected_error">Возникла непредвиденная ошибка</string>
     <string name="go_back">Вернуться назад</string>
+    <string name="abilities">Таланты</string>
 
     <string-array name="hero_level">
         <item>20</item>

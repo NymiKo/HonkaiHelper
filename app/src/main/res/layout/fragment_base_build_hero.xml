@@ -1,57 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".base_build_hero.BaseBuildHeroFragment">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar_base_build_hero"
-        style="@style/base_toolbar_style"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:titleCentered="true"
-        app:titleTextAppearance="@style/toolbar"
-        app:titleTextColor="?attr/colorSecondary" />
-
-    <ImageView
-        android:id="@+id/image_element_hero"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_margin="@dimen/DP16"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_base_build_hero" />
-
-    <ImageView
-        android:id="@+id/image_path_hero"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_margin="@dimen/DP16"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tint="?attr/colorSecondary"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_base_build_hero" />
-
-    <ImageView
-        android:id="@+id/image_hero_avatar_base_build"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginBottom="@dimen/DP16"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_base_build_hero" />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/text_story_hero"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/DP16"
-        android:fontFamily="sans-serif-medium"
-        android:textColor="?attr/colorSecondary"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_hero_avatar_base_build" />
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_base_build_hero"
+            style="@style/base_toolbar_style"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleCentered="true"
+            app:titleTextAppearance="@style/toolbar"
+            app:titleTextColor="?attr/colorSecondary" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/image_element_hero"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/DP16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_base_build_hero" />
+
+        <ImageView
+            android:id="@+id/image_path_hero"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/DP16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_base_build_hero"
+            app:tint="?attr/colorSecondary" />
+
+        <ImageView
+            android:id="@+id/image_hero_avatar_base_build"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginBottom="@dimen/DP16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_base_build_hero" />
+
+        <TextView
+            android:id="@+id/text_story_hero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/DP16"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="?attr/colorSecondary"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_hero_avatar_base_build" />
+
+        <TextView
+            android:id="@+id/text_ability"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/DP16"
+            android:textStyle="bold"
+            android:textColor="?attr/colorSecondary"
+            android:textSize="18sp"
+            android:text="@string/abilities"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_story_hero" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_abilities_hero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/DP8"
+            android:layout_marginHorizontal="@dimen/DP16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_ability" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
