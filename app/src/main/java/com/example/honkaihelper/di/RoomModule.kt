@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Room
 import com.example.honkaihelper.data.local.RoomDatabaseApp
 import com.example.honkaihelper.data.local.contract.RoomContract
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -25,4 +24,7 @@ object RoomModule {
 
     @Provides
     fun bindElementDao(database: RoomDatabaseApp) = database.elementDao()
+
+    @Provides
+    fun bindAbilityDao(database: RoomDatabaseApp) = database.abilityDao()
 }

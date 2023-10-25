@@ -3,9 +3,11 @@ package com.example.honkaihelper.load_data.data
 import com.example.honkaihelper.data.NetworkResult
 import com.example.honkaihelper.data.handleApi
 import com.example.honkaihelper.data.image_loader.ImageLoader
+import com.example.honkaihelper.data.local.dao.AbilityDao
 import com.example.honkaihelper.data.local.dao.ElementDao
 import com.example.honkaihelper.data.local.dao.HeroDao
 import com.example.honkaihelper.data.local.dao.PathDao
+import com.example.honkaihelper.data.local.entity.AbilityEntity
 import com.example.honkaihelper.data.local.entity.ElementEntity
 import com.example.honkaihelper.data.local.entity.HeroEntity
 import com.example.honkaihelper.data.local.entity.PathEntity
@@ -21,13 +23,14 @@ class LoadDataRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher,
     private val heroDao: HeroDao,
     private val pathDao: PathDao,
+    private val abilityDao: AbilityDao,
     private val elementDao: ElementDao,
     private val loadDataService: LoadDataService,
     private val imageLoader: ImageLoader
 ) : LoadDataRepository {
 
     override suspend fun downloadingData(): Boolean {
-        return getPathsHeroes() && getHeroesList() && getElementsHeroes()
+        return getPathsHeroes() && getHeroesList() && getElementsHeroes() && getAbilitiesHeroes()
     }
 
     private suspend fun getElementsHeroes(): Boolean {
@@ -53,7 +56,10 @@ class LoadDataRepositoryImpl @Inject constructor(
                         )
                     }
 
-                    insertEntitiesIntoLocalStorage(elementEntities, elementDao::insertElements).join()
+                    insertEntitiesIntoLocalStorage(
+                        elementEntities,
+                        elementDao::insertElements
+                    ).join()
 
                     return@withContext true
                 }
@@ -85,6 +91,40 @@ class LoadDataRepositoryImpl @Inject constructor(
                     }
 
                     insertEntitiesIntoLocalStorage(pathEntities, pathDao::insertPaths).join()
+
+                    return@withContext true
+                }
+            }
+        }
+    }
+
+    private suspend fun getAbilitiesHeroes(): Boolean {
+        return withContext(ioDispatcher) {
+            when (val resultApi = getRemoteAbilitiesList()) {
+                is NetworkResult.Error -> {
+                    return@withContext false
+                }
+
+                is NetworkResult.Success -> {
+                    val remoteAbilities = resultApi.data
+                    val localAbilities = getLocalEntities { abilityDao.getAbilities() }
+                    val newAbilities = remoteAbilities.filter { ability ->
+                        localAbilities.none { it.idAbility == ability.idAbility && it.title == ability.title && it.description == ability.description && it.idHero == ability.idHero }
+                    }
+
+                    val localImageAbilities =
+                        downloadImages(newAbilities, { it.image }, CHILD_ABILITIES_IMAGE).await()
+
+                    val abilityEntities = newAbilities.mapIndexed { index, ability ->
+                        AbilityEntity.toAbilityEntity(ability).copy(
+                            image = localImageAbilities[index]
+                        )
+                    }
+
+                    insertEntitiesIntoLocalStorage(
+                        abilityEntities,
+                        abilityDao::insertAbilities
+                    ).join()
 
                     return@withContext true
                 }
@@ -134,7 +174,12 @@ class LoadDataRepositoryImpl @Inject constructor(
 
     private suspend fun getRemoteElementsList() = handleApi { loadDataService.getElementsList() }
 
-    private suspend fun <T> insertEntitiesIntoLocalStorage(entityList: List<T>, insertFunction: suspend (List<T>) -> Unit): Job {
+    private suspend fun getRemoteAbilitiesList() = handleApi { loadDataService.getAbilitiesList() }
+
+    private suspend fun <T> insertEntitiesIntoLocalStorage(
+        entityList: List<T>,
+        insertFunction: suspend (List<T>) -> Unit
+    ): Job {
         return CoroutineScope(ioDispatcher).launch {
             insertFunction(entityList)
         }
@@ -162,5 +207,6 @@ class LoadDataRepositoryImpl @Inject constructor(
         const val CHILD_HEROES_SPLASH_ARTS = "heroes_splash_arts"
         const val CHILD_PATHS_IMAGE = "paths_image"
         const val CHILD_ELEMENTS_IMAGE = "elements_image"
+        const val CHILD_ABILITIES_IMAGE = "abilities_image"
     }
 }

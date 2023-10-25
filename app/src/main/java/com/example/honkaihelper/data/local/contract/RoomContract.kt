@@ -7,4 +7,5 @@ object RoomContract {
     const val tableHeroes = "heroes"
     const val tablePaths = "paths"
     const val tableElements = "elements"
+    const val tableAbilities = "abilities"
 }
