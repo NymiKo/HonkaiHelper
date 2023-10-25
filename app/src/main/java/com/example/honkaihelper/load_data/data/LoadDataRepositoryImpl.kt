@@ -39,7 +39,7 @@ class LoadDataRepositoryImpl @Inject constructor(
 
                 is NetworkResult.Success -> {
                     val remoteElements = resultApi.data
-                    val localElements = getLocalElements()
+                    val localElements = getLocalEntities { elementDao.getElements() }
                     val newElements = remoteElements.filter { element ->
                         localElements.none { it.idElement == element.idElement && it.title == element.image }
                     }
@@ -53,7 +53,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                         )
                     }
 
-                    insertElementsIntoLocalStorage(elementEntities).join()
+                    insertEntitiesIntoLocalStorage(elementEntities, elementDao::insertElements).join()
 
                     return@withContext true
                 }
@@ -70,7 +70,7 @@ class LoadDataRepositoryImpl @Inject constructor(
 
                 is NetworkResult.Success -> {
                     val remotePaths = resultApi.data
-                    val localPaths = getLocalPaths()
+                    val localPaths = getLocalEntities { pathDao.getPaths() }
                     val newPaths = remotePaths.filter { path ->
                         localPaths.none { it.idPath == path.idPath && it.title == path.title }
                     }
@@ -78,13 +78,13 @@ class LoadDataRepositoryImpl @Inject constructor(
                     val localImagePaths =
                         downloadImages(newPaths, { it.image }, CHILD_PATHS_IMAGE).await()
 
-                    val heroEntities = newPaths.mapIndexed { index, path ->
+                    val pathEntities = newPaths.mapIndexed { index, path ->
                         PathEntity.toPathEntity(path).copy(
                             image = localImagePaths[index]
                         )
                     }
 
-                    insertPathsIntoLocalStorage(heroEntities).join()
+                    insertEntitiesIntoLocalStorage(pathEntities, pathDao::insertPaths).join()
 
                     return@withContext true
                 }
@@ -101,7 +101,7 @@ class LoadDataRepositoryImpl @Inject constructor(
 
                 is NetworkResult.Success -> {
                     val remoteHeroes = resultApi.data
-                    val localHeroes = getLocalHeroes()
+                    val localHeroes = getLocalEntities { heroDao.getHeroes() }
                     val newHeroes = remoteHeroes.filter { hero ->
                         localHeroes.none { it.id == hero.id && it.name == hero.name && it.rarity == hero.rarity && it.idPath == hero.path && it.idElement == hero.element }
                     }
@@ -120,7 +120,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                         )
                     }
 
-                    insertHeroesIntoLocalStorage(heroEntities).join()
+                    insertEntitiesIntoLocalStorage(heroEntities, heroDao::insertHeroes).join()
 
                     return@withContext true
                 }
@@ -134,39 +134,15 @@ class LoadDataRepositoryImpl @Inject constructor(
 
     private suspend fun getRemoteElementsList() = handleApi { loadDataService.getElementsList() }
 
-    private suspend fun insertHeroesIntoLocalStorage(heroEntities: List<HeroEntity>): Job {
+    private suspend fun <T> insertEntitiesIntoLocalStorage(entityList: List<T>, insertFunction: suspend (List<T>) -> Unit): Job {
         return CoroutineScope(ioDispatcher).launch {
-            heroDao.insertHeroes(heroEntities)
+            insertFunction(entityList)
         }
     }
 
-    private suspend fun insertPathsIntoLocalStorage(pathEntity: List<PathEntity>): Job {
-        return CoroutineScope(ioDispatcher).launch {
-            pathDao.insertPaths(pathEntity)
-        }
-    }
-
-    private suspend fun insertElementsIntoLocalStorage(elementEntity: List<ElementEntity>): Job {
-        return CoroutineScope(ioDispatcher).launch {
-            elementDao.insertElements(elementEntity)
-        }
-    }
-
-    private suspend fun getLocalHeroes(): List<HeroEntity> {
+    private suspend fun <T> getLocalEntities(query: suspend () -> List<T>): List<T> {
         return withContext(ioDispatcher) {
-            heroDao.getHeroes()
-        }
-    }
-
-    private suspend fun getLocalPaths(): List<PathEntity> {
-        return withContext(ioDispatcher) {
-            pathDao.getPaths()
-        }
-    }
-
-    private suspend fun getLocalElements(): List<ElementEntity> {
-        return withContext(ioDispatcher) {
-            elementDao.getElements()
+            query()
         }
     }
 
