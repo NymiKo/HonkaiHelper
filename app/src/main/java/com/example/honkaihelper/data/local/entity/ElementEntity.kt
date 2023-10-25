@@ -16,14 +16,14 @@ data class ElementEntity(
     val image: String
 ) {
     companion object {
-        fun toPathEntity(element: Element) = ElementEntity(
+        fun toElementEntity(element: Element) = ElementEntity(
             idElement = element.idElement,
             title = element.title,
             image = element.image
         )
     }
 
-    fun toPath() = Element(
+    fun toElement() = Element(
         idElement = idElement,
         title = title,
         image = image

@@ -1,7 +1,8 @@
-package com.example.honkaihelper.base_build_hero.data.model
+package com.example.honkaihelper.data.local.models
 
 import androidx.room.Embedded
 import androidx.room.Relation
+import com.example.honkaihelper.data.local.entity.AbilityEntity
 import com.example.honkaihelper.data.local.entity.ElementEntity
 import com.example.honkaihelper.data.local.entity.HeroEntity
 import com.example.honkaihelper.data.local.entity.PathEntity
@@ -14,5 +15,8 @@ data class HeroWithPathAndElement(
     val pathEntity: PathEntity,
 
     @Relation(parentColumn = "idElement", entityColumn = "idElement", entity = ElementEntity::class)
-    val elementEntity: ElementEntity
+    val elementEntity: ElementEntity,
+
+    @Relation(parentColumn = "id", entityColumn = "idHero", entity = AbilityEntity::class)
+    val abilityEntity: List<AbilityEntity>
 )
