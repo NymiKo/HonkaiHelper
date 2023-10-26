@@ -5,9 +5,9 @@ import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.honkaihelper.App
 import com.example.honkaihelper.base_build_hero.adapters.AbilitiesHeroAdapter
+import com.example.honkaihelper.base_build_hero.adapters.EidolonsHeroAdapter
 import com.example.honkaihelper.databinding.FragmentBaseBuildHeroBinding
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.heroes.data.model.Hero
@@ -20,7 +20,8 @@ class BaseBuildHeroFragment :
 
     private val viewModel by viewModels<BaseBuildHeroViewModel> { viewModelFactory }
     private val hero get() = getParcelable(ARG_HERO, Hero::class.java)
-    private lateinit var mAdapter: AbilitiesHeroAdapter
+    private lateinit var mAbilitiesAdapter: AbilitiesHeroAdapter
+    private lateinit var mEidolonsAdapter: EidolonsHeroAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -35,8 +36,10 @@ class BaseBuildHeroFragment :
     override fun setupView() {
         setupToolbar()
         setupHeroSplashArt()
-        setupAdapter()
-        setupRecyclerView()
+        setupAbilitiesAdapter()
+        setupEidolonsAdapter()
+        setupAbilitiesRecyclerView()
+        setupEidolonsRecyclerView()
     }
 
     override fun uiStateHandle() {
@@ -44,7 +47,8 @@ class BaseBuildHeroFragment :
             binding.textStoryHero.text = it.hero.story
             binding.imageElementHero.load(it.element.image)
             binding.imagePathHero.load(it.path.image)
-            mAdapter.abilitiesList = it.ability
+            mAbilitiesAdapter.abilitiesList = it.ability
+            mEidolonsAdapter.eidolonList = it.eidolon
         }
     }
 
@@ -54,14 +58,25 @@ class BaseBuildHeroFragment :
 
     private fun setupHeroSplashArt() = binding.imageHeroAvatarBaseBuild.loadImageWithoutScale(hero?.splashArt)
 
-    private fun setupAdapter() {
-        mAdapter = AbilitiesHeroAdapter()
+    private fun setupAbilitiesAdapter() {
+        mAbilitiesAdapter = AbilitiesHeroAdapter()
     }
 
-    private fun setupRecyclerView() {
+    private fun setupEidolonsAdapter() {
+        mEidolonsAdapter = EidolonsHeroAdapter()
+    }
+
+    private fun setupAbilitiesRecyclerView() {
         binding.recyclerAbilitiesHero.apply {
             layoutManager = LinearLayoutManager(requireActivity())
-            adapter = mAdapter
+            adapter = mAbilitiesAdapter
+        }
+    }
+
+    private fun setupEidolonsRecyclerView() {
+        binding.recyclerEidolonsHero.apply {
+            layoutManager = LinearLayoutManager(requireActivity())
+            adapter = mEidolonsAdapter
         }
     }
 

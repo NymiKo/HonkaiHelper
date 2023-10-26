@@ -81,6 +81,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_ability" />
 
+        <TextView
+            android:id="@+id/text_eidolons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/DP16"
+            android:textStyle="bold"
+            android:textColor="?attr/colorSecondary"
+            android:textSize="18sp"
+            android:text="@string/abilities"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recycler_abilities_hero" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_eidolons_hero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/DP8"
+            android:layout_marginHorizontal="@dimen/DP16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_eidolons" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

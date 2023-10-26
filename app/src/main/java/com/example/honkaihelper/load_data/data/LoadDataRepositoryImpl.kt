@@ -4,10 +4,12 @@ import com.example.honkaihelper.data.NetworkResult
 import com.example.honkaihelper.data.handleApi
 import com.example.honkaihelper.data.image_loader.ImageLoader
 import com.example.honkaihelper.data.local.dao.AbilityDao
+import com.example.honkaihelper.data.local.dao.EidolonDao
 import com.example.honkaihelper.data.local.dao.ElementDao
 import com.example.honkaihelper.data.local.dao.HeroDao
 import com.example.honkaihelper.data.local.dao.PathDao
 import com.example.honkaihelper.data.local.entity.AbilityEntity
+import com.example.honkaihelper.data.local.entity.EidolonEntity
 import com.example.honkaihelper.data.local.entity.ElementEntity
 import com.example.honkaihelper.data.local.entity.HeroEntity
 import com.example.honkaihelper.data.local.entity.PathEntity
@@ -25,12 +27,13 @@ class LoadDataRepositoryImpl @Inject constructor(
     private val pathDao: PathDao,
     private val abilityDao: AbilityDao,
     private val elementDao: ElementDao,
+    private val eidolonDao: EidolonDao,
     private val loadDataService: LoadDataService,
     private val imageLoader: ImageLoader
 ) : LoadDataRepository {
 
     override suspend fun downloadingData(): Boolean {
-        return getPathsHeroes() && getHeroesList() && getElementsHeroes() && getAbilitiesHeroes()
+        return getPathsHeroes() && getHeroesList() && getElementsHeroes() && getAbilitiesHeroes() && getEidolonsHero()
     }
 
     private suspend fun getElementsHeroes(): Boolean {
@@ -132,6 +135,40 @@ class LoadDataRepositoryImpl @Inject constructor(
         }
     }
 
+    private suspend fun getEidolonsHero(): Boolean {
+        return withContext(ioDispatcher) {
+            when (val resultApi = getRemoteEidolonsList()) {
+                is NetworkResult.Error -> {
+                    return@withContext false
+                }
+
+                is NetworkResult.Success -> {
+                    val remoteEidolons = resultApi.data
+                    val localEidolons = getLocalEntities { eidolonDao.getEidolons() }
+                    val newEidolons = remoteEidolons.filter { eidolons ->
+                        localEidolons.none { it.idEidolon == eidolons.idEidolon && it.title == eidolons.title && it.description == eidolons.description && it.idHero == eidolons.idHero }
+                    }
+
+                    val localImageEidolons =
+                        downloadImages(newEidolons, { it.image }, CHILD_ABILITIES_IMAGE).await()
+
+                    val eidolonEntities = newEidolons.mapIndexed { index, eidolons ->
+                        EidolonEntity.toEidolonEntity(eidolons).copy(
+                            image = localImageEidolons[index]
+                        )
+                    }
+
+                    insertEntitiesIntoLocalStorage(
+                        eidolonEntities,
+                        eidolonDao::insertEidolons
+                    ).join()
+
+                    return@withContext true
+                }
+            }
+        }
+    }
+
     private suspend fun getHeroesList(): Boolean {
         return withContext(ioDispatcher) {
             when (val resultApi = getRemoteHeroesList()) {
@@ -176,6 +213,8 @@ class LoadDataRepositoryImpl @Inject constructor(
 
     private suspend fun getRemoteAbilitiesList() = handleApi { loadDataService.getAbilitiesList() }
 
+    private suspend fun getRemoteEidolonsList() = handleApi { loadDataService.getEidolonsList() }
+
     private suspend fun <T> insertEntitiesIntoLocalStorage(
         entityList: List<T>,
         insertFunction: suspend (List<T>) -> Unit
@@ -208,5 +247,6 @@ class LoadDataRepositoryImpl @Inject constructor(
         const val CHILD_PATHS_IMAGE = "paths_image"
         const val CHILD_ELEMENTS_IMAGE = "elements_image"
         const val CHILD_ABILITIES_IMAGE = "abilities_image"
+        const val CHILD_EIDOLONS_IMAGE = "eidolons_image"
     }
 }
