@@ -33,4 +33,7 @@ object RoomModule {
 
     @Provides
     fun bindRelicDao(database: RoomDatabaseApp) = database.relicDao()
+
+    @Provides
+    fun bindDecorationDao(database: RoomDatabaseApp) = database.decorationDao()
 }

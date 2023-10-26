@@ -10,4 +10,5 @@ object RoomContract {
     const val tableAbilities = "abilities"
     const val tableEidolons = "eidolons"
     const val tableRelics = "relics"
+    const val tableDecorations = "decorations"
 }
