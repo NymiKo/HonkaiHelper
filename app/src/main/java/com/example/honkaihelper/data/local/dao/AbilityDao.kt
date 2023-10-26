@@ -10,8 +10,8 @@ import com.example.honkaihelper.data.local.entity.AbilityEntity
 interface AbilityDao {
 
     @Query("SELECT * FROM ${RoomContract.tableAbilities}")
-    fun getAbilities(): List<AbilityEntity>
+    suspend fun getAbilities(): List<AbilityEntity>
 
     @Insert
-    fun insertAbilities(abilities: List<AbilityEntity>)
+    suspend fun insertAbilities(abilities: List<AbilityEntity>)
 }

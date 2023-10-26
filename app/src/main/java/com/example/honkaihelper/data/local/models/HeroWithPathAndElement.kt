@@ -3,6 +3,7 @@ package com.example.honkaihelper.data.local.models
 import androidx.room.Embedded
 import androidx.room.Relation
 import com.example.honkaihelper.data.local.entity.AbilityEntity
+import com.example.honkaihelper.data.local.entity.EidolonEntity
 import com.example.honkaihelper.data.local.entity.ElementEntity
 import com.example.honkaihelper.data.local.entity.HeroEntity
 import com.example.honkaihelper.data.local.entity.PathEntity
@@ -18,5 +19,8 @@ data class HeroWithPathAndElement(
     val elementEntity: ElementEntity,
 
     @Relation(parentColumn = "id", entityColumn = "idHero", entity = AbilityEntity::class)
-    val abilityEntity: List<AbilityEntity>
+    val abilityEntity: List<AbilityEntity>,
+
+    @Relation(parentColumn = "id", entityColumn = "idHero", entity = EidolonEntity::class)
+    val eidolonEntity: List<EidolonEntity>
 )

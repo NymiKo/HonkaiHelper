@@ -27,4 +27,7 @@ object RoomModule {
 
     @Provides
     fun bindAbilityDao(database: RoomDatabaseApp) = database.abilityDao()
+
+    @Provides
+    fun bindEidolonDao(database: RoomDatabaseApp) = database.eidolonDao()
 }

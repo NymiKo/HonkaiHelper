@@ -6,5 +6,6 @@ data class FullHeroInfo(
     val hero: Hero,
     val path: Path,
     val element: Element,
-    val ability: List<Ability>
+    val ability: List<Ability>,
+    val eidolon: List<Eidolon>
 )
