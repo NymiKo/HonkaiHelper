@@ -1,11 +1,13 @@
 package com.example.honkaihelper.data.local.entity
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.honkaihelper.base_build_hero.data.model.Eidolon
 import com.example.honkaihelper.data.local.contract.RoomContract
 
 @Entity(tableName = RoomContract.tableEidolons)
 data class EidolonEntity(
+    @PrimaryKey(autoGenerate = false)
     val idEidolon: Int,
     val title: String,
     val description: String,

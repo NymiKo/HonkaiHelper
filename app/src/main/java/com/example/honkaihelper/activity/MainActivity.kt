@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.ActivityMainBinding
+import com.example.honkaihelper.load_data.LoadDataFragment
 import com.example.honkaihelper.utils.getSharedPrefVersion
 import javax.inject.Inject
 
@@ -38,8 +39,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.uiState.observe(this) {
             when(it) {
                 is MainUiState.DATA_NOT_CORRECTLY -> {
-                    getSharedPrefVersion().edit().putString(KEY_VERSION_DB, it.version).apply()
-                    findNavController(R.id.navHostFragment).navigate(R.id.loadDataFragment)
+                    findNavController(R.id.navHostFragment).navigate(R.id.loadDataFragment, LoadDataFragment.newInstance(it.version))
                 }
                 MainUiState.ERROR -> {
 

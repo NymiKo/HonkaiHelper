@@ -17,7 +17,8 @@ class BaseBuildHeroRepositoryImpl @Inject constructor(
                 result.heroEntity.toHero(),
                 result.pathEntity.toPath(),
                 result.elementEntity.toElement(),
-                result.abilityEntity.map { it.toAbility() })
+                result.abilityEntity.map { it.toAbility() },
+                result.eidolonEntity.map { it.toEidolon() })
         }
     }
 }

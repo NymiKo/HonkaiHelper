@@ -13,6 +13,7 @@ import com.example.honkaihelper.databinding.FragmentLoadDataBinding
 import com.example.honkaihelper.equipment.EquipmentFragment
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.heroes.HeroesListFragment
+import com.example.honkaihelper.utils.getSharedPrefVersion
 import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.visible
 
@@ -21,6 +22,7 @@ const val DATA_UPLOADED_KEY = "data_uploaded"
 class LoadDataFragment : BaseFragment<FragmentLoadDataBinding>(FragmentLoadDataBinding::inflate) {
 
     private val viewModel by viewModels<LoadDataViewModel> { viewModelFactory }
+    private val versionDB get() = requireArguments().getString(ARG_VERSION_DB)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -44,6 +46,7 @@ class LoadDataFragment : BaseFragment<FragmentLoadDataBinding>(FragmentLoadDataB
                     binding.groupUnexpectedError.gone()
                 }
                 LoadDataUiState.SUCCESS -> {
+                    requireActivity().getSharedPrefVersion().edit().putString(KEY_VERSION_DB, versionDB).apply()
                     setFragmentResult(DATA_UPLOADED_KEY, HeroesListFragment.newInstance(true))
                     findNavController().popBackStack()
                 }
@@ -60,6 +63,16 @@ class LoadDataFragment : BaseFragment<FragmentLoadDataBinding>(FragmentLoadDataB
     private fun setupButtonGoBack() {
         binding.buttonGoBack.setOnClickListener {
             findNavController().popBackStack()
+        }
+    }
+
+    companion object {
+
+        private const val ARG_VERSION_DB = "version_db"
+        private const val KEY_VERSION_DB = "VERSION_DB"
+
+        fun newInstance(versionDB: String) : Bundle {
+            return bundleOf(ARG_VERSION_DB to versionDB)
         }
     }
 }

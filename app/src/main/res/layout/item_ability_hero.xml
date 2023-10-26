@@ -12,12 +12,16 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_ability"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/dark_gray"
+            android:padding="4dp"
             app:layout_constraintBottom_toBottomOf="@id/text_title_ability"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/text_type_ability"
-            app:shapeAppearanceOverlay="@style/roundedImageView" />
+            app:shapeAppearanceOverlay="@style/roundedImageView"
+            app:strokeColor="@color/dark_gray"
+            app:strokeWidth="4dp" />
 
         <TextView
             android:id="@+id/text_type_ability"
