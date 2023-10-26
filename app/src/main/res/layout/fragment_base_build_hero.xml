@@ -89,7 +89,7 @@
             android:textStyle="bold"
             android:textColor="?attr/colorSecondary"
             android:textSize="18sp"
-            android:text="@string/abilities"
+            android:text="@string/eidolons"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recycler_abilities_hero" />

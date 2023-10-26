@@ -52,6 +52,7 @@
     <string name="unexpected_error">Возникла непредвиденная ошибка</string>
     <string name="go_back">Вернуться назад</string>
     <string name="abilities">Таланты</string>
+    <string name="eidolons">Эйдолоны</string>
 
     <string-array name="hero_level">
         <item>20</item>

@@ -13,13 +13,12 @@ data class ElementEntity(
     @PrimaryKey(autoGenerate = false)
     val idElement: Int,
     val title: String,
-    val image: String
+    val image: String = ""
 ) {
     companion object {
         fun toElementEntity(element: Element) = ElementEntity(
             idElement = element.idElement,
-            title = element.title,
-            image = element.image
+            title = element.title
         )
     }
 

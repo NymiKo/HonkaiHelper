@@ -1,5 +1,6 @@
 package com.example.honkaihelper.load_data.data
 
+import android.util.Log
 import com.example.honkaihelper.data.NetworkResult
 import com.example.honkaihelper.data.handleApi
 import com.example.honkaihelper.data.image_loader.ImageLoader

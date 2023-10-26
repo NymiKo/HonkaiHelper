@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/image_eidolon"
-            android:layout_width="60dp"
-            android:layout_height="90dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -29,17 +29,17 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image_eidolon"
-            app:layout_constraintTop_toTopOf="@+id/image_eidolon" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_description_ability"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/DP16"
-            android:layout_marginTop="@dimen/DP8"
             android:fontFamily="sans-serif-medium"
             android:textColor="?attr/colorSecondary"
-            app:layout_constraintBottom_toBottomOf="@+id/image_eidolon"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image_eidolon"
             app:layout_constraintTop_toBottomOf="@+id/text_title_eidolon" />
