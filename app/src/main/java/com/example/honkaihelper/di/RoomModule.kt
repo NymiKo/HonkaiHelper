@@ -30,4 +30,7 @@ object RoomModule {
 
     @Provides
     fun bindEidolonDao(database: RoomDatabaseApp) = database.eidolonDao()
+
+    @Provides
+    fun bindRelicDao(database: RoomDatabaseApp) = database.relicDao()
 }
