@@ -48,7 +48,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                     val remoteElements = resultApi.data
                     val localElements = getLocalEntities { elementDao.getElements() }
                     val newElements = remoteElements.filter { element ->
-                        localElements.none { it.idElement == element.idElement && it.title == element.image }
+                        localElements.none { it.idElement == element.idElement && it.title == element.title }
                     }
 
                     val localImageElements =
