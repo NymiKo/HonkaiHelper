@@ -8,24 +8,24 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.honkaihelper.App
 import com.example.honkaihelper.base_build_hero.adapters.AbilitiesHeroAdapter
 import com.example.honkaihelper.base_build_hero.adapters.EidolonsHeroAdapter
-import com.example.honkaihelper.databinding.FragmentBaseBuildHeroBinding
+import com.example.honkaihelper.databinding.FragmentInfoAboutHeroBinding
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.utils.getParcelable
 import com.example.honkaihelper.utils.load
 import com.example.honkaihelper.utils.loadImageWithoutScale
 
-class BaseBuildHeroFragment :
-    BaseFragment<FragmentBaseBuildHeroBinding>(FragmentBaseBuildHeroBinding::inflate) {
+class InfoAboutHeroFragment :
+    BaseFragment<FragmentInfoAboutHeroBinding>(FragmentInfoAboutHeroBinding::inflate) {
 
-    private val viewModel by viewModels<BaseBuildHeroViewModel> { viewModelFactory }
+    private val viewModel by viewModels<InfoAboutHeroViewModel> { viewModelFactory }
     private val hero get() = getParcelable(ARG_HERO, Hero::class.java)
     private lateinit var mAbilitiesAdapter: AbilitiesHeroAdapter
     private lateinit var mEidolonsAdapter: EidolonsHeroAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as App).appComponent.baseBuildHeroComponent().create().inject(this)
+        (requireActivity().application as App).appComponent.infoAboutHeroComponent().create().inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,10 +53,10 @@ class BaseBuildHeroFragment :
     }
 
     private fun setupToolbar() {
-        binding.toolbarBaseBuildHero.title = hero?.name
+        binding.toolbarInfoAboutHero.title = hero?.name
     }
 
-    private fun setupHeroSplashArt() = binding.imageHeroAvatarBaseBuild.loadImageWithoutScale(hero?.splashArt)
+    private fun setupHeroSplashArt() = binding.imageAvatarInfoAboutHero.loadImageWithoutScale(hero?.splashArt)
 
     private fun setupAbilitiesAdapter() {
         mAbilitiesAdapter = AbilitiesHeroAdapter()

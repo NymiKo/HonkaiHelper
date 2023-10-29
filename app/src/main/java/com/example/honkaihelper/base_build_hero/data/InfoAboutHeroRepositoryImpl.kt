@@ -6,10 +6,10 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class BaseBuildHeroRepositoryImpl @Inject constructor(
+class InfoAboutHeroRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher,
     private val heroDao: HeroDao
-) : BaseBuildHeroRepository {
+) : InfoAboutHeroRepository {
     override suspend fun getHero(idHero: Int): FullHeroInfo {
         return withContext(ioDispatcher) {
             val result = heroDao.getHeroWithPathAndElement(idHero)

@@ -4,14 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.honkaihelper.base_build_hero.data.BaseBuildHeroRepository
+import com.example.honkaihelper.base_build_hero.data.InfoAboutHeroRepository
 import com.example.honkaihelper.base_build_hero.data.model.FullHeroInfo
-import com.example.honkaihelper.data.local.models.HeroWithPathAndElement
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class BaseBuildHeroViewModel @Inject constructor(
-    private val repository: BaseBuildHeroRepository
+class InfoAboutHeroViewModel @Inject constructor(
+    private val repository: InfoAboutHeroRepository
 ): ViewModel() {
 
     private val _heroInfo = MutableLiveData<FullHeroInfo>()

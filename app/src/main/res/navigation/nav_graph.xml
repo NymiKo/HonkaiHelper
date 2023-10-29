@@ -94,9 +94,9 @@
         tools:layout="@layout/fragment_create_build_hero" />
     <fragment
         android:id="@+id/baseBuildHeroFragment"
-        android:name="com.example.honkaihelper.base_build_hero.BaseBuildHeroFragment"
+        android:name="com.example.honkaihelper.base_build_hero.InfoAboutHeroFragment"
         android:label="fragment_base_build_hero"
-        tools:layout="@layout/fragment_base_build_hero" >
+        tools:layout="@layout/fragment_info_about_hero" >
         <action
             android:id="@+id/action_baseBuildHeroFragment_to_buildsHeroListFragment"
             app:destination="@id/buildsHeroListFragment" />

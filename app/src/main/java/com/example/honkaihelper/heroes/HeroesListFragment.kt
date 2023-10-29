@@ -2,9 +2,7 @@ package com.example.honkaihelper.heroes
 
 import android.app.SearchManager
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResultListener
@@ -13,16 +11,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
-import com.example.honkaihelper.base_build_hero.BaseBuildHeroFragment
-import com.example.honkaihelper.builds_hero.BuildsHeroListFragment
+import com.example.honkaihelper.base_build_hero.InfoAboutHeroFragment
 import com.example.honkaihelper.databinding.FragmentHeroesListBinding
-import com.example.honkaihelper.equipment.data.model.Equipment
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.heroes.adapter.HeroesListActionListener
 import com.example.honkaihelper.heroes.adapter.HeroesListAdapter
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.load_data.DATA_UPLOADED_KEY
-import com.example.honkaihelper.teams.TeamsListFragment
 import com.example.honkaihelper.utils.getSharedPrefToken
 import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.loadWithPlaceholder
@@ -153,7 +148,7 @@ class HeroesListFragment :
             override fun onClick(hero: Hero) {
                 findNavController().navigate(
                     R.id.baseBuildHeroFragment,
-                    BaseBuildHeroFragment.newInstance(hero)
+                    InfoAboutHeroFragment.newInstance(hero)
                 )
             }
         })
