@@ -38,12 +38,12 @@
             android:id="@+id/action_heroesListFragment_to_teamsListFragment"
             app:destination="@id/teamsListFragment" />
         <action
-            android:id="@+id/action_heroesListFragment_to_baseBuildHeroFragment"
-            app:destination="@id/baseBuildHeroFragment" />
-        <action
             android:id="@+id/action_heroesListFragment_to_loadDataFragment"
             app:destination="@id/loadDataFragment"
             app:popUpTo="@id/loadDataFragment" />
+        <action
+            android:id="@+id/action_heroesListFragment_to_infoAboutHeroFragment"
+            app:destination="@id/infoAboutHeroFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -79,6 +79,39 @@
         android:label="fragment_equipment"
         tools:layout="@layout/fragment_equipment" />
     <fragment
+        android:id="@+id/loadDataFragment"
+        android:name="com.example.honkaihelper.load_data.LoadDataFragment"
+        android:label="fragment_load_data"
+        tools:layout="@layout/fragment_load_data" >
+        <action
+            android:id="@+id/action_loadDataFragment_to_heroesListFragment"
+            app:destination="@id/heroesListFragment"
+            app:popUpTo="@id/loadDataFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoAboutHeroFragment"
+        android:name="com.example.honkaihelper.info_about_hero.InfoAboutHeroFragment"
+        android:label="fragment_info_about_hero"
+        tools:layout="@layout/fragment_info_about_hero" >
+        <action
+            android:id="@+id/action_infoAboutHeroFragment_to_baseBuildHeroFragment"
+            app:destination="@id/baseBuildHeroFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/baseBuildHeroFragment"
+        android:name="com.example.honkaihelper.base_build_hero.BaseBuildHeroFragment"
+        android:label="fragment_base_build_hero"
+        tools:layout="@layout/fragment_base_build_hero" >
+        <action
+            android:id="@+id/action_baseBuildHeroFragment_to_buildsHeroListFragment"
+            app:destination="@id/buildsHeroListFragment" />
+    </fragment>
+    <fragment
         android:id="@+id/buildsHeroListFragment"
         android:name="com.example.honkaihelper.builds_hero.BuildsHeroListFragment"
         android:label="fragment_builds_hero_list"
@@ -92,24 +125,4 @@
         android:name="com.example.honkaihelper.create_build_hero.CreateBuildHeroFragment"
         android:label="fragment_create_build_hero"
         tools:layout="@layout/fragment_create_build_hero" />
-    <fragment
-        android:id="@+id/baseBuildHeroFragment"
-        android:name="com.example.honkaihelper.base_build_hero.InfoAboutHeroFragment"
-        android:label="fragment_base_build_hero"
-        tools:layout="@layout/fragment_info_about_hero" >
-        <action
-            android:id="@+id/action_baseBuildHeroFragment_to_buildsHeroListFragment"
-            app:destination="@id/buildsHeroListFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/loadDataFragment"
-        android:name="com.example.honkaihelper.load_data.LoadDataFragment"
-        android:label="fragment_load_data"
-        tools:layout="@layout/fragment_load_data" >
-        <action
-            android:id="@+id/action_loadDataFragment_to_heroesListFragment"
-            app:destination="@id/heroesListFragment"
-            app:popUpTo="@id/loadDataFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
 </navigation>

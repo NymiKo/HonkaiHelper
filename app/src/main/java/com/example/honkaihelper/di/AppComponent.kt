@@ -3,8 +3,8 @@ package com.example.honkaihelper.di
 import android.content.Context
 import com.example.honkaihelper.activity.data.MainRepository
 import com.example.honkaihelper.activity.di.MainComponent
-import com.example.honkaihelper.base_build_hero.data.InfoAboutHeroRepository
-import com.example.honkaihelper.base_build_hero.di.InfoAboutHeroComponent
+import com.example.honkaihelper.info_about_hero.data.InfoAboutHeroRepository
+import com.example.honkaihelper.info_about_hero.di.InfoAboutHeroComponent
 import com.example.honkaihelper.builds_hero.di.BuildsHeroListComponent
 import com.example.honkaihelper.create_build_hero.di.CreateBuildHeroComponent
 import com.example.honkaihelper.createteam.data.CreateTeamRepository

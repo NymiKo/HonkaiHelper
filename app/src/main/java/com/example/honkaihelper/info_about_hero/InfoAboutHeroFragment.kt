@@ -1,13 +1,15 @@
-package com.example.honkaihelper.base_build_hero
+package com.example.honkaihelper.info_about_hero
 
 import android.content.Context
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.honkaihelper.App
-import com.example.honkaihelper.base_build_hero.adapters.AbilitiesHeroAdapter
-import com.example.honkaihelper.base_build_hero.adapters.EidolonsHeroAdapter
+import com.example.honkaihelper.R
+import com.example.honkaihelper.info_about_hero.adapters.AbilitiesHeroAdapter
+import com.example.honkaihelper.info_about_hero.adapters.EidolonsHeroAdapter
 import com.example.honkaihelper.databinding.FragmentInfoAboutHeroBinding
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.heroes.data.model.Hero
@@ -40,6 +42,7 @@ class InfoAboutHeroFragment :
         setupEidolonsAdapter()
         setupAbilitiesRecyclerView()
         setupEidolonsRecyclerView()
+        setupBuildButton()
     }
 
     override fun uiStateHandle() {
@@ -53,7 +56,12 @@ class InfoAboutHeroFragment :
     }
 
     private fun setupToolbar() {
-        binding.toolbarInfoAboutHero.title = hero?.name
+        binding.toolbarInfoAboutHero.apply {
+            title = hero?.name
+            setNavigationOnClickListener {
+                findNavController().popBackStack()
+            }
+        }
     }
 
     private fun setupHeroSplashArt() = binding.imageAvatarInfoAboutHero.loadImageWithoutScale(hero?.splashArt)
@@ -77,6 +85,12 @@ class InfoAboutHeroFragment :
         binding.recyclerEidolonsHero.apply {
             layoutManager = LinearLayoutManager(requireActivity())
             adapter = mEidolonsAdapter
+        }
+    }
+
+    private fun setupBuildButton() {
+        binding.buttonBuildHero.setOnClickListener {
+            findNavController().navigate(R.id.action_infoAboutHeroFragment_to_baseBuildHeroFragment)
         }
     }
 

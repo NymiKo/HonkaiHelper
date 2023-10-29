@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
-import com.example.honkaihelper.base_build_hero.InfoAboutHeroFragment
+import com.example.honkaihelper.info_about_hero.InfoAboutHeroFragment
 import com.example.honkaihelper.databinding.FragmentHeroesListBinding
 import com.example.honkaihelper.fragments.BaseFragment
 import com.example.honkaihelper.heroes.adapter.HeroesListActionListener
@@ -147,7 +147,7 @@ class HeroesListFragment :
         mAdapterRecyclerView = HeroesListAdapter(object : HeroesListActionListener {
             override fun onClick(hero: Hero) {
                 findNavController().navigate(
-                    R.id.baseBuildHeroFragment,
+                    R.id.infoAboutHeroFragment,
                     InfoAboutHeroFragment.newInstance(hero)
                 )
             }

@@ -1,4 +1,4 @@
-package com.example.honkaihelper.base_build_hero.data.model
+package com.example.honkaihelper.info_about_hero.data.model
 
 import com.example.honkaihelper.heroes.data.model.Hero
 

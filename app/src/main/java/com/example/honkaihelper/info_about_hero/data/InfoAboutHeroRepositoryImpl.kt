@@ -1,6 +1,6 @@
-package com.example.honkaihelper.base_build_hero.data
+package com.example.honkaihelper.info_about_hero.data
 
-import com.example.honkaihelper.base_build_hero.data.model.FullHeroInfo
+import com.example.honkaihelper.info_about_hero.data.model.FullHeroInfo
 import com.example.honkaihelper.data.local.dao.HeroDao
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

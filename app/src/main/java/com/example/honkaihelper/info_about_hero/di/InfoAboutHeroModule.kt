@@ -1,7 +1,7 @@
-package com.example.honkaihelper.base_build_hero.di
+package com.example.honkaihelper.info_about_hero.di
 
 import androidx.lifecycle.ViewModel
-import com.example.honkaihelper.base_build_hero.InfoAboutHeroViewModel
+import com.example.honkaihelper.info_about_hero.InfoAboutHeroViewModel
 import com.example.honkaihelper.di.ViewModelKey
 import dagger.Binds
 import dagger.Module

@@ -1,11 +1,11 @@
-package com.example.honkaihelper.base_build_hero
+package com.example.honkaihelper.info_about_hero
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.honkaihelper.base_build_hero.data.InfoAboutHeroRepository
-import com.example.honkaihelper.base_build_hero.data.model.FullHeroInfo
+import com.example.honkaihelper.info_about_hero.data.InfoAboutHeroRepository
+import com.example.honkaihelper.info_about_hero.data.model.FullHeroInfo
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

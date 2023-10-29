@@ -1,9 +1,9 @@
-package com.example.honkaihelper.base_build_hero.adapters
+package com.example.honkaihelper.info_about_hero.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.honkaihelper.base_build_hero.data.model.Eidolon
+import com.example.honkaihelper.info_about_hero.data.model.Eidolon
 import com.example.honkaihelper.databinding.ItemEidolonHeroBinding
 import com.example.honkaihelper.utils.load
 

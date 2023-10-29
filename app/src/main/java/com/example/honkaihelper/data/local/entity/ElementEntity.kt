@@ -2,8 +2,7 @@ package com.example.honkaihelper.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.honkaihelper.base_build_hero.data.model.Element
-import com.example.honkaihelper.base_build_hero.data.model.Path
+import com.example.honkaihelper.info_about_hero.data.model.Element
 import com.example.honkaihelper.data.local.contract.RoomContract
 
 @Entity(
