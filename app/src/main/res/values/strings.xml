@@ -50,6 +50,7 @@
     <string name="empty_data">Похоже данные не были загружены :(</string>
     <string name="download">Загрузить</string>
     <string name="unexpected_error">Возникла непредвиденная ошибка</string>
+    <string name="build">Билд</string>
     <string name="go_back">Вернуться назад</string>
     <string name="abilities">Таланты</string>
     <string name="eidolons">Эйдолоны</string>

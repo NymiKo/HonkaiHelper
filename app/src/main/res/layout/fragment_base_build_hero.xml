@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -58,25 +58,45 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_hero_avatar_base_build" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_build_hero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/DP16"
+            android:layout_marginTop="@dimen/DP16"
+            android:backgroundTint="?attr/colorSecondary"
+            android:drawableEnd="@drawable/ic_keyboard_arrow_right"
+            android:drawableTint="?attr/colorOnSecondary"
+            android:gravity="start|center"
+            android:text="@string/build"
+            android:textColor="?attr/colorOnSecondary"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:cornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_story_hero" />
+
         <TextView
             android:id="@+id/text_ability"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/DP16"
-            android:textStyle="bold"
+            android:text="@string/abilities"
             android:textColor="?attr/colorSecondary"
             android:textSize="18sp"
-            android:text="@string/abilities"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_story_hero" />
+            app:layout_constraintTop_toBottomOf="@+id/button_build_hero" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_abilities_hero"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/DP8"
             android:layout_marginHorizontal="@dimen/DP16"
+            android:layout_marginTop="@dimen/DP8"
+            android:nestedScrollingEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_ability" />
@@ -86,10 +106,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/DP16"
-            android:textStyle="bold"
+            android:text="@string/eidolons"
             android:textColor="?attr/colorSecondary"
             android:textSize="18sp"
-            android:text="@string/eidolons"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recycler_abilities_hero" />
@@ -98,12 +118,13 @@
             android:id="@+id/recycler_eidolons_hero"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/DP8"
             android:layout_marginHorizontal="@dimen/DP16"
+            android:layout_marginTop="@dimen/DP8"
+            android:nestedScrollingEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_eidolons" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>
