@@ -39,4 +39,7 @@ object RoomModule {
 
     @Provides
     fun bindOptimalStatsHeroDao(database: RoomDatabaseApp) = database.optimalStatsHeroDao()
+
+    @Provides
+    fun bindBuildWeaponDao(database: RoomDatabaseApp) = database.buildWeaponDao()
 }
