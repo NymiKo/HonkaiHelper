@@ -1,0 +1,29 @@
+package com.example.honkaihelper.data.local.entity
+
+import androidx.room.Entity
+import com.example.honkaihelper.base_build_hero.data.model.BuildRelic
+import com.example.honkaihelper.data.local.contract.RoomContract
+
+@Entity(tableName = RoomContract.tableBuildRelic)
+data class BuildRelicEntity(
+    val idBuildRelic: Int,
+    val idRelic: Int,
+    val top: Int,
+    val idHero: Int
+) {
+    companion object {
+        fun toBuildRelicEntity(buildRelic: BuildRelic) = BuildRelicEntity(
+            idBuildRelic = buildRelic.idBuildRelic,
+            idRelic = buildRelic.idRelic,
+            top = buildRelic.top,
+            idHero = buildRelic.idHero
+        )
+    }
+
+    fun toBuildRelic() = BuildRelic(
+        idBuildRelic = idBuildRelic,
+        idRelic = idRelic,
+        top = top,
+        idHero = idHero
+    )
+}
