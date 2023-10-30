@@ -42,7 +42,7 @@ class InfoAboutHeroFragment :
         setupEidolonsAdapter()
         setupAbilitiesRecyclerView()
         setupEidolonsRecyclerView()
-        setupBuildButton()
+        setupGoToBuildHeroButton()
     }
 
     override fun uiStateHandle() {
@@ -88,8 +88,8 @@ class InfoAboutHeroFragment :
         }
     }
 
-    private fun setupBuildButton() {
-        binding.buttonBuildHero.setOnClickListener {
+    private fun setupGoToBuildHeroButton() {
+        binding.buttonGoToBuildHero.setOnClickListener {
             findNavController().navigate(R.id.action_infoAboutHeroFragment_to_baseBuildHeroFragment)
         }
     }

@@ -61,7 +61,7 @@
             app:layout_constraintTop_toBottomOf="@+id/image_avatar_info_about_hero" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_build_hero"
+            android:id="@+id/button_go_to_build_hero"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/DP16"
@@ -90,7 +90,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_build_hero" />
+            app:layout_constraintTop_toBottomOf="@+id/button_go_to_build_hero" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_abilities_hero"
