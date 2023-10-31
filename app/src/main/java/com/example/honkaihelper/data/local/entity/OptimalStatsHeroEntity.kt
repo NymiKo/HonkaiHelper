@@ -1,11 +1,13 @@
 package com.example.honkaihelper.data.local.entity
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.honkaihelper.base_build_hero.data.model.OptimalStatsHero
 import com.example.honkaihelper.data.local.contract.RoomContract
 
 @Entity(tableName = RoomContract.tableOptimalStatsHero)
 data class OptimalStatsHeroEntity(
+    @PrimaryKey(autoGenerate = false)
     val idOptimalStats: Int,
     val attack: String,
     val speed: String,

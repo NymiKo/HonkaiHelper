@@ -3,6 +3,7 @@ package com.example.honkaihelper.data.local
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.example.honkaihelper.data.local.dao.AbilityDao
+import com.example.honkaihelper.data.local.dao.BuildDecorationDao
 import com.example.honkaihelper.data.local.dao.BuildRelicDao
 import com.example.honkaihelper.data.local.dao.BuildWeaponDao
 import com.example.honkaihelper.data.local.dao.DecorationDao
@@ -13,6 +14,7 @@ import com.example.honkaihelper.data.local.dao.OptimalStatsHeroDao
 import com.example.honkaihelper.data.local.dao.PathDao
 import com.example.honkaihelper.data.local.dao.RelicDao
 import com.example.honkaihelper.data.local.entity.AbilityEntity
+import com.example.honkaihelper.data.local.entity.BuildDecorationEntity
 import com.example.honkaihelper.data.local.entity.BuildRelicEntity
 import com.example.honkaihelper.data.local.entity.BuildWeaponEntity
 import com.example.honkaihelper.data.local.entity.DecorationEntity
@@ -34,7 +36,8 @@ import com.example.honkaihelper.data.local.entity.RelicEntity
         DecorationEntity::class,
         OptimalStatsHeroEntity::class,
         BuildWeaponEntity::class,
-        BuildRelicEntity::class
+        BuildRelicEntity::class,
+        BuildDecorationEntity::class
     ],
     version = 1,
     exportSchema = true
@@ -50,4 +53,5 @@ abstract class RoomDatabaseApp : RoomDatabase() {
     abstract fun optimalStatsHeroDao(): OptimalStatsHeroDao
     abstract fun buildWeaponDao(): BuildWeaponDao
     abstract fun buildRelicDao(): BuildRelicDao
+    abstract fun buildDecorationDao(): BuildDecorationDao
 }

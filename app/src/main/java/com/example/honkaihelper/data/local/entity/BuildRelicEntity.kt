@@ -1,11 +1,13 @@
 package com.example.honkaihelper.data.local.entity
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.honkaihelper.base_build_hero.data.model.BuildRelic
 import com.example.honkaihelper.data.local.contract.RoomContract
 
 @Entity(tableName = RoomContract.tableBuildRelic)
 data class BuildRelicEntity(
+    @PrimaryKey(autoGenerate = false)
     val idBuildRelic: Int,
     val idRelic: Int,
     val top: Int,
