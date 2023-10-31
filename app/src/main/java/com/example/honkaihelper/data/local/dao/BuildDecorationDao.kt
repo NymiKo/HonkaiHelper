@@ -13,5 +13,5 @@ interface BuildDecorationDao {
     suspend fun getBuildDecorations(): List<BuildDecorationEntity>
 
     @Insert
-    suspend fun insertBuildDecorations(buildDecorations: List<BuildDecoration>)
+    suspend fun insertBuildDecorations(buildDecorations: List<BuildDecorationEntity>)
 }

@@ -48,4 +48,7 @@ object RoomModule {
 
     @Provides
     fun bindBuildDecorationDao(database: RoomDatabaseApp) = database.buildDecorationDao()
+
+    @Provides
+    fun bindBuildStatsEquipmentDao(database: RoomDatabaseApp) = database.buildStatsEquipmentDao()
 }

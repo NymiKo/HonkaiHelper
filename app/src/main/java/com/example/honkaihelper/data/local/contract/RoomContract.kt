@@ -15,4 +15,5 @@ object RoomContract {
     const val tableBuildWeapon = "build_weapon"
     const val tableBuildRelic = "build_relic"
     const val tableBuildDecoration = "build_decoration"
+    const val tableBuildStatsEquipment = "build_stats_equipment"
 }
