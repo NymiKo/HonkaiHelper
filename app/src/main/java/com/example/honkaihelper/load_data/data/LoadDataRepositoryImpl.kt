@@ -9,6 +9,7 @@ import com.example.honkaihelper.data.local.dao.AbilityDao
 import com.example.honkaihelper.data.local.dao.BuildDecorationDao
 import com.example.honkaihelper.data.local.dao.BuildRelicDao
 import com.example.honkaihelper.data.local.dao.BuildWeaponDao
+import com.example.honkaihelper.data.local.dao.DecorationDao
 import com.example.honkaihelper.data.local.dao.EidolonDao
 import com.example.honkaihelper.data.local.dao.ElementDao
 import com.example.honkaihelper.data.local.dao.HeroDao
@@ -18,6 +19,7 @@ import com.example.honkaihelper.data.local.entity.AbilityEntity
 import com.example.honkaihelper.data.local.entity.BuildDecorationEntity
 import com.example.honkaihelper.data.local.entity.BuildRelicEntity
 import com.example.honkaihelper.data.local.entity.BuildWeaponEntity
+import com.example.honkaihelper.data.local.entity.DecorationEntity
 import com.example.honkaihelper.data.local.entity.EidolonEntity
 import com.example.honkaihelper.data.local.entity.ElementEntity
 import com.example.honkaihelper.data.local.entity.HeroEntity
@@ -44,6 +46,7 @@ class LoadDataRepositoryImpl @Inject constructor(
     private val buildWeaponDao: BuildWeaponDao,
     private val buildRelicDao: BuildRelicDao,
     private val buildDecorationDao: BuildDecorationDao,
+    private val decorationDao: DecorationDao,
     private val loadDataService: LoadDataService,
     private val imageLoader: ImageLoader
 ) : LoadDataRepository {
@@ -58,6 +61,7 @@ class LoadDataRepositoryImpl @Inject constructor(
         val deferredBuildWeapon = async { getBuildWeaponsList() }
         val deferredBuildRelic = async { getBuildRelicsList() }
         val deferredBuildDecorations = async { getBuildDecorationsList() }
+        val deferredDecorations = async { getDecorationsList() }
 
         val results = awaitAll(
             deferredPaths,
@@ -68,7 +72,8 @@ class LoadDataRepositoryImpl @Inject constructor(
             deferredOptimalStats,
             deferredBuildWeapon,
             deferredBuildRelic,
-            deferredBuildDecorations
+            deferredBuildDecorations,
+            deferredDecorations
         )
 
         results.all { it }
@@ -188,7 +193,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                     }
 
                     val localImageEidolons =
-                        downloadImages(newEidolons, { it.image }, CHILD_ABILITIES_IMAGE).await()
+                        downloadImages(newEidolons, { it.image }, CHILD_EIDOLONS_IMAGE).await()
 
                     val eidolonEntities = newEidolons.mapIndexed { index, eidolons ->
                         EidolonEntity.toEidolonEntity(eidolons).copy(
@@ -331,6 +336,37 @@ class LoadDataRepositoryImpl @Inject constructor(
         }
     }
 
+    private suspend fun getDecorationsList(): Boolean {
+        return withContext(ioDispatcher) {
+            when (val resultApi = getRemoteData { loadDataService.getDecorations() }) {
+                is NetworkResult.Error -> false
+                is NetworkResult.Success -> {
+                    val remoteEntities = resultApi.data
+                    val localEntities = getLocalEntities { decorationDao.getDecorations() }
+                    val newEntities = remoteEntities.filter { remoteDecoration ->
+                        localEntities.none { remoteDecoration == it.toDecoration() }
+                    }
+
+                    val localImageDecorations =
+                        downloadImages(newEntities, { it.image }, CHILD_DECORATIONS_IMAGE).await()
+
+                    val decorationEntities = newEntities.mapIndexed { index, decoration ->
+                        DecorationEntity.toDecorationEntity(decoration).copy(
+                            image = localImageDecorations[index]
+                        )
+                    }
+
+                    insertEntitiesIntoLocalStorage(
+                        decorationEntities,
+                        decorationDao::insertDecorations
+                    ).join()
+
+                    return@withContext true
+                }
+            }
+        }
+    }
+
     private suspend fun <T> getRemoteData(getData: suspend () -> Response<T>) =
         handleApi { getData() }
 
@@ -367,5 +403,6 @@ class LoadDataRepositoryImpl @Inject constructor(
         const val CHILD_ELEMENTS_IMAGE = "elements_image"
         const val CHILD_ABILITIES_IMAGE = "abilities_image"
         const val CHILD_EIDOLONS_IMAGE = "eidolons_image"
+        const val CHILD_DECORATIONS_IMAGE = "decorations_image"
     }
 }
