@@ -15,6 +15,7 @@ import com.example.honkaihelper.data.local.dao.ElementDao
 import com.example.honkaihelper.data.local.dao.HeroDao
 import com.example.honkaihelper.data.local.dao.OptimalStatsHeroDao
 import com.example.honkaihelper.data.local.dao.PathDao
+import com.example.honkaihelper.data.local.dao.RelicDao
 import com.example.honkaihelper.data.local.entity.AbilityEntity
 import com.example.honkaihelper.data.local.entity.BuildDecorationEntity
 import com.example.honkaihelper.data.local.entity.BuildRelicEntity
@@ -25,6 +26,7 @@ import com.example.honkaihelper.data.local.entity.ElementEntity
 import com.example.honkaihelper.data.local.entity.HeroEntity
 import com.example.honkaihelper.data.local.entity.OptimalStatsHeroEntity
 import com.example.honkaihelper.data.local.entity.PathEntity
+import com.example.honkaihelper.data.local.entity.RelicEntity
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -47,6 +49,7 @@ class LoadDataRepositoryImpl @Inject constructor(
     private val buildRelicDao: BuildRelicDao,
     private val buildDecorationDao: BuildDecorationDao,
     private val decorationDao: DecorationDao,
+    private val relicDao: RelicDao,
     private val loadDataService: LoadDataService,
     private val imageLoader: ImageLoader
 ) : LoadDataRepository {
@@ -62,6 +65,7 @@ class LoadDataRepositoryImpl @Inject constructor(
         val deferredBuildRelic = async { getBuildRelicsList() }
         val deferredBuildDecorations = async { getBuildDecorationsList() }
         val deferredDecorations = async { getDecorationsList() }
+        val deferredRelics = async { getRelicsList() }
 
         val results = awaitAll(
             deferredPaths,
@@ -73,7 +77,8 @@ class LoadDataRepositoryImpl @Inject constructor(
             deferredBuildWeapon,
             deferredBuildRelic,
             deferredBuildDecorations,
-            deferredDecorations
+            deferredDecorations,
+            deferredRelics
         )
 
         results.all { it }
@@ -367,6 +372,37 @@ class LoadDataRepositoryImpl @Inject constructor(
         }
     }
 
+    private suspend fun getRelicsList(): Boolean {
+        return withContext(ioDispatcher) {
+            when (val resultApi = getRemoteData { loadDataService.getRelics() }) {
+                is NetworkResult.Error -> false
+                is NetworkResult.Success -> {
+                    val remoteEntities = resultApi.data
+                    val localEntities = getLocalEntities { relicDao.getRelics() }
+                    val newEntities = remoteEntities.filter { remoteRelic ->
+                        localEntities.none { remoteRelic == it.toRelic() }
+                    }
+
+                    val localImageRelics =
+                        downloadImages(newEntities, { it.image }, CHILD_RELICS_IMAGE).await()
+
+                    val relicEntities = newEntities.mapIndexed { index, relic ->
+                        RelicEntity.toRelicEntity(relic).copy(
+                            image = localImageRelics[index]
+                        )
+                    }
+
+                    insertEntitiesIntoLocalStorage(
+                        relicEntities,
+                        relicDao::insertRelics
+                    ).join()
+
+                    return@withContext true
+                }
+            }
+        }
+    }
+
     private suspend fun <T> getRemoteData(getData: suspend () -> Response<T>) =
         handleApi { getData() }
 
@@ -404,5 +440,6 @@ class LoadDataRepositoryImpl @Inject constructor(
         const val CHILD_ABILITIES_IMAGE = "abilities_image"
         const val CHILD_EIDOLONS_IMAGE = "eidolons_image"
         const val CHILD_DECORATIONS_IMAGE = "decorations_image"
+        const val CHILD_RELICS_IMAGE = "relics_image"
     }
 }

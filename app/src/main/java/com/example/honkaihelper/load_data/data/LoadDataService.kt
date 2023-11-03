@@ -10,6 +10,7 @@ import com.example.honkaihelper.info_about_hero.data.model.Element
 import com.example.honkaihelper.info_about_hero.data.model.Path
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.info_about_hero.data.model.Decoration
+import com.example.honkaihelper.info_about_hero.data.model.Relic
 import retrofit2.Response
 import retrofit2.http.GET
 
@@ -43,4 +44,7 @@ interface LoadDataService {
 
     @GET("/getDecorations.php")
     suspend fun getDecorations(): Response<List<Decoration>>
+
+    @GET("/getRelics.php")
+    suspend fun getRelics(): Response<List<Relic>>
 }
