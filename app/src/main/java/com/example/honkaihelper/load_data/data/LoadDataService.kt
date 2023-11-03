@@ -2,6 +2,7 @@ package com.example.honkaihelper.load_data.data
 
 import com.example.honkaihelper.base_build_hero.data.model.BuildDecoration
 import com.example.honkaihelper.base_build_hero.data.model.BuildRelic
+import com.example.honkaihelper.base_build_hero.data.model.BuildStatsEquipment
 import com.example.honkaihelper.base_build_hero.data.model.BuildWeapon
 import com.example.honkaihelper.base_build_hero.data.model.OptimalStatsHero
 import com.example.honkaihelper.info_about_hero.data.model.Ability
@@ -47,4 +48,7 @@ interface LoadDataService {
 
     @GET("/getRelics.php")
     suspend fun getRelics(): Response<List<Relic>>
+
+    @GET("/getStatsEquipment.php")
+    suspend fun getStatsEquipment(): Response<List<BuildStatsEquipment>>
 }
