@@ -1,10 +1,12 @@
 package com.example.honkaihelper.load_data.data
 
+import com.example.honkaihelper.base_build_hero.data.model.BuildDecoration
 import com.example.honkaihelper.base_build_hero.data.model.BuildRelic
 import com.example.honkaihelper.data.NetworkResult
 import com.example.honkaihelper.data.handleApi
 import com.example.honkaihelper.data.image_loader.ImageLoader
 import com.example.honkaihelper.data.local.dao.AbilityDao
+import com.example.honkaihelper.data.local.dao.BuildDecorationDao
 import com.example.honkaihelper.data.local.dao.BuildRelicDao
 import com.example.honkaihelper.data.local.dao.BuildWeaponDao
 import com.example.honkaihelper.data.local.dao.EidolonDao
@@ -13,6 +15,7 @@ import com.example.honkaihelper.data.local.dao.HeroDao
 import com.example.honkaihelper.data.local.dao.OptimalStatsHeroDao
 import com.example.honkaihelper.data.local.dao.PathDao
 import com.example.honkaihelper.data.local.entity.AbilityEntity
+import com.example.honkaihelper.data.local.entity.BuildDecorationEntity
 import com.example.honkaihelper.data.local.entity.BuildRelicEntity
 import com.example.honkaihelper.data.local.entity.BuildWeaponEntity
 import com.example.honkaihelper.data.local.entity.EidolonEntity
@@ -40,6 +43,7 @@ class LoadDataRepositoryImpl @Inject constructor(
     private val optimalStatsHeroDao: OptimalStatsHeroDao,
     private val buildWeaponDao: BuildWeaponDao,
     private val buildRelicDao: BuildRelicDao,
+    private val buildDecorationDao: BuildDecorationDao,
     private val loadDataService: LoadDataService,
     private val imageLoader: ImageLoader
 ) : LoadDataRepository {
@@ -53,6 +57,7 @@ class LoadDataRepositoryImpl @Inject constructor(
         val deferredOptimalStats = async { getOptimalStatsList() }
         val deferredBuildWeapon = async { getBuildWeaponsList() }
         val deferredBuildRelic = async { getBuildRelicsList() }
+        val deferredBuildDecorations = async { getBuildDecorationsList() }
 
         val results = awaitAll(
             deferredPaths,
@@ -62,7 +67,8 @@ class LoadDataRepositoryImpl @Inject constructor(
             deferredEidolons,
             deferredOptimalStats,
             deferredBuildWeapon,
-            deferredBuildRelic
+            deferredBuildRelic,
+            deferredBuildDecorations
         )
 
         results.all { it }
@@ -295,6 +301,28 @@ class LoadDataRepositoryImpl @Inject constructor(
                     insertEntitiesIntoLocalStorage(
                         newEntities.map { BuildRelicEntity.toBuildRelicEntity(it) },
                         buildRelicDao::insertBuildRelic
+                    ).join()
+
+                    return@withContext true
+                }
+            }
+        }
+    }
+
+    private suspend fun getBuildDecorationsList(): Boolean {
+        return withContext(ioDispatcher) {
+            when (val resultApi = getRemoteData { loadDataService.getBuildDecorations() }) {
+                is NetworkResult.Error -> false
+                is NetworkResult.Success -> {
+                    val remoteEntities = resultApi.data
+                    val localEntities = getLocalEntities { buildDecorationDao.getBuildDecorations() }
+                    val newEntities = remoteEntities.filter { remoteBuildDecorations ->
+                        localEntities.none { remoteBuildDecorations == it.toBuildDecoration() }
+                    }
+
+                    insertEntitiesIntoLocalStorage(
+                        newEntities.map { BuildDecorationEntity.toBuildDecorationEntity(it) },
+                        buildDecorationDao::insertBuildDecorations
                     ).join()
 
                     return@withContext true

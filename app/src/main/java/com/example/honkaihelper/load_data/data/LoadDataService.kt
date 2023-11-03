@@ -1,5 +1,6 @@
 package com.example.honkaihelper.load_data.data
 
+import com.example.honkaihelper.base_build_hero.data.model.BuildDecoration
 import com.example.honkaihelper.base_build_hero.data.model.BuildRelic
 import com.example.honkaihelper.base_build_hero.data.model.BuildWeapon
 import com.example.honkaihelper.base_build_hero.data.model.OptimalStatsHero
@@ -35,4 +36,7 @@ interface LoadDataService {
 
     @GET("/getBuildRelics.php")
     suspend fun getBuildRelics(): Response<List<BuildRelic>>
+
+    @GET("/getBuildDecorations.php")
+    suspend fun getBuildDecorations(): Response<List<BuildDecoration>>
 }
