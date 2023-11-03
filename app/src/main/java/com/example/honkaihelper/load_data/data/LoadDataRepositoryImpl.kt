@@ -101,7 +101,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                     val remoteElements = resultApi.data
                     val localElements = getLocalEntities { elementDao.getElements() }
                     val newElements = remoteElements.filter { element ->
-                        localElements.none { it.idElement == element.idElement && it.title == element.title }
+                        localElements.none { it.copy(image = element.image).toElement() == element }
                     }
 
                     val localImageElements =
@@ -135,7 +135,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                     val remotePaths = resultApi.data
                     val localPaths = getLocalEntities { pathDao.getPaths() }
                     val newPaths = remotePaths.filter { path ->
-                        localPaths.none { it.idPath == path.idPath && it.title == path.title }
+                        localPaths.none { it.copy(image = path.image).toPath() == path }
                     }
 
                     val localImagePaths =
@@ -166,7 +166,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                     val remoteAbilities = resultApi.data
                     val localAbilities = getLocalEntities { abilityDao.getAbilities() }
                     val newAbilities = remoteAbilities.filter { ability ->
-                        localAbilities.none { it.idAbility == ability.idAbility && it.title == ability.title && it.description == ability.description && it.idHero == ability.idHero }
+                        localAbilities.none { it.copy(image = ability.image).toAbility() == ability }
                     }
 
                     val localImageAbilities =
