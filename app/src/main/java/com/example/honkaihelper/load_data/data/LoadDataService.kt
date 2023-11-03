@@ -1,5 +1,6 @@
 package com.example.honkaihelper.load_data.data
 
+import com.example.honkaihelper.base_build_hero.data.model.OptimalStatsHero
 import com.example.honkaihelper.info_about_hero.data.model.Ability
 import com.example.honkaihelper.info_about_hero.data.model.Eidolon
 import com.example.honkaihelper.info_about_hero.data.model.Element
@@ -23,4 +24,7 @@ interface LoadDataService {
 
     @GET("/getEidolons.php")
     suspend fun getEidolonsList(): Response<List<Eidolon>>
+
+    @GET("/getOptimalStats.php")
+    suspend fun getOptimalStats(): Response<List<OptimalStatsHero>>
 }

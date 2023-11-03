@@ -8,11 +8,13 @@ import com.example.honkaihelper.data.local.dao.AbilityDao
 import com.example.honkaihelper.data.local.dao.EidolonDao
 import com.example.honkaihelper.data.local.dao.ElementDao
 import com.example.honkaihelper.data.local.dao.HeroDao
+import com.example.honkaihelper.data.local.dao.OptimalStatsHeroDao
 import com.example.honkaihelper.data.local.dao.PathDao
 import com.example.honkaihelper.data.local.entity.AbilityEntity
 import com.example.honkaihelper.data.local.entity.EidolonEntity
 import com.example.honkaihelper.data.local.entity.ElementEntity
 import com.example.honkaihelper.data.local.entity.HeroEntity
+import com.example.honkaihelper.data.local.entity.OptimalStatsHeroEntity
 import com.example.honkaihelper.data.local.entity.PathEntity
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -20,6 +22,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.Response
 import javax.inject.Inject
 
 class LoadDataRepositoryImpl @Inject constructor(
@@ -29,6 +32,7 @@ class LoadDataRepositoryImpl @Inject constructor(
     private val abilityDao: AbilityDao,
     private val elementDao: ElementDao,
     private val eidolonDao: EidolonDao,
+    private val optimalStatsHeroDao: OptimalStatsHeroDao,
     private val loadDataService: LoadDataService,
     private val imageLoader: ImageLoader
 ) : LoadDataRepository {
@@ -39,7 +43,7 @@ class LoadDataRepositoryImpl @Inject constructor(
 
     private suspend fun getElementsHeroes(): Boolean {
         return withContext(ioDispatcher) {
-            when (val resultApi = getRemoteElementsList()) {
+            when (val resultApi = getRemoteData { loadDataService.getElementsList() }) {
                 is NetworkResult.Error -> {
                     return@withContext false
                 }
@@ -73,7 +77,7 @@ class LoadDataRepositoryImpl @Inject constructor(
 
     private suspend fun getPathsHeroes(): Boolean {
         return withContext(ioDispatcher) {
-            when (val resultApi = getRemotePathsList()) {
+            when (val resultApi = getRemoteData { loadDataService.getPathsList() }) {
                 is NetworkResult.Error -> {
                     return@withContext false
                 }
@@ -104,7 +108,7 @@ class LoadDataRepositoryImpl @Inject constructor(
 
     private suspend fun getAbilitiesHeroes(): Boolean {
         return withContext(ioDispatcher) {
-            when (val resultApi = getRemoteAbilitiesList()) {
+            when (val resultApi = getRemoteData { loadDataService.getAbilitiesList() }) {
                 is NetworkResult.Error -> {
                     return@withContext false
                 }
@@ -138,7 +142,7 @@ class LoadDataRepositoryImpl @Inject constructor(
 
     private suspend fun getEidolonsHero(): Boolean {
         return withContext(ioDispatcher) {
-            when (val resultApi = getRemoteEidolonsList()) {
+            when (val resultApi = getRemoteData { loadDataService.getEidolonsList() }) {
                 is NetworkResult.Error -> {
                     return@withContext false
                 }
@@ -172,7 +176,7 @@ class LoadDataRepositoryImpl @Inject constructor(
 
     private suspend fun getHeroesList(): Boolean {
         return withContext(ioDispatcher) {
-            when (val resultApi = getRemoteHeroesList()) {
+            when (val resultApi = getRemoteData { loadDataService.getHeroesList() }) {
                 is NetworkResult.Error -> {
                     return@withContext false
                 }
@@ -205,16 +209,28 @@ class LoadDataRepositoryImpl @Inject constructor(
             }
         }
     }
+//
+//    private suspend fun getRemoteData(): Boolean {
+//        return withContext(ioDispatcher) {
+//            when(val resultApi = getOptimalStats()) {
+//                is NetworkResult.Error -> false
+//                is NetworkResult.Success -> {
+//                    val remoteEntities = resultApi.data
+//                    val localEntities = getLocalEntities { optimalStatsHeroDao.getOptimalStats() }
+//                    val newEntities = remoteEntities.filter { remoteOptimalStats ->
+//                        localEntities.none { remoteOptimalStats == it.toOptimalStatsHero() }
+//                    }
+//
+//                    insertEntitiesIntoLocalStorage(newEntities.map { OptimalStatsHeroEntity.toOptimalStatsHeroEntity(it) },
+//                        optimalStatsHeroDao::insertOptimalStatsHero).join()
+//
+//                    return@withContext true
+//                }
+//            }
+//        }
+//    }
 
-    private suspend fun getRemoteHeroesList() = handleApi { loadDataService.getHeroesList() }
-
-    private suspend fun getRemotePathsList() = handleApi { loadDataService.getPathsList() }
-
-    private suspend fun getRemoteElementsList() = handleApi { loadDataService.getElementsList() }
-
-    private suspend fun getRemoteAbilitiesList() = handleApi { loadDataService.getAbilitiesList() }
-
-    private suspend fun getRemoteEidolonsList() = handleApi { loadDataService.getEidolonsList() }
+    private suspend fun <T> getRemoteData(getData: suspend () -> Response<T>) = handleApi { getData() }
 
     private suspend fun <T> insertEntitiesIntoLocalStorage(
         entityList: List<T>,
