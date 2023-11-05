@@ -51,4 +51,7 @@ interface LoadDataService {
 
     @GET("/getStatsEquipment.php")
     suspend fun getStatsEquipment(): Response<List<BuildStatsEquipment>>
+
+    @GET("/getWeapons.php")
+    suspend fun getWeapons(): Response<List<BuildStatsEquipment>>
 }

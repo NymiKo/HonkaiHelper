@@ -14,6 +14,7 @@ import com.example.honkaihelper.data.local.dao.HeroDao
 import com.example.honkaihelper.data.local.dao.OptimalStatsHeroDao
 import com.example.honkaihelper.data.local.dao.PathDao
 import com.example.honkaihelper.data.local.dao.RelicDao
+import com.example.honkaihelper.data.local.dao.WeaponDao
 import com.example.honkaihelper.data.local.entity.AbilityEntity
 import com.example.honkaihelper.data.local.entity.BuildDecorationEntity
 import com.example.honkaihelper.data.local.entity.BuildRelicEntity
@@ -26,6 +27,7 @@ import com.example.honkaihelper.data.local.entity.HeroEntity
 import com.example.honkaihelper.data.local.entity.OptimalStatsHeroEntity
 import com.example.honkaihelper.data.local.entity.PathEntity
 import com.example.honkaihelper.data.local.entity.RelicEntity
+import com.example.honkaihelper.data.local.entity.WeaponEntity
 
 @Database(
     entities = [
@@ -40,7 +42,8 @@ import com.example.honkaihelper.data.local.entity.RelicEntity
         BuildWeaponEntity::class,
         BuildRelicEntity::class,
         BuildDecorationEntity::class,
-        BuildStatsEquipmentEntity::class
+        BuildStatsEquipmentEntity::class,
+        WeaponEntity::class
     ],
     version = 1,
     exportSchema = true
@@ -58,4 +61,5 @@ abstract class RoomDatabaseApp : RoomDatabase() {
     abstract fun buildRelicDao(): BuildRelicDao
     abstract fun buildDecorationDao(): BuildDecorationDao
     abstract fun buildStatsEquipmentDao(): BuildStatsEquipmentDao
+    abstract fun weaponsDao(): WeaponDao
 }
