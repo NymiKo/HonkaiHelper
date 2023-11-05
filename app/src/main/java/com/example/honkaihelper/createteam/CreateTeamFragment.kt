@@ -1,7 +1,6 @@
 package com.example.honkaihelper.createteam
 
 import android.content.Context
-import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -11,7 +10,7 @@ import com.example.honkaihelper.createteam.adapter.CreateTeamAdapter
 import com.example.honkaihelper.createteam.adapter.HeroListInCreateTeamAdapter
 import com.example.honkaihelper.createteam.adapter.HeroListInCreateTeamListener
 import com.example.honkaihelper.databinding.FragmentCreateTeamBinding
-import com.example.honkaihelper.fragments.BaseFragment
+import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.createteam.data.model.ActiveHeroInTeam
 import com.example.honkaihelper.setupteam.SetupTeamFragment
 import com.example.honkaihelper.utils.gone

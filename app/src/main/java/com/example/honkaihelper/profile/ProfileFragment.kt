@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentProfileBinding
-import com.example.honkaihelper.fragments.BaseFragment
+import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.profile.adapter.ProfileTeamsListAdapter
 import com.example.honkaihelper.profile.data.model.User
 import com.example.honkaihelper.utils.TOKEN

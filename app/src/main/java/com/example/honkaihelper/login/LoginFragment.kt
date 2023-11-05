@@ -6,7 +6,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentLoginBinding
-import com.example.honkaihelper.fragments.BaseFragment
+import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.utils.TOKEN
 import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone

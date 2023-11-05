@@ -11,7 +11,7 @@ import com.example.honkaihelper.R
 import com.example.honkaihelper.info_about_hero.adapters.AbilitiesHeroAdapter
 import com.example.honkaihelper.info_about_hero.adapters.EidolonsHeroAdapter
 import com.example.honkaihelper.databinding.FragmentInfoAboutHeroBinding
-import com.example.honkaihelper.fragments.BaseFragment
+import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.utils.getParcelable
 import com.example.honkaihelper.utils.load

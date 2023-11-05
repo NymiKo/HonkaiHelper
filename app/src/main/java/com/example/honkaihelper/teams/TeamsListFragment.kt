@@ -2,9 +2,7 @@ package com.example.honkaihelper.teams
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -13,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentTeamsListBinding
-import com.example.honkaihelper.fragments.BaseFragment
+import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.teams.data.model.TeamHero
 import com.example.honkaihelper.teams.adapter.HeroTeamsListAdapter
 import com.example.honkaihelper.utils.TOKEN

@@ -13,7 +13,7 @@ import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.info_about_hero.InfoAboutHeroFragment
 import com.example.honkaihelper.databinding.FragmentHeroesListBinding
-import com.example.honkaihelper.fragments.BaseFragment
+import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.heroes.adapter.HeroesListActionListener
 import com.example.honkaihelper.heroes.adapter.HeroesListAdapter
 import com.example.honkaihelper.heroes.data.model.Hero

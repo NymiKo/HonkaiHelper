@@ -3,16 +3,14 @@ package com.example.honkaihelper.registration
 import android.content.Context
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentRegistrationBinding
-import com.example.honkaihelper.fragments.BaseFragment
+import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.toast
 import com.example.honkaihelper.utils.visible
-import javax.inject.Inject
 
 class RegistrationFragment :
     BaseFragment<FragmentRegistrationBinding>(FragmentRegistrationBinding::inflate) {

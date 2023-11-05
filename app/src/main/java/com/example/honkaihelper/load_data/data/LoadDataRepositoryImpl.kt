@@ -1,8 +1,5 @@
 package com.example.honkaihelper.load_data.data
 
-import com.example.honkaihelper.base_build_hero.data.model.BuildDecoration
-import com.example.honkaihelper.base_build_hero.data.model.BuildRelic
-import com.example.honkaihelper.base_build_hero.data.model.BuildStatsEquipment
 import com.example.honkaihelper.data.NetworkResult
 import com.example.honkaihelper.data.handleApi
 import com.example.honkaihelper.data.image_loader.ImageLoader
@@ -171,7 +168,9 @@ class LoadDataRepositoryImpl @Inject constructor(
                     val remoteAbilities = resultApi.data
                     val localAbilities = getLocalEntities { abilityDao.getAbilities() }
                     val newAbilities = remoteAbilities.filter { ability ->
-                        localAbilities.none { it.copy(image = ability.image).toAbility() == ability }
+                        localAbilities.none {
+                            it.copy(image = ability.image).toAbility() == ability
+                        }
                     }
 
                     val localImageAbilities =
@@ -336,7 +335,8 @@ class LoadDataRepositoryImpl @Inject constructor(
                 is NetworkResult.Error -> false
                 is NetworkResult.Success -> {
                     val remoteEntities = resultApi.data
-                    val localEntities = getLocalEntities { buildDecorationDao.getBuildDecorations() }
+                    val localEntities =
+                        getLocalEntities { buildDecorationDao.getBuildDecorations() }
                     val newEntities = remoteEntities.filter { remoteBuildDecorations ->
                         localEntities.none { remoteBuildDecorations == it.toBuildDecoration() }
                     }
@@ -420,7 +420,8 @@ class LoadDataRepositoryImpl @Inject constructor(
                 is NetworkResult.Error -> false
                 is NetworkResult.Success -> {
                     val remoteEntities = resultApi.data
-                    val localEntities = getLocalEntities { buildStatsEquipmentDao.getBuildStatsEquipment() }
+                    val localEntities =
+                        getLocalEntities { buildStatsEquipmentDao.getBuildStatsEquipment() }
                     val newEntities = remoteEntities.filter { remoteStatsEquipment ->
                         localEntities.none { remoteStatsEquipment == it.toBuildStatsEquipment() }
                     }

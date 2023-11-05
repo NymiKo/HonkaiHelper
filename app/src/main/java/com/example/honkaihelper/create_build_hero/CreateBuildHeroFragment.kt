@@ -17,7 +17,7 @@ import com.example.honkaihelper.databinding.FragmentCreateBuildHeroBinding
 import com.example.honkaihelper.equipment.EquipmentFragment
 import com.example.honkaihelper.equipment.KEY_WEAPON
 import com.example.honkaihelper.equipment.data.model.Equipment
-import com.example.honkaihelper.fragments.BaseFragment
+import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.utils.backgroundHero
 import com.example.honkaihelper.utils.getParcelable

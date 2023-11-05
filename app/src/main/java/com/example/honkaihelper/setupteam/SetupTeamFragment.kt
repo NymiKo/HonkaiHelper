@@ -3,7 +3,6 @@ package com.example.honkaihelper.setupteam
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -17,7 +16,7 @@ import com.example.honkaihelper.equipment.KEY_DECORATION
 import com.example.honkaihelper.equipment.KEY_RELIC
 import com.example.honkaihelper.equipment.KEY_WEAPON
 import com.example.honkaihelper.equipment.data.model.Equipment
-import com.example.honkaihelper.fragments.BaseFragment
+import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.setupteam.adapter.SetupTeamAdapter
 import com.example.honkaihelper.setupteam.adapter.SetupTeamListener
