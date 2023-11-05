@@ -5,6 +5,7 @@ import com.example.honkaihelper.base_build_hero.data.model.BuildRelic
 import com.example.honkaihelper.base_build_hero.data.model.BuildStatsEquipment
 import com.example.honkaihelper.base_build_hero.data.model.BuildWeapon
 import com.example.honkaihelper.base_build_hero.data.model.OptimalStatsHero
+import com.example.honkaihelper.base_build_hero.data.model.Weapon
 import com.example.honkaihelper.info_about_hero.data.model.Ability
 import com.example.honkaihelper.info_about_hero.data.model.Eidolon
 import com.example.honkaihelper.info_about_hero.data.model.Element
@@ -53,5 +54,5 @@ interface LoadDataService {
     suspend fun getStatsEquipment(): Response<List<BuildStatsEquipment>>
 
     @GET("/getWeapons.php")
-    suspend fun getWeapons(): Response<List<BuildStatsEquipment>>
+    suspend fun getWeapons(): Response<List<Weapon>>
 }

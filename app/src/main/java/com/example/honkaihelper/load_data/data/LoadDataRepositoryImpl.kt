@@ -18,6 +18,7 @@ import com.example.honkaihelper.data.local.dao.HeroDao
 import com.example.honkaihelper.data.local.dao.OptimalStatsHeroDao
 import com.example.honkaihelper.data.local.dao.PathDao
 import com.example.honkaihelper.data.local.dao.RelicDao
+import com.example.honkaihelper.data.local.dao.WeaponDao
 import com.example.honkaihelper.data.local.entity.AbilityEntity
 import com.example.honkaihelper.data.local.entity.BuildDecorationEntity
 import com.example.honkaihelper.data.local.entity.BuildRelicEntity
@@ -30,6 +31,7 @@ import com.example.honkaihelper.data.local.entity.HeroEntity
 import com.example.honkaihelper.data.local.entity.OptimalStatsHeroEntity
 import com.example.honkaihelper.data.local.entity.PathEntity
 import com.example.honkaihelper.data.local.entity.RelicEntity
+import com.example.honkaihelper.data.local.entity.WeaponEntity
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -54,6 +56,7 @@ class LoadDataRepositoryImpl @Inject constructor(
     private val decorationDao: DecorationDao,
     private val relicDao: RelicDao,
     private val buildStatsEquipmentDao: BuildStatsEquipmentDao,
+    private val weaponDao: WeaponDao,
     private val loadDataService: LoadDataService,
     private val imageLoader: ImageLoader
 ) : LoadDataRepository {
@@ -71,6 +74,7 @@ class LoadDataRepositoryImpl @Inject constructor(
         val deferredDecorations = async { getDecorationsList() }
         val deferredRelics = async { getRelicsList() }
         val deferredBuildStatsEquipment = async { getStatsEquipmentList() }
+        val deferredWeapons = async { getWeaponsList() }
 
         val results = awaitAll(
             deferredPaths,
@@ -84,7 +88,8 @@ class LoadDataRepositoryImpl @Inject constructor(
             deferredBuildDecorations,
             deferredDecorations,
             deferredRelics,
-            deferredBuildStatsEquipment
+            deferredBuildStatsEquipment,
+            deferredWeapons
         )
 
         results.all { it }
@@ -431,6 +436,37 @@ class LoadDataRepositoryImpl @Inject constructor(
         }
     }
 
+    private suspend fun getWeaponsList(): Boolean {
+        return withContext(ioDispatcher) {
+            when (val resultApi = getRemoteData { loadDataService.getWeapons() }) {
+                is NetworkResult.Error -> false
+                is NetworkResult.Success -> {
+                    val remoteEntities = resultApi.data
+                    val localEntities = getLocalEntities { weaponDao.getWeapons() }
+                    val newEntities = remoteEntities.filter { weapon ->
+                        localEntities.none { weapon == it.toWeapon() }
+                    }
+
+                    val localImageWeapons =
+                        downloadImages(newEntities, { it.image }, CHILD_WEAPONS_IMAGE).await()
+
+                    val weaponEntities = newEntities.mapIndexed { index, weapon ->
+                        WeaponEntity.toWeaponEntity(weapon).copy(
+                            image = localImageWeapons[index]
+                        )
+                    }
+
+                    insertEntitiesIntoLocalStorage(
+                        weaponEntities,
+                        weaponDao::insertWeapons
+                    ).join()
+
+                    return@withContext true
+                }
+            }
+        }
+    }
+
     private suspend fun <T> getRemoteData(getData: suspend () -> Response<T>) =
         handleApi { getData() }
 
@@ -469,5 +505,6 @@ class LoadDataRepositoryImpl @Inject constructor(
         const val CHILD_EIDOLONS_IMAGE = "eidolons_image"
         const val CHILD_DECORATIONS_IMAGE = "decorations_image"
         const val CHILD_RELICS_IMAGE = "relics_image"
+        const val CHILD_WEAPONS_IMAGE = "weapons_image"
     }
 }
