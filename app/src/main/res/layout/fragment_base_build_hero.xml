@@ -64,4 +64,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_relic_base_build" />
 
+    <TextView
+        android:id="@+id/text_decoration_base_build"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/DP16"
+        android:layout_marginTop="@dimen/DP16"
+        android:text="@string/best_decorations"
+        android:textColor="?attr/colorSecondary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recycler_relic_base_build_hero" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_decoration_base_build_hero"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/DP8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_decoration_base_build" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
