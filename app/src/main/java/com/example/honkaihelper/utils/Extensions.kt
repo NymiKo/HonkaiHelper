@@ -76,6 +76,14 @@ fun ImageView.backgroundEquipment(equipment: Equipment) {
     }
 }
 
+fun ImageView.backgroundRarity(rarity: Int) {
+    when (rarity) {
+        0 -> this.background = ContextCompat.getDrawable(this.context, R.color.blue)
+        1 -> this.background = ContextCompat.getDrawable(this.context, R.color.violet)
+        2 -> this.background = ContextCompat.getDrawable(this.context, R.color.orange)
+    }
+}
+
 fun <T: Parcelable> Fragment.getParcelable(arg: String, clazz: Class<T>) =
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         requireArguments().getParcelable(arg, clazz)

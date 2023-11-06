@@ -54,6 +54,7 @@
     <string name="go_back">Вернуться назад</string>
     <string name="abilities">Таланты</string>
     <string name="eidolons">Эйдолоны</string>
+    <string name="best_weapons">Лучшие конусы</string>
 
     <string-array name="hero_level">
         <item>20</item>
