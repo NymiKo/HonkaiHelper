@@ -55,6 +55,7 @@
     <string name="abilities">Таланты</string>
     <string name="eidolons">Эйдолоны</string>
     <string name="best_weapons">Лучшие конусы</string>
+    <string name="best_relics">Лучшие реликвии</string>
 
     <string-array name="hero_level">
         <item>20</item>
