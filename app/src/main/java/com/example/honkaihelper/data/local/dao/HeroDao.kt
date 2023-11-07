@@ -7,7 +7,7 @@ import androidx.room.Transaction
 import com.example.honkaihelper.data.local.models.HeroWithPathAndElement
 import com.example.honkaihelper.data.local.contract.RoomContract
 import com.example.honkaihelper.data.local.entity.HeroEntity
-import com.example.honkaihelper.data.local.models.FullBaseBuildHero
+import com.example.honkaihelper.data.local.models.FullBaseBuildHeroEntity
 
 @Dao
 interface HeroDao {
@@ -21,7 +21,7 @@ interface HeroDao {
 
     @Transaction
     @Query("SELECT id FROM ${RoomContract.tableHeroes} WHERE id = :idHero")
-    suspend fun getFullBaseBuildHero(idHero: Int): FullBaseBuildHero
+    suspend fun getFullBaseBuildHero(idHero: Int): FullBaseBuildHeroEntity
 
     @Insert
     suspend fun insertHeroes(heroes: List<HeroEntity>)
