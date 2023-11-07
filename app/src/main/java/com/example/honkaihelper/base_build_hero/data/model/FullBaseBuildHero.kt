@@ -1,5 +1,8 @@
 package com.example.honkaihelper.base_build_hero.data.model
 
+import com.example.honkaihelper.info_about_hero.data.model.Decoration
+import com.example.honkaihelper.info_about_hero.data.model.Relic
+
 data class FullBaseBuildHero(
     val id: Int,
 
@@ -7,9 +10,9 @@ data class FullBaseBuildHero(
 
     val weapons: List<Weapon>,
 
-    val buildRelic: List<BuildRelic>,
+    val relics: List<Relic>,
 
-    val buildDecoration: List<BuildDecoration>,
+    val decoration: List<Decoration>,
 
     val buildStatsEquipment: BuildStatsEquipment
 )

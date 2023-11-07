@@ -16,8 +16,8 @@ class BaseBuildHeroRepositoryImpl @Inject constructor(
             id = result.id,
             optimalStatsHero = result.optimalStatsHeroEntity.toOptimalStatsHero(),
             weapons = result.weaponsEntity.sortedBy { it.top }.map { it.weapons.toWeapon() },
-            buildRelic = result.buildRelicEntity.map { it.toBuildRelic() },
-            buildDecoration = result.buildDecorationEntity.map { it.toBuildDecoration() },
+            relics = result.relicsEntity.sortedBy { it.top }.map { it.relic.toRelic() },
+            decoration = result.decorationsEntity.sortedBy { it.top }.map { it.decoration.toDecoration() },
             buildStatsEquipment = result.buildStatsEquipmentEntity.toBuildStatsEquipment()
         )
     }
