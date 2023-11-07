@@ -3,6 +3,8 @@ package com.example.honkaihelper.di
 import android.content.Context
 import com.example.honkaihelper.activity.data.MainRepository
 import com.example.honkaihelper.activity.di.MainComponent
+import com.example.honkaihelper.base_build_hero.data.BaseBuildHeroRepository
+import com.example.honkaihelper.base_build_hero.di.BaseBuildHeroComponent
 import com.example.honkaihelper.info_about_hero.data.InfoAboutHeroRepository
 import com.example.honkaihelper.info_about_hero.di.InfoAboutHeroComponent
 import com.example.honkaihelper.builds_hero.di.BuildsHeroListComponent
@@ -57,6 +59,7 @@ interface AppComponent {
     fun createBuildHeroComponent(): CreateBuildHeroComponent.Factory
     fun infoAboutHeroComponent(): InfoAboutHeroComponent.Factory
     fun loadDataComponent(): LoadDataComponent.Factory
+    fun baseBuildHeroComponent(): BaseBuildHeroComponent.Factory
 
     val heroesListRepository: HeroesListRepository
     val teamsListRepository: TeamsListRepository
@@ -67,4 +70,5 @@ interface AppComponent {
     val infoAboutHeroRepository: InfoAboutHeroRepository
     val loadDataRepository: LoadDataRepository
     val mainRepository: MainRepository
+    val baseBuildHeroRepository: BaseBuildHeroRepository
 }

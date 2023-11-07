@@ -1,5 +1,6 @@
 package com.example.honkaihelper.base_build_hero
 
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +15,8 @@ import com.example.honkaihelper.info_about_hero.data.model.Relic
 
 class BaseBuildHeroFragment :
     BaseFragment<FragmentBaseBuildHeroBinding>(FragmentBaseBuildHeroBinding::inflate) {
+
+    private val viewModel get() = viewModels<BaseBuildHeroViewModel> { viewModelFactory }
 
     private lateinit var mAdapterWeapons: WeaponsAdapter
     private lateinit var mAdapterRelics: RelicsAdapter

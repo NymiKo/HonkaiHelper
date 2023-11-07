@@ -2,6 +2,8 @@ package com.example.honkaihelper.di
 
 import com.example.honkaihelper.activity.data.MainRepository
 import com.example.honkaihelper.activity.data.MainRepositoryImpl
+import com.example.honkaihelper.base_build_hero.data.BaseBuildHeroRepository
+import com.example.honkaihelper.base_build_hero.data.BaseBuildHeroRepositoryImpl
 import com.example.honkaihelper.info_about_hero.data.InfoAboutHeroRepository
 import com.example.honkaihelper.info_about_hero.data.InfoAboutHeroRepositoryImpl
 import com.example.honkaihelper.createteam.data.CreateTeamRepository
@@ -65,4 +67,9 @@ interface RepositoryModule {
     @Singleton
     @Binds
     fun bindMainRepository(repository: MainRepositoryImpl): MainRepository
+
+    @Singleton
+    @Binds
+    fun bindBaseBuildHeroRepository(repository: BaseBuildHeroRepositoryImpl): BaseBuildHeroRepository
+
 }
