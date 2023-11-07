@@ -2,6 +2,7 @@ package com.example.honkaihelper.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.Relation
 import com.example.honkaihelper.base_build_hero.data.model.BuildWeapon
 import com.example.honkaihelper.data.local.contract.RoomContract
 
@@ -11,7 +12,7 @@ data class BuildWeaponEntity(
     val idBuildWeapon: Int,
     val idWeapon: Int,
     val top: Int,
-    val idHero: Int
+    val idHero: Int,
 ) {
     companion object {
         fun toBuildWeaponEntity(buildWeapon: BuildWeapon) = BuildWeaponEntity(
