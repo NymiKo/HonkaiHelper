@@ -57,6 +57,7 @@
     <string name="best_weapons">Лучшие конусы</string>
     <string name="best_relics">Лучшие реликвии</string>
     <string name="best_decorations">Лучшие планарные украшения</string>
+    <string name="stats_equipment">Основные статы в реликвиях</string>
 
     <string-array name="hero_level">
         <item>20</item>
