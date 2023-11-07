@@ -12,6 +12,7 @@ import com.example.honkaihelper.info_about_hero.adapters.AbilitiesHeroAdapter
 import com.example.honkaihelper.info_about_hero.adapters.EidolonsHeroAdapter
 import com.example.honkaihelper.databinding.FragmentInfoAboutHeroBinding
 import com.example.honkaihelper.base.BaseFragment
+import com.example.honkaihelper.base_build_hero.BaseBuildHeroFragment
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.utils.getParcelable
 import com.example.honkaihelper.utils.load
@@ -90,7 +91,7 @@ class InfoAboutHeroFragment :
 
     private fun setupGoToBuildHeroButton() {
         binding.buttonGoToBuildHero.setOnClickListener {
-            findNavController().navigate(R.id.action_infoAboutHeroFragment_to_baseBuildHeroFragment)
+            findNavController().navigate(R.id.action_infoAboutHeroFragment_to_baseBuildHeroFragment, BaseBuildHeroFragment.newInstance(hero!!.id))
         }
     }
 
