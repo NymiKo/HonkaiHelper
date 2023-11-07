@@ -12,6 +12,7 @@ import com.example.honkaihelper.App
 import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.base_build_hero.adapters.DecorationsAdapter
 import com.example.honkaihelper.base_build_hero.adapters.RelicsAdapter
+import com.example.honkaihelper.base_build_hero.adapters.StatsEquipmentAdapter
 import com.example.honkaihelper.base_build_hero.adapters.WeaponsAdapter
 import com.example.honkaihelper.base_build_hero.data.model.Weapon
 import com.example.honkaihelper.databinding.FragmentBaseBuildHeroBinding
@@ -27,6 +28,7 @@ class BaseBuildHeroFragment :
     private lateinit var mAdapterWeapons: WeaponsAdapter
     private lateinit var mAdapterRelics: RelicsAdapter
     private lateinit var mAdapterDecorations: DecorationsAdapter
+    private lateinit var mAdapterStatsEquipment: StatsEquipmentAdapter
     private val idHero get() = requireArguments().getInt(ID_HERO)
 
     override fun onAttach(context: Context) {
@@ -45,6 +47,7 @@ class BaseBuildHeroFragment :
         setupWeaponRecyclerView()
         setupRelicRecyclerView()
         setupDecorationRecyclerView()
+        setupStatsEquipmentRecyclerView()
     }
 
     override fun uiStateHandle() {
@@ -52,6 +55,7 @@ class BaseBuildHeroFragment :
             mAdapterWeapons.list = it.weapons
             mAdapterRelics.list = it.relics
             mAdapterDecorations.list = it.decoration
+            mAdapterStatsEquipment.list = it.buildStatsEquipment
         }
     }
 
@@ -65,6 +69,7 @@ class BaseBuildHeroFragment :
         mAdapterWeapons = WeaponsAdapter()
         mAdapterRelics = RelicsAdapter()
         mAdapterDecorations = DecorationsAdapter()
+        mAdapterStatsEquipment = StatsEquipmentAdapter()
     }
 
     private fun setupWeaponRecyclerView() {
@@ -85,6 +90,13 @@ class BaseBuildHeroFragment :
         binding.recyclerDecorationBaseBuildHero.apply {
             layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
             adapter = mAdapterDecorations
+        }
+    }
+
+    private fun setupStatsEquipmentRecyclerView() {
+        binding.recyclerStatsEquipmentBaseBuildHero.apply {
+            layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
+            adapter = mAdapterStatsEquipment
         }
     }
 

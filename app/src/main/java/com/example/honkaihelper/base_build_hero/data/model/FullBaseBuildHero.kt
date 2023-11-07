@@ -14,5 +14,5 @@ data class FullBaseBuildHero(
 
     val decoration: List<Decoration>,
 
-    val buildStatsEquipment: BuildStatsEquipment
+    val buildStatsEquipment: List<String>
 )
