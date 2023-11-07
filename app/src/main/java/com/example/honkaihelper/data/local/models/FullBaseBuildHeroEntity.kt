@@ -6,7 +6,6 @@ import com.example.honkaihelper.data.local.entity.BuildRelicEntity
 import com.example.honkaihelper.data.local.entity.BuildStatsEquipmentEntity
 import com.example.honkaihelper.data.local.entity.BuildWeaponEntity
 import com.example.honkaihelper.data.local.entity.OptimalStatsHeroEntity
-import com.example.honkaihelper.data.local.entity.WeaponEntity
 
 data class FullBaseBuildHeroEntity(
 
@@ -19,7 +18,7 @@ data class FullBaseBuildHeroEntity(
     val weaponsEntity: List<WeaponsForBuildWeapons>,
 
     @Relation(parentColumn = "id", entityColumn = "idHero", entity = BuildRelicEntity::class)
-    val buildRelicEntity: List<BuildRelicEntity>,
+    val relicsEntity: List<RelicsForBuildRelics>,
 
     @Relation(parentColumn = "id", entityColumn = "idHero", entity = BuildDecorationEntity::class)
     val buildDecorationEntity: List<BuildDecorationEntity>,
