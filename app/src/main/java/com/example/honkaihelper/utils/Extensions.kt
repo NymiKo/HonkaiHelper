@@ -22,15 +22,14 @@ const val USER = "USER"
 const val DB = "DB"
 
 fun <T> ImageView.load(image: T) = Glide.with(this).load(image).fitCenter().centerCrop().into(this)
+fun ImageView.loadImageRarity(rarity: Boolean) =
+    if (rarity) loadImageWithoutScale(R.drawable.icon_5_stars) else loadImageWithoutScale(R.drawable.icon_4_stars)
 
 fun <T> ImageView.loadWithPlaceholder(image: T, placeholder: Int) =
     Glide.with(this).load(image).fitCenter().centerCrop()
         .skipMemoryCache(true)
         .diskCacheStrategy(DiskCacheStrategy.NONE)
         .placeholder(placeholder).into(this)
-
-fun Fragment.getDrawable(drawable: Int) =
-    AppCompatResources.getDrawable(requireActivity(), drawable)
 
 fun <T> ImageView.loadImageWithoutScale(image: T) {
     Glide.with(this).load(image).into(this)
@@ -84,14 +83,14 @@ fun ImageView.backgroundRarity(rarity: Int) {
     }
 }
 
-fun <T: Parcelable> Fragment.getParcelable(arg: String, clazz: Class<T>) =
+fun <T : Parcelable> Fragment.getParcelable(arg: String, clazz: Class<T>) =
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         requireArguments().getParcelable(arg, clazz)
     } else {
         requireArguments().getParcelable(arg)
     }
 
-fun <T: Parcelable> Fragment.getParcelableArrayList(arg: String, clazz: Class<T>) =
+fun <T : Parcelable> Fragment.getParcelableArrayList(arg: String, clazz: Class<T>) =
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         requireArguments().getParcelableArrayList(arg, clazz)
     } else {
