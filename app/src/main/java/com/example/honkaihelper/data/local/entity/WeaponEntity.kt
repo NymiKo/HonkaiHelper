@@ -10,6 +10,8 @@ data class WeaponEntity(
     @PrimaryKey(autoGenerate = false)
     val idWeapon: Int,
     val name: String,
+    val story: String,
+    val description: String,
     val image: String = "",
     val path: Int,
     val rarity: Int
@@ -18,6 +20,8 @@ data class WeaponEntity(
         fun toWeaponEntity(weapon: Weapon) = WeaponEntity(
             idWeapon = weapon.idWeapon,
             name = weapon.name,
+            story = weapon.story,
+            description = weapon.description,
             path = weapon.path,
             rarity = weapon.rarity
         )
@@ -26,6 +30,8 @@ data class WeaponEntity(
     fun toWeapon() = Weapon(
         idWeapon = idWeapon,
         name = name,
+        story = story,
+        description = description,
         image = image,
         path = path,
         rarity = rarity
