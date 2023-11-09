@@ -11,6 +11,9 @@ interface WeaponDao {
     @Query("SELECT * FROM ${RoomContract.tableWeapons}")
     suspend fun getWeapons(): List<WeaponEntity>
 
+    @Query("SELECT * FROM ${RoomContract.tableWeapons} WHERE idWeapon = :idWeapon")
+    suspend fun getWeapon(idWeapon: Int): WeaponEntity
+
     @Insert
     suspend fun insertWeapons(weapons: List<WeaponEntity>)
 }
