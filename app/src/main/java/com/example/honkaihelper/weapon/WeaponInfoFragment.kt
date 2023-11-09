@@ -56,6 +56,8 @@ class WeaponInfoFragment : BaseFragment<FragmentWeaponInfoBinding>(FragmentWeapo
                 2 -> R.drawable.icon_5_stars
                 else -> R.drawable.icon_3_stars
             }
+            binding.textStoryWeapon.text = it.story
+            binding.textSkillDescriptionWeapon.text = it.description
             binding.imageRarityWeapon.loadImageWithoutScale(rarityImage)
         }
     }
