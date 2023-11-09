@@ -11,6 +11,9 @@ interface RelicDao {
     @Query("SELECT * FROM ${RoomContract.tableRelics}")
     suspend fun getRelics(): List<RelicEntity>
 
+    @Query("SELECT * FROM ${RoomContract.tableRelics} WHERE idRelic = :idRelic")
+    suspend fun getRelic(idRelic: Int): RelicEntity
+
     @Insert
     suspend fun insertRelics(relics: List<RelicEntity>)
 }
