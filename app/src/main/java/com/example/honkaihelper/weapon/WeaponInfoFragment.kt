@@ -48,16 +48,17 @@ class WeaponInfoFragment : BaseFragment<FragmentWeaponInfoBinding>(FragmentWeapo
 
     private fun getWeapon() {
         viewModel.weapon.observe(viewLifecycleOwner) {
-            binding.toolbarInfoAboutWeapon.title = it.name
-            binding.imageWeapon.loadImageWithoutScale(it.image)
-            val rarityImage = when(it.rarity) {
+            binding.toolbarInfoAboutWeapon.title = it.weapon.name
+            binding.imageWeapon.loadImageWithoutScale(it.weapon.image)
+            binding.imagePathWeapon.load(it.path.image)
+            val rarityImage = when(it.weapon.rarity) {
                 0 -> R.drawable.icon_3_stars
                 1 -> R.drawable.icon_4_stars
                 2 -> R.drawable.icon_5_stars
                 else -> R.drawable.icon_3_stars
             }
-            binding.textStoryWeapon.text = it.story
-            binding.textSkillDescriptionWeapon.text = it.description
+            binding.textStoryWeapon.text = it.weapon.story
+            binding.textSkillDescriptionWeapon.text = it.weapon.description
             binding.imageRarityWeapon.loadImageWithoutScale(rarityImage)
         }
     }
