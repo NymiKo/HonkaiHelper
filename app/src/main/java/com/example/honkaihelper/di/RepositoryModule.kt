@@ -22,6 +22,8 @@ import com.example.honkaihelper.registration.data.RegistrationRepository
 import com.example.honkaihelper.registration.data.RegistrationRepositoryImpl
 import com.example.honkaihelper.teams.data.TeamsListRepository
 import com.example.honkaihelper.teams.data.TeamsListRepositoryImpl
+import com.example.honkaihelper.weapon.data.WeaponInfoRepository
+import com.example.honkaihelper.weapon.data.WeaponInfoRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
@@ -71,5 +73,9 @@ interface RepositoryModule {
     @Singleton
     @Binds
     fun bindBaseBuildHeroRepository(repository: BaseBuildHeroRepositoryImpl): BaseBuildHeroRepository
+
+    @Singleton
+    @Binds
+    fun bindWeaponInfoRepository(repository: WeaponInfoRepositoryImpl): WeaponInfoRepository
 
 }

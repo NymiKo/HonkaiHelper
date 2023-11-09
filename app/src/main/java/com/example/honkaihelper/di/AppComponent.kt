@@ -25,6 +25,8 @@ import com.example.honkaihelper.registration.di.RegistrationComponent
 import com.example.honkaihelper.setupteam.di.SetupTeamComponent
 import com.example.honkaihelper.teams.data.TeamsListRepository
 import com.example.honkaihelper.teams.di.TeamsListComponent
+import com.example.honkaihelper.weapon.data.WeaponInfoRepository
+import com.example.honkaihelper.weapon.di.WeaponInfoComponent
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -60,6 +62,7 @@ interface AppComponent {
     fun infoAboutHeroComponent(): InfoAboutHeroComponent.Factory
     fun loadDataComponent(): LoadDataComponent.Factory
     fun baseBuildHeroComponent(): BaseBuildHeroComponent.Factory
+    fun weaponInfoComponent(): WeaponInfoComponent.Factory
 
     val heroesListRepository: HeroesListRepository
     val teamsListRepository: TeamsListRepository
@@ -71,4 +74,5 @@ interface AppComponent {
     val loadDataRepository: LoadDataRepository
     val mainRepository: MainRepository
     val baseBuildHeroRepository: BaseBuildHeroRepository
+    val weaponInfoRepository: WeaponInfoRepository
 }
