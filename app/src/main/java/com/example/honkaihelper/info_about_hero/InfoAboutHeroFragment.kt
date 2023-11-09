@@ -16,6 +16,7 @@ import com.example.honkaihelper.base_build_hero.BaseBuildHeroFragment
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.utils.getParcelable
 import com.example.honkaihelper.utils.load
+import com.example.honkaihelper.utils.loadImageRarity
 import com.example.honkaihelper.utils.loadImageWithoutScale
 
 class InfoAboutHeroFragment :
@@ -51,6 +52,7 @@ class InfoAboutHeroFragment :
             binding.textStoryHero.text = it.hero.story
             binding.imageElementHero.load(it.element.image)
             binding.imagePathHero.load(it.path.image)
+            binding.imageRarityHero.loadImageRarity(it.hero.rarity)
             mAbilitiesAdapter.abilitiesList = it.ability
             mEidolonsAdapter.eidolonList = it.eidolon
         }

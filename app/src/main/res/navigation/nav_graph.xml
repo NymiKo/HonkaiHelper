@@ -110,6 +110,9 @@
         <action
             android:id="@+id/action_baseBuildHeroFragment_to_buildsHeroListFragment"
             app:destination="@id/buildsHeroListFragment" />
+        <action
+            android:id="@+id/action_baseBuildHeroFragment_to_weaponInfoFragment"
+            app:destination="@id/weaponInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/buildsHeroListFragment"
@@ -125,4 +128,9 @@
         android:name="com.example.honkaihelper.create_build_hero.CreateBuildHeroFragment"
         android:label="fragment_create_build_hero"
         tools:layout="@layout/fragment_create_build_hero" />
+    <fragment
+        android:id="@+id/weaponInfoFragment"
+        android:name="com.example.honkaihelper.weapon.WeaponInfoFragment"
+        android:label="fragment_weapon_info"
+        tools:layout="@layout/fragment_weapon_info" />
 </navigation>
