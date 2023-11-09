@@ -7,9 +7,11 @@ import android.net.Uri
 import android.os.Build
 import android.os.Parcelable
 import android.provider.OpenableColumns
+import android.text.Html
 import android.widget.ImageView
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.TypedArrayUtils.getString
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -96,3 +98,6 @@ fun <T : Parcelable> Fragment.getParcelableArrayList(arg: String, clazz: Class<T
     } else {
         requireArguments().getParcelableArrayList(arg)
     }
+
+fun fromHtml(source: String) =
+    Html.fromHtml(source, HtmlCompat.FROM_HTML_MODE_LEGACY)

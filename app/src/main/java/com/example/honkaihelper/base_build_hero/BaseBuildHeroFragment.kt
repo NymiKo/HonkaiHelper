@@ -21,6 +21,7 @@ import com.example.honkaihelper.databinding.FragmentBaseBuildHeroBinding
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.info_about_hero.data.model.Decoration
 import com.example.honkaihelper.info_about_hero.data.model.Relic
+import com.example.honkaihelper.relic.RelicInfoFragment
 import com.example.honkaihelper.weapon.WeaponInfoFragment
 
 class BaseBuildHeroFragment :
@@ -76,7 +77,7 @@ class BaseBuildHeroFragment :
         })
         mAdapterRelics = RelicsAdapter(object : ItemClickListener {
             override fun onItemClick(itemId: Int) {
-
+                findNavController().navigate(R.id.relicInfoFragment, RelicInfoFragment.newInject(itemId))
             }
         })
         mAdapterDecorations = DecorationsAdapter(object : ItemClickListener {
