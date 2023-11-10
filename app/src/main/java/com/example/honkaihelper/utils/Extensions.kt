@@ -29,8 +29,6 @@ fun ImageView.loadImageRarity(rarity: Boolean) =
 
 fun <T> ImageView.loadWithPlaceholder(image: T, placeholder: Int) =
     Glide.with(this).load(image).fitCenter().centerCrop()
-        .skipMemoryCache(true)
-        .diskCacheStrategy(DiskCacheStrategy.NONE)
         .placeholder(placeholder).into(this)
 
 fun <T> ImageView.loadImageWithoutScale(image: T) {

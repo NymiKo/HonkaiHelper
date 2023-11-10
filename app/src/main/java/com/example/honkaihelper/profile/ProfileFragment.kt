@@ -110,7 +110,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         binding.textUserLogin.text = user.login
         binding.textTeams.text = getString(R.string.my_teams)
         mAdapter.mTeamsList = user.teamsList ?: emptyList()
-        Log.e("TEAMS", user.teamsList.toString())
     }
 
     private fun setupRecyclerView() {

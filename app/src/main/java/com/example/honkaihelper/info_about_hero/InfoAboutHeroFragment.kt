@@ -39,7 +39,6 @@ class InfoAboutHeroFragment :
 
     override fun setupView() {
         setupToolbar()
-        setupHeroSplashArt()
         setupAbilitiesAdapter()
         setupEidolonsAdapter()
         setupAbilitiesRecyclerView()
@@ -49,6 +48,7 @@ class InfoAboutHeroFragment :
 
     override fun uiStateHandle() {
         viewModel.heroInfo.observe(viewLifecycleOwner) {
+            binding.imageAvatarInfoAboutHero.loadImageWithoutScale(it.hero.splashArt)
             binding.textStoryHero.text = it.hero.story
             binding.imageElementHero.load(it.element.image)
             binding.imagePathHero.load(it.path.image)
@@ -66,8 +66,6 @@ class InfoAboutHeroFragment :
             }
         }
     }
-
-    private fun setupHeroSplashArt() = binding.imageAvatarInfoAboutHero.loadImageWithoutScale(hero?.splashArt)
 
     private fun setupAbilitiesAdapter() {
         mAbilitiesAdapter = AbilitiesHeroAdapter()
