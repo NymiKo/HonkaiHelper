@@ -11,12 +11,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
-import com.example.honkaihelper.info_about_hero.InfoAboutHeroFragment
-import com.example.honkaihelper.databinding.FragmentHeroesListBinding
 import com.example.honkaihelper.base.BaseFragment
+import com.example.honkaihelper.databinding.FragmentHeroesListBinding
 import com.example.honkaihelper.heroes.adapter.HeroesListActionListener
 import com.example.honkaihelper.heroes.adapter.HeroesListAdapter
 import com.example.honkaihelper.heroes.data.model.Hero
+import com.example.honkaihelper.info_about_hero.InfoAboutHeroFragment
 import com.example.honkaihelper.load_data.DATA_UPLOADED_KEY
 import com.example.honkaihelper.utils.getSharedPrefToken
 import com.example.honkaihelper.utils.gone
@@ -134,7 +134,11 @@ class HeroesListFragment :
             override fun onQueryTextChange(newText: String?): Boolean {
                 viewModel.heroesList.observe(viewLifecycleOwner) {
                     mAdapterRecyclerView.mHeroesList =
-                        it.filter { hero -> hero.name.contains(newText?.lowercase()?.uppercaseFirstChar() as CharSequence) }
+                        it.filter { hero ->
+                            hero.name.contains(
+                                newText?.lowercase()?.uppercaseFirstChar() as CharSequence
+                            )
+                        }
                 }
                 return false
             }
