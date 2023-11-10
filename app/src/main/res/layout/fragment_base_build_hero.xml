@@ -47,17 +47,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/DP8"
-                android:layout_marginTop="@dimen/DP8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_weapon_base_build" />
-
-            <View
-                android:id="@+id/separator_weapons"
-                style="@style/base_separator"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_weapon_base_build_hero" />
 
             <TextView
                 android:id="@+id/text_relic_base_build"
@@ -71,7 +63,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/separator_weapons" />
+                app:layout_constraintTop_toBottomOf="@+id/recycler_weapon_base_build_hero" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_relic_base_build_hero"
@@ -81,13 +73,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_relic_base_build" />
-
-            <View
-                android:id="@+id/separator_relics"
-                style="@style/base_separator"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_relic_base_build_hero" />
 
             <TextView
                 android:id="@+id/text_decoration_base_build"
@@ -101,7 +86,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/separator_relics" />
+                app:layout_constraintTop_toBottomOf="@+id/recycler_relic_base_build_hero" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_decoration_base_build_hero"
@@ -111,13 +96,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_decoration_base_build" />
-
-            <View
-                android:id="@+id/separator_decorations"
-                style="@style/base_separator"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_decoration_base_build_hero" />
 
             <TextView
                 android:id="@+id/text_stats_equipment_base_build"
@@ -131,7 +109,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/separator_decorations" />
+                app:layout_constraintTop_toBottomOf="@+id/recycler_decoration_base_build_hero" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_stats_equipment_base_build_hero"

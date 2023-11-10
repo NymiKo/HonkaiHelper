@@ -116,6 +116,9 @@
         <action
             android:id="@+id/action_baseBuildHeroFragment_to_relicInfoFragment"
             app:destination="@id/relicInfoFragment" />
+        <action
+            android:id="@+id/action_baseBuildHeroFragment_to_decorationInfoFragment"
+            app:destination="@id/decorationInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/buildsHeroListFragment"
@@ -141,4 +144,9 @@
         android:name="com.example.honkaihelper.relic.RelicInfoFragment"
         android:label="fragment_relic_info"
         tools:layout="@layout/fragment_relic_info" />
+    <fragment
+        android:id="@+id/decorationInfoFragment"
+        android:name="com.example.honkaihelper.decoration.DecorationInfoFragment"
+        android:label="fragment_decoration_info"
+        tools:layout="@layout/fragment_decoration_info" />
 </navigation>
