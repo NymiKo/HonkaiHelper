@@ -15,6 +15,7 @@ import com.example.honkaihelper.base_build_hero.adapters.ItemClickListener
 import com.example.honkaihelper.base_build_hero.adapters.RelicsAdapter
 import com.example.honkaihelper.base_build_hero.adapters.StatsEquipmentAdapter
 import com.example.honkaihelper.base_build_hero.adapters.WeaponsAdapter
+import com.example.honkaihelper.builds_hero_from_users.BuildsHeroListFragment
 import com.example.honkaihelper.databinding.FragmentBaseBuildHeroBinding
 import com.example.honkaihelper.decoration.DecorationInfoFragment
 import com.example.honkaihelper.relic.RelicInfoFragment
@@ -49,6 +50,7 @@ class BaseBuildHeroFragment :
         setupRelicRecyclerView()
         setupDecorationRecyclerView()
         setupStatsEquipmentRecyclerView()
+        setupButtonGoToBuildsFromUsers()
     }
 
     override fun uiStateHandle() {
@@ -122,10 +124,17 @@ class BaseBuildHeroFragment :
         }
     }
 
+    private fun setupButtonGoToBuildsFromUsers() {
+        binding.buttonGoToBuildsFromUsers.setOnClickListener {
+            findNavController().navigate(R.id.action_baseBuildHeroFragment_to_buildsHeroListFragment, BuildsHeroListFragment.newInstance(idHero))
+        }
+    }
+
     override fun onDestroyView() {
         binding.recyclerWeaponBaseBuildHero.adapter = null
         binding.recyclerRelicBaseBuildHero.adapter = null
         binding.recyclerDecorationBaseBuildHero.adapter = null
+        binding.recyclerStatsEquipmentBaseBuildHero.adapter = null
         super.onDestroyView()
     }
 
