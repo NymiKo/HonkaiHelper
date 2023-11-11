@@ -50,8 +50,8 @@ class InfoAboutHeroFragment :
         viewModel.heroInfo.observe(viewLifecycleOwner) {
             binding.imageAvatarInfoAboutHero.loadImageWithoutScale(it.hero.splashArt)
             binding.textStoryHero.text = it.hero.story
-            binding.imageElementHero.load(it.element.image)
-            binding.imagePathHero.load(it.path.image)
+            binding.imageElementHero.loadImageWithoutScale(it.element.image)
+            binding.imagePathHero.loadImageWithoutScale(it.path.image)
             binding.imageRarityHero.loadImageRarity(it.hero.rarity)
             mAbilitiesAdapter.abilitiesList = it.ability
             mEidolonsAdapter.eidolonList = it.eidolon
