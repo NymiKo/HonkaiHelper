@@ -1,24 +1,19 @@
-package com.example.honkaihelper.builds_hero.adapter
+package com.example.honkaihelper.builds_hero_from_users.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.honkaihelper.R
-import com.example.honkaihelper.builds_hero.data.model.BuildHero
+import com.example.honkaihelper.builds_hero_from_users.data.model.FullBuildHeroFromUser
 import com.example.honkaihelper.databinding.ItemBuildsHeroBinding
-import com.example.honkaihelper.equipment.data.model.Equipment
-import com.example.honkaihelper.heroes.data.model.Hero
-import com.example.honkaihelper.utils.backgroundEquipment
-import com.example.honkaihelper.utils.backgroundHero
+import com.example.honkaihelper.utils.backgroundRarity
 import com.example.honkaihelper.utils.load
 
 class BuildsHeroListAdapter :
     RecyclerView.Adapter<BuildsHeroListAdapter.BuildsHeroListViewHolder>() {
 
-    var buildsHeroList = emptyList<BuildHero>()
+    var buildsHeroList = emptyList<FullBuildHeroFromUser>()
         @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
@@ -42,15 +37,16 @@ class BuildsHeroListAdapter :
     class BuildsHeroListViewHolder(private val binding: ItemBuildsHeroBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(buildHero: BuildHero) {
+        fun bind(buildHero: FullBuildHeroFromUser) {
             binding.apply {
-                imageHeroAvatarInBuildsHero.backgroundHero(buildHero.hero)
+                imageHeroAvatarInBuildsHero.load(buildHero.hero.localAvatarPath)
                 textHeroNameInBuildsHero.text = buildHero.hero.name
-                imageHeroWeapon.backgroundEquipment(buildHero.weapon)
-                imageHeroRelic.backgroundEquipment(buildHero.relic)
-                imageHeroDecoration.backgroundEquipment(buildHero.decoration)
-                textBuildFrom.text = textBuildFrom.context.getString(R.string.build_from, buildHero.user.login)
-                imageProfile.load(buildHero.user.avatarUrl)
+                imageHeroWeapon.load(buildHero.weapon.image)
+                imageHeroWeapon.backgroundRarity(buildHero.weapon.rarity)
+                imageHeroRelic.load(buildHero.relic.image)
+                imageHeroDecoration.load(buildHero.decoration.image)
+                textBuildFrom.text = textBuildFrom.context.getString(R.string.build_from, buildHero.buildUser.nickname)
+                imageProfile.load(buildHero.buildUser.avatar)
             }
         }
     }

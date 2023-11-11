@@ -18,9 +18,7 @@ import com.example.honkaihelper.equipment.EquipmentFragment
 import com.example.honkaihelper.equipment.KEY_WEAPON
 import com.example.honkaihelper.equipment.data.model.Equipment
 import com.example.honkaihelper.base.BaseFragment
-import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.utils.backgroundHero
-import com.example.honkaihelper.utils.getParcelable
 
 class CreateBuildHeroFragment :
     BaseFragment<FragmentCreateBuildHeroBinding>(FragmentCreateBuildHeroBinding::inflate) {
@@ -28,7 +26,7 @@ class CreateBuildHeroFragment :
     private val viewModel by viewModels<CreateBuildHeroViewModel> { viewModelFactory }
     private lateinit var mAdapterWeapon: CreateBuildEquipmentAdapter
 
-    private val hero get() = getParcelable(ARG_HERO, Hero::class.java)
+    private val idHero get() = requireArguments().getInt(ARG_ID_HERO)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -51,7 +49,7 @@ class CreateBuildHeroFragment :
     }
 
     override fun setupView() {
-        loadHero()
+        getHero()
         setupAdapter()
         setupRecyclerViewWeapon()
     }
@@ -60,20 +58,20 @@ class CreateBuildHeroFragment :
 
     }
 
-    private fun loadHero() {
-        binding.apply {
-            imageHeroAvatarInCreateBuildr.backgroundHero(hero!!)
-            textHeroNameInCreateBuild.text = hero?.name
-        }
+    private fun getHero() {
+//        binding.apply {
+//            imageHeroAvatarInCreateBuildr.backgroundHero(hero!!)
+//            textHeroNameInCreateBuild.text = hero?.name
+//        }
     }
 
     private fun setupAdapter() {
         mAdapterWeapon = CreateBuildEquipmentAdapter(object : CreateBuildEquipmentListener {
             override fun onAddEquipmentClick() {
-                findNavController().navigate(
-                    R.id.equipmentFragment,
-                    EquipmentFragment.newInstance(hero!!.path, equipmentClick = KEY_WEAPON)
-                )
+//                findNavController().navigate(
+//                    R.id.equipmentFragment,
+//                    EquipmentFragment.newInstance(hero!!.path, equipmentClick = KEY_WEAPON)
+//                )
             }
 
             override fun onRemoveEquipmentClick(position: Int) {
@@ -92,11 +90,11 @@ class CreateBuildHeroFragment :
     }
 
     companion object {
-        private const val ARG_HERO = "hero"
+        private const val ARG_ID_HERO = "id_hero"
 
         @JvmStatic
-        fun newInstance(hero: Hero?): Bundle {
-            return bundleOf(ARG_HERO to hero)
+        fun newInstance(idHero: Int): Bundle {
+            return bundleOf(ARG_ID_HERO to idHero)
         }
     }
 }
