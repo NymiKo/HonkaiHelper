@@ -62,6 +62,7 @@
     <string name="effect_relic">Эффект набора</string>
     <string name="effect_relic_two_parts"><![CDATA[<font color="#E2AB59"><b><u>Эффект от 2-х частей:</u></b></font> %1$s]]></string>
     <string name="effect_relic_four_parts"><![CDATA[<font color="#E2AB59"><b><u>Эффект от 4-х частей:</u></b></font> %1$s]]></string>
+    <string name="builds_from_users">Сборки героев от пользователей</string>
 
     <string-array name="hero_level">
         <item>20</item>

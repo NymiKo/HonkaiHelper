@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".builds_hero.BuildsHeroListFragment">
+    tools:context=".builds_hero_from_users.BuildsHeroListFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar_builds_hero_list"
