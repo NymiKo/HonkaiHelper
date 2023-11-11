@@ -15,6 +15,7 @@ import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.target.Target
 import com.example.honkaihelper.R
 import com.example.honkaihelper.equipment.data.model.Equipment
 import com.example.honkaihelper.heroes.data.model.Hero

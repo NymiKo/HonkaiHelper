@@ -11,7 +11,7 @@ class WeaponInfoRepositoryImpl @Inject constructor(
     private val weaponDao: WeaponDao
 ) : WeaponInfoRepository {
     override suspend fun getWeapon(idWeapon: Int): FullWeaponInfo = withContext(ioDispatcher) {
-        val weaponInfo = weaponDao.getWeapon(idWeapon)
+        val weaponInfo = weaponDao.getWeaponWithPath(idWeapon)
         return@withContext FullWeaponInfo(
             weaponInfo.weapon.toWeapon(),
             weaponInfo.path.toPath()
