@@ -1,4 +1,4 @@
-package com.example.honkaihelper.data.local.models
+package com.example.honkaihelper.data.local.models.weapon
 
 import androidx.room.Embedded
 import androidx.room.Relation

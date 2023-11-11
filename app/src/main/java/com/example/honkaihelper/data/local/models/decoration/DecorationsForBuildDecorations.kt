@@ -1,4 +1,4 @@
-package com.example.honkaihelper.data.local.models
+package com.example.honkaihelper.data.local.models.decoration
 
 import androidx.room.Relation
 import com.example.honkaihelper.data.local.entity.DecorationEntity

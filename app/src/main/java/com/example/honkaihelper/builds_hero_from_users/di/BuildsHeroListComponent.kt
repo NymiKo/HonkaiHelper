@@ -1,6 +1,6 @@
-package com.example.honkaihelper.builds_hero.di
+package com.example.honkaihelper.builds_hero_from_users.di
 
-import com.example.honkaihelper.builds_hero.BuildsHeroListFragment
+import com.example.honkaihelper.builds_hero_from_users.BuildsHeroListFragment
 import dagger.Subcomponent
 
 @Subcomponent(modules = [BuildsHeroListModule::class])
