@@ -5,7 +5,6 @@ import com.example.honkaihelper.activity.data.MainService
 import com.example.honkaihelper.builds_hero_from_users.data.BuildsHeroListService
 import com.example.honkaihelper.createteam.data.CreateTeamService
 import com.example.honkaihelper.data.AuthInterceptor
-import com.example.honkaihelper.equipment.data.EquipmentService
 import com.example.honkaihelper.heroes.data.HeroesListService
 import com.example.honkaihelper.data.image_loader.ImageLoader
 import com.example.honkaihelper.data.image_loader.ImageLoaderImpl
@@ -70,9 +69,6 @@ object NetworkModule {
 
     @Provides
     fun provideProfileService(retrofit: Retrofit): ProfileService = retrofit.create(ProfileService::class.java)
-
-    @Provides
-    fun providesEquipmentService(retrofit: Retrofit): EquipmentService = retrofit.create(EquipmentService::class.java)
 
     @Provides
     fun providesLoadDataService(retrofit: Retrofit): LoadDataService = retrofit.create(LoadDataService::class.java)

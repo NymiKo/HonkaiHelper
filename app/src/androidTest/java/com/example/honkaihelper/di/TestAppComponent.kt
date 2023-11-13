@@ -8,7 +8,7 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [TestRepositoryModule::class, ViewModelFactoryModule::class, AppModule::class])
-interface TestAppComponent: AppComponent {
+interface TestAppComponent {
 
     @Component.Factory
     interface Factory {
