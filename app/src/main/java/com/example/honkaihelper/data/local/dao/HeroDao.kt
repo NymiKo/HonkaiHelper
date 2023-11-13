@@ -2,6 +2,7 @@ package com.example.honkaihelper.data.local.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import com.example.honkaihelper.data.local.models.hero.HeroWithPathAndElement
@@ -28,6 +29,6 @@ interface HeroDao {
     @Query("SELECT name, localAvatarPath, rarity FROM ${RoomContract.tableHeroes} WHERE id = :idHero")
     suspend fun getHeroWithNameAvatarRarity(idHero: Int): HeroWithNameAvatarRarity
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertHeroes(heroes: List<HeroEntity>)
 }

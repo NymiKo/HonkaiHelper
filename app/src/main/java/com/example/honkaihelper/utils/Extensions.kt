@@ -58,9 +58,8 @@ fun ContentResolver.getFileName(fileUri: Uri): String {
 
 fun String.uppercaseFirstChar() = this.replaceFirstChar { it.uppercase() }
 
-fun ImageView.backgroundHero(hero: Hero) {
-    this.load(hero.avatar)
-    if (hero.rarity) {
+fun ImageView.backgroundHero(rarity: Boolean) {
+    if (rarity) {
         this.background = ContextCompat.getDrawable(this.context, R.color.orange)
     } else {
         this.background = ContextCompat.getDrawable(this.context, R.color.violet)

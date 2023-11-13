@@ -8,6 +8,7 @@ import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.ItemTeamBinding
 import com.example.honkaihelper.teams.data.model.TeamHero
 import com.example.honkaihelper.utils.backgroundHero
+import com.example.honkaihelper.utils.load
 import com.example.honkaihelper.utils.loadWithPlaceholder
 
 class HeroTeamsListAdapter: RecyclerView.Adapter<HeroTeamsListAdapter.HeroTeamsListViewHolder>() {
@@ -36,10 +37,14 @@ class HeroTeamsListAdapter: RecyclerView.Adapter<HeroTeamsListAdapter.HeroTeamsL
 
         fun bind(teamHero: TeamHero) {
             binding.apply {
-                heroAvatarInTeam1.backgroundHero(teamHero.heroOne)
-                heroAvatarInTeam2.backgroundHero(teamHero.heroTwo)
-                heroAvatarInTeam3.backgroundHero(teamHero.heroThree)
-                heroAvatarInTeam4.backgroundHero(teamHero.heroFour)
+                heroAvatarInTeam1.load(teamHero.heroOne.avatar)
+                heroAvatarInTeam2.load(teamHero.heroTwo.avatar)
+                heroAvatarInTeam3.load(teamHero.heroThree.avatar)
+                heroAvatarInTeam4.load(teamHero.heroFour.avatar)
+                heroAvatarInTeam1.backgroundHero(teamHero.heroOne.rarity)
+                heroAvatarInTeam2.backgroundHero(teamHero.heroTwo.rarity)
+                heroAvatarInTeam3.backgroundHero(teamHero.heroThree.rarity)
+                heroAvatarInTeam4.backgroundHero(teamHero.heroFour.rarity)
 
                 heroNameInTeam1.text = teamHero.heroOne.name
                 heroNameInTeam2.text = teamHero.heroTwo.name

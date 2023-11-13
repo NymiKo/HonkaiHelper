@@ -2,6 +2,7 @@ package com.example.honkaihelper.data.local.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import com.example.honkaihelper.data.local.contract.RoomContract
@@ -20,6 +21,6 @@ interface WeaponDao {
     @Query("SELECT * FROM ${RoomContract.tableWeapons} WHERE idWeapon = :idWeapon")
     suspend fun getWeapon(idWeapon: Int): WeaponEntity
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertWeapons(weapons: List<WeaponEntity>)
 }

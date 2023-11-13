@@ -10,6 +10,7 @@ import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.ItemSetupTeamBinding
 import com.example.honkaihelper.setupteam.data.model.SetupHero
 import com.example.honkaihelper.utils.backgroundHero
+import com.example.honkaihelper.utils.load
 import com.example.honkaihelper.utils.loadWithPlaceholder
 
 class SetupTeamAdapter(
@@ -39,7 +40,8 @@ class SetupTeamAdapter(
 
         fun bind(setupHero: SetupHero) {
             binding.apply {
-                imageHeroAvatarInSetupTeam.backgroundHero(setupHero.hero)
+                imageHeroAvatarInSetupTeam.load(setupHero.hero.avatar)
+                imageHeroAvatarInSetupTeam.backgroundHero(setupHero.hero.rarity)
                 textHeroNameInSetupTeam.text = setupHero.hero.name
 
                 spinnerHeroLevel.setSelection(setupHero.level ?: 0)
