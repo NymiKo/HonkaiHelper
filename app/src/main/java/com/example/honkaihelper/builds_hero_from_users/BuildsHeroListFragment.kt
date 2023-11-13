@@ -2,6 +2,7 @@ package com.example.honkaihelper.builds_hero_from_users
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -12,6 +13,12 @@ import com.example.honkaihelper.builds_hero_from_users.adapter.BuildsHeroListAda
 import com.example.honkaihelper.create_build_hero.CreateBuildHeroFragment
 import com.example.honkaihelper.databinding.FragmentBuildsHeroListBinding
 import com.example.honkaihelper.base.BaseFragment
+import com.example.honkaihelper.builds_hero_from_users.di.BuildsHeroListUIState
+import com.example.honkaihelper.databinding.ViewstubErrorLayoutBinding
+import com.example.honkaihelper.utils.TOKEN
+import com.example.honkaihelper.utils.getSharedPrefUser
+import com.example.honkaihelper.utils.gone
+import com.example.honkaihelper.utils.visible
 
 class BuildsHeroListFragment :
     BaseFragment<FragmentBuildsHeroListBinding>(FragmentBuildsHeroListBinding::inflate) {
@@ -40,14 +47,36 @@ class BuildsHeroListFragment :
     }
 
     override fun uiStateHandle() {
-
+        viewModel.uiState.observe(viewLifecycleOwner) { state ->
+            when(state) {
+                is BuildsHeroListUIState.EMPTY -> {
+                    binding.shimmerLayoutBuildsHeroList.stopShimmer()
+                    binding.shimmerLayoutBuildsHeroList.gone()
+                    binding.viewStubBuildsHeroEmptyList.inflate()
+                }
+                is BuildsHeroListUIState.ERROR -> {
+                    binding.shimmerLayoutBuildsHeroList.stopShimmer()
+                    binding.shimmerLayoutBuildsHeroList.gone()
+                    binding.viewStubError.inflate()
+                }
+                is BuildsHeroListUIState.LOADING -> {
+                    binding.shimmerLayoutBuildsHeroList.startShimmer()
+                    binding.shimmerLayoutBuildsHeroList.visible()
+                    //binding.viewStubError.gone()
+                }
+                is BuildsHeroListUIState.SUCCESS -> {
+                    binding.shimmerLayoutBuildsHeroList.stopShimmer()
+                    binding.shimmerLayoutBuildsHeroList.gone()
+                    binding.groupBuildsHeroList.visible()
+                    if (getSharedPrefUser().getString(TOKEN, "").isNullOrEmpty()) binding.buttonCreate.gone()
+                    mAdapter.buildsHeroList = state.buildsHeroList
+                }
+            }
+        }
     }
 
     private fun setupAdapter() {
         mAdapter = BuildsHeroListAdapter()
-        viewModel.buildsHeroList.observe(viewLifecycleOwner) {
-            mAdapter.buildsHeroList = it
-        }
     }
 
     private fun setupRecyclerView() {
@@ -65,6 +94,10 @@ class BuildsHeroListFragment :
         binding.buttonCreate.setOnClickListener {
             findNavController().navigate(R.id.createBuildHeroFragment, CreateBuildHeroFragment.newInstance(idHero))
         }
+    }
+
+    private fun retryLoadData() {
+        binding.viewStubError
     }
 
     companion object {

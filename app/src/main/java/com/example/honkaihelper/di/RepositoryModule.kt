@@ -6,6 +6,8 @@ import com.example.honkaihelper.base_build_hero.data.BaseBuildHeroRepository
 import com.example.honkaihelper.base_build_hero.data.BaseBuildHeroRepositoryImpl
 import com.example.honkaihelper.builds_hero_from_users.data.BuildsHeroListRepository
 import com.example.honkaihelper.builds_hero_from_users.data.BuildsHeroListRepositoryImpl
+import com.example.honkaihelper.create_build_hero.data.CreateBuildHeroRepository
+import com.example.honkaihelper.create_build_hero.data.CreateBuildHeroRepositoryImpl
 import com.example.honkaihelper.info_about_hero.data.InfoAboutHeroRepository
 import com.example.honkaihelper.info_about_hero.data.InfoAboutHeroRepositoryImpl
 import com.example.honkaihelper.createteam.data.CreateTeamRepository
@@ -95,4 +97,8 @@ interface RepositoryModule {
     @Singleton
     @Binds
     fun bindBuildsHeroRepository(repository: BuildsHeroListRepositoryImpl): BuildsHeroListRepository
+
+    @Singleton
+    @Binds
+    fun bindCreateBuildHeroRepository(repository: CreateBuildHeroRepositoryImpl): CreateBuildHeroRepository
 }
