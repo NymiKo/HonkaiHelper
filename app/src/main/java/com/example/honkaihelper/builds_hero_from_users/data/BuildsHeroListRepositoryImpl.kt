@@ -24,14 +24,14 @@ class BuildsHeroListRepositoryImpl @Inject constructor(
         return@withContext heroDao.getHeroWithNameAvatarRarity(idHero)
     }
 
-    override suspend fun getBuildsHeroList(idHero: Int): List<FullBuildHeroFromUser> = withContext(ioDispatcher) {
+    override suspend fun getBuildsHeroList(idHero: Int): NetworkResult<List<FullBuildHeroFromUser>> = withContext(ioDispatcher) {
         when(val result = handleApi { buildsHeroListService.getBuildsHeroList(idHero) }) {
             is NetworkResult.Error -> {
-                return@withContext emptyList()
+                return@withContext NetworkResult.Error(result.code)
             }
             is NetworkResult.Success -> {
                 val hero = getHero(idHero)
-                return@withContext result.data.map {
+                return@withContext NetworkResult.Success(result.data.map {
                     FullBuildHeroFromUser(
                         idBuild = it.idBuild,
                         hero = hero,
@@ -40,7 +40,7 @@ class BuildsHeroListRepositoryImpl @Inject constructor(
                         decoration = decorationDao.getDecoration(it.idDecoration).toDecoration(),
                         buildUser = it.buildUser
                     )
-                }
+                })
             }
         }
     }
