@@ -19,6 +19,7 @@ import com.example.honkaihelper.equipment.KEY_WEAPON
 import com.example.honkaihelper.equipment.data.model.Equipment
 import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.utils.backgroundHero
+import com.example.honkaihelper.utils.load
 
 class CreateBuildHeroFragment :
     BaseFragment<FragmentCreateBuildHeroBinding>(FragmentCreateBuildHeroBinding::inflate) {
@@ -36,6 +37,7 @@ class CreateBuildHeroFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.getHero(idHero)
         setFragmentResultListener("equipment_key") { key, bundle ->
             val equipment = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 bundle.getParcelable("equipment", Equipment::class.java)
@@ -59,10 +61,11 @@ class CreateBuildHeroFragment :
     }
 
     private fun getHero() {
-//        binding.apply {
-//            imageHeroAvatarInCreateBuildr.backgroundHero(hero!!)
-//            textHeroNameInCreateBuild.text = hero?.name
-//        }
+        viewModel.hero.observe(viewLifecycleOwner) {
+            binding.imageHeroAvatarInCreateBuildr.load(it.localAvatarPath)
+            binding.imageHeroAvatarInCreateBuildr.backgroundHero(it.rarity)
+            binding.textHeroNameInCreateBuild.text = it.name
+        }
     }
 
     private fun setupAdapter() {
