@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.honkaihelper.create_build_hero.data.CreateBuildHeroRepository
 import com.example.honkaihelper.data.local.models.hero.HeroWithNameAvatarRarity
 import com.example.honkaihelper.equipment.data.model.Equipment
+import com.example.honkaihelper.heroes.data.model.Hero
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -14,8 +15,8 @@ class CreateBuildHeroViewModel @Inject constructor(
     private val repository: CreateBuildHeroRepository
 ) : ViewModel() {
 
-    private val _hero = MutableLiveData<HeroWithNameAvatarRarity>()
-    val hero: LiveData<HeroWithNameAvatarRarity> = _hero
+    private val _hero = MutableLiveData<Hero>()
+    val hero: LiveData<Hero> = _hero
 
     private val _weaponList = MutableLiveData<List<Equipment>>()
     val weaponList: LiveData<List<Equipment>> = _weaponList
