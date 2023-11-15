@@ -2,6 +2,7 @@ package com.example.honkaihelper.equipment
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,41 +64,23 @@ class EquipmentFragment : BottomSheetDialogFragment() {
     }
 
     private fun setupView() {
-        uiStateHandle()
         setupAdapter()
         setupRecyclerView()
-    }
-
-    private fun uiStateHandle() {
-        viewModel.uiState.observe(viewLifecycleOwner) {
-            when (it) {
-                is EquipmentUiState.ERROR -> {
-
-                }
-
-                is EquipmentUiState.LOADING -> {
-
-                }
-
-                is EquipmentUiState.SUCCESS -> {
-                    mAdapter.mEquipmentList = it.data
-                }
-            }
-        }
+        setEquipmentList()
     }
 
     private fun getEquipmentByKey() {
         when (equipmentClick) {
             KEY_WEAPON -> {
-                viewModel.getWeapon(heroPath)
+                viewModel.getWeapons(heroPath)
             }
 
             KEY_RELIC -> {
-                viewModel.getRelic()
+                viewModel.getRelics()
             }
 
             KEY_DECORATION -> {
-                viewModel.getDecoration()
+                viewModel.getDecorations()
             }
         }
     }
@@ -116,6 +99,12 @@ class EquipmentFragment : BottomSheetDialogFragment() {
             layoutManager = GridLayoutManager(requireActivity(), 4)
             adapter = mAdapter
             itemAnimator = null
+        }
+    }
+
+    private fun setEquipmentList() {
+        viewModel.equipmentList.observe(viewLifecycleOwner) {
+            mAdapter.mEquipmentList = it
         }
     }
 

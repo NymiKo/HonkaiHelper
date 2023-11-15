@@ -20,12 +20,14 @@ import com.example.honkaihelper.equipment.data.model.Equipment
 import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.utils.backgroundHero
 import com.example.honkaihelper.utils.load
+import kotlin.properties.Delegates
 
 class CreateBuildHeroFragment :
     BaseFragment<FragmentCreateBuildHeroBinding>(FragmentCreateBuildHeroBinding::inflate) {
 
     private val viewModel by viewModels<CreateBuildHeroViewModel> { viewModelFactory }
     private lateinit var mAdapterWeapon: CreateBuildEquipmentAdapter
+    private var pathHero = 0
 
     private val idHero get() = requireArguments().getInt(ARG_ID_HERO)
 
@@ -62,19 +64,20 @@ class CreateBuildHeroFragment :
 
     private fun getHero() {
         viewModel.hero.observe(viewLifecycleOwner) {
-            binding.imageHeroAvatarInCreateBuildr.load(it.localAvatarPath)
+            binding.imageHeroAvatarInCreateBuildr.load(it.avatar)
             binding.imageHeroAvatarInCreateBuildr.backgroundHero(it.rarity)
             binding.textHeroNameInCreateBuild.text = it.name
+            pathHero = it.path
         }
     }
 
     private fun setupAdapter() {
         mAdapterWeapon = CreateBuildEquipmentAdapter(object : CreateBuildEquipmentListener {
             override fun onAddEquipmentClick() {
-//                findNavController().navigate(
-//                    R.id.equipmentFragment,
-//                    EquipmentFragment.newInstance(hero!!.path, equipmentClick = KEY_WEAPON)
-//                )
+                findNavController().navigate(
+                    R.id.equipmentFragment,
+                    EquipmentFragment.newInstance(pathHero, equipmentClick = KEY_WEAPON)
+                )
             }
 
             override fun onRemoveEquipmentClick(position: Int) {

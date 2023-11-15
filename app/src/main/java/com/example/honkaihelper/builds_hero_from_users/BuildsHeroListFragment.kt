@@ -44,6 +44,7 @@ class BuildsHeroListFragment :
         setupAdapter()
         setupRecyclerView()
         navigateToCreateBuild()
+        retryLoadData()
     }
 
     override fun uiStateHandle() {
@@ -52,17 +53,17 @@ class BuildsHeroListFragment :
                 is BuildsHeroListUIState.EMPTY -> {
                     binding.shimmerLayoutBuildsHeroList.stopShimmer()
                     binding.shimmerLayoutBuildsHeroList.gone()
-                    binding.viewStubBuildsHeroEmptyList.inflate()
+                    binding.viewStubBuildsHeroEmptyList.visible()
                 }
                 is BuildsHeroListUIState.ERROR -> {
                     binding.shimmerLayoutBuildsHeroList.stopShimmer()
                     binding.shimmerLayoutBuildsHeroList.gone()
-                    binding.viewStubError.inflate()
+                    binding.viewStubError.visible()
                 }
                 is BuildsHeroListUIState.LOADING -> {
                     binding.shimmerLayoutBuildsHeroList.startShimmer()
                     binding.shimmerLayoutBuildsHeroList.visible()
-                    //binding.viewStubError.gone()
+                    binding.viewStubError.gone()
                 }
                 is BuildsHeroListUIState.SUCCESS -> {
                     binding.shimmerLayoutBuildsHeroList.stopShimmer()
@@ -97,7 +98,13 @@ class BuildsHeroListFragment :
     }
 
     private fun retryLoadData() {
-        binding.viewStubError
+        binding.viewStubError.setOnInflateListener { _, inflated ->
+            val viewStubBinding = ViewstubErrorLayoutBinding.bind(inflated)
+
+            viewStubBinding.buttonRetryLoadBuildsHero.setOnClickListener {
+                viewModel.getBuildsHeroList(idHero)
+            }
+        }
     }
 
     companion object {

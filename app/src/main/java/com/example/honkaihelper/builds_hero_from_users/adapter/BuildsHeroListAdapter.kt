@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.honkaihelper.R
 import com.example.honkaihelper.builds_hero_from_users.data.model.FullBuildHeroFromUser
 import com.example.honkaihelper.databinding.ItemBuildsHeroBinding
+import com.example.honkaihelper.utils.backgroundHero
 import com.example.honkaihelper.utils.backgroundRarity
 import com.example.honkaihelper.utils.load
 
@@ -40,6 +41,7 @@ class BuildsHeroListAdapter :
         fun bind(buildHero: FullBuildHeroFromUser) {
             binding.apply {
                 imageHeroAvatarInBuildsHero.load(buildHero.hero.localAvatarPath)
+                imageHeroAvatarInBuildsHero.backgroundHero(buildHero.hero.rarity)
                 textHeroNameInBuildsHero.text = buildHero.hero.name
                 imageHeroWeapon.load(buildHero.weapon.image)
                 imageHeroWeapon.backgroundRarity(buildHero.weapon.rarity)

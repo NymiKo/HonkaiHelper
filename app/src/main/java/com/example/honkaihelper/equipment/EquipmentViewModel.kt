@@ -4,10 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.honkaihelper.R
-import com.example.honkaihelper.createteam.CreateTeamUIState
-import com.example.honkaihelper.data.NetworkResult
 import com.example.honkaihelper.equipment.data.EquipmentRepository
+import com.example.honkaihelper.equipment.data.model.Equipment
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,41 +13,18 @@ class EquipmentViewModel @Inject constructor(
     private val repository: EquipmentRepository
 ): ViewModel() {
 
-    private val _uiState = MutableLiveData<EquipmentUiState<Any>>(EquipmentUiState.LOADING)
-    val uiState: LiveData<EquipmentUiState<Any>> = _uiState
+    private val _equipmentList = MutableLiveData<List<Equipment>>()
+    val equipmentList: LiveData<List<Equipment>> = _equipmentList
 
-    fun getWeapon(path: Int) = viewModelScope.launch {
-        _uiState.value = EquipmentUiState.LOADING
-        val result = repository.getWeapon(path)
-        when(result) {
-            is NetworkResult.Error -> errorHandler(result.code)
-            is NetworkResult.Success -> _uiState.value = EquipmentUiState.SUCCESS(result.data)
-        }
+    fun getWeapons(path: Int) = viewModelScope.launch {
+        _equipmentList.value = repository.getWeapons(path)
     }
 
-    fun getRelic() = viewModelScope.launch {
-        _uiState.value = EquipmentUiState.LOADING
-        val result = repository.getRelic()
-        when(result) {
-            is NetworkResult.Error -> errorHandler(result.code)
-            is NetworkResult.Success -> _uiState.value = EquipmentUiState.SUCCESS(result.data)
-        }
+    fun getRelics() = viewModelScope.launch {
+        _equipmentList.value = repository.getRelics()
     }
 
-    fun getDecoration() = viewModelScope.launch {
-        _uiState.value = EquipmentUiState.LOADING
-        val result = repository.getDecoration()
-        when(result) {
-            is NetworkResult.Error -> errorHandler(result.code)
-            is NetworkResult.Success -> _uiState.value = EquipmentUiState.SUCCESS(result.data)
-        }
+    fun getDecorations() = viewModelScope.launch {
+        _equipmentList.value = repository.getDecorations()
     }
-
-    private fun errorHandler(errorCode: Int) {
-        when(errorCode) {
-            105 -> _uiState.value = EquipmentUiState.ERROR(R.string.check_your_internet_connection)
-            else -> _uiState.value = EquipmentUiState.ERROR(R.string.unknown_error)
-        }
-    }
-
 }
