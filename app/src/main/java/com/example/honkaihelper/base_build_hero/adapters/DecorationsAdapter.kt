@@ -1,9 +1,11 @@
 package com.example.honkaihelper.base_build_hero.adapters
 
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.ImageView
 import com.example.honkaihelper.base.BaseAdapter
 import com.example.honkaihelper.databinding.ItemRelicBaseBuildHeroBinding
 import com.example.honkaihelper.info_about_hero.data.model.Decoration
@@ -33,6 +35,6 @@ class DecorationsAdapter(
 
     override fun onClick(v: View?) {
         val itemId = v?.tag as Int
-        actionListener.onItemClick(itemId)
+        actionListener.onItemClick(itemId, v as ImageView)
     }
 }

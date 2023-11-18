@@ -15,6 +15,7 @@ import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.databinding.FragmentWeaponInfoBinding
 import com.example.honkaihelper.utils.load
 import com.example.honkaihelper.utils.loadImageWithoutScale
+import com.google.android.material.transition.MaterialContainerTransform
 
 class WeaponInfoFragment : BaseFragment<FragmentWeaponInfoBinding>(FragmentWeaponInfoBinding::inflate) {
 
@@ -28,6 +29,9 @@ class WeaponInfoFragment : BaseFragment<FragmentWeaponInfoBinding>(FragmentWeapo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            duration = 500
+        }
         viewModel.getWeapon(idWeapon)
     }
 

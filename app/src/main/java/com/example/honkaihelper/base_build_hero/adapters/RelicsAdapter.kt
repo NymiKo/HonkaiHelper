@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.ImageView
 import com.example.honkaihelper.base.BaseAdapter
 import com.example.honkaihelper.databinding.ItemRelicBaseBuildHeroBinding
 import com.example.honkaihelper.databinding.ItemWeaponBaseBuildHeroBinding
@@ -33,6 +34,6 @@ class RelicsAdapter(
 
     override fun onClick(v: View?) {
         val itemId = v?.tag as Int
-        actionListener.onItemClick(itemId)
+        actionListener.onItemClick(itemId, v as ImageView)
     }
 }

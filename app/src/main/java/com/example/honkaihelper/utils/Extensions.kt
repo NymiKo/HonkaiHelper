@@ -3,11 +3,13 @@ package com.example.honkaihelper.utils
 import android.app.Activity
 import android.content.ContentResolver
 import android.content.Context
+import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Build
 import android.os.Parcelable
 import android.provider.OpenableColumns
 import android.text.Html
+import android.view.View
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.TypedArrayUtils.getString
@@ -75,11 +77,11 @@ fun ImageView.backgroundEquipment(equipment: Equipment) {
     }
 }
 
-fun ImageView.backgroundRarity(rarity: Int) {
+fun View.backgroundRarity(rarity: Int) {
     when (rarity) {
-        0 -> this.background = ContextCompat.getDrawable(this.context, R.color.blue)
-        1 -> this.background = ContextCompat.getDrawable(this.context, R.color.violet)
-        2 -> this.background = ContextCompat.getDrawable(this.context, R.color.orange)
+        0 -> this.backgroundTintList = ColorStateList.valueOf(this.context.getColor(R.color.blue))
+        1 -> this.backgroundTintList = ColorStateList.valueOf(this.context.getColor(R.color.violet))
+        2 -> this.backgroundTintList = ColorStateList.valueOf(this.context.getColor(R.color.orange))
     }
 }
 

@@ -2,8 +2,12 @@ package com.example.honkaihelper.base_build_hero
 
 import android.content.Context
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.core.os.bundleOf
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -70,15 +74,19 @@ class BaseBuildHeroFragment :
 
     private fun setupAdapters() {
         mAdapterWeapons = WeaponsAdapter(object : ItemClickListener {
-            override fun onItemClick(itemId: Int) {
+            override fun onItemClick(itemId: Int, view: ImageView) {
+                val transitionName = getString(R.string.weapon_info_transition_name)
+                val extras = FragmentNavigatorExtras(view to transitionName)
                 findNavController().navigate(
-                    R.id.weaponInfoFragment,
-                    WeaponInfoFragment.newInstance(itemId)
+                    R.id.action_baseBuildHeroFragment_to_weaponInfoFragment,
+                    WeaponInfoFragment.newInstance(itemId),
+                    null,
+                    extras
                 )
             }
         })
         mAdapterRelics = RelicsAdapter(object : ItemClickListener {
-            override fun onItemClick(itemId: Int) {
+            override fun onItemClick(itemId: Int, view: ImageView) {
                 findNavController().navigate(
                     R.id.relicInfoFragment,
                     RelicInfoFragment.newInject(itemId)
@@ -86,7 +94,7 @@ class BaseBuildHeroFragment :
             }
         })
         mAdapterDecorations = DecorationsAdapter(object : ItemClickListener {
-            override fun onItemClick(itemId: Int) {
+            override fun onItemClick(itemId: Int, view: ImageView) {
                 findNavController().navigate(
                     R.id.decorationInfoFragment,
                     DecorationInfoFragment.newInject(itemId)
@@ -100,6 +108,10 @@ class BaseBuildHeroFragment :
         binding.recyclerWeaponBaseBuildHero.apply {
             layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
             adapter = mAdapterWeapons
+            postponeEnterTransition()
+            doOnPreDraw {
+                startPostponedEnterTransition()
+            }
         }
     }
 
