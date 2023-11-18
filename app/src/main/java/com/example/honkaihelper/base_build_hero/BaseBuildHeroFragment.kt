@@ -2,11 +2,11 @@ package com.example.honkaihelper.base_build_hero
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import androidx.core.os.bundleOf
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,6 +47,12 @@ class BaseBuildHeroFragment :
         viewModel.getFullBaseBuildHero(idHero)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
+    }
+
     override fun setupView() {
         setupToolbar()
         setupAdapters()
@@ -78,7 +84,7 @@ class BaseBuildHeroFragment :
                 val transitionName = getString(R.string.weapon_info_transition_name)
                 val extras = FragmentNavigatorExtras(view to transitionName)
                 findNavController().navigate(
-                    R.id.action_baseBuildHeroFragment_to_weaponInfoFragment,
+                    R.id.weaponInfoFragment,
                     WeaponInfoFragment.newInstance(itemId),
                     null,
                     extras
@@ -99,9 +105,13 @@ class BaseBuildHeroFragment :
         })
         mAdapterDecorations = DecorationsAdapter(object : ItemClickListener {
             override fun onItemClick(itemId: Int, view: ImageView) {
+                val transitionName = getString(R.string.decoration_info_transition_name)
+                val extras = FragmentNavigatorExtras(view to transitionName)
                 findNavController().navigate(
                     R.id.decorationInfoFragment,
-                    DecorationInfoFragment.newInject(itemId)
+                    DecorationInfoFragment.newInstance(itemId),
+                    null,
+                    extras
                 )
             }
         })
@@ -112,10 +122,6 @@ class BaseBuildHeroFragment :
         binding.recyclerWeaponBaseBuildHero.apply {
             layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
             adapter = mAdapterWeapons
-            postponeEnterTransition()
-            doOnPreDraw {
-                startPostponedEnterTransition()
-            }
         }
     }
 

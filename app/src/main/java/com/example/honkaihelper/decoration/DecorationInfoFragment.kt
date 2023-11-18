@@ -1,14 +1,19 @@
 package com.example.honkaihelper.decoration
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.honkaihelper.App
+import com.example.honkaihelper.R
 import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.databinding.FragmentDecorationInfoBinding
 import com.example.honkaihelper.utils.loadImageWithoutScale
+import com.google.android.material.transition.MaterialContainerTransform
+import com.google.android.material.transition.MaterialContainerTransform.TransitionDirection
+import java.util.concurrent.TimeUnit
 
 class DecorationInfoFragment : BaseFragment<FragmentDecorationInfoBinding>(FragmentDecorationInfoBinding::inflate) {
 
@@ -22,6 +27,11 @@ class DecorationInfoFragment : BaseFragment<FragmentDecorationInfoBinding>(Fragm
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = MaterialContainerTransform(requireActivity(), true).apply {
+            drawingViewId = R.id.navHostFragment
+            duration = 500
+            scrimColor = Color.TRANSPARENT
+        }
         viewModel.getDecoration(idDecoration)
     }
 
@@ -50,7 +60,7 @@ class DecorationInfoFragment : BaseFragment<FragmentDecorationInfoBinding>(Fragm
 
     companion object {
         private const val ID_DECORATION = "id_decoration"
-        fun newInject(idDecoration: Int): Bundle {
+        fun newInstance(idDecoration: Int): Bundle {
             return bundleOf(ID_DECORATION to idDecoration)
         }
     }

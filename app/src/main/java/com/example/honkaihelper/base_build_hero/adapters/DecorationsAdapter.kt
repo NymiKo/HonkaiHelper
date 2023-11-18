@@ -1,11 +1,12 @@
 package com.example.honkaihelper.base_build_hero.adapters
 
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.view.ViewCompat
+import com.example.honkaihelper.R
 import com.example.honkaihelper.base.BaseAdapter
 import com.example.honkaihelper.databinding.ItemRelicBaseBuildHeroBinding
 import com.example.honkaihelper.info_about_hero.data.model.Decoration
@@ -27,6 +28,11 @@ class DecorationsAdapter(
     private inner class DecorationsViewHolder(private val binding: ItemRelicBaseBuildHeroBinding) :
         BaseViewHolder(binding) {
         override fun bind(model: Decoration) {
+            ViewCompat.setTransitionName(
+                binding.imageRelicBaseBuildHero, binding.imageRelicBaseBuildHero.context.getString(
+                    R.string.base_build_decoration_transition_name, model.idDecoration
+                )
+            )
             binding.imageRelicBaseBuildHero.load(model.image)
             binding.imageRelicBaseBuildHero.tag = model.idDecoration
             if (adapterPosition + 1 == list.size) binding.imageNextRelic.gone()

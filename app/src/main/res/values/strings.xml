@@ -71,6 +71,8 @@
     <string name="weapon_info_transition_name" translatable="false">weapon_info_transition_name</string>
     <string name="base_build_relic_transition_name" translatable="false">base_build_relic_transition_name_%d</string>
     <string name="relic_info_transition_name" translatable="false">relic_info_transition_name</string>
+    <string name="base_build_decoration_transition_name" translatable="false">base_build_decoration_transition_name_%d</string>
+    <string name="decoration_info_transition_name" translatable="false">decoration_info_transition_name</string>
 
     <string-array name="hero_level">
         <item>20</item>
