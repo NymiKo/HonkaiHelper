@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginVertical="@dimen/DP8">
@@ -21,28 +20,26 @@
 
         <TextView
             android:id="@+id/text_title_eidolon"
+            style="@style/base_textview_header_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/DP16"
-            android:textColor="?attr/colorSecondary"
-            android:textSize="16sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image_eidolon"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_description_ability"
+            style="@style/base_textview_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/DP16"
-            android:fontFamily="sans-serif-medium"
-            android:textColor="?attr/colorSecondary"
-            app:layout_constraintVertical_bias="0"
+            android:layout_marginTop="@dimen/DP8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image_eidolon"
-            app:layout_constraintTop_toBottomOf="@+id/text_title_eidolon" />
+            app:layout_constraintTop_toBottomOf="@+id/text_title_eidolon"
+            app:layout_constraintVertical_bias="0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

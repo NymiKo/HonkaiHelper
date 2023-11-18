@@ -25,11 +25,10 @@
 
         <TextView
             android:id="@+id/text_type_ability"
+            style="@style/textview_ability_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/DP16"
-            android:textColor="@color/orange"
-            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/text_type_ability"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/image_ability"
@@ -37,13 +36,11 @@
 
         <TextView
             android:id="@+id/text_title_ability"
+            style="@style/base_textview_header_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/DP16"
             android:layout_marginTop="@dimen/DP8"
-            android:textColor="?attr/colorSecondary"
-            android:textSize="16sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/image_ability"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/image_ability"
@@ -51,6 +48,7 @@
 
         <TextView
             android:id="@+id/text_description_ability"
+            style="@style/base_textview_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/DP8"

@@ -52,17 +52,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/effect_relic"
-                        android:textColor="?attr/colorSecondary"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textSize="20sp"
+                        style="@style/base_textview_header_style"/>
 
                     <TextView
                         android:id="@+id/text_effect_description_decoration"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/DP8"
-                        android:fontFamily="sans-serif-medium"
-                        android:textColor="?attr/colorSecondary" />
+                        style="@style/base_textview_style"/>
 
                 </LinearLayout>
 

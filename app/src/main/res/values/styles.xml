@@ -99,7 +99,7 @@
         <item name="buttonBarPositiveButtonStyle">@style/positiveDialogTextColor</item>
         <item name="buttonBarNegativeButtonStyle">@style/negativeDialogTextColor</item>
     </style>
-    
+
     <style name="positiveDialogTextColor">
         <item name="android:textColor">?attr/colorSecondary</item>
         <item name="android:backgroundTint">@null</item>
@@ -125,6 +125,24 @@
         <item name="android:layout_marginHorizontal">16dp</item>
         <item name="android:layout_marginTop">@dimen/DP16</item>
         <item name="android:background">?attr/colorSecondary</item>
+    </style>
+
+    <style name="base_textview_style">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">?attr/colorSecondary</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="base_textview_header_style">
+        <item name="android:textColor">?attr/colorSecondary</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="textview_ability_style">
+        <item name="android:textColor">@color/orange</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
 </resources>
