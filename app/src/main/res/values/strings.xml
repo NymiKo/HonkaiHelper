@@ -64,8 +64,13 @@
     <string name="effect_relic_four_parts"><![CDATA[<font color="#E2AB59"><b><u>Эффект от 4-х частей:</u></b></font> %1$s]]></string>
     <string name="builds_from_users">Сборки героев от пользователей</string>
     <string name="empty_builds_hero">Пока что никто не поделился своей сборкой</string>
-    <string name="base_build_weapon_transition_name" translatable="false">base_build_weapon_transition_name_%1$s</string>
+
+
+
+    <string name="base_build_weapon_transition_name" translatable="false">base_build_weapon_transition_name_%d</string>
     <string name="weapon_info_transition_name" translatable="false">weapon_info_transition_name</string>
+    <string name="base_build_relic_transition_name" translatable="false">base_build_relic_transition_name_%d</string>
+    <string name="relic_info_transition_name" translatable="false">relic_info_transition_name</string>
 
     <string-array name="hero_level">
         <item>20</item>

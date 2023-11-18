@@ -32,7 +32,7 @@ class WeaponsAdapter(
             ViewCompat.setTransitionName(
                 binding.imageWeaponBaseBuildHero,
                 binding.imageWeaponBaseBuildHero.context.getString(
-                    R.string.base_build_weapon_transition_name, model.name
+                    R.string.base_build_weapon_transition_name, model.idWeapon
                 )
             )
             binding.imageWeaponBaseBuildHero.load(model.image)

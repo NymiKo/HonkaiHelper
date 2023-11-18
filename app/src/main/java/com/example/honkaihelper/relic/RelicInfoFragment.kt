@@ -17,6 +17,7 @@ import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.databinding.FragmentRelicInfoBinding
 import com.example.honkaihelper.utils.fromHtml
 import com.example.honkaihelper.utils.loadImageWithoutScale
+import com.google.android.material.transition.MaterialContainerTransform
 
 class RelicInfoFragment : BaseFragment<FragmentRelicInfoBinding>(FragmentRelicInfoBinding::inflate) {
 
@@ -30,6 +31,9 @@ class RelicInfoFragment : BaseFragment<FragmentRelicInfoBinding>(FragmentRelicIn
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            duration = 500
+        }
         viewModel.getRelic(idRelic)
     }
 

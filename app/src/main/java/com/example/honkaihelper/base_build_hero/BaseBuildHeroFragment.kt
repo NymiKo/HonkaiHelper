@@ -87,9 +87,13 @@ class BaseBuildHeroFragment :
         })
         mAdapterRelics = RelicsAdapter(object : ItemClickListener {
             override fun onItemClick(itemId: Int, view: ImageView) {
+                val transitionName = getString(R.string.relic_info_transition_name)
+                val extras = FragmentNavigatorExtras(view to transitionName)
                 findNavController().navigate(
                     R.id.relicInfoFragment,
-                    RelicInfoFragment.newInject(itemId)
+                    RelicInfoFragment.newInject(itemId),
+                    null,
+                    extras
                 )
             }
         })
