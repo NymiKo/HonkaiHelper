@@ -89,6 +89,9 @@ class BuildsHeroListFragment :
         viewModel.hero.observe(viewLifecycleOwner) {
             binding.toolbarBuildsHeroList.title = getString(R.string.builds_for_hero, it.name)
         }
+        binding.toolbarBuildsHeroList.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun navigateToCreateBuild() {
