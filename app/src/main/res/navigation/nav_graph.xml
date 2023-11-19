@@ -43,7 +43,7 @@
             app:popUpTo="@id/loadDataFragment" />
         <action
             android:id="@+id/action_heroesListFragment_to_infoAboutHeroFragment"
-            app:destination="@id/infoAboutHeroFragment" />
+            app:destination="@id/infoAboutHeroFragment"/>
     </fragment>
     <fragment
         android:id="@+id/loginFragment"

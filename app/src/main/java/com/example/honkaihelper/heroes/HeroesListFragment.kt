@@ -3,10 +3,14 @@ package com.example.honkaihelper.heroes
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
+import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.honkaihelper.App
@@ -23,6 +27,9 @@ import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.loadWithPlaceholder
 import com.example.honkaihelper.utils.uppercaseFirstChar
 import com.example.honkaihelper.utils.visible
+import com.google.android.material.card.MaterialCardView
+import com.google.android.material.transition.MaterialElevationScale
+import com.google.android.material.transition.MaterialFadeThrough
 
 class HeroesListFragment :
     BaseFragment<FragmentHeroesListBinding>(FragmentHeroesListBinding::inflate) {
@@ -38,9 +45,18 @@ class HeroesListFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        reenterTransition = MaterialFadeThrough().apply {
+            duration = 500
+        }
         setFragmentResultListener(DATA_UPLOADED_KEY) { _, bundle ->
             if (bundle.getBoolean(ARG_DATA_UPLOADED)) viewModel.getHeroesList()
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
     }
 
     override fun setupView() {
@@ -77,13 +93,9 @@ class HeroesListFragment :
     private fun showRetryView() {
         binding.groupRetry.visible()
         binding.recyclerViewHeroes.gone()
-        binding.shimmerLayoutHeroesList.stopShimmer()
-        binding.shimmerLayoutHeroesList.gone()
     }
 
     private fun showLoading() {
-        binding.shimmerLayoutHeroesList.startShimmer()
-        binding.shimmerLayoutHeroesList.visible()
         binding.recyclerViewHeroes.gone()
         binding.groupRetry.gone()
     }
@@ -91,8 +103,6 @@ class HeroesListFragment :
     private fun showHeroesList(heroesList: List<Hero>) {
         mAdapterRecyclerView.mHeroesList = heroesList
         binding.recyclerViewHeroes.visible()
-        binding.shimmerLayoutHeroesList.stopShimmer()
-        binding.shimmerLayoutHeroesList.gone()
         binding.groupRetry.gone()
     }
 
@@ -149,10 +159,11 @@ class HeroesListFragment :
         binding.recyclerViewHeroes.setHasFixedSize(true)
         binding.recyclerViewHeroes.layoutManager = GridLayoutManager(requireContext(), 2)
         mAdapterRecyclerView = HeroesListAdapter(object : HeroesListActionListener {
-            override fun onClick(hero: Hero) {
+            override fun onClick(hero: Hero, view: MaterialCardView) {
                 findNavController().navigate(
-                    R.id.infoAboutHeroFragment,
-                    InfoAboutHeroFragment.newInstance(hero)
+                    R.id.action_heroesListFragment_to_infoAboutHeroFragment,
+                    InfoAboutHeroFragment.newInstance(hero.id),
+                    null
                 )
             }
         })

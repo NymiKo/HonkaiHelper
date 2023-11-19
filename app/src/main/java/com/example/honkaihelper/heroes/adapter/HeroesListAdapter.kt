@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.ItemHeroBinding
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.utils.load
+import com.google.android.material.card.MaterialCardView
 
 class HeroesListAdapter(
     private val actionListener: HeroesListActionListener
@@ -44,9 +46,11 @@ class HeroesListAdapter(
         fun bind(hero: Hero) {
             binding.imageHeroAvatar.load(hero.avatar)
             if (hero.rarity) {
-                binding.cardHeroIcon.strokeColor = ContextCompat.getColor(binding.cardHeroIcon.context, R.color.orange)
+                binding.cardHeroIcon.strokeColor =
+                    ContextCompat.getColor(binding.cardHeroIcon.context, R.color.orange)
             } else {
-                binding.cardHeroIcon.strokeColor = ContextCompat.getColor(binding.cardHeroIcon.context, R.color.violet)
+                binding.cardHeroIcon.strokeColor =
+                    ContextCompat.getColor(binding.cardHeroIcon.context, R.color.violet)
             }
             binding.textHeroName.text = hero.name
             binding.cardHeroIcon.tag = hero
@@ -55,6 +59,6 @@ class HeroesListAdapter(
 
     override fun onClick(view: View?) {
         val hero = view?.tag as Hero
-        actionListener.onClick(hero)
+        actionListener.onClick(hero, view as MaterialCardView)
     }
 }

@@ -1,6 +1,7 @@
 package com.example.honkaihelper.relic
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Html
 import androidx.fragment.app.Fragment
@@ -32,7 +33,9 @@ class RelicInfoFragment : BaseFragment<FragmentRelicInfoBinding>(FragmentRelicIn
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = MaterialContainerTransform().apply {
+            drawingViewId = R.id.navHostFragment
             duration = 500
+            scrimColor = Color.TRANSPARENT
         }
         viewModel.getRelic(idRelic)
     }

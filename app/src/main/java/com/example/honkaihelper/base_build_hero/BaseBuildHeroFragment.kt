@@ -24,6 +24,9 @@ import com.example.honkaihelper.databinding.FragmentBaseBuildHeroBinding
 import com.example.honkaihelper.decoration.DecorationInfoFragment
 import com.example.honkaihelper.relic.RelicInfoFragment
 import com.example.honkaihelper.weapon.WeaponInfoFragment
+import com.google.android.material.transition.MaterialContainerTransform
+import com.google.android.material.transition.MaterialFadeThrough
+import com.google.android.material.transition.MaterialSharedAxis
 
 class BaseBuildHeroFragment :
     BaseFragment<FragmentBaseBuildHeroBinding>(FragmentBaseBuildHeroBinding::inflate) {

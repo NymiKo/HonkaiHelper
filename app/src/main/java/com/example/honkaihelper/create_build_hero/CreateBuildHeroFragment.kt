@@ -1,8 +1,11 @@
 package com.example.honkaihelper.create_build_hero
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.transition.Slide
+import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -20,6 +23,9 @@ import com.example.honkaihelper.equipment.data.model.Equipment
 import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.utils.backgroundHero
 import com.example.honkaihelper.utils.load
+import com.example.honkaihelper.utils.themeColor
+import com.google.android.material.color.MaterialColors
+import com.google.android.material.transition.MaterialContainerTransform
 import kotlin.properties.Delegates
 
 class CreateBuildHeroFragment :

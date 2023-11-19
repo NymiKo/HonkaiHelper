@@ -9,6 +9,7 @@ import com.example.honkaihelper.builds_hero_from_users.data.model.FullBuildHeroF
 import com.example.honkaihelper.databinding.ItemBuildsHeroBinding
 import com.example.honkaihelper.utils.backgroundHero
 import com.example.honkaihelper.utils.backgroundRarity
+import com.example.honkaihelper.utils.backgroundWeapon
 import com.example.honkaihelper.utils.load
 
 class BuildsHeroListAdapter :
@@ -44,7 +45,7 @@ class BuildsHeroListAdapter :
                 imageHeroAvatarInBuildsHero.backgroundHero(buildHero.hero.rarity)
                 textHeroNameInBuildsHero.text = buildHero.hero.name
                 imageHeroWeapon.load(buildHero.weapon.image)
-                imageHeroWeapon.backgroundRarity(buildHero.weapon.rarity)
+                imageHeroWeapon.backgroundWeapon(buildHero.weapon.rarity)
                 imageHeroRelic.load(buildHero.relic.image)
                 imageHeroDecoration.load(buildHero.decoration.image)
                 textBuildFrom.text = textBuildFrom.context.getString(R.string.build_from, buildHero.buildUser.nickname)

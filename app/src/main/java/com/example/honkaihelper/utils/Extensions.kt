@@ -1,9 +1,11 @@
 package com.example.honkaihelper.utils
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentResolver
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Parcelable
@@ -11,6 +13,8 @@ import android.provider.OpenableColumns
 import android.text.Html
 import android.view.View
 import android.widget.ImageView
+import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.TypedArrayUtils.getString
 import androidx.core.text.HtmlCompat
@@ -85,6 +89,14 @@ fun View.backgroundRarity(rarity: Int) {
     }
 }
 
+fun ImageView.backgroundWeapon(rarity: Int) {
+    when (rarity) {
+        0 -> this.background = ContextCompat.getDrawable(this.context, R.color.blue)
+        1 -> this.background = ContextCompat.getDrawable(this.context, R.color.violet)
+        2 -> this.background = ContextCompat.getDrawable(this.context, R.color.orange)
+    }
+}
+
 fun <T : Parcelable> Fragment.getParcelable(arg: String, clazz: Class<T>) =
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         requireArguments().getParcelable(arg, clazz)
@@ -101,3 +113,15 @@ fun <T : Parcelable> Fragment.getParcelableArrayList(arg: String, clazz: Class<T
 
 fun fromHtml(source: String) =
     Html.fromHtml(source, HtmlCompat.FROM_HTML_MODE_LEGACY)
+
+@ColorInt
+@SuppressLint("Recycle")
+fun Context.themeColor(
+    @AttrRes themeAttrId: Int
+): Int {
+    return obtainStyledAttributes(
+        intArrayOf(themeAttrId)
+    ).use {
+        it.getColor(0, Color.MAGENTA)
+    }
+}
