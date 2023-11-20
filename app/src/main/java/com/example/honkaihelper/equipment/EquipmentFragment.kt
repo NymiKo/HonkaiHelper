@@ -17,12 +17,9 @@ import com.example.honkaihelper.databinding.FragmentEquipmentBinding
 import com.example.honkaihelper.equipment.adapter.EquipmentAdapter
 import com.example.honkaihelper.equipment.adapter.EquipmentListener
 import com.example.honkaihelper.equipment.data.model.Equipment
+import com.example.honkaihelper.utils.getParcelable
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import javax.inject.Inject
-
-const val KEY_WEAPON = "weapon"
-const val KEY_RELIC = "relic"
-const val KEY_DECORATION = "decoration"
 
 class EquipmentFragment : BottomSheetDialogFragment() {
 
@@ -35,7 +32,7 @@ class EquipmentFragment : BottomSheetDialogFragment() {
 
     private val heroPath get() = requireArguments().getInt(ARG_HERO_PATH, 1)
     private val idItem get() = requireArguments().getInt(ARG_ID_ITEM, 1)
-    private val equipmentClick get() = requireArguments().getString(ARG_EQUIPMENT_CLICK, KEY_WEAPON)
+    private val equipmentClick get() = getParcelable(ARG_EQUIPMENT_CLICK, EquipmentType::class.java)
     private lateinit var mAdapter: EquipmentAdapter
 
     override fun onAttach(context: Context) {
@@ -71,16 +68,19 @@ class EquipmentFragment : BottomSheetDialogFragment() {
 
     private fun getEquipmentByKey() {
         when (equipmentClick) {
-            KEY_WEAPON -> {
+            EquipmentType.WEAPON -> {
                 viewModel.getWeapons(heroPath)
             }
 
-            KEY_RELIC -> {
+            EquipmentType.RELIC -> {
                 viewModel.getRelics()
             }
 
-            KEY_DECORATION -> {
+            EquipmentType.DECORATION -> {
                 viewModel.getDecorations()
+            }
+            else -> {
+                viewModel.getWeapons(heroPath)
             }
         }
     }
@@ -88,7 +88,8 @@ class EquipmentFragment : BottomSheetDialogFragment() {
     private fun setupAdapter() {
         mAdapter = EquipmentAdapter(object : EquipmentListener {
             override fun onClick(equipment: Equipment) {
-                setFragmentResult("equipment_key", bundleOf(ARG_ID_ITEM to idItem, ARG_EQUIPMENT to equipment, ARG_EQUIPMENT_CLICK to equipmentClick))
+                Log.e("EQUIPMENT_CLICK", equipment.toString())
+                setFragmentResult("equipment_key", bundleOf(ARG_ID_ITEM to idItem, ARG_EQUIPMENT to equipment))
                 findNavController().popBackStack()
             }
         })
@@ -115,7 +116,7 @@ class EquipmentFragment : BottomSheetDialogFragment() {
         private const val ARG_EQUIPMENT = "equipment"
 
         @JvmStatic
-        fun newInstance(heroPath: Int = 0, idItem: Int = 0, equipmentClick: String): Bundle {
+        fun newInstance(heroPath: Int = 0, idItem: Int = 0, equipmentClick: EquipmentType): Bundle {
             return bundleOf(
                 ARG_HERO_PATH to heroPath,
                 ARG_ID_ITEM to idItem,

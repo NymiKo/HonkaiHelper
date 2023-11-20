@@ -12,11 +12,9 @@ import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentSetupTeamBinding
 import com.example.honkaihelper.equipment.EquipmentFragment
-import com.example.honkaihelper.equipment.KEY_DECORATION
-import com.example.honkaihelper.equipment.KEY_RELIC
-import com.example.honkaihelper.equipment.KEY_WEAPON
 import com.example.honkaihelper.equipment.data.model.Equipment
 import com.example.honkaihelper.base.BaseFragment
+import com.example.honkaihelper.equipment.EquipmentType
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.setupteam.adapter.SetupTeamAdapter
 import com.example.honkaihelper.setupteam.adapter.SetupTeamListener
@@ -71,15 +69,15 @@ class SetupTeamFragment :
     private fun setupRecyclerViewAdapter() {
         mAdapter = SetupTeamAdapter(object : SetupTeamListener {
             override fun onWeaponClick(heroPath: Int, idItem: Int) {
-                navigateToEquipmentFragment(idItem, KEY_WEAPON, heroPath)
+                navigateToEquipmentFragment(idItem, EquipmentType.WEAPON, heroPath)
             }
 
             override fun onRelicClick(idItem: Int) {
-                navigateToEquipmentFragment(idItem, KEY_RELIC)
+                navigateToEquipmentFragment(idItem, EquipmentType.RELIC)
             }
 
             override fun onDecorationClick(idItem: Int) {
-                navigateToEquipmentFragment(idItem, KEY_DECORATION)
+                navigateToEquipmentFragment(idItem, EquipmentType.DECORATION)
             }
         })
 
@@ -90,7 +88,7 @@ class SetupTeamFragment :
 
     private fun navigateToEquipmentFragment(
         idItem: Int,
-        equipmentClick: String,
+        equipmentClick: EquipmentType,
         heroPath: Int = 1
     ) {
         findNavController().navigate(
