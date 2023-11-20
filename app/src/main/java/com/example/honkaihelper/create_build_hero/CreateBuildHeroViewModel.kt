@@ -25,6 +25,9 @@ class CreateBuildHeroViewModel @Inject constructor(
     private val _relic = MutableLiveData<Equipment>()
     val relic: LiveData<Equipment> = _relic
 
+    private val _decoration = MutableLiveData<Equipment>()
+    val decoration: LiveData<Equipment> = _decoration
+
     fun getHero(idHero: Int) = viewModelScope.launch {
         _hero.value = repository.getHero(idHero)
     }
@@ -35,5 +38,9 @@ class CreateBuildHeroViewModel @Inject constructor(
 
     fun addRelic(equipment: Equipment) {
         _relic.value = equipment
+    }
+
+    fun addDecoration(equipment: Equipment) {
+        _decoration.value = equipment
     }
 }

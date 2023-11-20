@@ -29,7 +29,8 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
 
         (application as App).appComponent.mainComponent().create().inject(this)
-        getSharedPrefVersion().getString(KEY_VERSION_DB, "")?.let { viewModel.getVersionDB(it) }
+        getSharedPrefVersion().getString(KEY_VERSION_DB, "")?.let {  }
+        //viewModel.getVersionDB(it)
         uiStateHandle()
 
         setContentView(binding.root)

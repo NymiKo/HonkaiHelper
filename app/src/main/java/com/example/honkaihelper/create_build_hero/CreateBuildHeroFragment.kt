@@ -57,7 +57,7 @@ class CreateBuildHeroFragment :
                     }
 
                     EquipmentType.DECORATION -> {
-
+                        viewModel.addDecoration(equipment)
                     }
                 }
             }
@@ -68,6 +68,7 @@ class CreateBuildHeroFragment :
         getHero()
         setupImageWeapon()
         setupImageRelic()
+        setupImageDecoration()
     }
 
     override fun uiStateHandle() {
@@ -110,6 +111,23 @@ class CreateBuildHeroFragment :
         }
         binding.imageHeroRelicBuild.setOnClickListener {
             equipmentClick = EquipmentType.RELIC
+            findNavController().navigate(
+                R.id.equipmentFragment,
+                EquipmentFragment.newInstance(equipmentClick = equipmentClick)
+            )
+        }
+    }
+
+    private fun setupImageDecoration() {
+        viewModel.decoration.observe(viewLifecycleOwner) {
+            binding.imageHeroDecorationBuild.apply {
+                load(it.image)
+                imageTintList = null
+                background = ContextCompat.getDrawable(requireActivity(), R.color.orange)
+            }
+        }
+        binding.imageHeroDecorationBuild.setOnClickListener {
+            equipmentClick = EquipmentType.DECORATION
             findNavController().navigate(
                 R.id.equipmentFragment,
                 EquipmentFragment.newInstance(equipmentClick = equipmentClick)

@@ -44,6 +44,7 @@
         android:layout_marginHorizontal="@dimen/DP16"
         android:layout_marginTop="@dimen/DP8"
         android:src="@drawable/ic_add"
+        app:layout_constraintEnd_toStartOf="@id/image_hero_relic_build"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         app:shapeAppearance="@style/roundedCornersImageView"
@@ -68,9 +69,36 @@
         android:layout_height="100dp"
         android:layout_marginHorizontal="@dimen/DP16"
         android:src="@drawable/ic_add"
+        app:layout_constraintEnd_toStartOf="@id/image_hero_decoration_build"
         app:layout_constraintBottom_toBottomOf="@+id/image_hero_weapon_build"
         app:layout_constraintStart_toEndOf="@+id/image_hero_weapon_build"
         app:layout_constraintTop_toTopOf="@+id/image_hero_weapon_build"
+        app:shapeAppearance="@style/roundedCornersImageView"
+        app:strokeWidth="2dp"
+        app:tint="?attr/colorSecondary" />
+
+    <TextView
+        android:id="@+id/textView5"
+        style="@style/text_view_message_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/DP16"
+        android:layout_marginTop="@dimen/DP16"
+        android:text="@string/decoration"
+        app:layout_constraintEnd_toEndOf="@+id/image_hero_decoration_build"
+        app:layout_constraintStart_toStartOf="@+id/image_hero_decoration_build"
+        app:layout_constraintTop_toBottomOf="@id/text_hero_name_in_create_build" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_hero_decoration_build"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginHorizontal="@dimen/DP16"
+        android:src="@drawable/ic_add"
+        app:layout_constraintBottom_toBottomOf="@+id/image_hero_relic_build"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/image_hero_relic_build"
+        app:layout_constraintTop_toTopOf="@+id/image_hero_relic_build"
         app:shapeAppearance="@style/roundedCornersImageView"
         app:strokeWidth="2dp"
         app:tint="?attr/colorSecondary" />
