@@ -28,23 +28,26 @@
     <TextView
         android:id="@+id/textView3"
         style="@style/text_view_message_style"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/DP16"
         android:layout_marginTop="@dimen/DP16"
-        android:layout_marginBottom="@dimen/DP8"
         android:text="@string/weapon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/image_hero_weapon_build"
+        app:layout_constraintStart_toStartOf="@+id/image_hero_weapon_build"
         app:layout_constraintTop_toBottomOf="@+id/image_hero_avatar_in_create_buildr" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_weapon_in_create_build"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_hero_weapon_build"
+        android:layout_width="80dp"
+        android:layout_height="120dp"
         android:layout_marginHorizontal="@dimen/DP16"
         android:layout_marginTop="@dimen/DP8"
+        android:src="@drawable/ic_add"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
-        tools:layout_editor_absoluteX="16dp" />
+        app:shapeAppearance="@style/roundedCornersImageView"
+        app:strokeWidth="2dp"
+        app:tint="?attr/colorSecondary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
