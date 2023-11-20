@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.honkaihelper.base_build_hero.data.model.Weapon
 import com.example.honkaihelper.create_build_hero.data.CreateBuildHeroRepository
+import com.example.honkaihelper.create_build_hero.data.model.BuildHeroFromUser
 import com.example.honkaihelper.data.local.models.hero.HeroWithNameAvatarRarity
 import com.example.honkaihelper.equipment.data.model.Equipment
 import com.example.honkaihelper.heroes.data.model.Hero
@@ -42,5 +43,9 @@ class CreateBuildHeroViewModel @Inject constructor(
 
     fun addDecoration(equipment: Equipment) {
         _decoration.value = equipment
+    }
+
+    fun saveBuild() {
+        val build = BuildHeroFromUser(_hero.value.id, _weapon.value.id, _relic.value.id, _decoration.value.id)
     }
 }
