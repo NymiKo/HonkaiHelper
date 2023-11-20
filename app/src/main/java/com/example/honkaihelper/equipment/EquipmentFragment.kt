@@ -35,7 +35,7 @@ class EquipmentFragment : BottomSheetDialogFragment() {
 
     private val heroPath get() = requireArguments().getInt(ARG_HERO_PATH, 1)
     private val idItem get() = requireArguments().getInt(ARG_ID_ITEM, 1)
-    private val equipmentClick get() = requireArguments().getString(ARG_EQUIPMENT, KEY_WEAPON)
+    private val equipmentClick get() = requireArguments().getString(ARG_EQUIPMENT_CLICK, KEY_WEAPON)
     private lateinit var mAdapter: EquipmentAdapter
 
     override fun onAttach(context: Context) {
@@ -88,7 +88,7 @@ class EquipmentFragment : BottomSheetDialogFragment() {
     private fun setupAdapter() {
         mAdapter = EquipmentAdapter(object : EquipmentListener {
             override fun onClick(equipment: Equipment) {
-                setFragmentResult("equipment_key", bundleOf(ARG_ID_ITEM to idItem, ARG_EQUIPMENT to equipment))
+                setFragmentResult("equipment_key", bundleOf(ARG_ID_ITEM to idItem, ARG_EQUIPMENT to equipment, ARG_EQUIPMENT_CLICK to equipmentClick))
                 findNavController().popBackStack()
             }
         })
@@ -111,14 +111,15 @@ class EquipmentFragment : BottomSheetDialogFragment() {
     companion object {
         private const val ARG_HERO_PATH = "path"
         private const val ARG_ID_ITEM = "id_item"
+        private const val ARG_EQUIPMENT_CLICK = "equipment_click"
         private const val ARG_EQUIPMENT = "equipment"
 
         @JvmStatic
-        fun newInstance(heroPath: Int, idItem: Int = 0, equipmentClick: String): Bundle {
+        fun newInstance(heroPath: Int = 0, idItem: Int = 0, equipmentClick: String): Bundle {
             return bundleOf(
                 ARG_HERO_PATH to heroPath,
                 ARG_ID_ITEM to idItem,
-                ARG_EQUIPMENT to equipmentClick
+                ARG_EQUIPMENT_CLICK to equipmentClick
             )
         }
     }

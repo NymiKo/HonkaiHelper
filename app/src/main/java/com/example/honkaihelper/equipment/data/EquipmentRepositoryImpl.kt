@@ -1,7 +1,5 @@
 package com.example.honkaihelper.equipment.data
 
-import com.example.honkaihelper.data.NetworkResult
-import com.example.honkaihelper.data.handleApi
 import com.example.honkaihelper.data.local.dao.DecorationDao
 import com.example.honkaihelper.data.local.dao.RelicDao
 import com.example.honkaihelper.data.local.dao.WeaponDao
@@ -15,9 +13,9 @@ class EquipmentRepositoryImpl @Inject constructor(
     private val weaponDao: WeaponDao,
     private val relicDao: RelicDao,
     private val decorationDao: DecorationDao
-): EquipmentRepository {
+) : EquipmentRepository {
     override suspend fun getWeapons(path: Int): List<Equipment> = withContext(ioDispatcher) {
-        weaponDao.getWeaponByPath(path).map {
+        weaponDao.getWeaponByPath(path).sortedByDescending { it.rarity }.map {
             Equipment(it.idWeapon, it.image, it.rarity.toByte())
         }
     }

@@ -3,6 +3,7 @@ package com.example.honkaihelper.create_build_hero
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -12,10 +13,13 @@ import com.example.honkaihelper.R
 import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.databinding.FragmentCreateBuildHeroBinding
 import com.example.honkaihelper.equipment.EquipmentFragment
+import com.example.honkaihelper.equipment.KEY_DECORATION
+import com.example.honkaihelper.equipment.KEY_RELIC
 import com.example.honkaihelper.equipment.KEY_WEAPON
 import com.example.honkaihelper.equipment.data.model.Equipment
 import com.example.honkaihelper.utils.backgroundHero
 import com.example.honkaihelper.utils.backgroundWeapon
+import com.example.honkaihelper.utils.getParcelable
 import com.example.honkaihelper.utils.load
 
 class CreateBuildHeroFragment :
@@ -36,13 +40,21 @@ class CreateBuildHeroFragment :
         super.onCreate(savedInstanceState)
         viewModel.getHero(idHero)
         setFragmentResultListener("equipment_key") { key, bundle ->
-            val equipment = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                bundle.getParcelable("equipment", Equipment::class.java)
-            } else {
-                bundle.getParcelable("equipment")
-            }
+            val equipment = getParcelable("equipment", Equipment::class.java)
             if (equipment != null) {
-                viewModel.addWeapon(equipment)
+                when(bundle.getString("equipment_click")) {
+                    KEY_WEAPON -> {
+                        viewModel.addWeapon(equipment)
+                    }
+
+                    KEY_RELIC -> {
+                        viewModel.addRelic(equipment)
+                    }
+
+                    KEY_DECORATION -> {
+
+                    }
+                }
             }
         }
     }
@@ -50,6 +62,7 @@ class CreateBuildHeroFragment :
     override fun setupView() {
         getHero()
         setupImageWeapon()
+        setupImageRelic()
     }
 
     override fun uiStateHandle() {
@@ -77,6 +90,22 @@ class CreateBuildHeroFragment :
             findNavController().navigate(
                 R.id.equipmentFragment,
                 EquipmentFragment.newInstance(pathHero, equipmentClick = KEY_WEAPON)
+            )
+        }
+    }
+
+    private fun setupImageRelic() {
+        viewModel.relic.observe(viewLifecycleOwner) {
+            binding.imageHeroRelicBuild.apply {
+                load(it.image)
+                imageTintList = null
+                background = ContextCompat.getDrawable(requireActivity(), R.color.orange)
+            }
+        }
+        binding.imageHeroRelicBuild.setOnClickListener {
+            findNavController().navigate(
+                R.id.equipmentFragment,
+                EquipmentFragment.newInstance(equipmentClick = KEY_RELIC)
             )
         }
     }

@@ -22,11 +22,18 @@ class CreateBuildHeroViewModel @Inject constructor(
     private val _weapon = MutableLiveData<Equipment>()
     val weapon: LiveData<Equipment> = _weapon
 
+    private val _relic = MutableLiveData<Equipment>()
+    val relic: LiveData<Equipment> = _relic
+
     fun getHero(idHero: Int) = viewModelScope.launch {
         _hero.value = repository.getHero(idHero)
     }
 
     fun addWeapon(equipment: Equipment) {
         _weapon.value = equipment
+    }
+
+    fun addRelic(equipment: Equipment) {
+        _relic.value = equipment
     }
 }
