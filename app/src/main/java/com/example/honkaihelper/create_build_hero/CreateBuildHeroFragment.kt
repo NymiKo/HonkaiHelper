@@ -9,9 +9,11 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.base.BaseFragment
+import com.example.honkaihelper.create_build_hero.adapter.CreateBuildHeroStatsAdapter
 import com.example.honkaihelper.databinding.FragmentCreateBuildHeroBinding
 import com.example.honkaihelper.equipment.EquipmentFragment
 import com.example.honkaihelper.equipment.EquipmentType
@@ -20,6 +22,7 @@ import com.example.honkaihelper.utils.backgroundHero
 import com.example.honkaihelper.utils.backgroundWeapon
 import com.example.honkaihelper.utils.getParcelable
 import com.example.honkaihelper.utils.load
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class CreateBuildHeroFragment :
     BaseFragment<FragmentCreateBuildHeroBinding>(FragmentCreateBuildHeroBinding::inflate) {
@@ -27,6 +30,7 @@ class CreateBuildHeroFragment :
     private val viewModel by viewModels<CreateBuildHeroViewModel> { viewModelFactory }
     private var pathHero = 0
     private var equipmentClick = EquipmentType.WEAPON
+    private lateinit var mStatsAdapter: CreateBuildHeroStatsAdapter
 
     private val idHero get() = requireArguments().getInt(ARG_ID_HERO)
 
@@ -69,6 +73,9 @@ class CreateBuildHeroFragment :
         setupImageWeapon()
         setupImageRelic()
         setupImageDecoration()
+        setupStatsAdapter()
+        setupStatsRecyclerView()
+        setupSaveBuildButton()
     }
 
     override fun uiStateHandle() {
@@ -132,6 +139,29 @@ class CreateBuildHeroFragment :
                 R.id.equipmentFragment,
                 EquipmentFragment.newInstance(equipmentClick = equipmentClick)
             )
+        }
+    }
+
+    private fun setupStatsAdapter() {
+        mStatsAdapter = CreateBuildHeroStatsAdapter()
+        mStatsAdapter.list = listOf(
+            R.array.stats_in_body,
+            R.array.stats_in_legs,
+            R.array.stats_in_sphere,
+            R.array.stats_in_rope
+        )
+    }
+
+    private fun setupStatsRecyclerView() {
+        binding.recyclerStatsEquipmentCreateBuild.apply {
+            layoutManager = LinearLayoutManager(requireActivity())
+            adapter = mStatsAdapter
+        }
+    }
+
+    private fun setupSaveBuildButton() {
+        binding.buttonSaveBuild.apply {
+            size = FloatingActionButton.SIZE_MINI
         }
     }
 

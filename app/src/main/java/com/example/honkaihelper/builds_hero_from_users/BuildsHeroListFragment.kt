@@ -19,6 +19,7 @@ import com.example.honkaihelper.utils.TOKEN
 import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.visible
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.transition.MaterialElevationScale
 
 class BuildsHeroListFragment :
@@ -96,6 +97,7 @@ class BuildsHeroListFragment :
     }
 
     private fun navigateToCreateBuild() {
+        binding.buttonCreate.size = FloatingActionButton.SIZE_MINI
         binding.buttonCreate.setOnClickListener {
             findNavController().navigate(R.id.createBuildHeroFragment, CreateBuildHeroFragment.newInstance(idHero))
         }

@@ -95,6 +95,44 @@
         <item>5</item>
         <item>6</item>
     </string-array>
+
+    <string-array name="stats_in_legs">
+        <item>HP %</item>
+        <item>Защита %</item>
+        <item>Сила атаки %</item>
+        <item>Скорость</item>
+    </string-array>
+
+    <string-array name="stats_in_rope">
+        <item>Эффект пробития %</item>
+        <item>HP %</item>
+        <item>Защита %</item>
+        <item>Скорость восст. энергии %</item>
+        <item>Сила атаки %</item>
+    </string-array>
+
+    <string-array name="stats_in_sphere">
+        <item>HP %</item>
+        <item>Защита %</item>
+        <item>Сила атаки %</item>
+        <item>Бонус физ.урона %</item>
+        <item>Бонус огн.урона %</item>
+        <item>Бонус элек.урона %</item>
+        <item>Бонус квант.урона %</item>
+        <item>Бонус лед.урона %</item>
+        <item>Бонус ветр.урона %</item>
+        <item>Бонус мним.урона %</item>
+    </string-array>
+
+    <string-array name="stats_in_body">
+        <item>HP %</item>
+        <item>Защита %</item>
+        <item>Крит.урон %</item>
+        <item>Сила атаки %</item>
+        <item>Крит.шанс %</item>
+        <item>Шанс попадания эффектов %</item>
+        <item>Бонус исцеления %</item>
+    </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="relic">Реликвия</string>

@@ -38,7 +38,6 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_create"
         style="@style/base_floating_button"
-        android:layout_gravity="end|bottom"
         android:src="@drawable/ic_add"
         app:fabSize="mini"
         app:layout_constraintBottom_toBottomOf="parent"
