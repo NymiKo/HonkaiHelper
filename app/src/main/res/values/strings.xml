@@ -64,6 +64,12 @@
     <string name="effect_relic_four_parts"><![CDATA[<font color="#E2AB59"><b><u>Эффект от 4-х частей:</u></b></font> %1$s]]></string>
     <string name="builds_from_users">Сборки героев от пользователей</string>
     <string name="empty_builds_hero">Пока что никто не поделился своей сборкой</string>
+    <string name="empty_weapon_in_create_build">Нужно выбрать конус</string>
+    <string name="empty_relic_in_create_build">Нужно выбрать реликвию</string>
+    <string name="empty_decoration_in_create_build">Нужно выбрать украшение</string>
+    <string name="already_shared_the_build">Вы уже делились сборкой этого героя</string>
+    <string name="error_save_in_server">Ошибка сохранения на сервере, пожалуйста, попробуйте позже</string>
+    <string name="success_create_build">Вы успешно поделились сборкой</string>
 
 
 
