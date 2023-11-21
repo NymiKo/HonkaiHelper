@@ -69,6 +69,7 @@ class BuildsHeroListFragment :
                 is BuildsHeroListUIState.LOADING -> {
                     binding.shimmerLayoutBuildsHeroList.startShimmer()
                     binding.shimmerLayoutBuildsHeroList.visible()
+                    binding.groupBuildsHeroList.gone()
                     binding.viewStubError.gone()
                     binding.viewStubBuildsHeroEmptyList.gone()
                 }
