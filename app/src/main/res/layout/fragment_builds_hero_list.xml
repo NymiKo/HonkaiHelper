@@ -1,90 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/swipe_refresh_container_build_hero"
     tools:context=".builds_hero_from_users.BuildsHeroListFragment">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar_builds_hero_list"
-        style="@style/base_toolbar_style"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_arrow_back"
-        app:navigationIconTint="?attr/colorSecondary"
-        app:titleTextAppearance="@style/toolbar"
-        app:titleTextColor="?attr/colorSecondary" />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_builds_hero_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:constraint_referenced_ids="recycler_builds_hero_list, button_create" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_builds_hero_list"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:paddingHorizontal="@dimen/DP16"
-        android:paddingBottom="@dimen/DP16"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_builds_hero_list" />
+        android:layout_height="match_parent">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button_create"
-        style="@style/base_floating_button"
-        android:src="@drawable/ic_add"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tint="?attr/colorOnSecondary" />
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_builds_hero_list"
+            style="@style/base_toolbar_style"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:navigationIconTint="?attr/colorSecondary"
+            app:titleTextAppearance="@style/toolbar"
+            app:titleTextColor="?attr/colorSecondary" />
 
-    <ViewStub
-        android:id="@+id/viewStub_error"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inflatedId="@+id/error_builds_hero_list"
-        android:layout="@layout/viewstub_error_layout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_builds_hero_list" />
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_builds_hero_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="recycler_builds_hero_list" />
 
-    <ViewStub
-        android:id="@+id/viewStub_builds_hero_empty_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inflatedId="@+id/builds_hero_empty_list"
-        android:layout="@layout/viewstub_builds_hero_empty_list"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_builds_hero_list" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_builds_hero_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingHorizontal="@dimen/DP16"
+            android:paddingBottom="@dimen/DP16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_builds_hero_list" />
 
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmer_layout_builds_hero_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:animateLayoutChanges="true"
-        android:paddingHorizontal="@dimen/DP16"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_builds_hero_list">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/button_create"
+            style="@style/base_floating_button"
+            android:src="@drawable/ic_add"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="?attr/colorOnSecondary" />
 
-        <LinearLayout
+        <ViewStub
+            android:id="@+id/viewStub_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inflatedId="@+id/error_builds_hero_list"
+            android:layout="@layout/viewstub_error_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_builds_hero_list" />
+
+        <ViewStub
+            android:id="@+id/viewStub_builds_hero_empty_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inflatedId="@+id/builds_hero_empty_list"
+            android:layout="@layout/viewstub_builds_hero_empty_list"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_builds_hero_list" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_layout_builds_hero_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:animateLayoutChanges="true"
+            android:paddingHorizontal="@dimen/DP16"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_builds_hero_list">
 
-            <include layout="@layout/shimmer_item_builds_hero" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <include layout="@layout/shimmer_item_builds_hero" />
+                <include layout="@layout/shimmer_item_builds_hero" />
 
-        </LinearLayout>
+                <include layout="@layout/shimmer_item_builds_hero" />
 
-    </com.facebook.shimmer.ShimmerFrameLayout>
+            </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

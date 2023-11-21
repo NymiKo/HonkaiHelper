@@ -37,7 +37,7 @@
         <item name="android:layout_height">150dp</item>
         <item name="android:layout_marginStart">@dimen/DP16</item>
         <item name="android:layout_marginEnd">@dimen/DP16</item>
-        <item name="android:backgroundTint">@color/gray</item>
+        <item name="android:backgroundTint">@color/grey</item>
     </style>
 
     <style name="EditTextLayoutLogin" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">

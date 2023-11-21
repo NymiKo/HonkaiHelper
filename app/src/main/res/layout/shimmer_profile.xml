@@ -9,7 +9,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="@dimen/DP16"
-        android:background="@color/gray"
+        android:background="@color/grey"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/roundedCornersImageView" />
@@ -24,7 +24,7 @@
         android:fontFamily="sans-serif-medium"
         android:textColor="?attr/colorSecondary"
         android:textSize="@dimen/SP24"
-        android:background="@color/gray"
+        android:background="@color/grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/shapeableImageView"
         app:layout_constraintTop_toTopOf="parent" />

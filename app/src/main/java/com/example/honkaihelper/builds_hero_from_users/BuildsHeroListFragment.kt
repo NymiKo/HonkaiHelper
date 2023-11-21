@@ -2,25 +2,23 @@ package com.example.honkaihelper.builds_hero_from_users
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
+import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.builds_hero_from_users.adapter.BuildsHeroListAdapter
+import com.example.honkaihelper.builds_hero_from_users.di.BuildsHeroListUIState
 import com.example.honkaihelper.create_build_hero.CreateBuildHeroFragment
 import com.example.honkaihelper.databinding.FragmentBuildsHeroListBinding
-import com.example.honkaihelper.base.BaseFragment
-import com.example.honkaihelper.builds_hero_from_users.di.BuildsHeroListUIState
 import com.example.honkaihelper.databinding.ViewstubErrorLayoutBinding
 import com.example.honkaihelper.utils.TOKEN
 import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.visible
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.transition.MaterialElevationScale
 
 class BuildsHeroListFragment :
     BaseFragment<FragmentBuildsHeroListBinding>(FragmentBuildsHeroListBinding::inflate) {
@@ -32,7 +30,8 @@ class BuildsHeroListFragment :
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as App).appComponent.buildsHeroListComponent().create().inject(this)
+        (requireActivity().application as App).appComponent.buildsHeroListComponent().create()
+            .inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,30 +46,38 @@ class BuildsHeroListFragment :
         setupRecyclerView()
         navigateToCreateBuild()
         retryLoadData()
+        refreshData()
     }
 
     override fun uiStateHandle() {
         viewModel.uiState.observe(viewLifecycleOwner) { state ->
-            when(state) {
+            when (state) {
                 is BuildsHeroListUIState.EMPTY -> {
                     binding.shimmerLayoutBuildsHeroList.stopShimmer()
                     binding.shimmerLayoutBuildsHeroList.gone()
                     binding.viewStubBuildsHeroEmptyList.visible()
+                    binding.swipeRefreshContainerBuildHero.isRefreshing = false
                 }
+
                 is BuildsHeroListUIState.ERROR -> {
                     binding.shimmerLayoutBuildsHeroList.stopShimmer()
                     binding.shimmerLayoutBuildsHeroList.gone()
                     binding.viewStubError.visible()
+                    binding.swipeRefreshContainerBuildHero.isRefreshing = false
                 }
+
                 is BuildsHeroListUIState.LOADING -> {
                     binding.shimmerLayoutBuildsHeroList.startShimmer()
                     binding.shimmerLayoutBuildsHeroList.visible()
                     binding.viewStubError.gone()
+                    binding.viewStubBuildsHeroEmptyList.gone()
                 }
+
                 is BuildsHeroListUIState.SUCCESS -> {
                     binding.shimmerLayoutBuildsHeroList.stopShimmer()
                     binding.shimmerLayoutBuildsHeroList.gone()
                     binding.groupBuildsHeroList.visible()
+                    binding.swipeRefreshContainerBuildHero.isRefreshing = false
                     if (getSharedPrefUser().getString(TOKEN, "").isNullOrEmpty()) binding.buttonCreate.gone()
                     mAdapter.buildsHeroList = state.buildsHeroList
                 }
@@ -99,7 +106,10 @@ class BuildsHeroListFragment :
     private fun navigateToCreateBuild() {
         binding.buttonCreate.size = FloatingActionButton.SIZE_MINI
         binding.buttonCreate.setOnClickListener {
-            findNavController().navigate(R.id.createBuildHeroFragment, CreateBuildHeroFragment.newInstance(idHero))
+            findNavController().navigate(
+                R.id.createBuildHeroFragment,
+                CreateBuildHeroFragment.newInstance(idHero)
+            )
         }
     }
 
@@ -110,6 +120,12 @@ class BuildsHeroListFragment :
             viewStubBinding.buttonRetryLoadBuildsHero.setOnClickListener {
                 viewModel.getBuildsHeroList(idHero)
             }
+        }
+    }
+
+    private fun refreshData() {
+        binding.swipeRefreshContainerBuildHero.setOnRefreshListener {
+            viewModel.getBuildsHeroList(idHero)
         }
     }
 
