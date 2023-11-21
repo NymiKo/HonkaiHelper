@@ -3,7 +3,7 @@ package com.example.honkaihelper.create_build_hero
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResultListener
@@ -14,14 +14,16 @@ import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.create_build_hero.adapter.CreateBuildHeroStatsAdapter
+import com.example.honkaihelper.create_build_hero.adapter.CreateBuildHeroStatsListener
 import com.example.honkaihelper.databinding.FragmentCreateBuildHeroBinding
 import com.example.honkaihelper.equipment.EquipmentFragment
 import com.example.honkaihelper.equipment.EquipmentType
 import com.example.honkaihelper.equipment.data.model.Equipment
 import com.example.honkaihelper.utils.backgroundHero
 import com.example.honkaihelper.utils.backgroundWeapon
-import com.example.honkaihelper.utils.getParcelable
+import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.load
+import com.example.honkaihelper.utils.visible
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class CreateBuildHeroFragment :
@@ -51,7 +53,7 @@ class CreateBuildHeroFragment :
             }
 
             if (equipment != null) {
-                when(equipmentClick) {
+                when (equipmentClick) {
                     EquipmentType.WEAPON -> {
                         viewModel.addWeapon(equipment)
                     }
@@ -79,7 +81,30 @@ class CreateBuildHeroFragment :
     }
 
     override fun uiStateHandle() {
+        viewModel.state.observe(viewLifecycleOwner) {
+            when (it) {
+                is CreateBuildHeroUiState.CREATION -> {
+                    binding.progressCreationBuild.gone()
+                    binding.buttonSaveBuild.visible()
+                }
 
+                is CreateBuildHeroUiState.ERROR -> {
+                    binding.progressCreationBuild.gone()
+                    binding.buttonSaveBuild.visible()
+                    Toast.makeText(requireActivity(), it.errorMessage, Toast.LENGTH_SHORT).show()
+                }
+
+                is CreateBuildHeroUiState.SENDING_BUILD -> {
+                    binding.progressCreationBuild.visible()
+                    binding.buttonSaveBuild.gone()
+                }
+
+                is CreateBuildHeroUiState.SUCCESS -> {
+                    Toast.makeText(requireActivity(), R.string.success_create_build, Toast.LENGTH_SHORT).show()
+                    findNavController().popBackStack()
+                }
+            }
+        }
     }
 
     private fun getHero() {
@@ -143,13 +168,19 @@ class CreateBuildHeroFragment :
     }
 
     private fun setupStatsAdapter() {
-        mStatsAdapter = CreateBuildHeroStatsAdapter()
-        mStatsAdapter.list = listOf(
+        val list = listOf(
             R.array.stats_in_body,
             R.array.stats_in_legs,
             R.array.stats_in_sphere,
             R.array.stats_in_rope
         )
+        mStatsAdapter = CreateBuildHeroStatsAdapter(object : CreateBuildHeroStatsListener {
+            override fun onSpinnerItemSelected(adapterPosition: Int, selectedItemPosition: Int) {
+                val selectedValue = list[adapterPosition]
+                viewModel.changeStatOnEquipment(adapterPosition, resources.getStringArray(selectedValue).toList()[selectedItemPosition])
+            }
+        })
+        mStatsAdapter.list = list
     }
 
     private fun setupStatsRecyclerView() {
@@ -162,6 +193,7 @@ class CreateBuildHeroFragment :
     private fun setupSaveBuildButton() {
         binding.buttonSaveBuild.apply {
             size = FloatingActionButton.SIZE_MINI
+            setOnClickListener { viewModel.saveBuild() }
         }
     }
 
