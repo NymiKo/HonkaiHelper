@@ -3,6 +3,7 @@ package com.example.honkaihelper.di
 import android.content.Context
 import com.example.honkaihelper.activity.data.MainService
 import com.example.honkaihelper.builds_hero_from_users.data.BuildsHeroListService
+import com.example.honkaihelper.create_build_hero.data.CreateBuildHeroService
 import com.example.honkaihelper.createteam.data.CreateTeamService
 import com.example.honkaihelper.data.AuthInterceptor
 import com.example.honkaihelper.heroes.data.HeroesListService
@@ -78,4 +79,7 @@ object NetworkModule {
 
     @Provides
     fun providesBuildsHeroService(retrofit: Retrofit): BuildsHeroListService = retrofit.create(BuildsHeroListService::class.java)
+
+    @Provides
+    fun providesCreateBuildHeroService(retrofit: Retrofit): CreateBuildHeroService = retrofit.create(CreateBuildHeroService::class.java)
 }
