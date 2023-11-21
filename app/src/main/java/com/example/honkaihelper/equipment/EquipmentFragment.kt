@@ -88,7 +88,6 @@ class EquipmentFragment : BottomSheetDialogFragment() {
     private fun setupAdapter() {
         mAdapter = EquipmentAdapter(object : EquipmentListener {
             override fun onClick(equipment: Equipment) {
-                Log.e("EQUIPMENT_CLICK", equipment.toString())
                 setFragmentResult("equipment_key", bundleOf(ARG_ID_ITEM to idItem, ARG_EQUIPMENT to equipment))
                 findNavController().popBackStack()
             }
