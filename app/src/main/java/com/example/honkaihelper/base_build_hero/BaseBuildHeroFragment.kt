@@ -65,7 +65,6 @@ class BaseBuildHeroFragment :
         setupDecorationRecyclerView()
         setupStatsEquipmentRecyclerView()
         setupButtonGoToBuildsFromUsers()
-        setupButtonGoToTeamsFromUsers()
     }
 
     override fun uiStateHandle() {
@@ -153,13 +152,10 @@ class BaseBuildHeroFragment :
 
     private fun setupButtonGoToBuildsFromUsers() {
         binding.buttonGoToBuildsFromUsers.setOnClickListener {
-            findNavController().navigate(R.id.action_baseBuildHeroFragment_to_buildsHeroListFragment, BuildsHeroListFragment.newInstance(idHero))
-        }
-    }
-
-    private fun setupButtonGoToTeamsFromUsers() {
-        binding.buttonGoToTeamsFromUsers.setOnClickListener {
-            findNavController().navigate(R.id.action_baseBuildHeroFragment_to_teamsListFragment, TeamsListFragment.newInstance(idHero))
+            findNavController().navigate(
+                R.id.action_baseBuildHeroFragment_to_buildsHeroListFragment,
+                BuildsHeroListFragment.newInstance(idHero)
+            )
         }
     }
 
