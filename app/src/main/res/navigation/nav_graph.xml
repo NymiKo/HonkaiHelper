@@ -85,6 +85,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_infoAboutHeroFragment_to_teamsListFragment"
+            app:destination="@id/teamsListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/baseBuildHeroFragment"
@@ -107,13 +114,6 @@
         <action
             android:id="@+id/action_baseBuildHeroFragment_to_decorationInfoFragment"
             app:destination="@id/decorationInfoFragment" />
-        <action
-            android:id="@+id/action_baseBuildHeroFragment_to_teamsListFragment"
-            app:destination="@id/teamsListFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/buildsHeroListFragment"

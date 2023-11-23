@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".createteam.CreateTeamFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -49,7 +48,6 @@
         android:id="@+id/group_create_team"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         app:constraint_referenced_ids="recycler_heroes_list, button_go_setup_team" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -68,35 +66,11 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_go_setup_team"
         style="@style/base_floating_button"
-        android:src="@drawable/ic_arrow_forward"
+        android:src="@drawable/ic_save"
         app:fabSize="mini"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="?attr/colorOnSecondary" />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_retry"
-        style="@style/group_message_style"
-        android:visibility="gone"
-        app:constraint_referenced_ids="button_retry, text_retry" />
-
-    <TextView
-        android:id="@+id/text_retry"
-        style="@style/text_view_message_style"
-        android:text="@string/error"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button_retry"
-        style="@style/button_message_style"
-        android:backgroundTint="?attr/colorSecondary"
-        android:text="@string/retry"
-        app:layout_constraintEnd_toEndOf="@+id/text_retry"
-        app:layout_constraintStart_toStartOf="@+id/text_retry"
-        app:layout_constraintTop_toBottomOf="@+id/text_retry" />
 
     <ProgressBar
         android:id="@+id/progress_team_creation"
@@ -107,31 +81,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialToolbar" />
-
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmer_layout_heroes_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/DP16"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/materialDivider">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <include layout="@layout/shimmer_item_hero_in_create_team" />
-
-            <include layout="@layout/shimmer_item_hero_in_create_team" />
-
-            <include layout="@layout/shimmer_item_hero_in_create_team" />
-
-            <include layout="@layout/shimmer_item_hero_in_create_team" />
-
-        </LinearLayout>
-
-    </com.facebook.shimmer.ShimmerFrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

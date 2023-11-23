@@ -10,10 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
-import com.example.honkaihelper.databinding.FragmentTeamsListBinding
 import com.example.honkaihelper.base.BaseFragment
-import com.example.honkaihelper.teams.data.model.TeamHero
+import com.example.honkaihelper.databinding.FragmentTeamsListBinding
+import com.example.honkaihelper.databinding.ViewstubErrorLayoutBinding
 import com.example.honkaihelper.teams.adapter.HeroTeamsListAdapter
+import com.example.honkaihelper.teams.data.model.TeamHero
 import com.example.honkaihelper.utils.TOKEN
 import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone
@@ -35,8 +36,8 @@ class TeamsListFragment :
             .inject(this)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         viewModel.getNameHero(idHero)
         viewModel.getTeamsList(idHero)
     }
@@ -46,6 +47,7 @@ class TeamsListFragment :
         setupRecyclerView()
         openCreateTeamFragment()
         setupRetryButtonClickListener()
+        refreshData()
     }
 
     override fun uiStateHandle() {
@@ -62,12 +64,23 @@ class TeamsListFragment :
                 is TeamsUiState.ERROR -> {
                     showRetryView()
                 }
+
+                is TeamsUiState.EMPTY -> {
+                    emptyData()
+                }
             }
         }
     }
 
+    private fun emptyData() {
+        binding.shimmerLayoutTeamsList.stopShimmer()
+        binding.shimmerLayoutTeamsList.gone()
+        binding.viewStubTeamsHeroEmptyList.visible()
+        binding.swipeRefreshContainerTeamsHero.isRefreshing = false
+    }
+
     private fun showRetryView() {
-        binding.groupRetry.visible()
+        binding.viewStubError.visible()
         binding.shimmerLayoutTeamsList.stopShimmer()
         binding.shimmerLayoutTeamsList.gone()
         binding.groupList.gone()
@@ -78,17 +91,22 @@ class TeamsListFragment :
         binding.groupList.visible()
         binding.shimmerLayoutTeamsList.stopShimmer()
         binding.shimmerLayoutTeamsList.gone()
+        binding.swipeRefreshContainerTeamsHero.isRefreshing = false
     }
 
     private fun showLoading() {
         binding.shimmerLayoutTeamsList.startShimmer()
         binding.shimmerLayoutTeamsList.visible()
-        binding.groupRetry.gone()
+        binding.viewStubError.gone()
     }
 
     private fun setupRetryButtonClickListener() {
-        binding.buttonRetry.setOnClickListener {
-            viewModel.getTeamsList(idHero)
+        binding.viewStubError.setOnInflateListener { _, inflated ->
+            val viewStubBinding = ViewstubErrorLayoutBinding.bind(inflated)
+
+            viewStubBinding.buttonRetryLoadBuildsHero.setOnClickListener {
+                viewModel.getTeamsList(idHero)
+            }
         }
     }
 
@@ -114,7 +132,7 @@ class TeamsListFragment :
                         binding.buttonCreateTeam.hide()
                     }
 
-                    if(dy < -6 && !binding.buttonCreateTeam.isShown) {
+                    if (dy < -6 && !binding.buttonCreateTeam.isShown) {
                         binding.buttonCreateTeam.show()
                     }
 
@@ -132,6 +150,12 @@ class TeamsListFragment :
         }
         binding.toolbarCreateTeam.setNavigationOnClickListener {
             findNavController().popBackStack()
+        }
+    }
+
+    private fun refreshData() {
+        binding.swipeRefreshContainerTeamsHero.setOnRefreshListener {
+            viewModel.getTeamsList(idHero)
         }
     }
 
