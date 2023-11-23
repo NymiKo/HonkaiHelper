@@ -5,4 +5,5 @@ import com.example.honkaihelper.teams.data.model.TeamHero
 
 interface TeamsListRepository {
     suspend fun getTeamsList(idHero: Int): NetworkResult<List<TeamHero>>
+    suspend fun getNameHero(idHero: Int): String
 }

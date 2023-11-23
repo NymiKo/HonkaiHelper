@@ -32,6 +32,9 @@ interface HeroDao {
     @Query("SELECT * FROM ${RoomContract.tableHeroes} WHERE id = :idHero")
     suspend fun getHero(idHero: Int): HeroEntity
 
+    @Query("SELECT name FROM ${RoomContract.tableHeroes} WHERE id = :idHero")
+    suspend fun getName(idHero: Int): String
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertHeroes(heroes: List<HeroEntity>)
 }

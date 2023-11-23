@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">HonkaiHelper</string>
-    <string name="team_for_hero">Команды для героя %1$s</string>
+    <string name="team_for_hero">Команды для героя: %1$s</string>
     <string name="creating_a_team">Создание команды</string>
     <string name="add_the_created_command">Добавить созданную команду?</string>
     <string name="add">Добавить</string>
@@ -62,7 +62,8 @@
     <string name="effect_relic">Эффект набора</string>
     <string name="effect_relic_two_parts"><![CDATA[<font color="#E2AB59"><b><u>Эффект от 2-х частей:</u></b></font> %1$s]]></string>
     <string name="effect_relic_four_parts"><![CDATA[<font color="#E2AB59"><b><u>Эффект от 4-х частей:</u></b></font> %1$s]]></string>
-    <string name="builds_from_users">Сборки героев от пользователей</string>
+    <string name="builds_from_users">Сборки героя от пользователей</string>
+    <string name="teams_from_users">Команды с героем от пользователей</string>
     <string name="empty_builds_hero">Пока что никто не поделился своей сборкой</string>
     <string name="empty_weapon_in_create_build">Нужно выбрать конус</string>
     <string name="empty_relic_in_create_build">Нужно выбрать реликвию</string>
@@ -113,7 +114,7 @@
         <item>Эффект пробития %</item>
         <item>HP %</item>
         <item>Защита %</item>
-        <item>Скорость восст. энергии %</item>
+        <item>Восст. энергии %</item>
         <item>Сила атаки %</item>
     </string-array>
 
