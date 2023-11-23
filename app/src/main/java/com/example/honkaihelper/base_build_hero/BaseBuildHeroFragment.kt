@@ -23,6 +23,7 @@ import com.example.honkaihelper.builds_hero_from_users.BuildsHeroListFragment
 import com.example.honkaihelper.databinding.FragmentBaseBuildHeroBinding
 import com.example.honkaihelper.decoration.DecorationInfoFragment
 import com.example.honkaihelper.relic.RelicInfoFragment
+import com.example.honkaihelper.teams.TeamsListFragment
 import com.example.honkaihelper.weapon.WeaponInfoFragment
 import com.google.android.material.transition.MaterialContainerTransform
 import com.google.android.material.transition.MaterialFadeThrough
@@ -64,6 +65,7 @@ class BaseBuildHeroFragment :
         setupDecorationRecyclerView()
         setupStatsEquipmentRecyclerView()
         setupButtonGoToBuildsFromUsers()
+        setupButtonGoToTeamsFromUsers()
     }
 
     override fun uiStateHandle() {
@@ -144,7 +146,7 @@ class BaseBuildHeroFragment :
 
     private fun setupStatsEquipmentRecyclerView() {
         binding.recyclerStatsEquipmentBaseBuildHero.apply {
-            layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(requireActivity())
             adapter = mAdapterStatsEquipment
         }
     }
@@ -152,6 +154,12 @@ class BaseBuildHeroFragment :
     private fun setupButtonGoToBuildsFromUsers() {
         binding.buttonGoToBuildsFromUsers.setOnClickListener {
             findNavController().navigate(R.id.action_baseBuildHeroFragment_to_buildsHeroListFragment, BuildsHeroListFragment.newInstance(idHero))
+        }
+    }
+
+    private fun setupButtonGoToTeamsFromUsers() {
+        binding.buttonGoToTeamsFromUsers.setOnClickListener {
+            findNavController().navigate(R.id.action_baseBuildHeroFragment_to_teamsListFragment, TeamsListFragment.newInstance(idHero))
         }
     }
 
