@@ -2,7 +2,7 @@
     <string name="app_name">HonkaiHelper</string>
     <string name="team_for_hero">Команды для героя: %1$s</string>
     <string name="creating_a_team">Создание команды</string>
-    <string name="add_the_created_command">Добавить созданную команду?</string>
+    <string name="add_the_created_command">Поделиться созданной командой?</string>
     <string name="add">Добавить</string>
     <string name="cancellation">Отмена</string>
     <string name="list_of_heroes">Список героев</string>
@@ -35,7 +35,7 @@
     <string name="should_be_4_heroes_in_the_team">В команде должно быть 4 героя"</string>
     <string name="team_has_been_added">Команда добавлена</string>
     <string name="adding_a_command">Добавление команды</string>
-    <string name="team_already_exists">Такая команда уже существует.</string>
+    <string name="team_already_exists">Вы уже делились такой командой.</string>
     <string name="team_from">Команда от: <b>%1$s</b></string>
     <string name="my_teams">Мои команды</string>
     <string name="incorrect_login">Логин должен содержать не более 20 символов</string>
@@ -64,7 +64,7 @@
     <string name="effect_relic_four_parts"><![CDATA[<font color="#E2AB59"><b><u>Эффект от 4-х частей:</u></b></font> %1$s]]></string>
     <string name="builds_from_users">Сборки героя от пользователей</string>
     <string name="teams_from_users">Команды с героем от пользователей</string>
-    <string name="empty_builds_hero">Пока что никто не поделился своей сборкой</string>
+    <string name="empty_here">Пока что здесь пусто. Будь первопроходцем!</string>
     <string name="empty_weapon_in_create_build">Нужно выбрать конус</string>
     <string name="empty_relic_in_create_build">Нужно выбрать реликвию</string>
     <string name="empty_decoration_in_create_build">Нужно выбрать украшение</string>

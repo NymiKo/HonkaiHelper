@@ -10,7 +10,7 @@
         style="@style/text_view_message_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/empty_builds_hero"
+        android:text="@string/empty_here"
         android:textSize="16sp" />
 
     <ImageView

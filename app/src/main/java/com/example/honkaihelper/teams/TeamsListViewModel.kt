@@ -29,8 +29,10 @@ class TeamsListViewModel @Inject constructor(
         val result = repository.getTeamsList(idHero)
         when (result) {
             is NetworkResult.Error -> _uiState.value = TeamsUiState.ERROR
-            is NetworkResult.Success -> _uiState.value =
-                TeamsUiState.SUCCESS(result.data.sortedBy { it.idTeam })
+            is NetworkResult.Success -> {
+                if (result.data.isEmpty()) _uiState.value = TeamsUiState.EMPTY
+                else _uiState.value = TeamsUiState.SUCCESS(result.data.sortedBy { it.idTeam })
+            }
         }
     }
 }
