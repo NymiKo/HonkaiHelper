@@ -6,8 +6,6 @@ import com.example.honkaihelper.info_about_hero.data.model.Relic
 data class FullBaseBuildHero(
     val id: Int,
 
-    val optimalStatsHero: OptimalStatsHero,
-
     val weapons: List<Weapon>,
 
     val relics: List<Relic>,

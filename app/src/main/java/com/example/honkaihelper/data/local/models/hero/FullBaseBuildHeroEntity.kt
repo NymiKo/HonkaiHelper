@@ -14,9 +14,6 @@ data class FullBaseBuildHeroEntity(
 
     val id: Int,
 
-    @Relation(parentColumn = "id", entityColumn = "idHero", entity = OptimalStatsHeroEntity::class)
-    val optimalStatsHeroEntity: OptimalStatsHeroEntity,
-
     @Relation(parentColumn = "id", entityColumn = "idHero", entity = BuildWeaponEntity::class)
     val weaponsEntity: List<WeaponsForBuildWeapons>,
 

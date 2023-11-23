@@ -19,6 +19,7 @@ import com.example.honkaihelper.utils.visible
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class CreateTeamFragment :
     BaseFragment<FragmentCreateTeamBinding>(FragmentCreateTeamBinding::inflate) {
@@ -148,9 +149,10 @@ class CreateTeamFragment :
     }
 
     private fun setupButtonSaveTeam() {
+        binding.buttonGoSetupTeam.size = FloatingActionButton.SIZE_MINI
         binding.buttonGoSetupTeam.setOnClickListener {
             if (mAdapterForViewTeam.mHeroListInTeam.size == 4) {
-                findNavController().navigate(R.id.setupTeamFragment, SetupTeamFragment.newInstance(mAdapterForViewTeam.mHeroListInTeam))
+
             } else {
                 toast(requireActivity(), R.string.should_be_4_heroes_in_the_team)
             }

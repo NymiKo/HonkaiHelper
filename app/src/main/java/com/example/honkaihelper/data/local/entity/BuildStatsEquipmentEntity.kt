@@ -18,7 +18,7 @@ data class BuildStatsEquipmentEntity(
     companion object {
         fun toBuildStatsEquipmentEntity(buildStatsEquipment: BuildStatsEquipment) =
             BuildStatsEquipmentEntity(
-                idBuildStatsEquipment = buildStatsEquipment.idBuildStatsEquipment,
+                idBuildStatsEquipment = buildStatsEquipment.idStats,
                 body = buildStatsEquipment.body,
                 legs = buildStatsEquipment.legs,
                 sphere = buildStatsEquipment.sphere,
@@ -28,7 +28,7 @@ data class BuildStatsEquipmentEntity(
     }
 
     fun toBuildStatsEquipment() = BuildStatsEquipment(
-        idBuildStatsEquipment = idBuildStatsEquipment,
+        idStats = idBuildStatsEquipment,
         body = body,
         legs = legs,
         sphere = sphere,
