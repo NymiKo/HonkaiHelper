@@ -7,5 +7,5 @@ import retrofit2.http.Query
 
 interface TeamsListService {
     @GET("/getTeams.php")
-    suspend fun getTeamsList(@Query("id") idHero: Int): Response<List<TeamHero>>
+    suspend fun getTeamsList(@Query("idHero") idHero: Int): Response<List<TeamHero>>
 }

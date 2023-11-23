@@ -26,7 +26,6 @@ class TeamsListFragment :
     private val viewModel by viewModels<TeamsListViewModel> { viewModelFactory }
 
     private val idHero get() = requireArguments().getInt(ARG_ID_HERO)
-    private val nameHero get() = requireArguments().getString(ARG_NAME_HERO)
 
     private lateinit var mAdapter: HeroTeamsListAdapter
 
@@ -38,6 +37,7 @@ class TeamsListFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.getNameHero(idHero)
         viewModel.getTeamsList(idHero)
     }
 
@@ -127,7 +127,12 @@ class TeamsListFragment :
     }
 
     private fun setupToolbar() {
-        binding.toolbarCreateTeam.title = resources.getString(R.string.team_for_hero, nameHero)
+        viewModel.nameHero.observe(viewLifecycleOwner) {
+            binding.toolbarCreateTeam.title = getString(R.string.team_for_hero, it)
+        }
+        binding.toolbarCreateTeam.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     override fun onDestroyView() {
@@ -137,11 +142,10 @@ class TeamsListFragment :
 
     companion object {
         private const val ARG_ID_HERO = "id_hero"
-        private const val ARG_NAME_HERO = "name_hero"
 
         @JvmStatic
-        fun newInstance(idHero: Int, nameHero: String): Bundle {
-            return bundleOf(ARG_ID_HERO to idHero, ARG_NAME_HERO to nameHero)
+        fun newInstance(idHero: Int): Bundle {
+            return bundleOf(ARG_ID_HERO to idHero)
         }
     }
 }

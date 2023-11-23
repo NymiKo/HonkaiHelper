@@ -17,6 +17,13 @@ class TeamsListViewModel @Inject constructor(
     private val _uiState = MutableLiveData<TeamsUiState<List<TeamHero>>>(TeamsUiState.LOADING)
     val uiState: LiveData<TeamsUiState<List<TeamHero>>> = _uiState
 
+    private val _nameHero = MutableLiveData<String>()
+    val nameHero: LiveData<String> = _nameHero
+
+    fun getNameHero(idHero: Int) = viewModelScope.launch {
+        _nameHero.value = repository.getNameHero(idHero)
+    }
+
     fun getTeamsList(idHero: Int) = viewModelScope.launch {
         _uiState.value = TeamsUiState.LOADING
         val result = repository.getTeamsList(idHero)
@@ -26,5 +33,4 @@ class TeamsListViewModel @Inject constructor(
                 TeamsUiState.SUCCESS(result.data.sortedBy { it.idTeam })
         }
     }
-
 }
