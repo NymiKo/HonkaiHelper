@@ -16,6 +16,7 @@ import com.example.honkaihelper.base_build_hero.BaseBuildHeroFragment
 import com.example.honkaihelper.databinding.FragmentInfoAboutHeroBinding
 import com.example.honkaihelper.info_about_hero.adapters.AbilitiesHeroAdapter
 import com.example.honkaihelper.info_about_hero.adapters.EidolonsHeroAdapter
+import com.example.honkaihelper.teams.TeamsListFragment
 import com.example.honkaihelper.utils.loadImageRarity
 import com.example.honkaihelper.utils.loadImageWithoutScale
 import com.example.honkaihelper.utils.themeColor
@@ -46,6 +47,7 @@ class InfoAboutHeroFragment :
         setupAbilitiesRecyclerView()
         setupEidolonsRecyclerView()
         setupGoToBuildHeroButton()
+        setupButtonGoToTeamsFromUsers()
     }
 
     override fun uiStateHandle() {
@@ -94,6 +96,12 @@ class InfoAboutHeroFragment :
     private fun setupGoToBuildHeroButton() {
         binding.buttonGoToBuildHero.setOnClickListener {
             findNavController().navigate(R.id.action_infoAboutHeroFragment_to_baseBuildHeroFragment, BaseBuildHeroFragment.newInstance(idHero))
+        }
+    }
+
+    private fun setupButtonGoToTeamsFromUsers() {
+        binding.buttonGoToTeamsFromUsers.setOnClickListener {
+            findNavController().navigate(R.id.action_infoAboutHeroFragment_to_teamsListFragment, TeamsListFragment.newInstance(idHero))
         }
     }
 

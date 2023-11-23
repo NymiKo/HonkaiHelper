@@ -1,6 +1,7 @@
 package com.example.honkaihelper.createteam
 
 import android.content.Context
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -39,22 +40,12 @@ class CreateTeamFragment :
         setupButtonSaveTeam()
         setupRecyclerViewForViewTeam()
         setupRecyclerViewHeroList()
-        setupRetryButtonClickListener()
         selectHero()
     }
 
     override fun uiStateHandle() {
-        viewModel.uiState.observe(viewLifecycleOwner) {
+        viewModel.state.observe(viewLifecycleOwner) {
             when (it) {
-                is CreateTeamUIState.ERROR -> {
-                    showRetryView()
-                }
-                is CreateTeamUIState.LOADING -> {
-                    showLoading()
-                }
-                is CreateTeamUIState.SUCCESS -> {
-                    showCreateTeamView(it.heroesList)
-                }
                 is CreateTeamUIState.ERROR_TEAM_CREATION -> {
                     showErrorTeamCreation(it.message)
                 }
@@ -64,35 +55,12 @@ class CreateTeamFragment :
                 is CreateTeamUIState.LOADING_TEAM_CREATION -> {
                     showCommandCreationLoading()
                 }
+                is CreateTeamUIState.CREATING_TEAM -> {
+                    viewModel.heroList.observe(viewLifecycleOwner) { heroesList ->
+                        mAdapterHeroList.mHeroList = heroesList
+                    }
+                }
             }
-        }
-    }
-
-    private fun showRetryView() {
-        binding.shimmerLayoutHeroesList.stopShimmer()
-        binding.shimmerLayoutHeroesList.gone()
-        binding.groupRetry.visible()
-        binding.groupTeamView.gone()
-        binding.progressTeamCreation.gone()
-    }
-
-    private fun showCreateTeamView(heroesList: List<ActiveHeroInTeam>) {
-        mAdapterHeroList.mHeroList = heroesList
-        binding.shimmerLayoutHeroesList.stopShimmer()
-        binding.shimmerLayoutHeroesList.gone()
-        binding.groupCreateTeam.visible()
-    }
-
-    private fun showLoading() {
-        binding.groupRetry.gone()
-        binding.groupTeamView.visible()
-        binding.shimmerLayoutHeroesList.startShimmer()
-        binding.shimmerLayoutHeroesList.visible()
-    }
-
-    private fun setupRetryButtonClickListener() {
-        binding.buttonRetry.setOnClickListener {
-            viewModel.getHeroesList()
         }
     }
 
@@ -148,11 +116,25 @@ class CreateTeamFragment :
         }
     }
 
+    private fun setupSaveDialog() {
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle(R.string.adding_a_command)
+            .setMessage(R.string.add_the_created_command)
+            .setPositiveButton(R.string.yes) { _, _ ->
+                viewModel.saveTeam()
+            }
+            .setNegativeButton(R.string.cancellation) { dialog, _ ->
+                dialog.cancel()
+            }
+            .create()
+        dialog.show()
+    }
+
     private fun setupButtonSaveTeam() {
         binding.buttonGoSetupTeam.size = FloatingActionButton.SIZE_MINI
         binding.buttonGoSetupTeam.setOnClickListener {
             if (mAdapterForViewTeam.mHeroListInTeam.size == 4) {
-
+                setupSaveDialog()
             } else {
                 toast(requireActivity(), R.string.should_be_4_heroes_in_the_team)
             }
