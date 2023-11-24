@@ -5,5 +5,5 @@ data class BuildHero(
     val idWeapon: Int,
     val idRelic: Int,
     val idDecoration: Int,
-    val buildUser: BuildUser
+    val buildUser: BuildUser?
 )

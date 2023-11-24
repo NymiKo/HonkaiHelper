@@ -35,7 +35,7 @@
     <string name="should_be_4_heroes_in_the_team">В команде должно быть 4 героя"</string>
     <string name="team_has_been_added">Команда добавлена</string>
     <string name="adding_a_command">Добавление команды</string>
-    <string name="team_already_exists">Вы уже делились такой командой.</string>
+    <string name="team_already_exists">Вы уже добавляли такую команду.</string>
     <string name="team_from">Команда от: <b>%1$s</b></string>
     <string name="my_teams">Мои команды</string>
     <string name="incorrect_login">Логин должен содержать не более 20 символов</string>
