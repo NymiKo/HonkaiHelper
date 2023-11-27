@@ -83,6 +83,7 @@ class CreateBuildHeroFragment :
         setupStatsAdapter()
         setupStatsRecyclerView()
         setupSaveBuildButton()
+        setupToolbar()
     }
 
     override fun uiStateHandle() {
@@ -162,7 +163,7 @@ class CreateBuildHeroFragment :
     private fun setupImageRelicFourParts() {
         viewModel.relicFourParts.observe(viewLifecycleOwner) {
             binding.imageHeroRelicBuildFourParts.apply {
-                load(it.image)
+                load(it?.image)
                 imageTintList = null
                 background = ContextCompat.getDrawable(requireActivity(), R.color.orange)
             }
@@ -223,6 +224,12 @@ class CreateBuildHeroFragment :
         binding.buttonSaveBuild.apply {
             size = FloatingActionButton.SIZE_MINI
             setOnClickListener { viewModel.saveBuild() }
+        }
+    }
+
+    private fun setupToolbar() {
+        binding.toolbarCreateBuildHero.setNavigationOnClickListener {
+            findNavController().popBackStack()
         }
     }
 
