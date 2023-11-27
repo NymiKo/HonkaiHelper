@@ -5,5 +5,5 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 enum class EquipmentType: Parcelable {
-    WEAPON, RELIC, DECORATION
+    WEAPON, RELIC_TWO_PARTS, RELIC_FOUR_PARTS, DECORATION
 }

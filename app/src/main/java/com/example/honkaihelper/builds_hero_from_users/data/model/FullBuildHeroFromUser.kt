@@ -9,7 +9,8 @@ data class FullBuildHeroFromUser(
     val idBuild: Int,
     val hero: HeroWithNameAvatarRarity,
     val weapon: Weapon,
-    val relic: Relic,
+    val relicTwoParts: Relic,
+    val relicFourParts: Relic,
     val decoration: Decoration,
     val buildUser: BuildUser
 )

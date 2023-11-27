@@ -72,12 +72,15 @@ class EquipmentFragment : BottomSheetDialogFragment() {
                 viewModel.getWeapons(heroPath)
             }
 
-            EquipmentType.RELIC -> {
+            EquipmentType.RELIC_TWO_PARTS -> {
                 viewModel.getRelics()
             }
 
             EquipmentType.DECORATION -> {
                 viewModel.getDecorations()
+            }
+            EquipmentType.RELIC_FOUR_PARTS -> {
+                viewModel.getRelics()
             }
             else -> {
                 viewModel.getWeapons(heroPath)

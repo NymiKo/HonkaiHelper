@@ -58,12 +58,16 @@ class CreateBuildHeroFragment :
                         viewModel.addWeapon(equipment)
                     }
 
-                    EquipmentType.RELIC -> {
-                        viewModel.addRelic(equipment)
+                    EquipmentType.RELIC_TWO_PARTS -> {
+                        viewModel.addRelicTwoParts(equipment)
                     }
 
                     EquipmentType.DECORATION -> {
                         viewModel.addDecoration(equipment)
+                    }
+
+                    EquipmentType.RELIC_FOUR_PARTS -> {
+                        viewModel.addRelicFourParts(equipment)
                     }
                 }
             }
@@ -73,7 +77,8 @@ class CreateBuildHeroFragment :
     override fun setupView() {
         getHero()
         setupImageWeapon()
-        setupImageRelic()
+        setupImageRelicTwoParts()
+        setupImageRelicFourParts()
         setupImageDecoration()
         setupStatsAdapter()
         setupStatsRecyclerView()
@@ -100,7 +105,11 @@ class CreateBuildHeroFragment :
                 }
 
                 is CreateBuildHeroUiState.SUCCESS -> {
-                    Toast.makeText(requireActivity(), R.string.success_create_build, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireActivity(),
+                        R.string.success_create_build,
+                        Toast.LENGTH_SHORT
+                    ).show()
                     findNavController().popBackStack()
                 }
             }
@@ -133,16 +142,33 @@ class CreateBuildHeroFragment :
         }
     }
 
-    private fun setupImageRelic() {
-        viewModel.relic.observe(viewLifecycleOwner) {
-            binding.imageHeroRelicBuild.apply {
+    private fun setupImageRelicTwoParts() {
+        viewModel.relicTwoParts.observe(viewLifecycleOwner) {
+            binding.imageHeroRelicBuildTwoParts.apply {
                 load(it.image)
                 imageTintList = null
                 background = ContextCompat.getDrawable(requireActivity(), R.color.orange)
             }
         }
-        binding.imageHeroRelicBuild.setOnClickListener {
-            equipmentClick = EquipmentType.RELIC
+        binding.imageHeroRelicBuildTwoParts.setOnClickListener {
+            equipmentClick = EquipmentType.RELIC_TWO_PARTS
+            findNavController().navigate(
+                R.id.equipmentFragment,
+                EquipmentFragment.newInstance(equipmentClick = equipmentClick)
+            )
+        }
+    }
+
+    private fun setupImageRelicFourParts() {
+        viewModel.relicFourParts.observe(viewLifecycleOwner) {
+            binding.imageHeroRelicBuildFourParts.apply {
+                load(it.image)
+                imageTintList = null
+                background = ContextCompat.getDrawable(requireActivity(), R.color.orange)
+            }
+        }
+        binding.imageHeroRelicBuildFourParts.setOnClickListener {
+            equipmentClick = EquipmentType.RELIC_FOUR_PARTS
             findNavController().navigate(
                 R.id.equipmentFragment,
                 EquipmentFragment.newInstance(equipmentClick = equipmentClick)
@@ -177,7 +203,10 @@ class CreateBuildHeroFragment :
         mStatsAdapter = CreateBuildHeroStatsAdapter(object : CreateBuildHeroStatsListener {
             override fun onSpinnerItemSelected(adapterPosition: Int, selectedItemPosition: Int) {
                 val selectedValue = list[adapterPosition]
-                viewModel.changeStatOnEquipment(adapterPosition, resources.getStringArray(selectedValue).toList()[selectedItemPosition])
+                viewModel.changeStatOnEquipment(
+                    adapterPosition,
+                    resources.getStringArray(selectedValue).toList()[selectedItemPosition]
+                )
             }
         })
         mStatsAdapter.list = list
