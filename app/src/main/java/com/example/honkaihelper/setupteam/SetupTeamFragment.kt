@@ -73,7 +73,7 @@ class SetupTeamFragment :
             }
 
             override fun onRelicClick(idItem: Int) {
-                navigateToEquipmentFragment(idItem, EquipmentType.RELIC)
+                //navigateToEquipmentFragment(idItem, EquipmentType.RELIC)
             }
 
             override fun onDecorationClick(idItem: Int) {

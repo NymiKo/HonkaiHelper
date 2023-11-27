@@ -36,7 +36,8 @@ class BuildsHeroListRepositoryImpl @Inject constructor(
                         idBuild = it.idBuild,
                         hero = hero,
                         weapon = weaponDao.getWeapon(it.idWeapon).toWeapon(),
-                        relic = relicDao.getRelic(it.idRelic).toRelic(),
+                        relicTwoParts = relicDao.getRelic(it.idRelicTwoParts).toRelic(),
+                        relicFourParts = relicDao.getRelic(it.idRelicFourParts).toRelic(),
                         decoration = decorationDao.getDecoration(it.idDecoration).toDecoration(),
                         buildUser = it.buildUser!!
                     )
