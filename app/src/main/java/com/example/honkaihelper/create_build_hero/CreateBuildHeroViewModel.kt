@@ -1,6 +1,5 @@
 package com.example.honkaihelper.create_build_hero
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -27,8 +26,11 @@ class CreateBuildHeroViewModel @Inject constructor(
     private val _weapon = MutableLiveData<Equipment>()
     val weapon: LiveData<Equipment> = _weapon
 
-    private val _relic = MutableLiveData<Equipment>()
-    val relic: LiveData<Equipment> = _relic
+    private val _relicTwoParts = MutableLiveData<Equipment>()
+    val relicTwoParts: LiveData<Equipment> = _relicTwoParts
+
+    private val _relicFourParts = MutableLiveData<Equipment?>()
+    val relicFourParts: LiveData<Equipment?> = _relicFourParts
 
     private val _decoration = MutableLiveData<Equipment>()
     val decoration: LiveData<Equipment> = _decoration
@@ -43,8 +45,12 @@ class CreateBuildHeroViewModel @Inject constructor(
         _weapon.value = equipment
     }
 
-    fun addRelic(equipment: Equipment) {
-        _relic.value = equipment
+    fun addRelicTwoParts(equipment: Equipment) {
+        _relicTwoParts.value = equipment
+    }
+
+    fun addRelicFourParts(equipment: Equipment) {
+        _relicFourParts.value = equipment
     }
 
     fun addDecoration(equipment: Equipment) {
@@ -60,7 +66,7 @@ class CreateBuildHeroViewModel @Inject constructor(
             return
         }
 
-        if (!checkForNull(_relic.value, R.string.empty_relic_in_create_build)) {
+        if (!checkForNull(_relicTwoParts.value, R.string.empty_relic_in_create_build)) {
             return
         }
 
@@ -70,10 +76,12 @@ class CreateBuildHeroViewModel @Inject constructor(
 
         viewModelScope.launch {
             _state.value = CreateBuildHeroUiState.SENDING_BUILD
+
             val build = BuildHeroFromUser(
                 _hero.value!!.id,
                 _weapon.value!!.id,
-                _relic.value!!.id,
+                _relicTwoParts.value!!.id,
+                _relicFourParts.value?.id ?: _relicTwoParts.value!!.id ,
                 _decoration.value!!.id,
                 statsEquipmentList
             )
