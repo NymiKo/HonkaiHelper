@@ -45,7 +45,8 @@ class BuildsHeroListAdapter :
                 textHeroNameInBuildsHero.text = buildHero.hero.name
                 imageHeroWeapon.load(buildHero.weapon.image)
                 imageHeroWeapon.backgroundWeapon(buildHero.weapon.rarity)
-                imageHeroRelic.load(buildHero.relicTwoParts.image)
+                imageHeroRelicTwoParts.load(buildHero.relicTwoParts.image)
+                imageHeroRelicFourParts.load(buildHero.relicFourParts.image)
                 imageHeroDecoration.load(buildHero.decoration.image)
                 textBuildFrom.text = textBuildFrom.context.getString(R.string.build_from, buildHero.buildUser.nickname)
                 imageProfile.load(buildHero.buildUser.avatar)

@@ -16,9 +16,9 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_hero_avatar_in_builds_hero"
             style="@style/image_hero_in_team"
+            app:layout_constraintEnd_toStartOf="@id/image_hero_weapon"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/image_hero_weapon"
             app:shapeAppearanceOverlay="@style/roundedTopRightCornerImageView"
             app:strokeColor="@color/dark_gray"
             app:strokeWidth="1dp" />
@@ -37,38 +37,49 @@
             android:layout_width="65dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/DP20"
-            android:layout_marginBottom="@dimen/DP16"
-            app:layout_constraintEnd_toStartOf="@id/image_hero_relic"
-            app:layout_constraintBottom_toTopOf="@+id/text_build_from"
+            app:layout_constraintBottom_toBottomOf="@+id/image_hero_relic_four_parts"
+            app:layout_constraintEnd_toStartOf="@id/image_hero_relic_two_parts"
             app:layout_constraintStart_toEndOf="@+id/image_hero_avatar_in_builds_hero"
-            app:layout_constraintTop_toTopOf="@+id/image_hero_avatar_in_builds_hero"
+            app:layout_constraintTop_toTopOf="@+id/image_hero_relic_two_parts"
             app:shapeAppearance="@style/roundedCornersImageView"
             app:strokeWidth="2dp" />
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/image_hero_relic"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
+            android:id="@+id/image_hero_relic_four_parts"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="@dimen/DP8"
+            android:background="@color/orange"
+            app:layout_constraintBottom_toTopOf="@+id/image_profile"
+            app:layout_constraintEnd_toEndOf="@+id/image_hero_relic_two_parts"
+            app:layout_constraintStart_toStartOf="@+id/image_hero_relic_two_parts"
+            app:layout_constraintTop_toBottomOf="@+id/image_hero_relic_two_parts"
+            app:shapeAppearance="@style/roundedCornersImageView"
+            app:strokeWidth="2dp" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_hero_relic_two_parts"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginStart="@dimen/DP20"
             android:background="@color/orange"
             app:layout_constraintEnd_toStartOf="@id/image_hero_decoration"
-            app:layout_constraintBottom_toBottomOf="@+id/image_hero_weapon"
             app:layout_constraintStart_toEndOf="@+id/image_hero_weapon"
-            app:layout_constraintTop_toTopOf="@+id/image_hero_weapon"
+            app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearance="@style/roundedCornersImageView"
             app:strokeWidth="2dp" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_hero_decoration"
             android:layout_width="65dp"
-            android:layout_height="0dp"
+            android:layout_height="65dp"
             android:layout_marginStart="@dimen/DP20"
             android:background="@color/orange"
-            app:layout_constraintBottom_toBottomOf="@+id/image_hero_relic"
+            app:layout_constraintBottom_toBottomOf="@+id/image_hero_relic_four_parts"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toEndOf="@+id/image_hero_relic"
-            app:layout_constraintTop_toTopOf="@+id/image_hero_relic"
+            app:layout_constraintStart_toEndOf="@+id/image_hero_relic_two_parts"
+            app:layout_constraintTop_toTopOf="@+id/image_hero_relic_two_parts"
             app:shapeAppearance="@style/roundedCornersImageView"
             app:strokeWidth="2dp" />
 
@@ -77,9 +88,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/DP20"
+            android:ellipsize="end"
             android:fontFamily="sans-serif-medium"
+            android:maxWidth="210dp"
+            android:maxLines="1"
             android:textColor="?attr/colorSecondary"
             app:layout_constraintBottom_toBottomOf="@+id/image_hero_avatar_in_builds_hero"
+            app:layout_constraintEnd_toStartOf="@id/image_profile"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toEndOf="@+id/image_hero_avatar_in_builds_hero"
             tools:text="Сборка от:" />
 
@@ -91,6 +108,8 @@
             android:background="@color/white"
             android:src="@drawable/ic_person"
             app:layout_constraintBottom_toBottomOf="@+id/text_build_from"
+            app:layout_constraintEnd_toEndOf="@+id/image_hero_decoration"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@+id/text_build_from"
             app:layout_constraintTop_toTopOf="@+id/text_build_from"
             app:shapeAppearanceOverlay="@style/roundedImageView" />
