@@ -72,7 +72,7 @@
     <string name="error_save_in_server">Ошибка сохранения на сервере, пожалуйста, попробуйте позже</string>
     <string name="success_create_build">Вы успешно поделились сборкой</string>
     <string name="adding_your_build">Добавление своей сборки</string>
-
+    <string name="hero_build_from">%1$s от %2$s</string>
 
 
     <string name="base_build_weapon_transition_name" translatable="false">base_build_weapon_transition_name_%d</string>

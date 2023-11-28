@@ -10,6 +10,7 @@ import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.builds_hero_from_users.adapter.BuildsHeroListAdapter
+import com.example.honkaihelper.builds_hero_from_users.adapter.BuildsHeroListListener
 import com.example.honkaihelper.builds_hero_from_users.di.BuildsHeroListUIState
 import com.example.honkaihelper.create_build_hero.CreateBuildHeroFragment
 import com.example.honkaihelper.databinding.FragmentBuildsHeroListBinding
@@ -18,6 +19,7 @@ import com.example.honkaihelper.utils.TOKEN
 import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.visible
+import com.example.honkaihelper.viewing_users_build.ViewingUsersBuildFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class BuildsHeroListFragment :
@@ -87,7 +89,11 @@ class BuildsHeroListFragment :
     }
 
     private fun setupAdapter() {
-        mAdapter = BuildsHeroListAdapter()
+        mAdapter = BuildsHeroListAdapter(object : BuildsHeroListListener {
+            override fun onClick(idBuild: Int) {
+                findNavController().navigate(R.id.viewingUsersBuildFragment, ViewingUsersBuildFragment.newInstance(idBuild))
+            }
+        })
     }
 
     private fun setupRecyclerView() {

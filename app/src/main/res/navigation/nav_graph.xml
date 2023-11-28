@@ -123,6 +123,9 @@
         <action
             android:id="@+id/action_buildsHeroListFragment_to_createBuildHeroFragment"
             app:destination="@id/createBuildHeroFragment" />
+        <action
+            android:id="@+id/action_buildsHeroListFragment_to_viewingUsersBuildFragment"
+            app:destination="@id/viewingUsersBuildFragment" />
     </fragment>
     <fragment
         android:id="@+id/createBuildHeroFragment"
@@ -148,4 +151,9 @@
         android:name="com.example.honkaihelper.decoration.DecorationInfoFragment"
         android:label="fragment_decoration_info"
         tools:layout="@layout/fragment_decoration_info" />
+    <fragment
+        android:id="@+id/viewingUsersBuildFragment"
+        android:name="com.example.honkaihelper.viewing_users_build.ViewingUsersBuildFragment"
+        android:label="fragment_viewing_users_build"
+        tools:layout="@layout/fragment_viewing_users_build" />
 </navigation>

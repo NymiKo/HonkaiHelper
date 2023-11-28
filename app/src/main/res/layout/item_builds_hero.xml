@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/card_builds_hero"
     android:layout_marginVertical="@dimen/DP8"
     app:cardElevation="2dp"
     app:strokeWidth="1dp">
