@@ -85,6 +85,8 @@
     <string name="heroes_info_transition_name" translatable="false">heroes_info_transition_name</string>
     <string name="users_build_weapon_transition_name" translatable="false">users_build_weapon_transition_name</string>
     <string name="users_build_relic_two_parts_transition_name" translatable="false">users_build_relic_two_parts_transition_name</string>
+    <string name="users_build_relic_four_parts_transition_name" translatable="false">users_build_relic_four_parts_transition_name</string>
+    <string name="users_build_decoration_transition_name" translatable="false">users_build_decoration_transition_name</string>
 
     <string-array name="hero_level">
         <item>20</item>

@@ -15,6 +15,7 @@ import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.databinding.FragmentViewingUsersBuildBinding
+import com.example.honkaihelper.decoration.DecorationInfoFragment
 import com.example.honkaihelper.relic.RelicInfoFragment
 import com.example.honkaihelper.utils.backgroundHero
 import com.example.honkaihelper.utils.backgroundRarity
@@ -82,6 +83,8 @@ class ViewingUsersBuildFragment :
                     binding.progressViewingUsersBuild.gone()
                     showWeaponInfo(it.fullBuildHeroFromUser.weapon.idWeapon)
                     showRelicTwoPartsInfo(it.fullBuildHeroFromUser.relicTwoParts.idRelic)
+                    showRelicFourPartsInfo(it.fullBuildHeroFromUser.relicFourParts.idRelic)
+                    showDecorationInfo(it.fullBuildHeroFromUser.decoration.idDecoration)
                 }
             }
         }
@@ -124,6 +127,32 @@ class ViewingUsersBuildFragment :
             findNavController().navigate(
                 R.id.relicInfoFragment,
                 RelicInfoFragment.newInject(idRelic),
+                null,
+                extras
+            )
+        }
+    }
+
+    private fun showRelicFourPartsInfo(idRelic: Int) {
+        binding.imageViewingHeroRelicBuildFourParts.setOnClickListener {
+            val transitionName = getString(R.string.relic_info_transition_name)
+            val extras = FragmentNavigatorExtras(it to transitionName)
+            findNavController().navigate(
+                R.id.relicInfoFragment,
+                RelicInfoFragment.newInject(idRelic),
+                null,
+                extras
+            )
+        }
+    }
+
+    private fun showDecorationInfo(idDecoration: Int) {
+        binding.imageViewingHeroDecorationBuild.setOnClickListener {
+            val transitionName = getString(R.string.decoration_info_transition_name)
+            val extras = FragmentNavigatorExtras(it to transitionName)
+            findNavController().navigate(
+                R.id.decorationInfoFragment,
+                DecorationInfoFragment.newInstance(idDecoration),
                 null,
                 extras
             )
