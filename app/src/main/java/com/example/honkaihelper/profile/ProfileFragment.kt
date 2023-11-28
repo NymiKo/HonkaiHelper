@@ -3,18 +3,16 @@ package com.example.honkaihelper.profile
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentProfileBinding
 import com.example.honkaihelper.base.BaseFragment
-import com.example.honkaihelper.profile.adapter.ProfileTeamsListAdapter
+import com.example.honkaihelper.profile.adapter.ViewPagerTeamsAndBuildsAdapter
 import com.example.honkaihelper.profile.data.model.User
 import com.example.honkaihelper.utils.TOKEN
 import com.example.honkaihelper.utils.getFileName
@@ -25,6 +23,7 @@ import com.example.honkaihelper.utils.load
 import com.example.honkaihelper.utils.loadWithPlaceholder
 import com.example.honkaihelper.utils.toast
 import com.example.honkaihelper.utils.visible
+import com.google.android.material.tabs.TabLayoutMediator
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -32,7 +31,7 @@ import java.io.FileOutputStream
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
 
     private val viewModel by viewModels<ProfileViewModel> { viewModelFactory }
-    private lateinit var mAdapter: ProfileTeamsListAdapter
+    private lateinit var mAdapter: ViewPagerTeamsAndBuildsAdapter
     private val selectImageIntent: ActivityResultLauncher<String> =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
             uri?.let {
@@ -54,7 +53,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     override fun setupView() {
         setupEnterButton()
         menuItemClickHandler()
+        setupViewPager()
         setupAvatarImageClickListener()
+        setupProfileTeamsAndBuilds()
     }
 
     override fun uiStateHandle() {
@@ -74,8 +75,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
                 is ProfileUiState.SUCCESS -> {
                     showUiProfile()
-                    setupRecyclerView()
                     loadProfile(it.user)
+                    val teamsAndBuildsList = listOf(it.user.teamsList, it.user.buildsHeroes)
                 }
             }
         }
@@ -108,17 +109,21 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         binding.imageUserAvatar.loadWithPlaceholder(user.avatarUrl, R.drawable.ic_person)
         binding.imageUserAvatar.imageTintList = null
         binding.textUserLogin.text = user.login
-        binding.textTeams.text = getString(R.string.my_teams)
-        mAdapter.mTeamsList = user.teamsList ?: emptyList()
+        mAdapter.list = listOf(user.teamsList ?: emptyList(), user.buildsHeroes ?: emptyList())
     }
 
-    private fun setupRecyclerView() {
-        mAdapter = ProfileTeamsListAdapter()
-        binding.recyclerTeamsList.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(requireActivity())
-            adapter = mAdapter
-        }
+    private fun setupViewPager() {
+        mAdapter = ViewPagerTeamsAndBuildsAdapter()
+        binding.viewPagerProfileTeamsAndBuilds.adapter = mAdapter
+    }
+
+    private fun setupProfileTeamsAndBuilds() {
+        TabLayoutMediator(binding.tabLayoutProfileTeams, binding.viewPagerProfileTeamsAndBuilds) { tab, position ->
+            when(position) {
+                0 -> tab.text = getString(R.string.my_builds)
+                1 -> tab.text = getString(R.string.my_teams)
+            }
+        }.attach()
     }
 
     private fun setupAvatarImageClickListener() {

@@ -10,12 +10,14 @@
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar_profile"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        style="@style/base_toolbar_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/profile_menu" />
+        app:menu="@menu/profile_menu"
+        app:title="@string/profile"
+        app:titleTextAppearance="@style/toolbar"
+        app:titleTextColor="?attr/colorSecondary" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_not_authorized"
@@ -46,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="image_user_avatar, text_user_login, text_teams, recycler_teams_list"
+        app:constraint_referenced_ids="image_user_avatar, text_user_login, tab_layout_profile_teams, view_pager_profile_teams_and_builds"
         tools:visibility="visible" />
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -64,12 +66,12 @@
         android:id="@+id/button_change_avatar"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:src="@drawable/ic_add"
-        android:elevation="2dp"
-        app:shapeAppearanceOverlay="@style/roundedImageView"
         android:background="@color/white"
+        android:elevation="2dp"
+        android:src="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="@+id/image_user_avatar"
         app:layout_constraintEnd_toEndOf="@+id/image_user_avatar"
+        app:shapeAppearanceOverlay="@style/roundedImageView"
         app:tint="@color/blue" />
 
     <TextView
@@ -78,37 +80,38 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/DP16"
         android:layout_marginTop="@dimen/DP8"
-        android:textSize="@dimen/SP24"
         android:fontFamily="sans-serif-medium"
         android:textColor="?attr/colorSecondary"
+        android:textSize="@dimen/SP24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/image_user_avatar"
         app:layout_constraintTop_toTopOf="@+id/image_user_avatar"
-        tools:text="Nymiko"/>
+        tools:text="Nymiko" />
 
-    <TextView
-        android:id="@+id/text_teams"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout_profile_teams"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/DP30"
         android:layout_marginHorizontal="@dimen/DP16"
+        android:layout_marginTop="@dimen/DP30"
         android:fontFamily="sans-serif-medium"
         android:textColor="?attr/colorSecondary"
         android:textSize="@dimen/SP18"
         app:layout_constraintTop_toBottomOf="@+id/image_user_avatar"
+        app:tabIndicatorGravity="bottom"
         tools:layout_editor_absoluteX="16dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_teams_list"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager_profile_teams_and_builds"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/DP8"
         android:layout_marginHorizontal="@dimen/DP16"
+        android:layout_marginTop="@dimen/DP8"
         android:layout_marginBottom="@dimen/DP16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_teams" />
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout_profile_teams"/>
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_layout_profile"
