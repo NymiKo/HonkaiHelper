@@ -15,6 +15,7 @@ import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.databinding.FragmentViewingUsersBuildBinding
+import com.example.honkaihelper.relic.RelicInfoFragment
 import com.example.honkaihelper.utils.backgroundHero
 import com.example.honkaihelper.utils.backgroundRarity
 import com.example.honkaihelper.utils.backgroundWeapon
@@ -80,6 +81,7 @@ class ViewingUsersBuildFragment :
                     binding.scrollHeroBuild.visible()
                     binding.progressViewingUsersBuild.gone()
                     showWeaponInfo(it.fullBuildHeroFromUser.weapon.idWeapon)
+                    showRelicTwoPartsInfo(it.fullBuildHeroFromUser.relicTwoParts.idRelic)
                 }
             }
         }
@@ -109,6 +111,19 @@ class ViewingUsersBuildFragment :
             findNavController().navigate(
                 R.id.weaponInfoFragment,
                 WeaponInfoFragment.newInstance(idWeapon),
+                null,
+                extras
+            )
+        }
+    }
+
+    private fun showRelicTwoPartsInfo(idRelic: Int) {
+        binding.imageViewingHeroRelicBuildTwoParts.setOnClickListener {
+            val transitionName = getString(R.string.relic_info_transition_name)
+            val extras = FragmentNavigatorExtras(it to transitionName)
+            findNavController().navigate(
+                R.id.relicInfoFragment,
+                RelicInfoFragment.newInject(idRelic),
                 null,
                 extras
             )
