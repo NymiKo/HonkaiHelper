@@ -16,7 +16,9 @@ import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.databinding.FragmentViewingUsersBuildBinding
 import com.example.honkaihelper.utils.backgroundHero
 import com.example.honkaihelper.utils.backgroundWeapon
+import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.load
+import com.example.honkaihelper.utils.visible
 import com.example.honkaihelper.viewing_users_build.adapter.ViewingUsersBuildStatsAdapter
 
 class ViewingUsersBuildFragment : BaseFragment<FragmentViewingUsersBuildBinding>(FragmentViewingUsersBuildBinding::inflate) {
@@ -49,7 +51,8 @@ class ViewingUsersBuildFragment : BaseFragment<FragmentViewingUsersBuildBinding>
 
                 }
                 is ViewingUsersBuildUiState.LOADING -> {
-
+                    binding.progressViewingUsersBuild.visible()
+                    binding.scrollHeroBuild.gone()
                 }
                 is ViewingUsersBuildUiState.SUCCESS -> {
                     binding.toolbarViewingUsersBuild.title = getString(R.string.hero_build_from, it.fullBuildHeroFromUser.hero.name, it.fullBuildHeroFromUser.nickname)
@@ -62,6 +65,8 @@ class ViewingUsersBuildFragment : BaseFragment<FragmentViewingUsersBuildBinding>
                     binding.imageViewingHeroRelicBuildFourParts.load(it.fullBuildHeroFromUser.relicFourParts.image)
                     binding.imageViewingHeroDecorationBuild.load(it.fullBuildHeroFromUser.decoration.image)
                     mAdapter.list = it.fullBuildHeroFromUser.statsEquipment
+                    binding.scrollHeroBuild.visible()
+                    binding.progressViewingUsersBuild.gone()
                 }
             }
         }
