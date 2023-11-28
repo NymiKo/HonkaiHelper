@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.honkaihelper.builds_hero_from_users.data.BuildsHeroListRepository
-import com.example.honkaihelper.builds_hero_from_users.data.model.FullBuildHeroFromUser
+import com.example.honkaihelper.builds_hero_from_users.data.model.BuildHeroWithUser
 import com.example.honkaihelper.builds_hero_from_users.di.BuildsHeroListUIState
 import com.example.honkaihelper.data.NetworkResult
 import com.example.honkaihelper.data.local.models.hero.HeroWithNameAvatarRarity
@@ -16,8 +16,8 @@ class BuildsHeroListViewModel @Inject constructor(
     private val repository: BuildsHeroListRepository
 ): ViewModel() {
 
-    private val _uiState = MutableLiveData<BuildsHeroListUIState<FullBuildHeroFromUser>>(BuildsHeroListUIState.LOADING)
-    val uiState: LiveData<BuildsHeroListUIState<FullBuildHeroFromUser>> = _uiState
+    private val _uiState = MutableLiveData<BuildsHeroListUIState<BuildHeroWithUser>>(BuildsHeroListUIState.LOADING)
+    val uiState: LiveData<BuildsHeroListUIState<BuildHeroWithUser>> = _uiState
 
     private val _hero = MutableLiveData<HeroWithNameAvatarRarity>()
     val hero: LiveData<HeroWithNameAvatarRarity> = _hero

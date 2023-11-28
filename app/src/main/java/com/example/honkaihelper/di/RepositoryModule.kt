@@ -30,6 +30,8 @@ import com.example.honkaihelper.relic.data.RelicInfoRepository
 import com.example.honkaihelper.relic.data.RelicInfoRepositoryImpl
 import com.example.honkaihelper.teams.data.TeamsListRepository
 import com.example.honkaihelper.teams.data.TeamsListRepositoryImpl
+import com.example.honkaihelper.viewing_users_build.data.ViewingUsersBuildRepository
+import com.example.honkaihelper.viewing_users_build.data.ViewingUsersBuildRepositoryImpl
 import com.example.honkaihelper.weapon.data.WeaponInfoRepository
 import com.example.honkaihelper.weapon.data.WeaponInfoRepositoryImpl
 import dagger.Binds
@@ -101,4 +103,8 @@ interface RepositoryModule {
     @Singleton
     @Binds
     fun bindCreateBuildHeroRepository(repository: CreateBuildHeroRepositoryImpl): CreateBuildHeroRepository
+
+    @Singleton
+    @Binds
+    fun bindViewingUsersBuildRepository(repository: ViewingUsersBuildRepositoryImpl): ViewingUsersBuildRepository
 }

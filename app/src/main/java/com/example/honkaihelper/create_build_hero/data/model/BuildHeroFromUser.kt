@@ -6,7 +6,8 @@ data class BuildHeroFromUser(
     val idRelicTwoParts: Int,
     val idRelicFourParts: Int,
     val idDecoration: Int,
-    val statsEquipment: Array<String>
+    val statsEquipment: Array<String>,
+    val nickname: String = ""
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

@@ -14,6 +14,7 @@ import com.example.honkaihelper.login.data.LoginService
 import com.example.honkaihelper.profile.data.ProfileService
 import com.example.honkaihelper.registration.data.RegistrationService
 import com.example.honkaihelper.teams.data.TeamsListService
+import com.example.honkaihelper.viewing_users_build.data.ViewingUsersBuildService
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineDispatcher
@@ -82,4 +83,7 @@ object NetworkModule {
 
     @Provides
     fun providesCreateBuildHeroService(retrofit: Retrofit): CreateBuildHeroService = retrofit.create(CreateBuildHeroService::class.java)
+
+    @Provides
+    fun providesViewingUsersBuildService(retrofit: Retrofit): ViewingUsersBuildService = retrofit.create(ViewingUsersBuildService::class.java)
 }

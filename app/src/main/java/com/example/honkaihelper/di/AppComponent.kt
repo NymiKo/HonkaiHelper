@@ -30,6 +30,8 @@ import com.example.honkaihelper.relic.di.RelicInfoComponent
 import com.example.honkaihelper.setupteam.di.SetupTeamComponent
 import com.example.honkaihelper.teams.data.TeamsListRepository
 import com.example.honkaihelper.teams.di.TeamsListComponent
+import com.example.honkaihelper.viewing_users_build.data.ViewingUsersBuildRepository
+import com.example.honkaihelper.viewing_users_build.di.ViewingUsersBuildComponent
 import com.example.honkaihelper.weapon.data.WeaponInfoRepository
 import com.example.honkaihelper.weapon.di.WeaponInfoComponent
 import dagger.BindsInstance
@@ -70,6 +72,7 @@ interface AppComponent {
     fun weaponInfoComponent(): WeaponInfoComponent.Factory
     fun relicInfoComponent(): RelicInfoComponent.Factory
     fun decorationInfoComponent(): DecorationInfoComponent.Factory
+    fun viewingUsersBuildComponent(): ViewingUsersBuildComponent.Factory
 
     val heroesListRepository: HeroesListRepository
     val teamsListRepository: TeamsListRepository
@@ -85,4 +88,5 @@ interface AppComponent {
     val relicInfoRepository: RelicInfoRepository
     val decorationInfoRepository: DecorationInfoRepository
     val buildsHeroListRepository: BuildsHeroListRepository
+    val viewingUsersBuildRepository: ViewingUsersBuildRepository
 }
