@@ -200,13 +200,17 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/progress_viewing_users_build"
+        android:id="@+id/shimmer_viewing_users_build"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/grey_transparent_20"
-        android:visibility="visible">
+        android:layout_height="wrap_content">
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <include layout="@layout/shimmer_hero_avatar_viewing_users_build"/>
+
+        </FrameLayout>
 
     </com.facebook.shimmer.ShimmerFrameLayout>
 

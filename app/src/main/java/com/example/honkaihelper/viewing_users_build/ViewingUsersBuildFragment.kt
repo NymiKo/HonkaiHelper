@@ -57,11 +57,13 @@ class ViewingUsersBuildFragment :
             when (it) {
                 is ViewingUsersBuildUiState.ERROR -> {
                     toast(requireActivity(), R.string.error)
-                    binding.progressViewingUsersBuild.gone()
+                    binding.shimmerViewingUsersBuild.gone()
+                    binding.shimmerViewingUsersBuild.stopShimmer()
                 }
 
                 is ViewingUsersBuildUiState.LOADING -> {
-                    binding.progressViewingUsersBuild.visible()
+                    binding.shimmerViewingUsersBuild.stopShimmer()
+                    binding.shimmerViewingUsersBuild.visible()
                 }
 
                 is ViewingUsersBuildUiState.SUCCESS -> {
@@ -80,7 +82,8 @@ class ViewingUsersBuildFragment :
                     binding.imageViewingHeroDecorationBuild.load(it.fullBuildHeroFromUser.decoration.image)
                     mAdapter.list = it.fullBuildHeroFromUser.statsEquipment
                     binding.scrollHeroBuild.visible()
-                    binding.progressViewingUsersBuild.gone()
+                    binding.shimmerViewingUsersBuild.stopShimmer()
+                    binding.shimmerViewingUsersBuild.gone()
                     showWeaponInfo(it.fullBuildHeroFromUser.weapon.idWeapon)
                     showRelicTwoPartsInfo(it.fullBuildHeroFromUser.relicTwoParts.idRelic)
                     showRelicFourPartsInfo(it.fullBuildHeroFromUser.relicFourParts.idRelic)
