@@ -1,6 +1,6 @@
 package com.example.honkaihelper.builds_hero_from_users.data
 
-import com.example.honkaihelper.builds_hero_from_users.data.model.FullBuildHeroFromUser
+import com.example.honkaihelper.builds_hero_from_users.data.model.BuildHeroWithUser
 import com.example.honkaihelper.data.NetworkResult
 import com.example.honkaihelper.data.handleApi
 import com.example.honkaihelper.data.local.dao.DecorationDao
@@ -24,7 +24,7 @@ class BuildsHeroListRepositoryImpl @Inject constructor(
         return@withContext heroDao.getHeroWithNameAvatarRarity(idHero)
     }
 
-    override suspend fun getBuildsHeroList(idHero: Int): NetworkResult<List<FullBuildHeroFromUser>> = withContext(ioDispatcher) {
+    override suspend fun getBuildsHeroList(idHero: Int): NetworkResult<List<BuildHeroWithUser>> = withContext(ioDispatcher) {
         when(val result = handleApi { buildsHeroListService.getBuildsHeroList(idHero) }) {
             is NetworkResult.Error -> {
                 return@withContext NetworkResult.Error(result.code)
@@ -32,7 +32,7 @@ class BuildsHeroListRepositoryImpl @Inject constructor(
             is NetworkResult.Success -> {
                 val hero = getHero(idHero)
                 return@withContext NetworkResult.Success(result.data.map {
-                    FullBuildHeroFromUser(
+                    BuildHeroWithUser(
                         idBuild = it.idBuild,
                         hero = hero,
                         weapon = weaponDao.getWeapon(it.idWeapon).toWeapon(),

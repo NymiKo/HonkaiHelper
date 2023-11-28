@@ -5,7 +5,7 @@ import com.example.honkaihelper.data.local.models.hero.HeroWithNameAvatarRarity
 import com.example.honkaihelper.info_about_hero.data.model.Decoration
 import com.example.honkaihelper.info_about_hero.data.model.Relic
 
-data class FullBuildHeroFromUser(
+data class BuildHeroWithUser(
     val idBuild: Int,
     val hero: HeroWithNameAvatarRarity,
     val weapon: Weapon,
