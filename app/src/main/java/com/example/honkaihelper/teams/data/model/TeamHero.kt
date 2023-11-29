@@ -1,13 +1,13 @@
 package com.example.honkaihelper.teams.data.model
 
-import com.example.honkaihelper.heroes.data.model.Hero
+import com.example.honkaihelper.data.local.models.hero.HeroWithNameAvatarRarity
 
 data class TeamHero(
     val idTeam: Long,
-    val heroOne: Hero,
-    val heroTwo: Hero,
-    val heroThree: Hero,
-    val heroFour: Hero,
+    val heroOne: HeroWithNameAvatarRarity,
+    val heroTwo: HeroWithNameAvatarRarity,
+    val heroThree: HeroWithNameAvatarRarity,
+    val heroFour: HeroWithNameAvatarRarity,
     val nickname: String?,
     val avatar: String?
 )
