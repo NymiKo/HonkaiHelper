@@ -21,10 +21,10 @@ class TeamsAdapter: BaseAdapter<ItemTeamBinding, TeamHero>() {
     private inner class TeamsViewHolder(private val binding: ItemTeamBinding): BaseViewHolder(binding) {
         override fun bind(model: TeamHero) {
             binding.apply {
-                heroAvatarInTeam1.load(model.heroOne.avatar)
-                heroAvatarInTeam2.load(model.heroTwo.avatar)
-                heroAvatarInTeam3.load(model.heroThree.avatar)
-                heroAvatarInTeam4.load(model.heroFour.avatar)
+                heroAvatarInTeam1.load(model.heroOne.localAvatarPath)
+                heroAvatarInTeam2.load(model.heroTwo.localAvatarPath)
+                heroAvatarInTeam3.load(model.heroThree.localAvatarPath)
+                heroAvatarInTeam4.load(model.heroFour.localAvatarPath)
                 heroAvatarInTeam1.backgroundHero(model.heroOne.rarity)
                 heroAvatarInTeam2.backgroundHero(model.heroTwo.rarity)
                 heroAvatarInTeam3.backgroundHero(model.heroThree.rarity)
