@@ -37,10 +37,10 @@ class HeroTeamsListAdapter: RecyclerView.Adapter<HeroTeamsListAdapter.HeroTeamsL
 
         fun bind(teamHero: TeamHero) {
             binding.apply {
-                heroAvatarInTeam1.load(teamHero.heroOne.avatar)
-                heroAvatarInTeam2.load(teamHero.heroTwo.avatar)
-                heroAvatarInTeam3.load(teamHero.heroThree.avatar)
-                heroAvatarInTeam4.load(teamHero.heroFour.avatar)
+                heroAvatarInTeam1.load(teamHero.heroOne.localAvatarPath)
+                heroAvatarInTeam2.load(teamHero.heroTwo.localAvatarPath)
+                heroAvatarInTeam3.load(teamHero.heroThree.localAvatarPath)
+                heroAvatarInTeam4.load(teamHero.heroFour.localAvatarPath)
                 heroAvatarInTeam1.backgroundHero(teamHero.heroOne.rarity)
                 heroAvatarInTeam2.backgroundHero(teamHero.heroTwo.rarity)
                 heroAvatarInTeam3.backgroundHero(teamHero.heroThree.rarity)

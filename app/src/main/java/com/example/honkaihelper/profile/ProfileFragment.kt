@@ -14,6 +14,7 @@ import com.example.honkaihelper.databinding.FragmentProfileBinding
 import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.profile.adapter.ViewPagerTeamsAndBuildsAdapter
 import com.example.honkaihelper.profile.data.model.User
+import com.example.honkaihelper.profile.data.model.UserResponse
 import com.example.honkaihelper.utils.TOKEN
 import com.example.honkaihelper.utils.getFileName
 import com.example.honkaihelper.utils.getSharedPrefUser
@@ -76,7 +77,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 is ProfileUiState.SUCCESS -> {
                     showUiProfile()
                     loadProfile(it.user)
-                    val teamsAndBuildsList = listOf(it.user.teamsList, it.user.buildsHeroes)
+                    mAdapter.list = listOf(it.user.buildsHeroes, it.user.teamsList)
                 }
             }
         }
@@ -109,7 +110,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         binding.imageUserAvatar.loadWithPlaceholder(user.avatarUrl, R.drawable.ic_person)
         binding.imageUserAvatar.imageTintList = null
         binding.textUserLogin.text = user.login
-        mAdapter.list = listOf(user.teamsList ?: emptyList(), user.buildsHeroes ?: emptyList())
+        mAdapter.list = listOf(user.teamsList, user.buildsHeroes)
     }
 
     private fun setupViewPager() {

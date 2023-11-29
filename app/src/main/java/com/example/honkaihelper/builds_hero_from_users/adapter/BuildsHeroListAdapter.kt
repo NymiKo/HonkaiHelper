@@ -53,8 +53,8 @@ class BuildsHeroListAdapter(
                 imageHeroRelicTwoParts.load(buildHero.relicTwoParts.image)
                 imageHeroRelicFourParts.load(buildHero.relicFourParts.image)
                 imageHeroDecoration.load(buildHero.decoration.image)
-                textBuildFrom.text = textBuildFrom.context.getString(R.string.build_from, buildHero.buildUser.nickname)
-                imageProfile.load(buildHero.buildUser.avatar)
+                textBuildFrom.text = textBuildFrom.context.getString(R.string.build_from, buildHero.buildUser?.nickname)
+                imageProfile.load(buildHero.buildUser?.avatar)
 
                 cardBuildsHero.tag = buildHero.idBuild
             }

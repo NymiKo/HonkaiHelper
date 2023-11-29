@@ -12,5 +12,5 @@ data class BuildHeroWithUser(
     val relicTwoParts: Relic,
     val relicFourParts: Relic,
     val decoration: Decoration,
-    val buildUser: BuildUser
+    val buildUser: BuildUser?
 )
