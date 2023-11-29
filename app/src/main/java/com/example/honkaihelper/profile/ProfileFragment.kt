@@ -77,7 +77,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 is ProfileUiState.SUCCESS -> {
                     showUiProfile()
                     loadProfile(it.user)
-                    mAdapter.list = listOf(it.user.buildsHeroes, it.user.teamsList)
                 }
             }
         }
@@ -107,10 +106,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     }
 
     private fun loadProfile(user: User) {
-        binding.imageUserAvatar.loadWithPlaceholder(user.avatarUrl, R.drawable.ic_person)
-        binding.imageUserAvatar.imageTintList = null
+        binding.imageUserAvatar.loadWithPlaceholder(user.avatarUrl ?: "", R.drawable.ic_person)
+        if (!user.avatarUrl.isNullOrEmpty()) binding.imageUserAvatar.imageTintList = null
         binding.textUserLogin.text = user.login
-        mAdapter.list = listOf(user.teamsList, user.buildsHeroes)
+        mAdapter.list = listOf(user.buildsHeroes, user.teamsList)
     }
 
     private fun setupViewPager() {
