@@ -61,7 +61,7 @@ class CreateBuildHeroViewModel @Inject constructor(
         statsEquipmentList[positionItem] = value
     }
 
-    fun saveBuild() {
+    fun saveBuild(idBuild: Int?) {
         if (!checkForNull(_weapon.value, R.string.empty_weapon_in_create_build)) {
             return
         }
@@ -83,7 +83,8 @@ class CreateBuildHeroViewModel @Inject constructor(
                 _relicTwoParts.value!!.id,
                 _relicFourParts.value?.id ?: _relicTwoParts.value!!.id ,
                 _decoration.value!!.id,
-                statsEquipmentList
+                statsEquipmentList,
+                idBuild = idBuild
             )
             when (val result = repository.saveBuild(build)) {
                 is NetworkResult.Error -> {
@@ -113,6 +114,23 @@ class CreateBuildHeroViewModel @Inject constructor(
             400 -> _state.value = CreateBuildHeroUiState.ERROR(R.string.already_shared_the_build)
             503 -> _state.value = CreateBuildHeroUiState.ERROR(R.string.error_save_in_server)
             else -> _state.value = CreateBuildHeroUiState.ERROR(R.string.error)
+        }
+    }
+
+    fun getBuild(idBuild: Int) = viewModelScope.launch {
+        when (val result = repository.getBuild(idBuild)) {
+            is NetworkResult.Error -> {
+                errorHandler(result.code)
+            }
+
+            is NetworkResult.Success -> {
+                _state.value = CreateBuildHeroUiState.CREATION
+                _weapon.value = Equipment(result.data.weapon.idWeapon, result.data.weapon.image, result.data.weapon.rarity.toByte())
+                _relicTwoParts.value = Equipment(result.data.relicTwoParts.idRelic, result.data.relicTwoParts.image)
+                _relicFourParts.value = Equipment(result.data.relicFourParts.idRelic, result.data.relicFourParts.image)
+                _decoration.value = Equipment(result.data.decoration.idDecoration, result.data.decoration.image)
+                _hero.value = repository.getHero(result.data.hero.id)
+            }
         }
     }
 }
