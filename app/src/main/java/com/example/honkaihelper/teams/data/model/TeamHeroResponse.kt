@@ -6,6 +6,6 @@ data class TeamHeroResponse(
     val idHeroTwo: Int,
     val idHeroThree: Int,
     val idHeroFour: Int,
-    val nickname: String?,
-    val avatar: String?
+    val nickname: String? = null,
+    val avatar: String? = null
 )

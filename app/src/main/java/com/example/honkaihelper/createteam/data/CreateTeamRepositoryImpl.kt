@@ -18,14 +18,32 @@ class CreateTeamRepositoryImpl @Inject constructor(
 ) : CreateTeamRepository {
 
     override suspend fun getHeroesList(): List<ActiveHeroInTeam> = withContext(ioDispatcher) {
-        return@withContext heroDao.getHeroes().sortedBy { it.name }.map { ActiveHeroInTeam(it.toHero(), false) }
+        return@withContext heroDao.getHeroWithNameAvatarRarityList().sortedBy { it.name }.map { ActiveHeroInTeam(it, false) }
     }
 
-    override suspend fun saveTeam(heroesList: List<Hero>): NetworkResult<Unit> {
+    override suspend fun saveTeam(heroesList: List<HeroWithNameAvatarRarity>): NetworkResult<Unit> {
         return withContext(ioDispatcher) {
             handleApi {
                 createTeamService.saveTeam(heroesList.sortedBy { hero -> hero.id }
                     .map { hero -> hero.id })
+            }
+        }
+    }
+
+    override suspend fun getTeam(idTeam: Int): NetworkResult<List<HeroWithNameAvatarRarity>> = withContext(ioDispatcher) {
+        when(val result = handleApi { createTeamService.getTeam(idTeam) }) {
+            is NetworkResult.Error -> {
+                return@withContext NetworkResult.Error(result.code)
+            }
+            is NetworkResult.Success -> {
+                return@withContext NetworkResult.Success(
+                    listOf<HeroWithNameAvatarRarity>(
+                        heroDao.getHeroWithNameAvatarRarity(result.data.idHeroOne),
+                        heroDao.getHeroWithNameAvatarRarity(result.data.idHeroTwo),
+                        heroDao.getHeroWithNameAvatarRarity(result.data.idHeroThree),
+                        heroDao.getHeroWithNameAvatarRarity(result.data.idHeroFour)
+                    )
+                )
             }
         }
     }
