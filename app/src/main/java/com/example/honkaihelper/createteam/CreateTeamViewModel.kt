@@ -1,5 +1,6 @@
 package com.example.honkaihelper.createteam
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,8 +25,8 @@ class CreateTeamViewModel @Inject constructor(
     private val _heroList = MutableLiveData<List<ActiveHeroInTeam>>()
     val heroList: LiveData<List<ActiveHeroInTeam>> = _heroList
 
-    private val _heroListInTeam = MutableLiveData<List<Hero>>()
-    val heroListInTeam: LiveData<List<Hero>> = _heroListInTeam
+    private val _heroListInTeam = MutableLiveData<List<HeroWithNameAvatarRarity>>()
+    val heroListInTeam: LiveData<List<HeroWithNameAvatarRarity>> = _heroListInTeam
 
     private val _selectedHero = MutableLiveData<ActiveHeroInTeam>()
     val selectedHero: LiveData<ActiveHeroInTeam> = _selectedHero
@@ -78,6 +79,19 @@ class CreateTeamViewModel @Inject constructor(
             400 -> _state.value = CreateTeamUIState.ERROR_TEAM_CREATION(R.string.team_already_exists)
             503 -> _state.value = CreateTeamUIState.ERROR_TEAM_CREATION(R.string.error_save_in_server)
             else -> _state.value = CreateTeamUIState.ERROR_TEAM_CREATION(R.string.error)
+        }
+    }
+
+    fun getTeam(idTeam: Int) = viewModelScope.launch {
+        when(val result = repository.getTeam(idTeam)) {
+            is NetworkResult.Error -> errorHandler(result.code)
+            is NetworkResult.Success -> {
+                result.data.forEach {
+
+                }
+                Log.e("ACTIVE_TEAM", _selectedHero.value.toString())
+                _state.value = CreateTeamUIState.CREATING_TEAM
+            }
         }
     }
 }
