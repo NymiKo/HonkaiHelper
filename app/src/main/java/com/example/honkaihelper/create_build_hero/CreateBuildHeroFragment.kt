@@ -3,6 +3,7 @@ package com.example.honkaihelper.create_build_hero
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -35,6 +36,7 @@ class CreateBuildHeroFragment :
     private lateinit var mStatsAdapter: CreateBuildHeroStatsAdapter
 
     private val idHero get() = requireArguments().getInt(ARG_ID_HERO)
+    private val idBuild get() = requireArguments().getInt(ARG_ID_BUILD)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -44,7 +46,8 @@ class CreateBuildHeroFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getHero(idHero)
+        if (idBuild != -1) viewModel.getBuild(idBuild)
+        if (idHero != -1) viewModel.getHero(idHero)
         setFragmentResultListener("equipment_key") { key, bundle ->
             val equipment = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 bundle.getParcelable("equipment", Equipment::class.java)
@@ -223,7 +226,7 @@ class CreateBuildHeroFragment :
     private fun setupSaveBuildButton() {
         binding.buttonSaveBuild.apply {
             size = FloatingActionButton.SIZE_MINI
-            setOnClickListener { viewModel.saveBuild() }
+            setOnClickListener { viewModel.saveBuild(idBuild, idHero) }
         }
     }
 
@@ -231,14 +234,16 @@ class CreateBuildHeroFragment :
         binding.toolbarCreateBuildHero.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
+        if (idBuild != -1) binding.toolbarCreateBuildHero.title = getString(R.string.edit_build)
     }
 
     companion object {
         private const val ARG_ID_HERO = "id_hero"
+        private const val ARG_ID_BUILD = "id_build"
 
         @JvmStatic
-        fun newInstance(idHero: Int): Bundle {
-            return bundleOf(ARG_ID_HERO to idHero)
+        fun newInstance(idHero: Int = -1, idBuild: Int = -1): Bundle {
+            return bundleOf(ARG_ID_HERO to idHero, ARG_ID_BUILD to idBuild)
         }
     }
 }

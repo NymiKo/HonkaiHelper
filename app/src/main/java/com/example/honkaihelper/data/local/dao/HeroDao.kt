@@ -26,7 +26,7 @@ interface HeroDao {
     @Query("SELECT id FROM ${RoomContract.tableHeroes} WHERE id = :idHero")
     suspend fun getFullBaseBuildHero(idHero: Int): FullBaseBuildHeroEntity
 
-    @Query("SELECT name, localAvatarPath, rarity FROM ${RoomContract.tableHeroes} WHERE id = :idHero")
+    @Query("SELECT id, name, localAvatarPath, rarity FROM ${RoomContract.tableHeroes} WHERE id = :idHero")
     suspend fun getHeroWithNameAvatarRarity(idHero: Int): HeroWithNameAvatarRarity
 
     @Query("SELECT * FROM ${RoomContract.tableHeroes} WHERE id = :idHero")
