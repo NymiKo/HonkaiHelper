@@ -87,9 +87,12 @@ class CreateTeamViewModel @Inject constructor(
             is NetworkResult.Error -> errorHandler(result.code)
             is NetworkResult.Success -> {
                 result.data.forEach {
-
+                    val list = _heroList.value ?: emptyList()
+                    val newList = list.toMutableList()
+                    newList[newList.indexOf(ActiveHeroInTeam(it))] = ActiveHeroInTeam(it, true)
+                    _heroList.value = newList
+                    addHeroInTeam(ActiveHeroInTeam(it))
                 }
-                Log.e("ACTIVE_TEAM", _selectedHero.value.toString())
                 _state.value = CreateTeamUIState.CREATING_TEAM
             }
         }

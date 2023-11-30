@@ -2,6 +2,7 @@ package com.example.honkaihelper.teams
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
@@ -17,6 +18,7 @@ import com.example.honkaihelper.databinding.ViewstubErrorLayoutBinding
 import com.example.honkaihelper.teams.adapter.HeroTeamsListAdapter
 import com.example.honkaihelper.teams.data.model.TeamHero
 import com.example.honkaihelper.utils.TOKEN
+import com.example.honkaihelper.utils.getSharedPrefToken
 import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.toast

@@ -122,7 +122,9 @@ class CreateTeamFragment :
 
     private fun selectHero() {
         viewModel.selectedHero.observe(viewLifecycleOwner) {
-            if (it != null) mAdapterHeroList.selectHero(it)
+            if (it != null) {
+                mAdapterHeroList.selectHero(it)
+            }
         }
     }
 

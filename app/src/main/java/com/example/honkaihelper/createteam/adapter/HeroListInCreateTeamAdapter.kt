@@ -26,7 +26,6 @@ class HeroListInCreateTeamAdapter(private val actionListener: HeroListInCreateTe
 
     fun selectHero(activeHeroInTeam: ActiveHeroInTeam) {
         notifyItemChanged(mHeroList.indexOf(activeHeroInTeam))
-        Log.e("ACTIVE_NOT_NULL", mHeroList.toString())
     }
 
     override fun onCreateViewHolder(
