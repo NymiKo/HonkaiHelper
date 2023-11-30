@@ -1,6 +1,7 @@
 package com.example.honkaihelper.createteam.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
@@ -25,6 +26,7 @@ class HeroListInCreateTeamAdapter(private val actionListener: HeroListInCreateTe
 
     fun selectHero(activeHeroInTeam: ActiveHeroInTeam) {
         notifyItemChanged(mHeroList.indexOf(activeHeroInTeam))
+        Log.e("ACTIVE_NOT_NULL", mHeroList.toString())
     }
 
     override fun onCreateViewHolder(
@@ -49,14 +51,14 @@ class HeroListInCreateTeamAdapter(private val actionListener: HeroListInCreateTe
     class HeroListInCreateTeamViewHolder(private val binding: ItemHeroCreateTeamListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(activeHeroInTeam: ActiveHeroInTeam) {
-            binding.heroAvatarInCreateTeamList.load(activeHeroInTeam.hero.avatar)
+            binding.heroAvatarInCreateTeamList.load(activeHeroInTeam.hero.localAvatarPath)
             binding.heroNameInCreateTeamList.text = activeHeroInTeam.hero.name
             if (activeHeroInTeam.active) {
                 changeStrokeActiveHero(ContextCompat.getColor(binding.cardHeroIconTeam.context, R.color.green), 10, 25F)
             } else {
                 changeStrokeActiveHero(ContextCompat.getColor(binding.cardHeroIconTeam.context, R.color.dark_gray), 1, 0F)
             }
-            binding.heroAvatarInCreateTeamList.load(activeHeroInTeam.hero.avatar)
+            binding.heroAvatarInCreateTeamList.load(activeHeroInTeam.hero.localAvatarPath)
             binding.heroAvatarInCreateTeamList.backgroundHero(activeHeroInTeam.hero.rarity)
             binding.cardHeroIconTeam.tag = activeHeroInTeam
         }

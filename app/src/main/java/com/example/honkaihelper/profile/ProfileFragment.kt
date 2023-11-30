@@ -17,10 +17,12 @@ import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentProfileBinding
 import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.create_build_hero.CreateBuildHeroFragment
+import com.example.honkaihelper.createteam.CreateTeamFragment
 import com.example.honkaihelper.profile.adapter.ViewPagerTeamsAndBuildsAdapter
 import com.example.honkaihelper.profile.adapter.ViewPagerTeamsAndBuildsListener
 import com.example.honkaihelper.profile.data.model.User
 import com.example.honkaihelper.profile.data.model.UserResponse
+import com.example.honkaihelper.teams.TeamsListFragment
 import com.example.honkaihelper.utils.TOKEN
 import com.example.honkaihelper.utils.getFileName
 import com.example.honkaihelper.utils.getSharedPrefUser
@@ -120,8 +122,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
     private fun setupViewPager() {
         mAdapter = ViewPagerTeamsAndBuildsAdapter(object : ViewPagerTeamsAndBuildsListener {
-            override fun onClickBuild(idBuild: Int) {
+            override fun onBuildClick(idBuild: Int) {
                 findNavController().navigate(R.id.createBuildHeroFragment, CreateBuildHeroFragment.newInstance(idBuild = idBuild))
+            }
+
+            override fun onTeamClick(idTeam: Int) {
+                findNavController().navigate(R.id.createTeamFragment, CreateTeamFragment.newInstance(idTeam))
             }
         })
         binding.viewPagerProfileTeamsAndBuilds.adapter = mAdapter

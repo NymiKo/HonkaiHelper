@@ -45,6 +45,6 @@ class BuildsAdapter(
 
     override fun onClick(view: View?) {
         val idBuild = view?.tag as Int
-        actionListener.onClickBuild(idBuild)
+        actionListener.onBuildClick(idBuild)
     }
 }

@@ -1,7 +1,10 @@
 package com.example.honkaihelper.createteam
 
 import android.content.Context
+import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -30,10 +33,17 @@ class CreateTeamFragment :
     private lateinit var mAdapterForViewTeam: CreateTeamAdapter
     private lateinit var mAdapterHeroList: HeroListInCreateTeamAdapter
 
+    private val idTeam get() = requireArguments().getInt(ARG_ID_TEAM, -1)
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (requireActivity().application as App).appComponent.createTeamComponent().create()
             .inject(this)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (idTeam != -1) viewModel.getTeam(idTeam)
     }
 
     override fun setupView() {
@@ -145,5 +155,13 @@ class CreateTeamFragment :
         binding.recyclerHeroesList.adapter = null
         binding.recyclerViewingCommand.adapter = null
         super.onDestroyView()
+    }
+
+    companion object {
+        const val ARG_ID_TEAM = "id_team"
+
+        fun newInstance(idTeam: Int = -1): Bundle {
+            return bundleOf(ARG_ID_TEAM to idTeam)
+        }
     }
 }

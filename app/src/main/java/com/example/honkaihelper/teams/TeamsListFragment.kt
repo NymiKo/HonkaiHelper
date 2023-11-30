@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.base.BaseFragment
+import com.example.honkaihelper.createteam.CreateTeamFragment
 import com.example.honkaihelper.databinding.FragmentTeamsListBinding
 import com.example.honkaihelper.databinding.ViewstubErrorLayoutBinding
 import com.example.honkaihelper.teams.adapter.HeroTeamsListAdapter
@@ -115,7 +116,7 @@ class TeamsListFragment :
             if (getSharedPrefUser().getString(TOKEN, "").isNullOrEmpty()) {
                 toast(requireActivity(), R.string.you_need_login)
             } else {
-                findNavController().navigate(R.id.createTeamFragment)
+                findNavController().navigate(R.id.createTeamFragment, CreateTeamFragment.newInstance())
             }
         }
     }

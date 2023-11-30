@@ -1,12 +1,8 @@
 package com.example.honkaihelper.profile.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.honkaihelper.base.BaseAdapter
 import com.example.honkaihelper.builds_hero_from_users.data.model.BuildHeroWithUser
 import com.example.honkaihelper.databinding.ViewPagerProfileTeamsAndBuildsBinding
@@ -27,9 +23,9 @@ class ViewPagerTeamsAndBuildsAdapter(
         BaseViewHolder(binding) {
         override fun bind(model: List<Any>) {
             if (adapterPosition == 0) {
-                val mAdapter = BuildsAdapter(object : BuildsAdapterListener{
-                    override fun onClickBuild(idBuild: Int) {
-                        actionListener.onClickBuild(idBuild)
+                val mAdapter = BuildsAdapter(object : BuildsAdapterListener {
+                    override fun onBuildClick(idBuild: Int) {
+                        actionListener.onBuildClick(idBuild)
                     }
                 })
                 mAdapter.list = model as List<BuildHeroWithUser>
@@ -38,7 +34,11 @@ class ViewPagerTeamsAndBuildsAdapter(
                     adapter = mAdapter
                 }
             } else {
-                val mAdapter = TeamsAdapter()
+                val mAdapter = TeamsAdapter(object : TeamsAdapterListener {
+                    override fun onTeamClick(idTeam: Int) {
+                        actionListener.onTeamClick(idTeam)
+                    }
+                })
                 mAdapter.list = model as List<TeamHero>
                 binding.recyclerViewPagerProfile.apply {
                     layoutManager = LinearLayoutManager(this.context)

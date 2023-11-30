@@ -4,13 +4,14 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.honkaihelper.data.local.models.hero.HeroWithNameAvatarRarity
 import com.example.honkaihelper.databinding.ItemHeroCreateTeamBinding
 import com.example.honkaihelper.heroes.data.model.Hero
 import com.example.honkaihelper.utils.load
 
 class CreateTeamAdapter : RecyclerView.Adapter<CreateTeamAdapter.CreateTeamViewHolder>() {
 
-    var mHeroListInTeam = emptyList<Hero>()
+    var mHeroListInTeam = emptyList<HeroWithNameAvatarRarity>()
         @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
@@ -32,8 +33,8 @@ class CreateTeamAdapter : RecyclerView.Adapter<CreateTeamAdapter.CreateTeamViewH
 
     class CreateTeamViewHolder(private val binding: ItemHeroCreateTeamBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(hero: Hero) {
-            binding.heroAvatarInCreateTeam.load(hero.avatar)
+        fun bind(hero: HeroWithNameAvatarRarity) {
+            binding.heroAvatarInCreateTeam.load(hero.localAvatarPath)
         }
     }
 }
