@@ -3,6 +3,10 @@ package com.example.honkaihelper.profile
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -12,7 +16,9 @@ import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentProfileBinding
 import com.example.honkaihelper.base.BaseFragment
+import com.example.honkaihelper.create_build_hero.CreateBuildHeroFragment
 import com.example.honkaihelper.profile.adapter.ViewPagerTeamsAndBuildsAdapter
+import com.example.honkaihelper.profile.adapter.ViewPagerTeamsAndBuildsListener
 import com.example.honkaihelper.profile.data.model.User
 import com.example.honkaihelper.profile.data.model.UserResponse
 import com.example.honkaihelper.utils.TOKEN
@@ -45,8 +51,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         (requireActivity().application as App).appComponent.profileComponent().create().inject(this)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val token = getSharedPrefUser().getString(TOKEN, "")
         if (!token.isNullOrEmpty()) viewModel.getProfile()
     }
@@ -113,7 +119,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     }
 
     private fun setupViewPager() {
-        mAdapter = ViewPagerTeamsAndBuildsAdapter()
+        mAdapter = ViewPagerTeamsAndBuildsAdapter(object : ViewPagerTeamsAndBuildsListener {
+            override fun onClickBuild(idBuild: Int) {
+                findNavController().navigate(R.id.createBuildHeroFragment, CreateBuildHeroFragment.newInstance(idBuild = idBuild))
+            }
+        })
         binding.viewPagerProfileTeamsAndBuilds.adapter = mAdapter
     }
 

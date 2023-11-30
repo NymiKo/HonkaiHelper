@@ -2,6 +2,8 @@ package com.example.honkaihelper.profile.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +13,9 @@ import com.example.honkaihelper.databinding.ViewPagerProfileTeamsAndBuildsBindin
 import com.example.honkaihelper.teams.data.model.TeamHero
 
 
-class ViewPagerTeamsAndBuildsAdapter : BaseAdapter<ViewPagerProfileTeamsAndBuildsBinding, List<Any>>() {
+class ViewPagerTeamsAndBuildsAdapter(
+    private val actionListener: ViewPagerTeamsAndBuildsListener
+) : BaseAdapter<ViewPagerProfileTeamsAndBuildsBinding, List<Any>>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ViewPagerProfileTeamsAndBuildsBinding.inflate(layoutInflater, parent, false)
@@ -23,9 +27,12 @@ class ViewPagerTeamsAndBuildsAdapter : BaseAdapter<ViewPagerProfileTeamsAndBuild
         BaseViewHolder(binding) {
         override fun bind(model: List<Any>) {
             if (adapterPosition == 0) {
-                val mAdapter = BuildsAdapter()
+                val mAdapter = BuildsAdapter(object : BuildsAdapterListener{
+                    override fun onClickBuild(idBuild: Int) {
+                        actionListener.onClickBuild(idBuild)
+                    }
+                })
                 mAdapter.list = model as List<BuildHeroWithUser>
-                Log.e("BUILDS", mAdapter.list.toString())
                 binding.recyclerViewPagerProfile.apply {
                     layoutManager = LinearLayoutManager(this.context)
                     adapter = mAdapter
