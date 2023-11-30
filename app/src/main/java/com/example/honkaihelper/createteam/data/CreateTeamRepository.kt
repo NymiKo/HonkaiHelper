@@ -7,6 +7,6 @@ import com.example.honkaihelper.heroes.data.model.Hero
 
 interface CreateTeamRepository {
     suspend fun getHeroesList(): List<ActiveHeroInTeam>
-    suspend fun saveTeam(heroesList: List<HeroWithNameAvatarRarity>): NetworkResult<Unit>
+    suspend fun saveTeam(idTeam: Int, heroesList: List<HeroWithNameAvatarRarity>): NetworkResult<Unit>
     suspend fun getTeam(idTeam: Int): NetworkResult<List<HeroWithNameAvatarRarity>>
 }

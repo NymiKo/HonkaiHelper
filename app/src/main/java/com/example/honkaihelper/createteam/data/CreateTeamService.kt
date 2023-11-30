@@ -14,4 +14,7 @@ interface CreateTeamService {
 
     @GET("/getTeam.php")
     suspend fun getTeam(@Query("idTeam") idTeam: Int): Response<TeamHeroResponse>
+
+    @GET("/updateTeam.php")
+    suspend fun updateTeam(@Query("idTeam") idTeam: Int, @Query("heroesList[]") heroesList: List<Int>): Response<Unit>
 }

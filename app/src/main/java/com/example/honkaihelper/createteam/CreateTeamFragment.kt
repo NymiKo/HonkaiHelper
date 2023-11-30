@@ -133,7 +133,7 @@ class CreateTeamFragment :
             .setTitle(R.string.adding_a_command)
             .setMessage(R.string.add_the_created_command)
             .setPositiveButton(R.string.yes) { _, _ ->
-                viewModel.saveTeam()
+                viewModel.saveTeam(idTeam)
             }
             .setNegativeButton(R.string.cancellation) { dialog, _ ->
                 dialog.cancel()

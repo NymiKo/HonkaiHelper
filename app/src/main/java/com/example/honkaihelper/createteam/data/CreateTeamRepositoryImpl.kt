@@ -21,11 +21,17 @@ class CreateTeamRepositoryImpl @Inject constructor(
         return@withContext heroDao.getHeroWithNameAvatarRarityList().sortedBy { it.name }.map { ActiveHeroInTeam(it, false) }
     }
 
-    override suspend fun saveTeam(heroesList: List<HeroWithNameAvatarRarity>): NetworkResult<Unit> {
+    override suspend fun saveTeam(idTeam: Int, heroesList: List<HeroWithNameAvatarRarity>): NetworkResult<Unit> {
         return withContext(ioDispatcher) {
-            handleApi {
-                createTeamService.saveTeam(heroesList.sortedBy { hero -> hero.id }
-                    .map { hero -> hero.id })
+            if (idTeam != -1) {
+                handleApi { createTeamService.updateTeam(idTeam,
+                    heroesList.sortedBy { hero -> hero.id }.map { hero -> hero.id })
+                }
+            } else {
+                handleApi {
+                    createTeamService.saveTeam(heroesList.sortedBy { hero -> hero.id }
+                        .map { hero -> hero.id })
+                }
             }
         }
     }
