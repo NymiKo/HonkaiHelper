@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.honkaihelper.R
 import com.example.honkaihelper.data.NetworkResult
+import com.example.honkaihelper.login.LoginUiState
 import com.example.honkaihelper.profile.data.ProfileRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -23,7 +24,7 @@ class ProfileViewModel @Inject constructor(
         _uiState.value = ProfileUiState.LOADING
         val result = repository.getProfile()
         when(result) {
-            is NetworkResult.Error -> _uiState.value = ProfileUiState.ERROR(R.string.unknown_error)
+            is NetworkResult.Error -> errorHandler(result.code)
             is NetworkResult.Success -> _uiState.value = ProfileUiState.SUCCESS(result.data)
         }
     }
@@ -34,5 +35,12 @@ class ProfileViewModel @Inject constructor(
 
     fun loadAvatar(file: File) = viewModelScope.launch {
         repository.loadAvatar(file)
+    }
+
+    private fun errorHandler(errorCode: Int) {
+        when(errorCode) {
+            105 -> _uiState.value = ProfileUiState.ERROR(R.string.check_your_internet_connection)
+            else -> _uiState.value = ProfileUiState.ERROR(R.string.unknown_error)
+        }
     }
 }

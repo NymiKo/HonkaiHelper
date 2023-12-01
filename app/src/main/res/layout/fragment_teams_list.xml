@@ -23,12 +23,6 @@
             app:titleTextAppearance="@style/toolbar"
             app:titleTextColor="?attr/colorSecondary" />
 
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/group_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:constraint_referenced_ids="recycler_view_teams_hero, button_create_team" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_teams_hero"
             android:layout_width="match_parent"

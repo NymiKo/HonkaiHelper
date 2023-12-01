@@ -71,7 +71,8 @@ class BuildsHeroListFragment :
                 is BuildsHeroListUIState.LOADING -> {
                     binding.shimmerLayoutBuildsHeroList.startShimmer()
                     binding.shimmerLayoutBuildsHeroList.visible()
-                    binding.groupBuildsHeroList.gone()
+                    binding.recyclerBuildsHeroList.gone()
+                    binding.buttonCreate.gone()
                     binding.viewStubError.gone()
                     binding.viewStubBuildsHeroEmptyList.gone()
                 }
@@ -79,9 +80,10 @@ class BuildsHeroListFragment :
                 is BuildsHeroListUIState.SUCCESS -> {
                     binding.shimmerLayoutBuildsHeroList.stopShimmer()
                     binding.shimmerLayoutBuildsHeroList.gone()
-                    binding.groupBuildsHeroList.visible()
+                    binding.recyclerBuildsHeroList.visible()
                     binding.swipeRefreshContainerBuildHero.isRefreshing = false
                     if (getSharedPrefUser().getString(TOKEN, "").isNullOrEmpty()) binding.buttonCreate.gone()
+                    else binding.buttonCreate.visible()
                     mAdapter.buildsHeroList = state.buildsHeroList
                 }
             }

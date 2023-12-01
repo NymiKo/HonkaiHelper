@@ -2,8 +2,6 @@ package com.example.honkaihelper.teams
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -18,10 +16,8 @@ import com.example.honkaihelper.databinding.ViewstubErrorLayoutBinding
 import com.example.honkaihelper.teams.adapter.HeroTeamsListAdapter
 import com.example.honkaihelper.teams.data.model.TeamHero
 import com.example.honkaihelper.utils.TOKEN
-import com.example.honkaihelper.utils.getSharedPrefToken
 import com.example.honkaihelper.utils.getSharedPrefUser
 import com.example.honkaihelper.utils.gone
-import com.example.honkaihelper.utils.toast
 import com.example.honkaihelper.utils.visible
 
 class TeamsListFragment :
@@ -48,7 +44,7 @@ class TeamsListFragment :
     override fun setupView() {
         setupToolbar()
         setupRecyclerView()
-        openCreateTeamFragment()
+        setupCreateTeamButton()
         setupRetryButtonClickListener()
         refreshData()
     }
@@ -86,14 +82,17 @@ class TeamsListFragment :
         binding.viewStubError.visible()
         binding.shimmerLayoutTeamsList.stopShimmer()
         binding.shimmerLayoutTeamsList.gone()
-        binding.groupList.gone()
+        binding.recyclerViewTeamsHero.gone()
+        binding.buttonCreateTeam.gone()
     }
 
     private fun showTeamsList(teamsList: List<TeamHero>) {
         mAdapter.mTeamsHeroList = teamsList
-        binding.groupList.visible()
+        binding.recyclerViewTeamsHero.visible()
         binding.shimmerLayoutTeamsList.stopShimmer()
         binding.shimmerLayoutTeamsList.gone()
+        if (getSharedPrefUser().getString(TOKEN, "").isNullOrEmpty()) binding.buttonCreateTeam.gone()
+        else binding.buttonCreateTeam.visible()
         binding.swipeRefreshContainerTeamsHero.isRefreshing = false
     }
 
@@ -113,13 +112,9 @@ class TeamsListFragment :
         }
     }
 
-    private fun openCreateTeamFragment() {
+    private fun setupCreateTeamButton() {
         binding.buttonCreateTeam.setOnClickListener {
-            if (getSharedPrefUser().getString(TOKEN, "").isNullOrEmpty()) {
-                toast(requireActivity(), R.string.you_need_login)
-            } else {
-                findNavController().navigate(R.id.createTeamFragment, CreateTeamFragment.newInstance())
-            }
+            findNavController().navigate(R.id.createTeamFragment, CreateTeamFragment.newInstance())
         }
     }
 
