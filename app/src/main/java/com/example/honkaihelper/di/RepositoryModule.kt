@@ -6,6 +6,8 @@ import com.example.honkaihelper.base_build_hero.data.BaseBuildHeroRepository
 import com.example.honkaihelper.base_build_hero.data.BaseBuildHeroRepositoryImpl
 import com.example.honkaihelper.builds_hero_from_users.data.BuildsHeroListRepository
 import com.example.honkaihelper.builds_hero_from_users.data.BuildsHeroListRepositoryImpl
+import com.example.honkaihelper.change_nickname.data.ChangeNicknameRepository
+import com.example.honkaihelper.change_nickname.data.ChangeNicknameRepositoryImpl
 import com.example.honkaihelper.create_build_hero.data.CreateBuildHeroRepository
 import com.example.honkaihelper.create_build_hero.data.CreateBuildHeroRepositoryImpl
 import com.example.honkaihelper.info_about_hero.data.InfoAboutHeroRepository
@@ -107,4 +109,8 @@ interface RepositoryModule {
     @Singleton
     @Binds
     fun bindViewingUsersBuildRepository(repository: ViewingUsersBuildRepositoryImpl): ViewingUsersBuildRepository
+
+    @Singleton
+    @Binds
+    fun bindChangeNicknameRepository(repository: ChangeNicknameRepositoryImpl): ChangeNicknameRepository
 }

@@ -9,6 +9,8 @@ import com.example.honkaihelper.builds_hero_from_users.data.BuildsHeroListReposi
 import com.example.honkaihelper.info_about_hero.data.InfoAboutHeroRepository
 import com.example.honkaihelper.info_about_hero.di.InfoAboutHeroComponent
 import com.example.honkaihelper.builds_hero_from_users.di.BuildsHeroListComponent
+import com.example.honkaihelper.change_nickname.data.ChangeNicknameRepository
+import com.example.honkaihelper.change_nickname.di.ChangeNicknameComponent
 import com.example.honkaihelper.create_build_hero.di.CreateBuildHeroComponent
 import com.example.honkaihelper.createteam.data.CreateTeamRepository
 import com.example.honkaihelper.createteam.di.CreateTeamComponent
@@ -73,6 +75,7 @@ interface AppComponent {
     fun relicInfoComponent(): RelicInfoComponent.Factory
     fun decorationInfoComponent(): DecorationInfoComponent.Factory
     fun viewingUsersBuildComponent(): ViewingUsersBuildComponent.Factory
+    fun changeNicknameComponent(): ChangeNicknameComponent.Factory
 
     val heroesListRepository: HeroesListRepository
     val teamsListRepository: TeamsListRepository
@@ -89,4 +92,5 @@ interface AppComponent {
     val decorationInfoRepository: DecorationInfoRepository
     val buildsHeroListRepository: BuildsHeroListRepository
     val viewingUsersBuildRepository: ViewingUsersBuildRepository
+    val changeNicknameRepository: ChangeNicknameRepository
 }
