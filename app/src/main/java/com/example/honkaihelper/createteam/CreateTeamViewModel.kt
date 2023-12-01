@@ -97,4 +97,13 @@ class CreateTeamViewModel @Inject constructor(
             }
         }
     }
+
+    fun deleteTeam(idTeam: Int) = viewModelScope.launch {
+        when(val result = repository.deleteTeam(idTeam)) {
+            is NetworkResult.Error -> errorHandler(result.code)
+            is NetworkResult.Success -> {
+                _state.value = CreateTeamUIState.SUCCESS_TEAM_DELETION
+            }
+        }
+    }
 }
