@@ -52,4 +52,8 @@ class CreateBuildHeroRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun deleteBuild(idBuild: Int): NetworkResult<Boolean> = withContext(ioDispatcher) {
+        return@withContext handleApi { createBuildHeroService.deleteBuild(idBuild) }
+    }
 }

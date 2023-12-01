@@ -10,4 +10,5 @@ interface CreateBuildHeroRepository {
     suspend fun getHero(idHero: Int): Hero
     suspend fun saveBuild(buildHeroFromUser: BuildHeroFromUser): NetworkResult<Boolean>
     suspend fun getBuild(idBuild: Int): NetworkResult<FullBuildHeroFromUser>
+    suspend fun deleteBuild(idBuild: Int): NetworkResult<Boolean>
 }

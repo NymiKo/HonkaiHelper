@@ -16,4 +16,7 @@ interface CreateBuildHeroService {
 
     @POST("/updateBuildHero.php")
     suspend fun updateBuild(@Body build: BuildHeroFromUser): Response<Boolean>
+
+    @GET("/deleteBuildHero.php")
+    suspend fun deleteBuild(@Query("idBuild") idBuild: Int): Response<Boolean>
 }
