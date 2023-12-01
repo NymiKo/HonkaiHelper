@@ -5,6 +5,7 @@
     <string name="add_the_created_command">Поделиться созданной командой?</string>
     <string name="update_the_command">Сохранить изменения в команде?</string>
     <string name="delete_the_command">Вы действительно хотите удалить команду?</string>
+    <string name="delete_the_build">Вы действительно хотите удалить сборку?</string>
     <string name="add">Добавить</string>
     <string name="cancellation">Отмена</string>
     <string name="list_of_heroes">Список героев</string>
@@ -75,11 +76,13 @@
     <string name="already_shared_the_build">Вы уже делились сборкой этого героя</string>
     <string name="error_save_in_server">Ошибка сохранения на сервере, пожалуйста, попробуйте позже</string>
     <string name="success_create_build">Вы успешно поделились сборкой</string>
+    <string name="success_delete_build">Сборка удалена</string>
     <string name="adding_your_build">Добавление своей сборки</string>
     <string name="hero_build_from">%1$s от %2$s</string>
     <string name="edit_profile">Редактировать профиль</string>
     <string name="my_builds">Мои сборки</string>
     <string name="edit_build">Редактирование сборки</string>
+    <string name="delete_build">Удаление сборки</string>
     <string name="edit_team">Редактирование команды</string>
     <string name="delete">Удалить</string>
     <string name="deletion_team">Команда удалена</string>

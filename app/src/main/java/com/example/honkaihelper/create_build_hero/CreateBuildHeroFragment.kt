@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResultListener
@@ -109,15 +110,23 @@ class CreateBuildHeroFragment :
                 }
 
                 is CreateBuildHeroUiState.SUCCESS -> {
-                    Toast.makeText(
-                        requireActivity(),
-                        R.string.success_create_build,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    findNavController().popBackStack()
+                    successResultBuild(R.string.success_create_build)
+                }
+
+                is CreateBuildHeroUiState.SUCCESS_DELETION_BUILD -> {
+                    successResultBuild(R.string.success_delete_build)
                 }
             }
         }
+    }
+
+    private fun successResultBuild(message: Int) {
+        Toast.makeText(
+            requireActivity(),
+            message,
+            Toast.LENGTH_SHORT
+        ).show()
+        findNavController().popBackStack()
     }
 
     private fun getHero() {
@@ -230,11 +239,38 @@ class CreateBuildHeroFragment :
         }
     }
 
+    private fun setupDeleteDialog(title: Int, message: Int) {
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(R.string.yes) { _, _ ->
+                viewModel.deleteBuild(idBuild)
+            }
+            .setNegativeButton(R.string.cancellation) { dialog, _ ->
+                dialog.cancel()
+            }
+            .create()
+        dialog.show()
+    }
+
     private fun setupToolbar() {
         binding.toolbarCreateBuildHero.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
-        if (idBuild != -1) binding.toolbarCreateBuildHero.title = getString(R.string.edit_build)
+        if (idBuild != -1) {
+            binding.toolbarCreateBuildHero.apply {
+                title = getString(R.string.edit_build)
+                inflateMenu(R.menu.create_build_and_team_menu)
+                setOnMenuItemClickListener {
+                    when(it.itemId) {
+                        R.id.delete -> {
+                            setupDeleteDialog(R.string.delete_build, R.string.delete_the_build)
+                        }
+                    }
+                    true
+                }
+            }
+        }
     }
 
     companion object {
