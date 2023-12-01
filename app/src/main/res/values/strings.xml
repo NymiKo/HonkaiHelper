@@ -79,13 +79,14 @@
     <string name="success_delete_build">Сборка удалена</string>
     <string name="adding_your_build">Добавление своей сборки</string>
     <string name="hero_build_from">%1$s от %2$s</string>
-    <string name="edit_profile">Редактировать профиль</string>
+    <string name="edit_nickname">Изменить никнейм</string>
     <string name="my_builds">Мои сборки</string>
     <string name="edit_build">Редактирование сборки</string>
     <string name="delete_build">Удаление сборки</string>
     <string name="edit_team">Редактирование команды</string>
     <string name="delete">Удалить</string>
     <string name="deletion_team">Команда удалена</string>
+    <string name="empty">Здесь пусто. Вы ничем не делились!</string>
 
 
     <string name="base_build_weapon_transition_name" translatable="false">base_build_weapon_transition_name_%d</string>

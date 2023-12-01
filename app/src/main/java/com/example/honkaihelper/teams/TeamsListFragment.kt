@@ -75,6 +75,8 @@ class TeamsListFragment :
         binding.shimmerLayoutTeamsList.stopShimmer()
         binding.shimmerLayoutTeamsList.gone()
         binding.viewStubTeamsHeroEmptyList.visible()
+        if (getSharedPrefUser().getString(TOKEN, "").isNullOrEmpty()) binding.buttonCreateTeam.gone()
+        else binding.buttonCreateTeam.visible()
         binding.swipeRefreshContainerTeamsHero.isRefreshing = false
     }
 

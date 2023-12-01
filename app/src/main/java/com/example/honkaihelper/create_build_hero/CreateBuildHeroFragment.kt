@@ -239,6 +239,20 @@ class CreateBuildHeroFragment :
         }
     }
 
+    private fun setupSaveDialog(title: Int, message: Int) {
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(R.string.yes) { _, _ ->
+                viewModel.saveBuild(idBuild)
+            }
+            .setNegativeButton(R.string.cancellation) { dialog, _ ->
+                dialog.cancel()
+            }
+            .create()
+        dialog.show()
+    }
+
     private fun setupDeleteDialog(title: Int, message: Int) {
         val dialog = AlertDialog.Builder(requireContext())
             .setTitle(title)

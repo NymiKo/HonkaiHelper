@@ -58,6 +58,8 @@ class BuildsHeroListFragment :
                     binding.shimmerLayoutBuildsHeroList.stopShimmer()
                     binding.shimmerLayoutBuildsHeroList.gone()
                     binding.viewStubBuildsHeroEmptyList.visible()
+                    if (getSharedPrefUser().getString(TOKEN, "").isNullOrEmpty()) binding.buttonCreate.gone()
+                    else binding.buttonCreate.visible()
                     binding.swipeRefreshContainerBuildHero.isRefreshing = false
                 }
 
