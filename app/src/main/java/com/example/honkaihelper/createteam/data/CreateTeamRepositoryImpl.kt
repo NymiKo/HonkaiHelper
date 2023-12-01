@@ -53,4 +53,8 @@ class CreateTeamRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun deleteTeam(idTeam: Int): NetworkResult<Boolean> = withContext(ioDispatcher) {
+        return@withContext handleApi { createTeamService.deleteTeam(idTeam) }
+    }
 }

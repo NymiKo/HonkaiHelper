@@ -1,6 +1,7 @@
 package com.example.honkaihelper.data
 
 import retrofit2.Response
+import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 suspend fun <T> handleApi(apiCall: suspend () -> Response<T>): NetworkResult<T> {
@@ -14,5 +15,7 @@ suspend fun <T> handleApi(apiCall: suspend () -> Response<T>): NetworkResult<T> 
         }
     } catch (e: UnknownHostException) {
         NetworkResult.Error(105)
+    } catch (e: SocketTimeoutException) {
+        NetworkResult.Error(106)
     }
 }
