@@ -2,7 +2,6 @@ package com.example.honkaihelper.createteam
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
@@ -16,7 +15,6 @@ import com.example.honkaihelper.createteam.adapter.HeroListInCreateTeamListener
 import com.example.honkaihelper.databinding.FragmentCreateTeamBinding
 import com.example.honkaihelper.base.BaseFragment
 import com.example.honkaihelper.createteam.data.model.ActiveHeroInTeam
-import com.example.honkaihelper.setupteam.SetupTeamFragment
 import com.example.honkaihelper.utils.gone
 import com.example.honkaihelper.utils.toast
 import com.example.honkaihelper.utils.visible
@@ -51,6 +49,7 @@ class CreateTeamFragment :
         setupRecyclerViewForViewTeam()
         setupRecyclerViewHeroList()
         selectHero()
+        setupToolbar()
     }
 
     override fun uiStateHandle() {
@@ -60,7 +59,7 @@ class CreateTeamFragment :
                     showErrorTeamCreation(it.message)
                 }
                 is CreateTeamUIState.SUCCESS_TEAM_CREATION -> {
-                    successCreatingTeam()
+                    successResultTeam(R.string.team_has_been_added)
                 }
                 is CreateTeamUIState.LOADING_TEAM_CREATION -> {
                     showCommandCreationLoading()
@@ -69,6 +68,10 @@ class CreateTeamFragment :
                     viewModel.heroList.observe(viewLifecycleOwner) { heroesList ->
                         mAdapterHeroList.mHeroList = heroesList
                     }
+                }
+
+                CreateTeamUIState.SUCCESS_TEAM_DELETION -> {
+                    successResultTeam(R.string.deletion_team)
                 }
             }
         }
@@ -79,8 +82,8 @@ class CreateTeamFragment :
         binding.groupCreateTeam.gone()
     }
 
-    private fun successCreatingTeam() {
-        toast(requireActivity(), R.string.team_has_been_added)
+    private fun successResultTeam(message: Int) {
+        toast(requireActivity(), message)
         findNavController().popBackStack()
     }
 
@@ -128,12 +131,26 @@ class CreateTeamFragment :
         }
     }
 
-    private fun setupSaveDialog() {
+    private fun setupSaveDialog(title: Int, message: Int) {
         val dialog = AlertDialog.Builder(requireContext())
-            .setTitle(R.string.adding_a_command)
-            .setMessage(R.string.add_the_created_command)
+            .setTitle(title)
+            .setMessage(message)
             .setPositiveButton(R.string.yes) { _, _ ->
                 viewModel.saveTeam(idTeam)
+            }
+            .setNegativeButton(R.string.cancellation) { dialog, _ ->
+                dialog.cancel()
+            }
+            .create()
+        dialog.show()
+    }
+
+    private fun setupDeleteDialog(title: Int, message: Int) {
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(R.string.yes) { _, _ ->
+                viewModel.deleteTeam(idTeam)
             }
             .setNegativeButton(R.string.cancellation) { dialog, _ ->
                 dialog.cancel()
@@ -146,9 +163,23 @@ class CreateTeamFragment :
         binding.buttonGoSetupTeam.size = FloatingActionButton.SIZE_MINI
         binding.buttonGoSetupTeam.setOnClickListener {
             if (mAdapterForViewTeam.mHeroListInTeam.size == 4) {
-                setupSaveDialog()
+                if (idTeam == -1) setupSaveDialog(R.string.adding_a_command, R.string.add_the_created_command)
+                else setupSaveDialog(R.string.update_a_command, R.string.update_the_command)
             } else {
                 toast(requireActivity(), R.string.should_be_4_heroes_in_the_team)
+            }
+        }
+    }
+
+    private fun setupToolbar() {
+        if (idTeam != -1) {
+            binding.materialToolbar.title = getString(R.string.edit_team)
+            binding.materialToolbar.inflateMenu(R.menu.create_build_and_team_menu)
+            binding.materialToolbar.setOnMenuItemClickListener {
+                when(it.itemId) {
+                    R.id.delete -> setupDeleteDialog(R.string.delete_a_command, R.string.delete_the_command)
+                }
+                true
             }
         }
     }

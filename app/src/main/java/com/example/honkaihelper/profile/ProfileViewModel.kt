@@ -40,6 +40,7 @@ class ProfileViewModel @Inject constructor(
     private fun errorHandler(errorCode: Int) {
         when(errorCode) {
             105 -> _uiState.value = ProfileUiState.ERROR(R.string.check_your_internet_connection)
+            106 -> _uiState.value = ProfileUiState.ERROR(R.string.error)
             else -> _uiState.value = ProfileUiState.ERROR(R.string.unknown_error)
         }
     }
