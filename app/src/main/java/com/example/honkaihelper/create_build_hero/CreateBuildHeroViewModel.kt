@@ -133,4 +133,16 @@ class CreateBuildHeroViewModel @Inject constructor(
             }
         }
     }
+
+    fun deleteBuild(idBuild: Int) = viewModelScope.launch {
+        when (val result = repository.deleteBuild(idBuild)) {
+            is NetworkResult.Error -> {
+                errorHandler(result.code)
+            }
+
+            is NetworkResult.Success -> {
+                _state.value = CreateBuildHeroUiState.SUCCESS_DELETION_BUILD
+            }
+        }
+    }
 }

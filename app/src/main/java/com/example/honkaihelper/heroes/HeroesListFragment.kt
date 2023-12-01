@@ -81,7 +81,7 @@ class HeroesListFragment :
                     showHeroesList(it.heroesList)
                     val token = getSharedPrefToken()
                     if (!token.isNullOrEmpty()) {
-                        //viewModel.getAvatar()
+                        viewModel.getAvatar()
                         binding.buttonProfile.imageTintList = null
                         loadAvatar()
                     }
