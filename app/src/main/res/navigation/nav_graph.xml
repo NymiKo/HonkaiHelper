@@ -56,7 +56,11 @@
         android:id="@+id/profileFragment"
         android:name="com.example.honkaihelper.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_changeNicknameFragment"
+            app:destination="@id/changeNicknameFragment" />
+    </fragment>
     <dialog
         android:id="@+id/equipmentFragment"
         android:name="com.example.honkaihelper.equipment.EquipmentFragment"
@@ -156,4 +160,9 @@
         android:name="com.example.honkaihelper.viewing_users_build.ViewingUsersBuildFragment"
         android:label="fragment_viewing_users_build"
         tools:layout="@layout/fragment_viewing_users_build" />
+    <fragment
+        android:id="@+id/changeNicknameFragment"
+        android:name="com.example.honkaihelper.change_nickname.ChangeNicknameFragment"
+        android:label="fragment_change_nickname"
+        tools:layout="@layout/fragment_change_nickname" />
 </navigation>

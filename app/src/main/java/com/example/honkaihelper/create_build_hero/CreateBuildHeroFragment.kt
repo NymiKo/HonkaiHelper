@@ -235,7 +235,10 @@ class CreateBuildHeroFragment :
     private fun setupSaveBuildButton() {
         binding.buttonSaveBuild.apply {
             size = FloatingActionButton.SIZE_MINI
-            setOnClickListener { viewModel.saveBuild(idBuild) }
+            setOnClickListener {
+                if (idBuild == -1) setupSaveDialog(R.string.adding_your_build, R.string.add_the_created_build)
+                else setupSaveDialog(R.string.update_your_build, R.string.update_the_build)
+            }
         }
     }
 

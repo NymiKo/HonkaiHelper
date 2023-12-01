@@ -3,6 +3,8 @@
     <string name="team_for_hero">Команды для героя: %1$s</string>
     <string name="creating_a_team">Создание команды</string>
     <string name="add_the_created_command">Поделиться созданной командой?</string>
+    <string name="add_the_created_build">Поделиться своей сборкой?</string>
+    <string name="update_the_build">Обновить свою сборку?</string>
     <string name="update_the_command">Сохранить изменения в команде?</string>
     <string name="delete_the_command">Вы действительно хотите удалить команду?</string>
     <string name="delete_the_build">Вы действительно хотите удалить сборку?</string>
@@ -13,7 +15,13 @@
     <string name="retry">Повторить</string>
     <string name="search">Поиск</string>
     <string name="authorization">Авторизация</string>
-    <string name="login">Логин</string>
+    <string name="nickname">Никнейм</string>
+    <string name="new_nickname">Новый никнейм</string>
+    <string name="nickname_change">Изменение никнейма</string>
+    <string name="nickname_changed">Никнейм изменен</string>
+    <string name="nickname_already_in_use">Этот никнейм уже используется</string>
+    <string name="empty_new_nickname">Введите новый никнейм</string>
+    <string name="already_have_nickname">У вас уже такой никнейм</string>
     <string name="password">Пароль</string>
     <string name="log_in">Авторизоваться</string>
     <string name="heroes">Герои</string>
@@ -77,7 +85,8 @@
     <string name="error_save_in_server">Ошибка сохранения на сервере, пожалуйста, попробуйте позже</string>
     <string name="success_create_build">Вы успешно поделились сборкой</string>
     <string name="success_delete_build">Сборка удалена</string>
-    <string name="adding_your_build">Добавление своей сборки</string>
+    <string name="adding_your_build">Добавление сборки</string>
+    <string name="update_your_build">Обновление сборки</string>
     <string name="hero_build_from">%1$s от %2$s</string>
     <string name="edit_nickname">Изменить никнейм</string>
     <string name="my_builds">Мои сборки</string>

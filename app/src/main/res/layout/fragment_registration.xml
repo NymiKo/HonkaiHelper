@@ -36,7 +36,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edit_layout_login"
                 style="@style/EditTextLayoutLogin"
-                android:hint="@string/login"
+                android:hint="@string/nickname"
                 app:boxCornerRadiusBottomEnd="@dimen/DP30"
                 app:boxCornerRadiusBottomStart="@dimen/DP30"
                 app:boxCornerRadiusTopEnd="@dimen/DP30"

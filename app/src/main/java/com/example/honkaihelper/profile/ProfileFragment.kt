@@ -3,10 +3,7 @@ package com.example.honkaihelper.profile
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -16,13 +13,12 @@ import com.example.honkaihelper.App
 import com.example.honkaihelper.R
 import com.example.honkaihelper.databinding.FragmentProfileBinding
 import com.example.honkaihelper.base.BaseFragment
+import com.example.honkaihelper.change_nickname.ChangeNicknameFragment
 import com.example.honkaihelper.create_build_hero.CreateBuildHeroFragment
 import com.example.honkaihelper.createteam.CreateTeamFragment
 import com.example.honkaihelper.profile.adapter.ViewPagerTeamsAndBuildsAdapter
 import com.example.honkaihelper.profile.adapter.ViewPagerTeamsAndBuildsListener
 import com.example.honkaihelper.profile.data.model.User
-import com.example.honkaihelper.profile.data.model.UserResponse
-import com.example.honkaihelper.teams.TeamsListFragment
 import com.example.honkaihelper.utils.TOKEN
 import com.example.honkaihelper.utils.getFileName
 import com.example.honkaihelper.utils.getSharedPrefUser
@@ -169,6 +165,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     private fun menuItemClickHandler() {
         binding.toolbarProfile.setOnMenuItemClickListener {
             when (it.itemId) {
+                R.id.change_nickname -> {
+                    findNavController().navigate(R.id.changeNicknameFragment, ChangeNicknameFragment.newInject(binding.textUserLogin.text.toString()))
+                }
                 R.id.exit_of_account -> {
                     showDialogExitOfAccount()
                 }
