@@ -31,7 +31,7 @@ class TeamsListViewModel @Inject constructor(
             is NetworkResult.Error -> _uiState.value = TeamsUiState.ERROR
             is NetworkResult.Success -> {
                 if (result.data.isEmpty()) _uiState.value = TeamsUiState.EMPTY
-                else _uiState.value = TeamsUiState.SUCCESS(result.data.sortedBy { it.idTeam })
+                else _uiState.value = TeamsUiState.SUCCESS(result.data)
             }
         }
     }
