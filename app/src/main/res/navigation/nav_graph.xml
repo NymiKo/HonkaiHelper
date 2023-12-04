@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_heroesListFragment_to_infoAboutHeroFragment"
             app:destination="@id/infoAboutHeroFragment"/>
+        <action
+            android:id="@+id/action_heroesListFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -165,4 +168,9 @@
         android:name="com.example.honkaihelper.change_nickname.ChangeNicknameFragment"
         android:label="fragment_change_nickname"
         tools:layout="@layout/fragment_change_nickname" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.honkaihelper.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

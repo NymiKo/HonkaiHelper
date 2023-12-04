@@ -153,6 +153,13 @@ class HeroesListFragment :
                 return false
             }
         })
+
+        binding.heroesListToolbar.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.settings -> findNavController().navigate(R.id.settingsFragment)
+            }
+            true
+        }
     }
 
     private fun setupRecyclerView() {
