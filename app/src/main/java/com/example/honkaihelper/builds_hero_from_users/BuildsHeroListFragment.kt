@@ -2,6 +2,9 @@ package com.example.honkaihelper.builds_hero_from_users
 
 import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -38,8 +41,12 @@ class BuildsHeroListFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getBuildsHeroList(idHero)
         viewModel.getHero(idHero)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.getBuildsHeroList(idHero)
     }
 
     override fun setupView() {
