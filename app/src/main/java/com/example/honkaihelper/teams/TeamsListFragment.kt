@@ -102,6 +102,7 @@ class TeamsListFragment :
         binding.shimmerLayoutTeamsList.startShimmer()
         binding.shimmerLayoutTeamsList.visible()
         binding.viewStubError.gone()
+        binding.viewStubTeamsHeroEmptyList.gone()
     }
 
     private fun setupRetryButtonClickListener() {
