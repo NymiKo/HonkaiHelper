@@ -29,7 +29,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/DP16"
-            app:layout_constraintBottom_toTopOf="@id/text_type_ability"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/image_ability"
             app:layout_constraintTop_toTopOf="parent" />
@@ -40,8 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/DP16"
-            android:layout_marginTop="@dimen/DP8"
-            app:layout_constraintBottom_toBottomOf="@+id/image_ability"
+            android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/image_ability"
             app:layout_constraintTop_toBottomOf="@+id/text_type_ability" />
