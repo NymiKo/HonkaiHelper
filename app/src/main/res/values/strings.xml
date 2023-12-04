@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Snidom</string>
+    <string name="app_name">Tanorami</string>
     <string name="team_for_hero">Команды для героя: %1$s</string>
     <string name="creating_a_team">Создание команды</string>
     <string name="add_the_created_command">Поделиться созданной командой?</string>
