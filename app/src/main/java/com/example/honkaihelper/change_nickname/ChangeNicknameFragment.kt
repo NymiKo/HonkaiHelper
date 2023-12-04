@@ -22,29 +22,34 @@ class ChangeNicknameFragment :
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as App).appComponent.changeNicknameComponent().create().inject(this)
+        (requireActivity().application as App).appComponent.changeNicknameComponent().create()
+            .inject(this)
     }
 
     override fun setupView() {
         setupChangeNicknameButton()
+        setupToolbar()
     }
 
     override fun uiStateHandle() {
         viewModel.uiState.observe(viewLifecycleOwner) {
-            when(it) {
+            when (it) {
                 is ChangeNicknameUiState.ERROR -> {
                     binding.progressChangeNickname.gone()
                     binding.buttonChangeNickname.visible()
                     binding.editLayoutLogin.visible()
                     Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
                 }
+
                 is ChangeNicknameUiState.LOADING -> {
                     binding.progressChangeNickname.visible()
                     binding.buttonChangeNickname.gone()
                     binding.editLayoutLogin.gone()
                 }
+
                 is ChangeNicknameUiState.SUCCESS -> {
-                    Toast.makeText(requireActivity(), R.string.nickname_changed, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireActivity(), R.string.nickname_changed, Toast.LENGTH_SHORT)
+                        .show()
                     findNavController().popBackStack()
                 }
             }
@@ -54,6 +59,12 @@ class ChangeNicknameFragment :
     private fun setupChangeNicknameButton() {
         binding.buttonChangeNickname.setOnClickListener {
             viewModel.changeNickname(oldNickname ?: "", binding.editTextLogin.text.toString())
+        }
+    }
+
+    private fun setupToolbar() {
+        binding.toolbarChangeNickname.setNavigationOnClickListener {
+            findNavController().popBackStack()
         }
     }
 

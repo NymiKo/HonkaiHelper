@@ -10,4 +10,11 @@
         app:iconTint="?attr/colorSecondary"
         app:showAsAction="ifRoom|collapseActionView" />
 
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings"
+        app:iconTint="?attr/colorSecondary"
+        app:showAsAction="always"/>
+
 </menu>
