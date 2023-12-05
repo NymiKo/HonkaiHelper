@@ -29,6 +29,8 @@ import com.example.honkaihelper.registration.data.RegistrationRepository
 import com.example.honkaihelper.registration.di.RegistrationComponent
 import com.example.honkaihelper.relic.data.RelicInfoRepository
 import com.example.honkaihelper.relic.di.RelicInfoComponent
+import com.example.honkaihelper.settings.data.SettingsRepository
+import com.example.honkaihelper.settings.di.SettingsComponent
 import com.example.honkaihelper.setupteam.di.SetupTeamComponent
 import com.example.honkaihelper.teams.data.TeamsListRepository
 import com.example.honkaihelper.teams.di.TeamsListComponent
@@ -76,6 +78,7 @@ interface AppComponent {
     fun decorationInfoComponent(): DecorationInfoComponent.Factory
     fun viewingUsersBuildComponent(): ViewingUsersBuildComponent.Factory
     fun changeNicknameComponent(): ChangeNicknameComponent.Factory
+    fun settingsComponent(): SettingsComponent.Factory
 
     val heroesListRepository: HeroesListRepository
     val teamsListRepository: TeamsListRepository
@@ -93,4 +96,5 @@ interface AppComponent {
     val buildsHeroListRepository: BuildsHeroListRepository
     val viewingUsersBuildRepository: ViewingUsersBuildRepository
     val changeNicknameRepository: ChangeNicknameRepository
+    val settingsRepository: SettingsRepository
 }
