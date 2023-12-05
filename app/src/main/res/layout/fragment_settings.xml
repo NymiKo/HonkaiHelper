@@ -20,6 +20,7 @@
         app:titleTextColor="?attr/colorSecondary" />
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/DP16"
@@ -39,7 +40,7 @@
                 android:background="@color/dark_gray"
                 android:padding="4dp"
                 android:src="@mipmap/ic_launcher_round"
-                app:layout_constraintBottom_toBottomOf="@id/text_version"
+                app:layout_constraintBottom_toBottomOf="@id/text_version_db"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/text_app_name"
                 app:shapeAppearanceOverlay="@style/roundedImageView" />
@@ -58,19 +59,85 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/text_version"
+                android:id="@+id/text_version_app"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/DP16"
-                android:text="@string/version"
+                android:layout_marginTop="@dimen/DP8"
+                android:text="@string/version_app"
                 android:textSize="16sp"
-                app:layout_constraintTop_toBottomOf="@id/text_app_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/image_app"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@id/text_app_name" />
+
+            <TextView
+                android:id="@+id/text_version_db"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/DP16"
+                android:text="@string/version_db"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/image_app"
+                app:layout_constraintTop_toBottomOf="@id/text_version_app" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_check_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/DP8"
+                android:backgroundTint="?attr/colorSecondary"
+                android:text="@string/check_update_db"
+                android:textColor="?attr/colorOnSecondary"
+                app:cornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_version_db" />
+
+            <ProgressBar
+                android:id="@+id/progress_check_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/button_check_update"
+                app:layout_constraintEnd_toEndOf="@+id/button_check_update"
+                app:layout_constraintStart_toStartOf="@+id/button_check_update"
+                app:layout_constraintTop_toTopOf="@+id/button_check_update" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_go_to_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/DP16"
+        android:backgroundTint="?attr/colorSecondary"
+        android:text="@string/report_an_error"
+        android:textColor="?attr/colorOnSecondary"
+        android:textSize="16sp"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_go_to_money"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/DP16"
+        android:layout_marginBottom="@dimen/DP8"
+        android:backgroundTint="?attr/colorSecondary"
+        android:text="@string/donat_for_coffee"
+        android:textColor="?attr/colorOnSecondary"
+        android:textSize="16sp"
+        app:cornerRadius="10dp"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_go_to_feedback" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

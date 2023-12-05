@@ -49,6 +49,7 @@ fun Fragment.getSharedPrefToken() =
     requireActivity().getSharedPreferences(USER, Context.MODE_PRIVATE).getString(TOKEN, "")
 
 fun Activity.getSharedPrefVersion() = getSharedPreferences(DB, Context.MODE_PRIVATE)
+fun Fragment.getSharedPrefVersion() = requireActivity().getSharedPreferences(DB, Context.MODE_PRIVATE)
 
 fun ContentResolver.getFileName(fileUri: Uri): String {
     var name = ""
