@@ -19,6 +19,7 @@
     <string name="authorization">Авторизация</string>
     <string name="nickname">Никнейм</string>
     <string name="new_nickname">Новый никнейм</string>
+    <string name="message">Сообщение</string>
     <string name="nickname_change">Изменение никнейма</string>
     <string name="nickname_changed">Никнейм изменен</string>
     <string name="nickname_already_in_use">Этот никнейм уже используется</string>
@@ -98,6 +99,7 @@
     <string name="delete">Удалить</string>
     <string name="deletion_team">Команда удалена</string>
     <string name="empty">Здесь пусто. Вы ничем не делились!</string>
+    <string name="feedback_has_been_sent">Сообщение было отправлено. Спасибо!</string>
 
 
     <string name="base_build_weapon_transition_name" translatable="false">base_build_weapon_transition_name_%d</string>

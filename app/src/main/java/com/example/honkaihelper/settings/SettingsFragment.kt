@@ -27,6 +27,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
     override fun setupView() {
         setupButtonCheckUpdate()
         setupTextVersionDb()
+        setupButtonGoToFeedback()
     }
 
     override fun uiStateHandle() {
@@ -61,6 +62,12 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
     private fun setupButtonCheckUpdate() {
         binding.buttonCheckUpdate.setOnClickListener {
             getSharedPrefVersion().getString(KEY_VERSION_DB, "")?.let { version -> viewModel.checkUpdate(version) }
+        }
+    }
+
+    private fun setupButtonGoToFeedback() {
+        binding.buttonGoToFeedback.setOnClickListener {
+            findNavController().navigate(R.id.sendFeedbackFragment)
         }
     }
 

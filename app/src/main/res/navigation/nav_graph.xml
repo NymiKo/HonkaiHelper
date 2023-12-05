@@ -176,5 +176,13 @@
         <action
             android:id="@+id/action_settingsFragment_to_loadDataFragment"
             app:destination="@id/loadDataFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_sendFeedbackFragment"
+            app:destination="@id/sendFeedbackFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/sendFeedbackFragment"
+        android:name="com.example.honkaihelper.send_feedback.SendFeedbackFragment"
+        android:label="fragment_send_feedback"
+        tools:layout="@layout/fragment_send_feedback" />
 </navigation>
