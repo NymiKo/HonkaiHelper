@@ -29,9 +29,10 @@ import com.example.honkaihelper.registration.data.RegistrationRepository
 import com.example.honkaihelper.registration.di.RegistrationComponent
 import com.example.honkaihelper.relic.data.RelicInfoRepository
 import com.example.honkaihelper.relic.di.RelicInfoComponent
+import com.example.honkaihelper.send_feedback.data.SendFeedbackRepository
+import com.example.honkaihelper.send_feedback.di.SendFeedbackComponent
 import com.example.honkaihelper.settings.data.SettingsRepository
 import com.example.honkaihelper.settings.di.SettingsComponent
-import com.example.honkaihelper.setupteam.di.SetupTeamComponent
 import com.example.honkaihelper.teams.data.TeamsListRepository
 import com.example.honkaihelper.teams.di.TeamsListComponent
 import com.example.honkaihelper.viewing_users_build.data.ViewingUsersBuildRepository
@@ -67,7 +68,6 @@ interface AppComponent {
     fun registrationComponent(): RegistrationComponent.Factory
     fun profileComponent(): ProfileComponent.Factory
     fun equipmentComponent(): EquipmentComponent.Factory
-    fun setupTeamComponent(): SetupTeamComponent.Factory
     fun buildsHeroListComponent(): BuildsHeroListComponent.Factory
     fun createBuildHeroComponent(): CreateBuildHeroComponent.Factory
     fun infoAboutHeroComponent(): InfoAboutHeroComponent.Factory
@@ -79,6 +79,7 @@ interface AppComponent {
     fun viewingUsersBuildComponent(): ViewingUsersBuildComponent.Factory
     fun changeNicknameComponent(): ChangeNicknameComponent.Factory
     fun settingsComponent(): SettingsComponent.Factory
+    fun sendFeedbackComponent(): SendFeedbackComponent.Factory
 
     val heroesListRepository: HeroesListRepository
     val teamsListRepository: TeamsListRepository
@@ -97,4 +98,5 @@ interface AppComponent {
     val viewingUsersBuildRepository: ViewingUsersBuildRepository
     val changeNicknameRepository: ChangeNicknameRepository
     val settingsRepository: SettingsRepository
+    val sendFeedbackRepository: SendFeedbackRepository
 }

@@ -14,6 +14,7 @@ import com.example.honkaihelper.load_data.data.LoadDataService
 import com.example.honkaihelper.login.data.LoginService
 import com.example.honkaihelper.profile.data.ProfileService
 import com.example.honkaihelper.registration.data.RegistrationService
+import com.example.honkaihelper.send_feedback.data.SendFeedbackService
 import com.example.honkaihelper.teams.data.TeamsListService
 import com.example.honkaihelper.viewing_users_build.data.ViewingUsersBuildService
 import dagger.Module
@@ -90,4 +91,7 @@ object NetworkModule {
 
     @Provides
     fun providesChangeNicknameService(retrofit: Retrofit): ChangeNicknameService = retrofit.create(ChangeNicknameService::class.java)
+
+    @Provides
+    fun providesSendFeedbackService(retrofit: Retrofit): SendFeedbackService = retrofit.create(SendFeedbackService::class.java)
 }

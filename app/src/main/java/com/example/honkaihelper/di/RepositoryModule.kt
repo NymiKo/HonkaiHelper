@@ -30,6 +30,8 @@ import com.example.honkaihelper.registration.data.RegistrationRepository
 import com.example.honkaihelper.registration.data.RegistrationRepositoryImpl
 import com.example.honkaihelper.relic.data.RelicInfoRepository
 import com.example.honkaihelper.relic.data.RelicInfoRepositoryImpl
+import com.example.honkaihelper.send_feedback.data.SendFeedbackRepository
+import com.example.honkaihelper.send_feedback.data.SendFeedbackRepositoryImpl
 import com.example.honkaihelper.settings.data.SettingsRepository
 import com.example.honkaihelper.settings.data.SettingsRepositoryImpl
 import com.example.honkaihelper.teams.data.TeamsListRepository
@@ -119,4 +121,8 @@ interface RepositoryModule {
     @Singleton
     @Binds
     fun bindSettingsRepository(repository: SettingsRepositoryImpl): SettingsRepository
+
+    @Singleton
+    @Binds
+    fun bindSendFeedbackRepository(repository: SendFeedbackRepositoryImpl): SendFeedbackRepository
 }
