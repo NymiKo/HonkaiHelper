@@ -8,4 +8,8 @@ class FakeTeamsListRepository @Inject constructor(): TeamsListRepository {
     override suspend fun getTeamsList(idHero: Int): NetworkResult<List<TeamHero>> {
         return NetworkResult.Success(emptyList())
     }
+
+    override suspend fun getNameHero(idHero: Int): String {
+        return ""
+    }
 }
