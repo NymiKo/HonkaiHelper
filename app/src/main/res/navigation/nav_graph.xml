@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/teamsListFragment"
-        android:name="com.example.honkaihelper.teams.TeamsListFragment"
+        android:name="com.example.tanorami.teams.TeamsListFragment"
         android:label="fragment_teams_list"
         tools:layout="@layout/fragment_teams_list" >
         <action
@@ -16,12 +16,12 @@
     </fragment>
     <fragment
         android:id="@+id/createTeamFragment"
-        android:name="com.example.honkaihelper.createteam.CreateTeamFragment"
+        android:name="com.example.tanorami.createteam.CreateTeamFragment"
         android:label="fragment_create_team"
         tools:layout="@layout/fragment_create_team" />
     <fragment
         android:id="@+id/heroesListFragment"
-        android:name="com.example.honkaihelper.heroes.HeroesListFragment"
+        android:name="com.example.tanorami.heroes.HeroesListFragment"
         android:label="fragment_heroes_list"
         tools:layout="@layout/fragment_heroes_list" >
         <action
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.honkaihelper.login.LoginFragment"
+        android:name="com.example.tanorami.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -52,12 +52,12 @@
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.example.honkaihelper.registration.RegistrationFragment"
+        android:name="com.example.tanorami.registration.RegistrationFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.honkaihelper.profile.ProfileFragment"
+        android:name="com.example.tanorami.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
@@ -66,12 +66,12 @@
     </fragment>
     <dialog
         android:id="@+id/equipmentFragment"
-        android:name="com.example.honkaihelper.equipment.EquipmentFragment"
+        android:name="com.example.tanorami.equipment.EquipmentFragment"
         android:label="fragment_equipment"
         tools:layout="@layout/fragment_equipment" />
     <fragment
         android:id="@+id/loadDataFragment"
-        android:name="com.example.honkaihelper.load_data.LoadDataFragment"
+        android:name="com.example.tanorami.load_data.LoadDataFragment"
         android:label="fragment_load_data"
         tools:layout="@layout/fragment_load_data" >
         <action
@@ -82,7 +82,7 @@
     </fragment>
     <fragment
         android:id="@+id/infoAboutHeroFragment"
-        android:name="com.example.honkaihelper.info_about_hero.InfoAboutHeroFragment"
+        android:name="com.example.tanorami.info_about_hero.InfoAboutHeroFragment"
         android:label="fragment_info_about_hero"
         tools:layout="@layout/fragment_info_about_hero" >
         <action
@@ -102,7 +102,7 @@
     </fragment>
     <fragment
         android:id="@+id/baseBuildHeroFragment"
-        android:name="com.example.honkaihelper.base_build_hero.BaseBuildHeroFragment"
+        android:name="com.example.tanorami.base_build_hero.BaseBuildHeroFragment"
         android:label="fragment_base_build_hero"
         tools:layout="@layout/fragment_base_build_hero" >
         <action
@@ -124,7 +124,7 @@
     </fragment>
     <fragment
         android:id="@+id/buildsHeroListFragment"
-        android:name="com.example.honkaihelper.builds_hero_from_users.BuildsHeroListFragment"
+        android:name="com.example.tanorami.builds_hero_from_users.BuildsHeroListFragment"
         android:label="fragment_builds_hero_list"
         tools:layout="@layout/fragment_builds_hero_list" >
         <action
@@ -136,7 +136,7 @@
     </fragment>
     <fragment
         android:id="@+id/createBuildHeroFragment"
-        android:name="com.example.honkaihelper.create_build_hero.CreateBuildHeroFragment"
+        android:name="com.example.tanorami.create_build_hero.CreateBuildHeroFragment"
         android:label="fragment_create_build_hero"
         tools:layout="@layout/fragment_create_build_hero" >
         <action
@@ -145,32 +145,32 @@
     </fragment>
     <fragment
         android:id="@+id/weaponInfoFragment"
-        android:name="com.example.honkaihelper.weapon.WeaponInfoFragment"
+        android:name="com.example.tanorami.weapon.WeaponInfoFragment"
         android:label="fragment_weapon_info"
         tools:layout="@layout/fragment_weapon_info" />
     <fragment
         android:id="@+id/relicInfoFragment"
-        android:name="com.example.honkaihelper.relic.RelicInfoFragment"
+        android:name="com.example.tanorami.relic.RelicInfoFragment"
         android:label="fragment_relic_info"
         tools:layout="@layout/fragment_relic_info" />
     <fragment
         android:id="@+id/decorationInfoFragment"
-        android:name="com.example.honkaihelper.decoration.DecorationInfoFragment"
+        android:name="com.example.tanorami.decoration.DecorationInfoFragment"
         android:label="fragment_decoration_info"
         tools:layout="@layout/fragment_decoration_info" />
     <fragment
         android:id="@+id/viewingUsersBuildFragment"
-        android:name="com.example.honkaihelper.viewing_users_build.ViewingUsersBuildFragment"
+        android:name="com.example.tanorami.viewing_users_build.ViewingUsersBuildFragment"
         android:label="fragment_viewing_users_build"
         tools:layout="@layout/fragment_viewing_users_build" />
     <fragment
         android:id="@+id/changeNicknameFragment"
-        android:name="com.example.honkaihelper.change_nickname.ChangeNicknameFragment"
+        android:name="com.example.tanorami.change_nickname.ChangeNicknameFragment"
         android:label="fragment_change_nickname"
         tools:layout="@layout/fragment_change_nickname" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.honkaihelper.settings.SettingsFragment"
+        android:name="com.example.tanorami.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action
@@ -182,7 +182,7 @@
     </fragment>
     <fragment
         android:id="@+id/sendFeedbackFragment"
-        android:name="com.example.honkaihelper.send_feedback.SendFeedbackFragment"
+        android:name="com.example.tanorami.send_feedback.SendFeedbackFragment"
         android:label="fragment_send_feedback"
         tools:layout="@layout/fragment_send_feedback" />
 </navigation>

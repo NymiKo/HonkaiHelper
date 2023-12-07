@@ -8,17 +8,17 @@ plugins {
 }
 
 android {
-    namespace 'com.example.honkaihelper'
+    namespace 'com.example.tanorami'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.honkaihelper"
+        applicationId "com.example.tanorami"
         minSdk 24
         targetSdk 34
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "com.example.honkaihelper.AppTestRunner"
+        testInstrumentationRunner "com.example.tanorami.AppTestRunner"
     }
 
     buildTypes {

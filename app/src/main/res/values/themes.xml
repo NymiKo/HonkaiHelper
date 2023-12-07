@@ -18,5 +18,6 @@
 
     <style name="Theme.HonkaiHelper.SplashScreen" parent="Theme.SplashScreen">
         <item name="postSplashScreenTheme">@style/Base.Theme.HonkaiHelper</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_round</item>
     </style>
 </resources>

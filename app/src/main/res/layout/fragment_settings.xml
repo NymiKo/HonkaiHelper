@@ -81,6 +81,19 @@
                 app:layout_constraintStart_toEndOf="@id/image_app"
                 app:layout_constraintTop_toBottomOf="@id/text_version_app" />
 
+            <TextView
+                android:id="@+id/text_about_developers"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/DP8"
+                android:layout_marginTop="@dimen/DP8"
+                android:text="@string/about_developers"
+                android:textColor="?attr/colorSecondary"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_version_db" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_check_update"
                 android:layout_width="match_parent"
@@ -93,7 +106,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_version_db" />
+                app:layout_constraintTop_toBottomOf="@id/text_about_developers" />
 
             <ProgressBar
                 android:id="@+id/progress_check_update"
@@ -123,6 +136,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
 
+    <TextView
+        android:id="@+id/text_thank_the_developer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintVertical_bias="1"
+        android:text="@string/thank_the_developer"
+        android:visibility="gone"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintBottom_toTopOf="@+id/button_go_to_money"
+        app:layout_constraintTop_toBottomOf="@id/button_go_to_feedback"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_go_to_money"
         android:layout_width="match_parent"
@@ -134,10 +160,10 @@
         android:textColor="?attr/colorOnSecondary"
         android:textSize="16sp"
         app:cornerRadius="10dp"
-        app:layout_constraintVertical_bias="1"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_go_to_feedback" />
+        app:layout_constraintTop_toBottomOf="@+id/text_thank_the_developer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
