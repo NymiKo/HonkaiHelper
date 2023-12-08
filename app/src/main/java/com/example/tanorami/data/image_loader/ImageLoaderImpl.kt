@@ -15,8 +15,12 @@ import javax.inject.Inject
 class ImageLoaderImpl @Inject constructor(
     private val context: Context,
     private val ioDispatcher: CoroutineDispatcher
-): ImageLoader {
-    override suspend fun downloadAndSaveImage(imageUrl: String, child: String, fileName: String): String = withContext(ioDispatcher) {
+) : ImageLoader {
+    override suspend fun downloadAndSaveImage(
+        imageUrl: String,
+        child: String,
+        fileName: String
+    ): String = withContext(ioDispatcher) {
         val directory = File(context.getExternalFilesDir(null), child)
         directory.mkdirs()
         val file = File(directory, fileName)
@@ -25,7 +29,9 @@ class ImageLoaderImpl @Inject constructor(
             val resource = Glide.with(context)
                 .asBitmap()
                 .load(imageUrl)
-                .apply(RequestOptions().skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE))
+                .apply(
+                    RequestOptions().skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE)
+                )
                 .submit()
                 .get()
 
@@ -36,7 +42,7 @@ class ImageLoaderImpl @Inject constructor(
             }
 
             FileOutputStream(file).use { outputStream ->
-                resource.compress(compressFormat, 100, outputStream)
+                resource.compress(compressFormat, 80, outputStream)
             }
 
             file.absolutePath

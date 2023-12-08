@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class LoadDataViewModel @Inject constructor(
     private val repository: LoadDataRepository
-): ViewModel() {
+) : ViewModel() {
 
     private val _dataLoaded = MutableLiveData<LoadDataUiState>()
     val dataLoaded: LiveData<LoadDataUiState> = _dataLoaded
@@ -22,10 +22,11 @@ class LoadDataViewModel @Inject constructor(
     fun getNewData() = viewModelScope.launch {
         _dataLoaded.value = LoadDataUiState.LOADING
         val result = repository.downloadingData()
-        when(result) {
+        when (result) {
             true -> {
                 _dataLoaded.value = LoadDataUiState.SUCCESS
             }
+
             false -> {
                 _dataLoaded.value = LoadDataUiState.ERROR
             }
