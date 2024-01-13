@@ -23,7 +23,9 @@
 Для устанвоки необходима версия Android 7.0 и выше.
 
 # Экраны Регистрации / Авторизации
-![screenshot-2024-01-13_20 50 08 661](https://github.com/NymiKo/HonkaiHelper/assets/37593124/0d5e2622-ba5b-497e-87f8-d8781ecb5889)
-![screenshot-2024-01-13_20 50 15 138](https://github.com/NymiKo/HonkaiHelper/assets/37593124/9a25fbd4-d6c9-444b-aa55-6d4de8e6d286)
+<p float="left">
+  <img src="https://github.com/NymiKo/HonkaiHelper/assets/37593124/0d5e2622-ba5b-497e-87f8-d8781ecb5889" width="250" height="540">
+  <img src="https://github.com/NymiKo/HonkaiHelper/assets/37593124/9a25fbd4-d6c9-444b-aa55-6d4de8e6d286" width="250" height="540">
+</p>
 
 
