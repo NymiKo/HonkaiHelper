@@ -24,8 +24,8 @@
 
 # Экраны Регистрации / Авторизации
 <p float="left">
-  <img src="https://github.com/NymiKo/HonkaiHelper/assets/37593124/0d5e2622-ba5b-497e-87f8-d8781ecb5889" width="250" height="540">
-  <img src="https://github.com/NymiKo/HonkaiHelper/assets/37593124/9a25fbd4-d6c9-444b-aa55-6d4de8e6d286" width="250" height="540">
+  <img src="https://github.com/NymiKo/HonkaiHelper/assets/37593124/0d5e2622-ba5b-497e-87f8-d8781ecb5889" width="250" height="500">
+  <img src="https://github.com/NymiKo/HonkaiHelper/assets/37593124/9a25fbd4-d6c9-444b-aa55-6d4de8e6d286" width="250" height="500">
 </p>
 
 
