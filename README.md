@@ -22,6 +22,10 @@
 
 # Устанвока приложения
 Для установки необходима версия Android 7.0 и выше.
+Скачать можно из магазинов приложений:
+- RuStore (https://apps.rustore.ru/app/com.example.tanorami)
+- Huawei AppGallery (https://appgallery.huawei.com/#/app/C109808049)
+- NashStore (https://store.nashstore.ru/store/6570bcb10a39b29c049f1beb)
 
 # Экраны Регистрации / Авторизации
 <p float="left">
