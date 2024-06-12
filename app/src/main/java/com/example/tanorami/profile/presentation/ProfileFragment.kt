@@ -16,15 +16,14 @@ import androidx.navigation.fragment.findNavController
 import com.example.tanorami.App
 import com.example.tanorami.R
 import com.example.tanorami.databinding.FragmentProfileBinding
-import com.example.tanorami.base.BaseFragment
 import com.example.tanorami.change_nickname.ChangeNicknameFragment
 import com.example.tanorami.core.theme.AppTheme
 import com.example.tanorami.create_build_hero.CreateBuildHeroFragment
 import com.example.tanorami.createteam.CreateTeamFragment
-import com.example.tanorami.databinding.FragmentLoadDataBinding
 import com.example.tanorami.profile.presentation.adapter.ViewPagerTeamsAndBuildsAdapter
 import com.example.tanorami.profile.presentation.adapter.ViewPagerTeamsAndBuildsListener
 import com.example.tanorami.profile.data.model.User
+import com.example.tanorami.profile.presentation.components.UserNotLoggedComponent
 import com.example.tanorami.utils.TOKEN
 import com.example.tanorami.utils.getFileName
 import com.example.tanorami.utils.getSharedPrefUser
