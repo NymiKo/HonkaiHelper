@@ -1,6 +1,6 @@
 package com.example.tanorami.profile.di
 
-import com.example.tanorami.profile.ProfileFragment
+import com.example.tanorami.profile.presentation.ProfileFragment
 import dagger.Subcomponent
 
 @Subcomponent(modules = [ProfileModule::class])

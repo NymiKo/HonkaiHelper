@@ -2,6 +2,7 @@ package com.example.tanorami.profile.data
 
 import com.example.tanorami.data.NetworkResult
 import com.example.tanorami.profile.data.model.User
+import com.example.tanorami.profile.domain.ProfileRepository
 import java.io.File
 import javax.inject.Inject
 

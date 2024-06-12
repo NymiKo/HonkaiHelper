@@ -11,9 +11,9 @@ import com.example.tanorami.heroes.data.HeroesListService
 import com.example.tanorami.data.image_loader.ImageLoader
 import com.example.tanorami.data.image_loader.ImageLoaderImpl
 import com.example.tanorami.load_data.data.LoadDataService
-import com.example.tanorami.login.data.LoginService
+import com.example.tanorami.auth.login.data.LoginService
 import com.example.tanorami.profile.data.ProfileService
-import com.example.tanorami.registration.data.RegistrationService
+import com.example.tanorami.auth.registration.data.RegistrationService
 import com.example.tanorami.send_feedback.data.SendFeedbackService
 import com.example.tanorami.teams.data.TeamsListService
 import com.example.tanorami.viewing_users_build.data.ViewingUsersBuildService
@@ -69,7 +69,8 @@ object NetworkModule {
     fun provideLoginService(retrofit: Retrofit): LoginService = retrofit.create(LoginService::class.java)
 
     @Provides
-    fun provideRegistrationService(retrofit: Retrofit): RegistrationService = retrofit.create(RegistrationService::class.java)
+    fun provideRegistrationService(retrofit: Retrofit): RegistrationService = retrofit.create(
+        RegistrationService::class.java)
 
     @Provides
     fun provideProfileService(retrofit: Retrofit): ProfileService = retrofit.create(ProfileService::class.java)

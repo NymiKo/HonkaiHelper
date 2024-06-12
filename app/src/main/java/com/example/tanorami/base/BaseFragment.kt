@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
@@ -22,8 +23,10 @@ abstract class BaseFragment<T: ViewBinding>(private val bindingInflater: (Layout
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = bindingInflater(inflater)
-        return  binding.root
+        _binding = bindingInflater(inflater).apply {
+
+        }
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,5 +43,4 @@ abstract class BaseFragment<T: ViewBinding>(private val bindingInflater: (Layout
         super.onDestroyView()
         _binding = null
     }
-
 }

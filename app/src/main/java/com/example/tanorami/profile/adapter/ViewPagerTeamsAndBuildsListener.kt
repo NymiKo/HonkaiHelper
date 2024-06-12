@@ -1,3 +1,0 @@
-package com.example.tanorami.profile.adapter
-
-interface ViewPagerTeamsAndBuildsListener: BuildsAdapterListener, TeamsAdapterListener

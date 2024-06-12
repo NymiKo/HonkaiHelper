@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.tanorami.login.LoginFragment"
+        android:name="com.example.tanorami.auth.login.presentation.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -52,12 +52,12 @@
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.example.tanorami.registration.RegistrationFragment"
+        android:name="com.example.tanorami.auth.registration.RegistrationFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.tanorami.profile.ProfileFragment"
+        android:name="com.example.tanorami.profile.presentation.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action

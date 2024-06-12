@@ -21,12 +21,12 @@ import com.example.tanorami.heroes.data.HeroesListRepository
 import com.example.tanorami.heroes.di.HeroesListComponent
 import com.example.tanorami.load_data.data.LoadDataRepository
 import com.example.tanorami.load_data.di.LoadDataComponent
-import com.example.tanorami.login.data.LoginRepository
-import com.example.tanorami.login.di.LoginComponent
-import com.example.tanorami.profile.data.ProfileRepository
+import com.example.tanorami.auth.login.domain.LoginRepository
+import com.example.tanorami.auth.login.di.LoginComponent
+import com.example.tanorami.profile.domain.ProfileRepository
 import com.example.tanorami.profile.di.ProfileComponent
-import com.example.tanorami.registration.data.RegistrationRepository
-import com.example.tanorami.registration.di.RegistrationComponent
+import com.example.tanorami.auth.registration.data.RegistrationRepository
+import com.example.tanorami.auth.registration.di.RegistrationComponent
 import com.example.tanorami.relic.data.RelicInfoRepository
 import com.example.tanorami.relic.di.RelicInfoComponent
 import com.example.tanorami.send_feedback.data.SendFeedbackRepository
