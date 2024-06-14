@@ -294,7 +294,7 @@ class CreateBuildHeroFragment :
         private const val ARG_ID_BUILD = "id_build"
 
         @JvmStatic
-        fun newInstance(idHero: Int = -1, idBuild: Int = -1): Bundle {
+        fun newInstance(idHero: Int = -1, idBuild: Long = -1): Bundle {
             return bundleOf(ARG_ID_HERO to idHero, ARG_ID_BUILD to idBuild)
         }
     }

@@ -193,7 +193,7 @@ class CreateTeamFragment :
     companion object {
         const val ARG_ID_TEAM = "id_team"
 
-        fun newInstance(idTeam: Int = -1): Bundle {
+        fun newInstance(idTeam: Long = -1): Bundle {
             return bundleOf(ARG_ID_TEAM to idTeam)
         }
     }

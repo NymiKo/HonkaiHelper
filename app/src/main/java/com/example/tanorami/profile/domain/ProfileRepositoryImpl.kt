@@ -32,7 +32,7 @@ class ProfileRepositoryImpl @Inject constructor(
             }
             is NetworkResult.Success -> {
                 return@withContext NetworkResult.Success(User(
-                    login = result.data.login,
+                    nickname = result.data.login,
                     avatarUrl = result.data.avatarUrl,
                     teamsList = result.data.teamsList.map {
                         TeamHero(

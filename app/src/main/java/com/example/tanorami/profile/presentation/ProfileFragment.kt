@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.tanorami.App
 import com.example.tanorami.R
+import com.example.tanorami.auth.login.presentation.LoginFragment
 import com.example.tanorami.databinding.FragmentProfileBinding
 import com.example.tanorami.change_nickname.ChangeNicknameFragment
 import com.example.tanorami.core.theme.AppTheme
@@ -68,7 +69,21 @@ class ProfileFragment : Fragment() {
         _binding = FragmentProfileBinding.inflate(inflater).apply {
             composeView.setContent {
                 AppTheme {
-                    UserNotLoggedComponent(onLoginScreen = { onLoginScreen() })
+                    ProfileScreen(
+                        viewModel = viewModel,
+                        onChangeNicknameScreen = { nickname ->
+                            findNavController().navigate(R.id.changeNicknameFragment, ChangeNicknameFragment.newInject(nickname))
+                        },
+                        onEditBuildHeroScreen = { idBuild ->
+                            findNavController().navigate(R.id.createBuildHeroFragment, CreateBuildHeroFragment.newInstance(idBuild = idBuild))
+                        },
+                        onEditTeamScreen = { idTeam ->
+                            findNavController().navigate(R.id.createTeamFragment, CreateTeamFragment.newInstance(idTeam))
+                        },
+                        onLoginScreen = {
+                            findNavController().navigate(R.id.loginFragment)
+                        },
+                    )
                 }
             }
         }
@@ -78,105 +93,100 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val token = getSharedPrefUser().getString(TOKEN, "")
-        if (!token.isNullOrEmpty()) viewModel.getProfile()
-        uiStateHandle()
-        setupView()
+        if (!token.isNullOrEmpty()) viewModel.onEvent(ProfileScreenEvents.FetchProfile)
+//        uiStateHandle()
+        //setupView()
     }
 
     fun setupView() {
-        menuItemClickHandler()
-        setupViewPager()
+        //setupViewPager()
         setupAvatarImageClickListener()
-        setupProfileTeamsAndBuilds()
+        //setupProfileTeamsAndBuilds()
     }
 
-    fun uiStateHandle() {
-        viewModel.uiState.observe(viewLifecycleOwner) {
-            when (it) {
-                is ProfileUiState.ERROR -> {
-                    toast(requireActivity(), it.message)
-                }
+//    fun uiStateHandle() {
+//        viewModel.uiState.observe(viewLifecycleOwner) {
+//            when (it) {
+//                is ProfileUiState.ERROR -> {
+//                    toast(requireActivity(), it.message)
+//                }
+//
+//                is ProfileUiState.LOADING -> {
+//                    showLoading()
+//                }
+//
+//                is ProfileUiState.NOT_AUTHORIZED -> {
+//                    showUiNotAuthorized()
+//                }
+//
+//                is ProfileUiState.SUCCESS -> {
+//                    showUiProfile()
+//                    loadProfile(it.user)
+//                }
+//            }
+//        }
+//    }
 
-                is ProfileUiState.LOADING -> {
-                    showLoading()
-                }
-
-                is ProfileUiState.NOT_AUTHORIZED -> {
-                    showUiNotAuthorized()
-                }
-
-                is ProfileUiState.SUCCESS -> {
-                    showUiProfile()
-                    loadProfile(it.user)
-                }
-            }
-        }
-    }
-
-    private fun showLoading() {
-        binding.composeView.gone()
-        binding.groupUserProfile.gone()
-        binding.toolbarProfile.invisible()
-        binding.shimmerLayoutProfile.showShimmer(true)
-    }
-
-    private fun showUiNotAuthorized() {
-        binding.shimmerLayoutProfile.gone()
-        binding.shimmerLayoutProfile.stopShimmer()
-        binding.groupUserProfile.gone()
-        binding.toolbarProfile.gone()
-        binding.composeView.visible()
-    }
-
-    private fun showUiProfile() {
-        binding.toolbarProfile.visible()
-        binding.groupUserProfile.visible()
-        binding.shimmerLayoutProfile.gone()
-        binding.shimmerLayoutProfile.stopShimmer()
-        binding.composeView.gone()
-    }
-
-    private fun loadProfile(user: User) {
-        binding.imageUserAvatar.loadWithPlaceholder(user.avatarUrl ?: "", R.drawable.ic_person)
-        if (!user.avatarUrl.isNullOrEmpty()) binding.imageUserAvatar.imageTintList = null
-        binding.textUserLogin.text = user.login
-        mAdapter.list = listOf(user.buildsHeroes, user.teamsList)
-    }
+//    private fun showLoading() {
+//        binding.composeView.gone()
+//        binding.groupUserProfile.gone()
+//        binding.toolbarProfile.invisible()
+//        binding.shimmerLayoutProfile.showShimmer(true)
+//    }
+//
+//    private fun showUiNotAuthorized() {
+//        binding.shimmerLayoutProfile.gone()
+//        binding.shimmerLayoutProfile.stopShimmer()
+//        binding.groupUserProfile.gone()
+//        binding.toolbarProfile.gone()
+//        binding.composeView.visible()
+//    }
+//
+//    private fun showUiProfile() {
+//        binding.toolbarProfile.visible()
+//        binding.groupUserProfile.visible()
+//        binding.shimmerLayoutProfile.gone()
+//        binding.shimmerLayoutProfile.stopShimmer()
+//        binding.composeView.gone()
+//    }
+//
+//    private fun loadProfile(user: User) {
+//        binding.imageUserAvatar.loadWithPlaceholder(user.avatarUrl ?: "", R.drawable.ic_person)
+//        if (!user.avatarUrl.isNullOrEmpty()) binding.imageUserAvatar.imageTintList = null
+//        binding.textUserLogin.text = user.nickname
+//        mAdapter.list = listOf(user.buildsHeroes, user.teamsList)
+//    }
 
     private fun setupViewPager() {
         mAdapter = ViewPagerTeamsAndBuildsAdapter(object : ViewPagerTeamsAndBuildsListener {
             override fun onBuildClick(idBuild: Int) {
-                findNavController().navigate(R.id.createBuildHeroFragment, CreateBuildHeroFragment.newInstance(idBuild = idBuild))
+                //findNavController().navigate(R.id.createBuildHeroFragment, CreateBuildHeroFragment.newInstance(idBuild = idBuild))
             }
 
             override fun onTeamClick(idTeam: Int) {
-                findNavController().navigate(R.id.createTeamFragment, CreateTeamFragment.newInstance(idTeam))
+                //findNavController().navigate(R.id.createTeamFragment, CreateTeamFragment.newInstance(idTeam))
             }
         })
-        binding.viewPagerProfileTeamsAndBuilds.adapter = mAdapter
+        //binding.viewPagerProfileTeamsAndBuilds.adapter = mAdapter
     }
 
-    private fun setupProfileTeamsAndBuilds() {
-        TabLayoutMediator(binding.tabLayoutProfileTeams, binding.viewPagerProfileTeamsAndBuilds) { tab, position ->
-            when(position) {
-                0 -> tab.text = getString(R.string.my_builds)
-                1 -> tab.text = getString(R.string.my_teams)
-            }
-        }.attach()
-    }
+//    private fun setupProfileTeamsAndBuilds() {
+//        TabLayoutMediator(binding.tabLayoutProfileTeams, binding.viewPagerProfileTeamsAndBuilds) { tab, position ->
+//            when(position) {
+//                0 -> tab.text = getString(R.string.my_builds)
+//                1 -> tab.text = getString(R.string.my_teams)
+//            }
+//        }.attach()
+//    }
 
     private fun setupAvatarImageClickListener() {
-        binding.imageUserAvatar.setOnClickListener {
-            selectImageIntent.launch("image/*")
-        }
-    }
-
-    private fun onLoginScreen() {
-        findNavController().navigate(R.id.loginFragment)
+//        binding.imageUserAvatar.setOnClickListener {
+//            selectImageIntent.launch("image/*")
+//        }
     }
 
     private fun loadAvatar(uri: Uri) {
-        binding.imageUserAvatar.load(uri)
+        //binding.imageUserAvatar.load(uri)
         val parcelFileDescriptor =
             requireActivity().contentResolver.openFileDescriptor(uri, "r", null)
         val inputStream = FileInputStream(parcelFileDescriptor?.fileDescriptor)
@@ -187,26 +197,12 @@ class ProfileFragment : Fragment() {
         viewModel.loadAvatar(file)
     }
 
-    private fun menuItemClickHandler() {
-        binding.toolbarProfile.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.change_nickname -> {
-                    findNavController().navigate(R.id.changeNicknameFragment, ChangeNicknameFragment.newInject(binding.textUserLogin.text.toString()))
-                }
-                R.id.exit_of_account -> {
-                    showDialogExitOfAccount()
-                }
-            }
-            true
-        }
-    }
-
     private fun showDialogExitOfAccount() {
         AlertDialog.Builder(requireActivity())
             .setMessage(R.string.want_to_logout_of_your_account)
             .setPositiveButton(R.string.yes) { _, _ ->
                 getSharedPrefUser().edit().putString(TOKEN, null).apply()
-                viewModel.logoutAccount()
+                findNavController().navigate(R.id.loginFragment)
             }
             .setNegativeButton(R.string.cancellation) { dialog, _ ->
                 dialog.cancel()

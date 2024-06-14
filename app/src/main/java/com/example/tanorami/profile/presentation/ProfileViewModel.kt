@@ -1,5 +1,8 @@
 package com.example.tanorami.profile.presentation
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,33 +16,55 @@ import javax.inject.Inject
 
 class ProfileViewModel @Inject constructor(
     private val repository: ProfileRepository
-): ViewModel() {
+) : ViewModel() {
 
     private val _uiState = MutableLiveData<ProfileUiState<Any>>(ProfileUiState.NOT_AUTHORIZED)
     val uiState: LiveData<ProfileUiState<Any>> = _uiState
 
-    fun getProfile() = viewModelScope.launch {
-        _uiState.value = ProfileUiState.LOADING
-        val result = repository.getProfile()
-        when(result) {
-            is NetworkResult.Error -> errorHandler(result.code)
-            is NetworkResult.Success -> _uiState.value = ProfileUiState.SUCCESS(result.data)
+    internal var profileUiState by mutableStateOf(ProfileScreenUiState())
+        private set
+
+    internal fun onEvent(event: ProfileScreenEvents) {
+        when (event) {
+            ProfileScreenEvents.LogoutAccount -> logoutAccount()
+            ProfileScreenEvents.FetchProfile -> getProfile()
+            is ProfileScreenEvents.LoadAvatar -> loadAvatar(event.file)
+            else -> Unit
         }
     }
 
-    fun logoutAccount() = viewModelScope.launch {
-        _uiState.value = ProfileUiState.NOT_AUTHORIZED
+    private fun getProfile() = viewModelScope.launch {
+        profileUiState = profileUiState.copy(isLoading = true)
+        when (val result = repository.getProfile()) {
+            is NetworkResult.Error -> profileUiState = profileUiState.copy(
+                isError = true,
+                isLoading = false,
+                errorMessage = errorHandler(result.code),
+                isAuthorized = true,
+            )
+
+            is NetworkResult.Success -> profileUiState = profileUiState.copy(
+                isError = false,
+                isLoading = false,
+                profileData = result.data,
+                isAuthorized = true,
+            )
+        }
+    }
+
+    private fun logoutAccount() = viewModelScope.launch {
+        profileUiState = profileUiState.copy(isAuthorized = false)
     }
 
     fun loadAvatar(file: File) = viewModelScope.launch {
         repository.loadAvatar(file)
     }
 
-    private fun errorHandler(errorCode: Int) {
-        when(errorCode) {
-            105 -> _uiState.value = ProfileUiState.ERROR(R.string.check_your_internet_connection)
-            106 -> _uiState.value = ProfileUiState.ERROR(R.string.error)
-            else -> _uiState.value = ProfileUiState.ERROR(R.string.unknown_error)
+    private fun errorHandler(errorCode: Int): Int {
+        return when (errorCode) {
+            105 -> R.string.check_your_internet_connection
+            106 -> R.string.error
+            else -> R.string.unknown_error
         }
     }
 }
