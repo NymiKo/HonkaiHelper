@@ -8,12 +8,13 @@ import com.example.tanorami.data.local.dao.HeroDao
 import com.example.tanorami.data.local.dao.RelicDao
 import com.example.tanorami.data.local.dao.WeaponDao
 import com.example.tanorami.data.local.models.hero.HeroWithNameAvatarRarity
+import com.example.tanorami.di.IODispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class BuildsHeroListRepositoryImpl @Inject constructor(
-    private val ioDispatcher: CoroutineDispatcher,
+    @IODispatcher private val ioDispatcher: CoroutineDispatcher,
     private val heroDao: HeroDao,
     private val buildsHeroListService: BuildsHeroListService,
     private val weaponDao: WeaponDao,

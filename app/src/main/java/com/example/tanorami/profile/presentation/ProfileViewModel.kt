@@ -1,28 +1,44 @@
 package com.example.tanorami.profile.presentation
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tanorami.R
 import com.example.tanorami.data.NetworkResult
+import com.example.tanorami.data.UserDataStore
 import com.example.tanorami.profile.domain.ProfileRepository
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
 
 class ProfileViewModel @Inject constructor(
-    private val repository: ProfileRepository
+    private val repository: ProfileRepository,
+    private val userDataStore: UserDataStore,
 ) : ViewModel() {
-
-    private val _uiState = MutableLiveData<ProfileUiState<Any>>(ProfileUiState.NOT_AUTHORIZED)
-    val uiState: LiveData<ProfileUiState<Any>> = _uiState
 
     internal var profileUiState by mutableStateOf(ProfileScreenUiState())
         private set
+
+    init {
+        viewModelScope.launch  {
+            userDataStore.tokenUser.collect {
+                if (it == "") {
+                    profileUiState = profileUiState.copy(
+                        isError = false,
+                        isLoading = false,
+                        isAuthorized = false,
+                    )
+                } else {
+                    getProfile()
+                }
+            }
+        }
+    }
 
     internal fun onEvent(event: ProfileScreenEvents) {
         when (event) {
@@ -40,19 +56,21 @@ class ProfileViewModel @Inject constructor(
                 isError = true,
                 isLoading = false,
                 errorMessage = errorHandler(result.code),
-                isAuthorized = true,
             )
 
-            is NetworkResult.Success -> profileUiState = profileUiState.copy(
-                isError = false,
-                isLoading = false,
-                profileData = result.data,
-                isAuthorized = true,
-            )
+            is NetworkResult.Success -> {
+                profileUiState = profileUiState.copy(
+                    isError = false,
+                    isLoading = false,
+                    profileData = result.data,
+                    isAuthorized = true,
+                )
+            }
         }
     }
 
     private fun logoutAccount() = viewModelScope.launch {
+        userDataStore.clearToken()
         profileUiState = profileUiState.copy(isAuthorized = false)
     }
 

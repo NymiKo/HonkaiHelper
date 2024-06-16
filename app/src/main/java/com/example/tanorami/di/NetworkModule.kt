@@ -54,7 +54,7 @@ object NetworkModule {
         .build()
 
     @Provides
-    fun provideImageLoader(context: Context, ioDispatcher: CoroutineDispatcher): ImageLoader = ImageLoaderImpl(context, ioDispatcher)
+    fun provideImageLoader(context: Context, @IODispatcher ioDispatcher: CoroutineDispatcher): ImageLoader = ImageLoaderImpl(context, ioDispatcher)
 
     @Provides
     fun providesHeroesListService(retrofit: Retrofit): HeroesListService = retrofit.create(HeroesListService::class.java)

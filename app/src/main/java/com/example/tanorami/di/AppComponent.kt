@@ -50,7 +50,8 @@ import javax.inject.Singleton
         ViewModelFactoryModule::class,
         RepositoryModule::class,
         NetworkModule::class,
-        RoomModule::class
+        RoomModule::class,
+        DataStoreModule::class,
     ]
 )
 interface AppComponent {

@@ -92,8 +92,8 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val token = getSharedPrefUser().getString(TOKEN, "")
-        if (!token.isNullOrEmpty()) viewModel.onEvent(ProfileScreenEvents.FetchProfile)
+//        val token = getSharedPrefUser().getString(TOKEN, "")
+//        if (!token.isNullOrEmpty()) viewModel.onEvent(ProfileScreenEvents.FetchProfile)
 //        uiStateHandle()
         //setupView()
     }

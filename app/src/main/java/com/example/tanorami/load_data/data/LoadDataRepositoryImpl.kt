@@ -29,6 +29,7 @@ import com.example.tanorami.data.local.entity.OptimalStatsHeroEntity
 import com.example.tanorami.data.local.entity.PathEntity
 import com.example.tanorami.data.local.entity.RelicEntity
 import com.example.tanorami.data.local.entity.WeaponEntity
+import com.example.tanorami.di.IODispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -40,7 +41,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class LoadDataRepositoryImpl @Inject constructor(
-    private val ioDispatcher: CoroutineDispatcher,
+    @IODispatcher private val ioDispatcher: CoroutineDispatcher,
     private val heroDao: HeroDao,
     private val pathDao: PathDao,
     private val abilityDao: AbilityDao,

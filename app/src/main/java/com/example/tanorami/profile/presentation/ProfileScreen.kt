@@ -1,5 +1,6 @@
 package com.example.tanorami.profile.presentation
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -94,6 +95,7 @@ private fun ProfileScreenContent(
             onLoginScreen = { onEvents(ProfileScreenEvents.OnLoginScreen) }
         )
     }
+    Log.e("TOKEN", uiState.profileData.toString())
 }
 
 @Composable

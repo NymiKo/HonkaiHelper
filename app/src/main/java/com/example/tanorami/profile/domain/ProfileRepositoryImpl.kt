@@ -7,6 +7,7 @@ import com.example.tanorami.data.local.dao.DecorationDao
 import com.example.tanorami.data.local.dao.HeroDao
 import com.example.tanorami.data.local.dao.RelicDao
 import com.example.tanorami.data.local.dao.WeaponDao
+import com.example.tanorami.di.IODispatcher
 import com.example.tanorami.profile.data.ProfileService
 import com.example.tanorami.profile.data.model.User
 import com.example.tanorami.teams.data.model.TeamHero
@@ -19,7 +20,7 @@ import javax.inject.Inject
 
 class ProfileRepositoryImpl @Inject constructor(
     private val profileService: ProfileService,
-    private val ioDispatcher: CoroutineDispatcher,
+    @IODispatcher private val ioDispatcher: CoroutineDispatcher,
     private val heroDao: HeroDao,
     private val weaponDao: WeaponDao,
     private val relicDao: RelicDao,

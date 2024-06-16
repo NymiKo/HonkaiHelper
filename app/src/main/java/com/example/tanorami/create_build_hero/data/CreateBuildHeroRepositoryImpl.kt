@@ -7,6 +7,7 @@ import com.example.tanorami.data.local.dao.DecorationDao
 import com.example.tanorami.data.local.dao.HeroDao
 import com.example.tanorami.data.local.dao.RelicDao
 import com.example.tanorami.data.local.dao.WeaponDao
+import com.example.tanorami.di.IODispatcher
 import com.example.tanorami.heroes.data.model.Hero
 import com.example.tanorami.viewing_users_build.data.model.FullBuildHeroFromUser
 import kotlinx.coroutines.CoroutineDispatcher
@@ -14,7 +15,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class CreateBuildHeroRepositoryImpl @Inject constructor(
-    private val ioDispatcher: CoroutineDispatcher,
+    @IODispatcher private val ioDispatcher: CoroutineDispatcher,
     private val heroDao: HeroDao,
     private val createBuildHeroService: CreateBuildHeroService,
     private val weaponDao: WeaponDao,

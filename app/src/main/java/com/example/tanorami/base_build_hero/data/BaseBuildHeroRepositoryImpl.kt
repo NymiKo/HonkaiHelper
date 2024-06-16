@@ -2,12 +2,13 @@ package com.example.tanorami.base_build_hero.data
 
 import com.example.tanorami.base_build_hero.data.model.FullBaseBuildHero
 import com.example.tanorami.data.local.dao.HeroDao
+import com.example.tanorami.di.IODispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class BaseBuildHeroRepositoryImpl @Inject constructor(
-    private val ioDispatcher: CoroutineDispatcher,
+    @IODispatcher private val ioDispatcher: CoroutineDispatcher,
     private val heroDao: HeroDao
 ) : BaseBuildHeroRepository {
     override suspend fun getBaseBuildHero(idHero: Int): FullBaseBuildHero =

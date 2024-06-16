@@ -1,5 +1,6 @@
 package com.example.tanorami.auth.login.presentation
 
+import android.util.Printer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,11 +8,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.tanorami.R
 import com.example.tanorami.data.NetworkResult
 import com.example.tanorami.auth.login.domain.LoginRepository
+import com.example.tanorami.data.UserDataStore
 import kotlinx.coroutines.launch
+import java.security.PrivateKey
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(
-    private val repository: LoginRepository
+    private val repository: LoginRepository,
+    private val userDataStore: UserDataStore
 ): ViewModel() {
 
     private val _uiState = MutableLiveData<LoginUiState<Any>>(LoginUiState.IDLE)
@@ -48,10 +52,12 @@ class LoginViewModel @Inject constructor(
 
     private fun loginUser(login: String, password: String) {
         viewModelScope.launch {
-            val result = repository.login(login, password)
-            when(result) {
+            when(val result = repository.login(login, password)) {
                 is NetworkResult.Error -> errorHandler(result.code)
-                is NetworkResult.Success -> _uiState.value = LoginUiState.SUCCESS(result.data.token)
+                is NetworkResult.Success -> {
+                    userDataStore.saveToken(result.data.token)
+                    _uiState.value = LoginUiState.SUCCESS(result.data.token)
+                }
             }
         }
     }

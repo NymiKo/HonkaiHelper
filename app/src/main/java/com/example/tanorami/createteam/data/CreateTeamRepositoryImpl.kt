@@ -5,6 +5,7 @@ import com.example.tanorami.data.NetworkResult
 import com.example.tanorami.data.handleApi
 import com.example.tanorami.data.local.dao.HeroDao
 import com.example.tanorami.data.local.models.hero.HeroWithNameAvatarRarity
+import com.example.tanorami.di.IODispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -12,7 +13,7 @@ import javax.inject.Inject
 class CreateTeamRepositoryImpl @Inject constructor(
     private val createTeamService: CreateTeamService,
     private val heroDao: HeroDao,
-    private val ioDispatcher: CoroutineDispatcher
+    @IODispatcher private val ioDispatcher: CoroutineDispatcher
 ) : CreateTeamRepository {
 
     override suspend fun getHeroesList(): List<ActiveHeroInTeam> = withContext(ioDispatcher) {

@@ -6,6 +6,7 @@ import android.os.Build
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.example.tanorami.di.IODispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -14,7 +15,7 @@ import javax.inject.Inject
 
 class ImageLoaderImpl @Inject constructor(
     private val context: Context,
-    private val ioDispatcher: CoroutineDispatcher
+    @IODispatcher private val ioDispatcher: CoroutineDispatcher
 ) : ImageLoader {
     override suspend fun downloadAndSaveImage(
         imageUrl: String,

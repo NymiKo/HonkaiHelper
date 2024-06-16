@@ -2,12 +2,13 @@ package com.example.tanorami.info_about_hero.data
 
 import com.example.tanorami.info_about_hero.data.model.FullHeroInfo
 import com.example.tanorami.data.local.dao.HeroDao
+import com.example.tanorami.di.IODispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class InfoAboutHeroRepositoryImpl @Inject constructor(
-    private val ioDispatcher: CoroutineDispatcher,
+    @IODispatcher private val ioDispatcher: CoroutineDispatcher,
     private val heroDao: HeroDao
 ) : InfoAboutHeroRepository {
     override suspend fun getHero(idHero: Int): FullHeroInfo {
