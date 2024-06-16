@@ -28,7 +28,7 @@ class ViewingUsersBuildFragment :
     private val viewModel by viewModels<ViewingUsersBuildViewModel> { viewModelFactory }
     private lateinit var mAdapter: ViewingUsersBuildStatsAdapter
 
-    private val idBuild get() = requireArguments().getInt(ARG_ID_BUILD)
+    private val idBuild get() = requireArguments().getLong(ARG_ID_BUILD)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

@@ -12,11 +12,11 @@ interface CreateBuildHeroService {
     suspend fun saveBuild(@Body build: BuildHeroFromUser): Response<Boolean>
 
     @GET("/getHeroBuild.php")
-    suspend fun getBuild(@Query("idBuild") idBuild: Int): Response<BuildHeroFromUser>
+    suspend fun getBuild(@Query("idBuild") idBuild: Long): Response<BuildHeroFromUser>
 
     @POST("/updateBuildHero.php")
     suspend fun updateBuild(@Body build: BuildHeroFromUser): Response<Boolean>
 
     @GET("/deleteBuildHero.php")
-    suspend fun deleteBuild(@Query("idBuild") idBuild: Int): Response<Boolean>
+    suspend fun deleteBuild(@Query("idBuild") idBuild: Long): Response<Boolean>
 }

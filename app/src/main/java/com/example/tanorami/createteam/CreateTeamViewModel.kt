@@ -58,7 +58,7 @@ class CreateTeamViewModel @Inject constructor(
         _selectedHero.value = activeHeroInTeam
     }
 
-    fun saveTeam(idTeam: Int) = viewModelScope.launch {
+    fun saveTeam(idTeam: Long) = viewModelScope.launch {
         _state.value = CreateTeamUIState.LOADING_TEAM_CREATION
         val result = repository.saveTeam(idTeam, _heroListInTeam.value!!)
         when(result) {
@@ -79,7 +79,7 @@ class CreateTeamViewModel @Inject constructor(
         }
     }
 
-    fun getTeam(idTeam: Int) = viewModelScope.launch {
+    fun getTeam(idTeam: Long) = viewModelScope.launch {
         when(val result = repository.getTeam(idTeam)) {
             is NetworkResult.Error -> errorHandler(result.code)
             is NetworkResult.Success -> {
@@ -95,7 +95,7 @@ class CreateTeamViewModel @Inject constructor(
         }
     }
 
-    fun deleteTeam(idTeam: Int) = viewModelScope.launch {
+    fun deleteTeam(idTeam: Long) = viewModelScope.launch {
         when(val result = repository.deleteTeam(idTeam)) {
             is NetworkResult.Error -> errorHandler(result.code)
             is NetworkResult.Success -> {

@@ -1,7 +1,7 @@
 package com.example.tanorami.profile.presentation.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -12,7 +12,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
@@ -24,8 +27,10 @@ import com.example.tanorami.base_build_hero.data.model.Weapon
 import com.example.tanorami.base_components.BaseHeroAvatarAndName
 import com.example.tanorami.base_components.BaseLazyColumn
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
+import com.example.tanorami.core.theme.Black
 import com.example.tanorami.core.theme.Blue
 import com.example.tanorami.core.theme.DarkGray
+import com.example.tanorami.core.theme.GreyTransparent20
 import com.example.tanorami.core.theme.Orange
 import com.example.tanorami.core.theme.Violet
 import com.example.tanorami.info_about_hero.data.model.Decoration
@@ -57,20 +62,27 @@ private fun BuildItem(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .border(1.dp, DarkGray, RoundedCornerShape(16.dp))
-            .shadow(2.dp, RoundedCornerShape(16.dp))
+            .shadow(
+                elevation = 4.dp,
+                shape = RoundedCornerShape(16.dp),
+                spotColor = GreyTransparent20,
+            )
             .clickable {
                 onEditBuildHeroScreen()
-            }
-            .padding(16.dp),
+            },
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
+        border = BorderStroke(1.dp, DarkGray),
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             BaseHeroAvatarAndName(
-                avatarHeroUrl = buildHero.hero.localAvatarPath,
-                nameHero = buildHero.hero.name,
+                hero = buildHero.hero,
             )
 
             HeroWeaponBuild(weapon = buildHero.weapon)
@@ -94,7 +106,7 @@ private fun HeroWeaponBuild(
 
     AsyncImage(
         modifier = modifier
-            .height(108.dp)
+            .height(104.dp)
             .width(65.dp)
             .clip(RoundedCornerShape(16.dp))
             .background(backgroundColor[weapon.rarity], RoundedCornerShape(16.dp)),

@@ -17,7 +17,7 @@ class ViewingUsersBuildViewModel @Inject constructor(
     private val _uiState = MutableLiveData<ViewingUsersBuildUiState>(ViewingUsersBuildUiState.LOADING)
     val uiState: LiveData<ViewingUsersBuildUiState> = _uiState
 
-    fun getHeroBuild(idBuild: Int) = viewModelScope.launch {
+    fun getHeroBuild(idBuild: Long) = viewModelScope.launch {
         ViewingUsersBuildUiState.LOADING
         val result = repository.getHeroBuild(idBuild)
         when(result) {

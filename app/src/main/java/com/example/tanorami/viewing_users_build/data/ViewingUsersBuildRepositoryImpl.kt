@@ -20,7 +20,7 @@ class ViewingUsersBuildRepositoryImpl @Inject constructor(
     private val relicDao: RelicDao,
     private val decorationDao: DecorationDao
 ): ViewingUsersBuildRepository {
-    override suspend fun getHeroBuild(idBuild: Int): NetworkResult<FullBuildHeroFromUser> = withContext(ioDispatcher) {
+    override suspend fun getHeroBuild(idBuild: Long): NetworkResult<FullBuildHeroFromUser> = withContext(ioDispatcher) {
         when(val result = handleApi { viewingUsersBuildService.getHeroBuild(idBuild) }) {
             is NetworkResult.Error -> {
                 return@withContext NetworkResult.Error(result.code)

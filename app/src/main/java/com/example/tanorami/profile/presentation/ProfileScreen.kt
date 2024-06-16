@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.tanorami.R
 import com.example.tanorami.base_components.BaseDefaultText
@@ -64,38 +65,47 @@ private fun ProfileScreenContent(
     uiState: ProfileScreenUiState,
     onEvents: (event: ProfileScreenEvents) -> Unit,
 ) {
-    if (uiState.isAuthorized) {
-        Scaffold(modifier = modifier.background(MaterialTheme.colorScheme.background), topBar = {
-            ProfileTopAppBar(
-                onEditNicknameScreen = { onEvents(ProfileScreenEvents.OnChangeNicknameScreen) },
-                logoutAccountClick = { onEvents(ProfileScreenEvents.LogoutAccount) }
-            )
-        }) { innerPadding ->
-            Column(
-                modifier = Modifier
-                    .padding(innerPadding)
-                    .fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(30.dp),
-            ) {
-                AvatarAndNickname(
-                    avatarUrl = uiState.profileData.avatarUrl ?: "",
-                    nickname = uiState.profileData.nickname
+    when {
+        uiState.isAuthorized && !uiState.isLoading && !uiState.isError -> {
+            Scaffold(modifier = modifier.background(MaterialTheme.colorScheme.background), topBar = {
+                ProfileTopAppBar(
+                    onEditNicknameScreen = { onEvents(ProfileScreenEvents.OnChangeNicknameScreen) },
+                    logoutAccountClick = { onEvents(ProfileScreenEvents.LogoutAccount) }
                 )
+            }) { innerPadding ->
+                Column(
+                    modifier = Modifier
+                        .padding(innerPadding)
+                        .fillMaxSize(),
+                    verticalArrangement = Arrangement.spacedBy(30.dp),
+                ) {
+                    AvatarAndNickname(
+                        avatarUrl = uiState.profileData.avatarUrl ?: "",
+                        nickname = uiState.profileData.nickname
+                    )
 
-                TeamsAndBuildsInProfile(
-                    heroesBuildsList = uiState.profileData.buildsHeroes,
-                    teamsList = uiState.profileData.teamsList,
-                    onEditBuildHeroScreen = { onEvents(ProfileScreenEvents.OnEditBuildHeroScreen(it)) },
-                    onEditTeamScreen = { onEvents(ProfileScreenEvents.OnEditTeamScreen(it)) },
-                )
+                    TeamsAndBuildsInProfile(
+                        heroesBuildsList = uiState.profileData.buildsHeroes,
+                        teamsList = uiState.profileData.teamsList,
+                        onEditBuildHeroScreen = { onEvents(ProfileScreenEvents.OnEditBuildHeroScreen(it)) },
+                        onEditTeamScreen = { onEvents(ProfileScreenEvents.OnEditTeamScreen(it)) },
+                    )
+                }
             }
         }
-    } else {
-        UserNotLoggedComponent(
-            onLoginScreen = { onEvents(ProfileScreenEvents.OnLoginScreen) }
-        )
+
+        !uiState.isAuthorized && !uiState.isLoading && !uiState.isError -> {
+            UserNotLoggedComponent(
+                onLoginScreen = { onEvents(ProfileScreenEvents.OnLoginScreen) }
+            )
+        }
+
+        uiState.isLoading -> {
+            Box(modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background))
+        }
     }
-    Log.e("TOKEN", uiState.profileData.toString())
 }
 
 @Composable
@@ -150,7 +160,8 @@ private fun NicknameText(
 ) {
     BaseDefaultText(
         modifier = modifier.fillMaxWidth(),
-        text = nickname
+        text = nickname,
+        fontSize  = 24.sp,
     )
 }
 

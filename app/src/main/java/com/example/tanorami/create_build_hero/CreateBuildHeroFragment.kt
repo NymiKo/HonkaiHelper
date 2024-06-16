@@ -36,7 +36,7 @@ class CreateBuildHeroFragment :
     private lateinit var mStatsAdapter: CreateBuildHeroStatsAdapter
 
     private val idHero get() = requireArguments().getInt(ARG_ID_HERO)
-    private val idBuild get() = requireArguments().getInt(ARG_ID_BUILD)
+    private val idBuild get() = requireArguments().getLong(ARG_ID_BUILD)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -46,7 +46,7 @@ class CreateBuildHeroFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (idBuild != -1) viewModel.getBuild(idBuild)
+        if (idBuild != -1L) viewModel.getBuild(idBuild)
         if (idHero != -1) viewModel.getHero(idHero)
         setFragmentResultListener("equipment_key") { key, bundle ->
             val equipment = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -235,7 +235,7 @@ class CreateBuildHeroFragment :
         binding.buttonSaveBuild.apply {
             size = FloatingActionButton.SIZE_MINI
             setOnClickListener {
-                if (idBuild == -1) setupSaveDialog(R.string.adding_your_build, R.string.add_the_created_build)
+                if (idBuild == -1L) setupSaveDialog(R.string.adding_your_build, R.string.add_the_created_build)
                 else setupSaveDialog(R.string.update_your_build, R.string.update_the_build)
             }
         }
@@ -273,7 +273,7 @@ class CreateBuildHeroFragment :
         binding.toolbarCreateBuildHero.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
-        if (idBuild != -1) {
+        if (idBuild != -1L) {
             binding.toolbarCreateBuildHero.apply {
                 title = getString(R.string.edit_build)
                 inflateMenu(R.menu.create_build_and_team_menu)

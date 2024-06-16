@@ -2,9 +2,9 @@ package com.example.tanorami.base_components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
@@ -19,14 +19,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.tanorami.core.theme.Grey500
+import com.example.tanorami.core.theme.DarkGray
+import com.example.tanorami.core.theme.Orange
+import com.example.tanorami.core.theme.Violet
 import com.example.tanorami.core.theme.White
+import com.example.tanorami.data.local.models.hero.HeroWithNameAvatarRarity
 
 @Composable
 fun BaseHeroAvatarAndName(
     modifier: Modifier = Modifier,
-    avatarHeroUrl: String,
-    nameHero: String
+    hero: HeroWithNameAvatarRarity
 ) {
     Box(
         modifier = modifier
@@ -34,8 +36,8 @@ fun BaseHeroAvatarAndName(
             .width(80.dp)
             .clip(RoundedCornerShape(topEnd = 16.dp)),
     ) {
-        HeroAvatar(avatarHeroUrl = avatarHeroUrl)
-        HeroName(modifier = Modifier.align(Alignment.BottomCenter), nameHero = nameHero)
+        HeroAvatar(avatarHeroUrl = hero.localAvatarPath, rarity = hero.rarity)
+        HeroName(modifier = Modifier.align(Alignment.BottomCenter), nameHero = hero.name)
     }
 }
 
@@ -43,9 +45,17 @@ fun BaseHeroAvatarAndName(
 private fun HeroAvatar(
     modifier: Modifier = Modifier,
     avatarHeroUrl: String,
+    rarity: Boolean,
 ) {
+    val backgroundColor = arrayOf(Violet, Orange)
+
     AsyncImage(
-        modifier = modifier,
+        modifier = modifier
+            .fillMaxSize()
+            .background(
+                color = if (rarity) backgroundColor[1] else backgroundColor[0],
+                shape = RoundedCornerShape(topEnd = 16.dp)
+            ),
         model = avatarHeroUrl,
         contentDescription = null,
         contentScale = ContentScale.Crop,
@@ -59,9 +69,9 @@ private fun HeroName(
 ) {
     Text(
         modifier = modifier
+            .height(25.dp)
             .fillMaxWidth()
-            .background(Grey500)
-            .padding(4.dp),
+            .background(DarkGray),
         text = nameHero,
         textAlign = TextAlign.Center,
         color = White,
@@ -74,7 +84,11 @@ private fun HeroName(
 @Composable
 private fun HeroAvatarAndNamePreview() {
     BaseHeroAvatarAndName(
-        avatarHeroUrl = "http://f0862137.xsph.ru/images/hero_icon/jingliu.webp",
-        nameHero = "Цзинлю"
+        hero = HeroWithNameAvatarRarity(
+            id = 1,
+            name = "Hero 1",
+            localAvatarPath = "",
+            rarity = true
+        )
     )
 }

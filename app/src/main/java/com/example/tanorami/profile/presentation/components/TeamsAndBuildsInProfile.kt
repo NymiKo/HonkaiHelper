@@ -12,6 +12,8 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
+import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -44,7 +46,15 @@ fun TeamsAndBuildsInProfile(
         TabRow(
             modifier = Modifier.padding(horizontal = 16.dp).fillMaxWidth(),
             selectedTabIndex = pagerState.currentPage,
-            contentColor = MaterialTheme.colorScheme.secondary
+            contentColor = MaterialTheme.colorScheme.secondary,
+            indicator = {tabPositions ->
+                if (pagerState.currentPage < tabPositions.size) {
+                    TabRowDefaults.SecondaryIndicator(
+                        modifier = Modifier.tabIndicatorOffset(tabPositions[pagerState.currentPage]),
+                        color = MaterialTheme.colorScheme.secondary,
+                    )
+                }
+            }
         ) {
             tabs.forEachIndexed { index, title ->
                 TabItem(
@@ -101,7 +111,8 @@ private fun TabsContent(
     HorizontalPager(
         modifier = modifier,
         state = pagerState,
-        contentPadding = PaddingValues(start = 16.dp, end =  16.dp, bottom =  16.dp),
+        contentPadding = PaddingValues(start = 16.dp, end =  16.dp),
+        pageSpacing = 32.dp,
     ) { index ->
         when (index) {
             0 -> {

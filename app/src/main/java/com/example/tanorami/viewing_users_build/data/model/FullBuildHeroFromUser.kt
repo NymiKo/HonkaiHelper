@@ -6,7 +6,7 @@ import com.example.tanorami.info_about_hero.data.model.Decoration
 import com.example.tanorami.info_about_hero.data.model.Relic
 
 data class FullBuildHeroFromUser(
-    val idBuild: Int,
+    val idBuild: Long,
     val hero: HeroWithNameAvatarRarity,
     val weapon: Weapon,
     val relicTwoParts: Relic,

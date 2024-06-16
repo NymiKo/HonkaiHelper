@@ -12,11 +12,11 @@ interface CreateTeamService {
     suspend fun saveTeam(@Body heroesList: List<Int>): Response<Unit>
 
     @GET("/getTeam.php")
-    suspend fun getTeam(@Query("idTeam") idTeam: Int): Response<TeamHeroResponse>
+    suspend fun getTeam(@Query("idTeam") idTeam: Long): Response<TeamHeroResponse>
 
     @GET("/updateTeam.php")
-    suspend fun updateTeam(@Query("idTeam") idTeam: Int, @Query("heroesList[]") heroesList: List<Int>): Response<Unit>
+    suspend fun updateTeam(@Query("idTeam") idTeam: Long, @Query("heroesList[]") heroesList: List<Int>): Response<Unit>
 
     @GET("/deleteTeam.php")
-    suspend fun deleteTeam(@Query("idTeam") idTeam: Int): Response<Boolean>
+    suspend fun deleteTeam(@Query("idTeam") idTeam: Long): Response<Boolean>
 }

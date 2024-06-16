@@ -8,6 +8,6 @@ import com.example.tanorami.viewing_users_build.data.model.FullBuildHeroFromUser
 interface CreateBuildHeroRepository {
     suspend fun getHero(idHero: Int): Hero
     suspend fun saveBuild(buildHeroFromUser: BuildHeroFromUser): NetworkResult<Boolean>
-    suspend fun getBuild(idBuild: Int): NetworkResult<FullBuildHeroFromUser>
-    suspend fun deleteBuild(idBuild: Int): NetworkResult<Boolean>
+    suspend fun getBuild(idBuild: Long): NetworkResult<FullBuildHeroFromUser>
+    suspend fun deleteBuild(idBuild: Long): NetworkResult<Boolean>
 }

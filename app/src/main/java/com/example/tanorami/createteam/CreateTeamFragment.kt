@@ -31,7 +31,7 @@ class CreateTeamFragment :
     private lateinit var mAdapterForViewTeam: CreateTeamAdapter
     private lateinit var mAdapterHeroList: HeroListInCreateTeamAdapter
 
-    private val idTeam get() = requireArguments().getInt(ARG_ID_TEAM, -1)
+    private val idTeam get() = requireArguments().getLong(ARG_ID_TEAM, -1)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -41,7 +41,7 @@ class CreateTeamFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (idTeam != -1) viewModel.getTeam(idTeam)
+        if (idTeam != -1L) viewModel.getTeam(idTeam)
     }
 
     override fun setupView() {
@@ -163,7 +163,7 @@ class CreateTeamFragment :
         binding.buttonGoSetupTeam.size = FloatingActionButton.SIZE_MINI
         binding.buttonGoSetupTeam.setOnClickListener {
             if (mAdapterForViewTeam.mHeroListInTeam.size == 4) {
-                if (idTeam == -1) setupSaveDialog(R.string.adding_a_command, R.string.add_the_created_command)
+                if (idTeam == -1L) setupSaveDialog(R.string.adding_a_command, R.string.add_the_created_command)
                 else setupSaveDialog(R.string.update_a_command, R.string.update_the_command)
             } else {
                 toast(requireActivity(), R.string.should_be_4_heroes_in_the_team)
@@ -172,7 +172,7 @@ class CreateTeamFragment :
     }
 
     private fun setupToolbar() {
-        if (idTeam != -1) {
+        if (idTeam != -1L) {
             binding.materialToolbar.title = getString(R.string.edit_team)
             binding.materialToolbar.inflateMenu(R.menu.create_build_and_team_menu)
             binding.materialToolbar.setOnMenuItemClickListener {

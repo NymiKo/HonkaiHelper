@@ -27,11 +27,11 @@ class CreateBuildHeroRepositoryImpl @Inject constructor(
     }
 
     override suspend fun saveBuild(buildHeroFromUser: BuildHeroFromUser): NetworkResult<Boolean> = withContext(ioDispatcher) {
-        if (buildHeroFromUser.idBuild == -1) return@withContext handleApi { createBuildHeroService.saveBuild(buildHeroFromUser) }
+        if (buildHeroFromUser.idBuild == -1L) return@withContext handleApi { createBuildHeroService.saveBuild(buildHeroFromUser) }
         else return@withContext handleApi { createBuildHeroService.updateBuild(buildHeroFromUser) }
     }
 
-    override suspend fun getBuild(idBuild: Int): NetworkResult<FullBuildHeroFromUser> = withContext(ioDispatcher) {
+    override suspend fun getBuild(idBuild: Long): NetworkResult<FullBuildHeroFromUser> = withContext(ioDispatcher) {
         when(val result = handleApi { createBuildHeroService.getBuild(idBuild) }) {
             is NetworkResult.Error -> {
                 return@withContext NetworkResult.Error(result.code)
@@ -53,7 +53,7 @@ class CreateBuildHeroRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun deleteBuild(idBuild: Int): NetworkResult<Boolean> = withContext(ioDispatcher) {
+    override suspend fun deleteBuild(idBuild: Long): NetworkResult<Boolean> = withContext(ioDispatcher) {
         return@withContext handleApi { createBuildHeroService.deleteBuild(idBuild) }
     }
 }

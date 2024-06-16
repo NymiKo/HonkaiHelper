@@ -6,7 +6,7 @@ import com.example.tanorami.data.local.models.hero.HeroWithNameAvatarRarity
 
 interface CreateTeamRepository {
     suspend fun getHeroesList(): List<ActiveHeroInTeam>
-    suspend fun saveTeam(idTeam: Int, heroesList: List<HeroWithNameAvatarRarity>): NetworkResult<Unit>
-    suspend fun getTeam(idTeam: Int): NetworkResult<List<HeroWithNameAvatarRarity>>
-    suspend fun deleteTeam(idTeam: Int): NetworkResult<Boolean>
+    suspend fun saveTeam(idTeam: Long, heroesList: List<HeroWithNameAvatarRarity>): NetworkResult<Unit>
+    suspend fun getTeam(idTeam: Long): NetworkResult<List<HeroWithNameAvatarRarity>>
+    suspend fun deleteTeam(idTeam: Long): NetworkResult<Boolean>
 }

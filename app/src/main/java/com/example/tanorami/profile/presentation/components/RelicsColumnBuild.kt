@@ -22,7 +22,7 @@ fun RelicsColumnBuild(
 ) {
     Column(
         modifier = modifier,
-        verticalArrangement  = Arrangement.spacedBy(8.dp),
+        verticalArrangement  = Arrangement.spacedBy(4.dp),
     ) {
         RelicImage(
             relicImage = relicTwoParts.image

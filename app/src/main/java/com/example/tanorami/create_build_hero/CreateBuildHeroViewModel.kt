@@ -61,7 +61,7 @@ class CreateBuildHeroViewModel @Inject constructor(
         statsEquipmentList[positionItem] = value
     }
 
-    fun saveBuild(idBuild: Int?) {
+    fun saveBuild(idBuild: Long?) {
         if (!checkForNull(_weapon.value, R.string.empty_weapon_in_create_build)) {
             return
         }
@@ -117,7 +117,7 @@ class CreateBuildHeroViewModel @Inject constructor(
         }
     }
 
-    fun getBuild(idBuild: Int) = viewModelScope.launch {
+    fun getBuild(idBuild: Long) = viewModelScope.launch {
         when (val result = repository.getBuild(idBuild)) {
             is NetworkResult.Error -> {
                 errorHandler(result.code)
@@ -134,7 +134,7 @@ class CreateBuildHeroViewModel @Inject constructor(
         }
     }
 
-    fun deleteBuild(idBuild: Int) = viewModelScope.launch {
+    fun deleteBuild(idBuild: Long) = viewModelScope.launch {
         when (val result = repository.deleteBuild(idBuild)) {
             is NetworkResult.Error -> {
                 errorHandler(result.code)

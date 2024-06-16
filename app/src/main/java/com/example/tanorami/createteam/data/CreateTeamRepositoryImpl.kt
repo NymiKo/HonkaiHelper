@@ -20,9 +20,9 @@ class CreateTeamRepositoryImpl @Inject constructor(
         return@withContext heroDao.getHeroWithNameAvatarRarityList().sortedBy { it.name }.map { ActiveHeroInTeam(it, false) }
     }
 
-    override suspend fun saveTeam(idTeam: Int, heroesList: List<HeroWithNameAvatarRarity>): NetworkResult<Unit> {
+    override suspend fun saveTeam(idTeam: Long, heroesList: List<HeroWithNameAvatarRarity>): NetworkResult<Unit> {
         return withContext(ioDispatcher) {
-            if (idTeam != -1) {
+            if (idTeam != -1L) {
                 handleApi { createTeamService.updateTeam(idTeam,
                     heroesList.sortedBy { hero -> hero.id }.map { hero -> hero.id })
                 }
@@ -35,7 +35,7 @@ class CreateTeamRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getTeam(idTeam: Int): NetworkResult<List<HeroWithNameAvatarRarity>> = withContext(ioDispatcher) {
+    override suspend fun getTeam(idTeam: Long): NetworkResult<List<HeroWithNameAvatarRarity>> = withContext(ioDispatcher) {
         when(val result = handleApi { createTeamService.getTeam(idTeam) }) {
             is NetworkResult.Error -> {
                 return@withContext NetworkResult.Error(result.code)
@@ -53,7 +53,7 @@ class CreateTeamRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun deleteTeam(idTeam: Int): NetworkResult<Boolean> = withContext(ioDispatcher) {
+    override suspend fun deleteTeam(idTeam: Long): NetworkResult<Boolean> = withContext(ioDispatcher) {
         return@withContext handleApi { createTeamService.deleteTeam(idTeam) }
     }
 }
