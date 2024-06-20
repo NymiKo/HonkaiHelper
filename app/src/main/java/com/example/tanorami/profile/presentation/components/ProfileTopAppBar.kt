@@ -4,12 +4,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -71,6 +73,8 @@ private fun MenuItemLogoutAccount(
     modifier: Modifier = Modifier,
     logoutAccountClick: () -> Unit
 ) {
+    var openExitAccountAlertDialog by remember  { mutableStateOf(false)  }
+
     DropdownMenuItem(
         modifier = modifier,
         text = {
@@ -79,8 +83,49 @@ private fun MenuItemLogoutAccount(
                 color = MaterialTheme.colorScheme.secondary
             )
         },
-        onClick = { logoutAccountClick() },
+        onClick = {
+            openExitAccountAlertDialog = true
+        },
         trailingIcon = { Icon(imageVector = Icons.AutoMirrored.Filled.ExitToApp, contentDescription = null, tint = MaterialTheme.colorScheme.secondary)  }
+    )
+
+    if (openExitAccountAlertDialog) {
+        ExitAccountAlertDialog(
+            onDismissRequest = { openExitAccountAlertDialog = false },
+            onConfirmation = {
+                openExitAccountAlertDialog = false
+                logoutAccountClick()
+            }
+        )
+    }
+}
+
+@Composable
+private fun ExitAccountAlertDialog(
+    modifier: Modifier = Modifier,
+    onConfirmation: () -> Unit,
+    onDismissRequest: () -> Unit,
+) {
+    AlertDialog(
+        modifier = modifier,
+        text = {
+            Text(text = stringResource(id = R.string.want_to_logout_of_your_account))
+        },
+        onDismissRequest = { onDismissRequest() },
+        confirmButton = {
+            TextButton(
+                onClick = { onConfirmation() }
+            ) {
+                Text(text = stringResource(id = R.string.yes))
+            }
+        },
+        dismissButton = {
+            TextButton(
+                onClick = { onDismissRequest() }
+            ) {
+                Text(text = stringResource(id = R.string.cancellation))
+            }
+        }
     )
 }
 

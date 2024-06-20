@@ -21,6 +21,8 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.tanorami.R
 import com.example.tanorami.equipment.data.model.Equipment
+import java.io.File
+import java.io.FileInputStream
 
 const val TOKEN = "token"
 const val USER = "USER"
@@ -121,4 +123,18 @@ fun Context.themeColor(
     ).use {
         it.getColor(0, Color.MAGENTA)
     }
+}
+
+fun Uri.toFile(context: Context): File  {
+    var file: File? = null
+    context.contentResolver.openFileDescriptor(this, "r", null).use { parcelFileDescriptor ->
+        FileInputStream(parcelFileDescriptor?.fileDescriptor).use { inputStream  ->
+            val tempFile = File(context.cacheDir, context.contentResolver.getFileName(this))
+            tempFile.outputStream().use { fileOutput ->
+                inputStream.copyTo(fileOutput)
+            }
+            file = tempFile
+        }
+    }
+    return checkNotNull(file)
 }

@@ -90,73 +90,6 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-//        val token = getSharedPrefUser().getString(TOKEN, "")
-//        if (!token.isNullOrEmpty()) viewModel.onEvent(ProfileScreenEvents.FetchProfile)
-//        uiStateHandle()
-        //setupView()
-    }
-
-    fun setupView() {
-        //setupViewPager()
-        setupAvatarImageClickListener()
-        //setupProfileTeamsAndBuilds()
-    }
-
-//    fun uiStateHandle() {
-//        viewModel.uiState.observe(viewLifecycleOwner) {
-//            when (it) {
-//                is ProfileUiState.ERROR -> {
-//                    toast(requireActivity(), it.message)
-//                }
-//
-//                is ProfileUiState.LOADING -> {
-//                    showLoading()
-//                }
-//
-//                is ProfileUiState.NOT_AUTHORIZED -> {
-//                    showUiNotAuthorized()
-//                }
-//
-//                is ProfileUiState.SUCCESS -> {
-//                    showUiProfile()
-//                    loadProfile(it.user)
-//                }
-//            }
-//        }
-//    }
-
-//    private fun showLoading() {
-//        binding.composeView.gone()
-//        binding.groupUserProfile.gone()
-//        binding.toolbarProfile.invisible()
-//        binding.shimmerLayoutProfile.showShimmer(true)
-//    }
-//
-//    private fun showUiNotAuthorized() {
-//        binding.shimmerLayoutProfile.gone()
-//        binding.shimmerLayoutProfile.stopShimmer()
-//        binding.groupUserProfile.gone()
-//        binding.toolbarProfile.gone()
-//        binding.composeView.visible()
-//    }
-//
-//    private fun showUiProfile() {
-//        binding.toolbarProfile.visible()
-//        binding.groupUserProfile.visible()
-//        binding.shimmerLayoutProfile.gone()
-//        binding.shimmerLayoutProfile.stopShimmer()
-//        binding.composeView.gone()
-//    }
-//
-//    private fun loadProfile(user: User) {
-//        binding.imageUserAvatar.loadWithPlaceholder(user.avatarUrl ?: "", R.drawable.ic_person)
-//        if (!user.avatarUrl.isNullOrEmpty()) binding.imageUserAvatar.imageTintList = null
-//        binding.textUserLogin.text = user.nickname
-//        mAdapter.list = listOf(user.buildsHeroes, user.teamsList)
-//    }
-
     private fun setupViewPager() {
         mAdapter = ViewPagerTeamsAndBuildsAdapter(object : ViewPagerTeamsAndBuildsListener {
             override fun onBuildClick(idBuild: Int) {
@@ -167,35 +100,8 @@ class ProfileFragment : Fragment() {
                 //findNavController().navigate(R.id.createTeamFragment, CreateTeamFragment.newInstance(idTeam))
             }
         })
-        //binding.viewPagerProfileTeamsAndBuilds.adapter = mAdapter
     }
 
-//    private fun setupProfileTeamsAndBuilds() {
-//        TabLayoutMediator(binding.tabLayoutProfileTeams, binding.viewPagerProfileTeamsAndBuilds) { tab, position ->
-//            when(position) {
-//                0 -> tab.text = getString(R.string.my_builds)
-//                1 -> tab.text = getString(R.string.my_teams)
-//            }
-//        }.attach()
-//    }
-
-    private fun setupAvatarImageClickListener() {
-//        binding.imageUserAvatar.setOnClickListener {
-//            selectImageIntent.launch("image/*")
-//        }
-    }
-
-    private fun loadAvatar(uri: Uri) {
-        //binding.imageUserAvatar.load(uri)
-        val parcelFileDescriptor =
-            requireActivity().contentResolver.openFileDescriptor(uri, "r", null)
-        val inputStream = FileInputStream(parcelFileDescriptor?.fileDescriptor)
-        val file =
-            File(requireActivity().cacheDir, requireActivity().contentResolver.getFileName(uri))
-        val outputStream = FileOutputStream(file)
-        inputStream.copyTo(outputStream)
-        viewModel.loadAvatar(file)
-    }
 
     private fun showDialogExitOfAccount() {
         AlertDialog.Builder(requireActivity())

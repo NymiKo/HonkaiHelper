@@ -1,6 +1,10 @@
 package com.example.tanorami.profile.presentation
 
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,12 +21,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,9 +38,11 @@ import com.example.tanorami.base.shimmerEffect
 import com.example.tanorami.base_components.BaseDefaultText
 import com.example.tanorami.core.theme.Blue
 import com.example.tanorami.core.theme.White
+import com.example.tanorami.profile.presentation.components.ErrorComponent
 import com.example.tanorami.profile.presentation.components.ProfileTopAppBar
 import com.example.tanorami.profile.presentation.components.TeamsAndBuildsInProfile
 import com.example.tanorami.profile.presentation.components.UserNotLoggedComponent
+import com.example.tanorami.utils.toFile
 
 @Composable
 fun ProfileScreen(
@@ -47,11 +55,10 @@ fun ProfileScreen(
 ) {
     ProfileScreenContent(
         modifier = modifier,
-        uiState = viewModel.profileUiState,
+        uiState = viewModel.profileUiState.collectAsState().value,
         onEvents = { event ->
             when (event) {
-                ProfileScreenEvents.ChangeAvatar -> {}
-                ProfileScreenEvents.OnChangeNicknameScreen -> onChangeNicknameScreen(viewModel.profileUiState.profileData.nickname)
+                ProfileScreenEvents.OnChangeNicknameScreen -> onChangeNicknameScreen("")
                 is ProfileScreenEvents.OnEditBuildHeroScreen -> onEditBuildHeroScreen(event.idBuild)
                 is ProfileScreenEvents.OnEditTeamScreen -> onEditTeamScreen(event.idTeam)
                 ProfileScreenEvents.OnLoginScreen -> onLoginScreen()
@@ -68,8 +75,16 @@ private fun ProfileScreenContent(
     uiState: ProfileScreenUiState,
     onEvents: (event: ProfileScreenEvents) -> Unit,
 ) {
-    when {
-        uiState.isAuthorized && !uiState.isLoading && !uiState.isError -> {
+    val context = LocalContext.current
+    val launcher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()) { uri: Uri? ->
+            uri?.let {
+                onEvents(ProfileScreenEvents.UploadAvatarOnServer(uri.toFile(context)))
+            }
+        }
+
+    when (uiState) {
+        is ProfileScreenUiState.Success -> {
             Scaffold(
                 modifier = modifier.background(MaterialTheme.colorScheme.background),
                 topBar = {
@@ -85,13 +100,14 @@ private fun ProfileScreenContent(
                     verticalArrangement = Arrangement.spacedBy(30.dp),
                 ) {
                     AvatarAndNickname(
-                        avatarUrl = uiState.profileData.avatarUrl ?: "",
-                        nickname = uiState.profileData.nickname
+                        avatarUrl = uiState.user.avatarUrl ?: "",
+                        nickname = uiState.user.nickname,
+                        uploadAvatarOnServer = { launcher.launch("image/*") }
                     )
 
                     TeamsAndBuildsInProfile(
-                        heroesBuildsList = uiState.profileData.buildsHeroes,
-                        teamsList = uiState.profileData.teamsList,
+                        heroesBuildsList = uiState.user.buildsHeroes,
+                        teamsList = uiState.user.teamsList,
                         onEditBuildHeroScreen = {
                             onEvents(
                                 ProfileScreenEvents.OnEditBuildHeroScreen(
@@ -105,21 +121,36 @@ private fun ProfileScreenContent(
             }
         }
 
-        !uiState.isAuthorized && !uiState.isLoading && !uiState.isError -> {
+        ProfileScreenUiState.NotAuthorized -> {
             UserNotLoggedComponent(
                 onLoginScreen = { onEvents(ProfileScreenEvents.OnLoginScreen) }
             )
         }
 
-        uiState.isLoading -> {
+        ProfileScreenUiState.Loading -> {
             ShimmerLoading()
+        }
+
+        is ProfileScreenUiState.Error -> {
+            ErrorComponent(loadingProfile = { onEvents(ProfileScreenEvents.FetchProfile) })
+        }
+
+        ProfileScreenUiState.Empty -> {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background),
+            )
         }
     }
 }
 
 @Composable
 private fun AvatarAndNickname(
-    modifier: Modifier = Modifier, avatarUrl: String, nickname: String
+    modifier: Modifier = Modifier,
+    avatarUrl: String,
+    nickname: String,
+    uploadAvatarOnServer: () -> Unit,
 ) {
     Row(
         modifier = modifier
@@ -127,14 +158,16 @@ private fun AvatarAndNickname(
             .padding(vertical = 8.dp, horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        AvatarImage(avatarUrl = avatarUrl)
+        AvatarImage(avatarUrl = avatarUrl, uploadAvatarOnServer = uploadAvatarOnServer::invoke)
         NicknameText(nickname = nickname)
     }
 }
 
 @Composable
 private fun AvatarImage(
-    modifier: Modifier = Modifier, avatarUrl: String
+    modifier: Modifier = Modifier,
+    avatarUrl: String,
+    uploadAvatarOnServer: () -> Unit,
 ) {
     Box(
         modifier = modifier.size(100.dp)
@@ -143,6 +176,7 @@ private fun AvatarImage(
             modifier = modifier
                 .fillMaxSize()
                 .clip(RoundedCornerShape(16.dp))
+                .clickable { uploadAvatarOnServer() }
                 .background(MaterialTheme.colorScheme.secondary, RoundedCornerShape(16.dp)),
             model = avatarUrl,
             contentDescription = null,
@@ -180,7 +214,9 @@ private fun ShimmerLoading(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.fillMaxSize().background(MaterialTheme.colorScheme.background),
+        modifier = modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background),
     ) {
         TopAppBar(title = { })
         Row(
@@ -209,6 +245,6 @@ private fun ShimmerLoading(
 @Preview
 @Composable
 private fun ProfileScreenPreview() {
-    ProfileScreenContent(uiState = ProfileScreenUiState(), onEvents = {})
+    ProfileScreenContent(uiState = ProfileScreenUiState.Loading, onEvents = {})
 }
 

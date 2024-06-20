@@ -1,17 +1,13 @@
 package com.example.tanorami.profile.presentation
 
-import android.util.Log
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tanorami.R
 import com.example.tanorami.data.NetworkResult
 import com.example.tanorami.data.UserDataStore
 import com.example.tanorami.profile.domain.ProfileRepository
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
@@ -21,18 +17,14 @@ class ProfileViewModel @Inject constructor(
     private val userDataStore: UserDataStore,
 ) : ViewModel() {
 
-    internal var profileUiState by mutableStateOf(ProfileScreenUiState())
-        private set
+    private var _profileUiState = MutableStateFlow<ProfileScreenUiState>(ProfileScreenUiState.Empty)
+    val profileUiState = _profileUiState.asStateFlow()
 
     init {
-        viewModelScope.launch  {
+        viewModelScope.launch {
             userDataStore.tokenUser.collect {
                 if (it == "") {
-                    profileUiState = profileUiState.copy(
-                        isError = false,
-                        isLoading = false,
-                        isAuthorized = false,
-                    )
+                    _profileUiState.value = ProfileScreenUiState.NotAuthorized
                 } else {
                     getProfile()
                 }
@@ -44,34 +36,23 @@ class ProfileViewModel @Inject constructor(
         when (event) {
             ProfileScreenEvents.LogoutAccount -> logoutAccount()
             ProfileScreenEvents.FetchProfile -> getProfile()
-            is ProfileScreenEvents.LoadAvatar -> loadAvatar(event.file)
+            is ProfileScreenEvents.UploadAvatarOnServer -> loadAvatar(event.file)
             else -> Unit
         }
     }
 
     private fun getProfile() = viewModelScope.launch {
-        profileUiState = profileUiState.copy(isLoading = true)
+        _profileUiState.value = ProfileScreenUiState.Loading
         when (val result = repository.getProfile()) {
-            is NetworkResult.Error -> profileUiState = profileUiState.copy(
-                isError = true,
-                isLoading = false,
-                errorMessage = errorHandler(result.code),
-            )
+            is NetworkResult.Error -> _profileUiState.value = ProfileScreenUiState.Error(result.code)
 
-            is NetworkResult.Success -> {
-                profileUiState = profileUiState.copy(
-                    isError = false,
-                    isLoading = false,
-                    profileData = result.data,
-                    isAuthorized = true,
-                )
-            }
+            is NetworkResult.Success -> _profileUiState.value = ProfileScreenUiState.Success(result.data)
         }
     }
 
     private fun logoutAccount() = viewModelScope.launch {
         userDataStore.clearToken()
-        profileUiState = profileUiState.copy(isAuthorized = false)
+        _profileUiState.value = ProfileScreenUiState.NotAuthorized
     }
 
     fun loadAvatar(file: File) = viewModelScope.launch {
