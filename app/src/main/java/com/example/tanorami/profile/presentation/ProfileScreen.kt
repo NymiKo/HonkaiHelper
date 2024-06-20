@@ -1,6 +1,5 @@
 package com.example.tanorami.profile.presentation
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -8,12 +7,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.tanorami.R
+import com.example.tanorami.base.shimmerEffect
 import com.example.tanorami.base_components.BaseDefaultText
 import com.example.tanorami.core.theme.Blue
 import com.example.tanorami.core.theme.White
@@ -67,12 +70,14 @@ private fun ProfileScreenContent(
 ) {
     when {
         uiState.isAuthorized && !uiState.isLoading && !uiState.isError -> {
-            Scaffold(modifier = modifier.background(MaterialTheme.colorScheme.background), topBar = {
-                ProfileTopAppBar(
-                    onEditNicknameScreen = { onEvents(ProfileScreenEvents.OnChangeNicknameScreen) },
-                    logoutAccountClick = { onEvents(ProfileScreenEvents.LogoutAccount) }
-                )
-            }) { innerPadding ->
+            Scaffold(
+                modifier = modifier.background(MaterialTheme.colorScheme.background),
+                topBar = {
+                    ProfileTopAppBar(
+                        onEditNicknameScreen = { onEvents(ProfileScreenEvents.OnChangeNicknameScreen) },
+                        logoutAccountClick = { onEvents(ProfileScreenEvents.LogoutAccount) }
+                    )
+                }) { innerPadding ->
                 Column(
                     modifier = Modifier
                         .padding(innerPadding)
@@ -87,7 +92,13 @@ private fun ProfileScreenContent(
                     TeamsAndBuildsInProfile(
                         heroesBuildsList = uiState.profileData.buildsHeroes,
                         teamsList = uiState.profileData.teamsList,
-                        onEditBuildHeroScreen = { onEvents(ProfileScreenEvents.OnEditBuildHeroScreen(it)) },
+                        onEditBuildHeroScreen = {
+                            onEvents(
+                                ProfileScreenEvents.OnEditBuildHeroScreen(
+                                    it
+                                )
+                            )
+                        },
                         onEditTeamScreen = { onEvents(ProfileScreenEvents.OnEditTeamScreen(it)) },
                     )
                 }
@@ -101,9 +112,7 @@ private fun ProfileScreenContent(
         }
 
         uiState.isLoading -> {
-            Box(modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background))
+            ShimmerLoading()
         }
     }
 }
@@ -161,8 +170,40 @@ private fun NicknameText(
     BaseDefaultText(
         modifier = modifier.fillMaxWidth(),
         text = nickname,
-        fontSize  = 24.sp,
+        fontSize = 24.sp,
     )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun ShimmerLoading(
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier.fillMaxSize().background(MaterialTheme.colorScheme.background),
+    ) {
+        TopAppBar(title = { })
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp, horizontal = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(100.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .shimmerEffect(),
+            )
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(30.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .shimmerEffect(),
+            )
+        }
+    }
 }
 
 @Preview

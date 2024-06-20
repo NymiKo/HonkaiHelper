@@ -3,8 +3,8 @@ package com.example.tanorami.profile.presentation
 import com.example.tanorami.profile.data.model.User
 
 sealed class ProfileUiState<out T> {
-    object LOADING : ProfileUiState<Nothing>()
-    data class SUCCESS(val user: User) : ProfileUiState<Nothing>()
-    data class ERROR(val message: Int) : ProfileUiState<Nothing>()
-    object NOT_AUTHORIZED : ProfileUiState<Nothing>()
+    data object Loading : ProfileUiState<Nothing>()
+    data class Success(val user: User) : ProfileUiState<Nothing>()
+    data class Error(val message: Int) : ProfileUiState<Nothing>()
+    data object NotAuthorized : ProfileUiState<Nothing>()
 }
