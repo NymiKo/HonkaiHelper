@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -17,10 +16,6 @@ import com.example.tanorami.core.theme.AppTheme
 import com.example.tanorami.create_build_hero.CreateBuildHeroFragment
 import com.example.tanorami.createteam.CreateTeamFragment
 import com.example.tanorami.databinding.FragmentProfileBinding
-import com.example.tanorami.profile.presentation.adapter.ViewPagerTeamsAndBuildsAdapter
-import com.example.tanorami.profile.presentation.adapter.ViewPagerTeamsAndBuildsListener
-import com.example.tanorami.utils.TOKEN
-import com.example.tanorami.utils.getSharedPrefUser
 import javax.inject.Inject
 
 class ProfileFragment : Fragment() {
@@ -31,7 +26,6 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel by viewModels<ProfileViewModel> { viewModelFactory }
-    private lateinit var mAdapter: ViewPagerTeamsAndBuildsAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -65,33 +59,6 @@ class ProfileFragment : Fragment() {
             }
         }
         return binding.root
-    }
-
-    private fun setupViewPager() {
-        mAdapter = ViewPagerTeamsAndBuildsAdapter(object : ViewPagerTeamsAndBuildsListener {
-            override fun onBuildClick(idBuild: Int) {
-                //findNavController().navigate(R.id.createBuildHeroFragment, CreateBuildHeroFragment.newInstance(idBuild = idBuild))
-            }
-
-            override fun onTeamClick(idTeam: Int) {
-                //findNavController().navigate(R.id.createTeamFragment, CreateTeamFragment.newInstance(idTeam))
-            }
-        })
-    }
-
-
-    private fun showDialogExitOfAccount() {
-        AlertDialog.Builder(requireActivity())
-            .setMessage(R.string.want_to_logout_of_your_account)
-            .setPositiveButton(R.string.yes) { _, _ ->
-                getSharedPrefUser().edit().putString(TOKEN, null).apply()
-                findNavController().navigate(R.id.loginFragment)
-            }
-            .setNegativeButton(R.string.cancellation) { dialog, _ ->
-                dialog.cancel()
-            }
-            .create()
-            .show()
     }
 
     override fun onDestroy() {

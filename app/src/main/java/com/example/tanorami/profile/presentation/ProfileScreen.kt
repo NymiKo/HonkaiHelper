@@ -92,7 +92,8 @@ private fun ProfileScreenContent(
                         onEditNicknameScreen = { onEvents(ProfileScreenEvents.OnChangeNicknameScreen) },
                         logoutAccountClick = { onEvents(ProfileScreenEvents.LogoutAccount) }
                     )
-                }) { innerPadding ->
+                }
+            ) { innerPadding ->
                 Column(
                     modifier = Modifier
                         .padding(innerPadding)

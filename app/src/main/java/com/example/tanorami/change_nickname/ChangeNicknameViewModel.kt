@@ -1,12 +1,12 @@
 package com.example.tanorami.change_nickname
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tanorami.R
 import com.example.tanorami.change_nickname.data.ChangeNicknameRepository
 import com.example.tanorami.data.NetworkResult
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -14,8 +14,8 @@ class ChangeNicknameViewModel @Inject constructor(
     private val repository: ChangeNicknameRepository
 ) : ViewModel() {
 
-    private val _uiState = MutableLiveData<ChangeNicknameUiState>()
-    val uiState: LiveData<ChangeNicknameUiState> = _uiState
+    private val _uiState = MutableStateFlow<ChangeNicknameUiState>(ChangeNicknameUiState.IDLE)
+    val uiState = _uiState.asStateFlow()
 
     fun changeNickname(oldNickname: String, newNickname: String) = viewModelScope.launch {
         if (checkNickname(newNickname)  && comparisonNickname(oldNickname, newNickname)) {

@@ -34,7 +34,8 @@ fun ProfileTopAppBar(
 
     BaseTopAppBar(
         modifier = modifier,
-        title = R.string.profile,
+        navigationIcon = false,
+        title = stringResource(id = R.string.profile),
         actions = {
             IconButton(onClick = { showMenu = !showMenu }) {
                 Icon(

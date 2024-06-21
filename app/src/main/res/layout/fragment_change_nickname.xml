@@ -7,63 +7,68 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".change_nickname.ChangeNicknameFragment">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar_change_nickname"
-        style="@style/base_toolbar_style"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_arrow_back"
-        app:navigationIconTint="?attr/colorSecondary"
-        app:title="@string/nickname_change"
-        app:titleTextAppearance="@style/toolbar"
-        app:titleTextColor="?attr/colorSecondary" />
+<!--    <com.google.android.material.appbar.MaterialToolbar-->
+<!--        android:id="@+id/toolbar_change_nickname"-->
+<!--        style="@style/base_toolbar_style"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:navigationIcon="@drawable/ic_arrow_back"-->
+<!--        app:navigationIconTint="?attr/colorSecondary"-->
+<!--        app:title="@string/nickname_change"-->
+<!--        app:titleTextAppearance="@style/toolbar"-->
+<!--        app:titleTextColor="?attr/colorSecondary" />-->
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edit_layout_login"
-        style="@style/EditTextLayoutLogin"
-        android:layout_margin="@dimen/DP16"
-        android:hint="@string/new_nickname"
-        app:boxCornerRadiusBottomEnd="5dp"
-        app:boxCornerRadiusBottomStart="5dp"
-        app:boxCornerRadiusTopEnd="5dp"
-        app:boxCornerRadiusTopStart="5dp"
-        app:boxStrokeColor="?attr/colorSecondary"
-        app:boxStrokeWidth="@dimen/DP2"
-        app:cursorColor="?attr/colorSecondary"
-        app:hintTextColor="?attr/colorSecondary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_change_nickname"
-        app:startIconDrawable="@drawable/ic_edit"
-        app:startIconTint="?attr/colorSecondary">
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/compose_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_text_login"
-            style="@style/EditTextLogin"
-            android:inputType="textPersonName"
-            android:textSize="20sp" />
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/edit_layout_login"-->
+<!--        style="@style/EditTextLayoutLogin"-->
+<!--        android:layout_margin="@dimen/DP16"-->
+<!--        android:hint="@string/new_nickname"-->
+<!--        app:boxCornerRadiusBottomEnd="5dp"-->
+<!--        app:boxCornerRadiusBottomStart="5dp"-->
+<!--        app:boxCornerRadiusTopEnd="5dp"-->
+<!--        app:boxCornerRadiusTopStart="5dp"-->
+<!--        app:boxStrokeColor="?attr/colorSecondary"-->
+<!--        app:boxStrokeWidth="@dimen/DP2"-->
+<!--        app:cursorColor="?attr/colorSecondary"-->
+<!--        app:hintTextColor="?attr/colorSecondary"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/toolbar_change_nickname"-->
+<!--        app:startIconDrawable="@drawable/ic_edit"-->
+<!--        app:startIconTint="?attr/colorSecondary">-->
 
-    </com.google.android.material.textfield.TextInputLayout>
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:id="@+id/edit_text_login"-->
+<!--            style="@style/EditTextLogin"-->
+<!--            android:inputType="textPersonName"-->
+<!--            android:textSize="20sp" />-->
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button_change_nickname"
-        style="@style/base_floating_button"
-        android:layout_gravity="bottom|end"
-        android:src="@drawable/ic_save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tint="?attr/colorOnSecondary" />
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
 
-    <ProgressBar
-        android:id="@+id/progress_change_nickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/button_change_nickname"-->
+<!--        style="@style/base_floating_button"-->
+<!--        android:layout_gravity="bottom|end"-->
+<!--        android:src="@drawable/ic_save"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:tint="?attr/colorOnSecondary" />-->
+
+<!--    <ProgressBar-->
+<!--        android:id="@+id/progress_change_nickname"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:visibility="gone"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
