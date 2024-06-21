@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.tanorami.R
+import com.example.tanorami.base_components.BaseDefaultText
 import com.example.tanorami.base_components.BaseTopAppBar
 
 @Composable
@@ -64,7 +65,13 @@ private fun MenuItemChangeNickname(
             )
         },
         onClick = { onEditNicknameScreen() },
-        trailingIcon = { Icon(imageVector = Icons.Default.Edit, contentDescription = null, tint = MaterialTheme.colorScheme.secondary) }
+        trailingIcon = {
+            Icon(
+                imageVector = Icons.Default.Edit,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.secondary
+            )
+        }
     )
 }
 
@@ -73,7 +80,7 @@ private fun MenuItemLogoutAccount(
     modifier: Modifier = Modifier,
     logoutAccountClick: () -> Unit
 ) {
-    var openExitAccountAlertDialog by remember  { mutableStateOf(false)  }
+    var openExitAccountAlertDialog by remember { mutableStateOf(false) }
 
     DropdownMenuItem(
         modifier = modifier,
@@ -86,7 +93,13 @@ private fun MenuItemLogoutAccount(
         onClick = {
             openExitAccountAlertDialog = true
         },
-        trailingIcon = { Icon(imageVector = Icons.AutoMirrored.Filled.ExitToApp, contentDescription = null, tint = MaterialTheme.colorScheme.secondary)  }
+        trailingIcon = {
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.ExitToApp,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.secondary
+            )
+        }
     )
 
     if (openExitAccountAlertDialog) {
@@ -109,21 +122,30 @@ private fun ExitAccountAlertDialog(
     AlertDialog(
         modifier = modifier,
         text = {
-            Text(text = stringResource(id = R.string.want_to_logout_of_your_account))
+            BaseDefaultText(
+                text = stringResource(id = R.string.want_to_logout_of_your_account),
+                color = MaterialTheme.colorScheme.secondary,
+            )
         },
         onDismissRequest = { onDismissRequest() },
         confirmButton = {
             TextButton(
                 onClick = { onConfirmation() }
             ) {
-                Text(text = stringResource(id = R.string.yes))
+                BaseDefaultText(
+                    text = stringResource(id = R.string.yes),
+                    color = MaterialTheme.colorScheme.secondary
+                )
             }
         },
         dismissButton = {
             TextButton(
                 onClick = { onDismissRequest() }
             ) {
-                Text(text = stringResource(id = R.string.cancellation))
+                BaseDefaultText(
+                    text = stringResource(id = R.string.cancellation),
+                    color = MaterialTheme.colorScheme.secondary
+                )
             }
         }
     )
