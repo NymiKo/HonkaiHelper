@@ -1,5 +1,8 @@
 package com.example.tanorami.change_nickname
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tanorami.R
@@ -13,20 +16,35 @@ import javax.inject.Inject
 class ChangeNicknameViewModel @Inject constructor(
     private val repository: ChangeNicknameRepository
 ) : ViewModel() {
+    var uiState by mutableStateOf(ChangeNicknameScreenUiState())
 
-    private val _uiState = MutableStateFlow<ChangeNicknameUiState>(ChangeNicknameUiState.IDLE)
-    val uiState = _uiState.asStateFlow()
+    fun onEvent(event: ChangeNicknameScreenEvents) {
+        when (event) {
+            ChangeNicknameScreenEvents.ChangeNickname -> changeNickname()
+            is ChangeNicknameScreenEvents.EnteringNickname -> uiState = uiState.copy(newNickname = event.nickname)
+            else -> Unit
+        }
+    }
 
-    fun changeNickname(oldNickname: String, newNickname: String) = viewModelScope.launch {
-        if (checkNickname(newNickname)  && comparisonNickname(oldNickname, newNickname)) {
-            _uiState.value = ChangeNicknameUiState.LOADING
-            when (val result = repository.changeNickname(newNickname)) {
+    private fun changeNickname() = viewModelScope.launch {
+        if (checkNickname(uiState.newNickname) && comparisonNickname(
+                uiState.oldNickname,
+                uiState.newNickname
+            )
+        ) {
+            uiState = uiState.copy(loading = true, success = false, error = false)
+            when (val result = repository.changeNickname(uiState.newNickname)) {
                 is NetworkResult.Error -> {
-                    errorHandler(result.code)
+                    uiState = uiState.copy(
+                        loading = false,
+                        success = false,
+                        error = true,
+                        errorMessage = errorHandler(result.code)
+                    )
                 }
 
                 is NetworkResult.Success -> {
-                    _uiState.value = ChangeNicknameUiState.SUCCESS
+                    uiState = uiState.copy(loading = false, success = true, error = false)
                 }
             }
         }
@@ -34,25 +52,35 @@ class ChangeNicknameViewModel @Inject constructor(
 
     private fun checkNickname(newNickname: String): Boolean {
         return if (newNickname.isEmpty()) {
-            _uiState.value = ChangeNicknameUiState.ERROR(R.string.empty_new_nickname)
+            uiState = uiState.copy(
+                loading = false,
+                success = false,
+                error = true,
+                errorMessage = R.string.empty_new_nickname
+            )
             false
         } else true
     }
 
     private fun comparisonNickname(oldNickname: String, newNickname: String): Boolean {
         return if (newNickname == oldNickname) {
-            _uiState.value = ChangeNicknameUiState.ERROR(R.string.already_have_nickname)
+            uiState = uiState.copy(
+                loading = false,
+                success = false,
+                error = true,
+                errorMessage = R.string.already_have_nickname
+            )
             false
         } else true
     }
 
-    private fun errorHandler(errorCode: Int) {
-        when (errorCode) {
-            105 -> _uiState.value = ChangeNicknameUiState.ERROR(R.string.check_your_internet_connection)
-            106 -> _uiState.value = ChangeNicknameUiState.ERROR(R.string.error)
-            400 -> _uiState.value = ChangeNicknameUiState.ERROR(R.string.nickname_already_in_use)
-            504 -> _uiState.value = ChangeNicknameUiState.ERROR(R.string.error_save_in_server)
-            else -> _uiState.value = ChangeNicknameUiState.ERROR(R.string.unknown_error)
+    private fun errorHandler(errorCode: Int): Int {
+        return when (errorCode) {
+            105 -> R.string.check_your_internet_connection
+            106 -> R.string.error
+            400 -> R.string.nickname_already_in_use
+            504 -> R.string.error_save_in_server
+            else -> R.string.unknown_error
         }
     }
 }

@@ -9,6 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.tanorami.App
 import com.example.tanorami.core.theme.AppTheme
 import com.example.tanorami.databinding.FragmentChangeNicknameBinding
@@ -39,7 +40,10 @@ class ChangeNicknameFragment : Fragment() {
         _binding = FragmentChangeNicknameBinding.inflate(inflater).apply {
             composeView.setContent {
                 AppTheme {
-                    ChangeNicknameScreen(viewModel = viewModel)
+                    ChangeNicknameScreen(
+                        viewModel = viewModel,
+                        onBack = { findNavController().popBackStack() }
+                    )
                 }
             }
         }
