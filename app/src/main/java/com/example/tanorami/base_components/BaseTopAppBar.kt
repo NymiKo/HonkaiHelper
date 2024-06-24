@@ -1,7 +1,9 @@
 package com.example.tanorami.base_components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -11,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
@@ -21,17 +24,25 @@ fun BaseTopAppBar(
     title: String,
     navigationIcon: Boolean = true,
     actions: @Composable RowScope.() -> Unit = {},
+    onBack: () -> Unit = {},
 ) {
     TopAppBar(
         modifier = modifier,
         title = {
-            Text(text = title, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.secondary)
+            Text(
+                text = title,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.secondary
+            )
         },
         actions = actions,
         navigationIcon = {
             if (navigationIcon) {
                 Icon(
-                    modifier = Modifier.padding(start = 8.dp, end = 8.dp),
+                    modifier = Modifier
+                        .padding(start = 8.dp, end = 8.dp)
+                        .clip(CircleShape)
+                        .clickable { onBack() },
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "",
                     tint = MaterialTheme.colorScheme.secondary,

@@ -8,8 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.tanorami.R
 import com.example.tanorami.change_nickname.data.ChangeNicknameRepository
 import com.example.tanorami.data.NetworkResult
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,7 +19,9 @@ class ChangeNicknameViewModel @Inject constructor(
     fun onEvent(event: ChangeNicknameScreenEvents) {
         when (event) {
             ChangeNicknameScreenEvents.ChangeNickname -> changeNickname()
-            is ChangeNicknameScreenEvents.EnteringNickname -> uiState = uiState.copy(newNickname = event.nickname)
+            is ChangeNicknameScreenEvents.EnteringNickname -> uiState =
+                uiState.copy(newNickname = event.nickname)
+
             else -> Unit
         }
     }
