@@ -1,4 +1,4 @@
-package com.example.tanorami.create_build_hero
+package com.example.tanorami.create_build_hero.presentation
 
 sealed class CreateBuildHeroUiState() {
     object CREATION : CreateBuildHeroUiState()

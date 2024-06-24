@@ -13,7 +13,7 @@ import com.example.tanorami.App
 import com.example.tanorami.R
 import com.example.tanorami.change_nickname.presentation.ChangeNicknameFragment
 import com.example.tanorami.core.theme.AppTheme
-import com.example.tanorami.create_build_hero.CreateBuildHeroFragment
+import com.example.tanorami.create_build_hero.presentation.CreateBuildHeroFragment
 import com.example.tanorami.createteam.CreateTeamFragment
 import com.example.tanorami.databinding.FragmentProfileBinding
 import javax.inject.Inject

@@ -56,8 +56,8 @@ private fun ChangeNicknameScreenContent(
     val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
 
-    LaunchedEffect(key1 = uiState.success) {
-        if (uiState.success) {
+    LaunchedEffect(key1 = uiState.isSuccess) {
+        if (uiState.isSuccess) {
             scope.launch {
                 snackbarHostState.showSnackbar(
                     message = "Никнейм изменен",
@@ -153,9 +153,9 @@ private fun EditNicknameField(
             cursorColor = MaterialTheme.colorScheme.secondary,
             errorBorderColor = Red,
         ),
-        isError = uiState.error,
+        isError = uiState.isError,
         supportingText = {
-            if (uiState.error) {
+            if (uiState.isError) {
                 Text(
                     modifier = Modifier.fillMaxWidth(),
                     text = stringResource(id = uiState.errorMessage),
@@ -163,7 +163,7 @@ private fun EditNicknameField(
                 )
             }
         },
-        enabled = !uiState.loading
+        enabled = !uiState.isLoading
     )
 }
 

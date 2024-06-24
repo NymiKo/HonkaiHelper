@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".create_build_hero.CreateBuildHeroFragment">
+    tools:context=".create_build_hero.presentation.CreateBuildHeroFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar_create_build_hero"
@@ -18,6 +18,11 @@
         app:title="@string/adding_your_build"
         app:titleTextAppearance="@style/toolbar"
         app:titleTextColor="?attr/colorSecondary" />
+
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/compose_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <FrameLayout
         android:layout_width="match_parent"

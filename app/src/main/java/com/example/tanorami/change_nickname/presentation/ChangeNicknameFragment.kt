@@ -42,7 +42,7 @@ class ChangeNicknameFragment : Fragment() {
                 AppTheme {
                     ChangeNicknameScreen(
                         viewModel = viewModel,
-                        onBack = { findNavController().popBackStack() }
+                        onBack = { findNavController().navigateUp() }
                     )
                 }
             }

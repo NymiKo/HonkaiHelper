@@ -32,19 +32,19 @@ class ChangeNicknameViewModel @Inject constructor(
                 uiState.newNickname
             )
         ) {
-            uiState = uiState.copy(loading = true, success = false, error = false)
+            uiState = uiState.copy(isLoading = true, isSuccess = false, isError = false)
             when (val result = repository.changeNickname(uiState.newNickname)) {
                 is NetworkResult.Error -> {
                     uiState = uiState.copy(
-                        loading = false,
-                        success = false,
-                        error = true,
+                        isLoading = false,
+                        isSuccess = false,
+                        isError = true,
                         errorMessage = errorHandler(result.code)
                     )
                 }
 
                 is NetworkResult.Success -> {
-                    uiState = uiState.copy(loading = false, success = true, error = false)
+                    uiState = uiState.copy(isLoading = false, isSuccess = true, isError = false)
                 }
             }
         }
@@ -53,9 +53,9 @@ class ChangeNicknameViewModel @Inject constructor(
     private fun checkNickname(newNickname: String): Boolean {
         return if (newNickname.isEmpty()) {
             uiState = uiState.copy(
-                loading = false,
-                success = false,
-                error = true,
+                isLoading = false,
+                isSuccess = false,
+                isError = true,
                 errorMessage = R.string.empty_new_nickname
             )
             false
@@ -65,9 +65,9 @@ class ChangeNicknameViewModel @Inject constructor(
     private fun comparisonNickname(oldNickname: String, newNickname: String): Boolean {
         return if (newNickname == oldNickname) {
             uiState = uiState.copy(
-                loading = false,
-                success = false,
-                error = true,
+                isLoading = false,
+                isSuccess = false,
+                isError = true,
                 errorMessage = R.string.already_have_nickname
             )
             false

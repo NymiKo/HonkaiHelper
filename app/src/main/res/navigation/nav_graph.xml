@@ -136,7 +136,7 @@
     </fragment>
     <fragment
         android:id="@+id/createBuildHeroFragment"
-        android:name="com.example.tanorami.create_build_hero.CreateBuildHeroFragment"
+        android:name="com.example.tanorami.create_build_hero.presentation.CreateBuildHeroFragment"
         android:label="fragment_create_build_hero"
         tools:layout="@layout/fragment_create_build_hero" >
         <action

@@ -1,19 +1,23 @@
-package com.example.tanorami.create_build_hero
+package com.example.tanorami.create_build_hero.presentation
 
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tanorami.App
 import com.example.tanorami.R
-import com.example.tanorami.base.BaseFragment
 import com.example.tanorami.create_build_hero.adapter.CreateBuildHeroStatsAdapter
 import com.example.tanorami.create_build_hero.adapter.CreateBuildHeroStatsListener
 import com.example.tanorami.databinding.FragmentCreateBuildHeroBinding
@@ -26,9 +30,14 @@ import com.example.tanorami.utils.gone
 import com.example.tanorami.utils.load
 import com.example.tanorami.utils.visible
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import javax.inject.Inject
 
-class CreateBuildHeroFragment :
-    BaseFragment<FragmentCreateBuildHeroBinding>(FragmentCreateBuildHeroBinding::inflate) {
+class CreateBuildHeroFragment : Fragment() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private var _binding: FragmentCreateBuildHeroBinding? = null
+    val binding get() = _binding!!
 
     private val viewModel by viewModels<CreateBuildHeroViewModel> { viewModelFactory }
     private var pathHero = 0
@@ -77,7 +86,24 @@ class CreateBuildHeroFragment :
         }
     }
 
-    override fun setupView() {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentCreateBuildHeroBinding.inflate(inflater).apply {
+
+        }
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        uiStateHandle()
+        setupView()
+    }
+
+    fun setupView() {
         getHero()
         setupImageWeapon()
         setupImageRelicTwoParts()
@@ -89,7 +115,7 @@ class CreateBuildHeroFragment :
         setupToolbar()
     }
 
-    override fun uiStateHandle() {
+    fun uiStateHandle() {
         viewModel.state.observe(viewLifecycleOwner) {
             when (it) {
                 is CreateBuildHeroUiState.CREATION -> {
@@ -287,6 +313,11 @@ class CreateBuildHeroFragment :
                 }
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {

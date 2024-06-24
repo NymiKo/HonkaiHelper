@@ -177,7 +177,9 @@ private fun AvatarImage(
             modifier = modifier
                 .fillMaxSize()
                 .clip(RoundedCornerShape(16.dp))
-                .clickable { uploadAvatarOnServer() }
+                .clickable {
+                    uploadAvatarOnServer() 
+                }
                 .background(MaterialTheme.colorScheme.secondary, RoundedCornerShape(16.dp)),
             model = avatarUrl,
             contentDescription = null,

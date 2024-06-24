@@ -13,7 +13,7 @@ import com.example.tanorami.base.BaseFragment
 import com.example.tanorami.builds_hero_from_users.adapter.BuildsHeroListAdapter
 import com.example.tanorami.builds_hero_from_users.adapter.BuildsHeroListListener
 import com.example.tanorami.builds_hero_from_users.di.BuildsHeroListUIState
-import com.example.tanorami.create_build_hero.CreateBuildHeroFragment
+import com.example.tanorami.create_build_hero.presentation.CreateBuildHeroFragment
 import com.example.tanorami.databinding.FragmentBuildsHeroListBinding
 import com.example.tanorami.databinding.ViewstubErrorLayoutBinding
 import com.example.tanorami.utils.TOKEN
