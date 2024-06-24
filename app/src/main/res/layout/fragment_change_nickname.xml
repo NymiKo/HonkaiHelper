@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".change_nickname.ChangeNicknameFragment">
+    tools:context=".change_nickname.presentation.ChangeNicknameFragment">
 
 <!--    <com.google.android.material.appbar.MaterialToolbar-->
 <!--        android:id="@+id/toolbar_change_nickname"-->

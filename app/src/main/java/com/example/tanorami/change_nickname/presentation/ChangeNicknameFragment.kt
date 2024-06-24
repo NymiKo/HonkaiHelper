@@ -1,4 +1,4 @@
-package com.example.tanorami.change_nickname
+package com.example.tanorami.change_nickname.presentation
 
 import android.content.Context
 import android.os.Bundle
@@ -49,48 +49,6 @@ class ChangeNicknameFragment : Fragment() {
         }
         return binding.root
     }
-
-//    fun setupView() {
-//        setupChangeNicknameButton()
-//        setupToolbar()
-//    }
-
-    fun uiStateHandle() {
-//        viewModel.uiState.observe(viewLifecycleOwner) {
-//            when (it) {
-//                is ChangeNicknameUiState.ERROR -> {
-//                    binding.progressChangeNickname.gone()
-//                    binding.buttonChangeNickname.visible()
-//                    binding.editLayoutLogin.visible()
-//                    Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
-//                }
-//
-//                is ChangeNicknameUiState.LOADING -> {
-//                    binding.progressChangeNickname.visible()
-//                    binding.buttonChangeNickname.gone()
-//                    binding.editLayoutLogin.gone()
-//                }
-//
-//                is ChangeNicknameUiState.SUCCESS -> {
-//                    Toast.makeText(requireActivity(), R.string.nickname_changed, Toast.LENGTH_SHORT)
-//                        .show()
-//                    findNavController().popBackStack()
-//                }
-//            }
-//        }
-    }
-
-//    private fun setupChangeNicknameButton() {
-//        binding.buttonChangeNickname.setOnClickListener {
-//            viewModel.changeNickname(oldNickname ?: "", binding.editTextLogin.text.toString())
-//        }
-//    }
-//
-//    private fun setupToolbar() {
-//        binding.toolbarChangeNickname.setNavigationOnClickListener {
-//            findNavController().popBackStack()
-//        }
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

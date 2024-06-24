@@ -1,6 +1,6 @@
 package com.example.tanorami.change_nickname.di
 
-import com.example.tanorami.change_nickname.ChangeNicknameFragment
+import com.example.tanorami.change_nickname.presentation.ChangeNicknameFragment
 import dagger.Subcomponent
 
 @Subcomponent(modules = [ChangeNicknameModule::class])

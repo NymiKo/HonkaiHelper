@@ -1,7 +1,7 @@
 package com.example.tanorami.change_nickname.di
 
 import androidx.lifecycle.ViewModel
-import com.example.tanorami.change_nickname.ChangeNicknameViewModel
+import com.example.tanorami.change_nickname.presentation.ChangeNicknameViewModel
 import com.example.tanorami.di.ViewModelKey
 import dagger.Binds
 import dagger.Module

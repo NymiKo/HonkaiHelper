@@ -1,4 +1,4 @@
-package com.example.tanorami.change_nickname
+package com.example.tanorami.change_nickname.presentation
 
 import com.example.tanorami.R
 

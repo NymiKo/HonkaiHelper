@@ -1,4 +1,4 @@
-package com.example.tanorami.change_nickname
+package com.example.tanorami.change_nickname.presentation
 
 sealed interface ChangeNicknameScreenEvents {
     data class EnteringNickname(val nickname: String): ChangeNicknameScreenEvents

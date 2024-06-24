@@ -165,7 +165,7 @@
         tools:layout="@layout/fragment_viewing_users_build" />
     <fragment
         android:id="@+id/changeNicknameFragment"
-        android:name="com.example.tanorami.change_nickname.ChangeNicknameFragment"
+        android:name="com.example.tanorami.change_nickname.presentation.ChangeNicknameFragment"
         android:label="fragment_change_nickname"
         tools:layout="@layout/fragment_change_nickname" />
     <fragment
