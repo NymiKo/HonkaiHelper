@@ -101,6 +101,24 @@
     <string name="empty">Здесь пусто. Вы ничем не делились!</string>
     <string name="feedback_has_been_sent">Сообщение было отправлено. Спасибо!</string>
 
+    <string name="hp">HP %</string>
+    <string name="defense">Защита %</string>
+    <string name="attack_power">Сила атаки %</string>
+    <string name="speed">Скорость</string>
+    <string name="penetration_effect">Эффект пробития %</string>
+    <string name="bonus_physical_damage">Бонус физ.урона %</string>
+    <string name="bonus_fire_damage">Бонус огн.урона %</string>
+    <string name="bonus_electric_damage">Бонус элек.урона %</string>
+    <string name="bonus_quantum_damage">Бонус квант.урона %</string>
+    <string name="bonus_ice_damage">Бонус лед.урона %</string>
+    <string name="bonus_wind_damage">Бонус ветр.урона %</string>
+    <string name="bonus_imaginary_damage">Бонус мним.урона %</string>
+    <string name="crit_damage">Крит.урон %</string>
+    <string name="crit_chance">Крит.шанс %</string>
+    <string name="chance_of_hitting_effects">Шанс попадания эффектов %</string>
+    <string name="healing_bonus">Бонус исцеления %</string>
+    <string name="recovery_energy">Восст. энергии %</string>
+
 
     <string name="base_build_weapon_transition_name" translatable="false">base_build_weapon_transition_name_%d</string>
     <string name="weapon_info_transition_name" translatable="false">weapon_info_transition_name</string>

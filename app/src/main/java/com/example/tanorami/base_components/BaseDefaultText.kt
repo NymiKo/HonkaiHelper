@@ -8,20 +8,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.sp
+import com.example.tanorami.core.theme.Typography
 
 @Composable
 fun BaseDefaultText(
     modifier: Modifier = Modifier,
     text: String,
-    fontSize: TextUnit = MaterialTheme.typography.bodyMedium.fontSize,
-    color: Color = MaterialTheme.typography.bodyMedium.color,
+    fontSize: TextUnit = 18.sp,
+    color: Color = MaterialTheme.colorScheme.secondary,
     textAlign: TextAlign? = null,
     fontWeight: FontWeight? = null,
 ) {
     Text(
         modifier = modifier,
         text = text,
-        style = MaterialTheme.typography.bodyMedium,
+        style = Typography.bodyMedium,
         fontSize = fontSize,
         color = color,
         textAlign = textAlign,

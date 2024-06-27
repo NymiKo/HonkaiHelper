@@ -1,5 +1,7 @@
 package com.example.tanorami.create_build_hero.presentation
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,6 +18,8 @@ import javax.inject.Inject
 class CreateBuildHeroViewModel @Inject constructor(
     private val repository: CreateBuildHeroRepository
 ) : ViewModel() {
+
+    val uiState by mutableStateOf(CreateBuildHeroScreenUiState())
 
     private val _state = MutableLiveData<CreateBuildHeroUiState>(CreateBuildHeroUiState.CREATION)
     val state: LiveData<CreateBuildHeroUiState> = _state
@@ -36,6 +40,10 @@ class CreateBuildHeroViewModel @Inject constructor(
     val decoration: LiveData<Equipment> = _decoration
 
     private val statsEquipmentList = Array<String>(4) { "" }
+
+    fun onEvent(event: CreateBuildHeroScreenEvents) {
+
+    }
 
     fun getHero(idHero: Int) = viewModelScope.launch {
         _hero.value = repository.getHero(idHero)

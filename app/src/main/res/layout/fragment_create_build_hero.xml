@@ -7,208 +7,208 @@
     android:orientation="vertical"
     tools:context=".create_build_hero.presentation.CreateBuildHeroFragment">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar_create_build_hero"
-        style="@style/base_toolbar_style"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_arrow_back"
-        app:navigationIconTint="?attr/colorSecondary"
-        app:title="@string/adding_your_build"
-        app:titleTextAppearance="@style/toolbar"
-        app:titleTextColor="?attr/colorSecondary" />
-
     <androidx.compose.ui.platform.ComposeView
         android:id="@+id/compose_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<!--    <com.google.android.material.appbar.MaterialToolbar-->
+<!--        android:id="@+id/toolbar_create_build_hero"-->
+<!--        style="@style/base_toolbar_style"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:navigationIcon="@drawable/ic_arrow_back"-->
+<!--        app:navigationIconTint="?attr/colorSecondary"-->
+<!--        app:title="@string/adding_your_build"-->
+<!--        app:titleTextAppearance="@style/toolbar"-->
+<!--        app:titleTextColor="?attr/colorSecondary" />-->
 
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+<!--    <FrameLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<!--        <androidx.core.widget.NestedScrollView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
 
-                <ImageView
-                    android:id="@+id/image_hero_avatar_in_create_buildr"
-                    style="@style/image_hero_in_team"
-                    android:layout_width="120dp"
-                    android:layout_height="170dp"
-                    android:layout_margin="@dimen/DP16"
-                    android:nestedScrollingEnabled="false"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent">-->
 
-                <TextView
-                    android:id="@+id/text_hero_name_in_create_build"
-                    style="@style/name_hero_in_team"
-                    android:layout_height="35dp"
-                    android:textSize="@dimen/SP18"
-                    app:layout_constraintBottom_toBottomOf="@+id/image_hero_avatar_in_create_buildr"
-                    app:layout_constraintEnd_toEndOf="@+id/image_hero_avatar_in_create_buildr"
-                    app:layout_constraintStart_toStartOf="@+id/image_hero_avatar_in_create_buildr"
-                    tools:text="Блэйд" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/image_hero_avatar_in_create_buildr"-->
+<!--                    style="@style/image_hero_in_team"-->
+<!--                    android:layout_width="120dp"-->
+<!--                    android:layout_height="170dp"-->
+<!--                    android:layout_margin="@dimen/DP16"-->
+<!--                    android:nestedScrollingEnabled="false"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
-                <TextView
-                    android:id="@+id/textView3"
-                    style="@style/text_view_message_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/DP16"
-                    android:layout_marginTop="@dimen/DP16"
-                    android:text="@string/weapon"
-                    app:layout_constraintEnd_toEndOf="@+id/image_hero_weapon_build"
-                    app:layout_constraintStart_toStartOf="@+id/image_hero_weapon_build"
-                    app:layout_constraintTop_toBottomOf="@+id/image_hero_avatar_in_create_buildr" />
+<!--                <TextView-->
+<!--                    android:id="@+id/text_hero_name_in_create_build"-->
+<!--                    style="@style/name_hero_in_team"-->
+<!--                    android:layout_height="35dp"-->
+<!--                    android:textSize="@dimen/SP18"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/image_hero_avatar_in_create_buildr"-->
+<!--                    app:layout_constraintEnd_toEndOf="@+id/image_hero_avatar_in_create_buildr"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/image_hero_avatar_in_create_buildr"-->
+<!--                    tools:text="Блэйд" />-->
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/image_hero_weapon_build"
-                    android:layout_width="80dp"
-                    android:layout_height="120dp"
-                    android:layout_marginHorizontal="@dimen/DP16"
-                    android:src="@drawable/ic_add"
-                    app:layout_constraintBottom_toBottomOf="@+id/image_hero_relic_build_four_parts"
-                    app:layout_constraintEnd_toStartOf="@id/image_hero_relic_build_two_parts"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/image_hero_relic_build_two_parts"
-                    app:shapeAppearance="@style/roundedCornersImageView"
-                    app:strokeWidth="2dp"
-                    app:tint="?attr/colorSecondary" />
+<!--                <TextView-->
+<!--                    android:id="@+id/textView3"-->
+<!--                    style="@style/text_view_message_style"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginHorizontal="@dimen/DP16"-->
+<!--                    android:layout_marginTop="@dimen/DP16"-->
+<!--                    android:text="@string/weapon"-->
+<!--                    app:layout_constraintEnd_toEndOf="@+id/image_hero_weapon_build"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/image_hero_weapon_build"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/image_hero_avatar_in_create_buildr" />-->
 
-                <TextView
-                    android:id="@+id/textView4"
-                    style="@style/text_view_message_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/DP16"
-                    android:layout_marginTop="@dimen/DP16"
-                    android:text="@string/relic"
-                    app:layout_constraintEnd_toEndOf="@+id/image_hero_relic_build_two_parts"
-                    app:layout_constraintStart_toStartOf="@+id/image_hero_relic_build_two_parts"
-                    app:layout_constraintTop_toBottomOf="@id/text_hero_name_in_create_build" />
+<!--                <com.google.android.material.imageview.ShapeableImageView-->
+<!--                    android:id="@+id/image_hero_weapon_build"-->
+<!--                    android:layout_width="80dp"-->
+<!--                    android:layout_height="120dp"-->
+<!--                    android:layout_marginHorizontal="@dimen/DP16"-->
+<!--                    android:src="@drawable/ic_add"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/image_hero_relic_build_four_parts"-->
+<!--                    app:layout_constraintEnd_toStartOf="@id/image_hero_relic_build_two_parts"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/image_hero_relic_build_two_parts"-->
+<!--                    app:shapeAppearance="@style/roundedCornersImageView"-->
+<!--                    app:strokeWidth="2dp"-->
+<!--                    app:tint="?attr/colorSecondary" />-->
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/image_hero_relic_build_two_parts"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginHorizontal="@dimen/DP16"
-                    android:layout_marginTop="@dimen/DP8"
-                    android:src="@drawable/ic_add"
-                    app:layout_constraintEnd_toStartOf="@id/image_hero_decoration_build"
-                    app:layout_constraintStart_toEndOf="@+id/image_hero_weapon_build"
-                    app:layout_constraintTop_toBottomOf="@+id/textView4"
-                    app:shapeAppearance="@style/roundedCornersImageView"
-                    app:strokeWidth="2dp"
-                    app:tint="?attr/colorSecondary" />
+<!--                <TextView-->
+<!--                    android:id="@+id/textView4"-->
+<!--                    style="@style/text_view_message_style"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginHorizontal="@dimen/DP16"-->
+<!--                    android:layout_marginTop="@dimen/DP16"-->
+<!--                    android:text="@string/relic"-->
+<!--                    app:layout_constraintEnd_toEndOf="@+id/image_hero_relic_build_two_parts"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/image_hero_relic_build_two_parts"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/text_hero_name_in_create_build" />-->
 
-                <TextView
-                    android:id="@+id/text_relic_two_parts"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/relic_two_parts"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="@+id/image_hero_relic_build_two_parts"
-                    app:layout_constraintStart_toStartOf="@+id/image_hero_relic_build_two_parts"
-                    app:layout_constraintTop_toBottomOf="@id/image_hero_relic_build_two_parts" />
+<!--                <com.google.android.material.imageview.ShapeableImageView-->
+<!--                    android:id="@+id/image_hero_relic_build_two_parts"-->
+<!--                    android:layout_width="80dp"-->
+<!--                    android:layout_height="80dp"-->
+<!--                    android:layout_marginHorizontal="@dimen/DP16"-->
+<!--                    android:layout_marginTop="@dimen/DP8"-->
+<!--                    android:src="@drawable/ic_add"-->
+<!--                    app:layout_constraintEnd_toStartOf="@id/image_hero_decoration_build"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/image_hero_weapon_build"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/textView4"-->
+<!--                    app:shapeAppearance="@style/roundedCornersImageView"-->
+<!--                    app:strokeWidth="2dp"-->
+<!--                    app:tint="?attr/colorSecondary" />-->
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/image_hero_relic_build_four_parts"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginHorizontal="@dimen/DP16"
-                    android:layout_marginTop="@dimen/DP8"
-                    android:src="@drawable/ic_add"
-                    app:layout_constraintEnd_toStartOf="@id/image_hero_decoration_build"
-                    app:layout_constraintStart_toEndOf="@+id/image_hero_weapon_build"
-                    app:layout_constraintTop_toBottomOf="@+id/text_relic_two_parts"
-                    app:shapeAppearance="@style/roundedCornersImageView"
-                    app:strokeWidth="2dp"
-                    app:tint="?attr/colorSecondary" />
+<!--                <TextView-->
+<!--                    android:id="@+id/text_relic_two_parts"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/relic_two_parts"-->
+<!--                    android:textSize="16sp"-->
+<!--                    app:layout_constraintEnd_toEndOf="@+id/image_hero_relic_build_two_parts"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/image_hero_relic_build_two_parts"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/image_hero_relic_build_two_parts" />-->
 
-                <TextView
-                    android:id="@+id/text_relic_four_parts"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/relic_four_parts"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="@+id/image_hero_relic_build_four_parts"
-                    app:layout_constraintStart_toStartOf="@+id/image_hero_relic_build_four_parts"
-                    app:layout_constraintTop_toBottomOf="@+id/image_hero_relic_build_four_parts" />
+<!--                <com.google.android.material.imageview.ShapeableImageView-->
+<!--                    android:id="@+id/image_hero_relic_build_four_parts"-->
+<!--                    android:layout_width="80dp"-->
+<!--                    android:layout_height="80dp"-->
+<!--                    android:layout_marginHorizontal="@dimen/DP16"-->
+<!--                    android:layout_marginTop="@dimen/DP8"-->
+<!--                    android:src="@drawable/ic_add"-->
+<!--                    app:layout_constraintEnd_toStartOf="@id/image_hero_decoration_build"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/image_hero_weapon_build"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/text_relic_two_parts"-->
+<!--                    app:shapeAppearance="@style/roundedCornersImageView"-->
+<!--                    app:strokeWidth="2dp"-->
+<!--                    app:tint="?attr/colorSecondary" />-->
 
-                <TextView
-                    android:id="@+id/textView5"
-                    style="@style/text_view_message_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/DP16"
-                    android:layout_marginTop="@dimen/DP16"
-                    android:text="@string/decoration"
-                    app:layout_constraintEnd_toEndOf="@+id/image_hero_decoration_build"
-                    app:layout_constraintStart_toStartOf="@+id/image_hero_decoration_build"
-                    app:layout_constraintTop_toBottomOf="@id/text_hero_name_in_create_build" />
+<!--                <TextView-->
+<!--                    android:id="@+id/text_relic_four_parts"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/relic_four_parts"-->
+<!--                    android:textSize="16sp"-->
+<!--                    app:layout_constraintEnd_toEndOf="@+id/image_hero_relic_build_four_parts"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/image_hero_relic_build_four_parts"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/image_hero_relic_build_four_parts" />-->
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/image_hero_decoration_build"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginHorizontal="@dimen/DP16"
-                    android:src="@drawable/ic_add"
-                    app:layout_constraintBottom_toBottomOf="@+id/image_hero_relic_build_four_parts"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/image_hero_relic_build_two_parts"
-                    app:layout_constraintTop_toTopOf="@+id/image_hero_relic_build_two_parts"
-                    app:shapeAppearance="@style/roundedCornersImageView"
-                    app:strokeWidth="2dp"
-                    app:tint="?attr/colorSecondary" />
+<!--                <TextView-->
+<!--                    android:id="@+id/textView5"-->
+<!--                    style="@style/text_view_message_style"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginHorizontal="@dimen/DP16"-->
+<!--                    android:layout_marginTop="@dimen/DP16"-->
+<!--                    android:text="@string/decoration"-->
+<!--                    app:layout_constraintEnd_toEndOf="@+id/image_hero_decoration_build"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/image_hero_decoration_build"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/text_hero_name_in_create_build" />-->
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_stats_equipment_create_build"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/DP16"
-                    android:nestedScrollingEnabled="false"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_relic_four_parts" />
+<!--                <com.google.android.material.imageview.ShapeableImageView-->
+<!--                    android:id="@+id/image_hero_decoration_build"-->
+<!--                    android:layout_width="100dp"-->
+<!--                    android:layout_height="100dp"-->
+<!--                    android:layout_marginHorizontal="@dimen/DP16"-->
+<!--                    android:src="@drawable/ic_add"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/image_hero_relic_build_four_parts"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/image_hero_relic_build_two_parts"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/image_hero_relic_build_two_parts"-->
+<!--                    app:shapeAppearance="@style/roundedCornersImageView"-->
+<!--                    app:strokeWidth="2dp"-->
+<!--                    app:tint="?attr/colorSecondary" />-->
 
-                <FrameLayout
-                    android:id="@+id/progress_creation_build"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/grey_transparent_20"
-                    android:visibility="gone">
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/recycler_stats_equipment_create_build"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/DP16"-->
+<!--                    android:nestedScrollingEnabled="false"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/text_relic_four_parts" />-->
 
-                    <ProgressBar
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+<!--                <FrameLayout-->
+<!--                    android:id="@+id/progress_creation_build"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:background="@color/grey_transparent_20"-->
+<!--                    android:visibility="gone">-->
 
-                </FrameLayout>
+<!--                    <ProgressBar-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                </FrameLayout>-->
 
-        </androidx.core.widget.NestedScrollView>
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/button_save_build"
-            style="@style/base_floating_button"
-            android:src="@drawable/ic_save"
-            android:layout_gravity="end|bottom"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:tint="?attr/colorOnSecondary" />
+<!--        </androidx.core.widget.NestedScrollView>-->
 
-    </FrameLayout>
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/button_save_build"-->
+<!--            style="@style/base_floating_button"-->
+<!--            android:src="@drawable/ic_save"-->
+<!--            android:layout_gravity="end|bottom"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:tint="?attr/colorOnSecondary" />-->
+
+<!--    </FrameLayout>-->
 
 </LinearLayout>

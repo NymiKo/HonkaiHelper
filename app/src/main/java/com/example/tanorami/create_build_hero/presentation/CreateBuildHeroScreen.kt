@@ -35,6 +35,8 @@ import com.example.tanorami.core.theme.AppTheme
 import com.example.tanorami.core.theme.DarkGray
 import com.example.tanorami.core.theme.Red
 import com.example.tanorami.core.theme.White
+import com.example.tanorami.create_build_hero.presentation.components.BuildStatsComponent
+import com.example.tanorami.create_build_hero.presentation.components.EquipmentBuildComponent
 
 @Composable
 fun CreateBuildHeroScreen(
@@ -42,7 +44,17 @@ fun CreateBuildHeroScreen(
     viewModel: CreateBuildHeroViewModel,
     onBack: () -> Unit,
 ) {
-
+    CreateBuildHeroScreenContent(
+        modifier = modifier,
+        uiState = viewModel.uiState,
+        onEvent = { event ->
+            when (event) {
+                CreateBuildHeroScreenEvents.OnBack -> onBack()
+                else -> Unit
+            }
+            viewModel.onEvent(event)
+        }
+    )
 }
 
 @Composable
@@ -61,7 +73,7 @@ private fun CreateBuildHeroScreenContent(
             )
         },
         floatingActionButton = {
-            SaveOrUpdateBuildHero(
+            SaveOrUpdateBuildHeroButton(
                 isCreateBuild = uiState.isCreateBuild,
                 saveBuild = { onEvent(CreateBuildHeroScreenEvents.SaveBuild) },
                 updateBuild = { onEvent(CreateBuildHeroScreenEvents.UpdateBuild) }
@@ -75,27 +87,41 @@ private fun CreateBuildHeroScreenContent(
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
         ) {
-            Box(
-                modifier = Modifier.width(120.dp)
-            ) {
-                AsyncImage(
-                    modifier = Modifier.height(170.dp),
-                    model = "",
-                    contentDescription = null,
-                )
-                BaseDefaultText(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(DarkGray)
-                        .align(Alignment.BottomCenter)
-                        .padding(8.dp),
-                    text = "",
-                    color = White,
-                    textAlign = TextAlign.Center,
-                    fontWeight = FontWeight.Bold
-                )
-            }
+            AvatarHeroImageAndName(
+                heroImage = uiState.hero?.avatar ?: "",
+                heroName = uiState.hero?.name ?: ""
+            )
+            EquipmentBuildComponent()
+            BuildStatsComponent()
         }
+    }
+}
+
+@Composable
+fun AvatarHeroImageAndName(
+    modifier: Modifier = Modifier,
+    heroImage: String,
+    heroName: String,
+) {
+    Box(
+        modifier = Modifier.width(120.dp)
+    ) {
+        AsyncImage(
+            modifier = Modifier.height(170.dp),
+            model = heroImage,
+            contentDescription = null,
+        )
+        BaseDefaultText(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(DarkGray)
+                .align(Alignment.BottomCenter)
+                .padding(8.dp),
+            text = heroName,
+            color = White,
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Bold
+        )
     }
 }
 
@@ -124,7 +150,7 @@ private fun TopAppBar(
 }
 
 @Composable
-private fun SaveOrUpdateBuildHero(
+private fun SaveOrUpdateBuildHeroButton(
     modifier: Modifier = Modifier,
     isCreateBuild: Boolean,
     saveBuild: () -> Unit,
