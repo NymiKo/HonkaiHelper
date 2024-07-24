@@ -3,6 +3,7 @@ package com.example.tanorami.create_build_hero.presentation
 import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -42,6 +43,7 @@ import com.example.tanorami.create_build_hero.presentation.components.EquipmentB
 fun CreateBuildHeroScreen(
     modifier: Modifier = Modifier,
     viewModel: CreateBuildHeroViewModel,
+    idBuild: Long,
     onBack: () -> Unit,
 ) {
     CreateBuildHeroScreenContent(
@@ -53,7 +55,8 @@ fun CreateBuildHeroScreen(
                 else -> Unit
             }
             viewModel.onEvent(event)
-        }
+        },
+        idBuild = idBuild
     )
 }
 
@@ -61,8 +64,11 @@ fun CreateBuildHeroScreen(
 private fun CreateBuildHeroScreenContent(
     modifier: Modifier = Modifier,
     uiState: CreateBuildHeroScreenUiState,
+    idBuild: Long,
     onEvent: (CreateBuildHeroScreenEvents) -> Unit,
 ) {
+    onEvent(CreateBuildHeroScreenEvents.GetBuild(idBuild))
+
     Scaffold(
         modifier = modifier.background(MaterialTheme.colorScheme.background),
         topBar = {
@@ -86,12 +92,18 @@ private fun CreateBuildHeroScreenContent(
                 .padding(16.dp)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             AvatarHeroImageAndName(
                 heroImage = uiState.hero?.avatar ?: "",
                 heroName = uiState.hero?.name ?: ""
             )
-            EquipmentBuildComponent()
+            EquipmentBuildComponent(
+                weaponImage = uiState.buildHeroFromUser?.weapon,
+                relicTwoPartsImage = uiState.buildHeroFromUser?.relicTwoParts,
+                relicFourPartsImage = uiState.buildHeroFromUser?.relicFourParts,
+                decorationImage = uiState.buildHeroFromUser?.decoration,
+            )
             BuildStatsComponent()
         }
     }
@@ -104,7 +116,7 @@ fun AvatarHeroImageAndName(
     heroName: String,
 ) {
     Box(
-        modifier = Modifier.width(120.dp)
+        modifier = modifier.width(120.dp)
     ) {
         AsyncImage(
             modifier = Modifier.height(170.dp),
@@ -180,7 +192,8 @@ fun CreateBuildHeroScreenPreview(modifier: Modifier = Modifier) {
         CreateBuildHeroScreenContent(
             modifier = modifier,
             uiState = CreateBuildHeroScreenUiState(),
-            onEvent = {}
+            onEvent = {},
+            idBuild = 1L,
         )
     }
 }

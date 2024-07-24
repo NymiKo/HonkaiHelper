@@ -1,6 +1,8 @@
 package com.example.tanorami.create_build_hero.presentation.components
 
 import android.content.res.Configuration
+import android.media.audiofx.DynamicsProcessing.Eq
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,10 +32,16 @@ import com.example.tanorami.R
 import com.example.tanorami.base_components.BaseDefaultText
 import com.example.tanorami.core.theme.AppTheme
 import com.example.tanorami.core.theme.GreyTransparent20
+import com.example.tanorami.core.theme.Orange
+import com.example.tanorami.equipment.data.model.Equipment
 
 @Composable
 fun EquipmentBuildComponent(
     modifier: Modifier = Modifier,
+    weaponImage: Equipment?,
+    relicTwoPartsImage: Equipment?,
+    relicFourPartsImage: Equipment?,
+    decorationImage: Equipment?,
 ) {
     Row(
         modifier = modifier
@@ -40,16 +49,19 @@ fun EquipmentBuildComponent(
             .height(IntrinsicSize.Max),
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
-        CategoryWeapon(weaponImage = R.drawable.ic_add)
-        CategoryRelics(relicTwoPartsImage = R.drawable.ic_add, relicFourPartsImage = R.drawable.ic_add)
-        CategoryDecoration(decorationImage = R.drawable.ic_add)
+        CategoryWeapon(equipment = weaponImage)
+        CategoryRelics(
+            relicTwoPartsEquipment = relicTwoPartsImage,
+            relicFourPartsEquipment = relicFourPartsImage
+        )
+        CategoryDecoration(equipment = decorationImage)
     }
 }
 
 @Composable
 fun CategoryWeapon(
     modifier: Modifier = Modifier,
-    weaponImage: Int,
+    equipment: Equipment?,
 ) {
     Column(
         modifier = modifier,
@@ -61,7 +73,8 @@ fun CategoryWeapon(
             EquipmentImage(
                 modifier = Modifier
                     .height(120.dp)
-                    .width(80.dp), model = weaponImage
+                    .width(80.dp),
+                equipment = equipment
             )
         }
     }
@@ -70,8 +83,8 @@ fun CategoryWeapon(
 @Composable
 fun CategoryRelics(
     modifier: Modifier = Modifier,
-    relicTwoPartsImage: Int,
-    relicFourPartsImage: Int,
+    relicTwoPartsEquipment: Equipment?,
+    relicFourPartsEquipment: Equipment?,
 ) {
     Column(
         modifier = modifier,
@@ -80,11 +93,11 @@ fun CategoryRelics(
     ) {
         EquipmentCategoryText(categoryText = stringResource(id = R.string.relic))
         RelicImage(
-            relicImage = relicTwoPartsImage,
+            equipment = relicTwoPartsEquipment,
             textRelicParts = stringResource(id = R.string.relic_two_parts)
         )
         RelicImage(
-            relicImage = relicFourPartsImage,
+            equipment = relicFourPartsEquipment,
             textRelicParts = stringResource(id = R.string.relic_four_parts)
         )
     }
@@ -93,7 +106,7 @@ fun CategoryRelics(
 @Composable
 fun CategoryDecoration(
     modifier: Modifier = Modifier,
-    decorationImage: Int,
+    equipment: Equipment?,
 ) {
     Column(
         modifier = modifier,
@@ -101,7 +114,11 @@ fun CategoryDecoration(
     ) {
         EquipmentCategoryText(categoryText = stringResource(id = R.string.decoration))
         Box(modifier = Modifier.fillMaxHeight(), contentAlignment = Alignment.Center) {
-            EquipmentImage(modifier = Modifier.size(100.dp), model = decorationImage)
+            EquipmentImage(
+                modifier = Modifier.size(100.dp),
+                equipment = equipment,
+
+            )
         }
     }
 }
@@ -121,14 +138,14 @@ fun EquipmentCategoryText(
 @Composable
 fun RelicImage(
     modifier: Modifier = Modifier,
-    relicImage: Int,
+    equipment: Equipment?,
     textRelicParts: String,
 ) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        EquipmentImage(modifier = Modifier.size(80.dp), model = relicImage)
+        EquipmentImage(modifier = Modifier.size(80.dp), equipment = equipment)
         BaseDefaultText(
             text = textRelicParts,
             fontSize = 16.sp,
@@ -139,23 +156,15 @@ fun RelicImage(
 @Composable
 fun EquipmentImage(
     modifier: Modifier = Modifier,
-    model: Int,
+    equipment: Equipment?,
 ) {
     AsyncImage(
         modifier = modifier
+            .background(color = if (equipment?.image == "") Color.Transparent else Orange, shape = RoundedCornerShape(16.dp))
             .clip(RoundedCornerShape(16.dp))
             .border(width = 2.dp, color = GreyTransparent20, shape = RoundedCornerShape(16.dp)),
-        model = model,
+        model = if (equipment?.image == "") R.drawable.ic_add else equipment?.image,
         contentDescription = null,
-        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.secondary),
+        colorFilter = if (equipment?.image == "") ColorFilter.tint(MaterialTheme.colorScheme.secondary) else null,
     )
-}
-
-@Preview
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun EquipmentBuildComponentPreview(modifier: Modifier = Modifier) {
-    AppTheme {
-        EquipmentBuildComponent()
-    }
 }

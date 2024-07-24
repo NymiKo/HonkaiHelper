@@ -19,6 +19,7 @@ import com.example.tanorami.R
 import com.example.tanorami.core.theme.AppTheme
 import com.example.tanorami.create_build_hero.adapter.CreateBuildHeroStatsAdapter
 import com.example.tanorami.create_build_hero.adapter.CreateBuildHeroStatsListener
+import com.example.tanorami.create_build_hero.data.model.BuildHeroModel
 import com.example.tanorami.databinding.FragmentCreateBuildHeroBinding
 import com.example.tanorami.equipment.EquipmentType
 import com.example.tanorami.equipment.data.model.Equipment
@@ -29,14 +30,13 @@ class CreateBuildHeroFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private var _binding: FragmentCreateBuildHeroBinding? = null
-    val binding get() = _binding!!
+    private val binding get() = _binding!!
 
     private val viewModel by viewModels<CreateBuildHeroViewModel> { viewModelFactory }
     private var pathHero = 0
     private var equipmentClick = EquipmentType.WEAPON
     private lateinit var mStatsAdapter: CreateBuildHeroStatsAdapter
 
-    private val idHero get() = requireArguments().getInt(ARG_ID_HERO)
     private val idBuild get() = requireArguments().getLong(ARG_ID_BUILD)
 
     override fun onAttach(context: Context) {
@@ -47,8 +47,6 @@ class CreateBuildHeroFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (idBuild != -1L) viewModel.getBuild(idBuild)
-        if (idHero != -1) viewModel.getHero(idHero)
         setFragmentResultListener("equipment_key") { key, bundle ->
             val equipment = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 bundle.getParcelable("equipment", Equipment::class.java)
@@ -88,6 +86,7 @@ class CreateBuildHeroFragment : Fragment() {
                 AppTheme {
                     CreateBuildHeroScreen(
                         viewModel = viewModel,
+                        idBuild = idBuild,
                         onBack = { findNavController().navigateUp() }
                     )
                 }
@@ -231,22 +230,22 @@ class CreateBuildHeroFragment : Fragment() {
     }
 
     private fun setupStatsAdapter() {
-        val list = listOf(
-            R.array.stats_in_body,
-            R.array.stats_in_legs,
-            R.array.stats_in_sphere,
-            R.array.stats_in_rope
-        )
-        mStatsAdapter = CreateBuildHeroStatsAdapter(object : CreateBuildHeroStatsListener {
-            override fun onSpinnerItemSelected(adapterPosition: Int, selectedItemPosition: Int) {
-                val selectedValue = list[adapterPosition]
-                viewModel.changeStatOnEquipment(
-                    adapterPosition,
-                    resources.getStringArray(selectedValue).toList()[selectedItemPosition]
-                )
-            }
-        })
-        mStatsAdapter.list = list
+//        val list = listOf(
+//            R.array.stats_in_body,
+//            R.array.stats_in_legs,
+//            R.array.stats_in_sphere,
+//            R.array.stats_in_rope
+//        )
+//        mStatsAdapter = CreateBuildHeroStatsAdapter(object : CreateBuildHeroStatsListener {
+//            override fun onSpinnerItemSelected(adapterPosition: Int, selectedItemPosition: Int) {
+//                val selectedValue = list[adapterPosition]
+//                viewModel.changeStatOnEquipment(
+//                    adapterPosition,
+//                    resources.getStringArray(selectedValue).toList()[selectedItemPosition]
+//                )
+//            }
+//        })
+//        mStatsAdapter.list = list
     }
 
     private fun setupStatsRecyclerView() {
@@ -324,7 +323,7 @@ class CreateBuildHeroFragment : Fragment() {
         private const val ARG_ID_BUILD = "id_build"
 
         @JvmStatic
-        fun newInstance(idHero: Int = -1, idBuild: Long = -1): Bundle {
+        fun newInstance(idHero: Int = -1, idBuild: Long = -1L): Bundle {
             return bundleOf(ARG_ID_HERO to idHero, ARG_ID_BUILD to idBuild)
         }
     }

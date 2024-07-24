@@ -18,6 +18,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -47,8 +48,7 @@ fun BuildStatsComponent(
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         ItemStat(
-            statImage = R.drawable.relic_piece_body,
-            statsList = listOf(
+            statImage = R.drawable.relic_piece_body, statsList = listOf(
                 R.string.hp,
                 R.string.defense,
                 R.string.crit_damage,
@@ -60,8 +60,7 @@ fun BuildStatsComponent(
         )
 
         ItemStat(
-            statImage = R.drawable.relic_piece_legs,
-            statsList = listOf(
+            statImage = R.drawable.relic_piece_legs, statsList = listOf(
                 R.string.hp,
                 R.string.defense,
                 R.string.attack_power,
@@ -70,8 +69,7 @@ fun BuildStatsComponent(
         )
 
         ItemStat(
-            statImage = R.drawable.relic_piece_sphere,
-            statsList = listOf(
+            statImage = R.drawable.relic_piece_sphere, statsList = listOf(
                 R.string.hp,
                 R.string.defense,
                 R.string.attack_power,
@@ -86,8 +84,7 @@ fun BuildStatsComponent(
         )
 
         ItemStat(
-            statImage = R.drawable.relic_piece_rope,
-            statsList = listOf(
+            statImage = R.drawable.relic_piece_rope, statsList = listOf(
                 R.string.penetration_effect,
                 R.string.hp,
                 R.string.defense,
@@ -104,9 +101,10 @@ fun ItemStat(
     statImage: Int,
     statsList: List<Int>,
 ) {
+    val expanded = remember { mutableStateOf(false) }
+
     Row(
-        modifier = modifier
-            .fillMaxWidth(),
+        modifier = modifier.fillMaxWidth().clickable { expanded.value = !expanded.value },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
@@ -121,9 +119,7 @@ fun ItemStat(
             colorFilter = ColorFilter.tint(White)
         )
 
-        StatsSpinner(
-            statsList = statsList
-        )
+        StatsSpinner(statsList = statsList, expanded = expanded)
     }
 }
 
@@ -131,16 +127,12 @@ fun ItemStat(
 fun StatsSpinner(
     modifier: Modifier = Modifier,
     statsList: List<Int>,
+    expanded: MutableState<Boolean>,
 ) {
-    var expanded by remember { mutableStateOf(false) }
     var currentValue by remember { mutableIntStateOf(statsList[0]) }
 
     Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .clickable {
-                expanded = !expanded
-            },
+        modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         BaseDefaultText(text = stringResource(id = currentValue), fontSize = 18.sp)
@@ -151,17 +143,14 @@ fun StatsSpinner(
             tint = MaterialTheme.colorScheme.secondary,
         )
 
-        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+        DropdownMenu(expanded = expanded.value, onDismissRequest = { expanded.value = false }) {
             statsList.forEach { titleItem ->
-                DropdownMenuItem(
-                    text = {
-                        BaseDefaultText(text = stringResource(id = titleItem), fontSize = 16.sp)
-                    },
-                    onClick = {
-                        currentValue = titleItem
-                        expanded = false
-                    }
-                )
+                DropdownMenuItem(text = {
+                    BaseDefaultText(text = stringResource(id = titleItem), fontSize = 16.sp)
+                }, onClick = {
+                    currentValue = titleItem
+                    expanded.value = false
+                })
             }
         }
     }
