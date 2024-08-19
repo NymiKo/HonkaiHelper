@@ -1,7 +1,5 @@
 package com.example.tanorami.create_build_hero.presentation.components
 
-import android.content.res.Configuration
-import android.media.audiofx.DynamicsProcessing.Eq
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -23,14 +21,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.tanorami.R
 import com.example.tanorami.base_components.BaseDefaultText
-import com.example.tanorami.core.theme.AppTheme
 import com.example.tanorami.core.theme.GreyTransparent20
 import com.example.tanorami.core.theme.Orange
 import com.example.tanorami.equipment.data.model.Equipment
@@ -74,7 +72,8 @@ fun CategoryWeapon(
                 modifier = Modifier
                     .height(120.dp)
                     .width(80.dp),
-                equipment = equipment
+                equipment = equipment,
+                contentScale = ContentScale.Crop
             )
         }
     }
@@ -149,6 +148,7 @@ fun RelicImage(
         BaseDefaultText(
             text = textRelicParts,
             fontSize = 16.sp,
+            fontWeight = FontWeight.Bold,
         )
     }
 }
@@ -157,6 +157,7 @@ fun RelicImage(
 fun EquipmentImage(
     modifier: Modifier = Modifier,
     equipment: Equipment?,
+    contentScale: ContentScale = ContentScale.Fit,
 ) {
     AsyncImage(
         modifier = modifier
@@ -166,5 +167,6 @@ fun EquipmentImage(
         model = if (equipment?.image == "") R.drawable.ic_add else equipment?.image,
         contentDescription = null,
         colorFilter = if (equipment?.image == "") ColorFilter.tint(MaterialTheme.colorScheme.secondary) else null,
+        contentScale = contentScale
     )
 }

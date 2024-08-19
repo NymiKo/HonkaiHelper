@@ -62,7 +62,7 @@ class BuildsHeroListAdapter(
     }
 
     override fun onClick(view: View?) {
-        val idBuild = view?.tag as Int
+        val idBuild = view?.tag as Long
         actionListener.onClick(idBuild)
     }
 }

@@ -99,7 +99,7 @@ class BuildsHeroListFragment :
 
     private fun setupAdapter() {
         mAdapter = BuildsHeroListAdapter(object : BuildsHeroListListener {
-            override fun onClick(idBuild: Int) {
+            override fun onClick(idBuild: Long) {
                 findNavController().navigate(R.id.viewingUsersBuildFragment, ViewingUsersBuildFragment.newInstance(idBuild))
             }
         })

@@ -160,7 +160,7 @@ class ViewingUsersBuildFragment :
     companion object {
         private const val ARG_ID_BUILD = "idBuild"
 
-        fun newInstance(idBuild: Int): Bundle {
+        fun newInstance(idBuild: Long): Bundle {
             return bundleOf(ARG_ID_BUILD to idBuild)
         }
     }
