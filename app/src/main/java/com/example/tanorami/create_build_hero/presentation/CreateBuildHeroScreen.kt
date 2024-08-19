@@ -51,6 +51,7 @@ fun CreateBuildHeroScreen(
     modifier: Modifier = Modifier,
     viewModel: CreateBuildHeroViewModel,
     idBuild: Long,
+    idHero: Int,
     onBack: () -> Unit,
 ) {
     CreateBuildHeroScreenContent(
@@ -63,7 +64,8 @@ fun CreateBuildHeroScreen(
             }
             viewModel.onEvent(event)
         },
-        idBuild = idBuild
+        idBuild = idBuild,
+        idHero = idHero,
     )
 }
 
@@ -72,11 +74,15 @@ private fun CreateBuildHeroScreenContent(
     modifier: Modifier = Modifier,
     uiState: CreateBuildHeroScreenUiState,
     idBuild: Long,
+    idHero: Int,
     onEvent: (CreateBuildHeroScreenEvents) -> Unit,
 ) {
     OnLifecycleEvent { owner, event ->
         when(event) {
-            Lifecycle.Event.ON_START -> { onEvent(CreateBuildHeroScreenEvents.GetBuild(idBuild)) }
+            Lifecycle.Event.ON_START -> {
+                onEvent(CreateBuildHeroScreenEvents.GetHero(idHero = idHero))
+                if (idBuild != -1L) onEvent(CreateBuildHeroScreenEvents.GetBuild(idBuild))
+            }
             else -> { }
         }
     }
@@ -101,7 +107,8 @@ private fun CreateBuildHeroScreenContent(
         Column(
             modifier = Modifier
                 .padding(innerPadding)
-                .padding(16.dp)
+                .padding(horizontal = 16.dp)
+                .padding(bottom = 16.dp)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -257,6 +264,7 @@ fun CreateBuildHeroScreenPreview(modifier: Modifier = Modifier) {
             uiState = CreateBuildHeroScreenUiState(),
             onEvent = {},
             idBuild = 1L,
+            idHero = 1,
         )
     }
 }

@@ -18,8 +18,6 @@ import com.example.tanorami.App
 import com.example.tanorami.R
 import com.example.tanorami.core.theme.AppTheme
 import com.example.tanorami.create_build_hero.adapter.CreateBuildHeroStatsAdapter
-import com.example.tanorami.create_build_hero.adapter.CreateBuildHeroStatsListener
-import com.example.tanorami.create_build_hero.data.model.BuildHeroModel
 import com.example.tanorami.databinding.FragmentCreateBuildHeroBinding
 import com.example.tanorami.equipment.EquipmentType
 import com.example.tanorami.equipment.data.model.Equipment
@@ -38,6 +36,7 @@ class CreateBuildHeroFragment : Fragment() {
     private lateinit var mStatsAdapter: CreateBuildHeroStatsAdapter
 
     private val idBuild get() = requireArguments().getLong(ARG_ID_BUILD)
+    private val idHero get() = requireArguments().getInt(ARG_ID_HERO)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -87,6 +86,7 @@ class CreateBuildHeroFragment : Fragment() {
                     CreateBuildHeroScreen(
                         viewModel = viewModel,
                         idBuild = idBuild,
+                        idHero = idHero,
                         onBack = { findNavController().navigateUp() }
                     )
                 }

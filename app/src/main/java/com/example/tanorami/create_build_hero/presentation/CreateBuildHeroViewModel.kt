@@ -49,18 +49,20 @@ class CreateBuildHeroViewModel @Inject constructor(
             is CreateBuildHeroScreenEvents.SaveBuild -> saveBuild(idBuild = uiState.idBuild)
             is CreateBuildHeroScreenEvents.UpdateBuild -> saveBuild(idBuild = uiState.idBuild)
             is CreateBuildHeroScreenEvents.GetBuild -> {
-                uiState = uiState.copy(idBuild = event.idBuild, isCreateBuild = event.idBuild == -1L)
-                if (event.idBuild != -1L) getBuild(event.idBuild)
+                uiState = uiState.copy(idBuild = event.idBuild, isCreateBuild = false)
+                getBuild(event.idBuild)
             }
-            is CreateBuildHeroScreenEvents.GetHero -> getHero(event.idHero)
+            is CreateBuildHeroScreenEvents.GetHero -> {
+                if (event.idHero != -1) getHero(event.idHero)
+            }
             else -> Unit
         }
     }
 
     fun getHero(idHero: Int) = viewModelScope.launch {
-        _hero.value = repository.getHero(idHero)
+        //_hero.value = repository.getHero(idHero)
 
-        uiState = uiState.copy(idHero = idHero, hero = repository.getHero(idHero))
+        uiState = uiState.copy(idHero = idHero, hero = repository.getHero(idHero), isCreateBuild = true)
     }
 
     fun addWeapon(equipment: Equipment) {
