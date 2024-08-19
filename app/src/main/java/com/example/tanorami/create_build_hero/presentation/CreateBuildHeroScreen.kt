@@ -28,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
 import coil.compose.AsyncImage
 import com.example.tanorami.R
 import com.example.tanorami.base_components.BaseDefaultText
@@ -38,6 +39,7 @@ import com.example.tanorami.core.theme.Red
 import com.example.tanorami.core.theme.White
 import com.example.tanorami.create_build_hero.presentation.components.BuildStatsComponent
 import com.example.tanorami.create_build_hero.presentation.components.EquipmentBuildComponent
+import com.example.tanorami.utils.OnLifecycleEvent
 
 @Composable
 fun CreateBuildHeroScreen(
@@ -67,7 +69,12 @@ private fun CreateBuildHeroScreenContent(
     idBuild: Long,
     onEvent: (CreateBuildHeroScreenEvents) -> Unit,
 ) {
-    onEvent(CreateBuildHeroScreenEvents.GetBuild(idBuild))
+    OnLifecycleEvent { owner, event ->
+        when(event) {
+            Lifecycle.Event.ON_START -> { onEvent(CreateBuildHeroScreenEvents.GetBuild(idBuild)) }
+            else -> { }
+        }
+    }
 
     Scaffold(
         modifier = modifier.background(MaterialTheme.colorScheme.background),

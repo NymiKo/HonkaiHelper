@@ -15,9 +15,16 @@ import android.view.View
 import android.widget.ImageView
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
 import com.bumptech.glide.Glide
 import com.example.tanorami.R
 import com.example.tanorami.equipment.data.model.Equipment
@@ -137,4 +144,22 @@ fun Uri.toFile(context: Context): File  {
         }
     }
     return checkNotNull(file)
+}
+
+@Composable
+fun OnLifecycleEvent(onEvent: (owner: LifecycleOwner, event: Lifecycle.Event) -> Unit) {
+    val eventHandler = rememberUpdatedState(newValue = onEvent)
+    val lifecycleOwner = rememberUpdatedState(newValue = LocalLifecycleOwner.current)
+
+    DisposableEffect(key1 = lifecycleOwner.value) {
+        val lifecycle = lifecycleOwner.value.lifecycle
+        val observer = LifecycleEventObserver { owner, event ->
+            eventHandler.value(owner, event)
+        }
+
+        lifecycle.addObserver(observer)
+        onDispose {
+            lifecycle.removeObserver(observer)
+        }
+    }
 }
