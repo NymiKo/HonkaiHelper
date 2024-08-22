@@ -19,6 +19,7 @@ import com.example.tanorami.R
 import com.example.tanorami.core.theme.AppTheme
 import com.example.tanorami.create_build_hero.adapter.CreateBuildHeroStatsAdapter
 import com.example.tanorami.databinding.FragmentCreateBuildHeroBinding
+import com.example.tanorami.equipment.EquipmentFragment
 import com.example.tanorami.equipment.EquipmentType
 import com.example.tanorami.equipment.data.model.Equipment
 import javax.inject.Inject
@@ -56,19 +57,19 @@ class CreateBuildHeroFragment : Fragment() {
             if (equipment != null) {
                 when (equipmentClick) {
                     EquipmentType.WEAPON -> {
-                        viewModel.addWeapon(equipment)
+                        viewModel.onEvent(CreateBuildHeroScreenEvents.AddWeapon(equipment))
                     }
 
                     EquipmentType.RELIC_TWO_PARTS -> {
-                        viewModel.addRelicTwoParts(equipment)
-                    }
-
-                    EquipmentType.DECORATION -> {
-                        viewModel.addDecoration(equipment)
+                        viewModel.onEvent(CreateBuildHeroScreenEvents.AddTwoPartsRelic(equipment))
                     }
 
                     EquipmentType.RELIC_FOUR_PARTS -> {
-                        viewModel.addRelicFourParts(equipment)
+                        viewModel.onEvent(CreateBuildHeroScreenEvents.AddFourPartsRelic(equipment))
+                    }
+
+                    EquipmentType.DECORATION -> {
+                        viewModel.onEvent(CreateBuildHeroScreenEvents.AddDecoration(equipment))
                     }
                 }
             }
@@ -87,6 +88,13 @@ class CreateBuildHeroFragment : Fragment() {
                         viewModel = viewModel,
                         idBuild = idBuild,
                         idHero = idHero,
+                        onEquipmentScreen = { pathHero, equipmentType ->
+                            equipmentClick = equipmentType
+                            findNavController().navigate(
+                                R.id.equipmentFragment,
+                                EquipmentFragment.newInstance(pathHero, equipmentClick = equipmentType)
+                            )
+                        },
                         onBack = { findNavController().navigateUp() }
                     )
                 }

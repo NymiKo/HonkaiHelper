@@ -2,6 +2,7 @@ package com.example.tanorami.create_build_hero.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,17 +30,21 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.tanorami.R
 import com.example.tanorami.base_components.BaseDefaultText
+import com.example.tanorami.core.theme.Blue
 import com.example.tanorami.core.theme.GreyTransparent20
 import com.example.tanorami.core.theme.Orange
+import com.example.tanorami.core.theme.Violet
+import com.example.tanorami.equipment.EquipmentType
 import com.example.tanorami.equipment.data.model.Equipment
 
 @Composable
 fun EquipmentBuildComponent(
     modifier: Modifier = Modifier,
-    weaponImage: Equipment?,
-    relicTwoPartsImage: Equipment?,
-    relicFourPartsImage: Equipment?,
-    decorationImage: Equipment?,
+    weapon: Equipment?,
+    relicTwoParts: Equipment?,
+    relicFourParts: Equipment?,
+    decoration: Equipment?,
+    onEquipmentScreen: (equipmentType: EquipmentType) -> Unit,
 ) {
     Row(
         modifier = modifier
@@ -47,12 +52,15 @@ fun EquipmentBuildComponent(
             .height(IntrinsicSize.Max),
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
-        CategoryWeapon(equipment = weaponImage)
+        CategoryWeapon(equipment = weapon, onEquipmentScreen = onEquipmentScreen::invoke)
         CategoryRelics(
-            relicTwoPartsEquipment = relicTwoPartsImage,
-            relicFourPartsEquipment = relicFourPartsImage
+            relicTwoPartsEquipment = relicTwoParts,
+            relicFourPartsEquipment = relicFourParts,
+            onEquipmentScreen = onEquipmentScreen::invoke
         )
-        CategoryDecoration(equipment = decorationImage)
+        CategoryDecoration(
+            equipment = decoration, onEquipmentScreen = onEquipmentScreen::invoke
+        )
     }
 }
 
@@ -60,6 +68,7 @@ fun EquipmentBuildComponent(
 fun CategoryWeapon(
     modifier: Modifier = Modifier,
     equipment: Equipment?,
+    onEquipmentScreen: (equipmentType: EquipmentType) -> Unit,
 ) {
     Column(
         modifier = modifier,
@@ -71,9 +80,19 @@ fun CategoryWeapon(
             EquipmentImage(
                 modifier = Modifier
                     .height(120.dp)
-                    .width(80.dp),
+                    .width(80.dp)
+                    .background(
+                        color = when (equipment?.rarity) {
+                            0 -> Blue
+                            1 -> Violet
+                            2 -> Orange
+                            else -> Color.Transparent
+                        },
+                        shape = RoundedCornerShape(16.dp)
+                    ),
                 equipment = equipment,
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
+                onEquipmentScreen = { onEquipmentScreen(EquipmentType.WEAPON) }
             )
         }
     }
@@ -84,6 +103,7 @@ fun CategoryRelics(
     modifier: Modifier = Modifier,
     relicTwoPartsEquipment: Equipment?,
     relicFourPartsEquipment: Equipment?,
+    onEquipmentScreen: (equipmentType: EquipmentType) -> Unit,
 ) {
     Column(
         modifier = modifier,
@@ -91,14 +111,12 @@ fun CategoryRelics(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         EquipmentCategoryText(categoryText = stringResource(id = R.string.relic))
-        RelicImage(
-            equipment = relicTwoPartsEquipment,
-            textRelicParts = stringResource(id = R.string.relic_two_parts)
-        )
-        RelicImage(
-            equipment = relicFourPartsEquipment,
-            textRelicParts = stringResource(id = R.string.relic_four_parts)
-        )
+        RelicImage(equipment = relicTwoPartsEquipment,
+            textRelicParts = stringResource(id = R.string.relic_two_parts),
+            onEquipmentScreen = { onEquipmentScreen(EquipmentType.RELIC_TWO_PARTS) })
+        RelicImage(equipment = relicFourPartsEquipment,
+            textRelicParts = stringResource(id = R.string.relic_four_parts),
+            onEquipmentScreen = { onEquipmentScreen(EquipmentType.RELIC_FOUR_PARTS) })
     }
 }
 
@@ -106,6 +124,7 @@ fun CategoryRelics(
 fun CategoryDecoration(
     modifier: Modifier = Modifier,
     equipment: Equipment?,
+    onEquipmentScreen: (equipmentType: EquipmentType) -> Unit,
 ) {
     Column(
         modifier = modifier,
@@ -113,11 +132,14 @@ fun CategoryDecoration(
     ) {
         EquipmentCategoryText(categoryText = stringResource(id = R.string.decoration))
         Box(modifier = Modifier.fillMaxHeight(), contentAlignment = Alignment.Center) {
-            EquipmentImage(
-                modifier = Modifier.size(100.dp),
+            EquipmentImage(modifier = Modifier
+                .size(100.dp)
+                .background(
+                    color = if (equipment == null) Color.Transparent else Orange,
+                    shape = RoundedCornerShape(16.dp)
+                ),
                 equipment = equipment,
-
-            )
+                onEquipmentScreen = { onEquipmentScreen(EquipmentType.DECORATION) })
         }
     }
 }
@@ -139,12 +161,22 @@ fun RelicImage(
     modifier: Modifier = Modifier,
     equipment: Equipment?,
     textRelicParts: String,
+    onEquipmentScreen: () -> Unit,
 ) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        EquipmentImage(modifier = Modifier.size(80.dp), equipment = equipment)
+        EquipmentImage(
+            modifier = Modifier
+                .size(80.dp)
+                .background(
+                    color = if (equipment == null) Color.Transparent else Orange,
+                    shape = RoundedCornerShape(16.dp)
+                ),
+            equipment = equipment,
+            onEquipmentScreen = onEquipmentScreen::invoke
+        )
         BaseDefaultText(
             text = textRelicParts,
             fontSize = 16.sp,
@@ -158,15 +190,18 @@ fun EquipmentImage(
     modifier: Modifier = Modifier,
     equipment: Equipment?,
     contentScale: ContentScale = ContentScale.Fit,
+    onEquipmentScreen: () -> Unit,
 ) {
     AsyncImage(
         modifier = modifier
-            .background(color = if (equipment?.image == "") Color.Transparent else Orange, shape = RoundedCornerShape(16.dp))
             .clip(RoundedCornerShape(16.dp))
-            .border(width = 2.dp, color = GreyTransparent20, shape = RoundedCornerShape(16.dp)),
-        model = if (equipment?.image == "") R.drawable.ic_add else equipment?.image,
+            .border(width = 2.dp, color = GreyTransparent20, shape = RoundedCornerShape(16.dp))
+            .clickable {
+                onEquipmentScreen()
+            },
+        model = equipment?.image ?: R.drawable.ic_add,
         contentDescription = null,
-        colorFilter = if (equipment?.image == "") ColorFilter.tint(MaterialTheme.colorScheme.secondary) else null,
-        contentScale = contentScale
+        colorFilter = if (equipment == null) ColorFilter.tint(MaterialTheme.colorScheme.secondary) else null,
+        contentScale = contentScale,
     )
 }

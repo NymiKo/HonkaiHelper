@@ -4,9 +4,9 @@ import com.example.tanorami.equipment.data.model.Equipment
 
 data class BuildHeroModel(
     val idBuild: Long? = null,
-    val weapon: Equipment,
-    val relicTwoParts: Equipment,
-    val relicFourParts: Equipment,
-    val decoration: Equipment,
+    val weapon: Equipment? = null,
+    val relicTwoParts: Equipment? = null,
+    val relicFourParts: Equipment? = null,
+    val decoration: Equipment? = null,
     val statsEquipmentList: Array<String> = arrayOf("HP %", "HP %", "HP %", "Эффект пробития %")
 )

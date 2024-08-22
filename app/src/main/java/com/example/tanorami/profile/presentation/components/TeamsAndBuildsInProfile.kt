@@ -47,7 +47,7 @@ fun TeamsAndBuildsInProfile(
             modifier = Modifier.padding(horizontal = 16.dp).fillMaxWidth(),
             selectedTabIndex = pagerState.currentPage,
             contentColor = MaterialTheme.colorScheme.secondary,
-            indicator = {tabPositions ->
+            indicator = { tabPositions ->
                 if (pagerState.currentPage < tabPositions.size) {
                     TabRowDefaults.SecondaryIndicator(
                         modifier = Modifier.tabIndicatorOffset(tabPositions[pagerState.currentPage]),

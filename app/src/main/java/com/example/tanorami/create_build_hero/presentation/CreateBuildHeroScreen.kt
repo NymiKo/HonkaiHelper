@@ -44,6 +44,7 @@ import com.example.tanorami.core.theme.Red
 import com.example.tanorami.core.theme.White
 import com.example.tanorami.create_build_hero.presentation.components.BuildStatsComponent
 import com.example.tanorami.create_build_hero.presentation.components.EquipmentBuildComponent
+import com.example.tanorami.equipment.EquipmentType
 import com.example.tanorami.utils.OnLifecycleEvent
 
 @Composable
@@ -52,6 +53,7 @@ fun CreateBuildHeroScreen(
     viewModel: CreateBuildHeroViewModel,
     idBuild: Long,
     idHero: Int,
+    onEquipmentScreen: (pathHero: Int, equipmentType: EquipmentType) -> Unit,
     onBack: () -> Unit,
 ) {
     CreateBuildHeroScreenContent(
@@ -59,6 +61,11 @@ fun CreateBuildHeroScreen(
         uiState = viewModel.uiState,
         onEvent = { event ->
             when (event) {
+                is CreateBuildHeroScreenEvents.OnEquipmentScreen -> onEquipmentScreen(
+                    event.pathHero,
+                    event.equipmentType
+                )
+
                 CreateBuildHeroScreenEvents.OnBack -> onBack()
                 else -> Unit
             }
@@ -78,12 +85,13 @@ private fun CreateBuildHeroScreenContent(
     onEvent: (CreateBuildHeroScreenEvents) -> Unit,
 ) {
     OnLifecycleEvent { owner, event ->
-        when(event) {
+        when (event) {
             Lifecycle.Event.ON_START -> {
                 onEvent(CreateBuildHeroScreenEvents.GetHero(idHero = idHero))
-                if (idBuild != -1L) onEvent(CreateBuildHeroScreenEvents.GetBuild(idBuild))
+                onEvent(CreateBuildHeroScreenEvents.GetBuild(idBuild))
             }
-            else -> { }
+
+            else -> {}
         }
     }
 
@@ -118,10 +126,15 @@ private fun CreateBuildHeroScreenContent(
                 heroName = uiState.hero?.name ?: ""
             )
             EquipmentBuildComponent(
-                weaponImage = uiState.buildHeroFromUser?.weapon,
-                relicTwoPartsImage = uiState.buildHeroFromUser?.relicTwoParts,
-                relicFourPartsImage = uiState.buildHeroFromUser?.relicFourParts,
-                decorationImage = uiState.buildHeroFromUser?.decoration,
+                weapon = uiState.buildHeroFromUser?.weapon,
+                relicTwoParts = uiState.buildHeroFromUser?.relicTwoParts,
+                relicFourParts = uiState.buildHeroFromUser?.relicFourParts,
+                decoration = uiState.buildHeroFromUser?.decoration,
+                onEquipmentScreen = { equipmentType ->
+                    onEvent(
+                        CreateBuildHeroScreenEvents.OnEquipmentScreen(uiState.hero?.path!!, equipmentType)
+                    )
+                }
             )
             BuildStatsComponent()
         }

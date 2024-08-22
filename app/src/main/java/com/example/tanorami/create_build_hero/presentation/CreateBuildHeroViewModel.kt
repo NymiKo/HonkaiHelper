@@ -44,41 +44,63 @@ class CreateBuildHeroViewModel @Inject constructor(
     private val statsEquipmentList = Array<String>(4) { "" }
 
     fun onEvent(event: CreateBuildHeroScreenEvents) {
-        when(event) {
+        when (event) {
             is CreateBuildHeroScreenEvents.DeleteBuild -> deleteBuild(idBuild = uiState.idBuild!!)
             is CreateBuildHeroScreenEvents.SaveBuild -> saveBuild(idBuild = uiState.idBuild)
             is CreateBuildHeroScreenEvents.UpdateBuild -> saveBuild(idBuild = uiState.idBuild)
             is CreateBuildHeroScreenEvents.GetBuild -> {
-                uiState = uiState.copy(idBuild = event.idBuild, isCreateBuild = false)
-                getBuild(event.idBuild)
+                if (event.idBuild != -1L) {
+                    uiState = uiState.copy(idBuild = event.idBuild, isCreateBuild = false)
+                    getBuild(event.idBuild)
+                } else {
+                    uiState = uiState.copy(isCreateBuild = true)
+                }
             }
+
             is CreateBuildHeroScreenEvents.GetHero -> {
                 if (event.idHero != -1) getHero(event.idHero)
             }
+
+            is CreateBuildHeroScreenEvents.AddWeapon -> addWeapon(event.weapon)
+            is CreateBuildHeroScreenEvents.AddTwoPartsRelic -> addRelicTwoParts(event.twoPartsRelic)
+            is CreateBuildHeroScreenEvents.AddFourPartsRelic -> addRelicFourParts(event.fourPartsRelic)
+            is CreateBuildHeroScreenEvents.AddDecoration -> addDecoration(event.decoration)
+
             else -> Unit
         }
     }
 
-    fun getHero(idHero: Int) = viewModelScope.launch {
+    private fun getHero(idHero: Int) = viewModelScope.launch {
         //_hero.value = repository.getHero(idHero)
 
-        uiState = uiState.copy(idHero = idHero, hero = repository.getHero(idHero), isCreateBuild = true)
+        uiState = uiState.copy(idHero = idHero, hero = repository.getHero(idHero))
     }
 
-    fun addWeapon(equipment: Equipment) {
-        _weapon.value = equipment
+    private fun addWeapon(weapon: Equipment) {
+        //_weapon.value = equipment
+
+        uiState = uiState.copy(buildHeroFromUser = uiState.buildHeroFromUser.copy(weapon = weapon))
     }
 
-    fun addRelicTwoParts(equipment: Equipment) {
-        _relicTwoParts.value = equipment
+    private fun addRelicTwoParts(twoPartsRelic: Equipment) {
+        //_relicTwoParts.value = equipment
+
+        uiState =
+            uiState.copy(buildHeroFromUser = uiState.buildHeroFromUser.copy(relicTwoParts = twoPartsRelic))
     }
 
-    fun addRelicFourParts(equipment: Equipment) {
-        _relicFourParts.value = equipment
+    private fun addRelicFourParts(fourPartsRelic: Equipment) {
+        //_relicFourParts.value = equipment
+
+        uiState =
+            uiState.copy(buildHeroFromUser = uiState.buildHeroFromUser.copy(relicFourParts = fourPartsRelic))
     }
 
-    fun addDecoration(equipment: Equipment) {
-        _decoration.value = equipment
+    private fun addDecoration(decoration: Equipment) {
+        //_decoration.value = equipment
+
+        uiState =
+            uiState.copy(buildHeroFromUser = uiState.buildHeroFromUser.copy(decoration = decoration))
     }
 
     fun changeStatOnEquipment(positionItem: Int, value: String) {
@@ -86,15 +108,27 @@ class CreateBuildHeroViewModel @Inject constructor(
     }
 
     fun saveBuild(idBuild: Long?) {
-        if (!checkForNull(uiState.buildHeroFromUser?.weapon, R.string.empty_weapon_in_create_build)) {
+        if (!checkForNull(
+                uiState.buildHeroFromUser.weapon,
+                R.string.empty_weapon_in_create_build
+            )
+        ) {
             return
         }
 
-        if (!checkForNull(uiState.buildHeroFromUser?.relicTwoParts, R.string.empty_relic_in_create_build)) {
+        if (!checkForNull(
+                uiState.buildHeroFromUser.relicTwoParts,
+                R.string.empty_relic_in_create_build
+            )
+        ) {
             return
         }
 
-        if (!checkForNull(uiState.buildHeroFromUser?.decoration, R.string.empty_decoration_in_create_build)) {
+        if (!checkForNull(
+                uiState.buildHeroFromUser.decoration,
+                R.string.empty_decoration_in_create_build
+            )
+        ) {
             return
         }
 
@@ -103,11 +137,12 @@ class CreateBuildHeroViewModel @Inject constructor(
 
             val build = BuildHeroFromUser(
                 uiState.idHero!!,
-                uiState.buildHeroFromUser?.weapon!!.id,
-                uiState.buildHeroFromUser?.relicTwoParts!!.id,
-                uiState.buildHeroFromUser?.relicFourParts?.id ?: uiState.buildHeroFromUser?.relicTwoParts!!.id ,
-                uiState.buildHeroFromUser?.decoration!!.id,
-                uiState.buildHeroFromUser?.statsEquipmentList!!,
+                uiState.buildHeroFromUser.weapon!!.id,
+                uiState.buildHeroFromUser.relicTwoParts!!.id,
+                uiState.buildHeroFromUser.relicFourParts?.id
+                    ?: uiState.buildHeroFromUser.relicTwoParts!!.id,
+                uiState.buildHeroFromUser.decoration!!.id,
+                uiState.buildHeroFromUser.statsEquipmentList,
                 idBuild = idBuild
             )
 
@@ -135,7 +170,12 @@ class CreateBuildHeroViewModel @Inject constructor(
 
     private fun checkForNull(arg: Equipment?, message: Int): Boolean {
         return if (arg == null) {
-            uiState = uiState.copy(isLoading = false, isSuccess = false, isError = true, errorMessage = message)
+            uiState = uiState.copy(
+                isLoading = false,
+                isSuccess = false,
+                isError = true,
+                errorMessage = message
+            )
             false
         } else {
             true
@@ -154,7 +194,12 @@ class CreateBuildHeroViewModel @Inject constructor(
     private fun getBuild(idBuild: Long) = viewModelScope.launch {
         when (val result = repository.getBuild(idBuild)) {
             is NetworkResult.Error -> {
-                uiState = uiState.copy(isLoading = false, isSuccess = false, isError = true, errorMessage = errorHandler(result.code))
+                uiState = uiState.copy(
+                    isLoading = false,
+                    isSuccess = false,
+                    isError = true,
+                    errorMessage = errorHandler(result.code)
+                )
             }
 
             is NetworkResult.Success -> {
@@ -167,10 +212,23 @@ class CreateBuildHeroViewModel @Inject constructor(
                     hero = repository.getHero(result.data.hero.id),
                     buildHeroFromUser = BuildHeroModel(
                         idBuild = idBuild,
-                        weapon = Equipment(result.data.weapon.idWeapon, result.data.weapon.image, result.data.weapon.rarity.toByte()),
-                        relicTwoParts = Equipment(result.data.relicTwoParts.idRelic, result.data.relicTwoParts.image),
-                        relicFourParts = Equipment(result.data.relicFourParts.idRelic, result.data.relicFourParts.image),
-                        decoration = Equipment(result.data.decoration.idDecoration, result.data.decoration.image)
+                        weapon = Equipment(
+                            result.data.weapon.idWeapon,
+                            result.data.weapon.image,
+                            result.data.weapon.rarity
+                        ),
+                        relicTwoParts = Equipment(
+                            result.data.relicTwoParts.idRelic,
+                            result.data.relicTwoParts.image
+                        ),
+                        relicFourParts = Equipment(
+                            result.data.relicFourParts.idRelic,
+                            result.data.relicFourParts.image
+                        ),
+                        decoration = Equipment(
+                            result.data.decoration.idDecoration,
+                            result.data.decoration.image
+                        )
                     ),
                 )
             }

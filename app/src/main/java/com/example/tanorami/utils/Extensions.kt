@@ -80,7 +80,7 @@ fun ImageView.backgroundHero(rarity: Boolean) {
 
 fun ImageView.backgroundEquipment(equipment: Equipment) {
     this.load(equipment.image)
-    when (equipment.rarity.toInt()) {
+    when (equipment.rarity) {
         0 -> this.background = ContextCompat.getDrawable(this.context, R.color.blue)
         1 -> this.background = ContextCompat.getDrawable(this.context, R.color.violet)
         2 -> this.background = ContextCompat.getDrawable(this.context, R.color.orange)

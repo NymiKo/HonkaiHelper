@@ -17,7 +17,7 @@ class EquipmentRepositoryImpl @Inject constructor(
 ) : EquipmentRepository {
     override suspend fun getWeapons(path: Int): List<Equipment> = withContext(ioDispatcher) {
         weaponDao.getWeaponByPath(path).sortedByDescending { it.rarity }.map {
-            Equipment(it.idWeapon, it.image, it.rarity.toByte())
+            Equipment(it.idWeapon, it.image, it.rarity)
         }
     }
 
