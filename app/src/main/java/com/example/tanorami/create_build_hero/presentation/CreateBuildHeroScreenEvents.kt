@@ -15,4 +15,8 @@ sealed interface CreateBuildHeroScreenEvents {
     data class AddTwoPartsRelic(val twoPartsRelic: Equipment): CreateBuildHeroScreenEvents
     data class AddFourPartsRelic(val fourPartsRelic: Equipment): CreateBuildHeroScreenEvents
     data class AddDecoration(val decoration: Equipment): CreateBuildHeroScreenEvents
+    data class ChangeStatsOnBody(val value: String): CreateBuildHeroScreenEvents
+    data class ChangeStatsOnLegs(val value: String): CreateBuildHeroScreenEvents
+    data class ChangeStatsOnSphere(val value: String): CreateBuildHeroScreenEvents
+    data class ChangeStatsOnRope(val value: String): CreateBuildHeroScreenEvents
 }

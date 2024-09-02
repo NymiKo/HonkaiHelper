@@ -10,7 +10,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.tanorami.R
 import com.example.tanorami.create_build_hero.data.CreateBuildHeroRepository
 import com.example.tanorami.create_build_hero.data.model.BuildHeroFromUser
-import com.example.tanorami.create_build_hero.data.model.BuildHeroModel
 import com.example.tanorami.data.NetworkResult
 import com.example.tanorami.equipment.data.model.Equipment
 import com.example.tanorami.heroes.data.model.Hero
@@ -41,8 +40,6 @@ class CreateBuildHeroViewModel @Inject constructor(
     private val _decoration = MutableLiveData<Equipment>()
     val decoration: LiveData<Equipment> = _decoration
 
-    private val statsEquipmentList = Array<String>(4) { "" }
-
     fun onEvent(event: CreateBuildHeroScreenEvents) {
         when (event) {
             is CreateBuildHeroScreenEvents.DeleteBuild -> deleteBuild(idBuild = uiState.idBuild!!)
@@ -57,14 +54,17 @@ class CreateBuildHeroViewModel @Inject constructor(
                 }
             }
 
-            is CreateBuildHeroScreenEvents.GetHero -> {
-                if (event.idHero != -1) getHero(event.idHero)
-            }
+            is CreateBuildHeroScreenEvents.GetHero -> getHero(event.idHero)
 
             is CreateBuildHeroScreenEvents.AddWeapon -> addWeapon(event.weapon)
             is CreateBuildHeroScreenEvents.AddTwoPartsRelic -> addRelicTwoParts(event.twoPartsRelic)
             is CreateBuildHeroScreenEvents.AddFourPartsRelic -> addRelicFourParts(event.fourPartsRelic)
             is CreateBuildHeroScreenEvents.AddDecoration -> addDecoration(event.decoration)
+
+            is CreateBuildHeroScreenEvents.ChangeStatsOnBody -> changeStatBody(event.value)
+            is CreateBuildHeroScreenEvents.ChangeStatsOnLegs -> changeStatLegs(event.value)
+            is CreateBuildHeroScreenEvents.ChangeStatsOnSphere -> changeStatSphere(event.value)
+            is CreateBuildHeroScreenEvents.ChangeStatsOnRope -> changeStatRope(event.value)
 
             else -> Unit
         }
@@ -72,8 +72,9 @@ class CreateBuildHeroViewModel @Inject constructor(
 
     private fun getHero(idHero: Int) = viewModelScope.launch {
         //_hero.value = repository.getHero(idHero)
-
-        uiState = uiState.copy(idHero = idHero, hero = repository.getHero(idHero))
+        if (idHero != -1) {
+            uiState = uiState.copy(idHero = idHero, hero = repository.getHero(idHero))
+        }
     }
 
     private fun addWeapon(weapon: Equipment) {
@@ -103,8 +104,36 @@ class CreateBuildHeroViewModel @Inject constructor(
             uiState.copy(buildHeroFromUser = uiState.buildHeroFromUser.copy(decoration = decoration))
     }
 
-    fun changeStatOnEquipment(positionItem: Int, value: String) {
-        statsEquipmentList[positionItem] = value
+    private fun changeStatBody(value: String) {
+        uiState = uiState.copy(
+            buildHeroFromUser = uiState.buildHeroFromUser.copy(
+                statsEquipmentList = uiState.buildHeroFromUser.statsEquipmentList.copy(statBody = value)
+            )
+        )
+    }
+
+    private fun changeStatLegs(value: String) {
+        uiState = uiState.copy(
+            buildHeroFromUser = uiState.buildHeroFromUser.copy(
+                statsEquipmentList = uiState.buildHeroFromUser.statsEquipmentList.copy(statLegs = value)
+            )
+        )
+    }
+
+    private fun changeStatSphere(value: String) {
+        uiState = uiState.copy(
+            buildHeroFromUser = uiState.buildHeroFromUser.copy(
+                statsEquipmentList = uiState.buildHeroFromUser.statsEquipmentList.copy(statSphere = value)
+            )
+        )
+    }
+
+    private fun changeStatRope(value: String) {
+        uiState = uiState.copy(
+            buildHeroFromUser = uiState.buildHeroFromUser.copy(
+                statsEquipmentList = uiState.buildHeroFromUser.statsEquipmentList.copy(statRope = value)
+            )
+        )
     }
 
     fun saveBuild(idBuild: Long?) {
@@ -142,7 +171,12 @@ class CreateBuildHeroViewModel @Inject constructor(
                 uiState.buildHeroFromUser.relicFourParts?.id
                     ?: uiState.buildHeroFromUser.relicTwoParts!!.id,
                 uiState.buildHeroFromUser.decoration!!.id,
-                uiState.buildHeroFromUser.statsEquipmentList,
+                arrayOf(
+                    uiState.buildHeroFromUser.statsEquipmentList.statBody,
+                    uiState.buildHeroFromUser.statsEquipmentList.statLegs,
+                    uiState.buildHeroFromUser.statsEquipmentList.statSphere,
+                    uiState.buildHeroFromUser.statsEquipmentList.statRope,
+                ),
                 idBuild = idBuild
             )
 
@@ -176,6 +210,7 @@ class CreateBuildHeroViewModel @Inject constructor(
                 isError = true,
                 errorMessage = message
             )
+            uiState = uiState.copy(isError = false)
             false
         } else {
             true
@@ -210,7 +245,7 @@ class CreateBuildHeroViewModel @Inject constructor(
                     isSuccess = true,
                     isError = false,
                     hero = repository.getHero(result.data.hero.id),
-                    buildHeroFromUser = BuildHeroModel(
+                    buildHeroFromUser = uiState.buildHeroFromUser.copy(
                         idBuild = idBuild,
                         weapon = Equipment(
                             result.data.weapon.idWeapon,
@@ -228,6 +263,12 @@ class CreateBuildHeroViewModel @Inject constructor(
                         decoration = Equipment(
                             result.data.decoration.idDecoration,
                             result.data.decoration.image
+                        ),
+                        statsEquipmentList = uiState.buildHeroFromUser.statsEquipmentList.copy(
+                            statBody = result.data.statsEquipment[0],
+                            statLegs = result.data.statsEquipment[1],
+                            statSphere = result.data.statsEquipment[2],
+                            statRope = result.data.statsEquipment[3],
                         )
                     ),
                 )

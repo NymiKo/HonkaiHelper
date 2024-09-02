@@ -8,5 +8,5 @@ data class BuildHeroModel(
     val relicTwoParts: Equipment? = null,
     val relicFourParts: Equipment? = null,
     val decoration: Equipment? = null,
-    val statsEquipmentList: Array<String> = arrayOf("HP %", "HP %", "HP %", "Эффект пробития %")
+    val statsEquipmentList: BuildStatsEquipment = BuildStatsEquipment()
 )

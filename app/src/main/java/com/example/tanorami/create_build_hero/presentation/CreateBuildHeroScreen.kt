@@ -1,6 +1,7 @@
 package com.example.tanorami.create_build_hero.presentation
 
 import android.content.res.Configuration
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -28,6 +29,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -84,6 +86,8 @@ private fun CreateBuildHeroScreenContent(
     idHero: Int,
     onEvent: (CreateBuildHeroScreenEvents) -> Unit,
 ) {
+    val context = LocalContext.current
+
     OnLifecycleEvent { owner, event ->
         when (event) {
             Lifecycle.Event.ON_START -> {
@@ -93,6 +97,10 @@ private fun CreateBuildHeroScreenContent(
 
             else -> {}
         }
+    }
+
+    if (uiState.isError) {
+        Toast.makeText(context, uiState.errorMessage, Toast.LENGTH_LONG).show()
     }
 
     Scaffold(
@@ -126,17 +134,34 @@ private fun CreateBuildHeroScreenContent(
                 heroName = uiState.hero?.name ?: ""
             )
             EquipmentBuildComponent(
-                weapon = uiState.buildHeroFromUser?.weapon,
-                relicTwoParts = uiState.buildHeroFromUser?.relicTwoParts,
-                relicFourParts = uiState.buildHeroFromUser?.relicFourParts,
-                decoration = uiState.buildHeroFromUser?.decoration,
+                weapon = uiState.buildHeroFromUser.weapon,
+                relicTwoParts = uiState.buildHeroFromUser.relicTwoParts,
+                relicFourParts = uiState.buildHeroFromUser.relicFourParts,
+                decoration = uiState.buildHeroFromUser.decoration,
                 onEquipmentScreen = { equipmentType ->
                     onEvent(
-                        CreateBuildHeroScreenEvents.OnEquipmentScreen(uiState.hero?.path!!, equipmentType)
+                        CreateBuildHeroScreenEvents.OnEquipmentScreen(
+                            uiState.hero?.path!!,
+                            equipmentType
+                        )
                     )
                 }
             )
-            BuildStatsComponent()
+            BuildStatsComponent(
+                currentValue = uiState.buildHeroFromUser.statsEquipmentList,
+                changeStatOnBody = { value ->
+                    onEvent(CreateBuildHeroScreenEvents.ChangeStatsOnBody(value = value))
+                },
+                changeStatOnLegs = { value ->
+                    onEvent(CreateBuildHeroScreenEvents.ChangeStatsOnLegs(value = value))
+                },
+                changeStatOnSphere = { value ->
+                    onEvent(CreateBuildHeroScreenEvents.ChangeStatsOnSphere(value = value))
+                },
+                changeStatOnRope = { value ->
+                    onEvent(CreateBuildHeroScreenEvents.ChangeStatsOnRope(value = value))
+                },
+            )
         }
     }
 }
