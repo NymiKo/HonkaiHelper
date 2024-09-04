@@ -3,8 +3,6 @@ package com.example.tanorami.create_build_hero.presentation
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tanorami.R
@@ -12,7 +10,6 @@ import com.example.tanorami.create_build_hero.data.CreateBuildHeroRepository
 import com.example.tanorami.create_build_hero.data.model.BuildHeroFromUser
 import com.example.tanorami.data.NetworkResult
 import com.example.tanorami.equipment.data.model.Equipment
-import com.example.tanorami.heroes.data.model.Hero
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,27 +19,9 @@ class CreateBuildHeroViewModel @Inject constructor(
 
     var uiState by mutableStateOf(CreateBuildHeroScreenUiState())
 
-    private val _state = MutableLiveData<CreateBuildHeroUiState>(CreateBuildHeroUiState.CREATION)
-    val state: LiveData<CreateBuildHeroUiState> = _state
-
-    private val _hero = MutableLiveData<Hero>()
-    val hero: LiveData<Hero> = _hero
-
-    private val _weapon = MutableLiveData<Equipment>()
-    val weapon: LiveData<Equipment> = _weapon
-
-    private val _relicTwoParts = MutableLiveData<Equipment>()
-    val relicTwoParts: LiveData<Equipment> = _relicTwoParts
-
-    private val _relicFourParts = MutableLiveData<Equipment?>()
-    val relicFourParts: LiveData<Equipment?> = _relicFourParts
-
-    private val _decoration = MutableLiveData<Equipment>()
-    val decoration: LiveData<Equipment> = _decoration
-
     fun onEvent(event: CreateBuildHeroScreenEvents) {
         when (event) {
-            is CreateBuildHeroScreenEvents.DeleteBuild -> deleteBuild(idBuild = uiState.idBuild!!)
+            is CreateBuildHeroScreenEvents.DeleteBuild -> deleteBuild(idBuild = uiState.idBuild)
             is CreateBuildHeroScreenEvents.SaveBuild -> saveBuild(idBuild = uiState.idBuild)
             is CreateBuildHeroScreenEvents.UpdateBuild -> saveBuild(idBuild = uiState.idBuild)
             is CreateBuildHeroScreenEvents.GetBuild -> {
@@ -53,7 +32,6 @@ class CreateBuildHeroViewModel @Inject constructor(
                     uiState = uiState.copy(isCreateBuild = true)
                 }
             }
-
             is CreateBuildHeroScreenEvents.GetHero -> getHero(event.idHero)
 
             is CreateBuildHeroScreenEvents.AddWeapon -> addWeapon(event.weapon)
@@ -71,35 +49,26 @@ class CreateBuildHeroViewModel @Inject constructor(
     }
 
     private fun getHero(idHero: Int) = viewModelScope.launch {
-        //_hero.value = repository.getHero(idHero)
         if (idHero != -1) {
             uiState = uiState.copy(idHero = idHero, hero = repository.getHero(idHero))
         }
     }
 
     private fun addWeapon(weapon: Equipment) {
-        //_weapon.value = equipment
-
         uiState = uiState.copy(buildHeroFromUser = uiState.buildHeroFromUser.copy(weapon = weapon))
     }
 
     private fun addRelicTwoParts(twoPartsRelic: Equipment) {
-        //_relicTwoParts.value = equipment
-
         uiState =
             uiState.copy(buildHeroFromUser = uiState.buildHeroFromUser.copy(relicTwoParts = twoPartsRelic))
     }
 
     private fun addRelicFourParts(fourPartsRelic: Equipment) {
-        //_relicFourParts.value = equipment
-
         uiState =
             uiState.copy(buildHeroFromUser = uiState.buildHeroFromUser.copy(relicFourParts = fourPartsRelic))
     }
 
     private fun addDecoration(decoration: Equipment) {
-        //_decoration.value = equipment
-
         uiState =
             uiState.copy(buildHeroFromUser = uiState.buildHeroFromUser.copy(decoration = decoration))
     }
@@ -162,10 +131,8 @@ class CreateBuildHeroViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            //_state.value = CreateBuildHeroUiState.SENDING_BUILD
-
             val build = BuildHeroFromUser(
-                uiState.idHero!!,
+                uiState.idHero,
                 uiState.buildHeroFromUser.weapon!!.id,
                 uiState.buildHeroFromUser.relicTwoParts!!.id,
                 uiState.buildHeroFromUser.relicFourParts?.id
@@ -191,7 +158,6 @@ class CreateBuildHeroViewModel @Inject constructor(
                 }
 
                 is NetworkResult.Success -> {
-                    //_state.value = CreateBuildHeroUiState.SUCCESS
                     uiState = uiState.copy(
                         isLoading = false,
                         isSuccess = true,
@@ -210,7 +176,6 @@ class CreateBuildHeroViewModel @Inject constructor(
                 isError = true,
                 errorMessage = message
             )
-            uiState = uiState.copy(isError = false)
             false
         } else {
             true
@@ -238,8 +203,6 @@ class CreateBuildHeroViewModel @Inject constructor(
             }
 
             is NetworkResult.Success -> {
-                //_state.value = CreateBuildHeroUiState.CREATION
-
                 uiState = uiState.copy(
                     isLoading = false,
                     isSuccess = true,
@@ -288,8 +251,6 @@ class CreateBuildHeroViewModel @Inject constructor(
             }
 
             is NetworkResult.Success -> {
-                //_state.value = CreateBuildHeroUiState.SUCCESS_DELETION_BUILD
-
                 uiState = uiState.copy(
                     isLoading = false,
                     isError = false,

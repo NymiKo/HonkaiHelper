@@ -11,7 +11,7 @@ data class CreateBuildHeroScreenUiState(
     val errorMessage: Int = R.string.error,
     val isCreateBuild: Boolean  = true,
     val buildHeroFromUser: BuildHeroModel = BuildHeroModel(),
-    val idBuild: Long? = null,
-    val idHero: Int? = null,
+    val idBuild: Long = -1L,
+    val idHero: Int = -1,
     val hero: Hero? = null,
 )
