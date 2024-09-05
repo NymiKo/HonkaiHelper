@@ -1,7 +1,12 @@
 package com.example.tanorami.viewing_users_build
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
+import android.content.Context.CLIPBOARD_SERVICE
 import android.os.Bundle
+import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -42,6 +47,7 @@ class ViewingUsersBuildFragment :
     }
 
     override fun setupView() {
+        addMenu()
         setupToolbar()
         setupAdapter()
         setupRecyclerView()
@@ -69,7 +75,8 @@ class ViewingUsersBuildFragment :
                     )
                     binding.imageHeroAvatarInViewingUsersBuild.backgroundHero(it.fullBuildHeroFromUser.hero.rarity)
                     binding.imageHeroAvatarInViewingUsersBuild.load(it.fullBuildHeroFromUser.hero.localAvatarPath)
-                    binding.textHeroNameInViewingUsersBuild.text = it.fullBuildHeroFromUser.hero.name
+                    binding.textHeroNameInViewingUsersBuild.text =
+                        it.fullBuildHeroFromUser.hero.name
                     binding.imageViewingHeroWeaponBuild.load(it.fullBuildHeroFromUser.weapon.image)
                     binding.cardViewingHeroWeaponBuild.backgroundRarity(it.fullBuildHeroFromUser.weapon.rarity)
                     binding.imageViewingHeroRelicBuildTwoParts.load(it.fullBuildHeroFromUser.relicTwoParts.image)
@@ -154,6 +161,29 @@ class ViewingUsersBuildFragment :
                 null,
                 extras
             )
+        }
+    }
+
+    private fun addMenu() {
+        binding.toolbarViewingUsersBuild.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.copy_uid_build -> {
+                    viewModel.uiState.observe(viewLifecycleOwner) { buildHero ->
+                        val clipboard = requireContext().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                        val clipData: ClipData = ClipData.newPlainText(
+                            "UID",
+                            if (buildHero is ViewingUsersBuildUiState.SUCCESS) {
+                                buildHero.fullBuildHeroFromUser.uid
+                            } else {
+                                ""
+                            }
+                        )
+                        clipboard.setPrimaryClip(clipData)
+                    }
+                    Toast.makeText(requireContext(), R.string.message_uid_build_copied, Toast.LENGTH_SHORT).show()
+                }
+            }
+            true
         }
     }
 

@@ -92,6 +92,7 @@
     <string name="update_your_build">Обновление сборки</string>
     <string name="hero_build_from">%1$s от %2$s</string>
     <string name="edit_nickname">Изменить никнейм</string>
+    <string name="copy_uid_build">Скопировать идентификатор сборки</string>
     <string name="my_builds">Мои сборки</string>
     <string name="edit_build">Редактирование сборки</string>
     <string name="delete_build">Удаление сборки</string>
@@ -100,6 +101,7 @@
     <string name="deletion_team">Команда удалена</string>
     <string name="empty">Здесь пусто. Вы ничем не делились!</string>
     <string name="feedback_has_been_sent">Сообщение было отправлено. Спасибо!</string>
+    <string name="message_uid_build_copied">Идентификатор сборки скопирован</string>
 
     <string name="hp">HP %</string>
     <string name="defense">Защита %</string>

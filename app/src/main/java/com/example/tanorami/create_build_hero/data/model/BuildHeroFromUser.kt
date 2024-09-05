@@ -9,4 +9,5 @@ data class BuildHeroFromUser(
     val statsEquipment: Array<String>,
     val nickname: String = "",
     val idBuild: Long? = null,
+    val uid: String = "",
 )

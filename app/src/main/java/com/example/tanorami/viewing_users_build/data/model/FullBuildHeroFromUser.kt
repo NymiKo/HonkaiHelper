@@ -13,5 +13,6 @@ data class FullBuildHeroFromUser(
     val relicFourParts: Relic,
     val decoration: Decoration,
     val statsEquipment: List<String>,
-    val nickname: String
+    val nickname: String,
+    val uid: String = "",
 )

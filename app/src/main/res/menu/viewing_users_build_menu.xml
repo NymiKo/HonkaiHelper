@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/copy_uid_build"
+        android:icon="@drawable/ic_baseline_content_copy"
+        android:title="@string/copy_uid_build"
+        app:iconTint="?attr/colorSecondary"
+        app:showAsAction="always" />
+</menu>
