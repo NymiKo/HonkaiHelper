@@ -1,10 +1,15 @@
 package com.example.tanorami.create_build_hero.presentation
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
 import android.content.res.Configuration
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -13,6 +18,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.AlertDialog
@@ -28,6 +34,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -46,6 +53,7 @@ import com.example.tanorami.create_build_hero.presentation.components.BuildStats
 import com.example.tanorami.create_build_hero.presentation.components.EquipmentBuildComponent
 import com.example.tanorami.equipment.EquipmentType
 import com.example.tanorami.utils.OnLifecycleEvent
+import com.example.tanorami.viewing_users_build.ViewingUsersBuildUiState
 
 @Composable
 fun CreateBuildHeroScreen(
@@ -95,10 +103,14 @@ private fun CreateBuildHeroScreenContent(
     }
 
     Scaffold(modifier = modifier.background(MaterialTheme.colorScheme.background), topBar = {
-        TopAppBar(isCreateBuild = uiState.isCreateBuild,
+        TopAppBar(
+            isCreateBuild = uiState.isCreateBuild,
+            uidBuild = uiState.buildHeroFromUser.uid,
             deleteBuild = { onEvent(CreateBuildHeroScreenEvents.DeleteBuild) },
-            onBack = { onEvent(CreateBuildHeroScreenEvents.OnBack) })
-    }, floatingActionButton = {
+            onBack = { onEvent(CreateBuildHeroScreenEvents.OnBack) }
+        )
+    },
+        floatingActionButton = {
         SaveOrUpdateBuildHeroButton(isCreateBuild = uiState.isCreateBuild,
             saveBuild = { onEvent(CreateBuildHeroScreenEvents.SaveBuild) },
             updateBuild = { onEvent(CreateBuildHeroScreenEvents.UpdateBuild) },
@@ -180,21 +192,39 @@ fun AvatarHeroImageAndName(
 private fun TopAppBar(
     modifier: Modifier = Modifier,
     isCreateBuild: Boolean,
+    uidBuild: String,
     deleteBuild: () -> Unit,
     onBack: () -> Unit
 ) {
+    val context = LocalContext.current
     var openDeleteBuildAlertDialog by remember { mutableStateOf(false) }
 
     BaseTopAppBar(modifier = modifier,
         title = stringResource(id = if (isCreateBuild) R.string.adding_your_build else R.string.edit_build),
         actions = {
             if (!isCreateBuild) {
-                Icon(
-                    modifier = Modifier.clickable { openDeleteBuildAlertDialog = true },
-                    imageVector = Icons.Default.Delete,
-                    contentDescription = null,
-                    tint = Red
-                )
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Icon(
+                        modifier = Modifier.clickable {
+                            val clipboard = context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                            val clipData: ClipData = ClipData.newPlainText("UID", uidBuild)
+                            clipboard.setPrimaryClip(clipData)
+                            Toast.makeText(context, R.string.message_uid_build_copied, Toast.LENGTH_SHORT).show()
+                        },
+                        imageVector = Icons.Default.ContentCopy,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.secondary
+                    )
+
+                    Icon(
+                        modifier = Modifier.clickable { openDeleteBuildAlertDialog = true },
+                        imageVector = Icons.Default.Delete,
+                        contentDescription = null,
+                        tint = Red
+                    )
+                }
             }
         },
         onBack = { onBack() })

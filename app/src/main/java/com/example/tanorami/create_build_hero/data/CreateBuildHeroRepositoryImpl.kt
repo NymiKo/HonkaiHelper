@@ -46,7 +46,8 @@ class CreateBuildHeroRepositoryImpl @Inject constructor(
                         relicFourParts = relicDao.getRelic(result.data.idRelicFourParts).toRelic(),
                         decoration = decorationDao.getDecoration(result.data.idDecoration).toDecoration(),
                         statsEquipment = result.data.statsEquipment.toList(),
-                        nickname = result.data.nickname
+                        nickname = result.data.nickname,
+                        uid = result.data.uid
                     )
                 )
             }

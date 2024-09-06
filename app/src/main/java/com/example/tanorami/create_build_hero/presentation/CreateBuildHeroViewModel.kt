@@ -232,7 +232,8 @@ class CreateBuildHeroViewModel @Inject constructor(
                             statLegs = result.data.statsEquipment[1],
                             statSphere = result.data.statsEquipment[2],
                             statRope = result.data.statsEquipment[3],
-                        )
+                        ),
+                        uid = result.data.uid
                     ),
                 )
             }

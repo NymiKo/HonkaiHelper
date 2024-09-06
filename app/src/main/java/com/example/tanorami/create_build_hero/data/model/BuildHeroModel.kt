@@ -8,5 +8,6 @@ data class BuildHeroModel(
     val relicTwoParts: Equipment? = null,
     val relicFourParts: Equipment? = null,
     val decoration: Equipment? = null,
+    val uid: String = "",
     val statsEquipmentList: BuildStatsEquipment = BuildStatsEquipment()
 )
