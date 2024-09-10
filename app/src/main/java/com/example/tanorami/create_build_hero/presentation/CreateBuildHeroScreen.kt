@@ -53,7 +53,6 @@ import com.example.tanorami.create_build_hero.presentation.components.BuildStats
 import com.example.tanorami.create_build_hero.presentation.components.EquipmentBuildComponent
 import com.example.tanorami.equipment.EquipmentType
 import com.example.tanorami.utils.OnLifecycleEvent
-import com.example.tanorami.viewing_users_build.ViewingUsersBuildUiState
 
 @Composable
 fun CreateBuildHeroScreen(
@@ -100,6 +99,11 @@ private fun CreateBuildHeroScreenContent(
 
             else -> {}
         }
+    }
+
+    if (uiState.isError) {
+        Toast.makeText(LocalContext.current, uiState.errorMessage, Toast.LENGTH_SHORT).show()
+        onEvent(CreateBuildHeroScreenEvents.HideToast)
     }
 
     Scaffold(modifier = modifier.background(MaterialTheme.colorScheme.background), topBar = {

@@ -19,4 +19,5 @@ sealed interface CreateBuildHeroScreenEvents {
     data class ChangeStatsOnLegs(val value: String): CreateBuildHeroScreenEvents
     data class ChangeStatsOnSphere(val value: String): CreateBuildHeroScreenEvents
     data class ChangeStatsOnRope(val value: String): CreateBuildHeroScreenEvents
+    data object HideToast: CreateBuildHeroScreenEvents
 }

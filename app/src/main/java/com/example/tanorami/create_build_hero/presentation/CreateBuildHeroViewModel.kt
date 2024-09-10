@@ -44,6 +44,8 @@ class CreateBuildHeroViewModel @Inject constructor(
             is CreateBuildHeroScreenEvents.ChangeStatsOnSphere -> changeStatSphere(event.value)
             is CreateBuildHeroScreenEvents.ChangeStatsOnRope -> changeStatRope(event.value)
 
+            is CreateBuildHeroScreenEvents.HideToast -> hideToast()
+
             else -> Unit
         }
     }
@@ -259,5 +261,9 @@ class CreateBuildHeroViewModel @Inject constructor(
                 )
             }
         }
+    }
+
+    fun hideToast() {
+        uiState = uiState.copy(isError = false)
     }
 }
