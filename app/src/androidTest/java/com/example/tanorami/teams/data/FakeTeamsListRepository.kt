@@ -5,7 +5,7 @@ import com.example.tanorami.teams.data.model.TeamHero
 import javax.inject.Inject
 
 class FakeTeamsListRepository @Inject constructor(): TeamsListRepository {
-    override suspend fun getTeamsList(idHero: Int): NetworkResult<List<TeamHero>> {
+    override suspend fun getTeamsListByID(idHero: Int): NetworkResult<List<TeamHero>> {
         return NetworkResult.Success(emptyList())
     }
 

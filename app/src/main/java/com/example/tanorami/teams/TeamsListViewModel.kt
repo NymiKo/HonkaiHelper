@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tanorami.data.NetworkResult
-import com.example.tanorami.teams.data.model.TeamHero
 import com.example.tanorami.teams.data.TeamsListRepository
+import com.example.tanorami.teams.data.model.TeamHero
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,9 +24,13 @@ class TeamsListViewModel @Inject constructor(
         _nameHero.value = repository.getNameHero(idHero)
     }
 
-    fun getTeamsList(idHero: Int) = viewModelScope.launch {
+    fun getTeamsList(idHero: Int, uid: String?) = viewModelScope.launch {
         _uiState.value = TeamsUiState.LOADING
-        val result = repository.getTeamsList(idHero)
+        val result = if (uid == "") {
+            repository.getTeamsListByID(idHero)
+        } else {
+            repository.getTeamsListByUID(uid!!)
+        }
         when (result) {
             is NetworkResult.Error -> _uiState.value = TeamsUiState.ERROR
             is NetworkResult.Success -> {

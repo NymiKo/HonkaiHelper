@@ -221,19 +221,11 @@ class HeroesListFragment :
                                 searchView.clearFocus()
                                 searchView.setQuery("", false)
                                 searchItem.collapseActionView()
-                                findNavController().navigate(R.id.action_heroesListFragment_to_teamsListFragment, TeamsListFragment.newInstance(17))
+                                findNavController().navigate(R.id.action_heroesListFragment_to_teamsListFragment, TeamsListFragment.newInstance(uid = query!!))
                                 return true
                             }
 
                             override fun onQueryTextChange(newText: String?): Boolean {
-                                viewModel.heroesList.observe(viewLifecycleOwner) {
-                                    mAdapterRecyclerView.mHeroesList =
-                                        it.filter { hero ->
-                                            hero.name.contains(
-                                                newText?.lowercase()?.uppercaseFirstChar() as CharSequence
-                                            )
-                                        }
-                                }
                                 return false
                             }
                         })

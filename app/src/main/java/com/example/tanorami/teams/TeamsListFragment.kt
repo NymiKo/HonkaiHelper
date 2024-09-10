@@ -27,6 +27,7 @@ class TeamsListFragment :
     private val viewModel by viewModels<TeamsListViewModel> { viewModelFactory }
 
     private val idHero get() = requireArguments().getInt(ARG_ID_HERO)
+    private val uid get() = requireArguments().getString(ARG_UID_TEAM)
 
     private lateinit var mAdapter: HeroTeamsListAdapter
 
@@ -43,7 +44,7 @@ class TeamsListFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getTeamsList(idHero)
+        viewModel.getTeamsList(idHero, uid)
     }
 
     override fun setupView() {
@@ -115,7 +116,7 @@ class TeamsListFragment :
             val viewStubBinding = ViewstubErrorLayoutBinding.bind(inflated)
 
             viewStubBinding.buttonRetryLoadBuildsHero.setOnClickListener {
-                viewModel.getTeamsList(idHero)
+                viewModel.getTeamsList(idHero, uid)
             }
         }
     }
@@ -161,7 +162,7 @@ class TeamsListFragment :
 
     private fun refreshData() {
         binding.swipeRefreshContainerTeamsHero.setOnRefreshListener {
-            viewModel.getTeamsList(idHero)
+            viewModel.getTeamsList(idHero, uid)
         }
     }
 
@@ -172,10 +173,11 @@ class TeamsListFragment :
 
     companion object {
         private const val ARG_ID_HERO = "id_hero"
+        private const val ARG_UID_TEAM = "uid"
 
         @JvmStatic
-        fun newInstance(idHero: Int): Bundle {
-            return bundleOf(ARG_ID_HERO to idHero)
+        fun newInstance(idHero: Int = -1, uid: String = ""): Bundle {
+            return bundleOf(ARG_ID_HERO to idHero, ARG_UID_TEAM to uid)
         }
     }
 }
