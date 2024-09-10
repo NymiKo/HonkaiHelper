@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Context.CLIPBOARD_SERVICE
 import android.os.Bundle
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -34,6 +33,7 @@ class ViewingUsersBuildFragment :
     private lateinit var mAdapter: ViewingUsersBuildStatsAdapter
 
     private val idBuild get() = requireArguments().getLong(ARG_ID_BUILD)
+    private val uid get() = requireArguments().getString(ARG_UID_BUILD)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -43,7 +43,7 @@ class ViewingUsersBuildFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getHeroBuild(idBuild)
+        viewModel.getHeroBuild(idBuild, uid)
     }
 
     override fun setupView() {
@@ -189,9 +189,10 @@ class ViewingUsersBuildFragment :
 
     companion object {
         private const val ARG_ID_BUILD = "idBuild"
+        private const val ARG_UID_BUILD = "uid"
 
-        fun newInstance(idBuild: Long): Bundle {
-            return bundleOf(ARG_ID_BUILD to idBuild)
+        fun newInstance(idBuild: Long = -1L, uid: String = ""): Bundle {
+            return bundleOf(ARG_ID_BUILD to idBuild, ARG_UID_BUILD to uid)
         }
     }
 }

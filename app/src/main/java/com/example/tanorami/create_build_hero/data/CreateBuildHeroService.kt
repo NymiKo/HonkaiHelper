@@ -11,7 +11,7 @@ interface CreateBuildHeroService {
     @POST("/saveBuildFromUser.php")
     suspend fun saveBuild(@Body build: BuildHeroFromUser): Response<Boolean>
 
-    @GET("/getHeroBuild.php")
+    @GET("/getHeroBuildByID.php")
     suspend fun getBuild(@Query("idBuild") idBuild: Long): Response<BuildHeroFromUser>
 
     @POST("/updateBuildHero.php")

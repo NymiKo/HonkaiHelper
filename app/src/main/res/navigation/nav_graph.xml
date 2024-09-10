@@ -40,6 +40,12 @@
         <action
             android:id="@+id/action_heroesListFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_heroesListFragment_to_teamsListFragment"
+            app:destination="@id/teamsListFragment" />
+        <action
+            android:id="@+id/action_heroesListFragment_to_viewingUsersBuildFragment"
+            app:destination="@id/viewingUsersBuildFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"

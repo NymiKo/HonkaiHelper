@@ -17,9 +17,14 @@ class ViewingUsersBuildViewModel @Inject constructor(
     private val _uiState = MutableLiveData<ViewingUsersBuildUiState>(ViewingUsersBuildUiState.LOADING)
     val uiState: LiveData<ViewingUsersBuildUiState> = _uiState
 
-    fun getHeroBuild(idBuild: Long) = viewModelScope.launch {
+    fun getHeroBuild(idBuild: Long, uid: String?) = viewModelScope.launch {
         ViewingUsersBuildUiState.LOADING
-        val result = repository.getHeroBuild(idBuild)
+        val result = if (uid == "") {
+            repository.getHeroBuildByID(idBuild)
+        } else {
+            repository.getHeroBuildByUID(uid!!)
+        }
+
         when(result) {
             is NetworkResult.Error -> {
                 errorHandler(result.code)

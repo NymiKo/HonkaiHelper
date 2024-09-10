@@ -193,6 +193,13 @@
         <item>Шанс попадания эффектов %</item>
         <item>Бонус исцеления %</item>
     </string-array>
+
+    <string-array name="search_dialog">
+        <item>Поиск персонажа</item>
+        <item>Поиск сборки</item>
+        <item>Поиск команды</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="relic">Реликвия</string>

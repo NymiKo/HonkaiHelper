@@ -4,6 +4,7 @@ import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.core.view.doOnPreDraw
@@ -20,11 +21,13 @@ import com.example.tanorami.heroes.adapter.HeroesListAdapter
 import com.example.tanorami.heroes.data.model.Hero
 import com.example.tanorami.info_about_hero.InfoAboutHeroFragment
 import com.example.tanorami.load_data.DATA_UPLOADED_KEY
+import com.example.tanorami.teams.TeamsListFragment
 import com.example.tanorami.utils.getSharedPrefToken
 import com.example.tanorami.utils.gone
 import com.example.tanorami.utils.loadWithPlaceholder
 import com.example.tanorami.utils.uppercaseFirstChar
 import com.example.tanorami.utils.visible
+import com.example.tanorami.viewing_users_build.ViewingUsersBuildFragment
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.transition.MaterialFadeThrough
 
@@ -122,37 +125,9 @@ class HeroesListFragment :
     }
 
     private fun addMenu() {
-        val manager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        val searchItem = binding.heroesListToolbar.menu.findItem(R.id.search)
-        val searchView = searchItem.actionView as SearchView
-        searchView.queryHint = getString(R.string.search)
-        searchView.setSearchableInfo(manager.getSearchableInfo(requireActivity().componentName))
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                searchView.clearFocus()
-                searchView.setQuery("", false)
-                searchItem.collapseActionView()
-                viewModel.heroesList.observe(viewLifecycleOwner) {
-                    mAdapterRecyclerView.mHeroesList = it
-                }
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.heroesList.observe(viewLifecycleOwner) {
-                    mAdapterRecyclerView.mHeroesList =
-                        it.filter { hero ->
-                            hero.name.contains(
-                                newText?.lowercase()?.uppercaseFirstChar() as CharSequence
-                            )
-                        }
-                }
-                return false
-            }
-        })
-
         binding.heroesListToolbar.setOnMenuItemClickListener {
             when(it.itemId) {
+                R.id.search -> setupSearchDialog()
                 R.id.settings -> findNavController().navigate(R.id.settingsFragment)
             }
             true
@@ -172,6 +147,101 @@ class HeroesListFragment :
             }
         })
         binding.recyclerViewHeroes.adapter = mAdapterRecyclerView
+    }
+
+    private fun setupSearchDialog() {
+        val searchStringArray = resources.getStringArray(R.array.search_dialog)
+
+        val dialog = AlertDialog.Builder(requireContext())
+            .setItems(searchStringArray) { _, item ->
+                when(item) {
+                    0 -> {
+                        val manager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+                        val searchItem = binding.heroesListToolbar.menu.findItem(R.id.search)
+                        val searchView = searchItem.actionView as SearchView
+                        searchView.queryHint = searchStringArray[0]
+                        searchView.setSearchableInfo(manager.getSearchableInfo(requireActivity().componentName))
+                        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                            override fun onQueryTextSubmit(query: String?): Boolean {
+                                searchView.clearFocus()
+                                searchView.setQuery("", false)
+                                searchItem.collapseActionView()
+                                viewModel.heroesList.observe(viewLifecycleOwner) {
+                                    mAdapterRecyclerView.mHeroesList = it
+                                }
+                                return true
+                            }
+
+                            override fun onQueryTextChange(newText: String?): Boolean {
+                                viewModel.heroesList.observe(viewLifecycleOwner) {
+                                    mAdapterRecyclerView.mHeroesList =
+                                        it.filter { hero ->
+                                            hero.name.contains(
+                                                newText?.lowercase()?.uppercaseFirstChar() as CharSequence
+                                            )
+                                        }
+                                }
+                                return false
+                            }
+                        })
+                    }
+
+                    1 -> {
+                        val manager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+                        val searchItem = binding.heroesListToolbar.menu.findItem(R.id.search)
+                        val searchView = searchItem.actionView as SearchView
+                        searchView.queryHint = searchStringArray[1]
+                        searchView.setSearchableInfo(manager.getSearchableInfo(requireActivity().componentName))
+                        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                            override fun onQueryTextSubmit(query: String?): Boolean {
+                                searchView.clearFocus()
+                                searchView.setQuery("", false)
+                                searchItem.collapseActionView()
+                                findNavController().navigate(
+                                    R.id.action_heroesListFragment_to_viewingUsersBuildFragment,
+                                    ViewingUsersBuildFragment.newInstance(uid = query!!)
+                                )
+                                return true
+                            }
+
+                            override fun onQueryTextChange(newText: String?): Boolean {
+                                return false
+                            }
+                        })
+                    }
+
+                    2 -> {
+                        val manager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+                        val searchItem = binding.heroesListToolbar.menu.findItem(R.id.search)
+                        val searchView = searchItem.actionView as SearchView
+                        searchView.queryHint = searchStringArray[2]
+                        searchView.setSearchableInfo(manager.getSearchableInfo(requireActivity().componentName))
+                        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                            override fun onQueryTextSubmit(query: String?): Boolean {
+                                searchView.clearFocus()
+                                searchView.setQuery("", false)
+                                searchItem.collapseActionView()
+                                findNavController().navigate(R.id.action_heroesListFragment_to_teamsListFragment, TeamsListFragment.newInstance(17))
+                                return true
+                            }
+
+                            override fun onQueryTextChange(newText: String?): Boolean {
+                                viewModel.heroesList.observe(viewLifecycleOwner) {
+                                    mAdapterRecyclerView.mHeroesList =
+                                        it.filter { hero ->
+                                            hero.name.contains(
+                                                newText?.lowercase()?.uppercaseFirstChar() as CharSequence
+                                            )
+                                        }
+                                }
+                                return false
+                            }
+                        })
+                    }
+                }
+            }
+            .create()
+        dialog.show()
     }
 
     override fun onDestroyView() {
