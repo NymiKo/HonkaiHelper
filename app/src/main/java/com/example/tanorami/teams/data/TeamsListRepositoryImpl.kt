@@ -29,7 +29,8 @@ class TeamsListRepositoryImpl @Inject constructor(
                         heroThree = heroDao.getHeroWithNameAvatarRarity(it.idHeroThree),
                         heroFour = heroDao.getHeroWithNameAvatarRarity(it.idHeroFour),
                         nickname = it.nickname,
-                        avatar = it.avatar
+                        avatar = it.avatar,
+                        uid = it.uid,
                     )
                 })
             }

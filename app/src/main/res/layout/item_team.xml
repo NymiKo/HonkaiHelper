@@ -23,6 +23,7 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/hero_avatar_in_team_1"
             style="@style/image_hero_in_team"
+            app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintEnd_toStartOf="@id/hero_avatar_in_team_2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -45,9 +46,10 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/hero_avatar_in_team_2"
             style="@style/image_hero_in_team"
+            app:layout_constraintBottom_toBottomOf="@+id/hero_avatar_in_team_1"
             app:layout_constraintEnd_toStartOf="@id/hero_avatar_in_team_3"
             app:layout_constraintStart_toEndOf="@+id/hero_avatar_in_team_1"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/hero_avatar_in_team_1"
             app:shapeAppearanceOverlay="@style/roundedTopRightCornerImageView"
             app:strokeColor="@color/dark_gray"
             app:strokeWidth="1dp" />
@@ -67,9 +69,10 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/hero_avatar_in_team_3"
             style="@style/image_hero_in_team"
+            app:layout_constraintBottom_toBottomOf="@+id/hero_avatar_in_team_2"
             app:layout_constraintEnd_toStartOf="@id/hero_avatar_in_team_4"
             app:layout_constraintStart_toEndOf="@+id/hero_avatar_in_team_2"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/hero_avatar_in_team_2"
             app:shapeAppearanceOverlay="@style/roundedTopRightCornerImageView"
             app:strokeColor="@color/dark_gray"
             app:strokeWidth="2dp" />
@@ -89,9 +92,10 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/hero_avatar_in_team_4"
             style="@style/image_hero_in_team"
+            app:layout_constraintBottom_toBottomOf="@+id/hero_avatar_in_team_3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/hero_avatar_in_team_3"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/hero_avatar_in_team_3"
             app:shapeAppearanceOverlay="@style/roundedTopRightCornerImageView"
             app:strokeColor="@color/dark_gray"
             app:strokeWidth="1dp" />
@@ -110,9 +114,15 @@
             android:layout_marginTop="@dimen/DP8"
             android:fontFamily="sans-serif-medium"
             android:textColor="@color/white"
+            android:ellipsize="end"
+            android:maxWidth="250dp"
+            android:maxLines="1"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/hero_avatar_in_team_1"
             app:layout_constraintTop_toBottomOf="@+id/hero_avatar_in_team_1"
+            app:layout_constraintEnd_toStartOf="@id/image_profile"
             tools:text="Команда от:" />
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -123,9 +133,21 @@
             android:background="@color/white"
             android:src="@drawable/ic_person"
             app:layout_constraintBottom_toBottomOf="@+id/text_team_from"
+            app:layout_constraintEnd_toStartOf="@+id/image_copy"
             app:layout_constraintStart_toEndOf="@+id/text_team_from"
             app:layout_constraintTop_toTopOf="@+id/text_team_from"
             app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+        <ImageView
+            android:id="@+id/image_copy"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:contentDescription="@string/message_uid_team_copied"
+            android:src="@drawable/ic_baseline_content_copy"
+            app:layout_constraintBottom_toBottomOf="@+id/image_profile"
+            app:layout_constraintEnd_toEndOf="@+id/hero_avatar_in_team_4"
+            app:layout_constraintTop_toTopOf="@+id/image_profile"
+            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

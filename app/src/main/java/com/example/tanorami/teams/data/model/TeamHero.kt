@@ -9,5 +9,6 @@ data class TeamHero(
     val heroThree: HeroWithNameAvatarRarity,
     val heroFour: HeroWithNameAvatarRarity,
     val nickname: String? = null,
-    val avatar: String? = null
+    val avatar: String? = null,
+    val uid: String = ""
 )

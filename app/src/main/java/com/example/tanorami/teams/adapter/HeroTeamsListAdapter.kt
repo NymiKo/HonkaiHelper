@@ -1,6 +1,9 @@
 package com.example.tanorami.teams.adapter
 
 import android.annotation.SuppressLint
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -53,6 +56,11 @@ class HeroTeamsListAdapter: RecyclerView.Adapter<HeroTeamsListAdapter.HeroTeamsL
 
                 textTeamFrom.text = textTeamFrom.context.getString(R.string.team_from, teamHero.nickname)
                 imageProfile.loadWithPlaceholder(teamHero.avatar, R.drawable.ic_person)
+                imageCopy.setOnClickListener {
+                    val clipboard = imageCopy.context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                    val clipData: ClipData = ClipData.newPlainText("UID", teamHero.uid)
+                    clipboard.setPrimaryClip(clipData)
+                }
             }
         }
     }
