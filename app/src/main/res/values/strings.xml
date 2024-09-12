@@ -93,6 +93,7 @@
     <string name="hero_build_from">%1$s от %2$s</string>
     <string name="edit_nickname">Изменить никнейм</string>
     <string name="copy_uid_build">Скопировать идентификатор сборки</string>
+    <string name="copy_uid_team">Скопировать идентификатор команды</string>
     <string name="my_builds">Мои сборки</string>
     <string name="edit_build">Редактирование сборки</string>
     <string name="delete_build">Удаление сборки</string>

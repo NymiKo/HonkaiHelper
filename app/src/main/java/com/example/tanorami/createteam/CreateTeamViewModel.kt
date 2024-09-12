@@ -28,6 +28,9 @@ class CreateTeamViewModel @Inject constructor(
     private val _selectedHero = MutableLiveData<ActiveHeroInTeam>()
     val selectedHero: LiveData<ActiveHeroInTeam> = _selectedHero
 
+    private val _uidTeam = MutableLiveData<String>()
+    val uidTeam: LiveData<String> = _uidTeam
+
     init {
         getHeroesList()
     }
@@ -83,7 +86,8 @@ class CreateTeamViewModel @Inject constructor(
         when(val result = repository.getTeam(idTeam)) {
             is NetworkResult.Error -> errorHandler(result.code)
             is NetworkResult.Success -> {
-                result.data.forEach {
+                _uidTeam.value = result.data.first
+                result.data.second.forEach {
                     val list = _heroList.value ?: emptyList()
                     val newList = list.toMutableList()
                     newList[newList.indexOf(ActiveHeroInTeam(it))] = ActiveHeroInTeam(it, true)

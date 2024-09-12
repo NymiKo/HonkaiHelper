@@ -1,6 +1,9 @@
 package com.example.tanorami.createteam
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
+import android.content.Context.CLIPBOARD_SERVICE
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
@@ -9,12 +12,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.tanorami.App
 import com.example.tanorami.R
+import com.example.tanorami.base.BaseFragment
 import com.example.tanorami.createteam.adapter.CreateTeamAdapter
 import com.example.tanorami.createteam.adapter.HeroListInCreateTeamAdapter
 import com.example.tanorami.createteam.adapter.HeroListInCreateTeamListener
-import com.example.tanorami.databinding.FragmentCreateTeamBinding
-import com.example.tanorami.base.BaseFragment
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
+import com.example.tanorami.databinding.FragmentCreateTeamBinding
 import com.example.tanorami.utils.gone
 import com.example.tanorami.utils.toast
 import com.example.tanorami.utils.visible
@@ -177,6 +180,14 @@ class CreateTeamFragment :
             binding.materialToolbar.inflateMenu(R.menu.create_build_and_team_menu)
             binding.materialToolbar.setOnMenuItemClickListener {
                 when(it.itemId) {
+                    R.id.copy_uid_team -> {
+                        viewModel.uidTeam.observe(viewLifecycleOwner) { uid ->
+                            val clipboard = requireContext().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                            val clipData: ClipData = ClipData.newPlainText("UID", uid)
+                            clipboard.setPrimaryClip(clipData)
+                            toast(requireContext(), R.string.message_uid_team_copied)
+                        }
+                    }
                     R.id.delete -> setupDeleteDialog(R.string.delete_a_command, R.string.delete_the_command)
                 }
                 true
