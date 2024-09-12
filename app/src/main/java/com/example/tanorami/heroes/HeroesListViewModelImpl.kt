@@ -38,14 +38,13 @@ class HeroesListViewModelImpl @Inject constructor(
     }
 
     override fun getAvatar() = viewModelScope.launch {
-        val result = repository.getAvatar()
-        when (result) {
+        when (val result = repository.getAvatar()) {
             is NetworkResult.Error -> {
 
             }
 
             is NetworkResult.Success -> {
-                _avatar.value = result.data!!
+                _avatar.value = result.data
             }
         }
     }

@@ -15,10 +15,12 @@ import com.example.tanorami.createteam.CreateTeamFragment
 import com.example.tanorami.databinding.FragmentTeamsListBinding
 import com.example.tanorami.databinding.ViewstubErrorLayoutBinding
 import com.example.tanorami.teams.adapter.HeroTeamsListAdapter
+import com.example.tanorami.teams.adapter.HeroTeamsListListener
 import com.example.tanorami.teams.data.model.TeamHero
 import com.example.tanorami.utils.TOKEN
 import com.example.tanorami.utils.getSharedPrefUser
 import com.example.tanorami.utils.gone
+import com.example.tanorami.utils.toast
 import com.example.tanorami.utils.visible
 
 class TeamsListFragment :
@@ -128,7 +130,11 @@ class TeamsListFragment :
     }
 
     private fun setupRecyclerView() {
-        mAdapter = HeroTeamsListAdapter()
+        mAdapter = HeroTeamsListAdapter(object : HeroTeamsListListener {
+            override fun onCopyClick() {
+                toast(requireContext(), R.string.message_uid_team_copied)
+            }
+        })
         binding.recyclerViewTeamsHero.apply {
             layoutManager = LinearLayoutManager(requireActivity())
             adapter = mAdapter
@@ -153,7 +159,11 @@ class TeamsListFragment :
 
     private fun setupToolbar() {
         viewModel.nameHero.observe(viewLifecycleOwner) {
-            binding.toolbarCreateTeam.title = getString(R.string.team_for_hero, it)
+            if (uid == "") {
+                binding.toolbarCreateTeam.title = getString(R.string.team_for_hero, it)
+            } else {
+                binding.toolbarCreateTeam.title = getString(R.string.team_for_uid)
+            }
         }
         binding.toolbarCreateTeam.setNavigationOnClickListener {
             findNavController().popBackStack()

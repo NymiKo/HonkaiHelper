@@ -14,7 +14,9 @@ import com.example.tanorami.utils.backgroundHero
 import com.example.tanorami.utils.load
 import com.example.tanorami.utils.loadWithPlaceholder
 
-class HeroTeamsListAdapter: RecyclerView.Adapter<HeroTeamsListAdapter.HeroTeamsListViewHolder>() {
+class HeroTeamsListAdapter(
+    private val actionListener: HeroTeamsListListener
+): RecyclerView.Adapter<HeroTeamsListAdapter.HeroTeamsListViewHolder>() {
 
     var mTeamsHeroList: List<TeamHero> = emptyList()
         @SuppressLint("NotifyDataSetChanged")
@@ -60,6 +62,7 @@ class HeroTeamsListAdapter: RecyclerView.Adapter<HeroTeamsListAdapter.HeroTeamsL
                     val clipboard = imageCopy.context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
                     val clipData: ClipData = ClipData.newPlainText("UID", teamHero.uid)
                     clipboard.setPrimaryClip(clipData)
+                    actionListener.onCopyClick()
                 }
             }
         }
