@@ -1,8 +1,9 @@
 package com.example.tanorami.settings
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -10,7 +11,6 @@ import com.example.tanorami.App
 import com.example.tanorami.R
 import com.example.tanorami.base.BaseFragment
 import com.example.tanorami.databinding.FragmentSettingsBinding
-import com.example.tanorami.heroes.HeroesListFragment
 import com.example.tanorami.load_data.DATA_UPLOADED_KEY
 import com.example.tanorami.load_data.LoadDataFragment
 import com.example.tanorami.utils.getSharedPrefVersion
@@ -42,6 +42,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         setupToolbar()
         setupButtonCheckUpdate()
         setupButtonGoToFeedback()
+        setupButtonDonate()
     }
 
     override fun uiStateHandle() {
@@ -91,6 +92,13 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
     private fun setupButtonGoToFeedback() {
         binding.buttonGoToFeedback.setOnClickListener {
             findNavController().navigate(R.id.sendFeedbackFragment)
+        }
+    }
+
+    private fun setupButtonDonate() {
+        binding.imageDonate.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.donationalerts.com/r/nymiko"))
+            startActivity(intent)
         }
     }
 

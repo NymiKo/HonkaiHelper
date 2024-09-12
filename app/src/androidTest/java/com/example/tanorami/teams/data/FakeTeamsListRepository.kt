@@ -9,6 +9,10 @@ class FakeTeamsListRepository @Inject constructor(): TeamsListRepository {
         return NetworkResult.Success(emptyList())
     }
 
+    override suspend fun getTeamsListByUID(uid: String): NetworkResult<List<TeamHero>> {
+        return NetworkResult.Success(emptyList())
+    }
+
     override suspend fun getNameHero(idHero: Int): String {
         return ""
     }

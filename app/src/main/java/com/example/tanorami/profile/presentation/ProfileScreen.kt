@@ -85,7 +85,7 @@ private fun ProfileScreenContent(
             }
         }
 
-    OnLifecycleEvent { owner, event ->
+    OnLifecycleEvent { _, event ->
         when (event) {
             Lifecycle.Event.ON_START -> {
                 onEvents(ProfileScreenEvents.FetchProfile)
@@ -190,7 +190,7 @@ private fun AvatarImage(
                 .fillMaxSize()
                 .clip(RoundedCornerShape(16.dp))
                 .clickable {
-                    uploadAvatarOnServer() 
+                    uploadAvatarOnServer()
                 }
                 .background(MaterialTheme.colorScheme.secondary, RoundedCornerShape(16.dp)),
             model = avatarUrl,

@@ -215,6 +215,6 @@
     <string name="discovered_new_version_db">Обнаружена новая версия базы данных</string>
     <string name="already_have_latest_version_db">У вас уже последняя версия базы данных</string>
     <string name="data_updated">Данные обновлены</string>
-    <string name="thank_the_developer">Поблагодарить</string>
+    <string name="thank_the_developer">Поддержать</string>
 
 </resources>

@@ -42,11 +42,17 @@ class ProfileViewModel @Inject constructor(
     }
 
     private fun getProfile() = viewModelScope.launch {
-        _profileUiState.value = ProfileScreenUiState.Loading
-        when (val result = repository.getProfile()) {
-            is NetworkResult.Error -> _profileUiState.value = ProfileScreenUiState.Error(result.code)
+        userDataStore.tokenUser.collect {
+            if (it == "") {
+                _profileUiState.value = ProfileScreenUiState.NotAuthorized
+            } else {
+                _profileUiState.value = ProfileScreenUiState.Loading
+                when (val result = repository.getProfile()) {
+                    is NetworkResult.Error -> _profileUiState.value = ProfileScreenUiState.Error(result.code)
 
-            is NetworkResult.Success -> _profileUiState.value = ProfileScreenUiState.Success(result.data)
+                    is NetworkResult.Success -> _profileUiState.value = ProfileScreenUiState.Success(result.data)
+                }
+            }
         }
     }
 

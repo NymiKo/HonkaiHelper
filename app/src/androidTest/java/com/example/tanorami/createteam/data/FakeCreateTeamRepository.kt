@@ -10,15 +10,18 @@ class FakeCreateTeamRepository @Inject constructor(): CreateTeamRepository {
         return emptyList()
     }
 
-    override suspend fun saveTeam(idTeam: Int, heroesList: List<HeroWithNameAvatarRarity>): NetworkResult<Unit> {
+    override suspend fun saveTeam(
+        idTeam: Long,
+        heroesList: List<HeroWithNameAvatarRarity>
+    ): NetworkResult<Unit> {
         return NetworkResult.Success(Unit)
     }
 
-    override suspend fun getTeam(idTeam: Int): NetworkResult<List<HeroWithNameAvatarRarity>> {
+    override suspend fun getTeam(idTeam: Long): NetworkResult<List<HeroWithNameAvatarRarity>> {
         return NetworkResult.Success(emptyList())
     }
 
-    override suspend fun deleteTeam(idTeam: Int): NetworkResult<Boolean> {
+    override suspend fun deleteTeam(idTeam: Long): NetworkResult<Boolean> {
         return NetworkResult.Success(true)
     }
 }
