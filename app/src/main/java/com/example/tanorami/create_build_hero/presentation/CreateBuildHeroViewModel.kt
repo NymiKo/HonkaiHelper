@@ -26,10 +26,10 @@ class CreateBuildHeroViewModel @Inject constructor(
             is CreateBuildHeroScreenEvents.UpdateBuild -> saveBuild(idBuild = uiState.idBuild)
             is CreateBuildHeroScreenEvents.GetBuild -> {
                 if (event.idBuild != -1L) {
-                    uiState = uiState.copy(idBuild = event.idBuild, isCreateBuild = false)
+                    uiState = uiState.copy(idBuild = event.idBuild, isCreateBuildMode = false)
                     getBuild(event.idBuild)
                 } else {
-                    uiState = uiState.copy(isCreateBuild = true)
+                    uiState = uiState.copy(isCreateBuildMode = true)
                 }
             }
 

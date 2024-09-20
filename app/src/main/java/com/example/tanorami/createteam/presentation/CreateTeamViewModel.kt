@@ -1,5 +1,8 @@
-package com.example.tanorami.createteam
+package com.example.tanorami.createteam.presentation
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,6 +18,8 @@ import javax.inject.Inject
 class CreateTeamViewModel @Inject constructor(
     private val repository: CreateTeamRepository
 ) : ViewModel() {
+
+    var uiState by mutableStateOf(CreateTeamScreenUiState())
 
     private val _state = MutableLiveData<CreateTeamUIState>(CreateTeamUIState.CREATING_TEAM)
     val state: LiveData<CreateTeamUIState> = _state
@@ -36,7 +41,8 @@ class CreateTeamViewModel @Inject constructor(
     }
 
     private fun getHeroesList() = viewModelScope.launch {
-        _heroList.value = repository.getHeroesList()
+        uiState = uiState.copy(heroesList = repository.getHeroesList())
+        //_heroList.value = repository.getHeroesList()
     }
 
     fun addHeroInTeam(activeHeroInTeam: ActiveHeroInTeam) {
@@ -63,38 +69,49 @@ class CreateTeamViewModel @Inject constructor(
 
     fun saveTeam(idTeam: Long) = viewModelScope.launch {
         _state.value = CreateTeamUIState.LOADING_TEAM_CREATION
-        val result = repository.saveTeam(idTeam, _heroListInTeam.value!!)
-        when(result) {
-            is NetworkResult.Error -> errorHandler(result.code)
+        when(val result = repository.saveTeam(idTeam, _heroListInTeam.value!!)) {
+            is NetworkResult.Error -> {
+                uiState = uiState.copy(isSuccess = false, isError = true, message = errorHandler(result.code))
+            }
             is NetworkResult.Success -> {
+                uiState = uiState.copy(isSuccess = true, isError = false)
                 _state.value = CreateTeamUIState.SUCCESS_TEAM_CREATION
             }
         }
     }
 
-    private fun errorHandler(errorCode: Int) {
-        when (errorCode) {
-            105 -> _state.value =
-                CreateTeamUIState.ERROR_TEAM_CREATION(R.string.check_your_internet_connection)
-            400 -> _state.value = CreateTeamUIState.ERROR_TEAM_CREATION(R.string.team_already_exists)
-            503 -> _state.value = CreateTeamUIState.ERROR_TEAM_CREATION(R.string.error_save_in_server)
-            else -> _state.value = CreateTeamUIState.ERROR_TEAM_CREATION(R.string.error)
+    private fun errorHandler(errorCode: Int): Int {
+        return when (errorCode) {
+            105 -> R.string.check_your_internet_connection
+            400 -> R.string.team_already_exists
+            503 -> R.string.error_save_in_server
+            else -> R.string.error
         }
     }
 
     fun getTeam(idTeam: Long) = viewModelScope.launch {
+        uiState = uiState.copy(isCreateTeamMode = false)
         when(val result = repository.getTeam(idTeam)) {
-            is NetworkResult.Error -> errorHandler(result.code)
+            is NetworkResult.Error -> {
+                uiState = uiState.copy(isSuccess = false, isError = true, message = errorHandler(result.code))
+            }
             is NetworkResult.Success -> {
-                _uidTeam.value = result.data.first
                 result.data.second.forEach {
                     val list = _heroList.value ?: emptyList()
                     val newList = list.toMutableList()
                     newList[newList.indexOf(ActiveHeroInTeam(it))] = ActiveHeroInTeam(it, true)
-                    _heroList.value = newList
+                    uiState = uiState.copy(heroesList = newList)
+                    //_heroList.value = newList
                     addHeroInTeam(ActiveHeroInTeam(it))
                 }
-                _state.value = CreateTeamUIState.CREATING_TEAM
+                uiState = uiState.copy(
+                    isSuccess = true,
+                    isError = false,
+                    uidTeam = result.data.first,
+                    heroesListInTeam = result.data.second,
+                )
+//                _uidTeam.value = result.data.first
+//                _state.value = CreateTeamUIState.CREATING_TEAM
             }
         }
     }

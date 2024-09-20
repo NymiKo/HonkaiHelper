@@ -108,14 +108,14 @@ private fun CreateBuildHeroScreenContent(
 
     Scaffold(modifier = modifier.background(MaterialTheme.colorScheme.background), topBar = {
         TopAppBar(
-            isCreateBuild = uiState.isCreateBuild,
+            isCreateBuild = uiState.isCreateBuildMode,
             uidBuild = uiState.buildHeroFromUser.uid,
             deleteBuild = { onEvent(CreateBuildHeroScreenEvents.DeleteBuild) },
             onBack = { onEvent(CreateBuildHeroScreenEvents.OnBack) }
         )
     },
         floatingActionButton = {
-        SaveOrUpdateBuildHeroButton(isCreateBuild = uiState.isCreateBuild,
+        SaveOrUpdateBuildHeroButton(isCreateBuild = uiState.isCreateBuildMode,
             saveBuild = { onEvent(CreateBuildHeroScreenEvents.SaveBuild) },
             updateBuild = { onEvent(CreateBuildHeroScreenEvents.UpdateBuild) },
             isSuccess = uiState.isSuccess,

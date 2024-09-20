@@ -1,4 +1,4 @@
-package com.example.tanorami.createteam
+package com.example.tanorami.createteam.presentation
 
 sealed class CreateTeamUIState {
     object CREATING_TEAM: CreateTeamUIState()

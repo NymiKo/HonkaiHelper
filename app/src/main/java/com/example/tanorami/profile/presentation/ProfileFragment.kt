@@ -15,7 +15,7 @@ import com.example.tanorami.R
 import com.example.tanorami.change_nickname.presentation.ChangeNicknameFragment
 import com.example.tanorami.core.theme.AppTheme
 import com.example.tanorami.create_build_hero.presentation.CreateBuildHeroFragment
-import com.example.tanorami.createteam.CreateTeamFragment
+import com.example.tanorami.createteam.presentation.CreateTeamFragment
 import javax.inject.Inject
 
 class ProfileFragment : Fragment() {

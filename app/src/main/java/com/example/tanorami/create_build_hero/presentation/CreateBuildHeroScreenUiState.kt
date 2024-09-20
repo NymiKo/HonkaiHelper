@@ -9,7 +9,7 @@ data class CreateBuildHeroScreenUiState(
     val isSuccess: Boolean = false,
     val isError: Boolean = false,
     val errorMessage: Int = R.string.error,
-    val isCreateBuild: Boolean  = true,
+    val isCreateBuildMode: Boolean  = true,
     val buildHeroFromUser: BuildHeroModel = BuildHeroModel(),
     val idBuild: Long = -1L,
     val idHero: Int = -1,

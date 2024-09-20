@@ -8,6 +8,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.sp
 import com.example.tanorami.core.theme.Typography
 
@@ -19,6 +20,8 @@ fun BaseDefaultText(
     color: Color = MaterialTheme.colorScheme.secondary,
     textAlign: TextAlign? = null,
     fontWeight: FontWeight? = null,
+    lineHeight: TextUnit = TextUnit.Unspecified,
+    maxLines: Int = Int.MAX_VALUE,
 ) {
     Text(
         modifier = modifier,
@@ -28,5 +31,7 @@ fun BaseDefaultText(
         color = color,
         textAlign = textAlign,
         fontWeight = fontWeight,
+        lineHeight = lineHeight,
+        maxLines = maxLines
     )
 }
