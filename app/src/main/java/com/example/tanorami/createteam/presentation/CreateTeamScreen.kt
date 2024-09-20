@@ -17,19 +17,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
 import com.example.tanorami.createteam.presentation.components.ItemHeroAvatar
 import com.example.tanorami.createteam.presentation.components.ItemHeroAvatarWithName
 import com.example.tanorami.data.local.models.hero.HeroWithNameAvatarRarity
+import com.example.tanorami.utils.OnLifecycleEvent
 
 @Composable
 fun CreateTeamScreen(
     modifier: Modifier = Modifier,
     viewModel: CreateTeamViewModel,
+    idTeam: Long,
 ) {
+
+
     CreateTeamScreenContent(
         modifier = modifier,
         uiState = viewModel.uiState,
+        idTeam = idTeam,
         onEvent = viewModel::onEvent
     )
 }
@@ -38,8 +44,19 @@ fun CreateTeamScreen(
 fun CreateTeamScreenContent(
     modifier: Modifier = Modifier,
     uiState: CreateTeamScreenUiState,
+    idTeam: Long,
     onEvent: (CreateTeamScreenEvents) -> Unit
 ) {
+    OnLifecycleEvent { owner, event ->
+        when (event) {
+            Lifecycle.Event.ON_START -> {
+                onEvent(CreateTeamScreenEvents.GetTeam(idTeam = idTeam))
+            }
+
+            else -> {}
+        }
+    }
+
     Scaffold(
         modifier = modifier.background(MaterialTheme.colorScheme.background)
     ) { innerPadding ->
@@ -74,7 +91,10 @@ fun HeroesListInTeam(
             count = heroesListInTeam.size,
             key = { heroesListInTeam[it].id },
         ) {
-            ItemHeroAvatar(heroWithNameAvatarRarity = heroesListInTeam[it])
+            ItemHeroAvatar(
+                modifier = Modifier.animateItem(),
+                heroWithNameAvatarRarity = heroesListInTeam[it]
+            )
         }
     }
 }

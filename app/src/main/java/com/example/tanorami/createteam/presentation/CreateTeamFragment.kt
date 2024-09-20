@@ -1,9 +1,6 @@
 package com.example.tanorami.createteam.presentation
 
-import android.content.ClipData
-import android.content.ClipboardManager
 import android.content.Context
-import android.content.Context.CLIPBOARD_SERVICE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,24 +11,11 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import com.example.tanorami.App
 import com.example.tanorami.R
-import com.example.tanorami.base.BaseFragment
 import com.example.tanorami.core.theme.AppTheme
 import com.example.tanorami.createteam.adapter.CreateTeamAdapter
 import com.example.tanorami.createteam.adapter.HeroListInCreateTeamAdapter
-import com.example.tanorami.createteam.adapter.HeroListInCreateTeamListener
-import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
-import com.example.tanorami.databinding.FragmentCreateTeamBinding
-import com.example.tanorami.utils.gone
-import com.example.tanorami.utils.toast
-import com.example.tanorami.utils.visible
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.android.flexbox.JustifyContent
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import javax.inject.Inject
 
 class CreateTeamFragment : Fragment() {
@@ -51,20 +35,18 @@ class CreateTeamFragment : Fragment() {
             .inject(this)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (idTeam != -1L) viewModel.getTeam(idTeam)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return ComposeView(requireContext()).apply {
             setContent {
                 AppTheme {
-                    CreateTeamScreen(viewModel = viewModel)
+                    CreateTeamScreen(
+                        viewModel = viewModel,
+                        idTeam = idTeam
+                    )
                 }
             }
         }
@@ -79,28 +61,28 @@ class CreateTeamFragment : Fragment() {
     }
 
     fun uiStateHandle() {
-        viewModel.state.observe(viewLifecycleOwner) {
-            when (it) {
-                is CreateTeamUIState.ERROR_TEAM_CREATION -> {
-                    showErrorTeamCreation(it.message)
-                }
-                is CreateTeamUIState.SUCCESS_TEAM_CREATION -> {
-                    successResultTeam(R.string.team_has_been_added)
-                }
-                is CreateTeamUIState.LOADING_TEAM_CREATION -> {
-                    showCommandCreationLoading()
-                }
-                is CreateTeamUIState.CREATING_TEAM -> {
-                    viewModel.heroList.observe(viewLifecycleOwner) { heroesList ->
-                        mAdapterHeroList.mHeroList = heroesList
-                    }
-                }
-
-                CreateTeamUIState.SUCCESS_TEAM_DELETION -> {
-                    successResultTeam(R.string.deletion_team)
-                }
-            }
-        }
+//        viewModel.state.observe(viewLifecycleOwner) {
+//            when (it) {
+//                is CreateTeamUIState.ERROR_TEAM_CREATION -> {
+//                    showErrorTeamCreation(it.message)
+//                }
+//                is CreateTeamUIState.SUCCESS_TEAM_CREATION -> {
+//                    successResultTeam(R.string.team_has_been_added)
+//                }
+//                is CreateTeamUIState.LOADING_TEAM_CREATION -> {
+//                    showCommandCreationLoading()
+//                }
+//                is CreateTeamUIState.CREATING_TEAM -> {
+//                    viewModel.heroList.observe(viewLifecycleOwner) { heroesList ->
+//                        mAdapterHeroList.mHeroList = heroesList
+//                    }
+//                }
+//
+//                CreateTeamUIState.SUCCESS_TEAM_DELETION -> {
+//                    successResultTeam(R.string.deletion_team)
+//                }
+//            }
+//        }
     }
 
     private fun showCommandCreationLoading() {
@@ -162,7 +144,7 @@ class CreateTeamFragment : Fragment() {
             .setTitle(title)
             .setMessage(message)
             .setPositiveButton(R.string.yes) { _, _ ->
-                viewModel.saveTeam(idTeam)
+                //viewModel.saveTeam(idTeam)
             }
             .setNegativeButton(R.string.cancellation) { dialog, _ ->
                 dialog.cancel()
@@ -176,7 +158,7 @@ class CreateTeamFragment : Fragment() {
             .setTitle(title)
             .setMessage(message)
             .setPositiveButton(R.string.yes) { _, _ ->
-                viewModel.deleteTeam(idTeam)
+                //viewModel.deleteTeam(idTeam)
             }
             .setNegativeButton(R.string.cancellation) { dialog, _ ->
                 dialog.cancel()
