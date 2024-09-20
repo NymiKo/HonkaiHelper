@@ -1,7 +1,6 @@
 package com.example.tanorami.createteam.presentation.components
 
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
@@ -20,10 +19,9 @@ fun ItemHeroAvatar(
 ) {
     AsyncImage(
         modifier = modifier
-            .padding(8.dp)
-            .size(90.dp)
+            .size(80.dp)
             .clip(CircleShape)
-            .border(4.dp, Grey, CircleShape),
+            .border(3.dp, Grey, CircleShape),
         model = heroWithNameAvatarRarity.localAvatarPath,
         contentDescription = null
     )

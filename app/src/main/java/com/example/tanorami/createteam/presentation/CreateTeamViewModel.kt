@@ -40,31 +40,32 @@ class CreateTeamViewModel @Inject constructor(
         getHeroesList()
     }
 
+    fun onEvent(event: CreateTeamScreenEvents) {
+        when(event) {
+            is CreateTeamScreenEvents.AddHeroInTeam -> addHeroInTeam(event.activeHeroInTeam)
+            is CreateTeamScreenEvents.RemoveHeroFromTeam -> removeHeroFromTeam(event.activeHeroInTeam)
+        }
+    }
+
     private fun getHeroesList() = viewModelScope.launch {
         uiState = uiState.copy(heroesList = repository.getHeroesList())
-        //_heroList.value = repository.getHeroesList()
     }
 
-    fun addHeroInTeam(activeHeroInTeam: ActiveHeroInTeam) {
-        if (_heroListInTeam.value?.size != 4) {
-            val currentList = _heroListInTeam.value ?: emptyList()
+    private fun addHeroInTeam(activeHeroInTeam: ActiveHeroInTeam) {
+        if (uiState.heroesListInTeam.size < 4) {
+            activeHeroInTeam.active = true
+            val currentList = uiState.heroesListInTeam
             val newList = currentList.toMutableList()
             newList.add(activeHeroInTeam.hero)
-            _heroListInTeam.value = newList
-            selectHero(activeHeroInTeam, true)
+            uiState = uiState.copy(heroesListInTeam = newList)
         }
     }
 
-    fun removeHeroFromTeam(activeHeroInTeam: ActiveHeroInTeam) {
+    private fun removeHeroFromTeam(activeHeroInTeam: ActiveHeroInTeam) {
         if (_heroListInTeam.value?.size != 0) {
-            _heroListInTeam.value = _heroListInTeam.value?.minus(activeHeroInTeam.hero)
-            selectHero(activeHeroInTeam, false)
+            uiState = uiState.copy(heroesListInTeam = uiState.heroesListInTeam.minus(activeHeroInTeam.hero))
+            activeHeroInTeam.active = false
         }
-    }
-
-    private fun selectHero(activeHeroInTeam: ActiveHeroInTeam, active: Boolean) {
-        activeHeroInTeam.active = active
-        _selectedHero.value = activeHeroInTeam
     }
 
     fun saveTeam(idTeam: Long) = viewModelScope.launch {

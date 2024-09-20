@@ -3,16 +3,16 @@ package com.example.tanorami.createteam.presentation.components
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -26,22 +26,32 @@ import com.example.tanorami.core.theme.DarkGray
 import com.example.tanorami.core.theme.Green
 import com.example.tanorami.core.theme.White
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
+import com.example.tanorami.createteam.presentation.CreateTeamScreenEvents
 import com.example.tanorami.data.local.models.hero.HeroWithNameAvatarRarity
 
 @Composable
 fun ItemHeroAvatarWithName(
     modifier: Modifier = Modifier,
     activeHeroInTeam: ActiveHeroInTeam,
+    onEvent: (CreateTeamScreenEvents) -> Unit
 ) {
     Column(
         modifier = modifier
             .height(120.dp)
             .width(120.dp)
             .border(
-                border = if (activeHeroInTeam.active) BorderStroke(10.dp, Green)
+                border = if (activeHeroInTeam.active) BorderStroke(3.dp, Green)
                 else BorderStroke(1.dp, DarkGray),
-                shape = if (activeHeroInTeam.active) RoundedCornerShape(25.dp) else RectangleShape
+                shape = if (activeHeroInTeam.active) RoundedCornerShape(15.dp) else RectangleShape
             )
+            .clip(if (activeHeroInTeam.active) RoundedCornerShape(15.dp) else RectangleShape)
+            .clickable {
+                if (activeHeroInTeam.active) {
+                    onEvent(CreateTeamScreenEvents.RemoveHeroFromTeam(activeHeroInTeam))
+                } else {
+                    onEvent(CreateTeamScreenEvents.AddHeroInTeam(activeHeroInTeam))
+                }
+            }
     ) {
         AsyncImage(
             modifier = Modifier.height(90.dp).fillMaxWidth(),
@@ -72,6 +82,7 @@ private fun ItemHeroAvatarWithNamePreview() {
     ItemHeroAvatarWithName(
         activeHeroInTeam = ActiveHeroInTeam(
             HeroWithNameAvatarRarity(1, "", "", false)
-        )
+        ),
+        onEvent = {}
     )
 }

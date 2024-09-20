@@ -1,17 +1,20 @@
 package com.example.tanorami.createteam.presentation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
@@ -26,7 +29,8 @@ fun CreateTeamScreen(
 ) {
     CreateTeamScreenContent(
         modifier = modifier,
-        uiState = viewModel.uiState
+        uiState = viewModel.uiState,
+        onEvent = viewModel::onEvent
     )
 }
 
@@ -34,9 +38,10 @@ fun CreateTeamScreen(
 fun CreateTeamScreenContent(
     modifier: Modifier = Modifier,
     uiState: CreateTeamScreenUiState,
+    onEvent: (CreateTeamScreenEvents) -> Unit
 ) {
     Scaffold(
-        modifier = modifier
+        modifier = modifier.background(MaterialTheme.colorScheme.background)
     ) { innerPadding ->
         Column(
             modifier = Modifier.padding(innerPadding),
@@ -45,10 +50,12 @@ fun CreateTeamScreenContent(
             HorizontalDivider(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
-                    .padding(top = 16.dp)
                     .fillMaxWidth()
             )
-            HeroesList(heroesList = uiState.heroesList)
+            HeroesList(
+                heroesList = uiState.heroesList,
+                onEvent = onEvent::invoke
+            )
         }
     }
 }
@@ -59,7 +66,9 @@ fun HeroesListInTeam(
     heroesListInTeam: List<HeroWithNameAvatarRarity>,
 ) {
     LazyRow(
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier.padding(16.dp).height(90.dp).fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
     ) {
         items(
             count = heroesListInTeam.size,
@@ -74,6 +83,7 @@ fun HeroesListInTeam(
 fun HeroesList(
     modifier: Modifier = Modifier,
     heroesList: List<ActiveHeroInTeam>,
+    onEvent: (CreateTeamScreenEvents) -> Unit
 ) {
     LazyVerticalGrid(
         modifier = modifier,
@@ -86,7 +96,10 @@ fun HeroesList(
             count = heroesList.size,
             key = { heroesList[it].hero.id }
         ) {
-            ItemHeroAvatarWithName(activeHeroInTeam = heroesList[it])
+            ItemHeroAvatarWithName(
+                activeHeroInTeam = heroesList[it],
+                onEvent = onEvent::invoke
+            )
         }
     }
 }
