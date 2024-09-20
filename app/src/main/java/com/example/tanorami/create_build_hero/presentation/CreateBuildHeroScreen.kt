@@ -20,12 +20,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -44,6 +42,8 @@ import androidx.lifecycle.Lifecycle
 import coil.compose.AsyncImage
 import com.example.tanorami.R
 import com.example.tanorami.base_components.BaseDefaultText
+import com.example.tanorami.base_components.BaseSaveAlertDialog
+import com.example.tanorami.base_components.BaseSaveFloatingButton
 import com.example.tanorami.base_components.BaseTopAppBar
 import com.example.tanorami.core.theme.AppTheme
 import com.example.tanorami.core.theme.DarkGray
@@ -284,20 +284,14 @@ private fun SaveOrUpdateBuildHeroButton(
 ) {
     var openSaveBuildDialog by remember { mutableStateOf(false) }
 
-    SmallFloatingActionButton(
+    BaseSaveFloatingButton(
         modifier = modifier,
-        onClick = {
-            openSaveBuildDialog = true
-        },
-        containerColor = MaterialTheme.colorScheme.secondary,
-        contentColor = MaterialTheme.colorScheme.primary,
-    ) {
-        Icon(imageVector = Icons.Default.Save, contentDescription = null)
-    }
+        onClick = { openSaveBuildDialog = true }
+    )
 
     if (openSaveBuildDialog) {
-        SaveBuildAlertDialog(
-            isCreateBuild = isCreateBuild,
+        BaseSaveAlertDialog(
+            message = if (isCreateBuild) R.string.add_the_created_build else R.string.update_the_build,
             onConfirmation = {
                 if (isCreateBuild) {
                     saveBuild()
@@ -312,37 +306,6 @@ private fun SaveOrUpdateBuildHeroButton(
             onDismissRequest = { openSaveBuildDialog = false }
         )
     }
-}
-
-@Composable
-private fun SaveBuildAlertDialog(
-    modifier: Modifier = Modifier,
-    isCreateBuild: Boolean,
-    onConfirmation: () -> Unit,
-    onDismissRequest: () -> Unit,
-) {
-    AlertDialog(modifier = modifier, text = {
-        BaseDefaultText(
-            text = stringResource(
-                id = if (isCreateBuild) R.string.add_the_created_build else R.string.update_the_build
-            ),
-            color = MaterialTheme.colorScheme.secondary,
-        )
-    }, onDismissRequest = { onDismissRequest() }, confirmButton = {
-        TextButton(onClick = { onConfirmation() }) {
-            BaseDefaultText(
-                text = stringResource(id = R.string.yes),
-                color = MaterialTheme.colorScheme.secondary
-            )
-        }
-    }, dismissButton = {
-        TextButton(onClick = { onDismissRequest() }) {
-            BaseDefaultText(
-                text = stringResource(id = R.string.cancellation),
-                color = MaterialTheme.colorScheme.secondary
-            )
-        }
-    })
 }
 
 @Preview

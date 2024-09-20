@@ -14,10 +14,17 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
+import com.example.tanorami.R
+import com.example.tanorami.base_components.BaseSaveAlertDialog
+import com.example.tanorami.base_components.BaseSaveFloatingButton
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
 import com.example.tanorami.createteam.presentation.components.ItemHeroAvatar
 import com.example.tanorami.createteam.presentation.components.ItemHeroAvatarWithName
@@ -41,7 +48,7 @@ fun CreateTeamScreen(
 }
 
 @Composable
-fun CreateTeamScreenContent(
+private fun CreateTeamScreenContent(
     modifier: Modifier = Modifier,
     uiState: CreateTeamScreenUiState,
     idTeam: Long,
@@ -58,7 +65,16 @@ fun CreateTeamScreenContent(
     }
 
     Scaffold(
-        modifier = modifier.background(MaterialTheme.colorScheme.background)
+        modifier = modifier.background(MaterialTheme.colorScheme.background),
+        floatingActionButton = {
+            SaveAndUpdateTeamButton(
+                isCreateTeam = uiState.isCreateTeamMode,
+                isSuccess = uiState.isSuccess,
+                saveTeam = {},
+                updateTeam = {},
+                onBack = {}
+            )
+        }
     ) { innerPadding ->
         Column(
             modifier = Modifier.padding(innerPadding),
@@ -78,12 +94,15 @@ fun CreateTeamScreenContent(
 }
 
 @Composable
-fun HeroesListInTeam(
+private fun HeroesListInTeam(
     modifier: Modifier = Modifier,
     heroesListInTeam: List<HeroWithNameAvatarRarity>,
 ) {
     LazyRow(
-        modifier = modifier.padding(16.dp).height(90.dp).fillMaxWidth(),
+        modifier = modifier
+            .padding(16.dp)
+            .height(90.dp)
+            .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
     ) {
@@ -100,7 +119,7 @@ fun HeroesListInTeam(
 }
 
 @Composable
-fun HeroesList(
+private fun HeroesList(
     modifier: Modifier = Modifier,
     heroesList: List<ActiveHeroInTeam>,
     onEvent: (CreateTeamScreenEvents) -> Unit
@@ -121,5 +140,40 @@ fun HeroesList(
                 onEvent = onEvent::invoke
             )
         }
+    }
+}
+
+@Composable
+private fun SaveAndUpdateTeamButton(
+    modifier: Modifier = Modifier,
+    isCreateTeam: Boolean,
+    isSuccess: Boolean,
+    saveTeam: () -> Unit,
+    updateTeam: () -> Unit,
+    onBack: () -> Unit,
+) {
+    var openSaveTeamDialog by remember { mutableStateOf(false) }
+
+    BaseSaveFloatingButton(
+        modifier = modifier,
+        onClick = { openSaveTeamDialog = true }
+    )
+
+    if (openSaveTeamDialog) {
+        BaseSaveAlertDialog(
+            message = if (isCreateTeam) R.string.add_the_created_command else R.string.update_the_command,
+            onConfirmation = {
+                if (isCreateTeam) {
+                    saveTeam()
+                } else {
+                    updateTeam()
+                }
+                if (isSuccess) {
+                    openSaveTeamDialog = false
+                    onBack()
+                }
+            },
+            onDismissRequest = { openSaveTeamDialog = false }
+        )
     }
 }
