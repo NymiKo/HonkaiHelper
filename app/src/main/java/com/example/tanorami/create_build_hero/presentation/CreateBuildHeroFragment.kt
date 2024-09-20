@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.platform.ComposeView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
@@ -15,8 +16,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.tanorami.App
 import com.example.tanorami.R
 import com.example.tanorami.core.theme.AppTheme
-import com.example.tanorami.create_build_hero.adapter.CreateBuildHeroStatsAdapter
-import com.example.tanorami.databinding.FragmentCreateBuildHeroBinding
 import com.example.tanorami.equipment.EquipmentFragment
 import com.example.tanorami.equipment.EquipmentType
 import com.example.tanorami.equipment.data.model.Equipment
@@ -26,13 +25,9 @@ class CreateBuildHeroFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private var _binding: FragmentCreateBuildHeroBinding? = null
-    private val binding get() = _binding!!
 
     private val viewModel by viewModels<CreateBuildHeroViewModel> { viewModelFactory }
-    private var pathHero = 0
     private var equipmentClick = EquipmentType.WEAPON
-    private lateinit var mStatsAdapter: CreateBuildHeroStatsAdapter
 
     private val idBuild get() = requireArguments().getLong(ARG_ID_BUILD)
     private val idHero get() = requireArguments().getInt(ARG_ID_HERO)
@@ -79,8 +74,8 @@ class CreateBuildHeroFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentCreateBuildHeroBinding.inflate(inflater).apply {
-            composeView.setContent {
+        return ComposeView(requireContext()).apply {
+            setContent {
                 AppTheme {
                     CreateBuildHeroScreen(
                         viewModel = viewModel,
@@ -98,12 +93,6 @@ class CreateBuildHeroFragment : Fragment() {
                 }
             }
         }
-        return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     companion object {

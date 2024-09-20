@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.platform.ComposeView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -12,15 +13,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.tanorami.App
 import com.example.tanorami.core.theme.AppTheme
-import com.example.tanorami.databinding.FragmentChangeNicknameBinding
 import javax.inject.Inject
 
 class ChangeNicknameFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private var _binding: FragmentChangeNicknameBinding? = null
-    private val binding get() = _binding!!
 
     private val viewModel by viewModels<ChangeNicknameViewModel> { viewModelFactory }
 
@@ -37,8 +35,8 @@ class ChangeNicknameFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentChangeNicknameBinding.inflate(inflater).apply {
-            composeView.setContent {
+        return ComposeView(requireContext()).apply {
+            setContent {
                 AppTheme {
                     ChangeNicknameScreen(
                         viewModel = viewModel,
@@ -47,12 +45,6 @@ class ChangeNicknameFragment : Fragment() {
                 }
             }
         }
-        return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     companion object {

@@ -32,6 +32,7 @@ class CreateBuildHeroViewModel @Inject constructor(
                     uiState = uiState.copy(isCreateBuild = true)
                 }
             }
+
             is CreateBuildHeroScreenEvents.GetHero -> getHero(event.idHero)
 
             is CreateBuildHeroScreenEvents.AddWeapon -> addWeapon(event.weapon)
