@@ -84,6 +84,11 @@ private fun CreateTeamScreenContent(
         }
     }
 
+    if (uiState.isError) {
+        toast(LocalContext.current, uiState.message)
+        onEvent(CreateTeamScreenEvents.HideToast)
+    }
+
     Scaffold(
         modifier = modifier.background(MaterialTheme.colorScheme.background),
         topBar = {

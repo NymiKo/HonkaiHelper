@@ -24,8 +24,13 @@ class CreateTeamViewModel @Inject constructor(
             is CreateTeamScreenEvents.GetTeam -> getTeam(idTeam = event.idTeam)
             CreateTeamScreenEvents.DeleteTeam -> deleteTeam()
             CreateTeamScreenEvents.SaveTeam -> saveTeam()
+            CreateTeamScreenEvents.HideToast -> hideToast()
             else -> Unit
         }
+    }
+
+    private fun hideToast() {
+        uiState = uiState.copy(isError = false)
     }
 
     private fun getHeroesList() = viewModelScope.launch {
@@ -77,7 +82,7 @@ class CreateTeamViewModel @Inject constructor(
         uiState = uiState.copy(isCreateTeamMode = false)
         when(val result = repository.getTeam(idTeam)) {
             is NetworkResult.Error -> {
-                uiState = uiState.copy(isSuccess = false, isError = true, message = errorHandler(result.code))
+                uiState = uiState.copy(isSuccess = false, isError = true, message = errorHandler(result.code), isCreateTeamMode = false)
             }
             is NetworkResult.Success -> {
                 result.data.second.forEach {

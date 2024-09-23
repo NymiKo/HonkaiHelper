@@ -13,5 +13,5 @@ data class CreateTeamScreenUiState(
     val heroesList: List<ActiveHeroInTeam> = emptyList(),
     val heroesListInTeam: List<HeroWithNameAvatarRarity> = emptyList(),
     val uidTeam: String = "",
-    val isCreateTeamMode: Boolean = true,
+    val isCreateTeamMode: Boolean = idTeam == -1L,
 )
