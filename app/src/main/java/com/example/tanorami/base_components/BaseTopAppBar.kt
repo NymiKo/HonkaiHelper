@@ -40,9 +40,9 @@ fun BaseTopAppBar(
             if (navigationIcon) {
                 Icon(
                     modifier = Modifier
-                        .padding(start = 8.dp, end = 8.dp)
                         .clip(CircleShape)
-                        .clickable { onBack() },
+                        .clickable { onBack() }
+                        .padding(start = 8.dp, end = 8.dp),
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "",
                     tint = MaterialTheme.colorScheme.secondary,
