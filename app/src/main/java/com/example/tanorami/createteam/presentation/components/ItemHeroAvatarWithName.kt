@@ -24,6 +24,8 @@ import coil.compose.AsyncImage
 import com.example.tanorami.base_components.BaseDefaultText
 import com.example.tanorami.core.theme.DarkGray
 import com.example.tanorami.core.theme.Green
+import com.example.tanorami.core.theme.Orange
+import com.example.tanorami.core.theme.Violet
 import com.example.tanorami.core.theme.White
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
 import com.example.tanorami.createteam.presentation.CreateTeamScreenEvents
@@ -54,7 +56,9 @@ fun ItemHeroAvatarWithName(
             }
     ) {
         AsyncImage(
-            modifier = Modifier.height(90.dp).fillMaxWidth(),
+            modifier = Modifier.height(90.dp)
+                .fillMaxWidth()
+                .background(if (activeHeroInTeam.hero.rarity) Orange else Violet),
             model = activeHeroInTeam.hero.localAvatarPath,
             contentDescription = null,
             contentScale = ContentScale.Crop

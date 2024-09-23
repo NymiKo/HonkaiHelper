@@ -20,11 +20,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -234,43 +232,16 @@ private fun TopAppBar(
         onBack = { onBack() })
 
     if (openDeleteBuildAlertDialog) {
-        DeleteBuildAlertDialog(
-            onDismissRequest = { openDeleteBuildAlertDialog = false },
+        BaseSaveAlertDialog(
+            message = R.string.delete_the_build,
             onConfirmation = {
                 openDeleteBuildAlertDialog = false
                 deleteBuild()
                 onBack()
-            }
+            },
+            onDismissRequest = { openDeleteBuildAlertDialog = false }
         )
     }
-}
-
-@Composable
-private fun DeleteBuildAlertDialog(
-    modifier: Modifier = Modifier,
-    onConfirmation: () -> Unit,
-    onDismissRequest: () -> Unit,
-) {
-    AlertDialog(modifier = modifier, text = {
-        BaseDefaultText(
-            text = stringResource(id = R.string.delete_the_build),
-            color = MaterialTheme.colorScheme.secondary,
-        )
-    }, onDismissRequest = { onDismissRequest() }, confirmButton = {
-        TextButton(onClick = { onConfirmation() }) {
-            BaseDefaultText(
-                text = stringResource(id = R.string.yes),
-                color = MaterialTheme.colorScheme.secondary
-            )
-        }
-    }, dismissButton = {
-        TextButton(onClick = { onDismissRequest() }) {
-            BaseDefaultText(
-                text = stringResource(id = R.string.cancellation),
-                color = MaterialTheme.colorScheme.secondary
-            )
-        }
-    })
 }
 
 @Composable

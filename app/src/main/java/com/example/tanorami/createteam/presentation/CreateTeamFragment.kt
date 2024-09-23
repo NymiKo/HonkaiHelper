@@ -11,6 +11,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.tanorami.App
 import com.example.tanorami.R
 import com.example.tanorami.core.theme.AppTheme
@@ -45,7 +46,8 @@ class CreateTeamFragment : Fragment() {
                 AppTheme {
                     CreateTeamScreen(
                         viewModel = viewModel,
-                        idTeam = idTeam
+                        idTeam = idTeam,
+                        onBack = { findNavController().navigateUp() }
                     )
                 }
             }
