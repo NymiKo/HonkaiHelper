@@ -15,26 +15,32 @@ fun BaseSaveAlertDialog(
     onConfirmation: () -> Unit,
     onDismissRequest: () -> Unit,
 ) {
-    AlertDialog(modifier = modifier, text = {
-        BaseDefaultText(
-            text = stringResource(
-                id = message
-            ),
-            color = MaterialTheme.colorScheme.secondary,
-        )
-    }, onDismissRequest = { onDismissRequest() }, confirmButton = {
-        TextButton(onClick = { onConfirmation() }) {
+    AlertDialog(
+        modifier = modifier,
+        text = {
             BaseDefaultText(
-                text = stringResource(id = R.string.yes),
-                color = MaterialTheme.colorScheme.secondary
+                text = stringResource(
+                    id = message
+                ),
+                color = MaterialTheme.colorScheme.secondary,
             )
+        },
+        onDismissRequest = { onDismissRequest() },
+        confirmButton = {
+            TextButton(onClick = { onConfirmation() }) {
+                BaseDefaultText(
+                    text = stringResource(id = R.string.yes),
+                    color = MaterialTheme.colorScheme.secondary
+                )
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismissRequest::invoke) {
+                BaseDefaultText(
+                    text = stringResource(id = R.string.cancellation),
+                    color = MaterialTheme.colorScheme.secondary
+                )
+            }
         }
-    }, dismissButton = {
-        TextButton(onClick = { onDismissRequest() }) {
-            BaseDefaultText(
-                text = stringResource(id = R.string.cancellation),
-                color = MaterialTheme.colorScheme.secondary
-            )
-        }
-    })
+    )
 }

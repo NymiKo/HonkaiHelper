@@ -1,4 +1,4 @@
-package com.example.tanorami.createteam.presentation
+package com.example.tanorami.createteam.ui
 
 import android.content.Context
 import android.os.Bundle
@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.tanorami.App
 import com.example.tanorami.core.theme.AppTheme
+import com.example.tanorami.createteam.presentation.CreateTeamViewModel
 import javax.inject.Inject
 
 class CreateTeamFragment : Fragment() {
@@ -40,7 +41,7 @@ class CreateTeamFragment : Fragment() {
                     CreateTeamScreen(
                         viewModel = viewModel,
                         idTeam = idTeam,
-                        onBack = { findNavController().navigateUp() }
+                        navController = findNavController(),
                     )
                 }
             }

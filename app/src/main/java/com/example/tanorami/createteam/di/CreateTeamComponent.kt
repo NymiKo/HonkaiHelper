@@ -1,6 +1,6 @@
 package com.example.tanorami.createteam.di
 
-import com.example.tanorami.createteam.presentation.CreateTeamFragment
+import com.example.tanorami.createteam.ui.CreateTeamFragment
 import dagger.Subcomponent
 
 @Subcomponent(modules = [CreateTeamModule::class])

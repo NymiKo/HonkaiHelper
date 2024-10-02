@@ -2,28 +2,31 @@ package com.example.tanorami.di
 
 import android.content.Context
 import com.example.tanorami.activity.data.MainService
+import com.example.tanorami.auth.login.data.LoginService
+import com.example.tanorami.auth.registration.data.RegistrationService
 import com.example.tanorami.builds_hero_from_users.data.BuildsHeroListService
 import com.example.tanorami.change_nickname.data.ChangeNicknameService
 import com.example.tanorami.create_build_hero.data.CreateBuildHeroService
 import com.example.tanorami.createteam.data.CreateTeamService
 import com.example.tanorami.data.AuthInterceptor
-import com.example.tanorami.heroes.data.HeroesListService
 import com.example.tanorami.data.image_loader.ImageLoader
 import com.example.tanorami.data.image_loader.ImageLoaderImpl
+import com.example.tanorami.heroes.data.HeroesListService
 import com.example.tanorami.load_data.data.LoadDataService
-import com.example.tanorami.auth.login.data.LoginService
 import com.example.tanorami.profile.data.ProfileService
-import com.example.tanorami.auth.registration.data.RegistrationService
 import com.example.tanorami.send_feedback.data.SendFeedbackService
 import com.example.tanorami.teams.data.TeamsListService
 import com.example.tanorami.viewing_users_build.data.ViewingUsersBuildService
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineDispatcher
+import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
+import okhttp3.Protocol
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -41,6 +44,17 @@ object NetworkModule {
     @Singleton
     fun provideClient(logginInterceptor: HttpLoggingInterceptor, authInterceptor: AuthInterceptor): OkHttpClient =
         OkHttpClient.Builder()
+            .protocols(listOf(Protocol.HTTP_2, Protocol.HTTP_1_1))
+            .connectionPool(
+                ConnectionPool(
+                    maxIdleConnections = 5,
+                    keepAliveDuration = 5,
+                    timeUnit = TimeUnit.MINUTES
+                )
+            )
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
             .addInterceptor(logginInterceptor)
             .addInterceptor(authInterceptor)
             .build()

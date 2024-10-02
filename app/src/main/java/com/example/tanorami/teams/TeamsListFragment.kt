@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tanorami.App
 import com.example.tanorami.R
 import com.example.tanorami.base.BaseFragment
-import com.example.tanorami.createteam.presentation.CreateTeamFragment
+import com.example.tanorami.createteam.ui.CreateTeamFragment
 import com.example.tanorami.databinding.FragmentTeamsListBinding
 import com.example.tanorami.databinding.ViewstubErrorLayoutBinding
 import com.example.tanorami.teams.adapter.HeroTeamsListAdapter

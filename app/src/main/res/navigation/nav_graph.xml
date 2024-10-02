@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/createTeamFragment"
-        android:name="com.example.tanorami.createteam.presentation.CreateTeamFragment"
+        android:name="com.example.tanorami.createteam.ui.CreateTeamFragment"
         android:label="fragment_create_team"
         tools:layout="@layout/fragment_create_team" />
     <fragment

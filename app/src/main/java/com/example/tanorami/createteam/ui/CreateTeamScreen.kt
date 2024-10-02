@@ -1,4 +1,4 @@
-package com.example.tanorami.createteam.presentation
+package com.example.tanorami.createteam.ui
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -34,42 +34,56 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
 import com.example.tanorami.R
 import com.example.tanorami.base_components.BaseSaveAlertDialog
 import com.example.tanorami.base_components.BaseSaveFloatingButton
 import com.example.tanorami.base_components.BaseTopAppBar
 import com.example.tanorami.core.theme.Red
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
+import com.example.tanorami.createteam.presentation.CreateTeamViewModel
 import com.example.tanorami.createteam.presentation.components.ItemHeroAvatar
 import com.example.tanorami.createteam.presentation.components.ItemHeroAvatarWithName
+import com.example.tanorami.createteam.presentation.models.CreateTeamScreenEvents
+import com.example.tanorami.createteam.presentation.models.CreateTeamScreenSideEffects
+import com.example.tanorami.createteam.presentation.models.CreateTeamScreenUiState
 import com.example.tanorami.data.local.models.hero.HeroWithNameAvatarRarity
 import com.example.tanorami.utils.OnLifecycleEvent
 import com.example.tanorami.utils.toast
 
 @Composable
 fun CreateTeamScreen(
-    modifier: Modifier = Modifier,
-    viewModel: CreateTeamViewModel,
     idTeam: Long,
-    onBack: () -> Unit,
+    viewModel: CreateTeamViewModel,
+    navController: NavController
 ) {
+    val state = viewModel.uiState().collectAsStateWithLifecycle().value
+    val sideEffects = viewModel.uiEffect().collectAsState(null).value
+
     CreateTeamScreenContent(
-        modifier = modifier,
-        uiState = viewModel.uiState().collectAsState().value,
+        uiState = state,
         idTeam = idTeam,
-        onEvent = { event ->
-            when(event) {
-                CreateTeamScreenEvents.OnBack -> onBack()
-                else -> Unit
-            }
-            viewModel.onEvent(event)
-        }
+        onEvent = { event -> viewModel.onEvent(event) }
     )
+
+    when(sideEffects) {
+        CreateTeamScreenSideEffects.OnBack -> navController.popBackStack()
+        CreateTeamScreenSideEffects.TeamDeleted -> {
+            toast(LocalContext.current, R.string.team_deleted)
+            navController.popBackStack()
+        }
+        CreateTeamScreenSideEffects.TeamSaved -> {
+            toast(LocalContext.current, R.string.team_saved)
+            navController.popBackStack()
+        }
+        is CreateTeamScreenSideEffects.ShowToastError -> toast(LocalContext.current, sideEffects.message)
+        null -> {}
+    }
 }
 
 @Composable
 private fun CreateTeamScreenContent(
-    modifier: Modifier = Modifier,
     uiState: CreateTeamScreenUiState,
     idTeam: Long,
     onEvent: (CreateTeamScreenEvents) -> Unit
@@ -86,11 +100,10 @@ private fun CreateTeamScreenContent(
 
     if (uiState.isError) {
         toast(LocalContext.current, uiState.message)
-        onEvent(CreateTeamScreenEvents.HideToast)
     }
 
     Scaffold(
-        modifier = modifier.background(MaterialTheme.colorScheme.background),
+        modifier = Modifier.background(MaterialTheme.colorScheme.background),
         topBar = {
             TopAppBar(
                 isCreateTeam = uiState.isCreateTeamMode,
@@ -103,7 +116,6 @@ private fun CreateTeamScreenContent(
             SaveAndUpdateTeamButton(isCreateTeam = uiState.isCreateTeamMode,
                 isSuccess = uiState.isSuccess,
                 saveTeam = { onEvent(CreateTeamScreenEvents.SaveTeam) },
-                onBack = { onEvent(CreateTeamScreenEvents.OnBack) }
             )
         },
     ) { innerPadding ->
@@ -162,17 +174,13 @@ private fun TopAppBar(
                 }
             }
         },
-        onBack = { onBack() }
+        onBack = onBack::invoke
     )
 
     if (openDeleteTeamAlertDialog) {
         BaseSaveAlertDialog(
             message = R.string.delete_the_command,
-            onConfirmation = {
-                deleteTeam()
-                openDeleteTeamAlertDialog = false
-                onBack()
-            },
+            onConfirmation = deleteTeam::invoke,
             onDismissRequest = { openDeleteTeamAlertDialog = false }
         )
     }
@@ -229,7 +237,6 @@ private fun SaveAndUpdateTeamButton(
     isCreateTeam: Boolean,
     isSuccess: Boolean,
     saveTeam: () -> Unit,
-    onBack: () -> Unit,
 ) {
     var openSaveTeamDialog by remember { mutableStateOf(false) }
 
@@ -241,7 +248,7 @@ private fun SaveAndUpdateTeamButton(
                 saveTeam()
                 if (isSuccess) {
                     openSaveTeamDialog = false
-                    onBack()
+                    saveTeam()
                 }
             },
             onDismissRequest = { openSaveTeamDialog = false })

@@ -28,7 +28,7 @@ import com.example.tanorami.core.theme.Orange
 import com.example.tanorami.core.theme.Violet
 import com.example.tanorami.core.theme.White
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
-import com.example.tanorami.createteam.presentation.CreateTeamScreenEvents
+import com.example.tanorami.createteam.presentation.models.CreateTeamScreenEvents
 import com.example.tanorami.data.local.models.hero.HeroWithNameAvatarRarity
 
 @Composable

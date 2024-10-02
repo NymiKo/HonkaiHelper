@@ -99,7 +99,8 @@
     <string name="delete_build">Удаление сборки</string>
     <string name="edit_team">Редактирование команды</string>
     <string name="delete">Удалить</string>
-    <string name="deletion_team">Команда удалена</string>
+    <string name="team_deleted">Команда удалена</string>
+    <string name="team_saved">Команда сохранена</string>
     <string name="empty">Здесь пусто. Вы ничем не делились!</string>
     <string name="feedback_has_been_sent">Сообщение было отправлено. Спасибо!</string>
     <string name="message_uid_build_copied">Идентификатор сборки скопирован</string>

@@ -5,32 +5,32 @@ import com.example.tanorami.R
 import com.example.tanorami.base.BaseViewModel
 import com.example.tanorami.createteam.data.CreateTeamRepository
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
+import com.example.tanorami.createteam.presentation.models.CreateTeamScreenEvents
+import com.example.tanorami.createteam.presentation.models.CreateTeamScreenSideEffects
+import com.example.tanorami.createteam.presentation.models.CreateTeamScreenUiState
 import com.example.tanorami.data.NetworkResult
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CreateTeamViewModel @Inject constructor(
     private val repository: CreateTeamRepository
-) : BaseViewModel<CreateTeamScreenUiState, CreateTeamScreenEvents>(initialState = CreateTeamScreenUiState()) {
+) : BaseViewModel<CreateTeamScreenUiState, CreateTeamScreenEvents, CreateTeamScreenSideEffects>(
+    initialState = CreateTeamScreenUiState()
+) {
 
     init {
         getHeroesList()
     }
 
     override fun onEvent(event: CreateTeamScreenEvents) {
-        when(event) {
+        when (event) {
             is CreateTeamScreenEvents.AddHeroInTeam -> addHeroInTeam(event.activeHeroInTeam)
             is CreateTeamScreenEvents.RemoveHeroFromTeam -> removeHeroFromTeam(event.activeHeroInTeam)
             is CreateTeamScreenEvents.GetTeam -> getTeam(idTeam = event.idTeam)
             CreateTeamScreenEvents.DeleteTeam -> deleteTeam()
             CreateTeamScreenEvents.SaveTeam -> saveTeam()
-            CreateTeamScreenEvents.HideToast -> hideToast()
-            else -> Unit
+            CreateTeamScreenEvents.OnBack -> sendSideEffect(CreateTeamScreenSideEffects.OnBack)
         }
-    }
-
-    private fun hideToast() {
-        uiState = uiState.copy(isError = false)
     }
 
     private fun getHeroesList() = viewModelScope.launch {
@@ -40,8 +40,7 @@ class CreateTeamViewModel @Inject constructor(
     private fun addHeroInTeam(activeHeroInTeam: ActiveHeroInTeam) {
         if (uiState.heroesListInTeam.size < 4) {
             activeHeroInTeam.active = true
-            val currentList = uiState.heroesListInTeam
-            val newList = currentList.toMutableList()
+            val newList = uiState.heroesListInTeam.toMutableList()
             newList.add(activeHeroInTeam.hero)
             uiState = uiState.copy(heroesListInTeam = newList)
         }
@@ -49,18 +48,21 @@ class CreateTeamViewModel @Inject constructor(
 
     private fun removeHeroFromTeam(activeHeroInTeam: ActiveHeroInTeam) {
         if (uiState.heroesListInTeam.isNotEmpty()) {
-            uiState = uiState.copy(heroesListInTeam = uiState.heroesListInTeam.minus(activeHeroInTeam.hero))
+            uiState =
+                uiState.copy(heroesListInTeam = uiState.heroesListInTeam.minus(activeHeroInTeam.hero))
             activeHeroInTeam.active = false
         }
     }
 
     private fun saveTeam() = viewModelScope.launch {
-        when(val result = repository.saveTeam(uiState.idTeam, uiState.heroesListInTeam)) {
+        when (val result = repository.saveTeam(uiState.idTeam, uiState.heroesListInTeam)) {
             is NetworkResult.Error -> {
-                uiState = uiState.copy(isSuccess = false, isError = true, message = errorHandler(result.code))
+                val errorMessage = errorHandler(result.code)
+                sendSideEffect(CreateTeamScreenSideEffects.ShowToastError(errorMessage))
             }
+
             is NetworkResult.Success -> {
-                uiState = uiState.copy(isSuccess = true, isError = false)
+                sendSideEffect(CreateTeamScreenSideEffects.TeamSaved)
             }
         }
     }
@@ -75,27 +77,36 @@ class CreateTeamViewModel @Inject constructor(
     }
 
     private fun getTeam(idTeam: Long) {
-        if (idTeam != -1L) getTeamFromServer(idTeam)
+        if (idTeam != -1L) {
+            uiState = uiState.copy(isCreateTeamMode = false)
+            getTeamFromServer(idTeam)
+        } else {
+            uiState = uiState.copy(isCreateTeamMode = true)
+        }
     }
 
     private fun getTeamFromServer(idTeam: Long) = viewModelScope.launch {
-        uiState = uiState.copy(isCreateTeamMode = false)
-        when(val result = repository.getTeam(idTeam)) {
+        when (val result = repository.getTeam(idTeam)) {
             is NetworkResult.Error -> {
-                uiState = uiState.copy(isSuccess = false, isError = true, message = errorHandler(result.code), isCreateTeamMode = false)
+                uiState = uiState.copy(
+                    isSuccess = false,
+                    isError = true,
+                    message = errorHandler(result.code),
+                    isCreateTeamMode = false
+                )
             }
+
             is NetworkResult.Success -> {
+                val newList = uiState.heroesList.toMutableList()
                 result.data.second.forEach {
-                    val list = uiState.heroesList
-                    val newList = list.toMutableList()
                     newList[newList.indexOf(ActiveHeroInTeam(it))] = ActiveHeroInTeam(it, true)
-                    uiState = uiState.copy(heroesList = newList)
                 }
                 uiState = uiState.copy(
                     idTeam = idTeam,
                     isSuccess = true,
                     isError = false,
                     uidTeam = result.data.first,
+                    heroesList = newList,
                     heroesListInTeam = result.data.second,
                     isCreateTeamMode = false,
                 )
@@ -104,10 +115,14 @@ class CreateTeamViewModel @Inject constructor(
     }
 
     private fun deleteTeam() = viewModelScope.launch {
-        when(val result = repository.deleteTeam(uiState.idTeam)) {
-            is NetworkResult.Error -> errorHandler(result.code)
+        when (val result = repository.deleteTeam(uiState.idTeam)) {
+            is NetworkResult.Error -> {
+                val errorMessage = errorHandler(result.code)
+                sendSideEffect(CreateTeamScreenSideEffects.ShowToastError(errorMessage))
+            }
+
             is NetworkResult.Success -> {
-                uiState = uiState.copy(isTeamDeleted = true)
+                sendSideEffect(CreateTeamScreenSideEffects.TeamDeleted)
             }
         }
     }
