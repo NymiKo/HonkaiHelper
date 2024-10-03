@@ -20,10 +20,10 @@ interface UiEffect
 abstract class BaseViewModel<S : UiState, E : UiEvent, F : UiEffect>(initialState: S) : ViewModel() {
 
     private val _uiState = MutableStateFlow(initialState)
-    private val _uiEffect: MutableSharedFlow<F> = MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+    private val _uiEffect: MutableSharedFlow<F?> = MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
 
     fun uiState(): StateFlow<S> = _uiState.asStateFlow()
-    fun uiEffect(): SharedFlow<F> = _uiEffect.asSharedFlow()
+    fun uiEffect(): SharedFlow<F?> = _uiEffect.asSharedFlow()
 
     protected var uiState: S
         get() = _uiState.value
@@ -35,5 +35,9 @@ abstract class BaseViewModel<S : UiState, E : UiEvent, F : UiEffect>(initialStat
 
     protected fun sendSideEffect(effect: F) {
         viewModelScope.launch { _uiEffect.emit(effect) }
+    }
+
+    fun clearEffect() {
+        viewModelScope.launch { _uiEffect.emit(null) }
     }
 }
