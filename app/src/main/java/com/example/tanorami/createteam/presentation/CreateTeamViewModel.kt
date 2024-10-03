@@ -48,9 +48,8 @@ class CreateTeamViewModel @Inject constructor(
 
     private fun removeHeroFromTeam(activeHeroInTeam: ActiveHeroInTeam) {
         if (uiState.heroesListInTeam.isNotEmpty()) {
-            uiState =
-                uiState.copy(heroesListInTeam = uiState.heroesListInTeam.minus(activeHeroInTeam.hero))
             activeHeroInTeam.active = false
+            uiState = uiState.copy(heroesListInTeam = uiState.heroesListInTeam.minus(activeHeroInTeam.hero))
         }
     }
 
@@ -86,12 +85,13 @@ class CreateTeamViewModel @Inject constructor(
     }
 
     private fun getTeamFromServer(idTeam: Long) = viewModelScope.launch {
+        uiState = uiState.copy(isLoading = true)
         when (val result = repository.getTeam(idTeam)) {
             is NetworkResult.Error -> {
                 uiState = uiState.copy(
+                    isLoading = false,
                     isSuccess = false,
                     isError = true,
-                    message = errorHandler(result.code),
                     isCreateTeamMode = false
                 )
             }
@@ -103,6 +103,7 @@ class CreateTeamViewModel @Inject constructor(
                 }
                 uiState = uiState.copy(
                     idTeam = idTeam,
+                    isLoading = false,
                     isSuccess = true,
                     isError = false,
                     uidTeam = result.data.first,

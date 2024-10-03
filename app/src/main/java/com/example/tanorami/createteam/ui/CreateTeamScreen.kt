@@ -23,7 +23,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -59,27 +58,36 @@ fun CreateTeamScreen(
     navController: NavController
 ) {
     val state = viewModel.uiState().collectAsStateWithLifecycle().value
-    val sideEffects = viewModel.uiEffect().collectAsState(null).value
+    val sideEffects = viewModel.uiEffect().collectAsStateWithLifecycle(null).value
+    val context = LocalContext.current
+
+    when(sideEffects) {
+        CreateTeamScreenSideEffects.OnBack -> {
+            navController.previousBackStackEntry?.savedStateHandle?.set("update", false)
+            navController.popBackStack()
+        }
+        CreateTeamScreenSideEffects.TeamDeleted -> {
+            toast(context, R.string.team_deleted)
+            navController.previousBackStackEntry?.savedStateHandle?.set("update", true)
+            navController.popBackStack()
+        }
+        CreateTeamScreenSideEffects.TeamSaved -> {
+            toast(context, R.string.team_saved)
+            navController.previousBackStackEntry?.savedStateHandle?.set("update", true)
+            navController.popBackStack()
+        }
+        is CreateTeamScreenSideEffects.ShowToastError -> {
+            toast(context, sideEffects.message)
+            viewModel.clearEffect()
+        }
+        null -> {}
+    }
 
     CreateTeamScreenContent(
         uiState = state,
         idTeam = idTeam,
         onEvent = { event -> viewModel.onEvent(event) }
     )
-
-    when(sideEffects) {
-        CreateTeamScreenSideEffects.OnBack -> navController.popBackStack()
-        CreateTeamScreenSideEffects.TeamDeleted -> {
-            toast(LocalContext.current, R.string.team_deleted)
-            navController.popBackStack()
-        }
-        CreateTeamScreenSideEffects.TeamSaved -> {
-            toast(LocalContext.current, R.string.team_saved)
-            navController.popBackStack()
-        }
-        is CreateTeamScreenSideEffects.ShowToastError -> toast(LocalContext.current, sideEffects.message)
-        null -> {}
-    }
 }
 
 @Composable
@@ -98,10 +106,6 @@ private fun CreateTeamScreenContent(
         }
     }
 
-    if (uiState.isError) {
-        toast(LocalContext.current, uiState.message)
-    }
-
     Scaffold(
         modifier = Modifier.background(MaterialTheme.colorScheme.background),
         topBar = {
@@ -113,8 +117,8 @@ private fun CreateTeamScreenContent(
             )
         },
         floatingActionButton = {
-            SaveAndUpdateTeamButton(isCreateTeam = uiState.isCreateTeamMode,
-                isSuccess = uiState.isSuccess,
+            SaveAndUpdateTeamButton(
+                isCreateTeam = uiState.isCreateTeamMode,
                 saveTeam = { onEvent(CreateTeamScreenEvents.SaveTeam) },
             )
         },
@@ -235,7 +239,6 @@ private fun HeroesList(
 private fun SaveAndUpdateTeamButton(
     modifier: Modifier = Modifier,
     isCreateTeam: Boolean,
-    isSuccess: Boolean,
     saveTeam: () -> Unit,
 ) {
     var openSaveTeamDialog by remember { mutableStateOf(false) }
@@ -246,10 +249,7 @@ private fun SaveAndUpdateTeamButton(
         BaseSaveAlertDialog(message = if (isCreateTeam) R.string.add_the_created_command else R.string.update_the_command,
             onConfirmation = {
                 saveTeam()
-                if (isSuccess) {
-                    openSaveTeamDialog = false
-                    saveTeam()
-                }
+                openSaveTeamDialog = false
             },
             onDismissRequest = { openSaveTeamDialog = false })
     }
