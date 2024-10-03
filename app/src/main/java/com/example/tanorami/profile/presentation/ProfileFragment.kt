@@ -66,4 +66,11 @@ class ProfileFragment : Fragment() {
             }
         }
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<Boolean>("update")?.observe(viewLifecycleOwner) { result ->
+            if (result) viewModel.onEvent(ProfileScreenEvents.FetchProfile)
+        }
+    }
 }

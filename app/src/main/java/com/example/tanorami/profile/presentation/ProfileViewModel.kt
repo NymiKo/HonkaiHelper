@@ -21,15 +21,7 @@ class ProfileViewModel @Inject constructor(
     val profileUiState = _profileUiState.asStateFlow()
 
     init {
-        viewModelScope.launch {
-            userDataStore.tokenUser.collect {
-                if (it == "") {
-                    _profileUiState.value = ProfileScreenUiState.NotAuthorized
-                } else {
-                    getProfile()
-                }
-            }
-        }
+        getProfile()
     }
 
     internal fun onEvent(event: ProfileScreenEvents) {

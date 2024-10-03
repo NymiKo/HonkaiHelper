@@ -32,7 +32,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.Lifecycle
 import coil.compose.AsyncImage
 import com.example.tanorami.R
 import com.example.tanorami.base.shimmerEffect
@@ -43,7 +42,6 @@ import com.example.tanorami.profile.presentation.components.ErrorComponent
 import com.example.tanorami.profile.presentation.components.ProfileTopAppBar
 import com.example.tanorami.profile.presentation.components.TeamsAndBuildsInProfile
 import com.example.tanorami.profile.presentation.components.UserNotLoggedComponent
-import com.example.tanorami.utils.OnLifecycleEvent
 import com.example.tanorami.utils.toFile
 
 @Composable
@@ -85,15 +83,15 @@ private fun ProfileScreenContent(
             }
         }
 
-    OnLifecycleEvent { _, event ->
-        when (event) {
-            Lifecycle.Event.ON_START -> {
-                onEvents(ProfileScreenEvents.FetchProfile)
-            }
-
-            else -> {}
-        }
-    }
+//    OnLifecycleEvent { _, event ->
+//        when (event) {
+//            Lifecycle.Event.ON_START -> {
+//                onEvents(ProfileScreenEvents.FetchProfile)
+//            }
+//
+//            else -> {}
+//        }
+//    }
 
     when (uiState) {
         is ProfileScreenUiState.Success -> {
