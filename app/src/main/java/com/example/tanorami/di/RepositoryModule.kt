@@ -14,8 +14,8 @@ import com.example.tanorami.info_about_hero.data.InfoAboutHeroRepository
 import com.example.tanorami.info_about_hero.data.InfoAboutHeroRepositoryImpl
 import com.example.tanorami.createteam.data.CreateTeamRepository
 import com.example.tanorami.createteam.data.CreateTeamRepositoryImpl
-import com.example.tanorami.info_about_decoration.data.DecorationInfoRepository
-import com.example.tanorami.info_about_decoration.data.DecorationInfoRepositoryImpl
+import com.example.tanorami.info_about_decoration.data.InfoAboutDecorationRepository
+import com.example.tanorami.info_about_decoration.data.InfoAboutDecorationRepositoryImpl
 import com.example.tanorami.equipment.data.EquipmentRepository
 import com.example.tanorami.equipment.data.EquipmentRepositoryImpl
 import com.example.tanorami.heroes.data.HeroesListRepository
@@ -100,7 +100,7 @@ interface RepositoryModule {
 
     @Singleton
     @Binds
-    fun bindDecorationInfoRepository(repository: DecorationInfoRepositoryImpl): DecorationInfoRepository
+    fun bindDecorationInfoRepository(repository: InfoAboutDecorationRepositoryImpl): InfoAboutDecorationRepository
 
     @Singleton
     @Binds

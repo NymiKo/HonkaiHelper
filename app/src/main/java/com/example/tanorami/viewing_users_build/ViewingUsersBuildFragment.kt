@@ -15,7 +15,7 @@ import com.example.tanorami.App
 import com.example.tanorami.R
 import com.example.tanorami.base.BaseFragment
 import com.example.tanorami.databinding.FragmentViewingUsersBuildBinding
-import com.example.tanorami.info_about_decoration.DecorationInfoFragment
+import com.example.tanorami.info_about_decoration.ui.InfoAboutDecorationFragment
 import com.example.tanorami.info_about_relic.ui.InfoAboutRelicFragment
 import com.example.tanorami.utils.backgroundHero
 import com.example.tanorami.utils.backgroundRarity
@@ -157,7 +157,7 @@ class ViewingUsersBuildFragment :
             val extras = FragmentNavigatorExtras(it to transitionName)
             findNavController().navigate(
                 R.id.decorationInfoFragment,
-                DecorationInfoFragment.newInstance(idDecoration),
+                InfoAboutDecorationFragment.newInstance(idDecoration),
                 null,
                 extras
             )

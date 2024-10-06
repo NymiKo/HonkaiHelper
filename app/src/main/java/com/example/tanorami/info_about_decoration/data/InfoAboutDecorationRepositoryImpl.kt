@@ -7,10 +7,10 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class DecorationInfoRepositoryImpl @Inject constructor(
+class InfoAboutDecorationRepositoryImpl @Inject constructor(
     @IODispatcher private val ioDispatcher: CoroutineDispatcher,
     private val decorationDao: DecorationDao
-): DecorationInfoRepository {
+): InfoAboutDecorationRepository {
     override suspend fun getDecoration(idDecoration: Int): Decoration = withContext(ioDispatcher) {
         return@withContext decorationDao.getDecoration(idDecoration).toDecoration()
     }

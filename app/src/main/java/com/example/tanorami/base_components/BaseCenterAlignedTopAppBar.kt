@@ -22,14 +22,14 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun BaseCenterAlignedTopAppBar(
     modifier: Modifier = Modifier,
-    title: String,
+    title: String?,
     onBack: () -> Unit,
 ) {
     CenterAlignedTopAppBar(
         modifier = modifier,
         title = {
             Text(
-                text = title,
+                text = title ?: "",
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.secondary,
                 maxLines = 1,

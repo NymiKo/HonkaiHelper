@@ -14,8 +14,8 @@ import com.example.tanorami.change_nickname.di.ChangeNicknameComponent
 import com.example.tanorami.create_build_hero.di.CreateBuildHeroComponent
 import com.example.tanorami.createteam.data.CreateTeamRepository
 import com.example.tanorami.createteam.di.CreateTeamComponent
-import com.example.tanorami.info_about_decoration.data.DecorationInfoRepository
-import com.example.tanorami.info_about_decoration.di.DecorationInfoComponent
+import com.example.tanorami.info_about_decoration.data.InfoAboutDecorationRepository
+import com.example.tanorami.info_about_decoration.di.InfoAboutDecorationComponent
 import com.example.tanorami.equipment.di.EquipmentComponent
 import com.example.tanorami.heroes.data.HeroesListRepository
 import com.example.tanorami.heroes.di.HeroesListComponent
@@ -76,7 +76,7 @@ interface AppComponent {
     fun baseBuildHeroComponent(): BaseBuildHeroComponent.Factory
     fun weaponInfoComponent(): InfoAboutWeaponComponent.Factory
     fun relicInfoComponent(): RelicInfoComponent.Factory
-    fun decorationInfoComponent(): DecorationInfoComponent.Factory
+    fun decorationInfoComponent(): InfoAboutDecorationComponent.Factory
     fun viewingUsersBuildComponent(): ViewingUsersBuildComponent.Factory
     fun changeNicknameComponent(): ChangeNicknameComponent.Factory
     fun settingsComponent(): SettingsComponent.Factory
@@ -94,7 +94,7 @@ interface AppComponent {
     val baseBuildHeroRepository: BaseBuildHeroRepository
     val infoAboutWeaponRepository: InfoAboutWeaponRepository
     val relicInfoRepository: RelicInfoRepository
-    val decorationInfoRepository: DecorationInfoRepository
+    val infoAboutDecorationRepository: InfoAboutDecorationRepository
     val buildsHeroListRepository: BuildsHeroListRepository
     val viewingUsersBuildRepository: ViewingUsersBuildRepository
     val changeNicknameRepository: ChangeNicknameRepository

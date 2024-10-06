@@ -161,7 +161,7 @@
         tools:layout="@layout/fragment_relic_info" />
     <fragment
         android:id="@+id/decorationInfoFragment"
-        android:name="com.example.tanorami.info_about_decoration.DecorationInfoFragment"
+        android:name="com.example.tanorami.info_about_decoration.ui.InfoAboutDecorationFragment"
         android:label="fragment_decoration_info"
         tools:layout="@layout/fragment_decoration_info" />
     <fragment
