@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".weapon.WeaponInfoFragment">
+    tools:context=".info_about_weapon.ui.WeaponInfoFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar_info_about_weapon"

@@ -21,9 +21,9 @@ import com.example.tanorami.base_build_hero.adapters.StatsEquipmentAdapter
 import com.example.tanorami.base_build_hero.adapters.WeaponsAdapter
 import com.example.tanorami.builds_hero_from_users.BuildsHeroListFragment
 import com.example.tanorami.databinding.FragmentBaseBuildHeroBinding
-import com.example.tanorami.decoration.DecorationInfoFragment
-import com.example.tanorami.relic.RelicInfoFragment
-import com.example.tanorami.weapon.WeaponInfoFragment
+import com.example.tanorami.info_about_decoration.DecorationInfoFragment
+import com.example.tanorami.info_about_relic.RelicInfoFragment
+import com.example.tanorami.info_about_weapon.ui.WeaponInfoFragment
 
 class BaseBuildHeroFragment :
     BaseFragment<FragmentBaseBuildHeroBinding>(FragmentBaseBuildHeroBinding::inflate) {

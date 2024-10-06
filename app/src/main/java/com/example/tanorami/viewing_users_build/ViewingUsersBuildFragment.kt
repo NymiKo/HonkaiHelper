@@ -15,8 +15,8 @@ import com.example.tanorami.App
 import com.example.tanorami.R
 import com.example.tanorami.base.BaseFragment
 import com.example.tanorami.databinding.FragmentViewingUsersBuildBinding
-import com.example.tanorami.decoration.DecorationInfoFragment
-import com.example.tanorami.relic.RelicInfoFragment
+import com.example.tanorami.info_about_decoration.DecorationInfoFragment
+import com.example.tanorami.info_about_relic.RelicInfoFragment
 import com.example.tanorami.utils.backgroundHero
 import com.example.tanorami.utils.backgroundRarity
 import com.example.tanorami.utils.gone
@@ -24,7 +24,7 @@ import com.example.tanorami.utils.load
 import com.example.tanorami.utils.toast
 import com.example.tanorami.utils.visible
 import com.example.tanorami.viewing_users_build.adapter.ViewingUsersBuildStatsAdapter
-import com.example.tanorami.weapon.WeaponInfoFragment
+import com.example.tanorami.info_about_weapon.ui.WeaponInfoFragment
 
 class ViewingUsersBuildFragment :
     BaseFragment<FragmentViewingUsersBuildBinding>(FragmentViewingUsersBuildBinding::inflate) {

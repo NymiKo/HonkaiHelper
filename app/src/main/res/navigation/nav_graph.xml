@@ -151,17 +151,17 @@
     </fragment>
     <fragment
         android:id="@+id/weaponInfoFragment"
-        android:name="com.example.tanorami.weapon.WeaponInfoFragment"
+        android:name="com.example.tanorami.info_about_weapon.ui.WeaponInfoFragment"
         android:label="fragment_weapon_info"
         tools:layout="@layout/fragment_weapon_info" />
     <fragment
         android:id="@+id/relicInfoFragment"
-        android:name="com.example.tanorami.relic.RelicInfoFragment"
+        android:name="com.example.tanorami.info_about_relic.RelicInfoFragment"
         android:label="fragment_relic_info"
         tools:layout="@layout/fragment_relic_info" />
     <fragment
         android:id="@+id/decorationInfoFragment"
-        android:name="com.example.tanorami.decoration.DecorationInfoFragment"
+        android:name="com.example.tanorami.info_about_decoration.DecorationInfoFragment"
         android:label="fragment_decoration_info"
         tools:layout="@layout/fragment_decoration_info" />
     <fragment

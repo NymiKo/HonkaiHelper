@@ -54,7 +54,6 @@ import com.example.tanorami.utils.OnLifecycleEvent
 
 @Composable
 fun CreateBuildHeroScreen(
-    modifier: Modifier = Modifier,
     viewModel: CreateBuildHeroViewModel,
     idBuild: Long,
     idHero: Int,
@@ -62,7 +61,6 @@ fun CreateBuildHeroScreen(
     onBack: () -> Unit,
 ) {
     CreateBuildHeroScreenContent(
-        modifier = modifier,
         uiState = viewModel.uiState,
         onEvent = { event ->
             when (event) {

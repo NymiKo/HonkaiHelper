@@ -42,15 +42,15 @@ import com.example.tanorami.base_components.BaseTopAppBar
 import com.example.tanorami.core.theme.Red
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
 import com.example.tanorami.createteam.presentation.CreateTeamViewModel
-import com.example.tanorami.createteam.presentation.components.ItemHeroAvatar
-import com.example.tanorami.createteam.presentation.components.ItemHeroAvatarWithName
 import com.example.tanorami.createteam.presentation.models.CreateTeamScreenEvents
 import com.example.tanorami.createteam.presentation.models.CreateTeamScreenSideEffects
 import com.example.tanorami.createteam.presentation.models.CreateTeamScreenUiState
+import com.example.tanorami.createteam.ui.components.ItemHeroAvatar
+import com.example.tanorami.createteam.ui.components.ItemHeroAvatarWithName
 import com.example.tanorami.data.local.models.hero.HeroWithNameAvatarRarity
 import com.example.tanorami.profile.presentation.ProfileFragment.Companion.UPDATE_SCREEN_KEY
 import com.example.tanorami.utils.OnLifecycleEvent
-import com.example.tanorami.utils.popBackStackWithBooleanResult
+import com.example.tanorami.utils.popBackStackWithResult
 import com.example.tanorami.utils.toast
 
 @Composable
@@ -65,15 +65,15 @@ fun CreateTeamScreen(
 
     when(sideEffects) {
         CreateTeamScreenSideEffects.OnBack -> {
-            navController.popBackStackWithBooleanResult(UPDATE_SCREEN_KEY, false)
+            navController.popBackStackWithResult(UPDATE_SCREEN_KEY, false)
         }
         CreateTeamScreenSideEffects.TeamDeleted -> {
             toast(context, R.string.team_deleted)
-            navController.popBackStackWithBooleanResult(UPDATE_SCREEN_KEY, true)
+            navController.popBackStackWithResult(UPDATE_SCREEN_KEY, true)
         }
         CreateTeamScreenSideEffects.TeamSaved -> {
             toast(context, R.string.team_saved)
-            navController.popBackStackWithBooleanResult(UPDATE_SCREEN_KEY, true)
+            navController.popBackStackWithResult(UPDATE_SCREEN_KEY, true)
         }
         is CreateTeamScreenSideEffects.ShowToastError -> {
             toast(context, sideEffects.message)
@@ -84,27 +84,25 @@ fun CreateTeamScreen(
 
     CreateTeamScreenContent(
         uiState = state,
-        idTeam = idTeam,
         onEvent = { event -> viewModel.onEvent(event) }
     )
-}
 
-@Composable
-private fun CreateTeamScreenContent(
-    uiState: CreateTeamScreenUiState,
-    idTeam: Long,
-    onEvent: (CreateTeamScreenEvents) -> Unit
-) {
     OnLifecycleEvent { owner, event ->
         when (event) {
             Lifecycle.Event.ON_START -> {
-                onEvent(CreateTeamScreenEvents.GetTeam(idTeam = idTeam))
+                viewModel.onEvent(CreateTeamScreenEvents.GetTeam(idTeam = idTeam))
             }
 
             else -> {}
         }
     }
+}
 
+@Composable
+private fun CreateTeamScreenContent(
+    uiState: CreateTeamScreenUiState,
+    onEvent: (CreateTeamScreenEvents) -> Unit
+) {
     Scaffold(
         modifier = Modifier.background(MaterialTheme.colorScheme.background),
         topBar = {

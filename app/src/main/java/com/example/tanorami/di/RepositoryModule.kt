@@ -14,8 +14,8 @@ import com.example.tanorami.info_about_hero.data.InfoAboutHeroRepository
 import com.example.tanorami.info_about_hero.data.InfoAboutHeroRepositoryImpl
 import com.example.tanorami.createteam.data.CreateTeamRepository
 import com.example.tanorami.createteam.data.CreateTeamRepositoryImpl
-import com.example.tanorami.decoration.data.DecorationInfoRepository
-import com.example.tanorami.decoration.data.DecorationInfoRepositoryImpl
+import com.example.tanorami.info_about_decoration.data.DecorationInfoRepository
+import com.example.tanorami.info_about_decoration.data.DecorationInfoRepositoryImpl
 import com.example.tanorami.equipment.data.EquipmentRepository
 import com.example.tanorami.equipment.data.EquipmentRepositoryImpl
 import com.example.tanorami.heroes.data.HeroesListRepository
@@ -28,8 +28,8 @@ import com.example.tanorami.profile.domain.ProfileRepository
 import com.example.tanorami.profile.domain.ProfileRepositoryImpl
 import com.example.tanorami.auth.registration.data.RegistrationRepository
 import com.example.tanorami.auth.registration.data.RegistrationRepositoryImpl
-import com.example.tanorami.relic.data.RelicInfoRepository
-import com.example.tanorami.relic.data.RelicInfoRepositoryImpl
+import com.example.tanorami.info_about_relic.data.RelicInfoRepository
+import com.example.tanorami.info_about_relic.data.RelicInfoRepositoryImpl
 import com.example.tanorami.send_feedback.data.SendFeedbackRepository
 import com.example.tanorami.send_feedback.data.SendFeedbackRepositoryImpl
 import com.example.tanorami.settings.data.SettingsRepository
@@ -38,8 +38,8 @@ import com.example.tanorami.teams.data.TeamsListRepository
 import com.example.tanorami.teams.data.TeamsListRepositoryImpl
 import com.example.tanorami.viewing_users_build.data.ViewingUsersBuildRepository
 import com.example.tanorami.viewing_users_build.data.ViewingUsersBuildRepositoryImpl
-import com.example.tanorami.weapon.data.WeaponInfoRepository
-import com.example.tanorami.weapon.data.WeaponInfoRepositoryImpl
+import com.example.tanorami.info_about_weapon.data.WeaponInfoRepository
+import com.example.tanorami.info_about_weapon.data.WeaponInfoRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton

@@ -14,8 +14,8 @@ import com.example.tanorami.change_nickname.di.ChangeNicknameComponent
 import com.example.tanorami.create_build_hero.di.CreateBuildHeroComponent
 import com.example.tanorami.createteam.data.CreateTeamRepository
 import com.example.tanorami.createteam.di.CreateTeamComponent
-import com.example.tanorami.decoration.data.DecorationInfoRepository
-import com.example.tanorami.decoration.di.DecorationInfoComponent
+import com.example.tanorami.info_about_decoration.data.DecorationInfoRepository
+import com.example.tanorami.info_about_decoration.di.DecorationInfoComponent
 import com.example.tanorami.equipment.di.EquipmentComponent
 import com.example.tanorami.heroes.data.HeroesListRepository
 import com.example.tanorami.heroes.di.HeroesListComponent
@@ -27,8 +27,8 @@ import com.example.tanorami.profile.domain.ProfileRepository
 import com.example.tanorami.profile.di.ProfileComponent
 import com.example.tanorami.auth.registration.data.RegistrationRepository
 import com.example.tanorami.auth.registration.di.RegistrationComponent
-import com.example.tanorami.relic.data.RelicInfoRepository
-import com.example.tanorami.relic.di.RelicInfoComponent
+import com.example.tanorami.info_about_relic.data.RelicInfoRepository
+import com.example.tanorami.info_about_relic.di.RelicInfoComponent
 import com.example.tanorami.send_feedback.data.SendFeedbackRepository
 import com.example.tanorami.send_feedback.di.SendFeedbackComponent
 import com.example.tanorami.settings.data.SettingsRepository
@@ -37,8 +37,8 @@ import com.example.tanorami.teams.data.TeamsListRepository
 import com.example.tanorami.teams.di.TeamsListComponent
 import com.example.tanorami.viewing_users_build.data.ViewingUsersBuildRepository
 import com.example.tanorami.viewing_users_build.di.ViewingUsersBuildComponent
-import com.example.tanorami.weapon.data.WeaponInfoRepository
-import com.example.tanorami.weapon.di.WeaponInfoComponent
+import com.example.tanorami.info_about_weapon.data.WeaponInfoRepository
+import com.example.tanorami.info_about_weapon.di.WeaponInfoComponent
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton

@@ -142,7 +142,7 @@ fun OnLifecycleEvent(onEvent: (owner: LifecycleOwner, event: Lifecycle.Event) ->
     }
 }
 
-fun <T> NavController.popBackStackWithBooleanResult(key: String, value: T?) {
-    this.previousBackStackEntry?.savedStateHandle?.set("update", true)
+fun <T> NavController.popBackStackWithResult(key: String, value: T?) {
+    this.previousBackStackEntry?.savedStateHandle?.set(key, value)
     this.popBackStack()
 }
