@@ -49,7 +49,7 @@ internal fun DescriptionWeaponSkill(
             BaseDefaultText(
                 modifier = Modifier.fillMaxWidth(),
                 text = descriptionWeaponSkill ?: "",
-                fontSize = 18.sp,
+                fontSize = 17.sp,
                 fontFamily = FontFamily.SansSerif,
             )
         }

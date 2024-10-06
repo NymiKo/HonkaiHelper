@@ -7,10 +7,10 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class WeaponInfoRepositoryImpl @Inject constructor(
+class InfoAboutWeaponRepositoryImpl @Inject constructor(
     @IODispatcher private val ioDispatcher: CoroutineDispatcher,
     private val weaponDao: WeaponDao
-) : WeaponInfoRepository {
+) : InfoAboutWeaponRepository {
     override suspend fun getWeapon(idWeapon: Int): FullInfoAboutWeapon = withContext(ioDispatcher) {
         val weaponInfo = weaponDao.getWeaponWithPath(idWeapon)
         return@withContext FullInfoAboutWeapon(

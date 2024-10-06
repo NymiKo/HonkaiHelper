@@ -38,8 +38,8 @@ import com.example.tanorami.teams.data.TeamsListRepository
 import com.example.tanorami.teams.data.TeamsListRepositoryImpl
 import com.example.tanorami.viewing_users_build.data.ViewingUsersBuildRepository
 import com.example.tanorami.viewing_users_build.data.ViewingUsersBuildRepositoryImpl
-import com.example.tanorami.info_about_weapon.data.WeaponInfoRepository
-import com.example.tanorami.info_about_weapon.data.WeaponInfoRepositoryImpl
+import com.example.tanorami.info_about_weapon.data.InfoAboutWeaponRepository
+import com.example.tanorami.info_about_weapon.data.InfoAboutWeaponRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
@@ -92,7 +92,7 @@ interface RepositoryModule {
 
     @Singleton
     @Binds
-    fun bindWeaponInfoRepository(repository: WeaponInfoRepositoryImpl): WeaponInfoRepository
+    fun bindWeaponInfoRepository(repository: InfoAboutWeaponRepositoryImpl): InfoAboutWeaponRepository
 
     @Singleton
     @Binds

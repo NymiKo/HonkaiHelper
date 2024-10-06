@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".info_about_relic.RelicInfoFragment">
+    tools:context=".info_about_relic.ui.InfoAboutRelicFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar_info_about_relic"

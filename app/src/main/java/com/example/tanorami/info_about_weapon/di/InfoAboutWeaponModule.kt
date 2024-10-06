@@ -8,7 +8,7 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 
 @Module
-interface WeaponInfoModule {
+interface InfoAboutWeaponModule {
     @Binds
     @[IntoMap ViewModelKey(InfoAboutWeaponViewModel::class)]
     fun bindViewModel(viewModel: InfoAboutWeaponViewModel): ViewModel

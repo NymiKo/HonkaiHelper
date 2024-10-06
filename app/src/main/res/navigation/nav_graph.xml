@@ -156,7 +156,7 @@
         tools:layout="@layout/fragment_weapon_info" />
     <fragment
         android:id="@+id/relicInfoFragment"
-        android:name="com.example.tanorami.info_about_relic.RelicInfoFragment"
+        android:name="com.example.tanorami.info_about_relic.ui.InfoAboutRelicFragment"
         android:label="fragment_relic_info"
         tools:layout="@layout/fragment_relic_info" />
     <fragment

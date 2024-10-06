@@ -37,8 +37,8 @@ import com.example.tanorami.teams.data.TeamsListRepository
 import com.example.tanorami.teams.di.TeamsListComponent
 import com.example.tanorami.viewing_users_build.data.ViewingUsersBuildRepository
 import com.example.tanorami.viewing_users_build.di.ViewingUsersBuildComponent
-import com.example.tanorami.info_about_weapon.data.WeaponInfoRepository
-import com.example.tanorami.info_about_weapon.di.WeaponInfoComponent
+import com.example.tanorami.info_about_weapon.data.InfoAboutWeaponRepository
+import com.example.tanorami.info_about_weapon.di.InfoAboutWeaponComponent
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -74,7 +74,7 @@ interface AppComponent {
     fun infoAboutHeroComponent(): InfoAboutHeroComponent.Factory
     fun loadDataComponent(): LoadDataComponent.Factory
     fun baseBuildHeroComponent(): BaseBuildHeroComponent.Factory
-    fun weaponInfoComponent(): WeaponInfoComponent.Factory
+    fun weaponInfoComponent(): InfoAboutWeaponComponent.Factory
     fun relicInfoComponent(): RelicInfoComponent.Factory
     fun decorationInfoComponent(): DecorationInfoComponent.Factory
     fun viewingUsersBuildComponent(): ViewingUsersBuildComponent.Factory
@@ -92,7 +92,7 @@ interface AppComponent {
     val loadDataRepository: LoadDataRepository
     val mainRepository: MainRepository
     val baseBuildHeroRepository: BaseBuildHeroRepository
-    val weaponInfoRepository: WeaponInfoRepository
+    val infoAboutWeaponRepository: InfoAboutWeaponRepository
     val relicInfoRepository: RelicInfoRepository
     val decorationInfoRepository: DecorationInfoRepository
     val buildsHeroListRepository: BuildsHeroListRepository

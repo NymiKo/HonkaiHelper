@@ -76,8 +76,8 @@
     <string name="stats_equipment">Основные статы</string>
     <string name="skill_weapon">Навык конуса</string>
     <string name="effect_relic">Эффект набора</string>
-    <string name="effect_relic_two_parts"><![CDATA[<font color="#E2AB59"><b><u>Эффект от 2-х частей:</u></b></font> %1$s]]></string>
-    <string name="effect_relic_four_parts"><![CDATA[<font color="#E2AB59"><b><u>Эффект от 4-х частей:</u></b></font> %1$s]]></string>
+    <string name="effect_relic_two_parts">Эффект от 2-х частей:</string>
+    <string name="effect_relic_four_parts">Эффект от 4-х частей:</string>
     <string name="builds_from_users">Сборки героя от игроков</string>
     <string name="teams_from_users">Команды с героем от игроков</string>
     <string name="empty_here">Пока что здесь пусто. Будь первопроходцем!</string>
