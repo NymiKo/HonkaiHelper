@@ -1,11 +1,9 @@
 package com.example.tanorami.utils
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentResolver
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Parcelable
@@ -13,18 +11,17 @@ import android.provider.OpenableColumns
 import android.text.Html
 import android.view.View
 import android.widget.ImageView
-import androidx.annotation.AttrRes
-import androidx.annotation.ColorInt
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.rememberUpdatedState
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.navigation.NavController
 import com.bumptech.glide.Glide
 import com.example.tanorami.R
 import com.example.tanorami.equipment.data.model.Equipment
@@ -110,27 +107,8 @@ fun <T : Parcelable> Fragment.getParcelable(arg: String, clazz: Class<T>) =
         requireArguments().getParcelable(arg)
     }
 
-fun <T : Parcelable> Fragment.getParcelableArrayList(arg: String, clazz: Class<T>) =
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        requireArguments().getParcelableArrayList(arg, clazz)
-    } else {
-        requireArguments().getParcelableArrayList(arg)
-    }
-
 fun fromHtml(source: String) =
     Html.fromHtml(source, HtmlCompat.FROM_HTML_MODE_LEGACY)
-
-@ColorInt
-@SuppressLint("Recycle")
-fun Context.themeColor(
-    @AttrRes themeAttrId: Int
-): Int {
-    return obtainStyledAttributes(
-        intArrayOf(themeAttrId)
-    ).use {
-        it.getColor(0, Color.MAGENTA)
-    }
-}
 
 fun Uri.toFile(context: Context): File  {
     var file: File? = null
@@ -162,4 +140,9 @@ fun OnLifecycleEvent(onEvent: (owner: LifecycleOwner, event: Lifecycle.Event) ->
             lifecycle.removeObserver(observer)
         }
     }
+}
+
+fun <T> NavController.popBackStackWithBooleanResult(key: String, value: T?) {
+    this.previousBackStackEntry?.savedStateHandle?.set("update", true)
+    this.popBackStack()
 }

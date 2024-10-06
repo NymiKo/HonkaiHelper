@@ -48,7 +48,9 @@ import com.example.tanorami.createteam.presentation.models.CreateTeamScreenEvent
 import com.example.tanorami.createteam.presentation.models.CreateTeamScreenSideEffects
 import com.example.tanorami.createteam.presentation.models.CreateTeamScreenUiState
 import com.example.tanorami.data.local.models.hero.HeroWithNameAvatarRarity
+import com.example.tanorami.profile.presentation.ProfileFragment.Companion.UPDATE_SCREEN_KEY
 import com.example.tanorami.utils.OnLifecycleEvent
+import com.example.tanorami.utils.popBackStackWithBooleanResult
 import com.example.tanorami.utils.toast
 
 @Composable
@@ -63,18 +65,15 @@ fun CreateTeamScreen(
 
     when(sideEffects) {
         CreateTeamScreenSideEffects.OnBack -> {
-            navController.previousBackStackEntry?.savedStateHandle?.set("update", false)
-            navController.popBackStack()
+            navController.popBackStackWithBooleanResult(UPDATE_SCREEN_KEY, false)
         }
         CreateTeamScreenSideEffects.TeamDeleted -> {
             toast(context, R.string.team_deleted)
-            navController.previousBackStackEntry?.savedStateHandle?.set("update", true)
-            navController.popBackStack()
+            navController.popBackStackWithBooleanResult(UPDATE_SCREEN_KEY, true)
         }
         CreateTeamScreenSideEffects.TeamSaved -> {
             toast(context, R.string.team_saved)
-            navController.previousBackStackEntry?.savedStateHandle?.set("update", true)
-            navController.popBackStack()
+            navController.popBackStackWithBooleanResult(UPDATE_SCREEN_KEY, true)
         }
         is CreateTeamScreenSideEffects.ShowToastError -> {
             toast(context, sideEffects.message)
