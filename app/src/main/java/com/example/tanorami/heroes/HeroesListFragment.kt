@@ -19,7 +19,7 @@ import com.example.tanorami.databinding.FragmentHeroesListBinding
 import com.example.tanorami.heroes.adapter.HeroesListActionListener
 import com.example.tanorami.heroes.adapter.HeroesListAdapter
 import com.example.tanorami.heroes.data.model.Hero
-import com.example.tanorami.info_about_hero.InfoAboutHeroFragment
+import com.example.tanorami.info_about_hero.ui.InfoAboutHeroFragment
 import com.example.tanorami.load_data.DATA_UPLOADED_KEY
 import com.example.tanorami.teams.TeamsListFragment
 import com.example.tanorami.utils.getSharedPrefToken

@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:id="@+id/container_info_about_hero"
-    tools:context=".info_about_hero.InfoAboutHeroFragment">
+    tools:context=".info_about_hero.ui.InfoAboutHeroFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar_info_about_hero"

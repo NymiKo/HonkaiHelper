@@ -88,7 +88,7 @@
     </fragment>
     <fragment
         android:id="@+id/infoAboutHeroFragment"
-        android:name="com.example.tanorami.info_about_hero.InfoAboutHeroFragment"
+        android:name="com.example.tanorami.info_about_hero.ui.InfoAboutHeroFragment"
         android:label="fragment_info_about_hero"
         tools:layout="@layout/fragment_info_about_hero" >
         <action

@@ -1,6 +1,6 @@
 package com.example.tanorami.info_about_hero.di
 
-import com.example.tanorami.info_about_hero.InfoAboutHeroFragment
+import com.example.tanorami.info_about_hero.ui.InfoAboutHeroFragment
 import dagger.Subcomponent
 
 @Subcomponent(modules = [InfoAboutHeroModule::class])
