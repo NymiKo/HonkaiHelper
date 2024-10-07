@@ -24,7 +24,7 @@ import com.example.tanorami.utils.load
 import com.example.tanorami.utils.toast
 import com.example.tanorami.utils.visible
 import com.example.tanorami.viewing_users_build.adapter.ViewingUsersBuildStatsAdapter
-import com.example.tanorami.info_about_weapon.ui.WeaponInfoFragment
+import com.example.tanorami.info_about_weapon.ui.InfoAboutWeaponFragment
 
 class ViewingUsersBuildFragment :
     BaseFragment<FragmentViewingUsersBuildBinding>(FragmentViewingUsersBuildBinding::inflate) {
@@ -118,7 +118,7 @@ class ViewingUsersBuildFragment :
             val extras = FragmentNavigatorExtras(it to transitionName)
             findNavController().navigate(
                 R.id.weaponInfoFragment,
-                WeaponInfoFragment.newInstance(idWeapon),
+                InfoAboutWeaponFragment.newInstance(idWeapon),
                 null,
                 extras
             )

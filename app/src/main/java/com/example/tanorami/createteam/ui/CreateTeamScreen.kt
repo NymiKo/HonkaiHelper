@@ -63,6 +63,11 @@ fun CreateTeamScreen(
     val sideEffects = viewModel.uiEffect().collectAsStateWithLifecycle(null).value
     val context = LocalContext.current
 
+    CreateTeamScreenContent(
+        uiState = state,
+        onEvent = { event -> viewModel.onEvent(event) }
+    )
+
     when(sideEffects) {
         CreateTeamScreenSideEffects.OnBack -> {
             navController.popBackStackWithResult(UPDATE_SCREEN_KEY, false)
@@ -81,11 +86,6 @@ fun CreateTeamScreen(
         }
         null -> {}
     }
-
-    CreateTeamScreenContent(
-        uiState = state,
-        onEvent = { event -> viewModel.onEvent(event) }
-    )
 
     OnLifecycleEvent { owner, event ->
         when (event) {

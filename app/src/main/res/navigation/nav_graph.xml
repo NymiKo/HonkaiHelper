@@ -108,7 +108,7 @@
     </fragment>
     <fragment
         android:id="@+id/baseBuildHeroFragment"
-        android:name="com.example.tanorami.base_build_hero.BaseBuildHeroFragment"
+        android:name="com.example.tanorami.base_build_hero.ui.BaseBuildHeroFragment"
         android:label="fragment_base_build_hero"
         tools:layout="@layout/fragment_base_build_hero" >
         <action
@@ -151,7 +151,7 @@
     </fragment>
     <fragment
         android:id="@+id/weaponInfoFragment"
-        android:name="com.example.tanorami.info_about_weapon.ui.WeaponInfoFragment"
+        android:name="com.example.tanorami.info_about_weapon.ui.InfoAboutWeaponFragment"
         android:label="fragment_weapon_info"
         tools:layout="@layout/fragment_weapon_info" />
     <fragment

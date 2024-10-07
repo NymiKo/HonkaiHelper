@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".base_build_hero.BaseBuildHeroFragment">
+    tools:context=".base_build_hero.ui.BaseBuildHeroFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar_base_build_hero"

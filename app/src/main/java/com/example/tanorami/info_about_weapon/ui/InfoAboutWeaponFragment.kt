@@ -19,7 +19,7 @@ import com.example.tanorami.info_about_weapon.presentation.InfoAboutWeaponViewMo
 import com.google.android.material.transition.MaterialContainerTransform
 import javax.inject.Inject
 
-class WeaponInfoFragment : Fragment() {
+class InfoAboutWeaponFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory

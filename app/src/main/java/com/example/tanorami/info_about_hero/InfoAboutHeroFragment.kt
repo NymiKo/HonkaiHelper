@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tanorami.App
 import com.example.tanorami.R
 import com.example.tanorami.base.BaseFragment
-import com.example.tanorami.base_build_hero.BaseBuildHeroFragment
+import com.example.tanorami.base_build_hero.ui.BaseBuildHeroFragment
 import com.example.tanorami.databinding.FragmentInfoAboutHeroBinding
 import com.example.tanorami.info_about_hero.adapters.AbilitiesHeroAdapter
 import com.example.tanorami.info_about_hero.adapters.EidolonsHeroAdapter
