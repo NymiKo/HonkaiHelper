@@ -27,7 +27,7 @@ fun BaseButton(
     Button(
         modifier = modifier
             .fillMaxWidth()
-            .height(40.dp)
+            .height(35.dp)
             .clip(RoundedCornerShape(10.dp)),
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.secondary,

@@ -35,7 +35,7 @@ fun InfoAboutRelicScreen(
 
     OnLifecycleEvent { owner, event ->
         when(event) {
-            Lifecycle.Event.ON_START -> {
+            Lifecycle.Event.ON_CREATE -> {
                 viewModel.getRelic(idRelic)
             }
 

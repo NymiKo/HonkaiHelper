@@ -13,8 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.tanorami.App
 import com.example.tanorami.core.theme.AppTheme
-import com.example.tanorami.info_about_hero.adapters.AbilitiesHeroAdapter
-import com.example.tanorami.info_about_hero.adapters.EidolonsHeroAdapter
 import com.example.tanorami.info_about_hero.presentation.InfoAboutHeroViewModel
 import javax.inject.Inject
 
@@ -25,8 +23,6 @@ class InfoAboutHeroFragment : Fragment() {
 
     private val viewModel by viewModels<InfoAboutHeroViewModel> { viewModelFactory }
     private val idHero get() = requireArguments().getInt(ARG_ID_HERO)
-    private lateinit var mAbilitiesAdapter: AbilitiesHeroAdapter
-    private lateinit var mEidolonsAdapter: EidolonsHeroAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -37,7 +33,7 @@ class InfoAboutHeroFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return ComposeView(requireContext()).apply {
             setContent {
                 AppTheme {
@@ -49,71 +45,6 @@ class InfoAboutHeroFragment : Fragment() {
                 }
             }
         }
-    }
-
-    fun setupView() {
-        setupToolbar()
-        setupAbilitiesAdapter()
-        setupEidolonsAdapter()
-        setupAbilitiesRecyclerView()
-        setupEidolonsRecyclerView()
-        setupGoToBuildHeroButton()
-        setupButtonGoToTeamsFromUsers()
-    }
-
-    fun uiStateHandle() {
-//        viewModel.heroInfo.observe(viewLifecycleOwner) {
-//            binding.toolbarInfoAboutHero.title = it.hero.name
-//            binding.imageAvatarInfoAboutHero.loadImageWithoutScale(it.hero.splashArt)
-//            binding.textStoryHero.text = it.hero.story
-//            binding.imageElementHero.loadImageWithoutScale(it.element.image)
-//            binding.imagePathHero.loadImageWithoutScale(it.path.image)
-//            binding.imageRarityHero.loadImageRarity(it.hero.rarity)
-//            mAbilitiesAdapter.abilitiesList = it.ability
-//            mEidolonsAdapter.eidolonList = it.eidolon
-//        }
-    }
-
-    private fun setupToolbar() {
-//        binding.toolbarInfoAboutHero.apply {
-//            setNavigationOnClickListener {
-//                findNavController().popBackStack()
-//            }
-//        }
-    }
-
-    private fun setupAbilitiesAdapter() {
-        mAbilitiesAdapter = AbilitiesHeroAdapter()
-    }
-
-    private fun setupEidolonsAdapter() {
-        mEidolonsAdapter = EidolonsHeroAdapter()
-    }
-
-    private fun setupAbilitiesRecyclerView() {
-//        binding.recyclerAbilitiesHero.apply {
-//            layoutManager = LinearLayoutManager(requireActivity())
-//            adapter = mAbilitiesAdapter
-//        }
-    }
-
-    private fun setupEidolonsRecyclerView() {
-//        binding.recyclerEidolonsHero.apply {
-//            layoutManager = LinearLayoutManager(requireActivity())
-//            adapter = mEidolonsAdapter
-//        }
-    }
-
-    private fun setupGoToBuildHeroButton() {
-//        binding.buttonGoToBuildHero.setOnClickListener {
-//            findNavController().navigate(R.id.action_infoAboutHeroFragment_to_baseBuildHeroFragment, BaseBuildHeroFragment.newInstance(idHero))
-//        }
-    }
-
-    private fun setupButtonGoToTeamsFromUsers() {
-//        binding.buttonGoToTeamsFromUsers.setOnClickListener {
-//            findNavController().navigate(R.id.action_infoAboutHeroFragment_to_teamsListFragment, TeamsListFragment.newInstance(idHero))
-//        }
     }
 
     companion object {

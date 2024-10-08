@@ -35,7 +35,7 @@ internal fun InfoAboutDecorationScreen(
 
     OnLifecycleEvent { owner, event ->
         when(event) {
-            Lifecycle.Event.ON_START -> {
+            Lifecycle.Event.ON_CREATE -> {
                 viewModel.getDecoration(idDecoration)
             }
 

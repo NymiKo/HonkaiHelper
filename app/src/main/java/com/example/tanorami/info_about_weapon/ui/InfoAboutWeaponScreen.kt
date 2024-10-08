@@ -42,7 +42,7 @@ fun InfoAboutWeaponScreen(
     
     OnLifecycleEvent { owner, event ->  
         when(event) {
-            Lifecycle.Event.ON_START -> {
+            Lifecycle.Event.ON_CREATE -> {
                 viewModel.getWeapon(idWeapon)
             }
             

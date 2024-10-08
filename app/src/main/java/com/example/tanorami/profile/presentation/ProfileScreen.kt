@@ -83,16 +83,6 @@ private fun ProfileScreenContent(
             }
         }
 
-//    OnLifecycleEvent { _, event ->
-//        when (event) {
-//            Lifecycle.Event.ON_START -> {
-//                onEvents(ProfileScreenEvents.FetchProfile)
-//            }
-//
-//            else -> {}
-//        }
-//    }
-
     when (uiState) {
         is ProfileScreenUiState.Success -> {
             Scaffold(
