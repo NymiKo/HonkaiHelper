@@ -2,7 +2,7 @@ package com.example.tanorami.teams.di
 
 import androidx.lifecycle.ViewModel
 import com.example.tanorami.di.ViewModelKey
-import com.example.tanorami.teams.TeamsListViewModel
+import com.example.tanorami.teams.presentation.TeamsListViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

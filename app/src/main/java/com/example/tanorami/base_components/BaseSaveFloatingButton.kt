@@ -17,7 +17,7 @@ fun BaseSaveFloatingButton(
         modifier = modifier,
         onClick = onClick::invoke,
         containerColor = MaterialTheme.colorScheme.secondary,
-        contentColor = MaterialTheme.colorScheme.primary,
+        contentColor = MaterialTheme.colorScheme.onSecondary,
     ) {
         Icon(imageVector = Icons.Default.Save, contentDescription = null)
     }

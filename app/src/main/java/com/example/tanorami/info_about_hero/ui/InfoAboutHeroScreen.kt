@@ -29,7 +29,7 @@ import com.example.tanorami.info_about_hero.presentation.models.InfoAboutHeroScr
 import com.example.tanorami.info_about_hero.ui.components.AbilitiesListColumn
 import com.example.tanorami.info_about_hero.ui.components.EidolonsListColumn
 import com.example.tanorami.info_about_hero.ui.components.SplashArtHeroImage
-import com.example.tanorami.teams.TeamsListFragment
+import com.example.tanorami.teams.ui.TeamsListFragment
 import com.example.tanorami.utils.OnLifecycleEvent
 
 @Composable

@@ -36,7 +36,7 @@ fun EidolonsListColumn(
     Column(
         modifier = Modifier
             .padding(horizontal = 16.dp)
-            .padding(top = 8.dp),
+            .padding(top = 8.dp, bottom = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         eidolonsList.forEach { eidolon ->

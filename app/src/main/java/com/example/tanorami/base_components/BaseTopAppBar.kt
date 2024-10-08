@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -33,6 +34,7 @@ fun BaseTopAppBar(
                 text = title,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.secondary,
+                overflow = TextOverflow.Ellipsis
             )
         },
         actions = actions,
