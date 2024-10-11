@@ -8,6 +8,10 @@ import com.example.tanorami.teams.data.TeamsListRepository
 import com.example.tanorami.teams.presentation.models.TeamsListScreenEvents
 import com.example.tanorami.teams.presentation.models.TeamsListScreenSideEffects
 import com.example.tanorami.teams.presentation.models.TeamsListScreenUiState
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,6 +21,12 @@ class TeamsListViewModel @Inject constructor(
 ) : BaseViewModel<TeamsListScreenUiState, TeamsListScreenEvents, TeamsListScreenSideEffects>(
     initialState = TeamsListScreenUiState()
 ) {
+    init {
+        userDataStore.tokenUser
+            .onEach { uiState = uiState.copy(tokenUser = it) }
+            .flowOn(Dispatchers.Default)
+            .launchIn(viewModelScope)
+    }
 
     override fun onEvent(event: TeamsListScreenEvents) {
         when(event) {
@@ -26,14 +36,7 @@ class TeamsListViewModel @Inject constructor(
                 sendSideEffect(TeamsListScreenSideEffects.OnBack)
             }
 
-            TeamsListScreenEvents.GetToken -> getToken()
             TeamsListScreenEvents.OnCreateTeamScreen -> sendSideEffect(TeamsListScreenSideEffects.OnCreateTeamScreen)
-        }
-    }
-
-    private fun getToken() = viewModelScope.launch {
-        userDataStore.tokenUser.collect {
-            uiState = uiState.copy(tokenUser = it)
         }
     }
 

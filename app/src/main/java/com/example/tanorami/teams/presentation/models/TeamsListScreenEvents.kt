@@ -7,5 +7,4 @@ sealed interface TeamsListScreenEvents : UiEvent {
     class GetTeamsList(val idHero: Int, val uid: String?): TeamsListScreenEvents
     data object OnCreateTeamScreen: TeamsListScreenEvents
     data object OnBack: TeamsListScreenEvents
-    data object GetToken: TeamsListScreenEvents
 }
