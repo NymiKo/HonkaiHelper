@@ -27,7 +27,7 @@ import com.example.tanorami.utils.gone
 import com.example.tanorami.utils.loadWithPlaceholder
 import com.example.tanorami.utils.uppercaseFirstChar
 import com.example.tanorami.utils.visible
-import com.example.tanorami.viewing_users_build.ViewingUsersBuildFragment
+import com.example.tanorami.viewing_users_build.ViewingBuildHeroFromUserFragment
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.transition.MaterialFadeThrough
 
@@ -199,7 +199,7 @@ class HeroesListFragment :
                                 searchItem.collapseActionView()
                                 findNavController().navigate(
                                     R.id.action_heroesListFragment_to_viewingUsersBuildFragment,
-                                    ViewingUsersBuildFragment.newInstance(uid = query!!)
+                                    ViewingBuildHeroFromUserFragment.newInstance(uid = query!!)
                                 )
                                 return true
                             }

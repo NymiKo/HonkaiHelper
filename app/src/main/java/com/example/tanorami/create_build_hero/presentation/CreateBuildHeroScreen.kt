@@ -20,6 +20,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -41,7 +42,7 @@ import coil.compose.AsyncImage
 import com.example.tanorami.R
 import com.example.tanorami.base_components.BaseDefaultText
 import com.example.tanorami.base_components.BaseSaveAlertDialog
-import com.example.tanorami.base_components.BaseSaveFloatingButton
+import com.example.tanorami.base_components.BaseSmallFloatingButton
 import com.example.tanorami.base_components.BaseTopAppBar
 import com.example.tanorami.core.theme.AppTheme
 import com.example.tanorami.core.theme.DarkGray
@@ -253,8 +254,9 @@ private fun SaveOrUpdateBuildHeroButton(
 ) {
     var openSaveBuildDialog by remember { mutableStateOf(false) }
 
-    BaseSaveFloatingButton(
+    BaseSmallFloatingButton(
         modifier = modifier,
+        icon = Icons.Default.Save,
         onClick = { openSaveBuildDialog = true }
     )
 

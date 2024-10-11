@@ -2,7 +2,7 @@ package com.example.tanorami.viewing_users_build.di
 
 import androidx.lifecycle.ViewModel
 import com.example.tanorami.di.ViewModelKey
-import com.example.tanorami.viewing_users_build.ViewingUsersBuildViewModel
+import com.example.tanorami.viewing_users_build.ViewingBuildHeroFromUserViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -11,6 +11,6 @@ import dagger.multibindings.IntoMap
 interface ViewingUsersBuildModule {
 
     @Binds
-    @[IntoMap ViewModelKey(ViewingUsersBuildViewModel::class)]
-    fun bindViewModel(viewModel: ViewingUsersBuildViewModel): ViewModel
+    @[IntoMap ViewModelKey(ViewingBuildHeroFromUserViewModel::class)]
+    fun bindViewModel(viewModel: ViewingBuildHeroFromUserViewModel): ViewModel
 }

@@ -1,16 +1,16 @@
 package com.example.tanorami.base_components
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 
 @Composable
-fun BaseSaveFloatingButton(
+fun BaseSmallFloatingButton(
     modifier: Modifier = Modifier,
+    icon: ImageVector,
     onClick: () -> Unit
 ) {
     SmallFloatingActionButton(
@@ -19,6 +19,6 @@ fun BaseSaveFloatingButton(
         containerColor = MaterialTheme.colorScheme.secondary,
         contentColor = MaterialTheme.colorScheme.onSecondary,
     ) {
-        Icon(imageVector = Icons.Default.Save, contentDescription = null)
+        Icon(imageVector = icon, contentDescription = null)
     }
 }

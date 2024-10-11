@@ -1,6 +1,6 @@
 package com.example.tanorami.builds_hero_from_users.di
 
-import com.example.tanorami.builds_hero_from_users.BuildsHeroListFragment
+import com.example.tanorami.builds_hero_from_users.ui.BuildsHeroFromUsersFragment
 import dagger.Subcomponent
 
 @Subcomponent(modules = [BuildsHeroListModule::class])
@@ -11,5 +11,5 @@ interface BuildsHeroListComponent {
         fun create(): BuildsHeroListComponent
     }
 
-    fun inject(fragment: BuildsHeroListFragment)
+    fun inject(fragment: BuildsHeroFromUsersFragment)
 }

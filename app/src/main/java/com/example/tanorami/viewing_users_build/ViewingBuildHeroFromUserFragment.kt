@@ -26,10 +26,10 @@ import com.example.tanorami.utils.visible
 import com.example.tanorami.viewing_users_build.adapter.ViewingUsersBuildStatsAdapter
 import com.example.tanorami.info_about_weapon.ui.InfoAboutWeaponFragment
 
-class ViewingUsersBuildFragment :
+class ViewingBuildHeroFromUserFragment :
     BaseFragment<FragmentViewingUsersBuildBinding>(FragmentViewingUsersBuildBinding::inflate) {
 
-    private val viewModel by viewModels<ViewingUsersBuildViewModel> { viewModelFactory }
+    private val viewModel by viewModels<ViewingBuildHeroFromUserViewModel> { viewModelFactory }
     private lateinit var mAdapter: ViewingUsersBuildStatsAdapter
 
     private val idBuild get() = requireArguments().getLong(ARG_ID_BUILD)

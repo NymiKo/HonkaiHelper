@@ -130,7 +130,7 @@
     </fragment>
     <fragment
         android:id="@+id/buildsHeroListFragment"
-        android:name="com.example.tanorami.builds_hero_from_users.BuildsHeroListFragment"
+        android:name="com.example.tanorami.builds_hero_from_users.ui.BuildsHeroFromUsersFragment"
         android:label="fragment_builds_hero_list"
         tools:layout="@layout/fragment_builds_hero_list" >
         <action
@@ -166,7 +166,7 @@
         tools:layout="@layout/fragment_decoration_info" />
     <fragment
         android:id="@+id/viewingUsersBuildFragment"
-        android:name="com.example.tanorami.viewing_users_build.ViewingUsersBuildFragment"
+        android:name="com.example.tanorami.viewing_users_build.ViewingBuildHeroFromUserFragment"
         android:label="fragment_viewing_users_build"
         tools:layout="@layout/fragment_viewing_users_build" />
     <fragment

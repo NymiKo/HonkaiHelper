@@ -28,7 +28,7 @@ import com.example.tanorami.base_build_hero.ui.components.EquipmentImage
 import com.example.tanorami.base_build_hero.ui.components.StatsListColumn
 import com.example.tanorami.base_components.BaseButton
 import com.example.tanorami.base_components.BaseCenterAlignedTopAppBar
-import com.example.tanorami.builds_hero_from_users.BuildsHeroListFragment
+import com.example.tanorami.builds_hero_from_users.ui.BuildsHeroFromUsersFragment
 import com.example.tanorami.core.theme.Blue
 import com.example.tanorami.core.theme.Orange
 import com.example.tanorami.core.theme.Violet
@@ -59,7 +59,7 @@ fun BaseBuildHeroScreen(
         is BaseBuildHeroScreenSideEffects.OnBuildsHeroFromUsersScreen -> {
             navController.navigate(
                 R.id.action_baseBuildHeroFragment_to_buildsHeroListFragment,
-                BuildsHeroListFragment.newInstance(uiState.idHero)
+                BuildsHeroFromUsersFragment.newInstance(uiState.idHero)
             )
             viewModel.clearEffect()
         }

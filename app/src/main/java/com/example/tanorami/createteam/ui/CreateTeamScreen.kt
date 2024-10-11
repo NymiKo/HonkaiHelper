@@ -18,6 +18,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -37,7 +38,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.tanorami.R
 import com.example.tanorami.base_components.BaseSaveAlertDialog
-import com.example.tanorami.base_components.BaseSaveFloatingButton
+import com.example.tanorami.base_components.BaseSmallFloatingButton
 import com.example.tanorami.base_components.BaseTopAppBar
 import com.example.tanorami.core.theme.Red
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
@@ -240,7 +241,7 @@ private fun SaveAndUpdateTeamButton(
 ) {
     var openSaveTeamDialog by remember { mutableStateOf(false) }
 
-    BaseSaveFloatingButton(modifier = modifier, onClick = { openSaveTeamDialog = true })
+    BaseSmallFloatingButton(modifier = modifier, icon = Icons.Default.Save, onClick = { openSaveTeamDialog = true })
 
     if (openSaveTeamDialog) {
         BaseSaveAlertDialog(message = if (isCreateTeam) R.string.add_the_created_command else R.string.update_the_command,

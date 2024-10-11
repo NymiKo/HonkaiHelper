@@ -6,8 +6,12 @@ import com.example.tanorami.R
 import com.example.tanorami.data.NetworkResult
 import com.example.tanorami.data.UserDataStore
 import com.example.tanorami.profile.domain.ProfileRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
@@ -33,8 +37,8 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    private fun getProfile() = viewModelScope.launch {
-        userDataStore.tokenUser.collect {
+    private fun getProfile() {
+        userDataStore.tokenUser.onEach {
             if (it == "") {
                 _profileUiState.value = ProfileScreenUiState.NotAuthorized
             } else {
@@ -46,6 +50,8 @@ class ProfileViewModel @Inject constructor(
                 }
             }
         }
+            .flowOn(Dispatchers.Default)
+            .launchIn(viewModelScope)
     }
 
     private fun logoutAccount() = viewModelScope.launch {
@@ -53,7 +59,7 @@ class ProfileViewModel @Inject constructor(
         _profileUiState.value = ProfileScreenUiState.NotAuthorized
     }
 
-    fun loadAvatar(file: File) = viewModelScope.launch {
+    private fun loadAvatar(file: File) = viewModelScope.launch {
         repository.loadAvatar(file)
     }
 

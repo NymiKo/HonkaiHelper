@@ -10,7 +10,7 @@ import com.example.tanorami.viewing_users_build.data.ViewingUsersBuildRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ViewingUsersBuildViewModel @Inject constructor(
+class ViewingBuildHeroFromUserViewModel @Inject constructor(
     private val repository: ViewingUsersBuildRepository
 ): ViewModel() {
 

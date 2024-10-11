@@ -1,6 +1,6 @@
 package com.example.tanorami.viewing_users_build.di
 
-import com.example.tanorami.viewing_users_build.ViewingUsersBuildFragment
+import com.example.tanorami.viewing_users_build.ViewingBuildHeroFromUserFragment
 import dagger.Subcomponent
 
 @Subcomponent(modules = [ViewingUsersBuildModule::class])
@@ -11,5 +11,5 @@ interface ViewingUsersBuildComponent {
         fun create(): ViewingUsersBuildComponent
     }
 
-    fun inject(fragment: ViewingUsersBuildFragment)
+    fun inject(fragment: ViewingBuildHeroFromUserFragment)
 }

@@ -69,7 +69,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<Boolean>(UPDATE_SCREEN_KEY)?.observe(viewLifecycleOwner) { result ->
+        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData(UPDATE_SCREEN_KEY, true)?.observe(viewLifecycleOwner) { result ->
             if (result) viewModel.onEvent(ProfileScreenEvents.FetchProfile)
         }
     }

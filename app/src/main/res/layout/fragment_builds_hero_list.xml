@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/swipe_refresh_container_build_hero"
-    tools:context=".builds_hero_from_users.BuildsHeroListFragment">
+    tools:context=".builds_hero_from_users.ui.BuildsHeroFromUsersFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
