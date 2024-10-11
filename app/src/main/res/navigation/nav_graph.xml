@@ -166,9 +166,19 @@
         tools:layout="@layout/fragment_decoration_info" />
     <fragment
         android:id="@+id/viewingUsersBuildFragment"
-        android:name="com.example.tanorami.viewing_users_build.ViewingBuildHeroFromUserFragment"
+        android:name="com.example.tanorami.viewing_users_build.ui.ViewingBuildHeroFromUserFragment"
         android:label="fragment_viewing_users_build"
-        tools:layout="@layout/fragment_viewing_users_build" />
+        tools:layout="@layout/fragment_viewing_users_build" >
+        <action
+            android:id="@+id/action_viewingUsersBuildFragment_to_weaponInfoFragment"
+            app:destination="@id/weaponInfoFragment" />
+        <action
+            android:id="@+id/action_viewingUsersBuildFragment_to_relicInfoFragment"
+            app:destination="@id/relicInfoFragment" />
+        <action
+            android:id="@+id/action_viewingUsersBuildFragment_to_decorationInfoFragment"
+            app:destination="@id/decorationInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/changeNicknameFragment"
         android:name="com.example.tanorami.change_nickname.presentation.ChangeNicknameFragment"

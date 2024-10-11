@@ -1,4 +1,4 @@
-package com.example.tanorami.builds_hero_from_users.ui
+package com.example.tanorami.viewing_users_build.ui
 
 import android.content.Context
 import android.os.Bundle
@@ -12,21 +12,22 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.tanorami.App
-import com.example.tanorami.builds_hero_from_users.presentation.BuildsHeroFromUsersViewModel
 import com.example.tanorami.core.theme.AppTheme
+import com.example.tanorami.viewing_users_build.presentation.ViewingBuildHeroFromUserViewModel
 import javax.inject.Inject
 
-class BuildsHeroFromUsersFragment : Fragment() {
+class ViewingBuildHeroFromUserFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel by viewModels<BuildsHeroFromUsersViewModel> { viewModelFactory }
+    private val viewModel by viewModels<ViewingBuildHeroFromUserViewModel> { viewModelFactory }
 
-    private val idHero get() = requireArguments().getInt(ARG_ID_HERO)
+    private val idBuild get() = requireArguments().getLong(ARG_ID_BUILD)
+    private val uid get() = requireArguments().getString(ARG_UID_BUILD, "")
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as App).appComponent.buildsHeroListComponent().create()
+        (requireActivity().application as App).appComponent.viewingUsersBuildComponent().create()
             .inject(this)
     }
 
@@ -38,10 +39,11 @@ class BuildsHeroFromUsersFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 AppTheme {
-                    BuildsHeroFromUsersScreen(
-                        idHero = idHero,
+                    ViewingBuildHeroFromUserScreen(
+                        idBuild = idBuild,
+                        uid = uid,
                         viewModel = viewModel,
-                        navController = findNavController(),
+                        navController = findNavController()
                     )
                 }
             }
@@ -49,11 +51,11 @@ class BuildsHeroFromUsersFragment : Fragment() {
     }
 
     companion object {
-        private const val ARG_ID_HERO = "id_hero"
+        private const val ARG_ID_BUILD = "idBuild"
+        private const val ARG_UID_BUILD = "uid"
 
-        @JvmStatic
-        fun newInstance(idHero: Int): Bundle {
-            return bundleOf(ARG_ID_HERO to idHero)
+        fun newInstance(idBuild: Long = -1L, uid: String = ""): Bundle {
+            return bundleOf(ARG_ID_BUILD to idBuild, ARG_UID_BUILD to uid)
         }
     }
 }

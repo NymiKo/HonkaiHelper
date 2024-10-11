@@ -26,7 +26,7 @@ import com.example.tanorami.profile.presentation.components.BuildItem
 import com.example.tanorami.teams.ui.components.EmptyListScreen
 import com.example.tanorami.teams.ui.components.ErrorScreen
 import com.example.tanorami.utils.OnLifecycleEvent
-import com.example.tanorami.viewing_users_build.ViewingBuildHeroFromUserFragment
+import com.example.tanorami.viewing_users_build.ui.ViewingBuildHeroFromUserFragment
 
 @Composable
 fun BuildsHeroFromUsersScreen(

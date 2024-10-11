@@ -1,4 +1,4 @@
-package com.example.tanorami.viewing_users_build
+package com.example.tanorami.viewing_users_build.ui
 
 import com.example.tanorami.viewing_users_build.data.model.FullBuildHeroFromUser
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".viewing_users_build.ViewingBuildHeroFromUserFragment">
+    tools:context=".viewing_users_build.ui.ViewingBuildHeroFromUserFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar_viewing_users_build"

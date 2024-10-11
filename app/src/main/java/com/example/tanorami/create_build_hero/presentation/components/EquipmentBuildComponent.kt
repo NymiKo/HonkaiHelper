@@ -34,7 +34,6 @@ import com.example.tanorami.core.theme.Blue
 import com.example.tanorami.core.theme.GreyTransparent20
 import com.example.tanorami.core.theme.Orange
 import com.example.tanorami.core.theme.Violet
-import com.example.tanorami.equipment.EquipmentType
 import com.example.tanorami.equipment.data.model.Equipment
 
 @Composable
@@ -44,7 +43,10 @@ fun EquipmentBuildComponent(
     relicTwoParts: Equipment?,
     relicFourParts: Equipment?,
     decoration: Equipment?,
-    onEquipmentScreen: (equipmentType: EquipmentType) -> Unit,
+    onWeaponClick: () -> Unit,
+    onTwoPartsRelicClick: () -> Unit,
+    onFourPartsRelicClick: () -> Unit,
+    onDecorationClick: () -> Unit,
 ) {
     Row(
         modifier = modifier
@@ -52,14 +54,18 @@ fun EquipmentBuildComponent(
             .height(IntrinsicSize.Max),
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
-        CategoryWeapon(equipment = weapon, onEquipmentScreen = onEquipmentScreen::invoke)
+        CategoryWeapon(
+            equipment = weapon,
+            onWeaponClick = onWeaponClick::invoke
+        )
         CategoryRelics(
             relicTwoPartsEquipment = relicTwoParts,
             relicFourPartsEquipment = relicFourParts,
-            onEquipmentScreen = onEquipmentScreen::invoke
+            onTwoPartsRelicClick = onTwoPartsRelicClick::invoke,
+            onFourPartsRelicClick = onFourPartsRelicClick::invoke,
         )
         CategoryDecoration(
-            equipment = decoration, onEquipmentScreen = onEquipmentScreen::invoke
+            equipment = decoration, onDecorationClick = onDecorationClick::invoke
         )
     }
 }
@@ -68,7 +74,7 @@ fun EquipmentBuildComponent(
 fun CategoryWeapon(
     modifier: Modifier = Modifier,
     equipment: Equipment?,
-    onEquipmentScreen: (equipmentType: EquipmentType) -> Unit,
+    onWeaponClick: () -> Unit,
 ) {
     Column(
         modifier = modifier,
@@ -92,7 +98,7 @@ fun CategoryWeapon(
                     ),
                 equipment = equipment,
                 contentScale = ContentScale.Crop,
-                onEquipmentScreen = { onEquipmentScreen(EquipmentType.WEAPON) }
+                onEquipmentScreen = onWeaponClick::invoke
             )
         }
     }
@@ -103,7 +109,8 @@ fun CategoryRelics(
     modifier: Modifier = Modifier,
     relicTwoPartsEquipment: Equipment?,
     relicFourPartsEquipment: Equipment?,
-    onEquipmentScreen: (equipmentType: EquipmentType) -> Unit,
+    onTwoPartsRelicClick: () -> Unit,
+    onFourPartsRelicClick: () -> Unit,
 ) {
     Column(
         modifier = modifier,
@@ -111,12 +118,16 @@ fun CategoryRelics(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         EquipmentCategoryText(categoryText = stringResource(id = R.string.relic))
-        RelicImage(equipment = relicTwoPartsEquipment,
+        RelicImage(
+            equipment = relicTwoPartsEquipment,
             textRelicParts = stringResource(id = R.string.relic_two_parts),
-            onEquipmentScreen = { onEquipmentScreen(EquipmentType.RELIC_TWO_PARTS) })
-        RelicImage(equipment = relicFourPartsEquipment,
+            onEquipmentScreen = onTwoPartsRelicClick::invoke
+        )
+        RelicImage(
+            equipment = relicFourPartsEquipment,
             textRelicParts = stringResource(id = R.string.relic_four_parts),
-            onEquipmentScreen = { onEquipmentScreen(EquipmentType.RELIC_FOUR_PARTS) })
+            onEquipmentScreen = onFourPartsRelicClick::invoke
+        )
     }
 }
 
@@ -124,7 +135,7 @@ fun CategoryRelics(
 fun CategoryDecoration(
     modifier: Modifier = Modifier,
     equipment: Equipment?,
-    onEquipmentScreen: (equipmentType: EquipmentType) -> Unit,
+    onDecorationClick: () -> Unit,
 ) {
     Column(
         modifier = modifier,
@@ -132,14 +143,16 @@ fun CategoryDecoration(
     ) {
         EquipmentCategoryText(categoryText = stringResource(id = R.string.decoration))
         Box(modifier = Modifier.fillMaxHeight(), contentAlignment = Alignment.Center) {
-            EquipmentImage(modifier = Modifier
+            EquipmentImage(
+                modifier = Modifier
                 .size(100.dp)
                 .background(
                     color = if (equipment == null) Color.Transparent else Orange,
                     shape = RoundedCornerShape(16.dp)
                 ),
                 equipment = equipment,
-                onEquipmentScreen = { onEquipmentScreen(EquipmentType.DECORATION) })
+                onEquipmentScreen = onDecorationClick::invoke
+            )
         }
     }
 }

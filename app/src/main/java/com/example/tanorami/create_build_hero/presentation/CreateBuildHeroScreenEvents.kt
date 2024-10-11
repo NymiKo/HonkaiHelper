@@ -8,7 +8,7 @@ sealed interface CreateBuildHeroScreenEvents {
     data object DeleteBuild: CreateBuildHeroScreenEvents
     data object SaveBuild: CreateBuildHeroScreenEvents
     data object UpdateBuild: CreateBuildHeroScreenEvents
-    data class OnEquipmentScreen(val pathHero: Int, val equipmentType: EquipmentType): CreateBuildHeroScreenEvents
+    data class OnEquipmentScreen(val equipmentType: EquipmentType): CreateBuildHeroScreenEvents
     data class GetBuild(val idBuild: Long): CreateBuildHeroScreenEvents
     data class GetHero(val idHero: Int): CreateBuildHeroScreenEvents
     data class AddWeapon(val weapon: Equipment): CreateBuildHeroScreenEvents

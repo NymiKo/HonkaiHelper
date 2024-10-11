@@ -210,24 +210,24 @@ class CreateBuildHeroViewModel @Inject constructor(
                     isLoading = false,
                     isSuccess = true,
                     isError = false,
-                    hero = repository.getHero(result.data.hero.id),
+                    hero = repository.getHero(result.data.hero!!.id),
                     buildHeroFromUser = uiState.buildHeroFromUser.copy(
                         idBuild = idBuild,
                         weapon = Equipment(
-                            result.data.weapon.idWeapon,
+                            result.data.weapon!!.idWeapon,
                             result.data.weapon.image,
                             result.data.weapon.rarity
                         ),
                         relicTwoParts = Equipment(
-                            result.data.relicTwoParts.idRelic,
+                            result.data.relicTwoParts!!.idRelic,
                             result.data.relicTwoParts.image
                         ),
                         relicFourParts = Equipment(
-                            result.data.relicFourParts.idRelic,
+                            result.data.relicFourParts!!.idRelic,
                             result.data.relicFourParts.image
                         ),
                         decoration = Equipment(
-                            result.data.decoration.idDecoration,
+                            result.data.decoration!!.idDecoration,
                             result.data.decoration.image
                         ),
                         statsEquipmentList = uiState.buildHeroFromUser.statsEquipmentList.copy(

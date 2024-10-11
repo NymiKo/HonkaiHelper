@@ -27,7 +27,7 @@ import com.example.tanorami.utils.gone
 import com.example.tanorami.utils.loadWithPlaceholder
 import com.example.tanorami.utils.uppercaseFirstChar
 import com.example.tanorami.utils.visible
-import com.example.tanorami.viewing_users_build.ViewingBuildHeroFromUserFragment
+import com.example.tanorami.viewing_users_build.ui.ViewingBuildHeroFromUserFragment
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.transition.MaterialFadeThrough
 

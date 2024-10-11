@@ -51,6 +51,7 @@ internal fun DescriptionWeaponSkill(
                 text = descriptionWeaponSkill ?: "",
                 fontSize = 17.sp,
                 fontFamily = FontFamily.SansSerif,
+                fontWeight = FontWeight.SemiBold
             )
         }
     }

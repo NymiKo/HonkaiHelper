@@ -51,28 +51,28 @@ fun BuildStatsComponent(
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         ItemStat(
-            statImage = R.drawable.relic_piece_body,
+            statIcon = R.drawable.relic_piece_body,
             statsList = stringArrayResource(id = R.array.stats_in_body),
             currentValue = currentValue.statBody,
             changeStatOnEquipment = changeStatOnBody::invoke
         )
 
         ItemStat(
-            statImage = R.drawable.relic_piece_legs,
+            statIcon = R.drawable.relic_piece_legs,
             statsList = stringArrayResource(id = R.array.stats_in_legs),
             currentValue = currentValue.statLegs,
             changeStatOnEquipment = changeStatOnLegs::invoke
         )
 
         ItemStat(
-            statImage = R.drawable.relic_piece_sphere,
+            statIcon = R.drawable.relic_piece_sphere,
             statsList = stringArrayResource(id = R.array.stats_in_sphere),
             currentValue = currentValue.statSphere,
             changeStatOnEquipment = changeStatOnSphere::invoke
         )
 
         ItemStat(
-            statImage = R.drawable.relic_piece_rope,
+            statIcon = R.drawable.relic_piece_rope,
             statsList = stringArrayResource(id = R.array.stats_in_rope),
             currentValue = currentValue.statRope,
             changeStatOnEquipment = changeStatOnRope::invoke
@@ -83,7 +83,7 @@ fun BuildStatsComponent(
 @Composable
 fun ItemStat(
     modifier: Modifier = Modifier,
-    statImage: Int,
+    statIcon: Int,
     statsList: Array<String>,
     currentValue: String,
     changeStatOnEquipment: (value: String) -> Unit,
@@ -97,16 +97,7 @@ fun ItemStat(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        AsyncImage(
-            modifier = Modifier
-                .size(55.dp)
-                .clip(CircleShape)
-                .background(color = DarkGray, shape = CircleShape)
-                .padding(8.dp),
-            model = statImage,
-            contentDescription = null,
-            colorFilter = ColorFilter.tint(White)
-        )
+        IconStatEquipment(statIcon = statIcon)
 
         StatsSpinner(
             statsList = statsList,
@@ -115,6 +106,23 @@ fun ItemStat(
             changeStatOnEquipment = changeStatOnEquipment::invoke
         )
     }
+}
+
+@Composable
+fun IconStatEquipment(
+    modifier: Modifier = Modifier,
+    statIcon: Int,
+) {
+    AsyncImage(
+        modifier = modifier
+            .size(55.dp)
+            .clip(CircleShape)
+            .background(color = DarkGray, shape = CircleShape)
+            .padding(8.dp),
+        model = statIcon,
+        contentDescription = null,
+        colorFilter = ColorFilter.tint(White)
+    )
 }
 
 @Composable

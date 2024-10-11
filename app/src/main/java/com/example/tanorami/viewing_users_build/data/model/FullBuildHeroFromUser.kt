@@ -6,13 +6,13 @@ import com.example.tanorami.info_about_hero.data.model.Decoration
 import com.example.tanorami.info_about_hero.data.model.Relic
 
 data class FullBuildHeroFromUser(
-    val idBuild: Long,
-    val hero: HeroWithNameAvatarRarity,
-    val weapon: Weapon,
-    val relicTwoParts: Relic,
-    val relicFourParts: Relic,
-    val decoration: Decoration,
-    val statsEquipment: List<String>,
-    val nickname: String,
+    val idBuild: Long = -1L,
+    val hero: HeroWithNameAvatarRarity? = null,
+    val weapon: Weapon? = null,
+    val relicTwoParts: Relic? = null,
+    val relicFourParts: Relic? = null,
+    val decoration: Decoration? = null,
+    val statsEquipment: List<String> = List(4) { "" },
+    val nickname: String = "",
     val uid: String = "",
 )

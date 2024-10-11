@@ -9,8 +9,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.tanorami.core.theme.LightGray
 
 @Composable
 fun SplashArtHeroImage(
@@ -47,6 +49,7 @@ fun SplashArtHeroImage(
                 .align(Alignment.TopEnd),
             model = pathHero,
             contentDescription = null,
+            colorFilter = ColorFilter.tint(LightGray)
         )
     }
 }

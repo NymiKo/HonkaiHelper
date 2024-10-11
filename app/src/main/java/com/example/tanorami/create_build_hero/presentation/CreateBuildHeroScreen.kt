@@ -11,10 +11,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -30,24 +27,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
-import coil.compose.AsyncImage
 import com.example.tanorami.R
-import com.example.tanorami.base_components.BaseDefaultText
 import com.example.tanorami.base_components.BaseSaveAlertDialog
 import com.example.tanorami.base_components.BaseSmallFloatingButton
 import com.example.tanorami.base_components.BaseTopAppBar
 import com.example.tanorami.core.theme.AppTheme
-import com.example.tanorami.core.theme.DarkGray
 import com.example.tanorami.core.theme.Red
-import com.example.tanorami.core.theme.White
+import com.example.tanorami.create_build_hero.presentation.components.AvatarHeroImageAndName
 import com.example.tanorami.create_build_hero.presentation.components.BuildStatsComponent
 import com.example.tanorami.create_build_hero.presentation.components.EquipmentBuildComponent
 import com.example.tanorami.equipment.EquipmentType
@@ -61,12 +52,14 @@ fun CreateBuildHeroScreen(
     onEquipmentScreen: (pathHero: Int, equipmentType: EquipmentType) -> Unit,
     onBack: () -> Unit,
 ) {
+    val state = viewModel.uiState
+
     CreateBuildHeroScreenContent(
-        uiState = viewModel.uiState,
+        uiState = state,
         onEvent = { event ->
             when (event) {
                 is CreateBuildHeroScreenEvents.OnEquipmentScreen -> onEquipmentScreen(
-                    event.pathHero, event.equipmentType
+                    state.hero?.path!!, event.equipmentType
                 )
 
                 CreateBuildHeroScreenEvents.OnBack -> onBack()
@@ -129,19 +122,26 @@ private fun CreateBuildHeroScreenContent(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             AvatarHeroImageAndName(
-                heroImage = uiState.hero?.avatar ?: "", heroName = uiState.hero?.name ?: ""
+                heroImage = uiState.hero?.avatar, heroName = uiState.hero?.name
             )
-            EquipmentBuildComponent(weapon = uiState.buildHeroFromUser.weapon,
+            EquipmentBuildComponent(
+                weapon = uiState.buildHeroFromUser.weapon,
                 relicTwoParts = uiState.buildHeroFromUser.relicTwoParts,
                 relicFourParts = uiState.buildHeroFromUser.relicFourParts,
                 decoration = uiState.buildHeroFromUser.decoration,
-                onEquipmentScreen = { equipmentType ->
-                    onEvent(
-                        CreateBuildHeroScreenEvents.OnEquipmentScreen(
-                            uiState.hero?.path!!, equipmentType
-                        )
-                    )
-                })
+                onWeaponClick = {
+                    onEvent(CreateBuildHeroScreenEvents.OnEquipmentScreen(equipmentType = EquipmentType.WEAPON))
+                },
+                onTwoPartsRelicClick = {
+                    onEvent(CreateBuildHeroScreenEvents.OnEquipmentScreen(equipmentType = EquipmentType.RELIC_TWO_PARTS))
+                },
+                onFourPartsRelicClick = {
+                    onEvent(CreateBuildHeroScreenEvents.OnEquipmentScreen(equipmentType = EquipmentType.RELIC_FOUR_PARTS))
+                },
+                onDecorationClick = {
+                    onEvent(CreateBuildHeroScreenEvents.OnEquipmentScreen(equipmentType = EquipmentType.DECORATION))
+                }
+            )
             BuildStatsComponent(
                 currentValue = uiState.buildHeroFromUser.statsEquipmentList,
                 changeStatOnBody = { value ->
@@ -158,34 +158,6 @@ private fun CreateBuildHeroScreenContent(
                 },
             )
         }
-    }
-}
-
-@Composable
-fun AvatarHeroImageAndName(
-    modifier: Modifier = Modifier,
-    heroImage: String,
-    heroName: String,
-) {
-    Column(
-        modifier = modifier.width(120.dp)
-    ) {
-        AsyncImage(
-            modifier = Modifier.height(150.dp),
-            model = heroImage,
-            contentDescription = null,
-            contentScale = ContentScale.Crop
-        )
-        BaseDefaultText(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(DarkGray)
-                .padding(8.dp),
-            text = heroName,
-            color = White,
-            textAlign = TextAlign.Center,
-            fontWeight = FontWeight.Bold
-        )
     }
 }
 
