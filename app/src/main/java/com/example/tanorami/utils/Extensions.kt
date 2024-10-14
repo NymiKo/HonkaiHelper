@@ -24,7 +24,7 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.navigation.NavController
 import com.bumptech.glide.Glide
 import com.example.tanorami.R
-import com.example.tanorami.equipment.data.model.Equipment
+import com.example.tanorami.create_build_hero.data.model.Equipment
 import java.io.File
 import java.io.FileInputStream
 

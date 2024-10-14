@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tanorami.R
 import com.example.tanorami.base_components.BaseDefaultText
-import com.example.tanorami.create_build_hero.presentation.components.IconStatEquipment
+import com.example.tanorami.create_build_hero.ui.components.IconStatEquipment
 
 @Composable
 fun BuildStatsColumn(

@@ -1,6 +1,6 @@
 package com.example.tanorami.create_build_hero.di
 
-import com.example.tanorami.create_build_hero.presentation.CreateBuildHeroFragment
+import com.example.tanorami.create_build_hero.ui.CreateBuildHeroFragment
 import dagger.Subcomponent
 
 @Subcomponent(modules = [CreateBuildHeroModule::class])

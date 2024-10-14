@@ -3,32 +3,33 @@ package com.example.tanorami.di
 import android.content.Context
 import com.example.tanorami.activity.data.MainRepository
 import com.example.tanorami.activity.di.MainComponent
+import com.example.tanorami.auth.login.di.LoginComponent
+import com.example.tanorami.auth.login.domain.LoginRepository
+import com.example.tanorami.auth.registration.data.RegistrationRepository
+import com.example.tanorami.auth.registration.di.RegistrationComponent
 import com.example.tanorami.base_build_hero.data.BaseBuildHeroRepository
 import com.example.tanorami.base_build_hero.di.BaseBuildHeroComponent
 import com.example.tanorami.builds_hero_from_users.data.BuildsHeroListRepository
-import com.example.tanorami.info_about_hero.data.InfoAboutHeroRepository
-import com.example.tanorami.info_about_hero.di.InfoAboutHeroComponent
 import com.example.tanorami.builds_hero_from_users.di.BuildsHeroListComponent
 import com.example.tanorami.change_nickname.data.ChangeNicknameRepository
 import com.example.tanorami.change_nickname.di.ChangeNicknameComponent
 import com.example.tanorami.create_build_hero.di.CreateBuildHeroComponent
 import com.example.tanorami.createteam.data.CreateTeamRepository
 import com.example.tanorami.createteam.di.CreateTeamComponent
-import com.example.tanorami.info_about_decoration.data.InfoAboutDecorationRepository
-import com.example.tanorami.info_about_decoration.di.InfoAboutDecorationComponent
-import com.example.tanorami.equipment.di.EquipmentComponent
 import com.example.tanorami.heroes.data.HeroesListRepository
 import com.example.tanorami.heroes.di.HeroesListComponent
-import com.example.tanorami.load_data.data.LoadDataRepository
-import com.example.tanorami.load_data.di.LoadDataComponent
-import com.example.tanorami.auth.login.domain.LoginRepository
-import com.example.tanorami.auth.login.di.LoginComponent
-import com.example.tanorami.profile.domain.ProfileRepository
-import com.example.tanorami.profile.di.ProfileComponent
-import com.example.tanorami.auth.registration.data.RegistrationRepository
-import com.example.tanorami.auth.registration.di.RegistrationComponent
+import com.example.tanorami.info_about_decoration.data.InfoAboutDecorationRepository
+import com.example.tanorami.info_about_decoration.di.InfoAboutDecorationComponent
+import com.example.tanorami.info_about_hero.data.InfoAboutHeroRepository
+import com.example.tanorami.info_about_hero.di.InfoAboutHeroComponent
 import com.example.tanorami.info_about_relic.data.RelicInfoRepository
 import com.example.tanorami.info_about_relic.di.RelicInfoComponent
+import com.example.tanorami.info_about_weapon.data.InfoAboutWeaponRepository
+import com.example.tanorami.info_about_weapon.di.InfoAboutWeaponComponent
+import com.example.tanorami.load_data.data.LoadDataRepository
+import com.example.tanorami.load_data.di.LoadDataComponent
+import com.example.tanorami.profile.di.ProfileComponent
+import com.example.tanorami.profile.domain.ProfileRepository
 import com.example.tanorami.send_feedback.data.SendFeedbackRepository
 import com.example.tanorami.send_feedback.di.SendFeedbackComponent
 import com.example.tanorami.settings.data.SettingsRepository
@@ -37,8 +38,6 @@ import com.example.tanorami.teams.data.TeamsListRepository
 import com.example.tanorami.teams.di.TeamsListComponent
 import com.example.tanorami.viewing_users_build.data.ViewingUsersBuildRepository
 import com.example.tanorami.viewing_users_build.di.ViewingUsersBuildComponent
-import com.example.tanorami.info_about_weapon.data.InfoAboutWeaponRepository
-import com.example.tanorami.info_about_weapon.di.InfoAboutWeaponComponent
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -68,7 +67,6 @@ interface AppComponent {
     fun loginComponent(): LoginComponent.Factory
     fun registrationComponent(): RegistrationComponent.Factory
     fun profileComponent(): ProfileComponent.Factory
-    fun equipmentComponent(): EquipmentComponent.Factory
     fun buildsHeroListComponent(): BuildsHeroListComponent.Factory
     fun createBuildHeroComponent(): CreateBuildHeroComponent.Factory
     fun infoAboutHeroComponent(): InfoAboutHeroComponent.Factory

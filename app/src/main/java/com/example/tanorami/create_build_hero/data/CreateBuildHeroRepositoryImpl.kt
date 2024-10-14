@@ -8,6 +8,7 @@ import com.example.tanorami.data.local.dao.HeroDao
 import com.example.tanorami.data.local.dao.RelicDao
 import com.example.tanorami.data.local.dao.WeaponDao
 import com.example.tanorami.di.IODispatcher
+import com.example.tanorami.create_build_hero.data.model.Equipment
 import com.example.tanorami.heroes.data.model.Hero
 import com.example.tanorami.viewing_users_build.data.model.FullBuildHeroFromUser
 import kotlinx.coroutines.CoroutineDispatcher
@@ -56,5 +57,23 @@ class CreateBuildHeroRepositoryImpl @Inject constructor(
 
     override suspend fun deleteBuild(idBuild: Long): NetworkResult<Boolean> = withContext(ioDispatcher) {
         return@withContext handleApi { createBuildHeroService.deleteBuild(idBuild) }
+    }
+
+    override suspend fun getWeapons(path: Int): List<Equipment> = withContext(ioDispatcher) {
+        weaponDao.getWeaponByPath(path).sortedByDescending { it.rarity }.map {
+            Equipment(it.idWeapon, it.image, it.rarity)
+        }
+    }
+
+    override suspend fun getRelics(): List<Equipment> = withContext(ioDispatcher) {
+        relicDao.getRelics().map {
+            Equipment(it.idRelic, it.image)
+        }
+    }
+
+    override suspend fun getDecorations(): List<Equipment> = withContext(ioDispatcher) {
+        decorationDao.getDecorations().map {
+            Equipment(it.idDecoration, it.image)
+        }
     }
 }

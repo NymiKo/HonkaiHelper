@@ -1,4 +1,4 @@
-package com.example.tanorami.create_build_hero.presentation.components
+package com.example.tanorami.create_build_hero.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -34,7 +34,7 @@ import com.example.tanorami.core.theme.Blue
 import com.example.tanorami.core.theme.GreyTransparent20
 import com.example.tanorami.core.theme.Orange
 import com.example.tanorami.core.theme.Violet
-import com.example.tanorami.equipment.data.model.Equipment
+import com.example.tanorami.create_build_hero.data.model.Equipment
 
 @Composable
 fun EquipmentBuildComponent(

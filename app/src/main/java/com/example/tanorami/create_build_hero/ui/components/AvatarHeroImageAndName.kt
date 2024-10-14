@@ -1,4 +1,4 @@
-package com.example.tanorami.create_build_hero.presentation.components
+package com.example.tanorami.create_build_hero.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column

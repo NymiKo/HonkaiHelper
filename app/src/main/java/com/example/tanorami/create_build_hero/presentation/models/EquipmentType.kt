@@ -1,4 +1,4 @@
-package com.example.tanorami.equipment
+package com.example.tanorami.create_build_hero.presentation.models
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

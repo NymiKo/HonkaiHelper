@@ -21,7 +21,7 @@ import com.example.tanorami.builds_hero_from_users.presentation.BuildsHeroFromUs
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenEvents
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenSideEffects
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenUiState
-import com.example.tanorami.create_build_hero.presentation.CreateBuildHeroFragment
+import com.example.tanorami.create_build_hero.ui.CreateBuildHeroFragment
 import com.example.tanorami.profile.presentation.components.BuildItem
 import com.example.tanorami.teams.ui.components.EmptyListScreen
 import com.example.tanorami.teams.ui.components.ErrorScreen

@@ -70,11 +70,6 @@
             android:id="@+id/action_profileFragment_to_changeNicknameFragment"
             app:destination="@id/changeNicknameFragment" />
     </fragment>
-    <dialog
-        android:id="@+id/equipmentFragment"
-        android:name="com.example.tanorami.equipment.EquipmentFragment"
-        android:label="fragment_equipment"
-        tools:layout="@layout/fragment_equipment" />
     <fragment
         android:id="@+id/loadDataFragment"
         android:name="com.example.tanorami.load_data.LoadDataFragment"
@@ -142,13 +137,9 @@
     </fragment>
     <fragment
         android:id="@+id/createBuildHeroFragment"
-        android:name="com.example.tanorami.create_build_hero.presentation.CreateBuildHeroFragment"
+        android:name="com.example.tanorami.create_build_hero.ui.CreateBuildHeroFragment"
         android:label="fragment_create_build_hero"
-        tools:layout="@layout/fragment_create_build_hero" >
-        <action
-            android:id="@+id/action_createBuildHeroFragment_to_equipmentFragment"
-            app:destination="@id/equipmentFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_create_build_hero" />
     <fragment
         android:id="@+id/weaponInfoFragment"
         android:name="com.example.tanorami.info_about_weapon.ui.InfoAboutWeaponFragment"

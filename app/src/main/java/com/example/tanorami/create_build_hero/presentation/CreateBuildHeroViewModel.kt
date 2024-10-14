@@ -1,25 +1,25 @@
 package com.example.tanorami.create_build_hero.presentation
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tanorami.R
+import com.example.tanorami.base.BaseViewModel
 import com.example.tanorami.create_build_hero.data.CreateBuildHeroRepository
 import com.example.tanorami.create_build_hero.data.model.BuildHeroFromUser
+import com.example.tanorami.create_build_hero.presentation.models.CreateBuildHeroScreenEvents
+import com.example.tanorami.create_build_hero.presentation.models.CreateBuildHeroScreenSideEffects
+import com.example.tanorami.create_build_hero.presentation.models.CreateBuildHeroScreenUiState
 import com.example.tanorami.data.NetworkResult
-import com.example.tanorami.equipment.data.model.Equipment
+import com.example.tanorami.create_build_hero.data.model.Equipment
+import com.example.tanorami.create_build_hero.presentation.models.EquipmentType
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CreateBuildHeroViewModel @Inject constructor(
-    private val repository: CreateBuildHeroRepository
-) : ViewModel() {
-
-    var uiState by mutableStateOf(CreateBuildHeroScreenUiState())
-
-    fun onEvent(event: CreateBuildHeroScreenEvents) {
+    private val repository: CreateBuildHeroRepository,
+) : BaseViewModel<CreateBuildHeroScreenUiState, CreateBuildHeroScreenEvents, CreateBuildHeroScreenSideEffects>(
+    initialState = CreateBuildHeroScreenUiState()
+) {
+    override fun onEvent(event: CreateBuildHeroScreenEvents) {
         when (event) {
             is CreateBuildHeroScreenEvents.DeleteBuild -> deleteBuild(idBuild = uiState.idBuild)
             is CreateBuildHeroScreenEvents.SaveBuild -> saveBuild(idBuild = uiState.idBuild)
@@ -44,10 +44,8 @@ class CreateBuildHeroViewModel @Inject constructor(
             is CreateBuildHeroScreenEvents.ChangeStatsOnLegs -> changeStatLegs(event.value)
             is CreateBuildHeroScreenEvents.ChangeStatsOnSphere -> changeStatSphere(event.value)
             is CreateBuildHeroScreenEvents.ChangeStatsOnRope -> changeStatRope(event.value)
-
-            is CreateBuildHeroScreenEvents.HideToast -> hideToast()
-
-            else -> Unit
+            CreateBuildHeroScreenEvents.OnBack -> sendSideEffect(CreateBuildHeroScreenSideEffects.OnBack)
+            is CreateBuildHeroScreenEvents.ChangeStateEquipmentBottomSheet -> getEquipmentList(event.sheetState, event.equipmentType)
         }
     }
 
@@ -108,7 +106,7 @@ class CreateBuildHeroViewModel @Inject constructor(
         )
     }
 
-    fun saveBuild(idBuild: Long?) {
+    private fun saveBuild(idBuild: Long?) {
         if (!checkForNull(
                 uiState.buildHeroFromUser.weapon,
                 R.string.empty_weapon_in_create_build
@@ -243,7 +241,7 @@ class CreateBuildHeroViewModel @Inject constructor(
         }
     }
 
-    fun deleteBuild(idBuild: Long) = viewModelScope.launch {
+    private fun deleteBuild(idBuild: Long) = viewModelScope.launch {
         when (val result = repository.deleteBuild(idBuild)) {
             is NetworkResult.Error -> {
                 uiState = uiState.copy(
@@ -264,7 +262,15 @@ class CreateBuildHeroViewModel @Inject constructor(
         }
     }
 
-    fun hideToast() {
-        uiState = uiState.copy(isError = false)
+    private fun getEquipmentList(sheetState: Boolean, equipmentType: EquipmentType) = viewModelScope.launch {
+        uiState = uiState.copy(showBottomSheet = sheetState)
+        if (sheetState) {
+            uiState = when(equipmentType) {
+                EquipmentType.WEAPON -> uiState.copy(equipmentList = repository.getWeapons(uiState.hero?.path ?: 0), equipmentType = equipmentType)
+                EquipmentType.RELIC_TWO_PARTS -> uiState.copy(equipmentList = repository.getRelics(), equipmentType = equipmentType)
+                EquipmentType.RELIC_FOUR_PARTS -> uiState.copy(equipmentList = repository.getRelics(), equipmentType = equipmentType)
+                EquipmentType.DECORATION -> uiState.copy(equipmentList = repository.getDecorations(), equipmentType = equipmentType)
+            }
+        }
     }
 }

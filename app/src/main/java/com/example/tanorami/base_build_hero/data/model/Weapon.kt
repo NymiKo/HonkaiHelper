@@ -1,6 +1,6 @@
 package com.example.tanorami.base_build_hero.data.model
 
-import com.example.tanorami.equipment.data.model.Equipment
+import com.example.tanorami.create_build_hero.data.model.Equipment
 
 data class Weapon(
     val idWeapon: Int,

@@ -1,4 +1,4 @@
-package com.example.tanorami.create_build_hero.presentation
+package com.example.tanorami.create_build_hero.ui
 
 import android.content.Context
 import android.os.Build
@@ -12,13 +12,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.findNavController
 import com.example.tanorami.App
-import com.example.tanorami.R
 import com.example.tanorami.core.theme.AppTheme
-import com.example.tanorami.equipment.EquipmentFragment
-import com.example.tanorami.equipment.EquipmentType
-import com.example.tanorami.equipment.data.model.Equipment
+import com.example.tanorami.create_build_hero.presentation.CreateBuildHeroViewModel
+import com.example.tanorami.create_build_hero.presentation.models.CreateBuildHeroScreenEvents
+import com.example.tanorami.create_build_hero.data.model.Equipment
+import com.example.tanorami.create_build_hero.presentation.models.EquipmentType
 import javax.inject.Inject
 
 class CreateBuildHeroFragment : Fragment() {
@@ -81,14 +81,7 @@ class CreateBuildHeroFragment : Fragment() {
                         viewModel = viewModel,
                         idBuild = idBuild,
                         idHero = idHero,
-                        onEquipmentScreen = { pathHero, equipmentType ->
-                            equipmentClick = equipmentType
-                            findNavController().navigate(
-                                R.id.equipmentFragment,
-                                EquipmentFragment.newInstance(pathHero, equipmentClick = equipmentType)
-                            )
-                        },
-                        onBack = { findNavController().navigateUp() }
+                        navController = findNavController(),
                     )
                 }
             }
