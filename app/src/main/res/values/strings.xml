@@ -209,7 +209,7 @@
     <string name="decoration">Украшение</string>
     <string name="relic_two_parts">2 части</string>
     <string name="relic_four_parts">4 части</string>
-    <string name="version_app">Версия приложения: 1.0.0</string>
+    <string name="version_app">Версия приложения: 1.0.2</string>
     <string name="version_db">Версия базы данных: %1$s</string>
     <string name="about_developers"><b>Дизайнеры:</b> Nymiko, SindelJ\n<b>Разработчик:</b> Nymiko\n<b>Тестировщик:</b> Xander408</string>
     <string name="check_update_db">Проверить обновления базы данных</string>

@@ -177,7 +177,7 @@
         tools:layout="@layout/fragment_change_nickname" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.tanorami.settings.SettingsFragment"
+        android:name="com.example.tanorami.settings.ui.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action

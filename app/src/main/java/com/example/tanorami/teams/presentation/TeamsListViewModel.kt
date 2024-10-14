@@ -3,7 +3,7 @@ package com.example.tanorami.teams.presentation
 import androidx.lifecycle.viewModelScope
 import com.example.tanorami.base.BaseViewModel
 import com.example.tanorami.data.NetworkResult
-import com.example.tanorami.data.UserDataStore
+import com.example.tanorami.data.AppDataStore
 import com.example.tanorami.teams.data.TeamsListRepository
 import com.example.tanorami.teams.presentation.models.TeamsListScreenEvents
 import com.example.tanorami.teams.presentation.models.TeamsListScreenSideEffects
@@ -17,12 +17,12 @@ import javax.inject.Inject
 
 class TeamsListViewModel @Inject constructor(
     private val repository: TeamsListRepository,
-    private val userDataStore: UserDataStore,
+    private val appDataStore: AppDataStore,
 ) : BaseViewModel<TeamsListScreenUiState, TeamsListScreenEvents, TeamsListScreenSideEffects>(
     initialState = TeamsListScreenUiState()
 ) {
     init {
-        userDataStore.tokenUser
+        appDataStore.tokenUser
             .onEach { uiState = uiState.copy(tokenUser = it) }
             .flowOn(Dispatchers.Default)
             .launchIn(viewModelScope)

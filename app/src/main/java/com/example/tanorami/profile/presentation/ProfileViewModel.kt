@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tanorami.R
 import com.example.tanorami.data.NetworkResult
-import com.example.tanorami.data.UserDataStore
+import com.example.tanorami.data.AppDataStore
 import com.example.tanorami.profile.domain.ProfileRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 class ProfileViewModel @Inject constructor(
     private val repository: ProfileRepository,
-    private val userDataStore: UserDataStore,
+    private val appDataStore: AppDataStore,
 ) : ViewModel() {
 
     private var _profileUiState = MutableStateFlow<ProfileScreenUiState>(ProfileScreenUiState.Empty)
@@ -38,7 +38,7 @@ class ProfileViewModel @Inject constructor(
     }
 
     private fun getProfile() {
-        userDataStore.tokenUser.onEach {
+        appDataStore.tokenUser.onEach {
             if (it == "") {
                 _profileUiState.value = ProfileScreenUiState.NotAuthorized
             } else {
@@ -55,7 +55,7 @@ class ProfileViewModel @Inject constructor(
     }
 
     private fun logoutAccount() = viewModelScope.launch {
-        userDataStore.clearToken()
+        appDataStore.clearToken()
         _profileUiState.value = ProfileScreenUiState.NotAuthorized
     }
 

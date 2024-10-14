@@ -7,7 +7,7 @@ import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHer
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenSideEffects
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenUiState
 import com.example.tanorami.data.NetworkResult
-import com.example.tanorami.data.UserDataStore
+import com.example.tanorami.data.AppDataStore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 class BuildsHeroFromUsersViewModel @Inject constructor(
     private val repository: BuildsHeroListRepository,
-    private val userDataStore: UserDataStore,
+    private val userDataStore: AppDataStore,
 ): BaseViewModel<BuildsHeroFromUsersScreenUiState, BuildsHeroFromUsersScreenEvents, BuildsHeroFromUsersScreenSideEffects>(
     initialState = BuildsHeroFromUsersScreenUiState()
 ) {
