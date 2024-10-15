@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tanorami.R
 import com.example.tanorami.data.NetworkResult
-import com.example.tanorami.data.AppDataStore
+import com.example.tanorami.data.data_store.AppDataStore
 import com.example.tanorami.profile.domain.ProfileRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

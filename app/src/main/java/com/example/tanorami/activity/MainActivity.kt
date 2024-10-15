@@ -1,9 +1,8 @@
 package com.example.tanorami.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -11,7 +10,6 @@ import com.example.tanorami.App
 import com.example.tanorami.R
 import com.example.tanorami.databinding.ActivityMainBinding
 import com.example.tanorami.load_data.LoadDataFragment
-import com.example.tanorami.utils.getSharedPrefVersion
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -29,9 +27,7 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
 
         (application as App).appComponent.mainComponent().create().inject(this)
-        getSharedPrefVersion().getString(KEY_VERSION_DB, "")?.let { viewModel.getVersionDB(it) }
         uiStateHandle()
-
         setContentView(binding.root)
     }
 
@@ -51,9 +47,5 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         _binding = null
         super.onDestroy()
-    }
-
-    companion object {
-        const val KEY_VERSION_DB = "VERSION_DB"
     }
 }

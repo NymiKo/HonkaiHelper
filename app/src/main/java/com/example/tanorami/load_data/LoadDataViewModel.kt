@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tanorami.data.AppDataStore
+import com.example.tanorami.data.data_store.AppDataStore
 import com.example.tanorami.load_data.data.LoadDataRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject

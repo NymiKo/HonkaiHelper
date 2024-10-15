@@ -1,4 +1,4 @@
-package com.example.tanorami.data
+package com.example.tanorami.data.data_store
 
 import kotlinx.coroutines.flow.Flow
 

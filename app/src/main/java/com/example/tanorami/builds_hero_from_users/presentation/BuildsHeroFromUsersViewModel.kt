@@ -7,7 +7,7 @@ import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHer
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenSideEffects
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenUiState
 import com.example.tanorami.data.NetworkResult
-import com.example.tanorami.data.AppDataStore
+import com.example.tanorami.data.data_store.AppDataStore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn

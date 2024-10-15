@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.tanorami.R
 import com.example.tanorami.data.NetworkResult
 import com.example.tanorami.auth.login.domain.LoginRepository
-import com.example.tanorami.data.AppDataStore
+import com.example.tanorami.data.data_store.AppDataStore
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
