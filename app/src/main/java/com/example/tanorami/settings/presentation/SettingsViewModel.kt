@@ -53,7 +53,7 @@ class SettingsViewModel @Inject constructor(
                 if (uiState.versionDB == result.data) {
                     sendSideEffect(SettingsScreenSideEffects.ShowToast(R.string.already_have_latest_version_db))
                 } else {
-                    sendSideEffect(SettingsScreenSideEffects.OnLoadDataScreen)
+                    sendSideEffect(SettingsScreenSideEffects.OnLoadDataScreen(result.data))
                 }
             }
         }

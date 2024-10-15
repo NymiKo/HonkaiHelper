@@ -1,4 +1,4 @@
-package com.example.tanorami.send_feedback
+package com.example.tanorami.send_feedback.ui
 
 sealed class SendFeedbackUIState {
     object LOADING: SendFeedbackUIState()

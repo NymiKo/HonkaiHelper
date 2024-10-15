@@ -32,6 +32,7 @@ import com.example.tanorami.R
 import com.example.tanorami.base_components.BaseDefaultText
 import com.example.tanorami.base_components.BaseTopAppBar
 import com.example.tanorami.core.theme.DarkGray
+import com.example.tanorami.load_data.LoadDataFragment
 import com.example.tanorami.settings.presentation.SettingsViewModel
 import com.example.tanorami.settings.presentation.models.SettingsScreenEvents
 import com.example.tanorami.settings.presentation.models.SettingsScreenSideEffects
@@ -60,8 +61,11 @@ fun SettingsScreen(
             viewModel.clearEffect()
         }
 
-        SettingsScreenSideEffects.OnLoadDataScreen -> {
-            navController.navigate(R.id.action_settingsFragment_to_loadDataFragment)
+        is SettingsScreenSideEffects.OnLoadDataScreen -> {
+            navController.navigate(
+                R.id.action_settingsFragment_to_loadDataFragment,
+                LoadDataFragment.newInstance(sideEffect.versionDB)
+            )
         }
 
         is SettingsScreenSideEffects.ShowToast -> {
