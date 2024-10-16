@@ -22,7 +22,6 @@ class ProfileFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-
     private val viewModel by viewModels<ProfileViewModel> { viewModelFactory }
 
     override fun onAttach(context: Context) {
@@ -65,16 +64,5 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData(UPDATE_SCREEN_KEY, true)?.observe(viewLifecycleOwner) { result ->
-            if (result) viewModel.onEvent(ProfileScreenEvents.FetchProfile)
-        }
-    }
-
-    companion object {
-        const val UPDATE_SCREEN_KEY = "update"
     }
 }

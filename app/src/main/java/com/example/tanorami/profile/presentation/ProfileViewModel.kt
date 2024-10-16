@@ -39,7 +39,7 @@ class ProfileViewModel @Inject constructor(
 
     private fun getProfile() {
         appDataStore.tokenUser.onEach {
-            if (it == "") {
+            if (it.isEmpty()) {
                 _profileUiState.value = ProfileScreenUiState.NotAuthorized
             } else {
                 _profileUiState.value = ProfileScreenUiState.Loading

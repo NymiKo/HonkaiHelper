@@ -16,7 +16,8 @@
     <string name="search">Поиск</string>
     <string name="settings">Настройки</string>
     <string name="about_app">О приложении</string>
-    <string name="authorization">Авторизация</string>
+    <string name="log_in_account">Вход в аккаунт</string>
+    <string name="welcome">Добро пожаловать!</string>
     <string name="nickname">Никнейм</string>
     <string name="new_nickname">Новый никнейм</string>
     <string name="message">Сообщение</string>
@@ -26,7 +27,7 @@
     <string name="empty_new_nickname">Введите новый никнейм</string>
     <string name="already_have_nickname">У вас уже такой никнейм</string>
     <string name="password">Пароль</string>
-    <string name="log_in">Авторизоваться</string>
+    <string name="log_in">Войти</string>
     <string name="heroes">Герои</string>
     <string name="profile">Профиль</string>
     <string name="not_authorized">Вы не авторизованы</string>
@@ -35,7 +36,6 @@
     <string name="empty_password">Пароль не может быть пустым</string>
     <string name="incorrect_password">Пароль должен содержать не менее 4 символов</string>
     <string name="registration">Регистрация</string>
-    <string name="registration_underline"><u>Регистрация</u></string>
     <string name="register">Зарегистрироваться</string>
     <string name="registration_success">Регистрация прошла успешно. теперь вы можете авторизоваться</string>
     <string name="want_to_logout_of_your_account">Вы действительно хотите выйти из аккаунта?</string>
@@ -45,7 +45,7 @@
     <string name="check_your_internet_connection">Проверьте подключение к интернету</string>
     <string name="login_already_exists">Пользователь с таким логином уже существует</string>
     <string name="unknown_error">Неизвестная ошибка</string>
-    <string name="unknown_user">Пользователя с таким логином и паролем не существует</string>
+    <string name="unknown_user">Пользователь не найден</string>
     <string name="should_be_4_heroes_in_the_team">В команде должно быть 4 героя"</string>
     <string name="team_has_been_added">Команда добавлена</string>
     <string name="adding_a_command">Добавление команды</string>

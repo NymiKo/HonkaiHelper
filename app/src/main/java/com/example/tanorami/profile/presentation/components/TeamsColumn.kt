@@ -30,9 +30,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.tanorami.R
-import com.example.tanorami.base_components.BaseDefaultText
 import com.example.tanorami.base_components.BaseHeroAvatarAndName
-import com.example.tanorami.base_components.BaseLazyColumn
+import com.example.tanorami.base_components.lazy_column.BaseLazyColumn
+import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.core.theme.Blue500
 import com.example.tanorami.core.theme.GreyTransparent20
 import com.example.tanorami.core.theme.White
@@ -78,7 +78,9 @@ fun TeamItem(
         colors = CardDefaults.cardColors(containerColor = Blue500),
     ) {
         Column(
-            modifier = Modifier.padding(horizontal = 16.dp).padding(top = 16.dp, bottom = 8.dp),
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .padding(top = 16.dp, bottom = 8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Row(
@@ -97,7 +99,7 @@ fun TeamItem(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     BaseDefaultText(
-                        text = stringResource(id = R.string.team_from, team.nickname ?: ""),
+                        text = stringResource(id = R.string.team_from, team.nickname),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         fontWeight = FontWeight.SemiBold,
@@ -117,11 +119,14 @@ fun TeamItem(
                     Spacer(modifier = Modifier.weight(1F))
 
                     AsyncImage(
-                        modifier = Modifier.size(25.dp).clickable {
-                            val clipboard = context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-                            val clipData: ClipData = ClipData.newPlainText("UID", team.uid)
-                            clipboard.setPrimaryClip(clipData)
-                        },
+                        modifier = Modifier
+                            .size(25.dp)
+                            .clickable {
+                                val clipboard =
+                                    context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                                val clipData: ClipData = ClipData.newPlainText("UID", team.uid)
+                                clipboard.setPrimaryClip(clipData)
+                            },
                         model = R.drawable.ic_baseline_content_copy,
                         contentDescription = null,
                         colorFilter = ColorFilter.tint(White)

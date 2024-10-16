@@ -1,4 +1,4 @@
-package com.example.tanorami.send_feedback.ui
+package com.example.tanorami.auth.login.ui
 
 import android.content.Context
 import android.os.Bundle
@@ -11,19 +11,20 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.tanorami.App
+import com.example.tanorami.auth.login.presentation.LoginViewModel
 import com.example.tanorami.core.theme.AppTheme
-import com.example.tanorami.send_feedback.presentation.SendFeedbackViewModel
 import javax.inject.Inject
 
-class SendFeedbackFragment : Fragment() {
+class LoginFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel by viewModels<SendFeedbackViewModel> { viewModelFactory }
+    private val viewModel by viewModels<LoginViewModel> { viewModelFactory }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as App).appComponent.sendFeedbackComponent().create().inject(this)
+        (requireActivity().application as App).appComponent.loginComponent().create()
+            .inject(this)
     }
 
     override fun onCreateView(
@@ -34,7 +35,7 @@ class SendFeedbackFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 AppTheme {
-                    SendFeedbackScreen(viewModel = viewModel, navController = findNavController())
+                    LoginScreen(viewModel = viewModel, navController = findNavController())
                 }
             }
         }

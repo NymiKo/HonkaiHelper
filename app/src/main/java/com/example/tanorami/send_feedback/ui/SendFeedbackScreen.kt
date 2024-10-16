@@ -1,4 +1,4 @@
-package com.example.tanorami.send_feedback
+package com.example.tanorami.send_feedback.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -7,9 +7,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.Feedback
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -20,10 +17,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.tanorami.R
-import com.example.tanorami.base_components.BaseDefaultText
-import com.example.tanorami.base_components.BaseSmallFloatingButton
-import com.example.tanorami.base_components.BaseTopAppBar
-import com.example.tanorami.core.theme.Grey
+import com.example.tanorami.base_components.button.BaseSmallFloatingButton
+import com.example.tanorami.base_components.text_field.BaseOutlinedTextField
+import com.example.tanorami.base_components.top_app_bar.BaseTopAppBar
 import com.example.tanorami.send_feedback.presentation.SendFeedbackViewModel
 import com.example.tanorami.send_feedback.presentation.models.SendFeedbackScreenEvents
 import com.example.tanorami.send_feedback.presentation.models.SendFeedbackScreenSideEffects
@@ -44,12 +40,13 @@ fun SendFeedbackScreen(
         onEvent = viewModel::onEvent
     )
 
-    when(sideEffects) {
+    when (sideEffects) {
         SendFeedbackScreenSideEffects.OnBack -> navController.popBackStack()
         is SendFeedbackScreenSideEffects.ShowToast -> {
             toast(context, sideEffects.message)
             viewModel.clearEffect()
         }
+
         null -> {}
     }
 }
@@ -79,28 +76,23 @@ private fun SendFeedbackScreenContent(
             modifier = Modifier.padding(innerPadding),
             contentAlignment = Alignment.Center,
         ) {
-            OutlinedTextField(
+            BaseOutlinedTextField(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .fillMaxWidth(),
                 value = uiState.messageValue,
-                onValueChange = { newValue -> onEvent(SendFeedbackScreenEvents.MessageChanged(newValue)) },
-                enabled = !uiState.isSendingFeedback,
-                label = {
-                    BaseDefaultText(text = stringResource(id = R.string.message))
+                onValueChanged = { newValue ->
+                    onEvent(
+                        SendFeedbackScreenEvents.MessageChanged(
+                            newValue
+                        )
+                    )
                 },
+                enabled = !uiState.isSendingFeedback,
                 leadingIcon = {
                     Icon(imageVector = Icons.Filled.Feedback, contentDescription = null)
                 },
-                colors = OutlinedTextFieldDefaults.colors(
-                    unfocusedLabelColor = Grey,
-                    focusedLabelColor = MaterialTheme.colorScheme.secondary,
-                    unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
-                    focusedBorderColor = MaterialTheme.colorScheme.secondary,
-                    unfocusedLeadingIconColor = MaterialTheme.colorScheme.secondary,
-                    focusedLeadingIconColor = MaterialTheme.colorScheme.secondary,
-                    cursorColor = MaterialTheme.colorScheme.secondary,
-                )
+                label = stringResource(id = R.string.message)
             )
         }
     }

@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.tanorami.base_components.BaseDefaultText
+import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.core.theme.DarkGray
 import com.example.tanorami.core.theme.Green
 import com.example.tanorami.core.theme.Orange
@@ -56,7 +56,8 @@ fun ItemHeroAvatarWithName(
             }
     ) {
         AsyncImage(
-            modifier = Modifier.height(90.dp)
+            modifier = Modifier
+                .height(90.dp)
                 .fillMaxWidth()
                 .background(if (activeHeroInTeam.hero.rarity) Orange else Violet),
             model = activeHeroInTeam.hero.localAvatarPath,

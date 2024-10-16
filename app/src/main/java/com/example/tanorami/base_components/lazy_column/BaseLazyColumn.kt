@@ -1,4 +1,4 @@
-package com.example.tanorami.base_components
+package com.example.tanorami.base_components.lazy_column
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize

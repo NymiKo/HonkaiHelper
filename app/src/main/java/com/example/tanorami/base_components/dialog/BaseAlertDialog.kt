@@ -1,4 +1,4 @@
-package com.example.tanorami.base_components
+package com.example.tanorami.base_components.dialog
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.example.tanorami.R
+import com.example.tanorami.base_components.text.BaseDefaultText
 
 @Composable
 fun BaseSaveAlertDialog(

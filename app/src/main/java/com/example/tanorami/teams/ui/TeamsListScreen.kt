@@ -19,7 +19,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.tanorami.R
-import com.example.tanorami.base_components.BaseTopAppBar
+import com.example.tanorami.base_components.top_app_bar.BaseTopAppBar
 import com.example.tanorami.createteam.ui.CreateTeamFragment
 import com.example.tanorami.profile.presentation.components.TeamItem
 import com.example.tanorami.teams.presentation.TeamsListViewModel

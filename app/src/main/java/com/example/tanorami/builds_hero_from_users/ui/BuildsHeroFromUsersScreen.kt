@@ -15,8 +15,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import com.example.tanorami.R
-import com.example.tanorami.base_components.BaseSmallFloatingButton
-import com.example.tanorami.base_components.BaseTopAppBar
+import com.example.tanorami.base_components.button.BaseSmallFloatingButton
+import com.example.tanorami.base_components.top_app_bar.BaseTopAppBar
 import com.example.tanorami.builds_hero_from_users.presentation.BuildsHeroFromUsersViewModel
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenEvents
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenSideEffects

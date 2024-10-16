@@ -49,9 +49,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.tanorami.R
-import com.example.tanorami.base_components.BaseSaveAlertDialog
-import com.example.tanorami.base_components.BaseSmallFloatingButton
-import com.example.tanorami.base_components.BaseTopAppBar
+import com.example.tanorami.base_components.button.BaseSmallFloatingButton
+import com.example.tanorami.base_components.dialog.BaseSaveAlertDialog
+import com.example.tanorami.base_components.top_app_bar.BaseTopAppBar
 import com.example.tanorami.core.theme.AppTheme
 import com.example.tanorami.core.theme.Blue
 import com.example.tanorami.core.theme.Orange
@@ -211,7 +211,7 @@ private fun CreateBuildHeroScreenContent(
                                     .height(120.dp)
                                     .clip(RoundedCornerShape(10.dp))
                                     .background(
-                                        when(equipment.rarity) {
+                                        when (equipment.rarity) {
                                             0 -> Blue
                                             1 -> Violet
                                             2 -> Orange
@@ -220,17 +220,38 @@ private fun CreateBuildHeroScreenContent(
                                         RoundedCornerShape(10.dp)
                                     )
                                     .clickable {
-                                        when(uiState.equipmentType) {
-                                            EquipmentType.WEAPON -> onEvent(CreateBuildHeroScreenEvents.AddWeapon(equipment))
-                                            EquipmentType.RELIC_TWO_PARTS -> onEvent(CreateBuildHeroScreenEvents.AddTwoPartsRelic(equipment))
-                                            EquipmentType.RELIC_FOUR_PARTS -> onEvent(CreateBuildHeroScreenEvents.AddFourPartsRelic(equipment))
-                                            EquipmentType.DECORATION -> onEvent(CreateBuildHeroScreenEvents.AddDecoration(equipment))
+                                        when (uiState.equipmentType) {
+                                            EquipmentType.WEAPON -> onEvent(
+                                                CreateBuildHeroScreenEvents.AddWeapon(equipment)
+                                            )
+
+                                            EquipmentType.RELIC_TWO_PARTS -> onEvent(
+                                                CreateBuildHeroScreenEvents.AddTwoPartsRelic(
+                                                    equipment
+                                                )
+                                            )
+
+                                            EquipmentType.RELIC_FOUR_PARTS -> onEvent(
+                                                CreateBuildHeroScreenEvents.AddFourPartsRelic(
+                                                    equipment
+                                                )
+                                            )
+
+                                            EquipmentType.DECORATION -> onEvent(
+                                                CreateBuildHeroScreenEvents.AddDecoration(equipment)
+                                            )
                                         }
-                                        coroutineScope.launch { sheetState.hide() }.invokeOnCompletion {
-                                            if (!sheetState.isVisible) {
-                                                onEvent(CreateBuildHeroScreenEvents.ChangeStateEquipmentBottomSheet(sheetState = false))
+                                        coroutineScope
+                                            .launch { sheetState.hide() }
+                                            .invokeOnCompletion {
+                                                if (!sheetState.isVisible) {
+                                                    onEvent(
+                                                        CreateBuildHeroScreenEvents.ChangeStateEquipmentBottomSheet(
+                                                            sheetState = false
+                                                        )
+                                                    )
+                                                }
                                             }
-                                        }
                                     },
                                 model = equipment.image,
                                 contentDescription = null,

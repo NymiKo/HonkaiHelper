@@ -35,7 +35,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.tanorami.R
 import com.example.tanorami.base.shimmerEffect
-import com.example.tanorami.base_components.BaseDefaultText
+import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.core.theme.Blue
 import com.example.tanorami.core.theme.White
 import com.example.tanorami.profile.presentation.components.ErrorComponent

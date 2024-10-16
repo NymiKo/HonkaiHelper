@@ -21,8 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.tanorami.R
-import com.example.tanorami.base_components.BaseDefaultText
-import com.example.tanorami.base_components.BaseTopAppBar
+import com.example.tanorami.base_components.text.BaseDefaultText
+import com.example.tanorami.base_components.top_app_bar.BaseTopAppBar
 
 @Composable
 fun ProfileTopAppBar(

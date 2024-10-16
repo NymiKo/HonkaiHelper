@@ -37,9 +37,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.tanorami.R
-import com.example.tanorami.base_components.BaseSaveAlertDialog
-import com.example.tanorami.base_components.BaseSmallFloatingButton
-import com.example.tanorami.base_components.BaseTopAppBar
+import com.example.tanorami.base_components.button.BaseSmallFloatingButton
+import com.example.tanorami.base_components.dialog.BaseSaveAlertDialog
+import com.example.tanorami.base_components.top_app_bar.BaseTopAppBar
 import com.example.tanorami.core.theme.Red
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
 import com.example.tanorami.createteam.presentation.CreateTeamViewModel
@@ -49,9 +49,7 @@ import com.example.tanorami.createteam.presentation.models.CreateTeamScreenUiSta
 import com.example.tanorami.createteam.ui.components.ItemHeroAvatar
 import com.example.tanorami.createteam.ui.components.ItemHeroAvatarWithName
 import com.example.tanorami.data.local.models.hero.HeroWithNameAvatarRarity
-import com.example.tanorami.profile.presentation.ProfileFragment.Companion.UPDATE_SCREEN_KEY
 import com.example.tanorami.utils.OnLifecycleEvent
-import com.example.tanorami.utils.popBackStackWithResult
 import com.example.tanorami.utils.toast
 
 @Composable
@@ -71,15 +69,15 @@ fun CreateTeamScreen(
 
     when(sideEffects) {
         CreateTeamScreenSideEffects.OnBack -> {
-            navController.popBackStackWithResult(UPDATE_SCREEN_KEY, false)
+            navController.popBackStack()
         }
         CreateTeamScreenSideEffects.TeamDeleted -> {
             toast(context, R.string.team_deleted)
-            navController.popBackStackWithResult(UPDATE_SCREEN_KEY, true)
+            navController.popBackStack()
         }
         CreateTeamScreenSideEffects.TeamSaved -> {
             toast(context, R.string.team_saved)
-            navController.popBackStackWithResult(UPDATE_SCREEN_KEY, true)
+            navController.popBackStack()
         }
         is CreateTeamScreenSideEffects.ShowToastError -> {
             toast(context, sideEffects.message)

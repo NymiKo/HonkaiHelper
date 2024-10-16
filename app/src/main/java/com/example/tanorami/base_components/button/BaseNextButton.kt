@@ -1,4 +1,4 @@
-package com.example.tanorami.base_components
+package com.example.tanorami.base_components.button
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,9 +18,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.tanorami.R
+import com.example.tanorami.base_components.text.BaseDefaultText
 
 @Composable
-fun BaseButton(
+fun BaseNextButton(
     modifier: Modifier = Modifier,
     text: String,
     onClick: () -> Unit,
@@ -45,7 +46,9 @@ fun BaseButton(
         )
         Spacer(modifier = Modifier.weight(1F))
         AsyncImage(
-            modifier = Modifier.width(10.dp).height(15.dp),
+            modifier = Modifier
+                .width(10.dp)
+                .height(15.dp),
             model = R.drawable.ic_arrow_forward,
             contentDescription = null,
             contentScale = ContentScale.Crop,

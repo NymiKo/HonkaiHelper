@@ -1,12 +1,13 @@
 package com.example.tanorami.auth.login.presentation
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tanorami.R
-import com.example.tanorami.data.NetworkResult
 import com.example.tanorami.auth.login.domain.LoginRepository
+import com.example.tanorami.auth.login.presentation.models.LoginScreenEvents
+import com.example.tanorami.auth.login.presentation.models.LoginScreenSideEffects
+import com.example.tanorami.auth.login.presentation.models.LoginScreenUiState
+import com.example.tanorami.base.BaseViewModel
+import com.example.tanorami.data.NetworkResult
 import com.example.tanorami.data.data_store.AppDataStore
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -14,22 +15,46 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val repository: LoginRepository,
     private val appDataStore: AppDataStore
-): ViewModel() {
+) : BaseViewModel<LoginScreenUiState, LoginScreenEvents, LoginScreenSideEffects>(
+    initialState = LoginScreenUiState()
+) {
+    override fun onEvent(event: LoginScreenEvents) {
+        when (event) {
+            LoginScreenEvents.OnBack -> sendSideEffect(LoginScreenSideEffects.OnBack)
+            is LoginScreenEvents.LoginChanged -> uiState = uiState.copy(
+                loginField = uiState.loginField.copy(
+                    value = event.newValue,
+                    isError = false
+                )
+            )
 
-    private val _uiState = MutableLiveData<LoginUiState<Any>>(LoginUiState.IDLE)
-    val uiState: LiveData<LoginUiState<Any>> = _uiState
+            is LoginScreenEvents.PasswordChanged -> uiState =
+                uiState.copy(
+                    passwordField = uiState.passwordField.copy(
+                        value = event.newValue,
+                        isError = false
+                    )
+                )
 
-    fun login(login: String, password: String) {
-        _uiState.value = LoginUiState.IDLE
-        _uiState.value = LoginUiState.LOADING
-        if (checkLogin(login) && checkPassword(password)) {
-            loginUser(login, password)
+            LoginScreenEvents.Authentication -> authentication()
+            LoginScreenEvents.OnRegistrationScreen -> sendSideEffect(LoginScreenSideEffects.OnRegistrationScreen)
+        }
+    }
+
+    private fun authentication() {
+        if (checkLogin(uiState.loginField.value) && checkPassword(uiState.passwordField.value)) {
+            loginUser(uiState.loginField.value, uiState.passwordField.value)
         }
     }
 
     private fun checkLogin(login: String): Boolean {
         return if (login.isEmpty()) {
-            _uiState.value = LoginUiState.EMPTY_LOGIN
+            uiState = uiState.copy(
+                loginField = uiState.loginField.copy(
+                    isError = true,
+                    errorMessage = R.string.empty_login
+                )
+            )
             false
         } else true
     }
@@ -37,34 +62,49 @@ class LoginViewModel @Inject constructor(
     private fun checkPassword(password: String): Boolean {
         return when {
             password.isEmpty() -> {
-                _uiState.value = LoginUiState.EMPTY_PASSWORD
+                uiState = uiState.copy(
+                    passwordField = uiState.passwordField.copy(
+                        isError = true,
+                        errorMessage = R.string.empty_password
+                    )
+                )
                 false
             }
+
             password.length < 4 -> {
-                _uiState.value = LoginUiState.INCORRECT_PASSWORD
+                uiState = uiState.copy(
+                    passwordField = uiState.passwordField.copy(
+                        isError = true,
+                        errorMessage = R.string.incorrect_password
+                    )
+                )
                 false
             }
+
             else -> true
         }
     }
 
-    private fun loginUser(login: String, password: String) {
-        viewModelScope.launch {
-            when(val result = repository.login(login, password)) {
-                is NetworkResult.Error -> errorHandler(result.code)
-                is NetworkResult.Success -> {
-                    appDataStore.saveToken(result.data.token)
-                    _uiState.value = LoginUiState.SUCCESS(result.data.token)
-                }
+    private fun loginUser(login: String, password: String) = viewModelScope.launch {
+        uiState = uiState.copy(isAuthentication = true)
+        when (val result = repository.login(login, password)) {
+            is NetworkResult.Error -> {
+                sendSideEffect(LoginScreenSideEffects.ShowToast(errorHandler(result.code)))
+                uiState = uiState.copy(isAuthentication = false)
+            }
+
+            is NetworkResult.Success -> {
+                appDataStore.saveToken(result.data.token)
+                sendSideEffect(LoginScreenSideEffects.OnBack)
             }
         }
     }
 
-    private fun errorHandler(errorCode: Int) {
-        when(errorCode) {
-            105 -> _uiState.value = LoginUiState.ERROR(R.string.check_your_internet_connection)
-            400 -> _uiState.value = LoginUiState.ERROR(R.string.unknown_user)
-            else -> _uiState.value = LoginUiState.ERROR(R.string.unknown_error)
+    private fun errorHandler(errorCode: Int): Int {
+        return when (errorCode) {
+            105 -> R.string.check_your_internet_connection
+            400 -> R.string.unknown_user
+            else -> R.string.unknown_error
         }
     }
 }

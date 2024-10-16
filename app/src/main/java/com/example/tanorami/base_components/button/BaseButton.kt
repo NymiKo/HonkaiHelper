@@ -1,4 +1,4 @@
-package com.example.tanorami.settings.ui.components
+package com.example.tanorami.base_components.button
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,12 +11,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import com.example.tanorami.base_components.BaseDefaultText
+import androidx.compose.ui.unit.sp
+import com.example.tanorami.base_components.text.BaseDefaultText
 
 @Composable
-fun BaseButtonSettings(
+fun BaseButton(
     modifier: Modifier = Modifier,
-    fontSize: TextUnit,
+    fontSize: TextUnit = 18.sp,
     text: String,
     onClick: () -> Unit,
 ) {

@@ -1,4 +1,4 @@
-package com.example.tanorami.base_components
+package com.example.tanorami.base_components.text
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -8,6 +8,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
@@ -25,6 +26,7 @@ fun BaseDefaultText(
     lineHeight: TextUnit = TextUnit.Unspecified,
     maxLines: Int = Int.MAX_VALUE,
     overflow: TextOverflow = TextOverflow.Clip,
+    textDecoration: TextDecoration? = null,
 ) {
     Text(
         modifier = modifier,
@@ -38,5 +40,6 @@ fun BaseDefaultText(
         fontFamily = fontFamily,
         maxLines = maxLines,
         overflow = overflow,
+        textDecoration = textDecoration,
     )
 }

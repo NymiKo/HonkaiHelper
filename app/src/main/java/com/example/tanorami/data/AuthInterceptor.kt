@@ -1,17 +1,22 @@
 package com.example.tanorami.data
 
-import android.content.Context
+import com.example.tanorami.data.data_store.AppDataStore
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class AuthInterceptor(private val context: Context): Interceptor {
+class AuthInterceptor(
+    private val appDataStore: AppDataStore,
+) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val requestBuilder = chain.request().newBuilder()
 
-        val token = context.getSharedPreferences("USER", Context.MODE_PRIVATE).getString("token", null)
-        token?.let {
-            requestBuilder.addHeader("Authorization", "Bearer $it")
+        val token = runBlocking {
+            appDataStore.tokenUser.first()
         }
+
+        requestBuilder.addHeader("Authorization", "Bearer $token")
 
         return chain.proceed(requestBuilder.build())
     }

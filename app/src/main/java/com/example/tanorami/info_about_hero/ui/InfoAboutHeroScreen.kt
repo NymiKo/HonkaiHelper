@@ -19,9 +19,9 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.tanorami.R
 import com.example.tanorami.base_build_hero.ui.BaseBuildHeroFragment
-import com.example.tanorami.base_components.BaseButton
-import com.example.tanorami.base_components.BaseCenterAlignedTopAppBar
-import com.example.tanorami.base_components.BaseDefaultText
+import com.example.tanorami.base_components.button.BaseNextButton
+import com.example.tanorami.base_components.text.BaseDefaultText
+import com.example.tanorami.base_components.top_app_bar.BaseCenterAlignedTopAppBar
 import com.example.tanorami.info_about_hero.presentation.InfoAboutHeroViewModel
 import com.example.tanorami.info_about_hero.presentation.models.InfoAboutHeroScreenEvents
 import com.example.tanorami.info_about_hero.presentation.models.InfoAboutHeroScreenSideEffects
@@ -124,7 +124,7 @@ private fun InfoAboutHeroScreenContent(
                 lineHeight = 20.sp
             )
 
-            BaseButton(
+            BaseNextButton(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .padding(top = 16.dp),
@@ -134,7 +134,7 @@ private fun InfoAboutHeroScreenContent(
                 }
             )
 
-            BaseButton(
+            BaseNextButton(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .padding(top = 8.dp),

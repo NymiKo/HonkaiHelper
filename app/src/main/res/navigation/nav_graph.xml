@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.tanorami.auth.login.presentation.LoginFragment"
+        android:name="com.example.tanorami.auth.login.ui.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action

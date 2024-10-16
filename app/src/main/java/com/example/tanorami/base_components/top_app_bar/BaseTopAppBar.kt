@@ -1,4 +1,4 @@
-package com.example.tanorami.base_components
+package com.example.tanorami.base_components.top_app_bar
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.RowScope

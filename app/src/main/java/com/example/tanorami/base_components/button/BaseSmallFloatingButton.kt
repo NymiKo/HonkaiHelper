@@ -1,4 +1,4 @@
-package com.example.tanorami.base_components
+package com.example.tanorami.base_components.button
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme

@@ -9,6 +9,7 @@ import com.example.tanorami.change_nickname.data.ChangeNicknameService
 import com.example.tanorami.create_build_hero.data.CreateBuildHeroService
 import com.example.tanorami.createteam.data.CreateTeamService
 import com.example.tanorami.data.AuthInterceptor
+import com.example.tanorami.data.data_store.AppDataStore
 import com.example.tanorami.data.image_loader.ImageLoader
 import com.example.tanorami.data.image_loader.ImageLoaderImpl
 import com.example.tanorami.heroes.data.HeroesListService
@@ -38,7 +39,8 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideAuthInterceptor(context: Context): AuthInterceptor = AuthInterceptor(context)
+    fun provideAuthInterceptor(appDataStore: AppDataStore): AuthInterceptor =
+        AuthInterceptor(appDataStore)
 
     @Provides
     @Singleton

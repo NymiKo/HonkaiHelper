@@ -1,6 +1,6 @@
 package com.example.tanorami.auth.login.di
 
-import com.example.tanorami.auth.login.presentation.LoginFragment
+import com.example.tanorami.auth.login.ui.LoginFragment
 import dagger.Subcomponent
 
 @Subcomponent(modules = [LoginModule::class])

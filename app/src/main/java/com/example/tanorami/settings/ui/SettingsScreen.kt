@@ -29,15 +29,15 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.tanorami.R
-import com.example.tanorami.base_components.BaseDefaultText
-import com.example.tanorami.base_components.BaseTopAppBar
+import com.example.tanorami.base_components.button.BaseButton
+import com.example.tanorami.base_components.text.BaseDefaultText
+import com.example.tanorami.base_components.top_app_bar.BaseTopAppBar
 import com.example.tanorami.core.theme.DarkGray
 import com.example.tanorami.load_data.LoadDataFragment
 import com.example.tanorami.settings.presentation.SettingsViewModel
 import com.example.tanorami.settings.presentation.models.SettingsScreenEvents
 import com.example.tanorami.settings.presentation.models.SettingsScreenSideEffects
 import com.example.tanorami.settings.presentation.models.SettingsScreenUiState
-import com.example.tanorami.settings.ui.components.BaseButtonSettings
 import com.example.tanorami.utils.toast
 
 @Composable
@@ -146,7 +146,9 @@ private fun SettingsScreenContent(
                 )
 
                 Box(
-                    modifier = Modifier.fillMaxWidth().height(50.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(50.dp),
                     contentAlignment = Alignment.Center,
                 ) {
                     if (uiState.isLoading) {
@@ -157,7 +159,7 @@ private fun SettingsScreenContent(
                             color = MaterialTheme.colorScheme.secondary,
                         )
                     } else {
-                        BaseButtonSettings(
+                        BaseButton(
                             modifier = Modifier.padding(top = 16.dp),
                             fontSize = 14.sp,
                             text = stringResource(id = R.string.check_update_db),
@@ -167,9 +169,8 @@ private fun SettingsScreenContent(
                 }
             }
 
-            BaseButtonSettings(
+            BaseButton(
                 modifier = Modifier.padding(top = 16.dp),
-                fontSize = 18.sp,
                 text = stringResource(id = R.string.report_an_error),
                 onClick = { onEvent(SettingsScreenEvents.OnSendFeedbackScreen) }
             )

@@ -17,7 +17,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tanorami.R
-import com.example.tanorami.base_components.BaseDefaultText
+import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.core.theme.DarkGray
 
 @Composable

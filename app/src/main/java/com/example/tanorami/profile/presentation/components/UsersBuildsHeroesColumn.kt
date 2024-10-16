@@ -30,9 +30,9 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.tanorami.R
 import com.example.tanorami.base_build_hero.data.model.Weapon
-import com.example.tanorami.base_components.BaseDefaultText
 import com.example.tanorami.base_components.BaseHeroAvatarAndName
-import com.example.tanorami.base_components.BaseLazyColumn
+import com.example.tanorami.base_components.lazy_column.BaseLazyColumn
+import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
 import com.example.tanorami.core.theme.Blue
 import com.example.tanorami.core.theme.DarkGray
@@ -83,7 +83,9 @@ fun BuildItem(
         border = BorderStroke(1.dp, DarkGray),
     ) {
         Row(
-            modifier = Modifier.padding(16.dp).fillMaxWidth(),
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {

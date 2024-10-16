@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import com.example.tanorami.R
-import com.example.tanorami.base_components.BaseTopAppBar
+import com.example.tanorami.base_components.top_app_bar.BaseTopAppBar
 import com.example.tanorami.create_build_hero.ui.components.AvatarHeroImageAndName
 import com.example.tanorami.create_build_hero.ui.components.EquipmentBuildComponent
 import com.example.tanorami.info_about_decoration.ui.InfoAboutDecorationFragment
