@@ -22,7 +22,7 @@ class LoginViewModel @Inject constructor(
         when (event) {
             LoginScreenEvents.OnBack -> sendSideEffect(LoginScreenSideEffects.OnBack)
             is LoginScreenEvents.LoginChanged -> uiState = uiState.copy(
-                loginField = uiState.loginField.copy(
+                nicknameField = uiState.nicknameField.copy(
                     value = event.newValue,
                     isError = false
                 )
@@ -42,15 +42,15 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun authentication() {
-        if (checkLogin(uiState.loginField.value) && checkPassword(uiState.passwordField.value)) {
-            loginUser(uiState.loginField.value, uiState.passwordField.value)
+        if (checkLogin() && checkPassword()) {
+            loginUser()
         }
     }
 
-    private fun checkLogin(login: String): Boolean {
-        return if (login.isEmpty()) {
+    private fun checkLogin(): Boolean {
+        return if (uiState.nicknameField.value.isEmpty()) {
             uiState = uiState.copy(
-                loginField = uiState.loginField.copy(
+                nicknameField = uiState.nicknameField.copy(
                     isError = true,
                     errorMessage = R.string.empty_login
                 )
@@ -59,35 +59,22 @@ class LoginViewModel @Inject constructor(
         } else true
     }
 
-    private fun checkPassword(password: String): Boolean {
-        return when {
-            password.isEmpty() -> {
-                uiState = uiState.copy(
-                    passwordField = uiState.passwordField.copy(
-                        isError = true,
-                        errorMessage = R.string.empty_password
-                    )
+    private fun checkPassword(): Boolean {
+        return if (uiState.passwordField.value.isEmpty()) {
+            uiState = uiState.copy(
+                passwordField = uiState.passwordField.copy(
+                    isError = true,
+                    errorMessage = R.string.empty_password
                 )
-                false
-            }
-
-            password.length < 4 -> {
-                uiState = uiState.copy(
-                    passwordField = uiState.passwordField.copy(
-                        isError = true,
-                        errorMessage = R.string.incorrect_password
-                    )
-                )
-                false
-            }
-
-            else -> true
-        }
+            )
+            false
+        } else true
     }
 
-    private fun loginUser(login: String, password: String) = viewModelScope.launch {
+    private fun loginUser() = viewModelScope.launch {
         uiState = uiState.copy(isAuthentication = true)
-        when (val result = repository.login(login, password)) {
+        when (val result =
+            repository.login(uiState.nicknameField.value, uiState.passwordField.value)) {
             is NetworkResult.Error -> {
                 sendSideEffect(LoginScreenSideEffects.ShowToast(errorHandler(result.code)))
                 uiState = uiState.copy(isAuthentication = false)

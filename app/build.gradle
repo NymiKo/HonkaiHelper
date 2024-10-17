@@ -6,6 +6,7 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
     id 'org.jetbrains.kotlin.plugin.compose'
+    id 'com.google.devtools.ksp'
 }
 
 android {
@@ -64,16 +65,16 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.core:core-ktx:1.13.1'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-    implementation 'androidx.activity:activity-compose:1.9.2'
+    implementation 'androidx.activity:activity-compose:1.9.3'
 
     //Compose
-    def composeBom = platform('androidx.compose:compose-bom:2024.09.01')
+    def composeBom = platform('androidx.compose:compose-bom:2024.10.00')
     implementation(composeBom)
     androidTestImplementation(composeBom)
-    implementation("androidx.compose.material:material-icons-extended:1.7.1")
+    implementation("androidx.compose.material:material-icons-extended:1.7.4")
 
     //Navigation Component
-    def nav_version = "2.8.0"
+    def nav_version = "2.8.3"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
@@ -82,7 +83,7 @@ dependencies {
     def glide_version = '4.14.2'
     implementation "com.github.bumptech.glide:glide:$glide_version"
     implementation 'jp.wasabeef:glide-transformations:4.3.0'
-    kapt "com.github.bumptech.glide:compiler:$glide_version"
+    ksp "com.github.bumptech.glide:ksp:$glide_version"
 
     //Coil
     def coil_version = '2.6.0'
@@ -115,7 +116,7 @@ dependencies {
     def room_version = "2.6.1"
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
+    ksp "androidx.room:room-compiler:$room_version"
 
     //SplashScreen
     def splash_version = "1.0.1"
@@ -131,5 +132,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.6.1'
     kaptAndroidTest "com.google.dagger:dagger-compiler:2.48"
     androidTestImplementation 'com.google.dagger:dagger:2.48'
-    androidTestImplementation "androidx.fragment:fragment-testing:1.8.3"
+    androidTestImplementation "androidx.fragment:fragment-testing:1.8.4"
 }

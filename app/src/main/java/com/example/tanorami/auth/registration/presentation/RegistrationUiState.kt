@@ -1,4 +1,4 @@
-package com.example.tanorami.auth.registration
+package com.example.tanorami.auth.registration.presentation
 
 sealed class RegistrationUiState<out T> {
     object IDLE : RegistrationUiState<Nothing>()

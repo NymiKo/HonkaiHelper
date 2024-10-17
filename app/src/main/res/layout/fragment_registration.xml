@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".auth.registration.RegistrationFragment">
+    tools:context=".auth.registration.ui.RegistrationFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/registration"
+                android:text="@string/creating_account"
                 android:textAlignment="center"
                 android:textColor="?attr/colorSecondary"
                 android:textSize="@dimen/SP36"

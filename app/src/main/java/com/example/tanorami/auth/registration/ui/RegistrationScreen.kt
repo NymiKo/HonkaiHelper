@@ -1,6 +1,5 @@
-package com.example.tanorami.auth.login.ui
+package com.example.tanorami.auth.registration.ui
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,63 +13,61 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.tanorami.R
-import com.example.tanorami.auth.login.presentation.LoginViewModel
-import com.example.tanorami.auth.login.presentation.models.LoginScreenEvents
-import com.example.tanorami.auth.login.presentation.models.LoginScreenSideEffects
-import com.example.tanorami.auth.login.presentation.models.LoginScreenUiState
 import com.example.tanorami.auth.login.ui.components.LoginButton
 import com.example.tanorami.auth.login.ui.components.LoginOutlinedTextField
+import com.example.tanorami.auth.registration.presentation.RegistrationViewModel
+import com.example.tanorami.auth.registration.presentation.models.RegistrationScreenEvent
+import com.example.tanorami.auth.registration.presentation.models.RegistrationScreenSideEffects
+import com.example.tanorami.auth.registration.presentation.models.RegistrationScreenUiState
 import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.base_components.top_app_bar.BaseCenterAlignedTopAppBar
-import com.example.tanorami.core.theme.Grey
 import com.example.tanorami.utils.toast
 
 @Composable
-fun LoginScreen(
-    viewModel: LoginViewModel,
+fun RegistrationScreen(
+    viewModel: RegistrationViewModel,
     navController: NavController,
 ) {
     val state = viewModel.uiState().collectAsState().value
     val sideEffects = viewModel.uiEffect().collectAsState(initial = null).value
     val context = LocalContext.current
 
-    LoginScreenContent(
+    RegistrationScreenContent(
         uiState = state,
         onEvent = viewModel::onEvent
     )
 
     when (sideEffects) {
-        LoginScreenSideEffects.OnBack -> navController.popBackStack()
-        LoginScreenSideEffects.OnRegistrationScreen -> {
-            navController.navigate(R.id.action_loginFragment_to_registrationFragment)
-            viewModel.clearEffect()
+        RegistrationScreenSideEffects.SuccessCreatingAccount -> {
+            toast(context, R.string.success_creating_account)
+            navController.popBackStack()
         }
 
-        is LoginScreenSideEffects.ShowToast -> {
+        is RegistrationScreenSideEffects.ShowToast -> {
             toast(context, sideEffects.message)
             viewModel.clearEffect()
         }
 
+        RegistrationScreenSideEffects.OnBack -> navController.popBackStack()
         null -> {}
     }
 }
 
 @Composable
-private fun LoginScreenContent(
-    uiState: LoginScreenUiState,
-    onEvent: (LoginScreenEvents) -> Unit,
+private fun RegistrationScreenContent(
+    uiState: RegistrationScreenUiState,
+    onEvent: (RegistrationScreenEvent) -> Unit,
 ) {
     Scaffold(
         topBar = {
             BaseCenterAlignedTopAppBar(
-                title = stringResource(id = R.string.log_in_account),
-                onBack = { onEvent(LoginScreenEvents.OnBack) }
+                title = stringResource(id = R.string.creating_account),
+                onBack = { onEvent(RegistrationScreenEvent.OnBack) }
             )
         }
     ) { innerPadding ->
@@ -82,7 +79,7 @@ private fun LoginScreenContent(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             BaseDefaultText(
-                text = stringResource(id = R.string.welcome),
+                text = stringResource(id = R.string.join_us),
                 fontSize = 26.sp,
                 fontWeight = FontWeight.Bold,
             )
@@ -91,40 +88,38 @@ private fun LoginScreenContent(
                 modifier = Modifier
                     .padding(vertical = 16.dp)
                     .size(130.dp),
-                model = R.drawable.pom_pom_hey,
+                model = R.drawable.pom_pom_heart,
                 contentDescription = null
             )
 
             LoginOutlinedTextField(
                 value = uiState.nicknameField.value,
-                onValueChanged = { newValue -> onEvent(LoginScreenEvents.LoginChanged(newValue)) },
+                onValueChanged = { newValue -> onEvent(RegistrationScreenEvent.LoginChanged(newValue)) },
                 label = stringResource(id = R.string.nickname),
-                enabled = !uiState.isAuthentication,
+                enabled = !uiState.isCreatingAccount,
                 isError = uiState.nicknameField.isError,
                 supportingText = stringResource(id = uiState.nicknameField.errorMessage)
             )
 
             LoginOutlinedTextField(
                 value = uiState.passwordField.value,
-                onValueChanged = { newValue -> onEvent(LoginScreenEvents.PasswordChanged(newValue)) },
+                onValueChanged = { newValue ->
+                    onEvent(
+                        RegistrationScreenEvent.PasswordChanged(
+                            newValue
+                        )
+                    )
+                },
                 label = stringResource(id = R.string.password),
-                enabled = !uiState.isAuthentication,
+                enabled = !uiState.isCreatingAccount,
                 isError = uiState.passwordField.isError,
                 supportingText = stringResource(id = uiState.passwordField.errorMessage)
             )
 
             LoginButton(
-                isProgress = uiState.isAuthentication,
-                text = stringResource(id = R.string.log_in),
-                onClick = { onEvent(LoginScreenEvents.Authentication) }
-            )
-
-            BaseDefaultText(
-                modifier = Modifier.clickable { onEvent(LoginScreenEvents.OnRegistrationScreen) },
+                isProgress = uiState.isCreatingAccount,
                 text = stringResource(id = R.string.create_account),
-                fontSize = 14.sp,
-                textDecoration = TextDecoration.Underline,
-                color = Grey,
+                onClick = { onEvent(RegistrationScreenEvent.CreateAccount) }
             )
         }
     }

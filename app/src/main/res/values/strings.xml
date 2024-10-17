@@ -35,9 +35,11 @@
     <string name="empty_login">Логин не может быть пустым</string>
     <string name="empty_password">Пароль не может быть пустым</string>
     <string name="incorrect_password">Пароль должен содержать не менее 4 символов</string>
-    <string name="registration">Регистрация</string>
+    <string name="create_account">Создать аккаунт</string>
+    <string name="creating_account">Создание аккаунта</string>
+    <string name="join_us">Присоединяйся!</string>
     <string name="register">Зарегистрироваться</string>
-    <string name="registration_success">Регистрация прошла успешно. теперь вы можете авторизоваться</string>
+    <string name="success_creating_account">Теперь вы можете войти в аккаунт!</string>
     <string name="want_to_logout_of_your_account">Вы действительно хотите выйти из аккаунта?</string>
     <string name="logout_of_your_account">Выход из аккаунта</string>
     <string name="yes">Да</string>
