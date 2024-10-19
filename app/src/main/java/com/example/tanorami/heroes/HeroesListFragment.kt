@@ -8,8 +8,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.core.view.doOnPreDraw
-import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.tanorami.App
@@ -20,7 +20,7 @@ import com.example.tanorami.heroes.adapter.HeroesListActionListener
 import com.example.tanorami.heroes.adapter.HeroesListAdapter
 import com.example.tanorami.heroes.data.model.Hero
 import com.example.tanorami.info_about_hero.ui.InfoAboutHeroFragment
-import com.example.tanorami.load_data.DATA_UPLOADED_KEY
+import com.example.tanorami.load_data.ui.DATA_UPLOADED_KEY
 import com.example.tanorami.teams.ui.TeamsListFragment
 import com.example.tanorami.utils.getSharedPrefToken
 import com.example.tanorami.utils.gone
@@ -30,6 +30,7 @@ import com.example.tanorami.utils.visible
 import com.example.tanorami.viewing_users_build.ui.ViewingBuildHeroFromUserFragment
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.transition.MaterialFadeThrough
+import kotlinx.coroutines.launch
 
 class HeroesListFragment :
     BaseFragment<FragmentHeroesListBinding>(FragmentHeroesListBinding::inflate) {
@@ -48,8 +49,14 @@ class HeroesListFragment :
         reenterTransition = MaterialFadeThrough().apply {
             duration = 500
         }
-        setFragmentResultListener(DATA_UPLOADED_KEY) { _, bundle ->
-            if (bundle.getBoolean(ARG_DATA_UPLOADED)) viewModel.getHeroesList()
+        val result = findNavController().currentBackStackEntry?.savedStateHandle?.getStateFlow(
+            DATA_UPLOADED_KEY,
+            false
+        )
+        lifecycleScope.launch {
+            result?.collect {
+                if (it) viewModel.getHeroesList()
+            }
         }
     }
 

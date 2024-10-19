@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.tanorami.App
 import com.example.tanorami.core.theme.AppTheme
-import com.example.tanorami.load_data.DATA_UPLOADED_KEY
+import com.example.tanorami.load_data.ui.DATA_UPLOADED_KEY
 import com.example.tanorami.settings.presentation.SettingsViewModel
 import com.example.tanorami.settings.presentation.models.SettingsScreenEvents
 import javax.inject.Inject

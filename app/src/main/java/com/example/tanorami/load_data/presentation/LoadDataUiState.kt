@@ -1,4 +1,4 @@
-package com.example.tanorami.load_data
+package com.example.tanorami.load_data.presentation
 
 sealed class LoadDataUiState {
     object LOADING: LoadDataUiState()

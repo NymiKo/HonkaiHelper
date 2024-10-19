@@ -72,7 +72,7 @@
     </fragment>
     <fragment
         android:id="@+id/loadDataFragment"
-        android:name="com.example.tanorami.load_data.LoadDataFragment"
+        android:name="com.example.tanorami.load_data.ui.LoadDataFragment"
         android:label="fragment_load_data"
         tools:layout="@layout/fragment_load_data" >
         <action

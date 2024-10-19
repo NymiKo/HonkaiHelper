@@ -9,7 +9,7 @@ import androidx.navigation.findNavController
 import com.example.tanorami.App
 import com.example.tanorami.R
 import com.example.tanorami.databinding.ActivityMainBinding
-import com.example.tanorami.load_data.LoadDataFragment
+import com.example.tanorami.load_data.ui.LoadDataFragment
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {

@@ -33,7 +33,7 @@ import com.example.tanorami.base_components.button.BaseButton
 import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.base_components.top_app_bar.BaseTopAppBar
 import com.example.tanorami.core.theme.DarkGray
-import com.example.tanorami.load_data.LoadDataFragment
+import com.example.tanorami.load_data.ui.LoadDataFragment
 import com.example.tanorami.settings.presentation.SettingsViewModel
 import com.example.tanorami.settings.presentation.models.SettingsScreenEvents
 import com.example.tanorami.settings.presentation.models.SettingsScreenSideEffects

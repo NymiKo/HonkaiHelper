@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".load_data.LoadDataFragment">
+    tools:context=".load_data.ui.LoadDataFragment">
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_download_data"
