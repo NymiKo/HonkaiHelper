@@ -35,7 +35,7 @@ import com.example.tanorami.base_components.lazy_column.BaseLazyColumn
 import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
 import com.example.tanorami.core.theme.Blue
-import com.example.tanorami.core.theme.DarkGray
+import com.example.tanorami.core.theme.DarkGrey
 import com.example.tanorami.core.theme.GreyTransparent20
 import com.example.tanorami.core.theme.Orange
 import com.example.tanorami.core.theme.Violet
@@ -80,7 +80,7 @@ fun BuildItem(
             },
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
-        border = BorderStroke(1.dp, DarkGray),
+        border = BorderStroke(1.dp, DarkGrey),
     ) {
         Row(
             modifier = Modifier

@@ -19,7 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.tanorami.core.theme.DarkGray
+import com.example.tanorami.core.theme.DarkGrey
 import com.example.tanorami.core.theme.Orange
 import com.example.tanorami.core.theme.Violet
 import com.example.tanorami.core.theme.White
@@ -71,7 +71,7 @@ private fun HeroName(
         modifier = modifier
             .height(25.dp)
             .fillMaxWidth()
-            .background(DarkGray),
+            .background(DarkGrey),
         text = nameHero,
         textAlign = TextAlign.Center,
         color = White,

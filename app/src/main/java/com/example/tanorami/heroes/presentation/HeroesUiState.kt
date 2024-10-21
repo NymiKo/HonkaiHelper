@@ -1,4 +1,4 @@
-package com.example.tanorami.heroes
+package com.example.tanorami.heroes.presentation
 
 sealed class HeroesUiState<out T> {
     object LOADING : HeroesUiState<Nothing>()

@@ -33,7 +33,7 @@ import coil.compose.AsyncImage
 import com.example.tanorami.R
 import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.core.theme.AppTheme
-import com.example.tanorami.core.theme.DarkGray
+import com.example.tanorami.core.theme.DarkGrey
 import com.example.tanorami.core.theme.White
 import com.example.tanorami.create_build_hero.data.model.BuildStatsEquipment
 
@@ -117,7 +117,7 @@ fun IconStatEquipment(
         modifier = modifier
             .size(55.dp)
             .clip(CircleShape)
-            .background(color = DarkGray, shape = CircleShape)
+            .background(color = DarkGrey, shape = CircleShape)
             .padding(8.dp),
         model = statIcon,
         contentDescription = null,

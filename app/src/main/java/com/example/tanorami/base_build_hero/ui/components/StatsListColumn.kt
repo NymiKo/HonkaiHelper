@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.tanorami.R
 import com.example.tanorami.base_components.text.BaseDefaultText
-import com.example.tanorami.core.theme.DarkGray
+import com.example.tanorami.core.theme.DarkGrey
 
 @Composable
 internal fun StatsListColumn(
@@ -48,7 +48,7 @@ internal fun StatsListColumn(
                         .padding(end = 8.dp)
                         .size(55.dp)
                         .clip(CircleShape)
-                        .background(DarkGray, CircleShape)
+                        .background(DarkGrey, CircleShape)
                         .padding(8.dp),
                     model = iconList[index],
                     contentDescription = null

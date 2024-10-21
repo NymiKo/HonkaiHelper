@@ -20,7 +20,7 @@ import com.example.tanorami.R
 import com.example.tanorami.base_build_hero.ui.components.HeaderCategory
 import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.core.theme.AppTheme
-import com.example.tanorami.core.theme.DarkGray
+import com.example.tanorami.core.theme.DarkGrey
 import com.example.tanorami.info_about_hero.data.model.Eidolon
 
 @Composable
@@ -59,7 +59,7 @@ private fun EidolonItem(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .border(1.dp, DarkGray, RoundedCornerShape(16.dp))
+            .border(1.dp, DarkGrey, RoundedCornerShape(16.dp))
             .padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {

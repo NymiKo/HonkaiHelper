@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.tanorami.base_components.text.BaseDefaultText
-import com.example.tanorami.core.theme.DarkGray
+import com.example.tanorami.core.theme.DarkGrey
 import com.example.tanorami.core.theme.Green
 import com.example.tanorami.core.theme.Orange
 import com.example.tanorami.core.theme.Violet
@@ -43,7 +43,7 @@ fun ItemHeroAvatarWithName(
             .width(120.dp)
             .border(
                 border = if (activeHeroInTeam.active) BorderStroke(3.dp, Green)
-                else BorderStroke(1.dp, DarkGray),
+                else BorderStroke(1.dp, DarkGrey),
                 shape = if (activeHeroInTeam.active) RoundedCornerShape(15.dp) else RectangleShape
             )
             .clip(if (activeHeroInTeam.active) RoundedCornerShape(15.dp) else RectangleShape)
@@ -68,7 +68,7 @@ fun ItemHeroAvatarWithName(
             modifier = Modifier
                 .height(30.dp)
                 .fillMaxWidth()
-                .background(DarkGray)
+                .background(DarkGrey)
                 .wrapContentHeight(),
             text = activeHeroInTeam.hero.name,
             fontSize = 11.sp,

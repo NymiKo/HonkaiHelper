@@ -32,7 +32,7 @@ import com.example.tanorami.R
 import com.example.tanorami.base_components.button.BaseButton
 import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.base_components.top_app_bar.BaseTopAppBar
-import com.example.tanorami.core.theme.DarkGray
+import com.example.tanorami.core.theme.DarkGrey
 import com.example.tanorami.load_data.ui.LoadDataFragment
 import com.example.tanorami.settings.presentation.SettingsViewModel
 import com.example.tanorami.settings.presentation.models.SettingsScreenEvents
@@ -106,7 +106,7 @@ private fun SettingsScreenContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(10.dp))
-                    .border(1.dp, DarkGray, RoundedCornerShape(10.dp))
+                    .border(1.dp, DarkGrey, RoundedCornerShape(10.dp))
                     .padding(16.dp)
             ) {
                 Row(

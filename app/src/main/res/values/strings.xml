@@ -126,6 +126,9 @@
     <string name="chance_of_hitting_effects">Шанс попадания эффектов %</string>
     <string name="healing_bonus">Бонус исцеления %</string>
     <string name="recovery_energy">Восст. энергии %</string>
+    <string name="enter_name_hero">Имя персонажа</string>
+    <string name="enter_build_uid">Идентификатор сборки</string>
+    <string name="enter_team_uid">Идентификатор команды</string>
 
 
     <string name="base_build_weapon_transition_name" translatable="false">base_build_weapon_transition_name_%d</string>
@@ -197,12 +200,6 @@
         <item>Крит.шанс %</item>
         <item>Шанс попадания эффектов %</item>
         <item>Бонус исцеления %</item>
-    </string-array>
-
-    <string-array name="search_dialog">
-        <item>Поиск персонажа</item>
-        <item>Поиск сборки</item>
-        <item>Поиск команды</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->

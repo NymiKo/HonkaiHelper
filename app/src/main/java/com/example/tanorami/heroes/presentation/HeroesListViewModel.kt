@@ -1,4 +1,4 @@
-package com.example.tanorami.heroes
+package com.example.tanorami.heroes.presentation
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.Job

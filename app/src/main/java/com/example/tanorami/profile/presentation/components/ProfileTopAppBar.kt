@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.tanorami.R
+import com.example.tanorami.base_components.icon.BaseIcon
 import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.base_components.top_app_bar.BaseTopAppBar
 
@@ -38,11 +39,7 @@ fun ProfileTopAppBar(
         title = stringResource(id = R.string.profile),
         actions = {
             IconButton(onClick = { showMenu = !showMenu }) {
-                Icon(
-                    imageVector = Icons.Default.MoreVert,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.secondary
-                )
+                BaseIcon(icon = Icons.Default.MoreVert)
             }
             DropdownMenu(expanded = showMenu, onDismissRequest = { showMenu = false }) {
                 MenuItemChangeNickname(onEditNicknameScreen = onEditNicknameScreen::invoke)

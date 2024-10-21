@@ -7,6 +7,7 @@ import androidx.test.espresso.matcher.ViewMatchers.hasDescendant
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.example.tanorami.base.BaseView
 import com.example.tanorami.heroes.adapter.HeroesListAdapter
+import com.example.tanorami.heroes.ui.HeroesListFragment
 import com.example.tanorami.utils.atPosition
 import org.junit.Rule
 import org.junit.Test

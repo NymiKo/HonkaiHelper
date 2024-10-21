@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tanorami.R
 import com.example.tanorami.base_components.text.BaseDefaultText
-import com.example.tanorami.core.theme.DarkGray
+import com.example.tanorami.core.theme.DarkGrey
 
 @Composable
 internal fun DescriptionWeaponSkill(
@@ -32,7 +32,7 @@ internal fun DescriptionWeaponSkill(
         colors = CardDefaults.cardColors(
             containerColor = Color.Transparent
         ),
-        border = BorderStroke(width = 1.dp, DarkGray)
+        border = BorderStroke(width = 1.dp, DarkGrey)
     ) {
         Column(
             modifier = Modifier.padding(16.dp),

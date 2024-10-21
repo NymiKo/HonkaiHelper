@@ -21,7 +21,7 @@
         tools:layout="@layout/fragment_create_team" />
     <fragment
         android:id="@+id/heroesListFragment"
-        android:name="com.example.tanorami.heroes.HeroesListFragment"
+        android:name="com.example.tanorami.heroes.ui.HeroesListFragment"
         android:label="fragment_heroes_list"
         tools:layout="@layout/fragment_heroes_list" >
         <action

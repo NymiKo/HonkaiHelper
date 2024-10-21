@@ -2,7 +2,7 @@ package com.example.tanorami.heroes.di
 
 import androidx.lifecycle.ViewModel
 import com.example.tanorami.di.ViewModelKey
-import com.example.tanorami.heroes.HeroesListViewModelImpl
+import com.example.tanorami.heroes.presentation.HeroesListViewModelImpl
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

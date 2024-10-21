@@ -14,7 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.tanorami.base_components.text.BaseDefaultText
-import com.example.tanorami.core.theme.DarkGray
+import com.example.tanorami.core.theme.DarkGrey
 import com.example.tanorami.core.theme.White
 
 @Composable
@@ -35,7 +35,7 @@ fun AvatarHeroImageAndName(
         BaseDefaultText(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(DarkGray)
+                .background(DarkGrey)
                 .padding(8.dp),
             text = heroName ?: "",
             color = White,

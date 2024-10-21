@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tanorami.R
 import com.example.tanorami.base_components.text.BaseDefaultText
-import com.example.tanorami.core.theme.DarkGray
+import com.example.tanorami.core.theme.DarkGrey
 
 @Composable
 internal fun DescriptionDecorationEffect(
@@ -29,7 +29,7 @@ internal fun DescriptionDecorationEffect(
         colors = CardDefaults.cardColors(
             containerColor = Color.Transparent
         ),
-        border = BorderStroke(width = 1.dp, color = DarkGray)
+        border = BorderStroke(width = 1.dp, color = DarkGrey)
     ) {
         Column(
             modifier = Modifier.padding(16.dp),

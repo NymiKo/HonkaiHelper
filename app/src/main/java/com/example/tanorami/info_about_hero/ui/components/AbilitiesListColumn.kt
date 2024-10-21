@@ -23,7 +23,7 @@ import com.example.tanorami.R
 import com.example.tanorami.base_build_hero.ui.components.HeaderCategory
 import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.core.theme.AppTheme
-import com.example.tanorami.core.theme.DarkGray
+import com.example.tanorami.core.theme.DarkGrey
 import com.example.tanorami.core.theme.Orange
 import com.example.tanorami.info_about_hero.data.model.Ability
 
@@ -65,7 +65,7 @@ private fun AbilityItem(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .border(1.dp, DarkGray, RoundedCornerShape(16.dp))
+            .border(1.dp, DarkGrey, RoundedCornerShape(16.dp))
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
@@ -77,7 +77,7 @@ private fun AbilityItem(
                 modifier = Modifier
                     .size(40.dp)
                     .clip(CircleShape)
-                    .background(DarkGray, CircleShape)
+                    .background(DarkGrey, CircleShape)
                     .align(Alignment.CenterVertically)
                     .padding(2.dp),
                 model = abilityImage,
