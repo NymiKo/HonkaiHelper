@@ -17,7 +17,7 @@ import com.example.tanorami.create_build_hero.di.CreateBuildHeroComponent
 import com.example.tanorami.createteam.data.CreateTeamRepository
 import com.example.tanorami.createteam.di.CreateTeamComponent
 import com.example.tanorami.heroes.data.HeroesListRepository
-import com.example.tanorami.heroes.di.HeroesListComponent
+import com.example.tanorami.heroes.di.HeroesListModule
 import com.example.tanorami.info_about_decoration.data.InfoAboutDecorationRepository
 import com.example.tanorami.info_about_decoration.di.InfoAboutDecorationComponent
 import com.example.tanorami.info_about_hero.data.InfoAboutHeroRepository
@@ -28,7 +28,7 @@ import com.example.tanorami.info_about_weapon.data.InfoAboutWeaponRepository
 import com.example.tanorami.info_about_weapon.di.InfoAboutWeaponComponent
 import com.example.tanorami.load_data.data.LoadDataRepository
 import com.example.tanorami.load_data.di.LoadDataComponent
-import com.example.tanorami.profile.di.ProfileComponent
+import com.example.tanorami.profile.di.ProfileModule
 import com.example.tanorami.profile.domain.ProfileRepository
 import com.example.tanorami.send_feedback.data.SendFeedbackRepository
 import com.example.tanorami.send_feedback.di.SendFeedbackComponent
@@ -51,6 +51,8 @@ import javax.inject.Singleton
         NetworkModule::class,
         RoomModule::class,
         DataStoreModule::class,
+        ProfileModule::class,
+        HeroesListModule::class,
     ]
 )
 interface AppComponent {
@@ -61,12 +63,10 @@ interface AppComponent {
     }
 
     fun mainComponent(): MainComponent.Factory
-    fun heroesListComponent(): HeroesListComponent.Factory
     fun teamsListComponent(): TeamsListComponent.Factory
     fun createTeamComponent(): CreateTeamComponent.Factory
     fun loginComponent(): LoginComponent.Factory
     fun registrationComponent(): RegistrationComponent.Factory
-    fun profileComponent(): ProfileComponent.Factory
     fun buildsHeroListComponent(): BuildsHeroListComponent.Factory
     fun createBuildHeroComponent(): CreateBuildHeroComponent.Factory
     fun infoAboutHeroComponent(): InfoAboutHeroComponent.Factory

@@ -1,7 +1,5 @@
 package com.example.tanorami.di
 
-import androidx.lifecycle.AbstractSavedStateViewModelFactory
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
@@ -12,12 +10,10 @@ import javax.inject.Provider
 import kotlin.reflect.KClass
 
 class ViewModelFactory @Inject constructor(
-    private val creators: @JvmSuppressWildcards Map<Class<out ViewModel>, Provider<ViewModel>>
-) : AbstractSavedStateViewModelFactory() {
+    private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
+) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(
-        key: String,
-        modelClass: Class<T>,
-        handle: SavedStateHandle
+        modelClass: Class<T>
     ): T {
         var creator: Provider<out ViewModel>? = creators[modelClass]
         if (creator == null) {
@@ -46,5 +42,11 @@ interface ViewModelFactoryModule {
     fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 }
 
+@Target(
+    AnnotationTarget.FUNCTION,
+    AnnotationTarget.PROPERTY_GETTER,
+    AnnotationTarget.PROPERTY_SETTER
+)
+@Retention(AnnotationRetention.RUNTIME)
 @MapKey
 annotation class ViewModelKey(val value: KClass<out ViewModel>)

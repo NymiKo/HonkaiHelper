@@ -8,5 +8,4 @@ sealed interface HeroesListScreenEvents : UiEvent {
     class OnInfoAboutHeroScreen(val idHero: Int) : HeroesListScreenEvents
     class ChangeSearchBarFocus(val focused: Boolean) : HeroesListScreenEvents
     class SearchTextChanged(val newValue: String) : HeroesListScreenEvents
-    class SearchHero(val nameHero: String) : HeroesListScreenEvents
 }

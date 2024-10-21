@@ -63,7 +63,7 @@
         tools:layout="@layout/fragment_registration" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.tanorami.profile.presentation.ProfileFragment"
+        android:name="com.example.tanorami.profile.ui.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action

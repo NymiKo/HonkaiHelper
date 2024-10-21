@@ -1,7 +1,6 @@
 package com.example.tanorami.info_about_weapon.ui
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +12,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.tanorami.App
-import com.example.tanorami.R
 import com.example.tanorami.core.theme.AppTheme
 import com.example.tanorami.info_about_weapon.presentation.InfoAboutWeaponViewModel
-import com.google.android.material.transition.MaterialContainerTransform
 import javax.inject.Inject
 
 class InfoAboutWeaponFragment : Fragment() {
@@ -34,11 +31,6 @@ class InfoAboutWeaponFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedElementEnterTransition = MaterialContainerTransform().apply {
-            drawingViewId = R.id.navHostFragment
-            duration = 500
-            scrimColor = Color.TRANSPARENT
-        }
         viewModel.getWeapon(idWeapon)
     }
 

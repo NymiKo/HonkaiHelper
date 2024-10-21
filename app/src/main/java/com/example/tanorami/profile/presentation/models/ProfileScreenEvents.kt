@@ -1,8 +1,9 @@
-package com.example.tanorami.profile.presentation
+package com.example.tanorami.profile.presentation.models
 
+import com.example.tanorami.base.UiEvent
 import java.io.File
 
-internal sealed interface ProfileScreenEvents {
+sealed interface ProfileScreenEvents : UiEvent {
     data object FetchProfile: ProfileScreenEvents
     data object OnLoginScreen: ProfileScreenEvents
     data object OnChangeNicknameScreen: ProfileScreenEvents

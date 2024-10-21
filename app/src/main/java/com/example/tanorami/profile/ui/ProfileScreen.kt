@@ -1,4 +1,4 @@
-package com.example.tanorami.profile.presentation
+package com.example.tanorami.profile.ui
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -32,36 +32,59 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.tanorami.R
 import com.example.tanorami.base.shimmerEffect
 import com.example.tanorami.base_components.text.BaseDefaultText
+import com.example.tanorami.change_nickname.presentation.ChangeNicknameFragment
 import com.example.tanorami.core.theme.Blue
 import com.example.tanorami.core.theme.White
+import com.example.tanorami.create_build_hero.ui.CreateBuildHeroFragment
+import com.example.tanorami.createteam.ui.CreateTeamFragment
+import com.example.tanorami.profile.presentation.ProfileViewModel
 import com.example.tanorami.profile.presentation.components.ErrorComponent
 import com.example.tanorami.profile.presentation.components.ProfileTopAppBar
 import com.example.tanorami.profile.presentation.components.TeamsAndBuildsInProfile
 import com.example.tanorami.profile.presentation.components.UserNotLoggedComponent
+import com.example.tanorami.profile.presentation.models.ProfileScreenEvents
+import com.example.tanorami.profile.presentation.models.ProfileScreenUiState
 import com.example.tanorami.utils.toFile
 
 @Composable
 fun ProfileScreen(
-    modifier: Modifier = Modifier,
-    viewModel: ProfileViewModel,
-    onChangeNicknameScreen: (nickname: String) -> Unit,
-    onEditBuildHeroScreen: (idBuild: Long) -> Unit,
-    onEditTeamScreen: (idTeam: Long) -> Unit,
-    onLoginScreen: () -> Unit,
+    viewModelFactory: ViewModelProvider.Factory,
+    viewModel: ProfileViewModel = viewModel(factory = viewModelFactory),
+    navController: NavController,
 ) {
     ProfileScreenContent(
-        modifier = modifier,
         uiState = viewModel.profileUiState.collectAsState().value,
         onEvents = { event ->
             when (event) {
-                ProfileScreenEvents.OnChangeNicknameScreen -> onChangeNicknameScreen("")
-                is ProfileScreenEvents.OnEditBuildHeroScreen -> onEditBuildHeroScreen(event.idBuild)
-                is ProfileScreenEvents.OnEditTeamScreen -> onEditTeamScreen(event.idTeam)
-                ProfileScreenEvents.OnLoginScreen -> onLoginScreen()
+                ProfileScreenEvents.OnChangeNicknameScreen -> {
+                    navController.navigate(
+                        R.id.changeNicknameFragment,
+                        ChangeNicknameFragment.newInject("")
+                    )
+                }
+
+                is ProfileScreenEvents.OnEditBuildHeroScreen -> {
+                    navController.navigate(
+                        R.id.createBuildHeroFragment,
+                        CreateBuildHeroFragment.newInstance(idBuild = event.idBuild)
+                    )
+                }
+
+                is ProfileScreenEvents.OnEditTeamScreen -> {
+                    navController.navigate(
+                        R.id.createTeamFragment,
+                        CreateTeamFragment.newInstance(event.idTeam)
+                    )
+                }
+
+                ProfileScreenEvents.OnLoginScreen -> navController.navigate(R.id.loginFragment)
                 else -> Unit
             }
             viewModel.onEvent(event)

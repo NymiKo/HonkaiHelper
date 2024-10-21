@@ -9,6 +9,8 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.tanorami.R
 import com.example.tanorami.heroes.presentation.HeroesListViewModelImpl
@@ -21,7 +23,8 @@ import com.example.tanorami.info_about_hero.ui.InfoAboutHeroFragment
 
 @Composable
 fun HeroesListScreen(
-    viewModel: HeroesListViewModelImpl,
+    viewModelFactory: ViewModelProvider.Factory,
+    viewModel: HeroesListViewModelImpl = viewModel(factory = viewModelFactory),
     navController: NavController,
 ) {
     val state = viewModel.uiState().collectAsState().value

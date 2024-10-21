@@ -8,10 +8,7 @@ import com.example.tanorami.heroes.data.HeroesListRepository
 import com.example.tanorami.heroes.presentation.models.HeroesListScreenEvents
 import com.example.tanorami.heroes.presentation.models.HeroesListScreenSideEffects
 import com.example.tanorami.heroes.presentation.models.HeroesListScreenUiState
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -46,8 +43,6 @@ class HeroesListViewModelImpl @Inject constructor(
                     }
                 )
             }
-
-            is HeroesListScreenEvents.SearchHero -> searchHeroByName(event.nameHero)
         }
     }
 
@@ -55,34 +50,21 @@ class HeroesListViewModelImpl @Inject constructor(
         uiState = uiState.copy(heroesList = repository.getHeroesList())
     }
 
-    private fun searchHeroByName(nameHero: String) = viewModelScope.launch {
-        if (nameHero.isEmpty()) {
-            uiState = uiState.copy(heroesList = uiState.heroesList)
-        } else {
-            uiState = uiState.copy(heroesList = uiState.heroesList.filter { hero ->
-                hero.name.contains(nameHero)
-            })
-        }
-    }
+    private fun getAvatar() = viewModelScope.launch {
+        val token = appDataStore.tokenUser.first()
 
-    private fun getAvatar() {
-        appDataStore.tokenUser
-            .onEach {
-                if (it.isNotEmpty()) {
-                    when (val result = repository.getAvatar()) {
-                        is NetworkResult.Error -> {
+        if (token.isNotEmpty()) {
+            when (val result = repository.getAvatar()) {
+                is NetworkResult.Error -> {
 
-                        }
+                }
 
-                        is NetworkResult.Success -> {
-                            uiState = uiState.copy(userAvatar = result.data)
-                        }
-                    }
-                } else {
-                    uiState = uiState.copy(userAvatar = "")
+                is NetworkResult.Success -> {
+                    uiState = uiState.copy(userAvatar = result.data)
                 }
             }
-            .flowOn(Dispatchers.Default)
-            .launchIn(viewModelScope)
+        } else {
+            uiState = uiState.copy(userAvatar = "")
+        }
     }
 }

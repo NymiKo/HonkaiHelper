@@ -1,4 +1,4 @@
-package com.example.tanorami.profile.presentation
+package com.example.tanorami.profile.presentation.models
 
 import com.example.tanorami.profile.data.model.User
 

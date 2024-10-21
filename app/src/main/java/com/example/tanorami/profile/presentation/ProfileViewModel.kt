@@ -1,11 +1,15 @@
 package com.example.tanorami.profile.presentation
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tanorami.R
+import com.example.tanorami.base.BaseViewModel
 import com.example.tanorami.data.NetworkResult
 import com.example.tanorami.data.data_store.AppDataStore
 import com.example.tanorami.profile.domain.ProfileRepository
+import com.example.tanorami.profile.presentation.models.ProfileScreenEvents
+import com.example.tanorami.profile.presentation.models.ProfileScreenSideEffects
+import com.example.tanorami.profile.presentation.models.ProfileScreenUiState
+import com.example.tanorami.profile.presentation.models.ProfileUiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -19,7 +23,9 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(
     private val repository: ProfileRepository,
     private val appDataStore: AppDataStore,
-) : ViewModel() {
+) : BaseViewModel<ProfileUiState, ProfileScreenEvents, ProfileScreenSideEffects>(
+    initialState = ProfileUiState("")
+) {
 
     private var _profileUiState = MutableStateFlow<ProfileScreenUiState>(ProfileScreenUiState.Empty)
     val profileUiState = _profileUiState.asStateFlow()
@@ -28,7 +34,7 @@ class ProfileViewModel @Inject constructor(
         getProfile()
     }
 
-    internal fun onEvent(event: ProfileScreenEvents) {
+    override fun onEvent(event: ProfileScreenEvents) {
         when (event) {
             ProfileScreenEvents.LogoutAccount -> logoutAccount()
             ProfileScreenEvents.FetchProfile -> getProfile()
