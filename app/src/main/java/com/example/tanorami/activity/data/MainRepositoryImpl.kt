@@ -10,18 +10,8 @@ import javax.inject.Inject
 
 class MainRepositoryImpl @Inject constructor(
     @IODispatcher private val ioDispatcher: CoroutineDispatcher,
-    private val mainService: MainService,
     private val heroesListService: HeroesListService,
 ): MainRepository {
-
-    override suspend fun getRemoteVersionDB(): NetworkResult<String> {
-        return withContext(ioDispatcher) {
-            handleApi {
-                mainService.getVersionDB()
-            }
-        }
-    }
-
     override suspend fun getAvatar(): NetworkResult<String> {
         return withContext(ioDispatcher) {
             handleApi {

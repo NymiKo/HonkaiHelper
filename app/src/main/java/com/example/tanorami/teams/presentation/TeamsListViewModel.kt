@@ -47,10 +47,10 @@ class TeamsListViewModel @Inject constructor(
     }
 
     private fun getTeamsList(idHero: Int, uid: String?) = viewModelScope.launch {
-        val result = if (uid == "") {
-            repository.getTeamsListByID(idHero)
-        } else {
-            repository.getTeamsListByUID(uid!!)
+        val result = when {
+            uid?.isNotEmpty() == true -> repository.getTeamsListByUID(uid)
+            idHero != -1 -> repository.getTeamsListByID(idHero)
+            else -> repository.getTeamsList()
         }
 
         when (result) {
@@ -65,7 +65,7 @@ class TeamsListViewModel @Inject constructor(
                     isLoading = false,
                     isError = false,
                     teamsList = result.data,
-                    uid = uid
+                    uid = uid ?: ""
                 )
             }
         }

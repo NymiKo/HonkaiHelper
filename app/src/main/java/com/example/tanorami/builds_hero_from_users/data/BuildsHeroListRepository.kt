@@ -6,5 +6,6 @@ import com.example.tanorami.data.local.models.hero.HeroWithNameAvatarRarity
 
 interface BuildsHeroListRepository {
     suspend fun getHero(idHero: Int): HeroWithNameAvatarRarity
-    suspend fun getBuildsHeroList(idHero: Int): NetworkResult<List<BuildHeroWithUser>>
+    suspend fun getBuildsHeroListByIdHero(idHero: Int): NetworkResult<List<BuildHeroWithUser>>
+    suspend fun getBuildsHeroList(): NetworkResult<List<BuildHeroWithUser>>
 }

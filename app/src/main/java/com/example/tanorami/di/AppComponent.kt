@@ -10,7 +10,7 @@ import com.example.tanorami.auth.registration.di.RegistrationComponent
 import com.example.tanorami.base_build_hero.data.BaseBuildHeroRepository
 import com.example.tanorami.base_build_hero.di.BaseBuildHeroComponent
 import com.example.tanorami.builds_hero_from_users.data.BuildsHeroListRepository
-import com.example.tanorami.builds_hero_from_users.di.BuildsHeroListComponent
+import com.example.tanorami.builds_hero_from_users.di.BuildsHeroListModule
 import com.example.tanorami.change_nickname.data.ChangeNicknameRepository
 import com.example.tanorami.change_nickname.di.ChangeNicknameComponent
 import com.example.tanorami.create_build_hero.di.CreateBuildHeroComponent
@@ -21,13 +21,16 @@ import com.example.tanorami.heroes.di.HeroesListModule
 import com.example.tanorami.info_about_decoration.data.InfoAboutDecorationRepository
 import com.example.tanorami.info_about_decoration.di.InfoAboutDecorationComponent
 import com.example.tanorami.info_about_hero.data.InfoAboutHeroRepository
-import com.example.tanorami.info_about_hero.di.InfoAboutHeroComponent
+import com.example.tanorami.info_about_hero.di.InfoAboutHeroModule
 import com.example.tanorami.info_about_relic.data.RelicInfoRepository
 import com.example.tanorami.info_about_relic.di.RelicInfoComponent
 import com.example.tanorami.info_about_weapon.data.InfoAboutWeaponRepository
 import com.example.tanorami.info_about_weapon.di.InfoAboutWeaponComponent
 import com.example.tanorami.load_data.data.LoadDataRepository
 import com.example.tanorami.load_data.di.LoadDataComponent
+import com.example.tanorami.load_data.di.LoadDataModule
+import com.example.tanorami.navigation.main.MainScreenRepositoryImpl
+import com.example.tanorami.navigation.main.di.MainScreenModule
 import com.example.tanorami.profile.di.ProfileModule
 import com.example.tanorami.profile.domain.ProfileRepository
 import com.example.tanorami.send_feedback.data.SendFeedbackRepository
@@ -35,7 +38,7 @@ import com.example.tanorami.send_feedback.di.SendFeedbackComponent
 import com.example.tanorami.settings.data.SettingsRepository
 import com.example.tanorami.settings.di.SettingsComponent
 import com.example.tanorami.teams.data.TeamsListRepository
-import com.example.tanorami.teams.di.TeamsListComponent
+import com.example.tanorami.teams.di.TeamsListModule
 import com.example.tanorami.viewing_users_build.data.ViewingUsersBuildRepository
 import com.example.tanorami.viewing_users_build.di.ViewingUsersBuildComponent
 import dagger.BindsInstance
@@ -53,6 +56,11 @@ import javax.inject.Singleton
         DataStoreModule::class,
         ProfileModule::class,
         HeroesListModule::class,
+        BuildsHeroListModule::class,
+        TeamsListModule::class,
+        InfoAboutHeroModule::class,
+        LoadDataModule::class,
+        MainScreenModule::class,
     ]
 )
 interface AppComponent {
@@ -63,13 +71,10 @@ interface AppComponent {
     }
 
     fun mainComponent(): MainComponent.Factory
-    fun teamsListComponent(): TeamsListComponent.Factory
     fun createTeamComponent(): CreateTeamComponent.Factory
     fun loginComponent(): LoginComponent.Factory
     fun registrationComponent(): RegistrationComponent.Factory
-    fun buildsHeroListComponent(): BuildsHeroListComponent.Factory
     fun createBuildHeroComponent(): CreateBuildHeroComponent.Factory
-    fun infoAboutHeroComponent(): InfoAboutHeroComponent.Factory
     fun loadDataComponent(): LoadDataComponent.Factory
     fun baseBuildHeroComponent(): BaseBuildHeroComponent.Factory
     fun weaponInfoComponent(): InfoAboutWeaponComponent.Factory
@@ -98,4 +103,5 @@ interface AppComponent {
     val changeNicknameRepository: ChangeNicknameRepository
     val settingsRepository: SettingsRepository
     val sendFeedbackRepository: SendFeedbackRepository
+    val mainScreenRepository: MainScreenRepositoryImpl
 }

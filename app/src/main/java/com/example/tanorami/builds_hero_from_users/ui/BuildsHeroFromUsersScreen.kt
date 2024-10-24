@@ -1,11 +1,10 @@
 package com.example.tanorami.builds_hero_from_users.ui
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -13,9 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.tanorami.R
-import com.example.tanorami.base_components.button.BaseSmallFloatingButton
 import com.example.tanorami.base_components.top_app_bar.BaseTopAppBar
 import com.example.tanorami.builds_hero_from_users.presentation.BuildsHeroFromUsersViewModel
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenEvents
@@ -30,8 +30,9 @@ import com.example.tanorami.viewing_users_build.ui.ViewingBuildHeroFromUserFragm
 
 @Composable
 fun BuildsHeroFromUsersScreen(
-    idHero: Int,
-    viewModel: BuildsHeroFromUsersViewModel,
+    idHero: Int = -1,
+    viewModelFactory: ViewModelProvider.Factory,
+    viewModel: BuildsHeroFromUsersViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
 ) {
     val state = viewModel.uiState().collectAsState().value
@@ -83,20 +84,12 @@ private fun BuildsHeroFromUsersScreenContent(
     Scaffold(
         topBar = {
             BaseTopAppBar(
-                title = stringResource(
+                title = if (uiState.hero != null) stringResource(
                     id = R.string.builds_for_hero,
-                    uiState.hero?.name ?: ""
-                ),
+                    uiState.hero.name
+                ) else "",
                 onBack = { onEvent(BuildsHeroFromUsersScreenEvents.OnBack) }
             )
-        },
-        floatingActionButton = {
-            if (uiState.tokenUser.isNotEmpty()) {
-                BaseSmallFloatingButton(
-                    icon = Icons.Default.Add,
-                    onClick = { onEvent(BuildsHeroFromUsersScreenEvents.OnCreateBuildHeroScreen) }
-                )
-            }
         }
     ) { innerPadding ->
         when {
@@ -108,7 +101,8 @@ private fun BuildsHeroFromUsersScreenContent(
                         .padding(innerPadding)
                         .padding(horizontal = 16.dp)
                         .padding(bottom = 16.dp)
-                        .fillMaxSize()
+                        .fillMaxSize(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
                     items(uiState.buildsList) { buildHero ->
                         BuildItem(

@@ -14,7 +14,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.tanorami.R
@@ -29,13 +31,15 @@ import com.example.tanorami.info_about_hero.presentation.models.InfoAboutHeroScr
 import com.example.tanorami.info_about_hero.ui.components.AbilitiesListColumn
 import com.example.tanorami.info_about_hero.ui.components.EidolonsListColumn
 import com.example.tanorami.info_about_hero.ui.components.SplashArtHeroImage
+import com.example.tanorami.info_about_hero.ui.models.InfoAboutHeroNavArguments
 import com.example.tanorami.teams.ui.TeamsListFragment
 import com.example.tanorami.utils.OnLifecycleEvent
 
 @Composable
 fun InfoAboutHeroScreen(
-    idHero: Int,
-    viewModel: InfoAboutHeroViewModel,
+    infoAboutHeroNavArguments: InfoAboutHeroNavArguments,
+    viewModelFactory: ViewModelProvider.Factory,
+    viewModel: InfoAboutHeroViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
 ) {
     val state = viewModel.uiState().collectAsStateWithLifecycle().value
@@ -48,19 +52,19 @@ fun InfoAboutHeroScreen(
 
     when(sideEffects) {
         InfoAboutHeroScreenSideEffects.OnBack -> {
-            navController.popBackStack()
+            navController.navigateUp()
         }
         is InfoAboutHeroScreenSideEffects.OnBaseBuildHeroScreen -> {
             navController.navigate(
                 R.id.action_infoAboutHeroFragment_to_baseBuildHeroFragment,
-                BaseBuildHeroFragment.newInstance(idHero = idHero)
+                BaseBuildHeroFragment.newInstance(idHero = infoAboutHeroNavArguments.idHero)
             )
             viewModel.clearEffect()
         }
         is InfoAboutHeroScreenSideEffects.OnTeamsListScreen -> {
             navController.navigate(
                 R.id.action_infoAboutHeroFragment_to_teamsListFragment,
-                TeamsListFragment.newInstance(idHero = idHero)
+                TeamsListFragment.newInstance(idHero = infoAboutHeroNavArguments.idHero)
             )
             viewModel.clearEffect()
         }
@@ -70,7 +74,7 @@ fun InfoAboutHeroScreen(
     OnLifecycleEvent { owner, event ->
         when(event) {
             Lifecycle.Event.ON_CREATE -> {
-                viewModel.onEvent(InfoAboutHeroScreenEvents.GetHeroInfo(idHero))
+                viewModel.onEvent(InfoAboutHeroScreenEvents.GetHeroInfo(infoAboutHeroNavArguments.idHero))
             }
 
             else -> {}

@@ -25,8 +25,10 @@ class BuildsHeroListRepositoryImpl @Inject constructor(
         return@withContext heroDao.getHeroWithNameAvatarRarity(idHero)
     }
 
-    override suspend fun getBuildsHeroList(idHero: Int): NetworkResult<List<BuildHeroWithUser>> = withContext(ioDispatcher) {
-        when(val result = handleApi { buildsHeroListService.getBuildsHeroList(idHero) }) {
+    override suspend fun getBuildsHeroListByIdHero(idHero: Int): NetworkResult<List<BuildHeroWithUser>> =
+        withContext(ioDispatcher) {
+            when (val result =
+                handleApi { buildsHeroListService.getBuildsHeroListByIdHero(idHero) }) {
             is NetworkResult.Error -> {
                 return@withContext NetworkResult.Error(result.code)
             }
@@ -41,6 +43,30 @@ class BuildsHeroListRepositoryImpl @Inject constructor(
                         relicFourParts = relicDao.getRelic(it.idRelicFourParts).toRelic(),
                         decoration = decorationDao.getDecoration(it.idDecoration).toDecoration(),
                         buildUser = it.buildUser!!
+                    )
+                })
+            }
+            }
+        }
+
+    override suspend fun getBuildsHeroList(): NetworkResult<List<BuildHeroWithUser>> =
+        withContext(ioDispatcher) {
+            when (val result = handleApi { buildsHeroListService.getBuildsHeroList() }) {
+                is NetworkResult.Error -> {
+                    return@withContext NetworkResult.Error(result.code)
+                }
+
+                is NetworkResult.Success -> {
+                    return@withContext NetworkResult.Success(result.data.map {
+                        BuildHeroWithUser(
+                            idBuild = it.idBuild,
+                            hero = getHero(it.idHero),
+                            weapon = weaponDao.getWeapon(it.idWeapon).toWeapon(),
+                            relicTwoParts = relicDao.getRelic(it.idRelicTwoParts).toRelic(),
+                            relicFourParts = relicDao.getRelic(it.idRelicFourParts).toRelic(),
+                            decoration = decorationDao.getDecoration(it.idDecoration)
+                                .toDecoration(),
+                            buildUser = it.buildUser!!
                     )
                 })
             }

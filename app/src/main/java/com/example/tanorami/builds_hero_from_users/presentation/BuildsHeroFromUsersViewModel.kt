@@ -40,9 +40,14 @@ class BuildsHeroFromUsersViewModel @Inject constructor(
     }
 
     private fun getBuildsHeroList(idHero: Int) = viewModelScope.launch {
-        getHero(idHero)
+        val result = if (idHero == -1) {
+            repository.getBuildsHeroList()
+        } else {
+            getHero(idHero)
+            repository.getBuildsHeroListByIdHero(idHero)
+        }
 
-        when(val result = repository.getBuildsHeroList(idHero)) {
+        when (result) {
             is NetworkResult.Error -> {
                 uiState = uiState.copy(isSuccess = false, isError = true)
             }

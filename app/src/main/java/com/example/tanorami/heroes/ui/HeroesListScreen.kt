@@ -19,7 +19,7 @@ import com.example.tanorami.heroes.presentation.models.HeroesListScreenSideEffec
 import com.example.tanorami.heroes.presentation.models.HeroesListScreenUiState
 import com.example.tanorami.heroes.ui.components.HeroItem
 import com.example.tanorami.heroes.ui.components.HeroesListTopAppBar
-import com.example.tanorami.info_about_hero.ui.InfoAboutHeroFragment
+import com.example.tanorami.info_about_hero.ui.models.InfoAboutHeroNavArguments
 
 @Composable
 fun HeroesListScreen(
@@ -47,10 +47,7 @@ fun HeroesListScreen(
         }
 
         is HeroesListScreenSideEffects.OnInfoAboutHeroScreen -> {
-            navController.navigate(
-                R.id.action_heroesListFragment_to_infoAboutHeroFragment,
-                InfoAboutHeroFragment.newInstance(sideEffect.idHero)
-            )
+            navController.navigate(route = InfoAboutHeroNavArguments(sideEffect.idHero))
             viewModel.clearEffect()
         }
 

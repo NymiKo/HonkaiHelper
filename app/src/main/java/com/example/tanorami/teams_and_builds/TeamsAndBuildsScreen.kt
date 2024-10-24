@@ -1,9 +1,7 @@
-package com.example.tanorami.profile.presentation.components
+package com.example.tanorami.teams_and_builds
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
@@ -19,32 +17,30 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import com.example.tanorami.R
-import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
-import com.example.tanorami.teams.data.model.TeamHero
+import com.example.tanorami.builds_hero_from_users.ui.BuildsHeroFromUsersScreen
+import com.example.tanorami.teams.ui.TeamsListScreen
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun TeamsAndBuildsInProfile(
-    modifier: Modifier = Modifier,
-    heroesBuildsList: List<BuildHeroWithUser>,
-    teamsList: List<TeamHero>,
-    onEditBuildHeroScreen: (idBuild: Long) -> Unit,
-    onEditTeamScreen: (idTeam: Long) -> Unit,
+fun TeamsAndBuildsScreen(
+    viewModelFactory: ViewModelProvider.Factory,
+    navController: NavController,
 ) {
     val pagerState = rememberPagerState(initialPage = 0) { 2 }
     val scope = rememberCoroutineScope()
-    val tabs = listOf(R.string.my_builds, R.string.my_teams)
+    val tabs = listOf(stringResource(id = R.string.builds), stringResource(id = R.string.teams))
 
     Column(
-        modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         TabRow(
-            modifier = Modifier.padding(horizontal = 16.dp).fillMaxWidth(),
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth(),
             selectedTabIndex = pagerState.currentPage,
             contentColor = MaterialTheme.colorScheme.secondary,
             indicator = { tabPositions ->
@@ -71,10 +67,8 @@ fun TeamsAndBuildsInProfile(
 
         TabsContent(
             pagerState = pagerState,
-            heroesBuildsList = heroesBuildsList,
-            teamsList = teamsList,
-            onEditBuildHeroScreen = onEditBuildHeroScreen::invoke,
-            onEditTeamScreen = onEditTeamScreen::invoke
+            viewModelFactory = viewModelFactory,
+            navController = navController,
         )
     }
 }
@@ -83,7 +77,7 @@ fun TeamsAndBuildsInProfile(
 private fun TabItem(
     modifier: Modifier = Modifier,
     selected: Boolean,
-    title: Int,
+    title: String,
     selectTab: () -> Unit,
 ) {
     Tab(
@@ -93,7 +87,7 @@ private fun TabItem(
     ) {
         Text(
             modifier = Modifier.padding(vertical = 12.dp),
-            text = stringResource(id = title)
+            text = title
         )
     }
 }
@@ -101,42 +95,22 @@ private fun TabItem(
 @Composable
 private fun TabsContent(
     modifier: Modifier = Modifier,
+    viewModelFactory: ViewModelProvider.Factory,
     pagerState: PagerState,
-    heroesBuildsList: List<BuildHeroWithUser>,
-    teamsList: List<TeamHero>,
-    onEditBuildHeroScreen: (idBuild: Long) -> Unit,
-    onEditTeamScreen: (idTeam: Long) -> Unit,
+    navController: NavController,
 ) {
-    HorizontalPager(
-        modifier = modifier,
-        state = pagerState,
-        contentPadding = PaddingValues(start = 16.dp, end =  16.dp),
-        pageSpacing = 32.dp,
-    ) { index ->
+    HorizontalPager(modifier = modifier, state = pagerState) { index ->
         when (index) {
             0 -> {
-                UsersBuildsHeroesColumn(
-                    heroesBuildsList = heroesBuildsList,
-                    onEditBuildHeroScreen = onEditBuildHeroScreen::invoke
+                BuildsHeroFromUsersScreen(
+                    viewModelFactory = viewModelFactory,
+                    navController = navController,
                 )
             }
 
             1 -> {
-                TeamsColumn(
-                    teamsList = teamsList,
-                    onEditTeamScreen = onEditTeamScreen::invoke
-                )
+                TeamsListScreen(viewModelFactory = viewModelFactory, navController = navController)
             }
         }
     }
-}
-
-@Preview
-@Composable
-private fun TeamsAndBuildsInProfilePreview() {
-    TeamsAndBuildsInProfile(
-        heroesBuildsList = emptyList(),
-        teamsList = emptyList(),
-        onEditBuildHeroScreen = {},
-        onEditTeamScreen = {})
 }

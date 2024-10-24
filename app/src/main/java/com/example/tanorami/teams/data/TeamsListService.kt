@@ -11,4 +11,7 @@ interface TeamsListService {
 
     @GET("/getTeamsByUID.php")
     suspend fun getTeamsListByUID(@Query("uid") uid: String): Response<List<TeamHeroResponse>>
+
+    @GET("/getTeamsList.php")
+    suspend fun getTeamsList(): Response<List<TeamHeroResponse>>
 }

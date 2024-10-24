@@ -10,8 +10,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import com.example.tanorami.App
 import com.example.tanorami.builds_hero_from_users.presentation.BuildsHeroFromUsersViewModel
 import com.example.tanorami.core.theme.AppTheme
 import javax.inject.Inject
@@ -26,8 +24,8 @@ class BuildsHeroFromUsersFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as App).appComponent.buildsHeroListComponent().create()
-            .inject(this)
+//        (requireActivity().application as App).appComponent.buildsHeroListComponent().create()
+//            .inject(this)
     }
 
     override fun onCreateView(
@@ -38,11 +36,7 @@ class BuildsHeroFromUsersFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 AppTheme {
-                    BuildsHeroFromUsersScreen(
-                        idHero = idHero,
-                        viewModel = viewModel,
-                        navController = findNavController(),
-                    )
+
                 }
             }
         }

@@ -108,6 +108,8 @@
     <string name="message_uid_build_copied">Идентификатор сборки скопирован</string>
     <string name="message_uid_team_copied">Идентификатор команды скопирован</string>
     <string name="team_for_uid">Команда по идентификатору</string>
+    <string name="teams">Команды</string>
+    <string name="builds">Сборки</string>
 
     <string name="hp">HP %</string>
     <string name="defense">Защита %</string>

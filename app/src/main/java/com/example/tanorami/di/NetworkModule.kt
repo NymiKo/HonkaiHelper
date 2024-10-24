@@ -14,6 +14,7 @@ import com.example.tanorami.data.image_loader.ImageLoader
 import com.example.tanorami.data.image_loader.ImageLoaderImpl
 import com.example.tanorami.heroes.data.HeroesListService
 import com.example.tanorami.load_data.data.LoadDataService
+import com.example.tanorami.navigation.main.MainScreenService
 import com.example.tanorami.profile.data.ProfileService
 import com.example.tanorami.send_feedback.data.SendFeedbackService
 import com.example.tanorami.teams.data.TeamsListService
@@ -95,7 +96,9 @@ object NetworkModule {
     fun providesLoadDataService(retrofit: Retrofit): LoadDataService = retrofit.create(LoadDataService::class.java)
 
     @Provides
-    fun providesMainService(retrofit: Retrofit): MainService = retrofit.create(MainService::class.java)
+    fun providesSplashService(retrofit: Retrofit): MainService = retrofit.create(
+        MainService::class.java
+    )
 
     @Provides
     fun providesBuildsHeroService(retrofit: Retrofit): BuildsHeroListService = retrofit.create(BuildsHeroListService::class.java)
@@ -111,4 +114,8 @@ object NetworkModule {
 
     @Provides
     fun providesSendFeedbackService(retrofit: Retrofit): SendFeedbackService = retrofit.create(SendFeedbackService::class.java)
+
+    @Provides
+    fun providesMainScreenService(retrofit: Retrofit): MainScreenService =
+        retrofit.create(MainScreenService::class.java)
 }

@@ -28,6 +28,8 @@ import com.example.tanorami.info_about_weapon.data.InfoAboutWeaponRepository
 import com.example.tanorami.info_about_weapon.data.InfoAboutWeaponRepositoryImpl
 import com.example.tanorami.load_data.data.LoadDataRepository
 import com.example.tanorami.load_data.data.LoadDataRepositoryImpl
+import com.example.tanorami.navigation.main.MainScreenRepository
+import com.example.tanorami.navigation.main.MainScreenRepositoryImpl
 import com.example.tanorami.profile.domain.ProfileRepository
 import com.example.tanorami.profile.domain.ProfileRepositoryImpl
 import com.example.tanorami.send_feedback.data.SendFeedbackRepository
@@ -119,4 +121,8 @@ interface RepositoryModule {
     @Singleton
     @Binds
     fun bindSendFeedbackRepository(repository: SendFeedbackRepositoryImpl): SendFeedbackRepository
+
+    @Singleton
+    @Binds
+    fun bindMainScreenRepository(repository: MainScreenRepositoryImpl): MainScreenRepository
 }

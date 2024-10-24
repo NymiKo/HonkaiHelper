@@ -10,8 +10,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import com.example.tanorami.App
 import com.example.tanorami.core.theme.AppTheme
 import com.example.tanorami.teams.presentation.TeamsListViewModel
 import javax.inject.Inject
@@ -28,8 +26,8 @@ class TeamsListFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as App).appComponent.teamsListComponent().create()
-            .inject(this)
+//        (requireActivity().application as App).appComponent.teamsListComponent().create()
+//            .inject(this)
     }
 
     override fun onCreateView(
@@ -40,12 +38,7 @@ class TeamsListFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 AppTheme {
-                    TeamsListScreen(
-                        idHero = idHero,
-                        uid = uid,
-                        viewModel = viewModel,
-                        navController = findNavController(),
-                    )
+
                 }
             }
         }

@@ -10,9 +10,9 @@ import javax.inject.Inject
 
 class SettingsRepositoryImpl @Inject constructor(
     @IODispatcher private val ioDispatcher: CoroutineDispatcher,
-    private val mainService: MainService
+    private val splashService: MainService
 ): SettingsRepository {
     override suspend fun checkUpdate(): NetworkResult<String> = withContext(ioDispatcher) {
-        return@withContext handleApi { mainService.getVersionDB() }
+        return@withContext handleApi { splashService.getVersionDB() }
     }
 }

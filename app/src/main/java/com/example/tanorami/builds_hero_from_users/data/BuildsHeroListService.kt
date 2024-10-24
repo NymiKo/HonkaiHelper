@@ -7,5 +7,8 @@ import retrofit2.http.Query
 
 interface BuildsHeroListService {
     @GET("/getBuildsHero.php")
-    suspend fun getBuildsHeroList(@Query("idHero") idHero: Int): Response<List<BuildHero>>
+    suspend fun getBuildsHeroListByIdHero(@Query("idHero") idHero: Int): Response<List<BuildHero>>
+
+    @GET("/getBuildsHeroList.php")
+    suspend fun getBuildsHeroList(): Response<List<BuildHero>>
 }

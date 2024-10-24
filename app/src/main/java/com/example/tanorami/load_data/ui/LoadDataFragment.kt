@@ -10,8 +10,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import com.example.tanorami.App
 import com.example.tanorami.core.theme.AppTheme
 import com.example.tanorami.load_data.presentation.LoadDataViewModel
 import javax.inject.Inject
@@ -27,7 +25,7 @@ class LoadDataFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as App).appComponent.loadDataComponent().create().inject(this)
+        //(requireActivity().application as App).appComponent.loadDataComponent().create().inject(this)
     }
 
     override fun onCreateView(
@@ -38,50 +36,10 @@ class LoadDataFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 AppTheme {
-                    LoadDataScreen(
-                        newVersionDB = versionDB ?: "",
-                        viewModel = viewModel,
-                        navController = findNavController()
-                    )
+
                 }
             }
         }
-    }
-
-    fun setupView() {
-        setupButtonRetryDownloadData()
-        setupButtonGoBack()
-    }
-
-    fun uiStateHandle() {
-//        viewModel.dataLoaded.observe(viewLifecycleOwner) {
-//            when(it) {
-//                LoadDataUiState.ERROR -> {
-//                    binding.groupDownloadData.gone()
-//                    binding.groupUnexpectedError.visible()
-//                }
-//                LoadDataUiState.LOADING -> {
-//                    binding.groupDownloadData.visible()
-//                    binding.groupUnexpectedError.gone()
-//                }
-//                LoadDataUiState.SUCCESS -> {
-//                    setFragmentResult(DATA_UPLOADED_KEY, bundleOf(ARG_DATA_UPLOADED to true))
-//                    findNavController().popBackStack()
-//                }
-//            }
-//        }
-    }
-
-    private fun setupButtonRetryDownloadData() {
-//        binding.buttonRetryDownloadData.setOnClickListener {
-//            viewModel.getNewData(versionDB)
-//        }
-    }
-
-    private fun setupButtonGoBack() {
-//        binding.buttonGoBack.setOnClickListener {
-//            findNavController().popBackStack()
-//        }
     }
 
     companion object {

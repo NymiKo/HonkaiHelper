@@ -3,6 +3,8 @@ package com.example.tanorami.load_data.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.tanorami.load_data.presentation.LoadDataViewModel
 import com.example.tanorami.load_data.presentation.models.LoadDataScreenEvents
@@ -10,13 +12,14 @@ import com.example.tanorami.load_data.presentation.models.LoadDataScreenSideEffe
 import com.example.tanorami.load_data.presentation.models.LoadDataScreenUiState
 import com.example.tanorami.load_data.ui.components.ErrorUploadingDataComponent
 import com.example.tanorami.load_data.ui.components.UploadingDataComponent
+import com.example.tanorami.navigation.LoadData
 import com.example.tanorami.utils.OnLifecycleEvent
-import com.example.tanorami.utils.popBackStackWithResult
 
 @Composable
 fun LoadDataScreen(
-    newVersionDB: String,
-    viewModel: LoadDataViewModel,
+    loadDataNavArguments: LoadData,
+    viewModelFactory: ViewModelProvider.Factory,
+    viewModel: LoadDataViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
 ) {
     val state = viewModel.uiState().collectAsState().value
@@ -29,7 +32,7 @@ fun LoadDataScreen(
 
     when (sideEffects) {
         LoadDataScreenSideEffects.OnBack -> {
-            navController.popBackStackWithResult(DATA_UPLOADED_KEY, true)
+            navController.navigateUp()
         }
 
         null -> {}
@@ -39,7 +42,7 @@ fun LoadDataScreen(
         when (event) {
             Lifecycle.Event.ON_CREATE -> viewModel.onEvent(
                 LoadDataScreenEvents.UploadData(
-                    newVersionDB
+                    loadDataNavArguments.remoteVersionDB
                 )
             )
 
