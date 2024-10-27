@@ -8,7 +8,7 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 
 @Module
-interface BuildsHeroListModule {
+interface BuildsHeroFromUsersModule {
     @Binds
     @[IntoMap ViewModelKey(BuildsHeroFromUsersViewModel::class)]
     fun bindViewModel(viewModel: BuildsHeroFromUsersViewModel): ViewModel

@@ -22,10 +22,14 @@ import com.example.tanorami.teams.ui.components.EmptyListScreen
 import com.example.tanorami.teams.ui.components.ErrorScreen
 import com.example.tanorami.utils.OnLifecycleEvent
 import com.example.tanorami.viewing_users_build.ui.ViewingBuildHeroFromUserFragment
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class BuildsHeroFromUsersNavArguments(val idHero: Int = -1)
 
 @Composable
 fun BuildsHeroFromUsersScreen(
-    idHero: Int = -1,
+    buildsHeroFromUsersNavArguments: BuildsHeroFromUsersNavArguments,
     viewModelFactory: ViewModelProvider.Factory,
     viewModel: BuildsHeroFromUsersViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
@@ -42,7 +46,7 @@ fun BuildsHeroFromUsersScreen(
         BuildsHeroFromUsersScreenSideEffects.OnCreateBuildHeroScreen -> {
             navController.navigate(
                 resId = R.id.action_buildsHeroListFragment_to_createBuildHeroFragment,
-                CreateBuildHeroFragment.newInstance(idHero = idHero)
+                CreateBuildHeroFragment.newInstance(idHero = buildsHeroFromUsersNavArguments.idHero)
             )
             viewModel.clearEffect()
         }
@@ -55,7 +59,10 @@ fun BuildsHeroFromUsersScreen(
             viewModel.clearEffect()
         }
 
-        BuildsHeroFromUsersScreenSideEffects.OnBack -> navController.popBackStack()
+        BuildsHeroFromUsersScreenSideEffects.OnBack -> {
+            navController.popBackStack()
+            viewModel.clearEffect()
+        }
 
         null -> {}
     }
@@ -63,7 +70,11 @@ fun BuildsHeroFromUsersScreen(
     OnLifecycleEvent { owner, event ->
         when (event) {
             Lifecycle.Event.ON_CREATE -> {
-                viewModel.onEvent(BuildsHeroFromUsersScreenEvents.GetBuildsHeroList(idHero))
+                viewModel.onEvent(
+                    BuildsHeroFromUsersScreenEvents.GetBuildsHeroList(
+                        buildsHeroFromUsersNavArguments.idHero
+                    )
+                )
             }
 
             else -> {}

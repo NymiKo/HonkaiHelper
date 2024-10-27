@@ -7,9 +7,9 @@ import com.example.tanorami.auth.login.domain.LoginRepository
 import com.example.tanorami.auth.registration.data.RegistrationRepository
 import com.example.tanorami.auth.registration.di.RegistrationComponent
 import com.example.tanorami.base_build_hero.data.BaseBuildHeroRepository
-import com.example.tanorami.base_build_hero.di.BaseBuildHeroComponent
+import com.example.tanorami.base_build_hero.di.BaseBuildHeroModule
 import com.example.tanorami.builds_hero_from_users.data.BuildsHeroListRepository
-import com.example.tanorami.builds_hero_from_users.di.BuildsHeroListModule
+import com.example.tanorami.builds_hero_from_users.di.BuildsHeroFromUsersModule
 import com.example.tanorami.change_nickname.data.ChangeNicknameRepository
 import com.example.tanorami.change_nickname.di.ChangeNicknameComponent
 import com.example.tanorami.create_build_hero.di.CreateBuildHeroComponent
@@ -56,13 +56,14 @@ import javax.inject.Singleton
         DataStoreModule::class,
         ProfileModule::class,
         HeroesListModule::class,
-        BuildsHeroListModule::class,
+        BuildsHeroFromUsersModule::class,
         TeamsListModule::class,
         InfoAboutHeroModule::class,
         LoadDataModule::class,
         MainScreenModule::class,
         TeamsAndBuildsModule::class,
-        SettingsModule::class
+        SettingsModule::class,
+        BaseBuildHeroModule::class,
     ]
 )
 interface AppComponent {
@@ -77,7 +78,6 @@ interface AppComponent {
     fun loginComponent(): LoginComponent.Factory
     fun registrationComponent(): RegistrationComponent.Factory
     fun createBuildHeroComponent(): CreateBuildHeroComponent.Factory
-    fun baseBuildHeroComponent(): BaseBuildHeroComponent.Factory
     fun weaponInfoComponent(): InfoAboutWeaponComponent.Factory
     fun relicInfoComponent(): RelicInfoComponent.Factory
     fun decorationInfoComponent(): InfoAboutDecorationComponent.Factory

@@ -41,6 +41,10 @@ import com.example.tanorami.settings.presentation.models.SettingsScreenEvents
 import com.example.tanorami.settings.presentation.models.SettingsScreenSideEffects
 import com.example.tanorami.settings.presentation.models.SettingsScreenUiState
 import com.example.tanorami.utils.toast
+import kotlinx.serialization.Serializable
+
+@Serializable
+object SettingsNavArguments
 
 @Composable
 fun SettingsScreen(

@@ -11,8 +11,6 @@ import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import com.example.tanorami.App
 import com.example.tanorami.base_build_hero.presentation.BaseBuildHeroViewModel
 import com.example.tanorami.core.theme.AppTheme
 import javax.inject.Inject
@@ -27,8 +25,8 @@ class BaseBuildHeroFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as App).appComponent.baseBuildHeroComponent().create()
-            .inject(this)
+        //(requireActivity().application as App).appComponent.baseBuildHeroComponent().create()
+        //.inject(this)
     }
 
     override fun onCreateView(
@@ -39,11 +37,11 @@ class BaseBuildHeroFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 AppTheme {
-                    BaseBuildHeroScreen(
-                        idHero = idHero,
-                        viewModel = viewModel,
-                        navController = findNavController(),
-                    )
+//                    BaseBuildHeroScreen(
+//                        idHero = idHero,
+//                        viewModel = viewModel,
+//                        navController = findNavController(),
+//                    )
                 }
             }
         }

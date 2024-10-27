@@ -8,6 +8,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -15,12 +16,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.tanorami.R
-import com.example.tanorami.base_build_hero.ui.BaseBuildHeroFragment
+import com.example.tanorami.base_build_hero.ui.BaseBuildHeroNavArguments
 import com.example.tanorami.base_components.button.BaseNextButton
 import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.base_components.top_app_bar.BaseCenterAlignedTopAppBar
@@ -42,8 +42,8 @@ fun InfoAboutHeroScreen(
     viewModel: InfoAboutHeroViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
 ) {
-    val state = viewModel.uiState().collectAsStateWithLifecycle().value
-    val sideEffects = viewModel.uiEffect().collectAsStateWithLifecycle(initialValue = null).value
+    val state = viewModel.uiState().collectAsState().value
+    val sideEffects = viewModel.uiEffect().collectAsState(initial = null).value
 
     InfoAboutHeroScreenContent(
         uiState = state,
@@ -52,13 +52,11 @@ fun InfoAboutHeroScreen(
 
     when(sideEffects) {
         InfoAboutHeroScreenSideEffects.OnBack -> {
-            navController.navigateUp()
+            navController.popBackStack()
+            viewModel.clearEffect()
         }
         is InfoAboutHeroScreenSideEffects.OnBaseBuildHeroScreen -> {
-            navController.navigate(
-                R.id.action_infoAboutHeroFragment_to_baseBuildHeroFragment,
-                BaseBuildHeroFragment.newInstance(idHero = infoAboutHeroNavArguments.idHero)
-            )
+            navController.navigate(route = BaseBuildHeroNavArguments(idHero = sideEffects.idHero))
             viewModel.clearEffect()
         }
         is InfoAboutHeroScreenSideEffects.OnTeamsListScreen -> {

@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -80,7 +81,7 @@ fun TeamItem(
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
-                .padding(top = 16.dp, bottom = 8.dp),
+                .padding(top = 16.dp, bottom = if (team.nickname.isNullOrEmpty()) 16.dp else 8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Row(
@@ -114,7 +115,8 @@ fun TeamItem(
                             .clip(CircleShape)
                             .background(White, CircleShape),
                         model = if (team.avatar.isNullOrEmpty()) R.drawable.ic_person else team.avatar,
-                        contentDescription = null
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
                     )
 
                     Spacer(modifier = Modifier.weight(1F))

@@ -11,12 +11,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.tanorami.R
 import com.example.tanorami.base_build_hero.presentation.BaseBuildHeroViewModel
@@ -28,7 +30,7 @@ import com.example.tanorami.base_build_hero.ui.components.EquipmentImage
 import com.example.tanorami.base_build_hero.ui.components.StatsListColumn
 import com.example.tanorami.base_components.button.BaseNextButton
 import com.example.tanorami.base_components.top_app_bar.BaseCenterAlignedTopAppBar
-import com.example.tanorami.builds_hero_from_users.ui.BuildsHeroFromUsersFragment
+import com.example.tanorami.builds_hero_from_users.ui.BuildsHeroFromUsersNavArguments
 import com.example.tanorami.core.theme.Blue
 import com.example.tanorami.core.theme.Orange
 import com.example.tanorami.core.theme.Violet
@@ -36,15 +38,20 @@ import com.example.tanorami.info_about_decoration.ui.InfoAboutDecorationFragment
 import com.example.tanorami.info_about_relic.ui.InfoAboutRelicFragment
 import com.example.tanorami.info_about_weapon.ui.InfoAboutWeaponFragment
 import com.example.tanorami.utils.OnLifecycleEvent
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class BaseBuildHeroNavArguments(val idHero: Int)
 
 @Composable
 fun BaseBuildHeroScreen(
-    idHero: Int,
-    viewModel: BaseBuildHeroViewModel,
+    baseBuildHeroNavArguments: BaseBuildHeroNavArguments,
+    viewModelFactory: ViewModelProvider.Factory,
+    viewModel: BaseBuildHeroViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
 ) {
-    val uiState = viewModel.uiState().collectAsStateWithLifecycle().value
-    val sideEffects = viewModel.uiEffect().collectAsStateWithLifecycle(null).value
+    val uiState = viewModel.uiState().collectAsState().value
+    val sideEffects = viewModel.uiEffect().collectAsState(null).value
 
     BaseBuildHeroScreenContent(
         uiState = uiState,
@@ -54,13 +61,11 @@ fun BaseBuildHeroScreen(
     when (sideEffects) {
         BaseBuildHeroScreenSideEffects.OnBack -> {
             navController.popBackStack()
+            viewModel.clearEffect()
         }
 
         is BaseBuildHeroScreenSideEffects.OnBuildsHeroFromUsersScreen -> {
-            navController.navigate(
-                R.id.action_baseBuildHeroFragment_to_buildsHeroListFragment,
-                BuildsHeroFromUsersFragment.newInstance(uiState.idHero)
-            )
+            navController.navigate(route = BuildsHeroFromUsersNavArguments(idHero = sideEffects.idHero))
             viewModel.clearEffect()
         }
         is BaseBuildHeroScreenSideEffects.OnInfoAboutDecorationScreen -> {
@@ -91,7 +96,11 @@ fun BaseBuildHeroScreen(
     OnLifecycleEvent { owner, event ->
         when (event) {
             Lifecycle.Event.ON_CREATE -> {
-                viewModel.onEvent(BaseBuildHeroScreenEvents.GetFullBaseBuildHero(idHero))
+                viewModel.onEvent(
+                    BaseBuildHeroScreenEvents.GetFullBaseBuildHero(
+                        baseBuildHeroNavArguments.idHero
+                    )
+                )
             }
 
             else -> {}

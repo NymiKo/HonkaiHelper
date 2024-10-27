@@ -12,12 +12,15 @@ import com.example.tanorami.load_data.presentation.models.LoadDataScreenSideEffe
 import com.example.tanorami.load_data.presentation.models.LoadDataScreenUiState
 import com.example.tanorami.load_data.ui.components.ErrorUploadingDataComponent
 import com.example.tanorami.load_data.ui.components.UploadingDataComponent
-import com.example.tanorami.navigation.LoadData
 import com.example.tanorami.utils.OnLifecycleEvent
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class LoadDataNavArguments(val remoteVersionDB: String)
 
 @Composable
 fun LoadDataScreen(
-    loadDataNavArguments: LoadData,
+    loadDataNavArguments: LoadDataNavArguments,
     viewModelFactory: ViewModelProvider.Factory,
     viewModel: LoadDataViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,

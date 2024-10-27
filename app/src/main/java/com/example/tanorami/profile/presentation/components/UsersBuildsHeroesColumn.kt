@@ -131,7 +131,8 @@ fun BuildItem(
                                 .clip(CircleShape)
                                 .background(White, CircleShape),
                             model = buildHero.buildUser.avatar,
-                            contentDescription = null
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop,
                         )
                     }
                 }

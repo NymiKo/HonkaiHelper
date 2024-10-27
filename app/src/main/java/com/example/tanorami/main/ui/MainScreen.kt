@@ -48,13 +48,14 @@ import com.example.tanorami.R
 import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.core.theme.Orange
 import com.example.tanorami.heroes.ui.HeroesListScreen
+import com.example.tanorami.load_data.ui.LoadDataNavArguments
 import com.example.tanorami.main.presentation.MainScreenViewModel
 import com.example.tanorami.main.presentation.models.MainScreenEvents
 import com.example.tanorami.main.presentation.models.MainScreenSideEffects
 import com.example.tanorami.main.presentation.models.MainScreenUiState
-import com.example.tanorami.navigation.LoadData
 import com.example.tanorami.profile.ui.ProfileScreen
 import com.example.tanorami.teams_and_builds.ui.TeamsAndBuildsScreen
+import kotlinx.serialization.Serializable
 
 enum class MainScreens(val route: String) {
     HeroesList("heroes_list"),
@@ -63,6 +64,9 @@ enum class MainScreens(val route: String) {
     TeamsAndBuilds("teams_and_builds"),
     Profile("profile")
 }
+
+@Serializable
+object MainNavArguments
 
 @Composable
 fun MainScreen(
@@ -81,7 +85,7 @@ fun MainScreen(
     )
 
     if (sideEffect is MainScreenSideEffects.OnLoadDataScreen) {
-        rootNavController.navigate(LoadData(remoteVersionDB = sideEffect.remoteVersionDB))
+        rootNavController.navigate(LoadDataNavArguments(remoteVersionDB = sideEffect.remoteVersionDB))
         viewModel.clearEffect()
     }
 }

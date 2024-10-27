@@ -11,21 +11,18 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.example.tanorami.base_build_hero.ui.BaseBuildHeroNavArguments
+import com.example.tanorami.base_build_hero.ui.BaseBuildHeroScreen
+import com.example.tanorami.builds_hero_from_users.ui.BuildsHeroFromUsersNavArguments
+import com.example.tanorami.builds_hero_from_users.ui.BuildsHeroFromUsersScreen
 import com.example.tanorami.info_about_hero.ui.InfoAboutHeroScreen
 import com.example.tanorami.info_about_hero.ui.models.InfoAboutHeroNavArguments
+import com.example.tanorami.load_data.ui.LoadDataNavArguments
 import com.example.tanorami.load_data.ui.LoadDataScreen
+import com.example.tanorami.main.ui.MainNavArguments
 import com.example.tanorami.main.ui.MainScreen
+import com.example.tanorami.settings.ui.SettingsNavArguments
 import com.example.tanorami.settings.ui.SettingsScreen
-import kotlinx.serialization.Serializable
-
-@Serializable
-object Main
-
-@Serializable
-data class LoadData(val remoteVersionDB: String)
-
-@Serializable
-object Settings
 
 @Composable
 fun AppNavigation(
@@ -37,21 +34,21 @@ fun AppNavigation(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
         navController = navController,
-        startDestination = Main
+        startDestination = MainNavArguments
     ) {
-        composable<Main> {
+        composable<MainNavArguments> {
             MainScreen(
                 viewModelFactory = viewModelFactory,
                 rootNavController = navController
             )
         }
 
-        composable<LoadData> { backStackEntry ->
-            val loadDataNavArguments: LoadData = backStackEntry.toRoute()
+        composable<LoadDataNavArguments> { backStackEntry ->
+            val loadDataNavArguments: LoadDataNavArguments = backStackEntry.toRoute()
             LoadDataScreen(
                 loadDataNavArguments = loadDataNavArguments,
                 viewModelFactory = viewModelFactory,
-                navController = navController
+                navController = navController,
             )
         }
 
@@ -60,14 +57,33 @@ fun AppNavigation(
             InfoAboutHeroScreen(
                 infoAboutHeroNavArguments = infoAboutHeroNavArguments,
                 viewModelFactory = viewModelFactory,
+                navController = navController,
+            )
+        }
+
+        composable<SettingsNavArguments> {
+            SettingsScreen(
+                viewModelFactory = viewModelFactory,
                 navController = navController
             )
         }
 
-        composable<Settings> {
-            SettingsScreen(
+        composable<BaseBuildHeroNavArguments> { backStackEntry ->
+            val baseBuildHeroNavArguments: BaseBuildHeroNavArguments = backStackEntry.toRoute()
+            BaseBuildHeroScreen(
+                baseBuildHeroNavArguments = baseBuildHeroNavArguments,
                 viewModelFactory = viewModelFactory,
-                navController = navController
+                navController = navController,
+            )
+        }
+
+        composable<BuildsHeroFromUsersNavArguments> { backStackEntry ->
+            val buildsHeroFromUsersNavArguments: BuildsHeroFromUsersNavArguments =
+                backStackEntry.toRoute()
+            BuildsHeroFromUsersScreen(
+                buildsHeroFromUsersNavArguments = buildsHeroFromUsersNavArguments,
+                viewModelFactory = viewModelFactory,
+                navController = navController,
             )
         }
     }
