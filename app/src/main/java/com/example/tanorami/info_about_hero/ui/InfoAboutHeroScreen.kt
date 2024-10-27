@@ -32,7 +32,7 @@ import com.example.tanorami.info_about_hero.ui.components.AbilitiesListColumn
 import com.example.tanorami.info_about_hero.ui.components.EidolonsListColumn
 import com.example.tanorami.info_about_hero.ui.components.SplashArtHeroImage
 import com.example.tanorami.info_about_hero.ui.models.InfoAboutHeroNavArguments
-import com.example.tanorami.teams.ui.TeamsListFragment
+import com.example.tanorami.teams.ui.TeamsFromUsersNavArguments
 import com.example.tanorami.utils.OnLifecycleEvent
 
 @Composable
@@ -60,10 +60,7 @@ fun InfoAboutHeroScreen(
             viewModel.clearEffect()
         }
         is InfoAboutHeroScreenSideEffects.OnTeamsListScreen -> {
-            navController.navigate(
-                R.id.action_infoAboutHeroFragment_to_teamsListFragment,
-                TeamsListFragment.newInstance(idHero = infoAboutHeroNavArguments.idHero)
-            )
+            navController.navigate(route = TeamsFromUsersNavArguments(idHero = sideEffects.idHero))
             viewModel.clearEffect()
         }
         null -> {}

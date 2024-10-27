@@ -18,7 +18,10 @@ class BuildsHeroFromUsersViewModel @Inject constructor(
 
     override fun onEvent(event: BuildsHeroFromUsersScreenEvents) {
         when(event) {
-            is BuildsHeroFromUsersScreenEvents.GetBuildsHeroList -> getBuildsHeroList(idHero = event.idHero)
+            is BuildsHeroFromUsersScreenEvents.GetBuildsHeroList -> {
+                getHero(event.idHero)
+                getBuildsHeroList(idHero = event.idHero)
+            }
 
             is BuildsHeroFromUsersScreenEvents.OnViewingBuildHeroFromUserScreen -> sendSideEffect(BuildsHeroFromUsersScreenSideEffects.OnViewingBuildHeroFromUserScreen(event.idBuild))
             BuildsHeroFromUsersScreenEvents.OnCreateBuildHeroScreen -> sendSideEffect(BuildsHeroFromUsersScreenSideEffects.OnCreateBuildHeroScreen)
@@ -27,7 +30,6 @@ class BuildsHeroFromUsersViewModel @Inject constructor(
     }
 
     private fun getBuildsHeroList(idHero: Int) = viewModelScope.launch {
-        getHero(idHero)
         when (val result = repository.getBuildsHeroListByIdHero(idHero)) {
             is NetworkResult.Error -> {
                 uiState = uiState.copy(isSuccess = false, isError = true)

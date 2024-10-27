@@ -3,11 +3,11 @@ package com.example.tanorami.teams.di
 import com.example.tanorami.teams.ui.TeamsListFragment
 import dagger.Subcomponent
 
-@Subcomponent(modules = [TeamsListModule::class])
-interface TeamsListComponent {
+@Subcomponent(modules = [TeamsFromUsersModule::class])
+interface TeamsFromUsersComponent {
     @Subcomponent.Factory
     interface Factory {
-        fun create(): TeamsListComponent
+        fun create(): TeamsFromUsersComponent
     }
 
     fun inject(fragment: TeamsListFragment)

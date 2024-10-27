@@ -4,12 +4,12 @@ import com.example.tanorami.data.NetworkResult
 import com.example.tanorami.teams.data.model.TeamHero
 import javax.inject.Inject
 
-class FakeTeamsListRepository @Inject constructor(): TeamsListRepository {
+class FakeTeamsFromUsersRepository @Inject constructor() : TeamsFromUsersRepository {
     override suspend fun getTeamsListByID(idHero: Int): NetworkResult<List<TeamHero>> {
         return NetworkResult.Success(emptyList())
     }
 
-    override suspend fun getTeamsListByUID(uid: String): NetworkResult<List<TeamHero>> {
+    override suspend fun getTeamsList(): NetworkResult<List<TeamHero>> {
         return NetworkResult.Success(emptyList())
     }
 

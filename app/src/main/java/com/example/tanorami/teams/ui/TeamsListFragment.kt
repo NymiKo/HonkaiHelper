@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.tanorami.core.theme.AppTheme
-import com.example.tanorami.teams.presentation.TeamsListViewModel
+import com.example.tanorami.teams.presentation.TeamsFromUsersViewModel
 import javax.inject.Inject
 
 class TeamsListFragment : Fragment() {
@@ -19,7 +19,7 @@ class TeamsListFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private val viewModel by viewModels<TeamsListViewModel> { viewModelFactory }
+    private val viewModel by viewModels<TeamsFromUsersViewModel> { viewModelFactory }
 
     private val idHero get() = requireArguments().getInt(ARG_ID_HERO)
     private val uid get() = requireArguments().getString(ARG_UID_TEAM)

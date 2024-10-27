@@ -10,7 +10,7 @@ import com.example.tanorami.data.local.dao.RelicDao
 import com.example.tanorami.data.local.dao.WeaponDao
 import com.example.tanorami.data.local.models.hero.HeroWithNameAvatarRarity
 import com.example.tanorami.di.IODispatcher
-import com.example.tanorami.teams.data.TeamsListService
+import com.example.tanorami.teams.data.TeamsFromUsersService
 import com.example.tanorami.teams.data.model.TeamHero
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 class TeamsAndBuildsRepositoryImpl @Inject constructor(
     private val buildsHeroListService: BuildsHeroListService,
-    private val teamsListService: TeamsListService,
+    private val teamsFromUsersService: TeamsFromUsersService,
     private val heroDao: HeroDao,
     private val weaponDao: WeaponDao,
     private val relicDao: RelicDao,
@@ -32,7 +32,7 @@ class TeamsAndBuildsRepositoryImpl @Inject constructor(
 
     override suspend fun getTeamsListFromUsers(): NetworkResult<List<TeamHero>> =
         withContext(ioDispatcher) {
-            when (val result = handleApi { teamsListService.getTeamsList() }) {
+            when (val result = handleApi { teamsFromUsersService.getTeamsList() }) {
                 is NetworkResult.Error -> {
                     return@withContext NetworkResult.Error(result.code)
                 }

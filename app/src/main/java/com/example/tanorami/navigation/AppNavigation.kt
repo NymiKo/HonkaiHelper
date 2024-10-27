@@ -23,6 +23,8 @@ import com.example.tanorami.main.ui.MainNavArguments
 import com.example.tanorami.main.ui.MainScreen
 import com.example.tanorami.settings.ui.SettingsNavArguments
 import com.example.tanorami.settings.ui.SettingsScreen
+import com.example.tanorami.teams.ui.TeamsFromUsersNavArguments
+import com.example.tanorami.teams.ui.TeamsFromUsersScreen
 import com.example.tanorami.viewing_users_build.ui.ViewingBuildHeroFromUserNavArguments
 import com.example.tanorami.viewing_users_build.ui.ViewingBuildHeroFromUserScreen
 
@@ -94,6 +96,15 @@ fun AppNavigation(
                 backStackEntry.toRoute()
             ViewingBuildHeroFromUserScreen(
                 navArguments = viewingBuildHeroFromUserNavArguments,
+                viewModelFactory = viewModelFactory,
+                navController = navController
+            )
+        }
+
+        composable<TeamsFromUsersNavArguments> { backStackEntry ->
+            val teamsFromUsersNavArguments: TeamsFromUsersNavArguments = backStackEntry.toRoute()
+            TeamsFromUsersScreen(
+                teamsFromUsersNavArguments = teamsFromUsersNavArguments,
                 viewModelFactory = viewModelFactory,
                 navController = navController
             )

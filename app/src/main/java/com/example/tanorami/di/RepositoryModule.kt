@@ -34,8 +34,8 @@ import com.example.tanorami.send_feedback.data.SendFeedbackRepository
 import com.example.tanorami.send_feedback.data.SendFeedbackRepositoryImpl
 import com.example.tanorami.settings.data.SettingsRepository
 import com.example.tanorami.settings.data.SettingsRepositoryImpl
-import com.example.tanorami.teams.data.TeamsListRepository
-import com.example.tanorami.teams.data.TeamsListRepositoryImpl
+import com.example.tanorami.teams.data.TeamsFromUsersRepository
+import com.example.tanorami.teams.data.TeamsFromUsersRepositoryImpl
 import com.example.tanorami.teams_and_builds.data.TeamsAndBuildsRepository
 import com.example.tanorami.teams_and_builds.data.TeamsAndBuildsRepositoryImpl
 import com.example.tanorami.viewing_users_build.data.ViewingBuildHeroFromUserRepository
@@ -52,7 +52,7 @@ interface RepositoryModule {
 
     @Singleton
     @Binds
-    fun bindTeamsListRepository(repository: TeamsListRepositoryImpl): TeamsListRepository
+    fun bindTeamsListRepository(repository: TeamsFromUsersRepositoryImpl): TeamsFromUsersRepository
 
     @Singleton
     @Binds

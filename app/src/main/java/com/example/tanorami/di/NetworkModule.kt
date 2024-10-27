@@ -16,7 +16,7 @@ import com.example.tanorami.load_data.data.LoadDataService
 import com.example.tanorami.main.data.MainScreenService
 import com.example.tanorami.profile.data.ProfileService
 import com.example.tanorami.send_feedback.data.SendFeedbackService
-import com.example.tanorami.teams.data.TeamsListService
+import com.example.tanorami.teams.data.TeamsFromUsersService
 import com.example.tanorami.viewing_users_build.data.ViewingBuildHeroFromUserService
 import dagger.Module
 import dagger.Provides
@@ -76,7 +76,8 @@ object NetworkModule {
     fun providesHeroesListService(retrofit: Retrofit): HeroesListService = retrofit.create(HeroesListService::class.java)
 
     @Provides
-    fun provideTeamsListService(retrofit: Retrofit): TeamsListService = retrofit.create(TeamsListService::class.java)
+    fun provideTeamsListService(retrofit: Retrofit): TeamsFromUsersService =
+        retrofit.create(TeamsFromUsersService::class.java)
 
     @Provides
     fun provideCreateTeamService(retrofit: Retrofit): CreateTeamService = retrofit.create(CreateTeamService::class.java)

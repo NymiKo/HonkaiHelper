@@ -35,8 +35,8 @@ import com.example.tanorami.send_feedback.data.SendFeedbackRepository
 import com.example.tanorami.send_feedback.di.SendFeedbackComponent
 import com.example.tanorami.settings.data.SettingsRepository
 import com.example.tanorami.settings.di.SettingsModule
-import com.example.tanorami.teams.data.TeamsListRepository
-import com.example.tanorami.teams.di.TeamsListModule
+import com.example.tanorami.teams.data.TeamsFromUsersRepository
+import com.example.tanorami.teams.di.TeamsFromUsersModule
 import com.example.tanorami.teams_and_builds.data.TeamsAndBuildsRepositoryImpl
 import com.example.tanorami.teams_and_builds.di.TeamsAndBuildsModule
 import com.example.tanorami.viewing_users_build.data.ViewingBuildHeroFromUserRepository
@@ -57,7 +57,7 @@ import javax.inject.Singleton
         ProfileModule::class,
         HeroesListModule::class,
         BuildsHeroFromUsersModule::class,
-        TeamsListModule::class,
+        TeamsFromUsersModule::class,
         InfoAboutHeroModule::class,
         LoadDataModule::class,
         MainScreenModule::class,
@@ -86,7 +86,7 @@ interface AppComponent {
     fun sendFeedbackComponent(): SendFeedbackComponent.Factory
 
     val heroesListRepository: HeroesListRepository
-    val teamsListRepository: TeamsListRepository
+    val teamsFromUsersRepository: TeamsFromUsersRepository
     val createTeamRepository: CreateTeamRepository
     val loginRepository: LoginRepository
     val registrationRepository: RegistrationRepository

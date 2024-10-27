@@ -9,14 +9,14 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class TeamsListRepositoryImpl @Inject constructor(
-    private val teamsListService: TeamsListService,
+class TeamsFromUsersRepositoryImpl @Inject constructor(
+    private val teamsFromUsersService: TeamsFromUsersService,
     private val heroDao: HeroDao,
     @IODispatcher private val ioDispatcher: CoroutineDispatcher
-) : TeamsListRepository {
+) : TeamsFromUsersRepository {
 
     override suspend fun getTeamsListByID(idHero: Int): NetworkResult<List<TeamHero>> = withContext(ioDispatcher) {
-        when(val result = handleApi { teamsListService.getTeamsListByID(idHero) }) {
+        when (val result = handleApi { teamsFromUsersService.getTeamsListByID(idHero) }) {
             is NetworkResult.Error -> {
                 return@withContext NetworkResult.Error(result.code)
             }
@@ -38,7 +38,7 @@ class TeamsListRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getTeamsList(): NetworkResult<List<TeamHero>> = withContext(ioDispatcher) {
-        when (val result = handleApi { teamsListService.getTeamsList() }) {
+        when (val result = handleApi { teamsFromUsersService.getTeamsList() }) {
             is NetworkResult.Error -> {
                 return@withContext NetworkResult.Error(result.code)
             }
