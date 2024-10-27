@@ -42,6 +42,15 @@ class MainScreenViewModel @Inject constructor(
         }
     }
 
+    override fun onEvent(event: MainScreenEvents) {
+        when (event) {
+            MainScreenEvents.DialogButtonOkClick -> {
+                uiState = uiState.copy(dialogVisibilityState = false)
+                sendSideEffect(MainScreenSideEffects.OnLoadDataScreen(remoteVersionDB = uiState.remoteVersionDB))
+            }
+        }
+    }
+
     private fun getRemoteVersionDB(localVersionDB: String) = viewModelScope.launch {
         when (val result = repository.getRemoteVersionDB()) {
             is NetworkResult.Error -> {
@@ -49,14 +58,14 @@ class MainScreenViewModel @Inject constructor(
             }
 
             is NetworkResult.Success -> {
-                if (localVersionDB != result.data) {
-                    sendSideEffect(MainScreenSideEffects.OnLoadDataScreen(remoteVersionDB = result.data))
+                if (localVersionDB != result.data.remoteVersionDB) {
+                    uiState = uiState.copy(
+                        dialogVisibilityState = true,
+                        remoteVersionDB = result.data.remoteVersionDB,
+                        message = result.data.message
+                    )
                 }
             }
         }
-    }
-
-    override fun onEvent(event: MainScreenEvents) {
-
     }
 }

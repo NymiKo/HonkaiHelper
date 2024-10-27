@@ -16,7 +16,11 @@ import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -25,7 +29,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -41,6 +49,7 @@ import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.core.theme.Orange
 import com.example.tanorami.heroes.ui.HeroesListScreen
 import com.example.tanorami.main.presentation.MainScreenViewModel
+import com.example.tanorami.main.presentation.models.MainScreenEvents
 import com.example.tanorami.main.presentation.models.MainScreenSideEffects
 import com.example.tanorami.main.presentation.models.MainScreenUiState
 import com.example.tanorami.navigation.LoadData
@@ -68,6 +77,7 @@ fun MainScreen(
         uiState = state,
         viewModelFactory = viewModelFactory,
         rootNavController = rootNavController,
+        onEvent = viewModel::onEvent
     )
 
     if (sideEffect is MainScreenSideEffects.OnLoadDataScreen) {
@@ -81,9 +91,34 @@ private fun MainScreenContent(
     uiState: MainScreenUiState,
     viewModelFactory: ViewModelProvider.Factory,
     rootNavController: NavController,
+    onEvent: (MainScreenEvents) -> Unit,
 ) {
     val navController = rememberNavController()
     val items = MainScreens.entries.toTypedArray()
+
+    if (uiState.dialogVisibilityState) {
+        AlertDialog(
+            title = {
+                BaseDefaultText(
+                    text = stringResource(id = R.string.data_needs_updated),
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                )
+            },
+            text = { BaseDefaultText(text = uiState.message) },
+            onDismissRequest = { },
+            confirmButton = {
+                TextButton(onClick = { onEvent(MainScreenEvents.DialogButtonOkClick) }) {
+                    BaseDefaultText(text = stringResource(id = R.string.ok))
+                }
+            },
+            icon = {
+                Icon(imageVector = Icons.Default.Info, contentDescription = null, tint = Orange)
+            },
+            containerColor = MaterialTheme.colorScheme.background,
+        )
+    }
 
     Scaffold(
         modifier = Modifier

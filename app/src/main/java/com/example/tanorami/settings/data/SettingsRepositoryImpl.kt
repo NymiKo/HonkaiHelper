@@ -13,6 +13,14 @@ class SettingsRepositoryImpl @Inject constructor(
     private val mainScreenService: MainScreenService
 ): SettingsRepository {
     override suspend fun checkUpdate(): NetworkResult<String> = withContext(ioDispatcher) {
-        return@withContext handleApi { mainScreenService.getRemoteVersionDB() }
+        when (val result = handleApi { mainScreenService.getRemoteVersionDB() }) {
+            is NetworkResult.Error -> {
+                return@withContext NetworkResult.Error(result.code)
+            }
+
+            is NetworkResult.Success -> {
+                return@withContext NetworkResult.Success(result.data.remoteVersionDB)
+            }
+        }
     }
 }

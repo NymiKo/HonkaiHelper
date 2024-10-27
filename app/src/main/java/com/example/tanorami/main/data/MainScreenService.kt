@@ -1,9 +1,10 @@
 package com.example.tanorami.main.data
 
+import com.example.tanorami.main.data.models.NewDataResponse
 import retrofit2.Response
 import retrofit2.http.GET
 
 interface MainScreenService {
-    @GET("/versionDB.php")
-    suspend fun getRemoteVersionDB(): Response<String>
+    @GET("/updatingData.php")
+    suspend fun getRemoteVersionDB(): Response<NewDataResponse>
 }
