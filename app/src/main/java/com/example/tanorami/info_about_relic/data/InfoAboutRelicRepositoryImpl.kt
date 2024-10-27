@@ -7,10 +7,10 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class RelicInfoRepositoryImpl @Inject constructor(
+class InfoAboutRelicRepositoryImpl @Inject constructor(
     @IODispatcher private val ioDispatcher: CoroutineDispatcher,
     private val relicDao: RelicDao
-): RelicInfoRepository {
+) : InfoAboutRelicRepository {
     override suspend fun getRelic(idRelic: Int): Relic = withContext(ioDispatcher) {
         return@withContext relicDao.getRelic(idRelic).toRelic()
     }

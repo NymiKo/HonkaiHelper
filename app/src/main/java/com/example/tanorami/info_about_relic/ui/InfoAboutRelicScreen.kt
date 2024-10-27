@@ -11,19 +11,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.tanorami.base_components.top_app_bar.BaseCenterAlignedTopAppBar
 import com.example.tanorami.info_about_hero.data.model.Relic
-import com.example.tanorami.info_about_relic.presentation.RelicInfoViewModel
+import com.example.tanorami.info_about_relic.presentation.InfoAboutRelicViewModel
 import com.example.tanorami.info_about_relic.ui.components.DescriptionRelicEffect
 import com.example.tanorami.info_about_relic.ui.components.ImageRelic
 import com.example.tanorami.utils.OnLifecycleEvent
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class InfoAboutRelicNavArgument(val idRelic: Int)
 
 @Composable
 fun InfoAboutRelicScreen(
-    idRelic: Int,
-    viewModel: RelicInfoViewModel,
+    infoAboutRelicNavArgument: InfoAboutRelicNavArgument,
+    viewModelFactory: ViewModelProvider.Factory,
+    viewModel: InfoAboutRelicViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
 ) {
     val relic = viewModel.relic.collectAsStateWithLifecycle().value
@@ -36,7 +43,7 @@ fun InfoAboutRelicScreen(
     OnLifecycleEvent { owner, event ->
         when(event) {
             Lifecycle.Event.ON_CREATE -> {
-                viewModel.getRelic(idRelic)
+                viewModel.getRelic(infoAboutRelicNavArgument.idRelic)
             }
 
             else -> {}

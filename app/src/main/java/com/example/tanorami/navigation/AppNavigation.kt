@@ -17,6 +17,8 @@ import com.example.tanorami.builds_hero_from_users.ui.BuildsHeroFromUsersNavArgu
 import com.example.tanorami.builds_hero_from_users.ui.BuildsHeroFromUsersScreen
 import com.example.tanorami.info_about_hero.ui.InfoAboutHeroScreen
 import com.example.tanorami.info_about_hero.ui.models.InfoAboutHeroNavArguments
+import com.example.tanorami.info_about_relic.ui.InfoAboutRelicNavArgument
+import com.example.tanorami.info_about_relic.ui.InfoAboutRelicScreen
 import com.example.tanorami.info_about_weapon.ui.InfoAboutWeaponNavArguments
 import com.example.tanorami.info_about_weapon.ui.InfoAboutWeaponScreen
 import com.example.tanorami.load_data.ui.LoadDataNavArguments
@@ -116,6 +118,15 @@ fun AppNavigation(
             val infoAboutWeaponNavArguments: InfoAboutWeaponNavArguments = backStackEntry.toRoute()
             InfoAboutWeaponScreen(
                 infoAboutWeaponNavArguments = infoAboutWeaponNavArguments,
+                viewModelFactory = viewModelFactory,
+                navController = navController
+            )
+        }
+
+        composable<InfoAboutRelicNavArgument> { backStackEntry ->
+            val infoAboutRelicNavArgument: InfoAboutRelicNavArgument = backStackEntry.toRoute()
+            InfoAboutRelicScreen(
+                infoAboutRelicNavArgument = infoAboutRelicNavArgument,
                 viewModelFactory = viewModelFactory,
                 navController = navController
             )

@@ -21,8 +21,9 @@ import com.example.tanorami.info_about_decoration.data.InfoAboutDecorationReposi
 import com.example.tanorami.info_about_decoration.di.InfoAboutDecorationComponent
 import com.example.tanorami.info_about_hero.data.InfoAboutHeroRepository
 import com.example.tanorami.info_about_hero.di.InfoAboutHeroModule
-import com.example.tanorami.info_about_relic.data.RelicInfoRepository
-import com.example.tanorami.info_about_relic.di.RelicInfoComponent
+import com.example.tanorami.info_about_relic.data.InfoAboutRelicRepository
+import com.example.tanorami.info_about_relic.di.InfoAboutRelicComponent
+import com.example.tanorami.info_about_relic.di.InfoAboutRelicModule
 import com.example.tanorami.info_about_weapon.data.InfoAboutWeaponRepository
 import com.example.tanorami.info_about_weapon.di.InfoAboutWeaponModule
 import com.example.tanorami.load_data.data.LoadDataRepository
@@ -66,6 +67,7 @@ import javax.inject.Singleton
         BaseBuildHeroModule::class,
         ViewingBuildHeroFromUserModel::class,
         InfoAboutWeaponModule::class,
+        InfoAboutRelicModule::class,
     ]
 )
 interface AppComponent {
@@ -80,7 +82,7 @@ interface AppComponent {
     fun loginComponent(): LoginComponent.Factory
     fun registrationComponent(): RegistrationComponent.Factory
     fun createBuildHeroComponent(): CreateBuildHeroComponent.Factory
-    fun relicInfoComponent(): RelicInfoComponent.Factory
+    fun relicInfoComponent(): InfoAboutRelicComponent.Factory
     fun decorationInfoComponent(): InfoAboutDecorationComponent.Factory
     fun changeNicknameComponent(): ChangeNicknameComponent.Factory
     fun sendFeedbackComponent(): SendFeedbackComponent.Factory
@@ -95,7 +97,7 @@ interface AppComponent {
     val loadDataRepository: LoadDataRepository
     val baseBuildHeroRepository: BaseBuildHeroRepository
     val infoAboutWeaponRepository: InfoAboutWeaponRepository
-    val relicInfoRepository: RelicInfoRepository
+    val infoAboutRelicRepository: InfoAboutRelicRepository
     val infoAboutDecorationRepository: InfoAboutDecorationRepository
     val buildsHeroListRepository: BuildsHeroListRepository
     val viewingBuildHeroFromUserRepository: ViewingBuildHeroFromUserRepository

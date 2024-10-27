@@ -20,8 +20,8 @@ import com.example.tanorami.info_about_decoration.data.InfoAboutDecorationReposi
 import com.example.tanorami.info_about_decoration.data.InfoAboutDecorationRepositoryImpl
 import com.example.tanorami.info_about_hero.data.InfoAboutHeroRepository
 import com.example.tanorami.info_about_hero.data.InfoAboutHeroRepositoryImpl
-import com.example.tanorami.info_about_relic.data.RelicInfoRepository
-import com.example.tanorami.info_about_relic.data.RelicInfoRepositoryImpl
+import com.example.tanorami.info_about_relic.data.InfoAboutRelicRepository
+import com.example.tanorami.info_about_relic.data.InfoAboutRelicRepositoryImpl
 import com.example.tanorami.info_about_weapon.data.InfoAboutWeaponRepository
 import com.example.tanorami.info_about_weapon.data.InfoAboutWeaponRepositoryImpl
 import com.example.tanorami.load_data.data.LoadDataRepository
@@ -88,7 +88,7 @@ interface RepositoryModule {
 
     @Singleton
     @Binds
-    fun bindRelicInfoRepository(repository: RelicInfoRepositoryImpl): RelicInfoRepository
+    fun bindRelicInfoRepository(repository: InfoAboutRelicRepositoryImpl): InfoAboutRelicRepository
 
     @Singleton
     @Binds

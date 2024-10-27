@@ -10,10 +10,8 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import com.example.tanorami.App
 import com.example.tanorami.core.theme.AppTheme
-import com.example.tanorami.info_about_relic.presentation.RelicInfoViewModel
+import com.example.tanorami.info_about_relic.presentation.InfoAboutRelicViewModel
 import javax.inject.Inject
 
 class InfoAboutRelicFragment : Fragment() {
@@ -22,11 +20,11 @@ class InfoAboutRelicFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val idRelic get() = requireArguments().getInt(ID_RELIC)
-    private val viewModel by viewModels<RelicInfoViewModel> { viewModelFactory }
+    private val viewModel by viewModels<InfoAboutRelicViewModel> { viewModelFactory }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as App).appComponent.relicInfoComponent().create().inject(this)
+        //(requireActivity().application as App).appComponent.relicInfoComponent().create().inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,11 +40,7 @@ class InfoAboutRelicFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 AppTheme {
-                    InfoAboutRelicScreen(
-                        idRelic = idRelic,
-                        viewModel = viewModel,
-                        navController = findNavController(),
-                    )
+
                 }
             }
         }
