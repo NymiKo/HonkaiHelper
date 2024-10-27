@@ -34,7 +34,7 @@ data class InfoAboutWeaponNavArguments(val idWeapon: Int)
 
 @Composable
 fun InfoAboutWeaponScreen(
-    infoAboutWeaponNavArguments: InfoAboutWeaponNavArguments,
+    navArguments: InfoAboutWeaponNavArguments,
     viewModelFactory: ViewModelProvider.Factory,
     viewModel: InfoAboutWeaponViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
@@ -49,7 +49,7 @@ fun InfoAboutWeaponScreen(
     OnLifecycleEvent { owner, event ->  
         when(event) {
             Lifecycle.Event.ON_CREATE -> {
-                viewModel.getWeapon(infoAboutWeaponNavArguments.idWeapon)
+                viewModel.getWeapon(navArguments.idWeapon)
             }
             
             else -> {}

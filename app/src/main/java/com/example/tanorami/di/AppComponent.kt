@@ -18,11 +18,10 @@ import com.example.tanorami.createteam.di.CreateTeamComponent
 import com.example.tanorami.heroes.data.HeroesListRepository
 import com.example.tanorami.heroes.di.HeroesListModule
 import com.example.tanorami.info_about_decoration.data.InfoAboutDecorationRepository
-import com.example.tanorami.info_about_decoration.di.InfoAboutDecorationComponent
+import com.example.tanorami.info_about_decoration.di.InfoAboutDecorationModule
 import com.example.tanorami.info_about_hero.data.InfoAboutHeroRepository
 import com.example.tanorami.info_about_hero.di.InfoAboutHeroModule
 import com.example.tanorami.info_about_relic.data.InfoAboutRelicRepository
-import com.example.tanorami.info_about_relic.di.InfoAboutRelicComponent
 import com.example.tanorami.info_about_relic.di.InfoAboutRelicModule
 import com.example.tanorami.info_about_weapon.data.InfoAboutWeaponRepository
 import com.example.tanorami.info_about_weapon.di.InfoAboutWeaponModule
@@ -68,6 +67,7 @@ import javax.inject.Singleton
         ViewingBuildHeroFromUserModel::class,
         InfoAboutWeaponModule::class,
         InfoAboutRelicModule::class,
+        InfoAboutDecorationModule::class,
     ]
 )
 interface AppComponent {
@@ -82,8 +82,6 @@ interface AppComponent {
     fun loginComponent(): LoginComponent.Factory
     fun registrationComponent(): RegistrationComponent.Factory
     fun createBuildHeroComponent(): CreateBuildHeroComponent.Factory
-    fun relicInfoComponent(): InfoAboutRelicComponent.Factory
-    fun decorationInfoComponent(): InfoAboutDecorationComponent.Factory
     fun changeNicknameComponent(): ChangeNicknameComponent.Factory
     fun sendFeedbackComponent(): SendFeedbackComponent.Factory
 

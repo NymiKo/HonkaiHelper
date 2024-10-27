@@ -29,7 +29,7 @@ data class BuildsHeroFromUsersNavArguments(val idHero: Int)
 
 @Composable
 fun BuildsHeroFromUsersScreen(
-    buildsHeroFromUsersNavArguments: BuildsHeroFromUsersNavArguments,
+    navArguments: BuildsHeroFromUsersNavArguments,
     viewModelFactory: ViewModelProvider.Factory,
     viewModel: BuildsHeroFromUsersViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
@@ -46,7 +46,7 @@ fun BuildsHeroFromUsersScreen(
         BuildsHeroFromUsersScreenSideEffects.OnCreateBuildHeroScreen -> {
             navController.navigate(
                 resId = R.id.action_buildsHeroListFragment_to_createBuildHeroFragment,
-                CreateBuildHeroFragment.newInstance(idHero = buildsHeroFromUsersNavArguments.idHero)
+                CreateBuildHeroFragment.newInstance(idHero = navArguments.idHero)
             )
             viewModel.clearEffect()
         }
@@ -69,7 +69,7 @@ fun BuildsHeroFromUsersScreen(
             Lifecycle.Event.ON_CREATE -> {
                 viewModel.onEvent(
                     BuildsHeroFromUsersScreenEvents.GetBuildsHeroList(
-                        buildsHeroFromUsersNavArguments.idHero
+                        navArguments.idHero
                     )
                 )
             }

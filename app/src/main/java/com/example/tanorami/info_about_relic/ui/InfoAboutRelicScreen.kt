@@ -28,7 +28,7 @@ data class InfoAboutRelicNavArgument(val idRelic: Int)
 
 @Composable
 fun InfoAboutRelicScreen(
-    infoAboutRelicNavArgument: InfoAboutRelicNavArgument,
+    navArguments: InfoAboutRelicNavArgument,
     viewModelFactory: ViewModelProvider.Factory,
     viewModel: InfoAboutRelicViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
@@ -43,7 +43,7 @@ fun InfoAboutRelicScreen(
     OnLifecycleEvent { owner, event ->
         when(event) {
             Lifecycle.Event.ON_CREATE -> {
-                viewModel.getRelic(infoAboutRelicNavArgument.idRelic)
+                viewModel.getRelic(navArguments.idRelic)
             }
 
             else -> {}

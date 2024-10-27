@@ -11,7 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.tanorami.base_components.top_app_bar.BaseCenterAlignedTopAppBar
@@ -19,11 +21,16 @@ import com.example.tanorami.info_about_decoration.presentation.InfoAboutDecorati
 import com.example.tanorami.info_about_decoration.ui.components.DescriptionDecorationEffect
 import com.example.tanorami.info_about_hero.data.model.Decoration
 import com.example.tanorami.utils.OnLifecycleEvent
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class InfoAboutDecorationNavArguments(val idDecoration: Int)
 
 @Composable
 internal fun InfoAboutDecorationScreen(
-    idDecoration: Int,
-    viewModel: InfoAboutDecorationViewModel,
+    navArguments: InfoAboutDecorationNavArguments,
+    viewModelFactory: ViewModelProvider.Factory,
+    viewModel: InfoAboutDecorationViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
 ) {
     val decoration = viewModel.decoration.collectAsStateWithLifecycle().value
@@ -36,7 +43,7 @@ internal fun InfoAboutDecorationScreen(
     OnLifecycleEvent { owner, event ->
         when(event) {
             Lifecycle.Event.ON_CREATE -> {
-                viewModel.getDecoration(idDecoration)
+                viewModel.getDecoration(navArguments.idDecoration)
             }
 
             else -> {}

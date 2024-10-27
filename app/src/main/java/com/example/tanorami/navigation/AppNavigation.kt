@@ -15,6 +15,8 @@ import com.example.tanorami.base_build_hero.ui.BaseBuildHeroNavArguments
 import com.example.tanorami.base_build_hero.ui.BaseBuildHeroScreen
 import com.example.tanorami.builds_hero_from_users.ui.BuildsHeroFromUsersNavArguments
 import com.example.tanorami.builds_hero_from_users.ui.BuildsHeroFromUsersScreen
+import com.example.tanorami.info_about_decoration.ui.InfoAboutDecorationNavArguments
+import com.example.tanorami.info_about_decoration.ui.InfoAboutDecorationScreen
 import com.example.tanorami.info_about_hero.ui.InfoAboutHeroScreen
 import com.example.tanorami.info_about_hero.ui.models.InfoAboutHeroNavArguments
 import com.example.tanorami.info_about_relic.ui.InfoAboutRelicNavArgument
@@ -54,7 +56,7 @@ fun AppNavigation(
         composable<LoadDataNavArguments> { backStackEntry ->
             val loadDataNavArguments: LoadDataNavArguments = backStackEntry.toRoute()
             LoadDataScreen(
-                loadDataNavArguments = loadDataNavArguments,
+                navArguments = loadDataNavArguments,
                 viewModelFactory = viewModelFactory,
                 navController = navController,
             )
@@ -63,7 +65,7 @@ fun AppNavigation(
         composable<InfoAboutHeroNavArguments> { backStackEntry ->
             val infoAboutHeroNavArguments: InfoAboutHeroNavArguments = backStackEntry.toRoute()
             InfoAboutHeroScreen(
-                infoAboutHeroNavArguments = infoAboutHeroNavArguments,
+                navArguments = infoAboutHeroNavArguments,
                 viewModelFactory = viewModelFactory,
                 navController = navController,
             )
@@ -79,7 +81,7 @@ fun AppNavigation(
         composable<BaseBuildHeroNavArguments> { backStackEntry ->
             val baseBuildHeroNavArguments: BaseBuildHeroNavArguments = backStackEntry.toRoute()
             BaseBuildHeroScreen(
-                baseBuildHeroNavArguments = baseBuildHeroNavArguments,
+                navArguments = baseBuildHeroNavArguments,
                 viewModelFactory = viewModelFactory,
                 navController = navController,
             )
@@ -89,7 +91,7 @@ fun AppNavigation(
             val buildsHeroFromUsersNavArguments: BuildsHeroFromUsersNavArguments =
                 backStackEntry.toRoute()
             BuildsHeroFromUsersScreen(
-                buildsHeroFromUsersNavArguments = buildsHeroFromUsersNavArguments,
+                navArguments = buildsHeroFromUsersNavArguments,
                 viewModelFactory = viewModelFactory,
                 navController = navController,
             )
@@ -108,7 +110,7 @@ fun AppNavigation(
         composable<TeamsFromUsersNavArguments> { backStackEntry ->
             val teamsFromUsersNavArguments: TeamsFromUsersNavArguments = backStackEntry.toRoute()
             TeamsFromUsersScreen(
-                teamsFromUsersNavArguments = teamsFromUsersNavArguments,
+                navArguments = teamsFromUsersNavArguments,
                 viewModelFactory = viewModelFactory,
                 navController = navController
             )
@@ -117,7 +119,7 @@ fun AppNavigation(
         composable<InfoAboutWeaponNavArguments> { backStackEntry ->
             val infoAboutWeaponNavArguments: InfoAboutWeaponNavArguments = backStackEntry.toRoute()
             InfoAboutWeaponScreen(
-                infoAboutWeaponNavArguments = infoAboutWeaponNavArguments,
+                navArguments = infoAboutWeaponNavArguments,
                 viewModelFactory = viewModelFactory,
                 navController = navController
             )
@@ -126,7 +128,17 @@ fun AppNavigation(
         composable<InfoAboutRelicNavArgument> { backStackEntry ->
             val infoAboutRelicNavArgument: InfoAboutRelicNavArgument = backStackEntry.toRoute()
             InfoAboutRelicScreen(
-                infoAboutRelicNavArgument = infoAboutRelicNavArgument,
+                navArguments = infoAboutRelicNavArgument,
+                viewModelFactory = viewModelFactory,
+                navController = navController
+            )
+        }
+
+        composable<InfoAboutDecorationNavArguments> { backStackEntry ->
+            val infoAboutDecorationNavArguments: InfoAboutDecorationNavArguments =
+                backStackEntry.toRoute()
+            InfoAboutDecorationScreen(
+                navArguments = infoAboutDecorationNavArguments,
                 viewModelFactory = viewModelFactory,
                 navController = navController
             )

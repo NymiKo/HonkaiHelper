@@ -10,8 +10,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import com.example.tanorami.App
 import com.example.tanorami.core.theme.AppTheme
 import com.example.tanorami.info_about_decoration.presentation.InfoAboutDecorationViewModel
 import javax.inject.Inject
@@ -26,7 +24,7 @@ class InfoAboutDecorationFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as App).appComponent.decorationInfoComponent().create().inject(this)
+        //(requireActivity().application as App).appComponent.decorationInfoComponent().create().inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,11 +40,7 @@ class InfoAboutDecorationFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 AppTheme {
-                    InfoAboutDecorationScreen(
-                        idDecoration = idDecoration,
-                        viewModel = viewModel,
-                        navController = findNavController(),
-                    )
+
                 }
             }
         }

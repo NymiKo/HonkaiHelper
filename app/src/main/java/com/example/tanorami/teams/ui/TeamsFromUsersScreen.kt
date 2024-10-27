@@ -28,7 +28,7 @@ data class TeamsFromUsersNavArguments(val idHero: Int)
 
 @Composable
 fun TeamsFromUsersScreen(
-    teamsFromUsersNavArguments: TeamsFromUsersNavArguments,
+    navArguments: TeamsFromUsersNavArguments,
     viewModelFactory: ViewModelProvider.Factory,
     viewModel: TeamsFromUsersViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
@@ -63,7 +63,7 @@ fun TeamsFromUsersScreen(
             Lifecycle.Event.ON_CREATE -> {
                 viewModel.onEvent(
                     TeamsFromUsersScreenEvents.GetTeamsFromUsers(
-                        teamsFromUsersNavArguments.idHero
+                        navArguments.idHero
                     )
                 )
             }

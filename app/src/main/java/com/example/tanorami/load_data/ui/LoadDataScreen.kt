@@ -20,7 +20,7 @@ data class LoadDataNavArguments(val remoteVersionDB: String)
 
 @Composable
 fun LoadDataScreen(
-    loadDataNavArguments: LoadDataNavArguments,
+    navArguments: LoadDataNavArguments,
     viewModelFactory: ViewModelProvider.Factory,
     viewModel: LoadDataViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
@@ -45,7 +45,7 @@ fun LoadDataScreen(
         when (event) {
             Lifecycle.Event.ON_CREATE -> viewModel.onEvent(
                 LoadDataScreenEvents.UploadData(
-                    loadDataNavArguments.remoteVersionDB
+                    navArguments.remoteVersionDB
                 )
             )
 

@@ -34,7 +34,7 @@ import com.example.tanorami.builds_hero_from_users.ui.BuildsHeroFromUsersNavArgu
 import com.example.tanorami.core.theme.Blue
 import com.example.tanorami.core.theme.Orange
 import com.example.tanorami.core.theme.Violet
-import com.example.tanorami.info_about_decoration.ui.InfoAboutDecorationFragment
+import com.example.tanorami.info_about_decoration.ui.InfoAboutDecorationNavArguments
 import com.example.tanorami.info_about_relic.ui.InfoAboutRelicNavArgument
 import com.example.tanorami.info_about_weapon.ui.InfoAboutWeaponNavArguments
 import com.example.tanorami.utils.OnLifecycleEvent
@@ -45,7 +45,7 @@ data class BaseBuildHeroNavArguments(val idHero: Int)
 
 @Composable
 fun BaseBuildHeroScreen(
-    baseBuildHeroNavArguments: BaseBuildHeroNavArguments,
+    navArguments: BaseBuildHeroNavArguments,
     viewModelFactory: ViewModelProvider.Factory,
     viewModel: BaseBuildHeroViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
@@ -69,10 +69,7 @@ fun BaseBuildHeroScreen(
             viewModel.clearEffect()
         }
         is BaseBuildHeroScreenSideEffects.OnInfoAboutDecorationScreen -> {
-            navController.navigate(
-                R.id.action_baseBuildHeroFragment_to_decorationInfoFragment,
-                InfoAboutDecorationFragment.newInstance(sideEffects.idDecoration)
-            )
+            navController.navigate(route = InfoAboutDecorationNavArguments(idDecoration = sideEffects.idDecoration))
             viewModel.clearEffect()
         }
         is BaseBuildHeroScreenSideEffects.OnInfoAboutRelicScreen -> {
@@ -92,7 +89,7 @@ fun BaseBuildHeroScreen(
             Lifecycle.Event.ON_CREATE -> {
                 viewModel.onEvent(
                     BaseBuildHeroScreenEvents.GetFullBaseBuildHero(
-                        baseBuildHeroNavArguments.idHero
+                        navArguments.idHero
                     )
                 )
             }

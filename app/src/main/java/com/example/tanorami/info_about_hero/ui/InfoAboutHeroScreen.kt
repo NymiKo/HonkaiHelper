@@ -37,7 +37,7 @@ import com.example.tanorami.utils.OnLifecycleEvent
 
 @Composable
 fun InfoAboutHeroScreen(
-    infoAboutHeroNavArguments: InfoAboutHeroNavArguments,
+    navArguments: InfoAboutHeroNavArguments,
     viewModelFactory: ViewModelProvider.Factory,
     viewModel: InfoAboutHeroViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
@@ -69,7 +69,7 @@ fun InfoAboutHeroScreen(
     OnLifecycleEvent { owner, event ->
         when(event) {
             Lifecycle.Event.ON_CREATE -> {
-                viewModel.onEvent(InfoAboutHeroScreenEvents.GetHeroInfo(infoAboutHeroNavArguments.idHero))
+                viewModel.onEvent(InfoAboutHeroScreenEvents.GetHeroInfo(navArguments.idHero))
             }
 
             else -> {}
