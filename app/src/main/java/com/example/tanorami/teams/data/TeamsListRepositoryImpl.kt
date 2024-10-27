@@ -37,28 +37,6 @@ class TeamsListRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getTeamsListByUID(uid: String): NetworkResult<List<TeamHero>> = withContext(ioDispatcher) {
-        when(val result = handleApi { teamsListService.getTeamsListByUID(uid) }) {
-            is NetworkResult.Error -> {
-                return@withContext NetworkResult.Error(result.code)
-            }
-            is NetworkResult.Success -> {
-                return@withContext NetworkResult.Success(result.data.map {
-                    TeamHero(
-                        idTeam = it.idTeam,
-                        heroOne = heroDao.getHeroWithNameAvatarRarity(it.idHeroOne),
-                        heroTwo = heroDao.getHeroWithNameAvatarRarity(it.idHeroTwo),
-                        heroThree = heroDao.getHeroWithNameAvatarRarity(it.idHeroThree),
-                        heroFour = heroDao.getHeroWithNameAvatarRarity(it.idHeroFour),
-                        nickname = it.nickname,
-                        avatar = it.avatar,
-                        uid = it.uid,
-                    )
-                })
-            }
-        }
-    }
-
     override suspend fun getTeamsList(): NetworkResult<List<TeamHero>> = withContext(ioDispatcher) {
         when (val result = handleApi { teamsListService.getTeamsList() }) {
             is NetworkResult.Error -> {

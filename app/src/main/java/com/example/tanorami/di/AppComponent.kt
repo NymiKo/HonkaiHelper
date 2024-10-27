@@ -1,7 +1,6 @@
 package com.example.tanorami.di
 
 import android.content.Context
-import com.example.tanorami.activity.data.MainRepository
 import com.example.tanorami.activity.di.MainComponent
 import com.example.tanorami.auth.login.di.LoginComponent
 import com.example.tanorami.auth.login.domain.LoginRepository
@@ -27,18 +26,19 @@ import com.example.tanorami.info_about_relic.di.RelicInfoComponent
 import com.example.tanorami.info_about_weapon.data.InfoAboutWeaponRepository
 import com.example.tanorami.info_about_weapon.di.InfoAboutWeaponComponent
 import com.example.tanorami.load_data.data.LoadDataRepository
-import com.example.tanorami.load_data.di.LoadDataComponent
 import com.example.tanorami.load_data.di.LoadDataModule
-import com.example.tanorami.navigation.main.MainScreenRepositoryImpl
-import com.example.tanorami.navigation.main.di.MainScreenModule
+import com.example.tanorami.main.data.MainScreenRepositoryImpl
+import com.example.tanorami.main.di.MainScreenModule
 import com.example.tanorami.profile.di.ProfileModule
 import com.example.tanorami.profile.domain.ProfileRepository
 import com.example.tanorami.send_feedback.data.SendFeedbackRepository
 import com.example.tanorami.send_feedback.di.SendFeedbackComponent
 import com.example.tanorami.settings.data.SettingsRepository
-import com.example.tanorami.settings.di.SettingsComponent
+import com.example.tanorami.settings.di.SettingsModule
 import com.example.tanorami.teams.data.TeamsListRepository
 import com.example.tanorami.teams.di.TeamsListModule
+import com.example.tanorami.teams_and_builds.data.TeamsAndBuildsRepositoryImpl
+import com.example.tanorami.teams_and_builds.di.TeamsAndBuildsModule
 import com.example.tanorami.viewing_users_build.data.ViewingUsersBuildRepository
 import com.example.tanorami.viewing_users_build.di.ViewingUsersBuildComponent
 import dagger.BindsInstance
@@ -61,6 +61,8 @@ import javax.inject.Singleton
         InfoAboutHeroModule::class,
         LoadDataModule::class,
         MainScreenModule::class,
+        TeamsAndBuildsModule::class,
+        SettingsModule::class
     ]
 )
 interface AppComponent {
@@ -75,14 +77,12 @@ interface AppComponent {
     fun loginComponent(): LoginComponent.Factory
     fun registrationComponent(): RegistrationComponent.Factory
     fun createBuildHeroComponent(): CreateBuildHeroComponent.Factory
-    fun loadDataComponent(): LoadDataComponent.Factory
     fun baseBuildHeroComponent(): BaseBuildHeroComponent.Factory
     fun weaponInfoComponent(): InfoAboutWeaponComponent.Factory
     fun relicInfoComponent(): RelicInfoComponent.Factory
     fun decorationInfoComponent(): InfoAboutDecorationComponent.Factory
     fun viewingUsersBuildComponent(): ViewingUsersBuildComponent.Factory
     fun changeNicknameComponent(): ChangeNicknameComponent.Factory
-    fun settingsComponent(): SettingsComponent.Factory
     fun sendFeedbackComponent(): SendFeedbackComponent.Factory
 
     val heroesListRepository: HeroesListRepository
@@ -93,7 +93,6 @@ interface AppComponent {
     val profileRepository: ProfileRepository
     val infoAboutHeroRepository: InfoAboutHeroRepository
     val loadDataRepository: LoadDataRepository
-    val mainRepository: MainRepository
     val baseBuildHeroRepository: BaseBuildHeroRepository
     val infoAboutWeaponRepository: InfoAboutWeaponRepository
     val relicInfoRepository: RelicInfoRepository
@@ -104,4 +103,5 @@ interface AppComponent {
     val settingsRepository: SettingsRepository
     val sendFeedbackRepository: SendFeedbackRepository
     val mainScreenRepository: MainScreenRepositoryImpl
+    val teamsAndBuildsRepository: TeamsAndBuildsRepositoryImpl
 }

@@ -1,4 +1,4 @@
-package com.example.tanorami.navigation.main.presentation.models
+package com.example.tanorami.main.presentation.models
 
 import com.example.tanorami.base.UiEvent
 

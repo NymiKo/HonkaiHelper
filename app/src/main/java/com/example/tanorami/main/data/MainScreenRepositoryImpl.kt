@@ -1,4 +1,4 @@
-package com.example.tanorami.activity.data
+package com.example.tanorami.main.data
 
 import com.example.tanorami.data.NetworkResult
 import com.example.tanorami.data.handleApi
@@ -8,10 +8,17 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class MainRepositoryImpl @Inject constructor(
-    @IODispatcher private val ioDispatcher: CoroutineDispatcher,
+class MainScreenRepositoryImpl @Inject constructor(
+    private val mainScreenService: MainScreenService,
     private val heroesListService: HeroesListService,
-): MainRepository {
+    @IODispatcher private val ioDispatcher: CoroutineDispatcher,
+) : MainScreenRepository {
+    override suspend fun getRemoteVersionDB(): NetworkResult<String> = withContext(ioDispatcher) {
+        handleApi {
+            mainScreenService.getRemoteVersionDB()
+        }
+    }
+
     override suspend fun getAvatar(): NetworkResult<String> {
         return withContext(ioDispatcher) {
             handleApi {

@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class HeroesListViewModelImpl @Inject constructor(
+class HeroesListViewMode @Inject constructor(
     private val repository: HeroesListRepository,
     private val appDataStore: AppDataStore,
 ) : BaseViewModel<HeroesListScreenUiState, HeroesListScreenEvents, HeroesListScreenSideEffects>(

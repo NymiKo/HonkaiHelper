@@ -11,9 +11,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -22,6 +24,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun BaseTopAppBar(
     modifier: Modifier = Modifier,
+    containerColor: Color = Color.Unspecified,
     title: String,
     navigationIcon: Boolean = true,
     actions: @Composable RowScope.() -> Unit = {},
@@ -50,6 +53,9 @@ fun BaseTopAppBar(
                     tint = MaterialTheme.colorScheme.secondary,
                 )
             }
-        }
+        },
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = containerColor,
+        )
     )
 }

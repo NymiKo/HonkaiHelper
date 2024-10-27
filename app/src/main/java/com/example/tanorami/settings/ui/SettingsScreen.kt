@@ -26,6 +26,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.tanorami.R
@@ -42,7 +44,8 @@ import com.example.tanorami.utils.toast
 
 @Composable
 fun SettingsScreen(
-    viewModel: SettingsViewModel,
+    viewModelFactory: ViewModelProvider.Factory,
+    viewModel: SettingsViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
 ) {
     val state = viewModel.uiState().collectAsState().value
@@ -78,7 +81,7 @@ fun SettingsScreen(
             viewModel.clearEffect()
         }
 
-        SettingsScreenSideEffects.OnBack -> navController.popBackStack()
+        SettingsScreenSideEffects.OnBack -> navController.navigateUp()
 
         null -> {}
     }

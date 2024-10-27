@@ -56,11 +56,7 @@ class ViewingBuildHeroFromUserViewModel @Inject constructor(
     }
 
     private fun getHeroBuild(idBuild: Long, uid: String) = viewModelScope.launch {
-        val result = if (uid.isEmpty()) {
-            repository.getHeroBuildByID(idBuild)
-        } else {
-            repository.getHeroBuildByUID(uid)
-        }
+        val result = repository.getHeroBuildByID(idBuild)
 
         when (result) {
             is NetworkResult.Error -> {

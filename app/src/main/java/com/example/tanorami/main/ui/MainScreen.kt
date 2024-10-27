@@ -1,4 +1,4 @@
-package com.example.tanorami.navigation.main
+package com.example.tanorami.main.ui
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
@@ -40,11 +40,12 @@ import com.example.tanorami.R
 import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.core.theme.Orange
 import com.example.tanorami.heroes.ui.HeroesListScreen
+import com.example.tanorami.main.presentation.MainScreenViewModel
+import com.example.tanorami.main.presentation.models.MainScreenSideEffects
+import com.example.tanorami.main.presentation.models.MainScreenUiState
 import com.example.tanorami.navigation.LoadData
-import com.example.tanorami.navigation.main.presentation.MainScreenViewModel
-import com.example.tanorami.navigation.main.presentation.models.MainScreenSideEffects
 import com.example.tanorami.profile.ui.ProfileScreen
-import com.example.tanorami.teams_and_builds.TeamsAndBuildsScreen
+import com.example.tanorami.teams_and_builds.ui.TeamsAndBuildsScreen
 
 enum class MainScreens(val route: String) {
     HeroesList("heroes_list"),
@@ -56,15 +57,15 @@ enum class MainScreens(val route: String) {
 
 @Composable
 fun MainScreen(
-    profileAvatar: String,
     viewModelFactory: ViewModelProvider.Factory,
     viewModel: MainScreenViewModel = viewModel(factory = viewModelFactory),
     rootNavController: NavController,
 ) {
+    val state = viewModel.uiState().collectAsState().value
     val sideEffect = viewModel.uiEffect().collectAsState(initial = null).value
 
     MainScreenContent(
-        profileAvatar = profileAvatar,
+        uiState = state,
         viewModelFactory = viewModelFactory,
         rootNavController = rootNavController,
     )
@@ -77,7 +78,7 @@ fun MainScreen(
 
 @Composable
 private fun MainScreenContent(
-    profileAvatar: String,
+    uiState: MainScreenUiState,
     viewModelFactory: ViewModelProvider.Factory,
     rootNavController: NavController,
 ) {
@@ -142,9 +143,9 @@ private fun MainScreenContent(
                                                 MaterialTheme.colorScheme.secondary,
                                                 CircleShape
                                             ),
-                                        model = profileAvatar.ifEmpty { R.drawable.ic_person },
+                                        model = uiState.userProfileAvatar.ifEmpty { R.drawable.ic_person },
                                         contentDescription = null,
-                                        colorFilter = if (profileAvatar.isEmpty()) ColorFilter.tint(
+                                        colorFilter = if (uiState.userProfileAvatar.isEmpty()) ColorFilter.tint(
                                             MaterialTheme.colorScheme.onSecondary
                                         ) else null,
                                         contentScale = ContentScale.Crop,

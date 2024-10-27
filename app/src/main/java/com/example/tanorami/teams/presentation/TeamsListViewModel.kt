@@ -48,7 +48,6 @@ class TeamsListViewModel @Inject constructor(
 
     private fun getTeamsList(idHero: Int, uid: String?) = viewModelScope.launch {
         val result = when {
-            uid?.isNotEmpty() == true -> repository.getTeamsListByUID(uid)
             idHero != -1 -> repository.getTeamsListByID(idHero)
             else -> repository.getTeamsList()
         }

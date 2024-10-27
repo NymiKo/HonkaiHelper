@@ -103,7 +103,8 @@ fun TeamItem(
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         fontWeight = FontWeight.SemiBold,
-                        fontSize = 14.sp
+                        fontSize = 14.sp,
+                        color = White,
                     )
 
                     AsyncImage(

@@ -15,7 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.tanorami.core.theme.AppTheme
-import com.example.tanorami.heroes.presentation.HeroesListViewModelImpl
+import com.example.tanorami.heroes.presentation.HeroesListViewMode
 import com.example.tanorami.load_data.ui.DATA_UPLOADED_KEY
 import com.google.android.material.transition.MaterialFadeThrough
 import kotlinx.coroutines.launch
@@ -25,7 +25,7 @@ class HeroesListFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel by viewModels<HeroesListViewModelImpl> { viewModelFactory }
+    private val viewModel by viewModels<HeroesListViewMode> { viewModelFactory }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

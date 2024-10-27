@@ -3,7 +3,7 @@ package com.example.tanorami.activity.di
 import com.example.tanorami.activity.MainActivity
 import dagger.Subcomponent
 
-@Subcomponent(modules = [MainModule::class])
+@Subcomponent
 interface MainComponent {
     @Subcomponent.Factory
     interface Factory {

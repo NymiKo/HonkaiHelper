@@ -1,7 +1,5 @@
 package com.example.tanorami.di
 
-import com.example.tanorami.activity.data.MainRepository
-import com.example.tanorami.activity.data.MainRepositoryImpl
 import com.example.tanorami.auth.login.domain.LoginRepository
 import com.example.tanorami.auth.login.domain.LoginRepositoryImpl
 import com.example.tanorami.auth.registration.data.RegistrationRepository
@@ -28,8 +26,8 @@ import com.example.tanorami.info_about_weapon.data.InfoAboutWeaponRepository
 import com.example.tanorami.info_about_weapon.data.InfoAboutWeaponRepositoryImpl
 import com.example.tanorami.load_data.data.LoadDataRepository
 import com.example.tanorami.load_data.data.LoadDataRepositoryImpl
-import com.example.tanorami.navigation.main.MainScreenRepository
-import com.example.tanorami.navigation.main.MainScreenRepositoryImpl
+import com.example.tanorami.main.data.MainScreenRepository
+import com.example.tanorami.main.data.MainScreenRepositoryImpl
 import com.example.tanorami.profile.domain.ProfileRepository
 import com.example.tanorami.profile.domain.ProfileRepositoryImpl
 import com.example.tanorami.send_feedback.data.SendFeedbackRepository
@@ -38,6 +36,8 @@ import com.example.tanorami.settings.data.SettingsRepository
 import com.example.tanorami.settings.data.SettingsRepositoryImpl
 import com.example.tanorami.teams.data.TeamsListRepository
 import com.example.tanorami.teams.data.TeamsListRepositoryImpl
+import com.example.tanorami.teams_and_builds.data.TeamsAndBuildsRepository
+import com.example.tanorami.teams_and_builds.data.TeamsAndBuildsRepositoryImpl
 import com.example.tanorami.viewing_users_build.data.ViewingUsersBuildRepository
 import com.example.tanorami.viewing_users_build.data.ViewingUsersBuildRepositoryImpl
 import dagger.Binds
@@ -77,10 +77,6 @@ interface RepositoryModule {
     @Singleton
     @Binds
     fun bindLoadDataRepository(repository: LoadDataRepositoryImpl): LoadDataRepository
-
-    @Singleton
-    @Binds
-    fun bindMainRepository(repository: MainRepositoryImpl): MainRepository
 
     @Singleton
     @Binds
@@ -125,4 +121,8 @@ interface RepositoryModule {
     @Singleton
     @Binds
     fun bindMainScreenRepository(repository: MainScreenRepositoryImpl): MainScreenRepository
+
+    @Singleton
+    @Binds
+    fun bindTeamsAndBuildsRepository(repository: TeamsAndBuildsRepositoryImpl): TeamsAndBuildsRepository
 }

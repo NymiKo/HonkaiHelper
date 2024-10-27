@@ -1,13 +1,13 @@
-package com.example.tanorami.navigation.main.presentation
+package com.example.tanorami.main.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.example.tanorami.base.BaseViewModel
 import com.example.tanorami.data.NetworkResult
 import com.example.tanorami.data.data_store.AppDataStore
-import com.example.tanorami.navigation.main.MainScreenRepository
-import com.example.tanorami.navigation.main.presentation.models.MainScreenEvents
-import com.example.tanorami.navigation.main.presentation.models.MainScreenSideEffects
-import com.example.tanorami.navigation.main.presentation.models.MainScreenUiState
+import com.example.tanorami.main.data.MainScreenRepository
+import com.example.tanorami.main.presentation.models.MainScreenEvents
+import com.example.tanorami.main.presentation.models.MainScreenSideEffects
+import com.example.tanorami.main.presentation.models.MainScreenUiState
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,6 +22,23 @@ class MainScreenViewModel @Inject constructor(
         viewModelScope.launch {
             val localVersionDB = dataStore.versionDB.first()
             getRemoteVersionDB(localVersionDB)
+        }
+
+        viewModelScope.launch {
+            val token = dataStore.tokenUser.first()
+            if (token.isNotEmpty()) {
+                when (val result = repository.getAvatar()) {
+                    is NetworkResult.Error -> {
+                        uiState = uiState.copy(userProfileAvatar = "")
+                    }
+
+                    is NetworkResult.Success -> {
+                        uiState = uiState.copy(userProfileAvatar = result.data)
+                    }
+                }
+            } else {
+                uiState = uiState.copy(userProfileAvatar = "")
+            }
         }
     }
 

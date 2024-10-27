@@ -1,6 +1,10 @@
 package com.example.tanorami.navigation
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -10,7 +14,8 @@ import androidx.navigation.toRoute
 import com.example.tanorami.info_about_hero.ui.InfoAboutHeroScreen
 import com.example.tanorami.info_about_hero.ui.models.InfoAboutHeroNavArguments
 import com.example.tanorami.load_data.ui.LoadDataScreen
-import com.example.tanorami.navigation.main.MainScreen
+import com.example.tanorami.main.ui.MainScreen
+import com.example.tanorami.settings.ui.SettingsScreen
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -19,19 +24,23 @@ object Main
 @Serializable
 data class LoadData(val remoteVersionDB: String)
 
+@Serializable
+object Settings
+
 @Composable
 fun AppNavigation(
     navController: NavHostController = rememberNavController(),
-    profileAvatar: String,
     viewModelFactory: ViewModelProvider.Factory
 ) {
     NavHost(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background),
         navController = navController,
         startDestination = Main
     ) {
         composable<Main> {
             MainScreen(
-                profileAvatar = profileAvatar,
                 viewModelFactory = viewModelFactory,
                 rootNavController = navController
             )
@@ -50,6 +59,13 @@ fun AppNavigation(
             val infoAboutHeroNavArguments: InfoAboutHeroNavArguments = backStackEntry.toRoute()
             InfoAboutHeroScreen(
                 infoAboutHeroNavArguments = infoAboutHeroNavArguments,
+                viewModelFactory = viewModelFactory,
+                navController = navController
+            )
+        }
+
+        composable<Settings> {
+            SettingsScreen(
                 viewModelFactory = viewModelFactory,
                 navController = navController
             )

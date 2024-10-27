@@ -1,30 +1,49 @@
 package com.example.tanorami.heroes.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SearchBar
+import androidx.compose.material3.SearchBarDefaults
+import androidx.compose.material3.SearchBarDefaults.inputFieldColors
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.isTraversalGroup
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.traversalIndex
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.tanorami.R
-import com.example.tanorami.heroes.presentation.HeroesListViewModelImpl
+import com.example.tanorami.heroes.presentation.HeroesListViewMode
 import com.example.tanorami.heroes.presentation.models.HeroesListScreenEvents
 import com.example.tanorami.heroes.presentation.models.HeroesListScreenSideEffects
 import com.example.tanorami.heroes.presentation.models.HeroesListScreenUiState
 import com.example.tanorami.heroes.ui.components.HeroItem
-import com.example.tanorami.heroes.ui.components.HeroesListTopAppBar
 import com.example.tanorami.info_about_hero.ui.models.InfoAboutHeroNavArguments
+import com.example.tanorami.navigation.Settings
 
 @Composable
 fun HeroesListScreen(
     viewModelFactory: ViewModelProvider.Factory,
-    viewModel: HeroesListViewModelImpl = viewModel(factory = viewModelFactory),
+    viewModel: HeroesListViewMode = viewModel(factory = viewModelFactory),
     navController: NavController,
 ) {
     val state = viewModel.uiState().collectAsState().value
@@ -37,7 +56,7 @@ fun HeroesListScreen(
 
     when (sideEffect) {
         HeroesListScreenSideEffects.OnSettingsScreen -> {
-            navController.navigate(R.id.action_heroesListFragment_to_settingsFragment)
+            navController.navigate(route = Settings)
             viewModel.clearEffect()
         }
 
@@ -55,20 +74,61 @@ fun HeroesListScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun HeroesListScreenContent(
     uiState: HeroesListScreenUiState,
     onEvent: (HeroesListScreenEvents) -> Unit,
 ) {
-    Column {
-        HeroesListTopAppBar(
-            uiState = uiState,
-            onEvent = onEvent::invoke
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .semantics { isTraversalGroup = true }
+    ) {
+        SearchBar(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth()
+                .semantics { traversalIndex = 0F },
+            inputField = {
+                SearchBarDefaults.InputField(
+                    query = uiState.searchTextField.value,
+                    onQueryChange = { onEvent(HeroesListScreenEvents.SearchTextChanged(it)) },
+                    onSearch = { },
+                    expanded = false,
+                    onExpandedChange = { },
+                    placeholder = {
+                        Text(
+                            text = stringResource(id = R.string.enter_name_hero)
+                        )
+                    },
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = null
+                        )
+                    },
+                    trailingIcon = {
+                        Icon(
+                            modifier = Modifier.clickable { onEvent(HeroesListScreenEvents.OnSettingsScreen) },
+                            imageVector = Icons.Default.Settings,
+                            contentDescription = null
+                        )
+                    },
+                    colors = inputFieldColors(
+                        cursorColor = MaterialTheme.colorScheme.secondary
+                    )
+                )
+            },
+            expanded = false,
+            onExpandedChange = { },
+            content = { }
         )
 
         LazyVerticalGrid(
+            modifier = Modifier.semantics { traversalIndex = 1F },
             columns = GridCells.Adaptive(minSize = 150.dp),
-            contentPadding = PaddingValues(horizontal = 16.dp),
+            contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 72.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {

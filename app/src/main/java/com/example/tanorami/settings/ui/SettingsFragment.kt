@@ -10,8 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import com.example.tanorami.App
 import com.example.tanorami.core.theme.AppTheme
 import com.example.tanorami.load_data.ui.DATA_UPLOADED_KEY
 import com.example.tanorami.settings.presentation.SettingsViewModel
@@ -26,7 +24,7 @@ class SettingsFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as App).appComponent.settingsComponent().create().inject(this)
+        //(requireActivity().application as App).appComponent.settingsComponent().create().inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +44,7 @@ class SettingsFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 AppTheme {
-                    SettingsScreen(viewModel = viewModel, navController = findNavController())
+                    //SettingsScreen(viewModel = viewModel, navController = findNavController())
                 }
             }
         }

@@ -1,4 +1,4 @@
-package com.example.tanorami.navigation.main
+package com.example.tanorami.main.data
 
 import retrofit2.Response
 import retrofit2.http.GET
