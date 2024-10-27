@@ -39,8 +39,8 @@ import com.example.tanorami.teams.data.TeamsListRepository
 import com.example.tanorami.teams.di.TeamsListModule
 import com.example.tanorami.teams_and_builds.data.TeamsAndBuildsRepositoryImpl
 import com.example.tanorami.teams_and_builds.di.TeamsAndBuildsModule
-import com.example.tanorami.viewing_users_build.data.ViewingUsersBuildRepository
-import com.example.tanorami.viewing_users_build.di.ViewingUsersBuildComponent
+import com.example.tanorami.viewing_users_build.data.ViewingBuildHeroFromUserRepository
+import com.example.tanorami.viewing_users_build.di.ViewingBuildHeroFromUserModel
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -64,6 +64,7 @@ import javax.inject.Singleton
         TeamsAndBuildsModule::class,
         SettingsModule::class,
         BaseBuildHeroModule::class,
+        ViewingBuildHeroFromUserModel::class
     ]
 )
 interface AppComponent {
@@ -81,7 +82,6 @@ interface AppComponent {
     fun weaponInfoComponent(): InfoAboutWeaponComponent.Factory
     fun relicInfoComponent(): RelicInfoComponent.Factory
     fun decorationInfoComponent(): InfoAboutDecorationComponent.Factory
-    fun viewingUsersBuildComponent(): ViewingUsersBuildComponent.Factory
     fun changeNicknameComponent(): ChangeNicknameComponent.Factory
     fun sendFeedbackComponent(): SendFeedbackComponent.Factory
 
@@ -98,7 +98,7 @@ interface AppComponent {
     val relicInfoRepository: RelicInfoRepository
     val infoAboutDecorationRepository: InfoAboutDecorationRepository
     val buildsHeroListRepository: BuildsHeroListRepository
-    val viewingUsersBuildRepository: ViewingUsersBuildRepository
+    val viewingBuildHeroFromUserRepository: ViewingBuildHeroFromUserRepository
     val changeNicknameRepository: ChangeNicknameRepository
     val settingsRepository: SettingsRepository
     val sendFeedbackRepository: SendFeedbackRepository

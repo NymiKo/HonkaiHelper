@@ -21,6 +21,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.tanorami.R
 import com.example.tanorami.base_components.top_app_bar.BaseTopAppBar
@@ -36,12 +38,16 @@ import com.example.tanorami.viewing_users_build.presentation.models.ViewingBuild
 import com.example.tanorami.viewing_users_build.presentation.models.ViewingBuildHeroFromUserScreenSideEffects
 import com.example.tanorami.viewing_users_build.presentation.models.ViewingBuildHeroFromUserScreenUiState
 import com.example.tanorami.viewing_users_build.ui.components.BuildStatsColumn
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class ViewingBuildHeroFromUserNavArguments(val idBuild: Long)
 
 @Composable
 fun ViewingBuildHeroFromUserScreen(
-    idBuild: Long,
-    uid: String,
-    viewModel: ViewingBuildHeroFromUserViewModel,
+    navArguments: ViewingBuildHeroFromUserNavArguments,
+    viewModelFactory: ViewModelProvider.Factory,
+    viewModel: ViewingBuildHeroFromUserViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
 ) {
     val state = viewModel.uiState().collectAsState().value
@@ -51,7 +57,10 @@ fun ViewingBuildHeroFromUserScreen(
     ViewingBuildHeroFromUserScreenContent(uiState = state, onEvent = viewModel::onEvent)
 
     when (sideEffects) {
-        ViewingBuildHeroFromUserScreenSideEffects.OnBack -> navController.popBackStack()
+        ViewingBuildHeroFromUserScreenSideEffects.OnBack -> {
+            navController.popBackStack()
+            viewModel.clearEffect()
+        }
         ViewingBuildHeroFromUserScreenSideEffects.OnCopyUIDClick -> {
             val clipboard = context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
             val clipData: ClipData = ClipData.newPlainText("UID", state.buildHero.uid)
@@ -89,7 +98,7 @@ fun ViewingBuildHeroFromUserScreen(
     OnLifecycleEvent { owner, event ->
         when (event) {
             Lifecycle.Event.ON_CREATE -> {
-                viewModel.onEvent(ViewingBuildHeroFromUserScreenEvents.GetHeroBuild(idBuild, uid))
+                viewModel.onEvent(ViewingBuildHeroFromUserScreenEvents.GetHeroBuild(navArguments.idBuild))
             }
 
             else -> {}
@@ -105,11 +114,13 @@ private fun ViewingBuildHeroFromUserScreenContent(
     Scaffold(
         topBar = {
             BaseTopAppBar(
-                title = stringResource(
-                    id = R.string.hero_build_from,
-                    uiState.buildHero.hero?.name ?: "",
-                    uiState.buildHero.nickname
-                ),
+                title = uiState.buildHero.hero?.let {
+                    stringResource(
+                        id = R.string.hero_build_from,
+                        it.name,
+                        uiState.buildHero.nickname
+                    )
+                } ?: "",
                 actions = {
                     Icon(
                         modifier = Modifier.clickable {

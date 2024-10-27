@@ -17,7 +17,7 @@ import com.example.tanorami.main.data.MainScreenService
 import com.example.tanorami.profile.data.ProfileService
 import com.example.tanorami.send_feedback.data.SendFeedbackService
 import com.example.tanorami.teams.data.TeamsListService
-import com.example.tanorami.viewing_users_build.data.ViewingUsersBuildService
+import com.example.tanorami.viewing_users_build.data.ViewingBuildHeroFromUserService
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineDispatcher
@@ -101,7 +101,8 @@ object NetworkModule {
     fun providesCreateBuildHeroService(retrofit: Retrofit): CreateBuildHeroService = retrofit.create(CreateBuildHeroService::class.java)
 
     @Provides
-    fun providesViewingUsersBuildService(retrofit: Retrofit): ViewingUsersBuildService = retrofit.create(ViewingUsersBuildService::class.java)
+    fun providesViewingUsersBuildService(retrofit: Retrofit): ViewingBuildHeroFromUserService =
+        retrofit.create(ViewingBuildHeroFromUserService::class.java)
 
     @Provides
     fun providesChangeNicknameService(retrofit: Retrofit): ChangeNicknameService = retrofit.create(ChangeNicknameService::class.java)

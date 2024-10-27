@@ -48,28 +48,4 @@ class BuildsHeroListRepositoryImpl @Inject constructor(
             }
             }
         }
-
-    override suspend fun getBuildsHeroList(): NetworkResult<List<BuildHeroWithUser>> =
-        withContext(ioDispatcher) {
-            when (val result = handleApi { buildsHeroListService.getBuildsHeroList() }) {
-                is NetworkResult.Error -> {
-                    return@withContext NetworkResult.Error(result.code)
-                }
-
-                is NetworkResult.Success -> {
-                    return@withContext NetworkResult.Success(result.data.map {
-                        BuildHeroWithUser(
-                            idBuild = it.idBuild,
-                            hero = getHero(it.idHero),
-                            weapon = weaponDao.getWeapon(it.idWeapon).toWeapon(),
-                            relicTwoParts = relicDao.getRelic(it.idRelicTwoParts).toRelic(),
-                            relicFourParts = relicDao.getRelic(it.idRelicFourParts).toRelic(),
-                            decoration = decorationDao.getDecoration(it.idDecoration)
-                                .toDecoration(),
-                            buildUser = it.buildUser!!
-                    )
-                })
-            }
-        }
-    }
 }

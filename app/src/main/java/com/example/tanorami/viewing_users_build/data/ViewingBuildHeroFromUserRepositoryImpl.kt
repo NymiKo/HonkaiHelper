@@ -12,16 +12,17 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class ViewingUsersBuildRepositoryImpl @Inject constructor(
+class ViewingBuildHeroFromUserRepositoryImpl @Inject constructor(
     @IODispatcher private val ioDispatcher: CoroutineDispatcher,
-    private val viewingUsersBuildService: ViewingUsersBuildService,
+    private val viewingBuildHeroFromUserService: ViewingBuildHeroFromUserService,
     private val heroDao: HeroDao,
     private val weaponDao: WeaponDao,
     private val relicDao: RelicDao,
     private val decorationDao: DecorationDao
-): ViewingUsersBuildRepository {
+) : ViewingBuildHeroFromUserRepository {
     override suspend fun getHeroBuildByID(idBuild: Long): NetworkResult<FullBuildHeroFromUser> = withContext(ioDispatcher) {
-        when(val result = handleApi { viewingUsersBuildService.getHeroBuildByID(idBuild) }) {
+        when (val result =
+            handleApi { viewingBuildHeroFromUserService.getHeroBuildByID(idBuild) }) {
             is NetworkResult.Error -> {
                 return@withContext NetworkResult.Error(result.code)
             }

@@ -21,11 +21,11 @@ import com.example.tanorami.create_build_hero.ui.CreateBuildHeroFragment
 import com.example.tanorami.teams.ui.components.EmptyListScreen
 import com.example.tanorami.teams.ui.components.ErrorScreen
 import com.example.tanorami.utils.OnLifecycleEvent
-import com.example.tanorami.viewing_users_build.ui.ViewingBuildHeroFromUserFragment
+import com.example.tanorami.viewing_users_build.ui.ViewingBuildHeroFromUserNavArguments
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BuildsHeroFromUsersNavArguments(val idHero: Int = -1)
+data class BuildsHeroFromUsersNavArguments(val idHero: Int)
 
 @Composable
 fun BuildsHeroFromUsersScreen(
@@ -52,10 +52,7 @@ fun BuildsHeroFromUsersScreen(
         }
 
         is BuildsHeroFromUsersScreenSideEffects.OnViewingBuildHeroFromUserScreen -> {
-            navController.navigate(
-                R.id.action_buildsHeroListFragment_to_viewingUsersBuildFragment,
-                ViewingBuildHeroFromUserFragment.newInstance(idBuild = sideEffects.idBuild)
-            )
+            navController.navigate(route = ViewingBuildHeroFromUserNavArguments(idBuild = sideEffects.idBuild))
             viewModel.clearEffect()
         }
 
@@ -90,10 +87,7 @@ private fun BuildsHeroFromUsersScreenContent(
     Scaffold(
         topBar = {
             BaseTopAppBar(
-                title = if (uiState.hero != null) stringResource(
-                    id = R.string.builds_for_hero,
-                    uiState.hero.name
-                ) else "",
+                title = stringResource(id = R.string.builds_for_hero, uiState.hero?.name ?: ""),
                 onBack = { onEvent(BuildsHeroFromUsersScreenEvents.OnBack) }
             )
         }

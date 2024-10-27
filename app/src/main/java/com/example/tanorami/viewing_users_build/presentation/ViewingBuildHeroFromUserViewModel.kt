@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.tanorami.R
 import com.example.tanorami.base.BaseViewModel
 import com.example.tanorami.data.NetworkResult
-import com.example.tanorami.viewing_users_build.data.ViewingUsersBuildRepository
+import com.example.tanorami.viewing_users_build.data.ViewingBuildHeroFromUserRepository
 import com.example.tanorami.viewing_users_build.presentation.models.ViewingBuildHeroFromUserScreenEvents
 import com.example.tanorami.viewing_users_build.presentation.models.ViewingBuildHeroFromUserScreenSideEffects
 import com.example.tanorami.viewing_users_build.presentation.models.ViewingBuildHeroFromUserScreenUiState
@@ -12,14 +12,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ViewingBuildHeroFromUserViewModel @Inject constructor(
-    private val repository: ViewingUsersBuildRepository
+    private val repository: ViewingBuildHeroFromUserRepository
 ) : BaseViewModel<ViewingBuildHeroFromUserScreenUiState, ViewingBuildHeroFromUserScreenEvents, ViewingBuildHeroFromUserScreenSideEffects>(
     initialState = ViewingBuildHeroFromUserScreenUiState()
 ) {
 
     override fun onEvent(event: ViewingBuildHeroFromUserScreenEvents) {
         when (event) {
-            is ViewingBuildHeroFromUserScreenEvents.GetHeroBuild -> getHeroBuild(event.idBuild, event.uid)
+            is ViewingBuildHeroFromUserScreenEvents.GetHeroBuild -> getHeroBuild(event.idBuild)
 
             ViewingBuildHeroFromUserScreenEvents.OnBack -> sendSideEffect(
                 ViewingBuildHeroFromUserScreenSideEffects.OnBack
@@ -55,10 +55,8 @@ class ViewingBuildHeroFromUserViewModel @Inject constructor(
         }
     }
 
-    private fun getHeroBuild(idBuild: Long, uid: String) = viewModelScope.launch {
-        val result = repository.getHeroBuildByID(idBuild)
-
-        when (result) {
+    private fun getHeroBuild(idBuild: Long) = viewModelScope.launch {
+        when (val result = repository.getHeroBuildByID(idBuild)) {
             is NetworkResult.Error -> {
                 uiState = uiState.copy(
                     isSuccess = false,

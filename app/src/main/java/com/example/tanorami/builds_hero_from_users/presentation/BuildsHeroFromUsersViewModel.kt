@@ -7,27 +7,14 @@ import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHer
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenSideEffects
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenUiState
 import com.example.tanorami.data.NetworkResult
-import com.example.tanorami.data.data_store.AppDataStore
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class BuildsHeroFromUsersViewModel @Inject constructor(
     private val repository: BuildsHeroListRepository,
-    private val userDataStore: AppDataStore,
 ): BaseViewModel<BuildsHeroFromUsersScreenUiState, BuildsHeroFromUsersScreenEvents, BuildsHeroFromUsersScreenSideEffects>(
     initialState = BuildsHeroFromUsersScreenUiState()
 ) {
-
-    init {
-        userDataStore.tokenUser
-            .onEach { uiState = uiState.copy(tokenUser = it) }
-            .flowOn(Dispatchers.Default)
-            .launchIn(viewModelScope)
-    }
 
     override fun onEvent(event: BuildsHeroFromUsersScreenEvents) {
         when(event) {
@@ -40,14 +27,8 @@ class BuildsHeroFromUsersViewModel @Inject constructor(
     }
 
     private fun getBuildsHeroList(idHero: Int) = viewModelScope.launch {
-        val result = if (idHero == -1) {
-            repository.getBuildsHeroList()
-        } else {
-            getHero(idHero)
-            repository.getBuildsHeroListByIdHero(idHero)
-        }
-
-        when (result) {
+        getHero(idHero)
+        when (val result = repository.getBuildsHeroListByIdHero(idHero)) {
             is NetworkResult.Error -> {
                 uiState = uiState.copy(isSuccess = false, isError = true)
             }
@@ -58,6 +39,7 @@ class BuildsHeroFromUsersViewModel @Inject constructor(
     }
 
     private fun getHero(idHero: Int) = viewModelScope.launch {
-        uiState = uiState.copy(hero = repository.getHero(idHero))
+        val hero = repository.getHero(idHero)
+        uiState = uiState.copy(hero = hero)
     }
 }

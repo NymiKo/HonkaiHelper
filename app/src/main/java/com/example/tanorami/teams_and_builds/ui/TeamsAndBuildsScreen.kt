@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
@@ -32,6 +31,7 @@ import com.example.tanorami.teams_and_builds.presentation.TeamsAndBuildsViewMode
 import com.example.tanorami.teams_and_builds.presentation.models.TeamsAndBuildsScreenEvents
 import com.example.tanorami.teams_and_builds.presentation.models.TeamsAndBuildsScreenSideEffects
 import com.example.tanorami.teams_and_builds.presentation.models.TeamsAndBuildsScreenUiState
+import com.example.tanorami.viewing_users_build.ui.ViewingBuildHeroFromUserNavArguments
 import kotlinx.coroutines.launch
 
 @Composable
@@ -50,6 +50,7 @@ fun TeamsAndBuildsScreen(
 
     when (sideEffects) {
         is TeamsAndBuildsScreenSideEffects.OnViewingBuildHeroFromUserScreen -> {
+            navController.navigate(route = ViewingBuildHeroFromUserNavArguments(idBuild = sideEffects.idBuild))
             viewModel.clearEffect()
         }
 
@@ -57,7 +58,6 @@ fun TeamsAndBuildsScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun TeamsAndBuildsScreenContent(
     uiState: TeamsAndBuildsScreenUiState,
@@ -105,9 +105,7 @@ private fun TeamsAndBuildsScreenContent(
             teamsList = uiState.teamsList,
             onBuildClick = { idBuild ->
                 onEvent(
-                    TeamsAndBuildsScreenEvents.OnViewingBuildHeroFromUserScreen(
-                        idBuild
-                    )
+                    TeamsAndBuildsScreenEvents.OnViewingBuildHeroFromUserScreen(idBuild)
                 )
             }
         )

@@ -38,8 +38,8 @@ import com.example.tanorami.teams.data.TeamsListRepository
 import com.example.tanorami.teams.data.TeamsListRepositoryImpl
 import com.example.tanorami.teams_and_builds.data.TeamsAndBuildsRepository
 import com.example.tanorami.teams_and_builds.data.TeamsAndBuildsRepositoryImpl
-import com.example.tanorami.viewing_users_build.data.ViewingUsersBuildRepository
-import com.example.tanorami.viewing_users_build.data.ViewingUsersBuildRepositoryImpl
+import com.example.tanorami.viewing_users_build.data.ViewingBuildHeroFromUserRepository
+import com.example.tanorami.viewing_users_build.data.ViewingBuildHeroFromUserRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
@@ -104,7 +104,7 @@ interface RepositoryModule {
 
     @Singleton
     @Binds
-    fun bindViewingUsersBuildRepository(repository: ViewingUsersBuildRepositoryImpl): ViewingUsersBuildRepository
+    fun bindViewingUsersBuildRepository(repository: ViewingBuildHeroFromUserRepositoryImpl): ViewingBuildHeroFromUserRepository
 
     @Singleton
     @Binds

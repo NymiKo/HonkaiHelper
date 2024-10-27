@@ -5,7 +5,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface ViewingUsersBuildService {
+interface ViewingBuildHeroFromUserService {
     @GET("/getHeroBuildByID.php")
     suspend fun getHeroBuildByID(@Query("idBuild") idBuild: Long): Response<BuildHeroFromUser>
 
