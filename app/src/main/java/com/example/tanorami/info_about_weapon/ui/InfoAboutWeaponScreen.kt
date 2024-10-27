@@ -15,7 +15,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.base_components.top_app_bar.BaseCenterAlignedTopAppBar
@@ -25,11 +27,16 @@ import com.example.tanorami.info_about_weapon.ui.components.DescriptionWeaponSki
 import com.example.tanorami.info_about_weapon.ui.components.ImageRarityWeapon
 import com.example.tanorami.info_about_weapon.ui.components.ImagesWeaponAndPath
 import com.example.tanorami.utils.OnLifecycleEvent
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class InfoAboutWeaponNavArguments(val idWeapon: Int)
 
 @Composable
 fun InfoAboutWeaponScreen(
-    idWeapon: Int,
-    viewModel: InfoAboutWeaponViewModel,
+    infoAboutWeaponNavArguments: InfoAboutWeaponNavArguments,
+    viewModelFactory: ViewModelProvider.Factory,
+    viewModel: InfoAboutWeaponViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
 ) {
     val weapon = viewModel.weapon.collectAsStateWithLifecycle().value
@@ -42,7 +49,7 @@ fun InfoAboutWeaponScreen(
     OnLifecycleEvent { owner, event ->  
         when(event) {
             Lifecycle.Event.ON_CREATE -> {
-                viewModel.getWeapon(idWeapon)
+                viewModel.getWeapon(infoAboutWeaponNavArguments.idWeapon)
             }
             
             else -> {}

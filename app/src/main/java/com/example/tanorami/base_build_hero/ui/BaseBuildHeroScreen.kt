@@ -36,7 +36,7 @@ import com.example.tanorami.core.theme.Orange
 import com.example.tanorami.core.theme.Violet
 import com.example.tanorami.info_about_decoration.ui.InfoAboutDecorationFragment
 import com.example.tanorami.info_about_relic.ui.InfoAboutRelicFragment
-import com.example.tanorami.info_about_weapon.ui.InfoAboutWeaponFragment
+import com.example.tanorami.info_about_weapon.ui.InfoAboutWeaponNavArguments
 import com.example.tanorami.utils.OnLifecycleEvent
 import kotlinx.serialization.Serializable
 
@@ -83,10 +83,7 @@ fun BaseBuildHeroScreen(
             viewModel.clearEffect()
         }
         is BaseBuildHeroScreenSideEffects.OnInfoAboutWeaponScreen -> {
-            navController.navigate(
-                R.id.action_baseBuildHeroFragment_to_weaponInfoFragment,
-                InfoAboutWeaponFragment.newInstance(sideEffects.idWeapon)
-            )
+            navController.navigate(route = InfoAboutWeaponNavArguments(idWeapon = sideEffects.idWeapon))
             viewModel.clearEffect()
         }
 

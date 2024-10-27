@@ -24,7 +24,7 @@ import com.example.tanorami.info_about_hero.di.InfoAboutHeroModule
 import com.example.tanorami.info_about_relic.data.RelicInfoRepository
 import com.example.tanorami.info_about_relic.di.RelicInfoComponent
 import com.example.tanorami.info_about_weapon.data.InfoAboutWeaponRepository
-import com.example.tanorami.info_about_weapon.di.InfoAboutWeaponComponent
+import com.example.tanorami.info_about_weapon.di.InfoAboutWeaponModule
 import com.example.tanorami.load_data.data.LoadDataRepository
 import com.example.tanorami.load_data.di.LoadDataModule
 import com.example.tanorami.main.data.MainScreenRepositoryImpl
@@ -64,7 +64,8 @@ import javax.inject.Singleton
         TeamsAndBuildsModule::class,
         SettingsModule::class,
         BaseBuildHeroModule::class,
-        ViewingBuildHeroFromUserModel::class
+        ViewingBuildHeroFromUserModel::class,
+        InfoAboutWeaponModule::class,
     ]
 )
 interface AppComponent {
@@ -79,7 +80,6 @@ interface AppComponent {
     fun loginComponent(): LoginComponent.Factory
     fun registrationComponent(): RegistrationComponent.Factory
     fun createBuildHeroComponent(): CreateBuildHeroComponent.Factory
-    fun weaponInfoComponent(): InfoAboutWeaponComponent.Factory
     fun relicInfoComponent(): RelicInfoComponent.Factory
     fun decorationInfoComponent(): InfoAboutDecorationComponent.Factory
     fun changeNicknameComponent(): ChangeNicknameComponent.Factory
