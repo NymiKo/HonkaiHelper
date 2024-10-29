@@ -28,9 +28,9 @@ import com.example.tanorami.R
 import com.example.tanorami.base_components.top_app_bar.BaseTopAppBar
 import com.example.tanorami.create_build_hero.ui.components.AvatarHeroImageAndName
 import com.example.tanorami.create_build_hero.ui.components.EquipmentBuildComponent
-import com.example.tanorami.info_about_decoration.ui.InfoAboutDecorationFragment
-import com.example.tanorami.info_about_relic.ui.InfoAboutRelicFragment
-import com.example.tanorami.info_about_weapon.ui.InfoAboutWeaponFragment
+import com.example.tanorami.info_about_decoration.ui.InfoAboutDecorationNavArguments
+import com.example.tanorami.info_about_relic.ui.InfoAboutRelicNavArgument
+import com.example.tanorami.info_about_weapon.ui.InfoAboutWeaponNavArguments
 import com.example.tanorami.utils.OnLifecycleEvent
 import com.example.tanorami.utils.toast
 import com.example.tanorami.viewing_users_build.presentation.ViewingBuildHeroFromUserViewModel
@@ -70,25 +70,16 @@ fun ViewingBuildHeroFromUserScreen(
         }
 
         is ViewingBuildHeroFromUserScreenSideEffects.OnInfoAboutDecorationScreen -> {
-            navController.navigate(
-                R.id.action_viewingUsersBuildFragment_to_decorationInfoFragment,
-                InfoAboutDecorationFragment.newInstance(sideEffects.idDecoration)
-            )
+            navController.navigate(route = InfoAboutDecorationNavArguments(sideEffects.idDecoration))
             viewModel.clearEffect()
         }
 
         is ViewingBuildHeroFromUserScreenSideEffects.OnInfoAboutRelicScreen -> {
-            navController.navigate(
-                R.id.action_viewingUsersBuildFragment_to_relicInfoFragment,
-                InfoAboutRelicFragment.newInject(sideEffects.idRelic)
-            )
+            navController.navigate(route = InfoAboutRelicNavArgument(sideEffects.idRelic))
             viewModel.clearEffect()
         }
         is ViewingBuildHeroFromUserScreenSideEffects.OnInfoAboutWeaponScreen -> {
-            navController.navigate(
-                R.id.action_viewingUsersBuildFragment_to_weaponInfoFragment,
-                InfoAboutWeaponFragment.newInstance(sideEffects.idWeapon)
-            )
+            navController.navigate(route = InfoAboutWeaponNavArguments(sideEffects.idWeapon))
             viewModel.clearEffect()
         }
 
