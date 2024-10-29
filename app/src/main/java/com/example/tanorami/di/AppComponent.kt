@@ -14,7 +14,7 @@ import com.example.tanorami.change_nickname.data.ChangeNicknameRepository
 import com.example.tanorami.change_nickname.di.ChangeNicknameComponent
 import com.example.tanorami.create_build_hero.di.CreateBuildHeroModule
 import com.example.tanorami.createteam.data.CreateTeamRepository
-import com.example.tanorami.createteam.di.CreateTeamComponent
+import com.example.tanorami.createteam.di.CreateTeamModule
 import com.example.tanorami.heroes.data.HeroesListRepository
 import com.example.tanorami.heroes.di.HeroesListModule
 import com.example.tanorami.info_about_decoration.data.InfoAboutDecorationRepository
@@ -69,6 +69,7 @@ import javax.inject.Singleton
         InfoAboutRelicModule::class,
         InfoAboutDecorationModule::class,
         CreateBuildHeroModule::class,
+        CreateTeamModule::class,
     ]
 )
 interface AppComponent {
@@ -79,7 +80,6 @@ interface AppComponent {
     }
 
     fun mainComponent(): MainComponent.Factory
-    fun createTeamComponent(): CreateTeamComponent.Factory
     fun loginComponent(): LoginComponent.Factory
     fun registrationComponent(): RegistrationComponent.Factory
     fun changeNicknameComponent(): ChangeNicknameComponent.Factory

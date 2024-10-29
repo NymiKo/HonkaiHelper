@@ -24,6 +24,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,7 +35,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.tanorami.R
 import com.example.tanorami.base_components.button.BaseSmallFloatingButton
@@ -51,33 +53,41 @@ import com.example.tanorami.createteam.ui.components.ItemHeroAvatarWithName
 import com.example.tanorami.data.local.models.hero.HeroWithNameAvatarRarity
 import com.example.tanorami.utils.OnLifecycleEvent
 import com.example.tanorami.utils.toast
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class CreateTeamNavArguments(val idTeam: Long)
 
 @Composable
 fun CreateTeamScreen(
-    idTeam: Long,
-    viewModel: CreateTeamViewModel,
+    navArguments: CreateTeamNavArguments,
+    viewModelFactory: ViewModelProvider.Factory,
+    viewModel: CreateTeamViewModel = viewModel(factory = viewModelFactory),
     navController: NavController
 ) {
-    val state = viewModel.uiState().collectAsStateWithLifecycle().value
-    val sideEffects = viewModel.uiEffect().collectAsStateWithLifecycle(null).value
+    val state = viewModel.uiState().collectAsState().value
+    val sideEffects = viewModel.uiEffect().collectAsState(null).value
     val context = LocalContext.current
 
     CreateTeamScreenContent(
         uiState = state,
-        onEvent = { event -> viewModel.onEvent(event) }
+        onEvent = viewModel::onEvent
     )
 
     when(sideEffects) {
         CreateTeamScreenSideEffects.OnBack -> {
             navController.popBackStack()
+            viewModel.clearEffect()
         }
         CreateTeamScreenSideEffects.TeamDeleted -> {
             toast(context, R.string.team_deleted)
             navController.popBackStack()
+            viewModel.clearEffect()
         }
         CreateTeamScreenSideEffects.TeamSaved -> {
             toast(context, R.string.team_saved)
             navController.popBackStack()
+            viewModel.clearEffect()
         }
         is CreateTeamScreenSideEffects.ShowToastError -> {
             toast(context, sideEffects.message)
@@ -88,8 +98,8 @@ fun CreateTeamScreen(
 
     OnLifecycleEvent { owner, event ->
         when (event) {
-            Lifecycle.Event.ON_START -> {
-                viewModel.onEvent(CreateTeamScreenEvents.GetTeam(idTeam = idTeam))
+            Lifecycle.Event.ON_CREATE -> {
+                viewModel.onEvent(CreateTeamScreenEvents.GetTeam(idTeam = navArguments.idTeam))
             }
 
             else -> {}
