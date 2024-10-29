@@ -12,12 +12,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import com.example.tanorami.App
 import com.example.tanorami.core.theme.AppTheme
+import com.example.tanorami.create_build_hero.data.model.Equipment
 import com.example.tanorami.create_build_hero.presentation.CreateBuildHeroViewModel
 import com.example.tanorami.create_build_hero.presentation.models.CreateBuildHeroScreenEvents
-import com.example.tanorami.create_build_hero.data.model.Equipment
 import com.example.tanorami.create_build_hero.presentation.models.EquipmentType
 import javax.inject.Inject
 
@@ -34,8 +32,8 @@ class CreateBuildHeroFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as App).appComponent.createBuildHeroComponent().create()
-            .inject(this)
+//        (requireActivity().application as App).appComponent.createBuildHeroComponent().create()
+//            .inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,12 +75,12 @@ class CreateBuildHeroFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 AppTheme {
-                    CreateBuildHeroScreen(
-                        viewModel = viewModel,
-                        idBuild = idBuild,
-                        idHero = idHero,
-                        navController = findNavController(),
-                    )
+//                    CreateBuildHeroScreen(
+//                        viewModel = viewModel,
+//                        idBuild = idBuild,
+//                        idHero = idHero,
+//                        navController = findNavController(),
+//                    )
                 }
             }
         }

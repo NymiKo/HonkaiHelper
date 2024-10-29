@@ -3,8 +3,8 @@
     <string name="team_for_hero">Команды для героя: %1$s</string>
     <string name="creating_a_team">Создание команды</string>
     <string name="add_the_created_command">Поделиться созданной командой?</string>
-    <string name="add_the_created_build">Поделиться своей сборкой?</string>
-    <string name="update_the_build">Обновить свою сборку?</string>
+    <string name="add_the_created_build">Поделиться сборкой?</string>
+    <string name="update_the_build">Обновить сборку?</string>
     <string name="update_the_command">Сохранить изменения в команде?</string>
     <string name="delete_the_command">Вы действительно хотите удалить команду?</string>
     <string name="delete_the_build">Вы действительно хотите удалить сборку?</string>

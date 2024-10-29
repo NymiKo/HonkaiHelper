@@ -5,12 +5,12 @@ import com.example.tanorami.R
 import com.example.tanorami.base.BaseViewModel
 import com.example.tanorami.create_build_hero.data.CreateBuildHeroRepository
 import com.example.tanorami.create_build_hero.data.model.BuildHeroFromUser
+import com.example.tanorami.create_build_hero.data.model.Equipment
 import com.example.tanorami.create_build_hero.presentation.models.CreateBuildHeroScreenEvents
 import com.example.tanorami.create_build_hero.presentation.models.CreateBuildHeroScreenSideEffects
 import com.example.tanorami.create_build_hero.presentation.models.CreateBuildHeroScreenUiState
-import com.example.tanorami.data.NetworkResult
-import com.example.tanorami.create_build_hero.data.model.Equipment
 import com.example.tanorami.create_build_hero.presentation.models.EquipmentType
+import com.example.tanorami.data.NetworkResult
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,15 +25,16 @@ class CreateBuildHeroViewModel @Inject constructor(
             is CreateBuildHeroScreenEvents.SaveBuild -> saveBuild(idBuild = uiState.idBuild)
             is CreateBuildHeroScreenEvents.UpdateBuild -> saveBuild(idBuild = uiState.idBuild)
             is CreateBuildHeroScreenEvents.GetBuild -> {
-                if (event.idBuild != -1L) {
-                    uiState = uiState.copy(idBuild = event.idBuild, isCreateBuildMode = false)
-                    getBuild(event.idBuild)
+                val idBuild = event.idBuild ?: -1L
+                val idHero = event.idHero ?: -1
+                getHero(idHero)
+                if (idBuild != -1L) {
+                    uiState = uiState.copy(idBuild = idBuild, isCreateBuildMode = false)
+                    getBuild(idBuild)
                 } else {
                     uiState = uiState.copy(isCreateBuildMode = true)
                 }
             }
-
-            is CreateBuildHeroScreenEvents.GetHero -> getHero(event.idHero)
 
             is CreateBuildHeroScreenEvents.AddWeapon -> addWeapon(event.weapon)
             is CreateBuildHeroScreenEvents.AddTwoPartsRelic -> addRelicTwoParts(event.twoPartsRelic)

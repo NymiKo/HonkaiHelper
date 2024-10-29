@@ -9,8 +9,7 @@ sealed interface CreateBuildHeroScreenEvents : UiEvent {
     data object SaveBuild: CreateBuildHeroScreenEvents
     data object UpdateBuild: CreateBuildHeroScreenEvents
     class ChangeStateEquipmentBottomSheet(val sheetState: Boolean, val equipmentType: EquipmentType = EquipmentType.WEAPON): CreateBuildHeroScreenEvents
-    class GetBuild(val idBuild: Long): CreateBuildHeroScreenEvents
-    class GetHero(val idHero: Int): CreateBuildHeroScreenEvents
+    class GetBuild(val idBuild: Long?, val idHero: Int?) : CreateBuildHeroScreenEvents
     class AddWeapon(val weapon: Equipment): CreateBuildHeroScreenEvents
     class AddTwoPartsRelic(val twoPartsRelic: Equipment): CreateBuildHeroScreenEvents
     class AddFourPartsRelic(val fourPartsRelic: Equipment): CreateBuildHeroScreenEvents

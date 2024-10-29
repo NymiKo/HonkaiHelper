@@ -46,6 +46,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.tanorami.R
@@ -67,12 +69,16 @@ import com.example.tanorami.create_build_hero.ui.components.BuildStatsComponent
 import com.example.tanorami.create_build_hero.ui.components.EquipmentBuildComponent
 import com.example.tanorami.utils.OnLifecycleEvent
 import kotlinx.coroutines.launch
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class CreateBuildHeroNavArguments(val idBuild: Long? = null, val idHero: Int? = null)
 
 @Composable
 fun CreateBuildHeroScreen(
-    idBuild: Long,
-    idHero: Int,
-    viewModel: CreateBuildHeroViewModel,
+    navArguments: CreateBuildHeroNavArguments,
+    viewModelFactory: ViewModelProvider.Factory,
+    viewModel: CreateBuildHeroViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
 ) {
     val state = viewModel.uiState().collectAsState().value
@@ -81,15 +87,22 @@ fun CreateBuildHeroScreen(
     CreateBuildHeroScreenContent(uiState = state, onEvent = viewModel::onEvent,)
 
     when (sideEffect) {
-        CreateBuildHeroScreenSideEffects.OnBack -> navController.popBackStack()
+        CreateBuildHeroScreenSideEffects.OnBack -> {
+            navController.popBackStack()
+            viewModel.clearEffect()
+        }
         null -> {}
     }
 
     OnLifecycleEvent { owner, event ->
         when (event) {
             Lifecycle.Event.ON_CREATE -> {
-                viewModel.onEvent(CreateBuildHeroScreenEvents.GetHero(idHero = idHero))
-                viewModel.onEvent(CreateBuildHeroScreenEvents.GetBuild(idBuild))
+                viewModel.onEvent(
+                    CreateBuildHeroScreenEvents.GetBuild(
+                        idBuild = navArguments.idBuild,
+                        idHero = navArguments.idHero
+                    )
+                )
             }
 
             else -> {}
@@ -103,7 +116,9 @@ private fun CreateBuildHeroScreenContent(
     uiState: CreateBuildHeroScreenUiState,
     onEvent: (CreateBuildHeroScreenEvents) -> Unit,
 ) {
-    val sheetState = rememberModalBottomSheetState()
+    val sheetState = rememberModalBottomSheetState(
+        skipPartiallyExpanded = true
+    )
     val coroutineScope = rememberCoroutineScope()
 
     Scaffold(modifier = Modifier.background(MaterialTheme.colorScheme.background), topBar = {
@@ -192,6 +207,7 @@ private fun CreateBuildHeroScreenContent(
 
             if (uiState.showBottomSheet) {
                 ModalBottomSheet(
+                    modifier = Modifier.padding(innerPadding),
                     onDismissRequest = {
                         onEvent(CreateBuildHeroScreenEvents.ChangeStateEquipmentBottomSheet(sheetState = false))
                     },

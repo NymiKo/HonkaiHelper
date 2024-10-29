@@ -42,7 +42,7 @@ import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.change_nickname.presentation.ChangeNicknameFragment
 import com.example.tanorami.core.theme.Blue
 import com.example.tanorami.core.theme.White
-import com.example.tanorami.create_build_hero.ui.CreateBuildHeroFragment
+import com.example.tanorami.create_build_hero.ui.CreateBuildHeroNavArguments
 import com.example.tanorami.createteam.ui.CreateTeamFragment
 import com.example.tanorami.profile.presentation.ProfileViewModel
 import com.example.tanorami.profile.presentation.components.ErrorComponent
@@ -71,10 +71,7 @@ fun ProfileScreen(
                 }
 
                 is ProfileScreenEvents.OnEditBuildHeroScreen -> {
-                    navController.navigate(
-                        R.id.createBuildHeroFragment,
-                        CreateBuildHeroFragment.newInstance(idBuild = event.idBuild)
-                    )
+                    navController.navigate(route = CreateBuildHeroNavArguments(idBuild = event.idBuild))
                 }
 
                 is ProfileScreenEvents.OnEditTeamScreen -> {
