@@ -1,6 +1,5 @@
 package com.example.tanorami.change_nickname.di
 
-import com.example.tanorami.change_nickname.ui.ChangeNicknameFragment
 import dagger.Subcomponent
 
 @Subcomponent(modules = [ChangeNicknameModule::class])
@@ -10,6 +9,4 @@ interface ChangeNicknameComponent {
     interface Factory {
         fun create(): ChangeNicknameComponent
     }
-
-    fun inject(fragment: ChangeNicknameFragment)
 }

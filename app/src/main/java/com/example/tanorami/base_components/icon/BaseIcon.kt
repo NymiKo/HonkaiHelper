@@ -13,5 +13,5 @@ fun BaseIcon(
     icon: ImageVector,
     tint: Color = MaterialTheme.colorScheme.secondary,
 ) {
-    Icon(imageVector = icon, contentDescription = null, tint = tint)
+    Icon(modifier = modifier, imageVector = icon, contentDescription = null, tint = tint)
 }

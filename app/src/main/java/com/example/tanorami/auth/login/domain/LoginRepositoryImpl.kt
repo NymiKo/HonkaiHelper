@@ -1,11 +1,11 @@
 package com.example.tanorami.auth.login.domain
 
-import com.example.tanorami.data.NetworkResult
-import com.example.tanorami.data.handleApi
 import com.example.tanorami.auth.login.data.LoginService
 import com.example.tanorami.auth.login.data.models.LoginRequest
 import com.example.tanorami.auth.login.data.models.LoginResponse
-import com.example.tanorami.di.IODispatcher
+import com.example.tanorami.core.data.NetworkResult
+import com.example.tanorami.core.data.handleApi
+import com.example.tanorami.core.di.IODispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

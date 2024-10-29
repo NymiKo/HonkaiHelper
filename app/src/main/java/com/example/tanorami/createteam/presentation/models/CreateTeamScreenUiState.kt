@@ -1,8 +1,8 @@
 package com.example.tanorami.createteam.presentation.models
 
 import com.example.tanorami.base.UiState
+import com.example.tanorami.core.data.local.models.hero.HeroWithNameAvatarRarity
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
-import com.example.tanorami.data.local.models.hero.HeroWithNameAvatarRarity
 
 data class CreateTeamScreenUiState(
     val idTeam: Long = -1L,

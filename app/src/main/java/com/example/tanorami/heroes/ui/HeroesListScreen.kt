@@ -32,18 +32,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.tanorami.R
-import com.example.tanorami.heroes.presentation.HeroesListViewMode
+import com.example.tanorami.heroes.presentation.HeroesListViewModel
 import com.example.tanorami.heroes.presentation.models.HeroesListScreenEvents
 import com.example.tanorami.heroes.presentation.models.HeroesListScreenSideEffects
 import com.example.tanorami.heroes.presentation.models.HeroesListScreenUiState
 import com.example.tanorami.heroes.ui.components.HeroItem
-import com.example.tanorami.info_about_hero.ui.models.InfoAboutHeroNavArguments
+import com.example.tanorami.info_about_hero.ui.InfoAboutHeroNavArguments
 import com.example.tanorami.settings.ui.SettingsRoute
 
 @Composable
 fun HeroesListScreen(
     viewModelFactory: ViewModelProvider.Factory,
-    viewModel: HeroesListViewMode = viewModel(factory = viewModelFactory),
+    viewModel: HeroesListViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
 ) {
     val state = viewModel.uiState().collectAsState().value
@@ -57,11 +57,6 @@ fun HeroesListScreen(
     when (sideEffect) {
         HeroesListScreenSideEffects.OnSettingsScreen -> {
             navController.navigate(route = SettingsRoute)
-            viewModel.clearEffect()
-        }
-
-        HeroesListScreenSideEffects.OnProfileScreen -> {
-            navController.navigate(R.id.action_heroesListFragment_to_profileFragment)
             viewModel.clearEffect()
         }
 

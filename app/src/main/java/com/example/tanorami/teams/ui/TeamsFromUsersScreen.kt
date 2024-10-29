@@ -12,7 +12,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.tanorami.R
 import com.example.tanorami.base_components.top_app_bar.BaseTopAppBar
-import com.example.tanorami.createteam.ui.CreateTeamFragment
 import com.example.tanorami.teams.presentation.TeamsFromUsersViewModel
 import com.example.tanorami.teams.presentation.models.TeamsFromUsersScreenEvents
 import com.example.tanorami.teams.presentation.models.TeamsFromUsersScreenSideEffects
@@ -44,14 +43,6 @@ fun TeamsFromUsersScreen(
     when (sideEffects) {
         TeamsFromUsersScreenSideEffects.OnBack -> {
             navController.popBackStack()
-            viewModel.clearEffect()
-        }
-
-        TeamsFromUsersScreenSideEffects.OnCreateTeamScreen -> {
-            navController.navigate(
-                R.id.action_teamsListFragment_to_createTeamFragment,
-                CreateTeamFragment.newInstance()
-            )
             viewModel.clearEffect()
         }
 

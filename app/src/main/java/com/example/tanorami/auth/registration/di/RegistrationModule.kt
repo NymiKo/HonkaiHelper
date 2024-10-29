@@ -2,7 +2,7 @@ package com.example.tanorami.auth.registration.di
 
 import androidx.lifecycle.ViewModel
 import com.example.tanorami.auth.registration.presentation.RegistrationViewModel
-import com.example.tanorami.di.ViewModelKey
+import com.example.tanorami.core.di.ViewModelKey
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

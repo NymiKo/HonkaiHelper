@@ -1,8 +1,8 @@
 package com.example.tanorami.heroes.di
 
 import androidx.lifecycle.ViewModel
-import com.example.tanorami.di.ViewModelKey
-import com.example.tanorami.heroes.presentation.HeroesListViewMode
+import com.example.tanorami.core.di.ViewModelKey
+import com.example.tanorami.heroes.presentation.HeroesListViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -11,6 +11,6 @@ import dagger.multibindings.IntoMap
 interface HeroesListModule {
 
     @Binds
-    @[IntoMap ViewModelKey(HeroesListViewMode::class)]
-    fun bindViewModel(viewModel: HeroesListViewMode): ViewModel
+    @[IntoMap ViewModelKey(HeroesListViewModel::class)]
+    fun bindViewModel(viewModel: HeroesListViewModel): ViewModel
 }

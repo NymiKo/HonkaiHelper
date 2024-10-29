@@ -3,7 +3,7 @@ package com.example.tanorami.send_feedback.presentation
 import androidx.lifecycle.viewModelScope
 import com.example.tanorami.R
 import com.example.tanorami.base.BaseViewModel
-import com.example.tanorami.data.NetworkResult
+import com.example.tanorami.core.data.NetworkResult
 import com.example.tanorami.send_feedback.data.SendFeedbackRepository
 import com.example.tanorami.send_feedback.presentation.models.SendFeedbackScreenEvents
 import com.example.tanorami.send_feedback.presentation.models.SendFeedbackScreenSideEffects

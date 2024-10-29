@@ -1,7 +1,7 @@
 package com.example.tanorami.builds_hero_from_users.data.model
 
 import com.example.tanorami.base_build_hero.data.model.Weapon
-import com.example.tanorami.data.local.models.hero.HeroWithNameAvatarRarity
+import com.example.tanorami.core.data.local.models.hero.HeroWithNameAvatarRarity
 import com.example.tanorami.info_about_hero.data.model.Decoration
 import com.example.tanorami.info_about_hero.data.model.Relic
 

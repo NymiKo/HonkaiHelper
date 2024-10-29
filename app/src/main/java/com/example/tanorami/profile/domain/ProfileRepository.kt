@@ -1,6 +1,6 @@
 package com.example.tanorami.profile.domain
 
-import com.example.tanorami.data.NetworkResult
+import com.example.tanorami.core.data.NetworkResult
 import com.example.tanorami.profile.data.model.User
 import java.io.File
 

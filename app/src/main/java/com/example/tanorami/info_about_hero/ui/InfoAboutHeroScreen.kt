@@ -31,9 +31,13 @@ import com.example.tanorami.info_about_hero.presentation.models.InfoAboutHeroScr
 import com.example.tanorami.info_about_hero.ui.components.AbilitiesListColumn
 import com.example.tanorami.info_about_hero.ui.components.EidolonsListColumn
 import com.example.tanorami.info_about_hero.ui.components.SplashArtHeroImage
-import com.example.tanorami.info_about_hero.ui.models.InfoAboutHeroNavArguments
 import com.example.tanorami.teams.ui.TeamsFromUsersNavArguments
 import com.example.tanorami.utils.OnLifecycleEvent
+import kotlinx.serialization.Serializable
+
+
+@Serializable
+data class InfoAboutHeroNavArguments(val idHero: Int)
 
 @Composable
 fun InfoAboutHeroScreen(

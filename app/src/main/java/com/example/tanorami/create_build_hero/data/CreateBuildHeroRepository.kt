@@ -1,7 +1,7 @@
 package com.example.tanorami.create_build_hero.data
 
+import com.example.tanorami.core.data.NetworkResult
 import com.example.tanorami.create_build_hero.data.model.BuildHeroFromUser
-import com.example.tanorami.data.NetworkResult
 import com.example.tanorami.create_build_hero.data.model.Equipment
 import com.example.tanorami.heroes.data.model.Hero
 import com.example.tanorami.viewing_users_build.data.model.FullBuildHeroFromUser

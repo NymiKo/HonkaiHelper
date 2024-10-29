@@ -1,6 +1,5 @@
 package com.example.tanorami.heroes.di
 
-import com.example.tanorami.heroes.ui.HeroesListFragment
 import dagger.Subcomponent
 
 @Subcomponent(modules = [HeroesListModule::class])
@@ -9,5 +8,4 @@ interface HeroesListComponent {
     interface Factory {
         fun create(): HeroesListComponent
     }
-    fun inject(fragment: HeroesListFragment)
 }

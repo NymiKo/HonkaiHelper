@@ -17,7 +17,6 @@ import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHer
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenSideEffects
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenUiState
 import com.example.tanorami.builds_hero_from_users.ui.components.BuildsListLazyColumn
-import com.example.tanorami.create_build_hero.ui.CreateBuildHeroFragment
 import com.example.tanorami.teams.ui.components.EmptyListScreen
 import com.example.tanorami.teams.ui.components.ErrorScreen
 import com.example.tanorami.utils.OnLifecycleEvent
@@ -43,14 +42,6 @@ fun BuildsHeroFromUsersScreen(
     )
 
     when (sideEffects) {
-        BuildsHeroFromUsersScreenSideEffects.OnCreateBuildHeroScreen -> {
-            navController.navigate(
-                resId = R.id.action_buildsHeroListFragment_to_createBuildHeroFragment,
-                CreateBuildHeroFragment.newInstance(idHero = navArguments.idHero)
-            )
-            viewModel.clearEffect()
-        }
-
         is BuildsHeroFromUsersScreenSideEffects.OnViewingBuildHeroFromUserScreen -> {
             navController.navigate(route = ViewingBuildHeroFromUserNavArguments(idBuild = sideEffects.idBuild))
             viewModel.clearEffect()

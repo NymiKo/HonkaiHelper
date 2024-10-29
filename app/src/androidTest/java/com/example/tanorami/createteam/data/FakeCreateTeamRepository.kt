@@ -1,8 +1,8 @@
 package com.example.tanorami.createteam.data
 
+import com.example.tanorami.core.data.NetworkResult
+import com.example.tanorami.core.data.local.models.hero.HeroWithNameAvatarRarity
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
-import com.example.tanorami.data.NetworkResult
-import com.example.tanorami.data.local.models.hero.HeroWithNameAvatarRarity
 import javax.inject.Inject
 
 class FakeCreateTeamRepository @Inject constructor(): CreateTeamRepository {

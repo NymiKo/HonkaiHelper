@@ -27,8 +27,8 @@ import com.example.tanorami.createteam.ui.CreateTeamNavArguments
 import com.example.tanorami.createteam.ui.CreateTeamScreen
 import com.example.tanorami.info_about_decoration.ui.InfoAboutDecorationNavArguments
 import com.example.tanorami.info_about_decoration.ui.InfoAboutDecorationScreen
+import com.example.tanorami.info_about_hero.ui.InfoAboutHeroNavArguments
 import com.example.tanorami.info_about_hero.ui.InfoAboutHeroScreen
-import com.example.tanorami.info_about_hero.ui.models.InfoAboutHeroNavArguments
 import com.example.tanorami.info_about_relic.ui.InfoAboutRelicNavArgument
 import com.example.tanorami.info_about_relic.ui.InfoAboutRelicScreen
 import com.example.tanorami.info_about_weapon.ui.InfoAboutWeaponNavArguments

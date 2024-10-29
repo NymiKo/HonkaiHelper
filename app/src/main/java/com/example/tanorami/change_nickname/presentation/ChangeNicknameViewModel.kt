@@ -9,7 +9,7 @@ import com.example.tanorami.R
 import com.example.tanorami.change_nickname.data.ChangeNicknameRepository
 import com.example.tanorami.change_nickname.presentation.models.ChangeNicknameScreenEvents
 import com.example.tanorami.change_nickname.presentation.models.ChangeNicknameScreenUiState
-import com.example.tanorami.data.NetworkResult
+import com.example.tanorami.core.data.NetworkResult
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

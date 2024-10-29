@@ -6,7 +6,7 @@ import com.example.tanorami.builds_hero_from_users.data.BuildsHeroListRepository
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenEvents
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenSideEffects
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenUiState
-import com.example.tanorami.data.NetworkResult
+import com.example.tanorami.core.data.NetworkResult
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,9 +22,7 @@ class BuildsHeroFromUsersViewModel @Inject constructor(
                 getHero(event.idHero)
                 getBuildsHeroList(idHero = event.idHero)
             }
-
             is BuildsHeroFromUsersScreenEvents.OnViewingBuildHeroFromUserScreen -> sendSideEffect(BuildsHeroFromUsersScreenSideEffects.OnViewingBuildHeroFromUserScreen(event.idBuild))
-            BuildsHeroFromUsersScreenEvents.OnCreateBuildHeroScreen -> sendSideEffect(BuildsHeroFromUsersScreenSideEffects.OnCreateBuildHeroScreen)
             BuildsHeroFromUsersScreenEvents.OnBack -> sendSideEffect(BuildsHeroFromUsersScreenSideEffects.OnBack)
         }
     }

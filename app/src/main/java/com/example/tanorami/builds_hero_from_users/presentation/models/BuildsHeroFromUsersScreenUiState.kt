@@ -2,7 +2,7 @@ package com.example.tanorami.builds_hero_from_users.presentation.models
 
 import com.example.tanorami.base.UiState
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
-import com.example.tanorami.data.local.models.hero.HeroWithNameAvatarRarity
+import com.example.tanorami.core.data.local.models.hero.HeroWithNameAvatarRarity
 
 data class BuildsHeroFromUsersScreenUiState(
     val isSuccess: Boolean = false,

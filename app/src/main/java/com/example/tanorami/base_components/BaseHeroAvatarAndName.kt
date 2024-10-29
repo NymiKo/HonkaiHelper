@@ -19,11 +19,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.tanorami.core.data.local.models.hero.HeroWithNameAvatarRarity
 import com.example.tanorami.core.theme.DarkGrey
 import com.example.tanorami.core.theme.Orange
 import com.example.tanorami.core.theme.Violet
 import com.example.tanorami.core.theme.White
-import com.example.tanorami.data.local.models.hero.HeroWithNameAvatarRarity
 
 @Composable
 fun BaseHeroAvatarAndName(

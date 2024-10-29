@@ -3,6 +3,7 @@ package com.example.tanorami.create_build_hero.presentation
 import androidx.lifecycle.viewModelScope
 import com.example.tanorami.R
 import com.example.tanorami.base.BaseViewModel
+import com.example.tanorami.core.data.NetworkResult
 import com.example.tanorami.create_build_hero.data.CreateBuildHeroRepository
 import com.example.tanorami.create_build_hero.data.model.BuildHeroFromUser
 import com.example.tanorami.create_build_hero.data.model.Equipment
@@ -10,7 +11,6 @@ import com.example.tanorami.create_build_hero.presentation.models.CreateBuildHer
 import com.example.tanorami.create_build_hero.presentation.models.CreateBuildHeroScreenSideEffects
 import com.example.tanorami.create_build_hero.presentation.models.CreateBuildHeroScreenUiState
 import com.example.tanorami.create_build_hero.presentation.models.EquipmentType
-import com.example.tanorami.data.NetworkResult
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

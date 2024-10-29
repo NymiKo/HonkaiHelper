@@ -42,6 +42,7 @@ import com.example.tanorami.R
 import com.example.tanorami.base_components.button.BaseSmallFloatingButton
 import com.example.tanorami.base_components.dialog.BaseSaveAlertDialog
 import com.example.tanorami.base_components.top_app_bar.BaseTopAppBar
+import com.example.tanorami.core.data.local.models.hero.HeroWithNameAvatarRarity
 import com.example.tanorami.core.theme.Red
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
 import com.example.tanorami.createteam.presentation.CreateTeamViewModel
@@ -50,7 +51,6 @@ import com.example.tanorami.createteam.presentation.models.CreateTeamScreenSideE
 import com.example.tanorami.createteam.presentation.models.CreateTeamScreenUiState
 import com.example.tanorami.createteam.ui.components.ItemHeroAvatar
 import com.example.tanorami.createteam.ui.components.ItemHeroAvatarWithName
-import com.example.tanorami.data.local.models.hero.HeroWithNameAvatarRarity
 import com.example.tanorami.utils.OnLifecycleEvent
 import com.example.tanorami.utils.toast
 import kotlinx.serialization.Serializable

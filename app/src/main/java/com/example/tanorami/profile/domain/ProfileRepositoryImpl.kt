@@ -1,13 +1,13 @@
 package com.example.tanorami.profile.domain
 
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
-import com.example.tanorami.data.NetworkResult
-import com.example.tanorami.data.handleApi
-import com.example.tanorami.data.local.dao.DecorationDao
-import com.example.tanorami.data.local.dao.HeroDao
-import com.example.tanorami.data.local.dao.RelicDao
-import com.example.tanorami.data.local.dao.WeaponDao
-import com.example.tanorami.di.IODispatcher
+import com.example.tanorami.core.data.NetworkResult
+import com.example.tanorami.core.data.handleApi
+import com.example.tanorami.core.data.local.dao.DecorationDao
+import com.example.tanorami.core.data.local.dao.HeroDao
+import com.example.tanorami.core.data.local.dao.RelicDao
+import com.example.tanorami.core.data.local.dao.WeaponDao
+import com.example.tanorami.core.di.IODispatcher
 import com.example.tanorami.profile.data.ProfileService
 import com.example.tanorami.profile.data.model.User
 import com.example.tanorami.teams.data.model.TeamHero

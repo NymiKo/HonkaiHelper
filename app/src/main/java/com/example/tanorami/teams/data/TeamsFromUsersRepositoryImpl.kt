@@ -1,9 +1,9 @@
 package com.example.tanorami.teams.data
 
-import com.example.tanorami.data.NetworkResult
-import com.example.tanorami.data.handleApi
-import com.example.tanorami.data.local.dao.HeroDao
-import com.example.tanorami.di.IODispatcher
+import com.example.tanorami.core.data.NetworkResult
+import com.example.tanorami.core.data.handleApi
+import com.example.tanorami.core.data.local.dao.HeroDao
+import com.example.tanorami.core.di.IODispatcher
 import com.example.tanorami.teams.data.model.TeamHero
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

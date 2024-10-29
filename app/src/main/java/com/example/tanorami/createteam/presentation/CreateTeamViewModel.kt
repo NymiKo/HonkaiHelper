@@ -3,12 +3,12 @@ package com.example.tanorami.createteam.presentation
 import androidx.lifecycle.viewModelScope
 import com.example.tanorami.R
 import com.example.tanorami.base.BaseViewModel
+import com.example.tanorami.core.data.NetworkResult
 import com.example.tanorami.createteam.data.CreateTeamRepository
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
 import com.example.tanorami.createteam.presentation.models.CreateTeamScreenEvents
 import com.example.tanorami.createteam.presentation.models.CreateTeamScreenSideEffects
 import com.example.tanorami.createteam.presentation.models.CreateTeamScreenUiState
-import com.example.tanorami.data.NetworkResult
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

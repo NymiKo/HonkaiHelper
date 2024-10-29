@@ -1,6 +1,6 @@
 package com.example.tanorami.main.data
 
-import com.example.tanorami.data.NetworkResult
+import com.example.tanorami.core.data.NetworkResult
 import com.example.tanorami.main.presentation.models.NewDataModel
 
 interface MainScreenRepository {
