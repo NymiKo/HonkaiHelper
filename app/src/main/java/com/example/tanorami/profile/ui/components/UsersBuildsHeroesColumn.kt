@@ -1,4 +1,4 @@
-package com.example.tanorami.profile.presentation.components
+package com.example.tanorami.profile.ui.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background

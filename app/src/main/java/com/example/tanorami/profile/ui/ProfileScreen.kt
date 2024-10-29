@@ -39,18 +39,18 @@ import coil.compose.AsyncImage
 import com.example.tanorami.R
 import com.example.tanorami.base.shimmerEffect
 import com.example.tanorami.base_components.text.BaseDefaultText
-import com.example.tanorami.change_nickname.presentation.ChangeNicknameFragment
+import com.example.tanorami.change_nickname.ui.ChangeNicknameNavArguments
 import com.example.tanorami.core.theme.Blue
 import com.example.tanorami.core.theme.White
 import com.example.tanorami.create_build_hero.ui.CreateBuildHeroNavArguments
 import com.example.tanorami.createteam.ui.CreateTeamNavArguments
 import com.example.tanorami.profile.presentation.ProfileViewModel
-import com.example.tanorami.profile.presentation.components.ErrorComponent
-import com.example.tanorami.profile.presentation.components.ProfileTopAppBar
-import com.example.tanorami.profile.presentation.components.TeamsAndBuildsInProfile
-import com.example.tanorami.profile.presentation.components.UserNotLoggedComponent
 import com.example.tanorami.profile.presentation.models.ProfileScreenEvents
 import com.example.tanorami.profile.presentation.models.ProfileScreenUiState
+import com.example.tanorami.profile.ui.components.ErrorComponent
+import com.example.tanorami.profile.ui.components.ProfileTopAppBar
+import com.example.tanorami.profile.ui.components.TeamsAndBuildsInProfile
+import com.example.tanorami.profile.ui.components.UserNotLoggedComponent
 import com.example.tanorami.utils.toFile
 
 @Composable
@@ -59,15 +59,15 @@ fun ProfileScreen(
     viewModel: ProfileViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
 ) {
+    val state = viewModel.uiState().collectAsState().value
+    val sideEvents = viewModel.uiEffect().collectAsState(initial = null).value
+
     ProfileScreenContent(
-        uiState = viewModel.profileUiState.collectAsState().value,
+        uiState = state,
         onEvents = { event ->
             when (event) {
                 ProfileScreenEvents.OnChangeNicknameScreen -> {
-                    navController.navigate(
-                        R.id.changeNicknameFragment,
-                        ChangeNicknameFragment.newInject("")
-                    )
+                    navController.navigate(route = ChangeNicknameNavArguments(nickname = state.user.nickname))
                 }
 
                 is ProfileScreenEvents.OnEditBuildHeroScreen -> {
@@ -88,7 +88,6 @@ fun ProfileScreen(
 
 @Composable
 private fun ProfileScreenContent(
-    modifier: Modifier = Modifier,
     uiState: ProfileScreenUiState,
     onEvents: (event: ProfileScreenEvents) -> Unit,
 ) {
@@ -100,10 +99,9 @@ private fun ProfileScreenContent(
             }
         }
 
-    when (uiState) {
-        is ProfileScreenUiState.Success -> {
+    when {
+        uiState.isSuccess -> {
             Scaffold(
-                modifier = modifier.background(MaterialTheme.colorScheme.background),
                 topBar = {
                     ProfileTopAppBar(
                         onEditNicknameScreen = { onEvents(ProfileScreenEvents.OnChangeNicknameScreen) },
@@ -139,26 +137,18 @@ private fun ProfileScreenContent(
             }
         }
 
-        ProfileScreenUiState.NotAuthorized -> {
+        !uiState.isAuthorized -> {
             UserNotLoggedComponent(
                 onLoginScreen = { onEvents(ProfileScreenEvents.OnLoginScreen) }
             )
         }
 
-        ProfileScreenUiState.Loading -> {
+        uiState.isLoading -> {
             ShimmerLoading()
         }
 
-        is ProfileScreenUiState.Error -> {
+        uiState.isError -> {
             ErrorComponent(loadingProfile = { onEvents(ProfileScreenEvents.FetchProfile) })
-        }
-
-        ProfileScreenUiState.Empty -> {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(MaterialTheme.colorScheme.background),
-            )
         }
     }
 }
@@ -265,6 +255,6 @@ private fun ShimmerLoading(
 @Preview
 @Composable
 private fun ProfileScreenPreview() {
-    ProfileScreenContent(uiState = ProfileScreenUiState.Loading, onEvents = {})
+    ProfileScreenContent(uiState = ProfileScreenUiState(), onEvents = {})
 }
 

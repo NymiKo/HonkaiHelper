@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tanorami.R
 import com.example.tanorami.change_nickname.data.ChangeNicknameRepository
+import com.example.tanorami.change_nickname.presentation.models.ChangeNicknameScreenEvents
+import com.example.tanorami.change_nickname.presentation.models.ChangeNicknameScreenUiState
 import com.example.tanorami.data.NetworkResult
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,32 +21,52 @@ class ChangeNicknameViewModel @Inject constructor(
     fun onEvent(event: ChangeNicknameScreenEvents) {
         when (event) {
             ChangeNicknameScreenEvents.ChangeNickname -> changeNickname()
-            is ChangeNicknameScreenEvents.EnteringNickname -> uiState =
-                uiState.copy(newNickname = event.nickname)
+            is ChangeNicknameScreenEvents.NicknameChanged -> uiState =
+                uiState.copy(
+                    newNickname = uiState.newNickname.copy(
+                        value = event.newValue,
+                        isError = false
+                    )
+                )
+
+            is ChangeNicknameScreenEvents.SetOldNickname -> {
+                uiState = uiState.copy(
+                    oldNickname = event.oldNickname,
+                    newNickname = uiState.newNickname.copy(
+                        value = event.oldNickname,
+                        isError = false
+                    )
+                )
+            }
 
             else -> Unit
         }
     }
 
     private fun changeNickname() = viewModelScope.launch {
-        if (checkNickname(uiState.newNickname) && comparisonNickname(
+        if (checkNickname(uiState.newNickname.value) && comparisonNickname(
                 uiState.oldNickname,
-                uiState.newNickname
+                uiState.newNickname.value
             )
         ) {
             uiState = uiState.copy(isLoading = true, isSuccess = false, isError = false)
-            when (val result = repository.changeNickname(uiState.newNickname)) {
+            when (val result = repository.changeNickname(uiState.newNickname.value)) {
                 is NetworkResult.Error -> {
                     uiState = uiState.copy(
                         isLoading = false,
                         isSuccess = false,
                         isError = true,
-                        errorMessage = errorHandler(result.code)
+                        message = errorHandler(result.code)
                     )
                 }
 
                 is NetworkResult.Success -> {
-                    uiState = uiState.copy(isLoading = false, isSuccess = true, isError = false)
+                    uiState = uiState.copy(
+                        isLoading = false,
+                        isSuccess = true,
+                        isError = false,
+                        message = R.string.nickname_changed
+                    )
                 }
             }
         }
@@ -55,8 +77,10 @@ class ChangeNicknameViewModel @Inject constructor(
             uiState = uiState.copy(
                 isLoading = false,
                 isSuccess = false,
-                isError = true,
-                errorMessage = R.string.empty_new_nickname
+                newNickname = uiState.newNickname.copy(
+                    isError = true,
+                    errorMessage = R.string.empty_new_nickname
+                ),
             )
             false
         } else true
@@ -67,8 +91,10 @@ class ChangeNicknameViewModel @Inject constructor(
             uiState = uiState.copy(
                 isLoading = false,
                 isSuccess = false,
-                isError = true,
-                errorMessage = R.string.already_have_nickname
+                newNickname = uiState.newNickname.copy(
+                    isError = true,
+                    errorMessage = R.string.already_have_nickname
+                ),
             )
             false
         } else true

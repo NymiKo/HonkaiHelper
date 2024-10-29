@@ -8,7 +8,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.tanorami.profile.presentation.components.TeamItem
+import com.example.tanorami.profile.ui.components.TeamItem
 import com.example.tanorami.teams.data.model.TeamHero
 
 @Composable

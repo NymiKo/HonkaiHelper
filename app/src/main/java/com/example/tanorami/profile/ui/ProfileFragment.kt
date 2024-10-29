@@ -9,7 +9,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import com.example.tanorami.core.theme.AppTheme
 import com.example.tanorami.profile.presentation.ProfileViewModel
 import javax.inject.Inject
@@ -33,10 +32,7 @@ class ProfileFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 AppTheme {
-                    ProfileScreen(
-                        viewModelFactory = viewModelFactory,
-                        navController = findNavController(),
-                    )
+
                 }
             }
         }

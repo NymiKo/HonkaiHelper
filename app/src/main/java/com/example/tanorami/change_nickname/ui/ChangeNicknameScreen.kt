@@ -1,6 +1,5 @@
-package com.example.tanorami.change_nickname.presentation
+package com.example.tanorami.change_nickname.ui
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -23,33 +22,58 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.tanorami.R
 import com.example.tanorami.base_components.top_app_bar.BaseTopAppBar
+import com.example.tanorami.change_nickname.presentation.ChangeNicknameViewModel
+import com.example.tanorami.change_nickname.presentation.models.ChangeNicknameScreenEvents
+import com.example.tanorami.change_nickname.presentation.models.ChangeNicknameScreenUiState
+import com.example.tanorami.core.theme.AppTheme
 import com.example.tanorami.core.theme.Red
+import com.example.tanorami.utils.OnLifecycleEvent
 import kotlinx.coroutines.launch
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class ChangeNicknameNavArguments(val nickname: String)
 
 @Composable
 fun ChangeNicknameScreen(
-    modifier: Modifier = Modifier,
-    viewModel: ChangeNicknameViewModel,
+    navArguments: ChangeNicknameNavArguments,
+    viewModelFactory: ViewModelProvider.Factory,
+    viewModel: ChangeNicknameViewModel = viewModel(factory = viewModelFactory),
     onBack: () -> Unit
 ) {
     ChangeNicknameScreenContent(
-        modifier = modifier,
         uiState = viewModel.uiState,
         onEvent = { event ->
             when (event) {
-                ChangeNicknameScreenEvents.OnBack -> onBack()
+                ChangeNicknameScreenEvents.OnBack -> {
+                    onBack()
+                }
                 else -> Unit
             }
             viewModel.onEvent(event)
         },
     )
+
+    OnLifecycleEvent { owner, event ->
+        when (event) {
+            Lifecycle.Event.ON_CREATE -> viewModel.onEvent(
+                ChangeNicknameScreenEvents.SetOldNickname(
+                    navArguments.nickname
+                )
+            )
+
+            else -> {}
+        }
+    }
 }
 
 @Composable
 private fun ChangeNicknameScreenContent(
-    modifier: Modifier = Modifier,
     uiState: ChangeNicknameScreenUiState,
     onEvent: (ChangeNicknameScreenEvents) -> Unit,
 ) {
@@ -57,7 +81,7 @@ private fun ChangeNicknameScreenContent(
     val snackbarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(key1 = uiState.isSuccess) {
-        if (uiState.isSuccess) {
+        if (uiState.isSuccess || uiState.isError) {
             scope.launch {
                 snackbarHostState.showSnackbar(
                     message = "Никнейм изменен",
@@ -68,7 +92,6 @@ private fun ChangeNicknameScreenContent(
     }
 
     Scaffold(
-        modifier = modifier.background(MaterialTheme.colorScheme.background),
         topBar = {
             TopAppBar(onBack = { onEvent(ChangeNicknameScreenEvents.OnBack) })
         },
@@ -82,7 +105,7 @@ private fun ChangeNicknameScreenContent(
         EditNicknameField(
             modifier = Modifier.padding(innerPadding),
             uiState = uiState,
-            enteringNickname = { onEvent(ChangeNicknameScreenEvents.EnteringNickname(it)) }
+            nicknameChanged = { onEvent(ChangeNicknameScreenEvents.NicknameChanged(it)) }
         )
     }
 }
@@ -132,14 +155,14 @@ fun ChangeNicknameButton(
 private fun EditNicknameField(
     modifier: Modifier = Modifier,
     uiState: ChangeNicknameScreenUiState,
-    enteringNickname: (String) -> Unit,
+    nicknameChanged: (String) -> Unit,
 ) {
     OutlinedTextField(
         modifier = modifier
             .padding(horizontal = 16.dp)
             .fillMaxWidth(),
-        value = uiState.newNickname,
-        onValueChange = { enteringNickname(it) },
+        value = uiState.newNickname.value,
+        onValueChange = { nicknameChanged(it) },
         label = {
             Text(
                 text = stringResource(id = R.string.new_nickname),
@@ -153,12 +176,12 @@ private fun EditNicknameField(
             cursorColor = MaterialTheme.colorScheme.secondary,
             errorBorderColor = Red,
         ),
-        isError = uiState.isError,
+        isError = uiState.newNickname.isError,
         supportingText = {
-            if (uiState.isError) {
+            if (uiState.newNickname.isError) {
                 Text(
                     modifier = Modifier.fillMaxWidth(),
-                    text = stringResource(id = uiState.errorMessage),
+                    text = stringResource(id = uiState.newNickname.errorMessage),
                     color = Red
                 )
             }
@@ -169,6 +192,8 @@ private fun EditNicknameField(
 
 @Preview
 @Composable
-fun ChangeNicknameScreenPreview(modifier: Modifier = Modifier) {
-    ChangeNicknameScreenContent(uiState = ChangeNicknameScreenUiState(), onEvent = {})
+private fun ChangeNicknameScreenPreview(modifier: Modifier = Modifier) {
+    AppTheme {
+        ChangeNicknameScreenContent(uiState = ChangeNicknameScreenUiState(), onEvent = {})
+    }
 }

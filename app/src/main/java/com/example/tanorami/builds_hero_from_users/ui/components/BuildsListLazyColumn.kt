@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
-import com.example.tanorami.profile.presentation.components.BuildItem
+import com.example.tanorami.profile.ui.components.BuildItem
 
 @Composable
 fun BuildsListLazyColumn(

@@ -9,10 +9,7 @@ import com.example.tanorami.profile.domain.ProfileRepository
 import com.example.tanorami.profile.presentation.models.ProfileScreenEvents
 import com.example.tanorami.profile.presentation.models.ProfileScreenSideEffects
 import com.example.tanorami.profile.presentation.models.ProfileScreenUiState
-import com.example.tanorami.profile.presentation.models.ProfileUiState
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -23,13 +20,9 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(
     private val repository: ProfileRepository,
     private val appDataStore: AppDataStore,
-) : BaseViewModel<ProfileUiState, ProfileScreenEvents, ProfileScreenSideEffects>(
-    initialState = ProfileUiState("")
+) : BaseViewModel<ProfileScreenUiState, ProfileScreenEvents, ProfileScreenSideEffects>(
+    initialState = ProfileScreenUiState()
 ) {
-
-    private var _profileUiState = MutableStateFlow<ProfileScreenUiState>(ProfileScreenUiState.Empty)
-    val profileUiState = _profileUiState.asStateFlow()
-
     init {
         getProfile()
     }
@@ -46,13 +39,25 @@ class ProfileViewModel @Inject constructor(
     private fun getProfile() {
         appDataStore.tokenUser.onEach {
             if (it.isEmpty()) {
-                _profileUiState.value = ProfileScreenUiState.NotAuthorized
+                uiState = uiState.copy(isAuthorized = false)
             } else {
-                _profileUiState.value = ProfileScreenUiState.Loading
+                uiState = uiState.copy(isLoading = true)
                 when (val result = repository.getProfile()) {
-                    is NetworkResult.Error -> _profileUiState.value = ProfileScreenUiState.Error(result.code)
+                    is NetworkResult.Error -> uiState = uiState.copy(
+                        isLoading = false,
+                        isSuccess = false,
+                        isError = true,
+                        isAuthorized = true,
+                        message = errorHandler(result.code),
+                    )
 
-                    is NetworkResult.Success -> _profileUiState.value = ProfileScreenUiState.Success(result.data)
+                    is NetworkResult.Success -> uiState = uiState.copy(
+                        isLoading = false,
+                        isSuccess = true,
+                        isAuthorized = true,
+                        isError = false,
+                        user = result.data
+                    )
                 }
             }
         }
@@ -62,7 +67,7 @@ class ProfileViewModel @Inject constructor(
 
     private fun logoutAccount() = viewModelScope.launch {
         appDataStore.clearToken()
-        _profileUiState.value = ProfileScreenUiState.NotAuthorized
+        uiState = uiState.copy(isAuthorized = false)
     }
 
     private fun loadAvatar(file: File) = viewModelScope.launch {

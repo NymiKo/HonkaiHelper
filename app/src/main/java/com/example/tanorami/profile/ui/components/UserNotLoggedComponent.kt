@@ -1,4 +1,4 @@
-package com.example.tanorami.profile.presentation.components
+package com.example.tanorami.profile.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -22,7 +22,9 @@ import com.example.tanorami.R
 @Composable
 fun UserNotLoggedComponent(modifier: Modifier  = Modifier, onLoginScreen: () -> Unit) {
     Box(
-        modifier = modifier.fillMaxSize().background(color = MaterialTheme.colorScheme.background),
+        modifier = modifier
+            .fillMaxSize()
+            .background(color = MaterialTheme.colorScheme.background),
         contentAlignment = Alignment.Center,
     ) {
         Column(

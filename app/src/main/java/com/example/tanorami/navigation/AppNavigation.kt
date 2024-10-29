@@ -15,6 +15,8 @@ import com.example.tanorami.base_build_hero.ui.BaseBuildHeroNavArguments
 import com.example.tanorami.base_build_hero.ui.BaseBuildHeroScreen
 import com.example.tanorami.builds_hero_from_users.ui.BuildsHeroFromUsersNavArguments
 import com.example.tanorami.builds_hero_from_users.ui.BuildsHeroFromUsersScreen
+import com.example.tanorami.change_nickname.ui.ChangeNicknameNavArguments
+import com.example.tanorami.change_nickname.ui.ChangeNicknameScreen
 import com.example.tanorami.create_build_hero.ui.CreateBuildHeroNavArguments
 import com.example.tanorami.create_build_hero.ui.CreateBuildHeroScreen
 import com.example.tanorami.createteam.ui.CreateTeamNavArguments
@@ -163,6 +165,15 @@ fun AppNavigation(
                 navArguments = createTeamNavArguments,
                 viewModelFactory = viewModelFactory,
                 navController = navController
+            )
+        }
+
+        composable<ChangeNicknameNavArguments> { backStackEntry ->
+            val changeNicknameNavArguments: ChangeNicknameNavArguments = backStackEntry.toRoute()
+            ChangeNicknameScreen(
+                navArguments = changeNicknameNavArguments,
+                viewModelFactory = viewModelFactory,
+                onBack = navController::popBackStack,
             )
         }
     }

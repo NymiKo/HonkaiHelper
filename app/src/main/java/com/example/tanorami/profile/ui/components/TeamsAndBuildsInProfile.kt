@@ -1,4 +1,4 @@
-package com.example.tanorami.profile.presentation.components
+package com.example.tanorami.profile.ui.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
@@ -44,7 +44,9 @@ fun TeamsAndBuildsInProfile(
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         TabRow(
-            modifier = Modifier.padding(horizontal = 16.dp).fillMaxWidth(),
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth(),
             selectedTabIndex = pagerState.currentPage,
             contentColor = MaterialTheme.colorScheme.secondary,
             indicator = { tabPositions ->
