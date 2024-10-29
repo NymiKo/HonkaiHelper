@@ -9,8 +9,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import com.example.tanorami.App
 import com.example.tanorami.auth.registration.presentation.RegistrationViewModel
 import com.example.tanorami.core.theme.AppTheme
 import javax.inject.Inject
@@ -23,8 +21,8 @@ class RegistrationFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as App).appComponent.registrationComponent().create()
-            .inject(this)
+//        (requireActivity().application as App).appComponent.registrationComponent().create()
+//            .inject(this)
     }
 
     override fun onCreateView(
@@ -35,7 +33,7 @@ class RegistrationFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 AppTheme {
-                    RegistrationScreen(viewModel = viewModel, navController = findNavController())
+
                 }
             }
         }

@@ -5,7 +5,7 @@ import com.example.tanorami.activity.di.MainComponent
 import com.example.tanorami.auth.login.di.LoginModule
 import com.example.tanorami.auth.login.domain.LoginRepository
 import com.example.tanorami.auth.registration.data.RegistrationRepository
-import com.example.tanorami.auth.registration.di.RegistrationComponent
+import com.example.tanorami.auth.registration.di.RegistrationModule
 import com.example.tanorami.base_build_hero.data.BaseBuildHeroRepository
 import com.example.tanorami.base_build_hero.di.BaseBuildHeroModule
 import com.example.tanorami.builds_hero_from_users.data.BuildsHeroListRepository
@@ -72,6 +72,7 @@ import javax.inject.Singleton
         CreateTeamModule::class,
         ChangeNicknameModule::class,
         LoginModule::class,
+        RegistrationModule::class,
     ]
 )
 interface AppComponent {
@@ -82,7 +83,6 @@ interface AppComponent {
     }
 
     fun mainComponent(): MainComponent.Factory
-    fun registrationComponent(): RegistrationComponent.Factory
     fun sendFeedbackComponent(): SendFeedbackComponent.Factory
 
     val heroesListRepository: HeroesListRepository

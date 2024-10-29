@@ -15,6 +15,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.tanorami.R
@@ -27,10 +29,15 @@ import com.example.tanorami.auth.registration.presentation.models.RegistrationSc
 import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.base_components.top_app_bar.BaseCenterAlignedTopAppBar
 import com.example.tanorami.utils.toast
+import kotlinx.serialization.Serializable
+
+@Serializable
+data object RegistrationRoute
 
 @Composable
 fun RegistrationScreen(
-    viewModel: RegistrationViewModel,
+    viewModelFactory: ViewModelProvider.Factory,
+    viewModel: RegistrationViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
 ) {
     val state = viewModel.uiState().collectAsState().value
@@ -46,6 +53,7 @@ fun RegistrationScreen(
         RegistrationScreenSideEffects.SuccessCreatingAccount -> {
             toast(context, R.string.success_creating_account)
             navController.popBackStack()
+            viewModel.clearEffect()
         }
 
         is RegistrationScreenSideEffects.ShowToast -> {
@@ -53,7 +61,10 @@ fun RegistrationScreen(
             viewModel.clearEffect()
         }
 
-        RegistrationScreenSideEffects.OnBack -> navController.popBackStack()
+        RegistrationScreenSideEffects.OnBack -> {
+            navController.popBackStack()
+            viewModel.clearEffect()
+        }
         null -> {}
     }
 }

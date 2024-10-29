@@ -13,6 +13,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.example.tanorami.auth.login.ui.LoginRoute
 import com.example.tanorami.auth.login.ui.LoginScreen
+import com.example.tanorami.auth.registration.ui.RegistrationRoute
+import com.example.tanorami.auth.registration.ui.RegistrationScreen
 import com.example.tanorami.base_build_hero.ui.BaseBuildHeroNavArguments
 import com.example.tanorami.base_build_hero.ui.BaseBuildHeroScreen
 import com.example.tanorami.builds_hero_from_users.ui.BuildsHeroFromUsersNavArguments
@@ -181,6 +183,10 @@ fun AppNavigation(
 
         composable<LoginRoute> {
             LoginScreen(viewModelFactory = viewModelFactory, navController = navController)
+        }
+
+        composable<RegistrationRoute> {
+            RegistrationScreen(viewModelFactory = viewModelFactory, navController = navController)
         }
     }
 }
