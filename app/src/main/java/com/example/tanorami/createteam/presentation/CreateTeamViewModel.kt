@@ -26,10 +26,12 @@ class CreateTeamViewModel @Inject constructor(
         when (event) {
             is CreateTeamScreenEvents.AddHeroInTeam -> addHeroInTeam(event.activeHeroInTeam)
             is CreateTeamScreenEvents.RemoveHeroFromTeam -> removeHeroFromTeam(event.activeHeroInTeam)
-            is CreateTeamScreenEvents.GetTeam -> getTeam(idTeam = event.idTeam)
+            is CreateTeamScreenEvents.GetTeam -> getTeam(idTeam = event.idTeam ?: -1L)
             CreateTeamScreenEvents.DeleteTeam -> deleteTeam()
             CreateTeamScreenEvents.SaveTeam -> saveTeam()
             CreateTeamScreenEvents.OnBack -> sendSideEffect(CreateTeamScreenSideEffects.OnBack)
+            is CreateTeamScreenEvents.ChangeVisibilityDialogDeleteTeam -> uiState =
+                uiState.copy(dialogDeleteTeamVisibilityState = event.visibility)
         }
     }
 
@@ -124,6 +126,7 @@ class CreateTeamViewModel @Inject constructor(
 
             is NetworkResult.Success -> {
                 sendSideEffect(CreateTeamScreenSideEffects.TeamDeleted)
+                uiState = uiState.copy(dialogDeleteTeamVisibilityState = false)
             }
         }
     }

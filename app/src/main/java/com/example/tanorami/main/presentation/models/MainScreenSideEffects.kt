@@ -4,4 +4,6 @@ import com.example.tanorami.base.UiEffect
 
 sealed interface MainScreenSideEffects : UiEffect {
     class OnLoadDataScreen(val remoteVersionDB: String) : MainScreenSideEffects
+    data object CreateBuildForHeroScreen : MainScreenSideEffects
+    data object OnCreateTeamScreen : MainScreenSideEffects
 }

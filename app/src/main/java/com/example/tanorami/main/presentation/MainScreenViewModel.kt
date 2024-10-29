@@ -44,9 +44,23 @@ class MainScreenViewModel @Inject constructor(
 
     override fun onEvent(event: MainScreenEvents) {
         when (event) {
-            MainScreenEvents.DialogButtonOkClick -> {
-                uiState = uiState.copy(dialogVisibilityState = false)
+            MainScreenEvents.DialogUploadingDataButtonOkClick -> {
+                uiState = uiState.copy(dialogUploadingDataVisibilityState = false)
                 sendSideEffect(MainScreenSideEffects.OnLoadDataScreen(remoteVersionDB = uiState.remoteVersionDB))
+            }
+
+            is MainScreenEvents.ChangeVisibilityDialogCreateBuildOrTeam -> {
+                uiState = uiState.copy(dialogCreateBuildOrTeamVisibilityState = event.visibility)
+            }
+
+            MainScreenEvents.OnDialogItemCreateTeamClick -> {
+                sendSideEffect(MainScreenSideEffects.OnCreateTeamScreen)
+                uiState = uiState.copy(dialogCreateBuildOrTeamVisibilityState = false)
+            }
+
+            MainScreenEvents.OnDialogItemCreateBuildClick -> {
+                sendSideEffect(MainScreenSideEffects.CreateBuildForHeroScreen)
+                uiState = uiState.copy(dialogCreateBuildOrTeamVisibilityState = false)
             }
         }
     }
@@ -60,7 +74,7 @@ class MainScreenViewModel @Inject constructor(
             is NetworkResult.Success -> {
                 if (localVersionDB != result.data.remoteVersionDB) {
                     uiState = uiState.copy(
-                        dialogVisibilityState = true,
+                        dialogUploadingDataVisibilityState = true,
                         remoteVersionDB = result.data.remoteVersionDB,
                         message = result.data.message
                     )

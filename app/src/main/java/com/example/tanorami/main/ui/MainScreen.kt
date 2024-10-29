@@ -16,11 +16,7 @@ import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -29,11 +25,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -47,12 +39,16 @@ import coil.compose.AsyncImage
 import com.example.tanorami.R
 import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.core.theme.Orange
+import com.example.tanorami.create_build_hero.ui.CreateBuildForHeroNavArguments
+import com.example.tanorami.createteam.ui.CreateTeamNavArguments
 import com.example.tanorami.heroes.ui.HeroesListScreen
 import com.example.tanorami.load_data.ui.LoadDataNavArguments
 import com.example.tanorami.main.presentation.MainScreenViewModel
 import com.example.tanorami.main.presentation.models.MainScreenEvents
 import com.example.tanorami.main.presentation.models.MainScreenSideEffects
 import com.example.tanorami.main.presentation.models.MainScreenUiState
+import com.example.tanorami.main.ui.components.CreateBuildOrTeamDialog
+import com.example.tanorami.main.ui.components.UploadingDataDialog
 import com.example.tanorami.profile.ui.ProfileScreen
 import com.example.tanorami.teams_and_builds.ui.TeamsAndBuildsScreen
 import kotlinx.serialization.Serializable
@@ -84,9 +80,23 @@ fun MainScreen(
         onEvent = viewModel::onEvent
     )
 
-    if (sideEffect is MainScreenSideEffects.OnLoadDataScreen) {
-        rootNavController.navigate(LoadDataNavArguments(remoteVersionDB = sideEffect.remoteVersionDB))
-        viewModel.clearEffect()
+    when (sideEffect) {
+        MainScreenSideEffects.OnCreateTeamScreen -> {
+            rootNavController.navigate(route = CreateTeamNavArguments())
+            viewModel.clearEffect()
+        }
+
+        is MainScreenSideEffects.OnLoadDataScreen -> {
+            rootNavController.navigate(LoadDataNavArguments(remoteVersionDB = sideEffect.remoteVersionDB))
+            viewModel.clearEffect()
+        }
+
+        MainScreenSideEffects.CreateBuildForHeroScreen -> {
+            rootNavController.navigate(route = CreateBuildForHeroNavArguments(idHero = 25))
+            viewModel.clearEffect()
+        }
+
+        null -> {}
     }
 }
 
@@ -100,27 +110,10 @@ private fun MainScreenContent(
     val navController = rememberNavController()
     val items = MainScreens.entries.toTypedArray()
 
-    if (uiState.dialogVisibilityState) {
-        AlertDialog(
-            title = {
-                BaseDefaultText(
-                    text = stringResource(id = R.string.data_needs_updated),
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
-                )
-            },
-            text = { BaseDefaultText(text = uiState.message) },
-            onDismissRequest = { },
-            confirmButton = {
-                TextButton(onClick = { onEvent(MainScreenEvents.DialogButtonOkClick) }) {
-                    BaseDefaultText(text = stringResource(id = R.string.ok))
-                }
-            },
-            icon = {
-                Icon(imageVector = Icons.Default.Info, contentDescription = null, tint = Orange)
-            },
-            containerColor = MaterialTheme.colorScheme.background,
+    if (uiState.dialogUploadingDataVisibilityState) {
+        UploadingDataDialog(
+            text = uiState.message,
+            onOkButtonClick = { onEvent(MainScreenEvents.DialogUploadingDataButtonOkClick) }
         )
     }
 
@@ -146,7 +139,11 @@ private fun MainScreenContent(
                         selected = isSelected,
                         onClick = {
                             if (screen == MainScreens.CreateDialog) {
-
+                                onEvent(
+                                    MainScreenEvents.ChangeVisibilityDialogCreateBuildOrTeam(
+                                        true
+                                    )
+                                )
                             } else {
                                 navController.navigate(screen.route) {
                                     popUpTo(navController.graph.findStartDestination().id) {
@@ -246,6 +243,10 @@ private fun MainScreenContent(
                     navController = rootNavController
                 )
             }
+        }
+
+        if (uiState.dialogCreateBuildOrTeamVisibilityState) {
+            CreateBuildOrTeamDialog(onEvent = onEvent::invoke)
         }
     }
 }

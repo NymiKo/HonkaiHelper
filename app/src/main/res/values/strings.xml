@@ -112,6 +112,8 @@
     <string name="builds">Сборки</string>
     <string name="ok">Ок</string>
     <string name="data_needs_updated">Необходимо обновить данные</string>
+    <string name="add_a_build">Добавить сборку</string>
+    <string name="add_a_team">Добавить команду</string>
 
     <string name="hp">HP %</string>
     <string name="defense">Защита %</string>

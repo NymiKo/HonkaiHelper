@@ -43,7 +43,7 @@ import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.change_nickname.ui.ChangeNicknameNavArguments
 import com.example.tanorami.core.theme.Blue
 import com.example.tanorami.core.theme.White
-import com.example.tanorami.create_build_hero.ui.CreateBuildHeroNavArguments
+import com.example.tanorami.create_build_hero.ui.CreateBuildForHeroNavArguments
 import com.example.tanorami.createteam.ui.CreateTeamNavArguments
 import com.example.tanorami.profile.presentation.ProfileViewModel
 import com.example.tanorami.profile.presentation.models.ProfileScreenEvents
@@ -76,7 +76,7 @@ fun ProfileScreen(
         }
 
         is ProfileScreenSideEffects.OnEditBuildHeroScreen -> {
-            navController.navigate(route = CreateBuildHeroNavArguments(idBuild = sideEffects.idBuild))
+            navController.navigate(route = CreateBuildForHeroNavArguments(idBuild = sideEffects.idBuild))
             viewModel.clearEffect()
         }
 

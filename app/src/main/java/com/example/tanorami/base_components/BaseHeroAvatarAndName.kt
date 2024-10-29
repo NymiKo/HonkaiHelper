@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -69,14 +70,17 @@ private fun HeroName(
 ) {
     Text(
         modifier = modifier
-            .height(25.dp)
+            .height(30.dp)
             .fillMaxWidth()
-            .background(DarkGrey),
+            .background(DarkGrey)
+            .wrapContentHeight(),
         text = nameHero,
         textAlign = TextAlign.Center,
         color = White,
         fontSize = 11.sp,
         fontWeight = FontWeight.Bold,
+        lineHeight = 11.sp,
+        maxLines = 2,
     )
 }
 

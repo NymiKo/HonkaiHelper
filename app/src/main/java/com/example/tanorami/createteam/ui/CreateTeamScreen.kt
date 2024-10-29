@@ -56,7 +56,7 @@ import com.example.tanorami.utils.toast
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CreateTeamNavArguments(val idTeam: Long)
+data class CreateTeamNavArguments(val idTeam: Long? = null)
 
 @Composable
 fun CreateTeamScreen(
@@ -116,10 +116,8 @@ private fun CreateTeamScreenContent(
         modifier = Modifier.background(MaterialTheme.colorScheme.background),
         topBar = {
             TopAppBar(
-                isCreateTeam = uiState.isCreateTeamMode,
-                uidTeam = uiState.uidTeam,
-                deleteTeam = { onEvent(CreateTeamScreenEvents.DeleteTeam) },
-                onBack = { onEvent(CreateTeamScreenEvents.OnBack) }
+                uiState = uiState,
+                onEvent = onEvent::invoke
             )
         },
         floatingActionButton = {
@@ -148,25 +146,22 @@ private fun CreateTeamScreenContent(
 @Composable
 private fun TopAppBar(
     modifier: Modifier = Modifier,
-    isCreateTeam: Boolean,
-    uidTeam: String,
-    deleteTeam: () -> Unit,
-    onBack: () -> Unit
+    uiState: CreateTeamScreenUiState,
+    onEvent: (CreateTeamScreenEvents) -> Unit,
 ) {
     val context = LocalContext.current
-    var openDeleteTeamAlertDialog by remember { mutableStateOf(false) }
 
     BaseTopAppBar(modifier = modifier,
-        title = stringResource(id = if (isCreateTeam) R.string.creating_a_team else R.string.edit_team),
+        title = stringResource(id = if (uiState.isCreateTeamMode) R.string.creating_a_team else R.string.edit_team),
         actions = {
-            if (!isCreateTeam) {
+            if (!uiState.isCreateTeamMode) {
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Icon(
                         modifier = Modifier.clickable {
                             val clipboard = context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-                            val clipData: ClipData = ClipData.newPlainText("UID", uidTeam)
+                            val clipData: ClipData = ClipData.newPlainText("UID", uiState.uidTeam)
                             clipboard.setPrimaryClip(clipData)
                             toast(context, R.string.message_uid_team_copied)
                         },
@@ -176,7 +171,13 @@ private fun TopAppBar(
                     )
 
                     Icon(
-                        modifier = Modifier.clickable { openDeleteTeamAlertDialog = true },
+                        modifier = Modifier.clickable {
+                            onEvent(
+                                CreateTeamScreenEvents.ChangeVisibilityDialogDeleteTeam(
+                                    true
+                                )
+                            )
+                        },
                         imageVector = Icons.Default.Delete,
                         contentDescription = null,
                         tint = Red
@@ -184,14 +185,20 @@ private fun TopAppBar(
                 }
             }
         },
-        onBack = onBack::invoke
+        onBack = { onEvent(CreateTeamScreenEvents.OnBack) }
     )
 
-    if (openDeleteTeamAlertDialog) {
+    if (uiState.dialogDeleteTeamVisibilityState) {
         BaseSaveAlertDialog(
             message = R.string.delete_the_command,
-            onConfirmation = deleteTeam::invoke,
-            onDismissRequest = { openDeleteTeamAlertDialog = false }
+            onConfirmation = { onEvent(CreateTeamScreenEvents.DeleteTeam) },
+            onDismissRequest = {
+                onEvent(
+                    CreateTeamScreenEvents.ChangeVisibilityDialogDeleteTeam(
+                        false
+                    )
+                )
+            }
         )
     }
 }

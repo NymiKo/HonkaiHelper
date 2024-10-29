@@ -6,5 +6,6 @@ data class MainScreenUiState(
     val userProfileAvatar: String = "",
     val remoteVersionDB: String = "",
     val message: String = "",
-    val dialogVisibilityState: Boolean = false,
+    val dialogUploadingDataVisibilityState: Boolean = false,
+    val dialogCreateBuildOrTeamVisibilityState: Boolean = false,
 ) : UiState

@@ -72,11 +72,11 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CreateBuildHeroNavArguments(val idBuild: Long? = null, val idHero: Int? = null)
+data class CreateBuildForHeroNavArguments(val idBuild: Long? = null, val idHero: Int? = null)
 
 @Composable
 fun CreateBuildHeroScreen(
-    navArguments: CreateBuildHeroNavArguments,
+    navArguments: CreateBuildForHeroNavArguments,
     viewModelFactory: ViewModelProvider.Factory,
     viewModel: CreateBuildHeroViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,

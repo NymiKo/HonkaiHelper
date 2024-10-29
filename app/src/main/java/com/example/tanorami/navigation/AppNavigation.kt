@@ -21,7 +21,7 @@ import com.example.tanorami.builds_hero_from_users.ui.BuildsHeroFromUsersNavArgu
 import com.example.tanorami.builds_hero_from_users.ui.BuildsHeroFromUsersScreen
 import com.example.tanorami.change_nickname.ui.ChangeNicknameNavArguments
 import com.example.tanorami.change_nickname.ui.ChangeNicknameScreen
-import com.example.tanorami.create_build_hero.ui.CreateBuildHeroNavArguments
+import com.example.tanorami.create_build_hero.ui.CreateBuildForHeroNavArguments
 import com.example.tanorami.create_build_hero.ui.CreateBuildHeroScreen
 import com.example.tanorami.createteam.ui.CreateTeamNavArguments
 import com.example.tanorami.createteam.ui.CreateTeamScreen
@@ -156,10 +156,11 @@ fun AppNavigation(
             )
         }
 
-        composable<CreateBuildHeroNavArguments> { backStackEntry ->
-            val createBuildHeroNavArguments: CreateBuildHeroNavArguments = backStackEntry.toRoute()
+        composable<CreateBuildForHeroNavArguments> { backStackEntry ->
+            val createBuildForHeroNavArguments: CreateBuildForHeroNavArguments =
+                backStackEntry.toRoute()
             CreateBuildHeroScreen(
-                navArguments = createBuildHeroNavArguments,
+                navArguments = createBuildForHeroNavArguments,
                 viewModelFactory = viewModelFactory,
                 navController = navController
             )
