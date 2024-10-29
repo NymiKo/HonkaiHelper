@@ -9,8 +9,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import com.example.tanorami.App
 import com.example.tanorami.core.theme.AppTheme
 import com.example.tanorami.send_feedback.presentation.SendFeedbackViewModel
 import javax.inject.Inject
@@ -23,7 +21,7 @@ class SendFeedbackFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as App).appComponent.sendFeedbackComponent().create().inject(this)
+        //(requireActivity().application as App).appComponent.sendFeedbackComponent().create().inject(this)
     }
 
     override fun onCreateView(
@@ -34,7 +32,7 @@ class SendFeedbackFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 AppTheme {
-                    SendFeedbackScreen(viewModel = viewModel, navController = findNavController())
+
                 }
             }
         }

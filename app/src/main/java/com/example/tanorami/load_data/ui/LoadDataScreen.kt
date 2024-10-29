@@ -35,7 +35,8 @@ fun LoadDataScreen(
 
     when (sideEffects) {
         LoadDataScreenSideEffects.OnBack -> {
-            navController.navigateUp()
+            navController.popBackStack()
+            viewModel.clearEffect()
         }
 
         null -> {}

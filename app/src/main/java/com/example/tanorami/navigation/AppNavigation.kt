@@ -37,6 +37,8 @@ import com.example.tanorami.load_data.ui.LoadDataNavArguments
 import com.example.tanorami.load_data.ui.LoadDataScreen
 import com.example.tanorami.main.ui.MainRoute
 import com.example.tanorami.main.ui.MainScreen
+import com.example.tanorami.send_feedback.ui.SendFeedbackRoute
+import com.example.tanorami.send_feedback.ui.SendFeedbackScreen
 import com.example.tanorami.settings.ui.SettingsRoute
 import com.example.tanorami.settings.ui.SettingsScreen
 import com.example.tanorami.teams.ui.TeamsFromUsersNavArguments
@@ -187,6 +189,10 @@ fun AppNavigation(
 
         composable<RegistrationRoute> {
             RegistrationScreen(viewModelFactory = viewModelFactory, navController = navController)
+        }
+
+        composable<SendFeedbackRoute> {
+            SendFeedbackScreen(viewModelFactory = viewModelFactory, navController = navController)
         }
     }
 }

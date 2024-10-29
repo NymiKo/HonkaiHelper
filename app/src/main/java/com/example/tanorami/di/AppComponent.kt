@@ -32,7 +32,7 @@ import com.example.tanorami.main.di.MainScreenModule
 import com.example.tanorami.profile.di.ProfileModule
 import com.example.tanorami.profile.domain.ProfileRepository
 import com.example.tanorami.send_feedback.data.SendFeedbackRepository
-import com.example.tanorami.send_feedback.di.SendFeedbackComponent
+import com.example.tanorami.send_feedback.di.SendFeedbackModule
 import com.example.tanorami.settings.data.SettingsRepository
 import com.example.tanorami.settings.di.SettingsModule
 import com.example.tanorami.teams.data.TeamsFromUsersRepository
@@ -73,6 +73,7 @@ import javax.inject.Singleton
         ChangeNicknameModule::class,
         LoginModule::class,
         RegistrationModule::class,
+        SendFeedbackModule::class,
     ]
 )
 interface AppComponent {
@@ -83,7 +84,6 @@ interface AppComponent {
     }
 
     fun mainComponent(): MainComponent.Factory
-    fun sendFeedbackComponent(): SendFeedbackComponent.Factory
 
     val heroesListRepository: HeroesListRepository
     val teamsFromUsersRepository: TeamsFromUsersRepository

@@ -15,6 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.tanorami.R
 import com.example.tanorami.base_components.button.BaseSmallFloatingButton
@@ -25,10 +27,15 @@ import com.example.tanorami.send_feedback.presentation.models.SendFeedbackScreen
 import com.example.tanorami.send_feedback.presentation.models.SendFeedbackScreenSideEffects
 import com.example.tanorami.send_feedback.presentation.models.SendFeedbackScreenUiState
 import com.example.tanorami.utils.toast
+import kotlinx.serialization.Serializable
+
+@Serializable
+data object SendFeedbackRoute
 
 @Composable
 fun SendFeedbackScreen(
-    viewModel: SendFeedbackViewModel,
+    viewModelFactory: ViewModelProvider.Factory,
+    viewModel: SendFeedbackViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
 ) {
     val state = viewModel.uiState().collectAsState().value
@@ -41,7 +48,10 @@ fun SendFeedbackScreen(
     )
 
     when (sideEffects) {
-        SendFeedbackScreenSideEffects.OnBack -> navController.popBackStack()
+        SendFeedbackScreenSideEffects.OnBack -> {
+            navController.popBackStack()
+            viewModel.clearEffect()
+        }
         is SendFeedbackScreenSideEffects.ShowToast -> {
             toast(context, sideEffects.message)
             viewModel.clearEffect()

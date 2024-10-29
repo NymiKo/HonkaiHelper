@@ -35,7 +35,8 @@ import com.example.tanorami.base_components.button.BaseButton
 import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.base_components.top_app_bar.BaseTopAppBar
 import com.example.tanorami.core.theme.DarkGrey
-import com.example.tanorami.load_data.ui.LoadDataFragment
+import com.example.tanorami.load_data.ui.LoadDataNavArguments
+import com.example.tanorami.send_feedback.ui.SendFeedbackRoute
 import com.example.tanorami.settings.presentation.SettingsViewModel
 import com.example.tanorami.settings.presentation.models.SettingsScreenEvents
 import com.example.tanorami.settings.presentation.models.SettingsScreenSideEffects
@@ -64,15 +65,13 @@ fun SettingsScreen(
 
     when(sideEffect) {
         SettingsScreenSideEffects.OnSendFeedbackScreen -> {
-            navController.navigate(resId = R.id.action_settingsFragment_to_sendFeedbackFragment)
+            navController.navigate(route = SendFeedbackRoute)
             viewModel.clearEffect()
         }
 
         is SettingsScreenSideEffects.OnLoadDataScreen -> {
-            navController.navigate(
-                R.id.action_settingsFragment_to_loadDataFragment,
-                LoadDataFragment.newInstance(sideEffect.versionDB)
-            )
+            navController.navigate(route = LoadDataNavArguments(remoteVersionDB = sideEffect.versionDB))
+            viewModel.clearEffect()
         }
 
         is SettingsScreenSideEffects.ShowToast -> {
@@ -85,7 +84,10 @@ fun SettingsScreen(
             viewModel.clearEffect()
         }
 
-        SettingsScreenSideEffects.OnBack -> navController.navigateUp()
+        SettingsScreenSideEffects.OnBack -> {
+            navController.popBackStack()
+            viewModel.clearEffect()
+        }
 
         null -> {}
     }
