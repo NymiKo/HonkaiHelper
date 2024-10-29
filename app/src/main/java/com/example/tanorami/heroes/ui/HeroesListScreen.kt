@@ -38,7 +38,7 @@ import com.example.tanorami.heroes.presentation.models.HeroesListScreenSideEffec
 import com.example.tanorami.heroes.presentation.models.HeroesListScreenUiState
 import com.example.tanorami.heroes.ui.components.HeroItem
 import com.example.tanorami.info_about_hero.ui.models.InfoAboutHeroNavArguments
-import com.example.tanorami.settings.ui.SettingsNavArguments
+import com.example.tanorami.settings.ui.SettingsRoute
 
 @Composable
 fun HeroesListScreen(
@@ -56,7 +56,7 @@ fun HeroesListScreen(
 
     when (sideEffect) {
         HeroesListScreenSideEffects.OnSettingsScreen -> {
-            navController.navigate(route = SettingsNavArguments)
+            navController.navigate(route = SettingsRoute)
             viewModel.clearEffect()
         }
 

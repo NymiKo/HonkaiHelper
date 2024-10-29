@@ -17,6 +17,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.tanorami.R
@@ -30,10 +32,15 @@ import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.base_components.top_app_bar.BaseCenterAlignedTopAppBar
 import com.example.tanorami.core.theme.Grey
 import com.example.tanorami.utils.toast
+import kotlinx.serialization.Serializable
+
+@Serializable
+data object LoginRoute
 
 @Composable
 fun LoginScreen(
-    viewModel: LoginViewModel,
+    viewModelFactory: ViewModelProvider.Factory,
+    viewModel: LoginViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
 ) {
     val state = viewModel.uiState().collectAsState().value
@@ -46,7 +53,10 @@ fun LoginScreen(
     )
 
     when (sideEffects) {
-        LoginScreenSideEffects.OnBack -> navController.popBackStack()
+        LoginScreenSideEffects.OnBack -> {
+            navController.popBackStack()
+            viewModel.clearEffect()
+        }
         LoginScreenSideEffects.OnRegistrationScreen -> {
             navController.navigate(R.id.action_loginFragment_to_registrationFragment)
             viewModel.clearEffect()

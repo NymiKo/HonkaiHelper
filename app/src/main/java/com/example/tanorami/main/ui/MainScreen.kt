@@ -66,7 +66,7 @@ enum class MainScreens(val route: String) {
 }
 
 @Serializable
-object MainNavArguments
+object MainRoute
 
 @Composable
 fun MainScreen(

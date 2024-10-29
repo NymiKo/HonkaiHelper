@@ -44,7 +44,7 @@ import com.example.tanorami.utils.toast
 import kotlinx.serialization.Serializable
 
 @Serializable
-object SettingsNavArguments
+object SettingsRoute
 
 @Composable
 fun SettingsScreen(

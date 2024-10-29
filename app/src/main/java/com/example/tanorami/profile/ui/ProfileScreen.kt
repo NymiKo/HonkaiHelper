@@ -37,6 +37,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.tanorami.R
+import com.example.tanorami.auth.login.ui.LoginRoute
 import com.example.tanorami.base.shimmerEffect
 import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.change_nickname.ui.ChangeNicknameNavArguments
@@ -46,6 +47,7 @@ import com.example.tanorami.create_build_hero.ui.CreateBuildHeroNavArguments
 import com.example.tanorami.createteam.ui.CreateTeamNavArguments
 import com.example.tanorami.profile.presentation.ProfileViewModel
 import com.example.tanorami.profile.presentation.models.ProfileScreenEvents
+import com.example.tanorami.profile.presentation.models.ProfileScreenSideEffects
 import com.example.tanorami.profile.presentation.models.ProfileScreenUiState
 import com.example.tanorami.profile.ui.components.ErrorComponent
 import com.example.tanorami.profile.ui.components.ProfileTopAppBar
@@ -60,30 +62,36 @@ fun ProfileScreen(
     navController: NavController,
 ) {
     val state = viewModel.uiState().collectAsState().value
-    val sideEvents = viewModel.uiEffect().collectAsState(initial = null).value
+    val sideEffects = viewModel.uiEffect().collectAsState(initial = null).value
 
     ProfileScreenContent(
         uiState = state,
-        onEvents = { event ->
-            when (event) {
-                ProfileScreenEvents.OnChangeNicknameScreen -> {
-                    navController.navigate(route = ChangeNicknameNavArguments(nickname = state.user.nickname))
-                }
-
-                is ProfileScreenEvents.OnEditBuildHeroScreen -> {
-                    navController.navigate(route = CreateBuildHeroNavArguments(idBuild = event.idBuild))
-                }
-
-                is ProfileScreenEvents.OnEditTeamScreen -> {
-                    navController.navigate(route = CreateTeamNavArguments(idTeam = event.idTeam))
-                }
-
-                ProfileScreenEvents.OnLoginScreen -> navController.navigate(R.id.loginFragment)
-                else -> Unit
-            }
-            viewModel.onEvent(event)
-        },
+        onEvents = viewModel::onEvent,
     )
+
+    when (sideEffects) {
+        is ProfileScreenSideEffects.OnChangeNicknameScreen -> {
+            navController.navigate(route = ChangeNicknameNavArguments(nickname = sideEffects.nickname))
+            viewModel.clearEffect()
+        }
+
+        is ProfileScreenSideEffects.OnEditBuildHeroScreen -> {
+            navController.navigate(route = CreateBuildHeroNavArguments(idBuild = sideEffects.idBuild))
+            viewModel.clearEffect()
+        }
+
+        is ProfileScreenSideEffects.OnEditTeamScreen -> {
+            navController.navigate(route = CreateTeamNavArguments(idTeam = sideEffects.idTeam))
+            viewModel.clearEffect()
+        }
+
+        ProfileScreenSideEffects.OnLoginScreen -> {
+            navController.navigate(route = LoginRoute)
+            viewModel.clearEffect()
+        }
+
+        null -> {}
+    }
 }
 
 @Composable

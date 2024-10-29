@@ -2,7 +2,7 @@ package com.example.tanorami.di
 
 import android.content.Context
 import com.example.tanorami.activity.di.MainComponent
-import com.example.tanorami.auth.login.di.LoginComponent
+import com.example.tanorami.auth.login.di.LoginModule
 import com.example.tanorami.auth.login.domain.LoginRepository
 import com.example.tanorami.auth.registration.data.RegistrationRepository
 import com.example.tanorami.auth.registration.di.RegistrationComponent
@@ -70,7 +70,8 @@ import javax.inject.Singleton
         InfoAboutDecorationModule::class,
         CreateBuildHeroModule::class,
         CreateTeamModule::class,
-        ChangeNicknameModule::class
+        ChangeNicknameModule::class,
+        LoginModule::class,
     ]
 )
 interface AppComponent {
@@ -81,7 +82,6 @@ interface AppComponent {
     }
 
     fun mainComponent(): MainComponent.Factory
-    fun loginComponent(): LoginComponent.Factory
     fun registrationComponent(): RegistrationComponent.Factory
     fun sendFeedbackComponent(): SendFeedbackComponent.Factory
 

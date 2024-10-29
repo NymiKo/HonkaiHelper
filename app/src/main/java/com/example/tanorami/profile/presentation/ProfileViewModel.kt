@@ -32,7 +32,25 @@ class ProfileViewModel @Inject constructor(
             ProfileScreenEvents.LogoutAccount -> logoutAccount()
             ProfileScreenEvents.FetchProfile -> getProfile()
             is ProfileScreenEvents.UploadAvatarOnServer -> loadAvatar(event.file)
-            else -> Unit
+            ProfileScreenEvents.OnChangeNicknameScreen -> sendSideEffect(
+                ProfileScreenSideEffects.OnChangeNicknameScreen(
+                    uiState.user.nickname
+                )
+            )
+
+            is ProfileScreenEvents.OnEditBuildHeroScreen -> sendSideEffect(
+                ProfileScreenSideEffects.OnEditBuildHeroScreen(
+                    event.idBuild
+                )
+            )
+
+            is ProfileScreenEvents.OnEditTeamScreen -> sendSideEffect(
+                ProfileScreenSideEffects.OnEditTeamScreen(
+                    event.idTeam
+                )
+            )
+
+            ProfileScreenEvents.OnLoginScreen -> sendSideEffect(ProfileScreenSideEffects.OnLoginScreen)
         }
     }
 
@@ -67,7 +85,12 @@ class ProfileViewModel @Inject constructor(
 
     private fun logoutAccount() = viewModelScope.launch {
         appDataStore.clearToken()
-        uiState = uiState.copy(isAuthorized = false)
+        uiState = uiState.copy(
+            isAuthorized = false,
+            isSuccess = false,
+            isError = false,
+            isLoading = false
+        )
     }
 
     private fun loadAvatar(file: File) = viewModelScope.launch {

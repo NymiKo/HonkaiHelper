@@ -11,6 +11,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.example.tanorami.auth.login.ui.LoginRoute
+import com.example.tanorami.auth.login.ui.LoginScreen
 import com.example.tanorami.base_build_hero.ui.BaseBuildHeroNavArguments
 import com.example.tanorami.base_build_hero.ui.BaseBuildHeroScreen
 import com.example.tanorami.builds_hero_from_users.ui.BuildsHeroFromUsersNavArguments
@@ -31,9 +33,9 @@ import com.example.tanorami.info_about_weapon.ui.InfoAboutWeaponNavArguments
 import com.example.tanorami.info_about_weapon.ui.InfoAboutWeaponScreen
 import com.example.tanorami.load_data.ui.LoadDataNavArguments
 import com.example.tanorami.load_data.ui.LoadDataScreen
-import com.example.tanorami.main.ui.MainNavArguments
+import com.example.tanorami.main.ui.MainRoute
 import com.example.tanorami.main.ui.MainScreen
-import com.example.tanorami.settings.ui.SettingsNavArguments
+import com.example.tanorami.settings.ui.SettingsRoute
 import com.example.tanorami.settings.ui.SettingsScreen
 import com.example.tanorami.teams.ui.TeamsFromUsersNavArguments
 import com.example.tanorami.teams.ui.TeamsFromUsersScreen
@@ -50,9 +52,9 @@ fun AppNavigation(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
         navController = navController,
-        startDestination = MainNavArguments
+        startDestination = MainRoute
     ) {
-        composable<MainNavArguments> {
+        composable<MainRoute> {
             MainScreen(
                 viewModelFactory = viewModelFactory,
                 rootNavController = navController
@@ -77,7 +79,7 @@ fun AppNavigation(
             )
         }
 
-        composable<SettingsNavArguments> {
+        composable<SettingsRoute> {
             SettingsScreen(
                 viewModelFactory = viewModelFactory,
                 navController = navController
@@ -175,6 +177,10 @@ fun AppNavigation(
                 viewModelFactory = viewModelFactory,
                 onBack = navController::popBackStack,
             )
+        }
+
+        composable<LoginRoute> {
+            LoginScreen(viewModelFactory = viewModelFactory, navController = navController)
         }
     }
 }

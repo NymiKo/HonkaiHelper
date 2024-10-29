@@ -9,8 +9,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import com.example.tanorami.App
 import com.example.tanorami.auth.login.presentation.LoginViewModel
 import com.example.tanorami.core.theme.AppTheme
 import javax.inject.Inject
@@ -23,8 +21,8 @@ class LoginFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as App).appComponent.loginComponent().create()
-            .inject(this)
+//        (requireActivity().application as App).appComponent.loginComponent().create()
+//            .inject(this)
     }
 
     override fun onCreateView(
@@ -35,7 +33,7 @@ class LoginFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 AppTheme {
-                    LoginScreen(viewModel = viewModel, navController = findNavController())
+
                 }
             }
         }
