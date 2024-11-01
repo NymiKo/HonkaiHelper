@@ -12,7 +12,7 @@ import com.example.tanorami.info_about_hero.data.model.Eidolon
 import com.example.tanorami.info_about_hero.data.model.Element
 import com.example.tanorami.info_about_hero.data.model.Path
 import com.example.tanorami.info_about_hero.data.model.Relic
-import com.example.tanorami.weapons_list.data.models.Weapon
+import com.example.tanorami.weapons_list.domain.models.Weapon
 import retrofit2.Response
 import retrofit2.http.GET
 

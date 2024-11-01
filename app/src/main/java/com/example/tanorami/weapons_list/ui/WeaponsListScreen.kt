@@ -51,7 +51,7 @@ import com.example.tanorami.core.theme.Orange
 import com.example.tanorami.core.theme.Violet
 import com.example.tanorami.core.theme.White
 import com.example.tanorami.info_about_weapon.ui.InfoAboutWeaponNavArguments
-import com.example.tanorami.weapons_list.data.models.Weapon
+import com.example.tanorami.weapons_list.domain.models.Weapon
 import com.example.tanorami.weapons_list.presentation.WeaponsListViewModel
 import com.example.tanorami.weapons_list.presentation.models.WeaponsListScreenEvents
 import com.example.tanorami.weapons_list.presentation.models.WeaponsListScreenSideEffects

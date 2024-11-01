@@ -32,6 +32,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -53,7 +54,9 @@ import com.example.tanorami.profile.ui.components.ErrorComponent
 import com.example.tanorami.profile.ui.components.ProfileTopAppBar
 import com.example.tanorami.profile.ui.components.TeamsAndBuildsInProfile
 import com.example.tanorami.profile.ui.components.UserNotLoggedComponent
+import com.example.tanorami.utils.OnLifecycleEvent
 import com.example.tanorami.utils.toFile
+import com.example.tanorami.utils.toast
 
 @Composable
 fun ProfileScreen(
@@ -63,6 +66,7 @@ fun ProfileScreen(
 ) {
     val state = viewModel.uiState().collectAsState().value
     val sideEffects = viewModel.uiEffect().collectAsState(initial = null).value
+    val context = LocalContext.current
 
     ProfileScreenContent(
         uiState = state,
@@ -90,7 +94,19 @@ fun ProfileScreen(
             viewModel.clearEffect()
         }
 
+        is ProfileScreenSideEffects.ShowToastError -> {
+            toast(context, sideEffects.message)
+            viewModel.clearEffect()
+        }
+
         null -> {}
+    }
+
+    OnLifecycleEvent { owner, event ->
+        when (event) {
+            Lifecycle.Event.ON_START -> viewModel.onEvent(ProfileScreenEvents.FetchProfile)
+            else -> {}
+        }
     }
 }
 

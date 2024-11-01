@@ -42,8 +42,8 @@ import com.example.tanorami.teams_and_builds.data.TeamsAndBuildsRepositoryImpl
 import com.example.tanorami.teams_and_builds.di.TeamsAndBuildsModule
 import com.example.tanorami.viewing_users_build.data.ViewingBuildHeroFromUserRepository
 import com.example.tanorami.viewing_users_build.di.ViewingBuildHeroFromUserModel
-import com.example.tanorami.weapons_list.data.WeaponsListRepositoryImpl
 import com.example.tanorami.weapons_list.di.WeaponsListModule
+import com.example.tanorami.weapons_list.domain.WeaponsListRepositoryImpl
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton

@@ -3,7 +3,7 @@ package com.example.tanorami.core.data.local.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.tanorami.core.data.local.contract.RoomContract
-import com.example.tanorami.weapons_list.data.models.Weapon
+import com.example.tanorami.weapons_list.domain.models.Weapon
 
 @Entity(tableName = RoomContract.tableWeapons)
 data class WeaponEntity(

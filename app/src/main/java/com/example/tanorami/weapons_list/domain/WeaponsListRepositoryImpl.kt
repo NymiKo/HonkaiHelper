@@ -1,8 +1,8 @@
-package com.example.tanorami.weapons_list.data
+package com.example.tanorami.weapons_list.domain
 
 import com.example.tanorami.core.data.local.dao.WeaponDao
 import com.example.tanorami.core.di.IODispatcher
-import com.example.tanorami.weapons_list.data.models.Weapon
+import com.example.tanorami.weapons_list.domain.models.Weapon
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

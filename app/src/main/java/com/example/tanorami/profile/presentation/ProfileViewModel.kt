@@ -25,6 +25,7 @@ class ProfileViewModel @Inject constructor(
 ) {
     init {
         getProfile()
+        getProfileFlow()
     }
 
     override fun onEvent(event: ProfileScreenEvents) {
@@ -54,33 +55,41 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    private fun getProfile() {
+    private fun getProfileFlow() {
         appDataStore.tokenUser.onEach {
             if (it.isEmpty()) {
                 uiState = uiState.copy(isAuthorized = false)
             } else {
                 uiState = uiState.copy(isLoading = true)
-                when (val result = repository.getProfile()) {
-                    is NetworkResult.Error -> uiState = uiState.copy(
-                        isLoading = false,
-                        isSuccess = false,
-                        isError = true,
-                        isAuthorized = true,
-                        message = errorHandler(result.code),
-                    )
+                repository.profileFlow.collect { result ->
+                    when (result) {
+                        is NetworkResult.Error -> uiState = uiState.copy(
+                            isLoading = false,
+                            isSuccess = false,
+                            isError = true,
+                            isAuthorized = true,
+                            message = errorHandler(result.code),
+                        )
 
-                    is NetworkResult.Success -> uiState = uiState.copy(
-                        isLoading = false,
-                        isSuccess = true,
-                        isAuthorized = true,
-                        isError = false,
-                        user = result.data
-                    )
+                        is NetworkResult.Success -> uiState = uiState.copy(
+                            isLoading = false,
+                            isSuccess = true,
+                            isAuthorized = true,
+                            isError = false,
+                            user = result.data
+                        )
+
+                        null -> {}
+                    }
                 }
             }
         }
             .flowOn(Dispatchers.Default)
             .launchIn(viewModelScope)
+    }
+
+    private fun getProfile() = viewModelScope.launch {
+        repository.getProfile()
     }
 
     private fun logoutAccount() = viewModelScope.launch {
@@ -94,7 +103,15 @@ class ProfileViewModel @Inject constructor(
     }
 
     private fun loadAvatar(file: File) = viewModelScope.launch {
-        repository.loadAvatar(file)
+        when (repository.loadAvatar(file)) {
+            is NetworkResult.Error -> {
+                sendSideEffect(ProfileScreenSideEffects.ShowToastError(R.string.error_upload_avatar))
+            }
+
+            is NetworkResult.Success -> {
+                getProfile()
+            }
+        }
     }
 
     private fun errorHandler(errorCode: Int): Int {

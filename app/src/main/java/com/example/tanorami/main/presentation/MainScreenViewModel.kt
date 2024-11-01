@@ -8,12 +8,18 @@ import com.example.tanorami.main.data.MainScreenRepository
 import com.example.tanorami.main.presentation.models.MainScreenEvents
 import com.example.tanorami.main.presentation.models.MainScreenSideEffects
 import com.example.tanorami.main.presentation.models.MainScreenUiState
+import com.example.tanorami.profile.domain.ProfileRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainScreenViewModel @Inject constructor(
     private val repository: MainScreenRepository,
+    private val profileRepository: ProfileRepository,
     private val dataStore: AppDataStore,
 ) : BaseViewModel<MainScreenUiState, MainScreenEvents, MainScreenSideEffects>(
     initialState = MainScreenUiState()
@@ -24,22 +30,16 @@ class MainScreenViewModel @Inject constructor(
             getRemoteVersionDB(localVersionDB)
         }
 
-        viewModelScope.launch {
-            val token = dataStore.tokenUser.first()
-            if (token.isNotEmpty()) {
-                when (val result = repository.getAvatar()) {
-                    is NetworkResult.Error -> {
-                        uiState = uiState.copy(userProfileAvatar = "")
-                    }
-
-                    is NetworkResult.Success -> {
-                        uiState = uiState.copy(userProfileAvatar = result.data)
-                    }
-                }
+        dataStore.tokenUser.onEach {
+            if (it.isNotEmpty()) {
+                profileRepository.getProfile()
+                getProfileAvatar()
             } else {
                 uiState = uiState.copy(userProfileAvatar = "")
             }
         }
+            .flowOn(Dispatchers.Default)
+            .launchIn(viewModelScope)
     }
 
     override fun onEvent(event: MainScreenEvents) {
@@ -79,6 +79,22 @@ class MainScreenViewModel @Inject constructor(
                         message = result.data.message
                     )
                 }
+            }
+        }
+    }
+
+    private fun getProfileAvatar() = viewModelScope.launch {
+        profileRepository.profileFlow.collect { result ->
+            when (result) {
+                is NetworkResult.Error -> {
+                    uiState = uiState.copy(userProfileAvatar = "")
+                }
+
+                is NetworkResult.Success -> {
+                    uiState = uiState.copy(userProfileAvatar = result.data.avatarUrl ?: "")
+                }
+
+                null -> {}
             }
         }
     }

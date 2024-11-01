@@ -3,7 +3,7 @@ package com.example.tanorami.builds_hero_from_users.data.model
 import com.example.tanorami.core.data.local.models.hero.HeroWithNameAvatarRarity
 import com.example.tanorami.info_about_hero.data.model.Decoration
 import com.example.tanorami.info_about_hero.data.model.Relic
-import com.example.tanorami.weapons_list.data.models.Weapon
+import com.example.tanorami.weapons_list.domain.models.Weapon
 
 data class BuildHeroWithUser(
     val idBuild: Long,
