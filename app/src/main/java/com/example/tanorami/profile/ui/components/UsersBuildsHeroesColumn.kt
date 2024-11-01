@@ -29,7 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.tanorami.R
-import com.example.tanorami.base_build_hero.data.model.Weapon
 import com.example.tanorami.base_components.BaseHeroAvatarAndName
 import com.example.tanorami.base_components.lazy_column.BaseLazyColumn
 import com.example.tanorami.base_components.text.BaseDefaultText
@@ -41,6 +40,7 @@ import com.example.tanorami.core.theme.Orange
 import com.example.tanorami.core.theme.Violet
 import com.example.tanorami.core.theme.White
 import com.example.tanorami.info_about_hero.data.model.Decoration
+import com.example.tanorami.weapons_list.data.models.Weapon
 
 @Composable
 fun UsersBuildsHeroesColumn(

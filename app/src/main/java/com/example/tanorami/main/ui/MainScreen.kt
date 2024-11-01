@@ -37,7 +37,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.example.tanorami.R
-import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.core.theme.Orange
 import com.example.tanorami.create_build_heroes_list.ui.CreateBuildHeroesListNavArguments
 import com.example.tanorami.createteam.ui.CreateTeamNavArguments
@@ -51,6 +50,7 @@ import com.example.tanorami.main.ui.components.CreateBuildOrTeamDialog
 import com.example.tanorami.main.ui.components.UploadingDataDialog
 import com.example.tanorami.profile.ui.ProfileScreen
 import com.example.tanorami.teams_and_builds.ui.TeamsAndBuildsScreen
+import com.example.tanorami.weapons_list.ui.WeaponsListScreen
 import kotlinx.serialization.Serializable
 
 enum class MainScreens(val route: String) {
@@ -225,9 +225,10 @@ private fun MainScreenContent(
             }
 
             composable(MainScreens.WeaponsList.route) {
-                Box(modifier = Modifier.fillMaxSize()) {
-                    BaseDefaultText(text = "Экран списка оружия")
-                }
+                WeaponsListScreen(
+                    viewModelFactory = viewModelFactory,
+                    navController = rootNavController
+                )
             }
 
             composable(MainScreens.TeamsAndBuilds.route) {

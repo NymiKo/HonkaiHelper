@@ -1,7 +1,7 @@
 package com.example.tanorami.info_about_weapon.data.model
 
-import com.example.tanorami.base_build_hero.data.model.Weapon
 import com.example.tanorami.info_about_hero.data.model.Path
+import com.example.tanorami.weapons_list.data.models.Weapon
 
 data class FullInfoAboutWeapon(
     val weapon: Weapon,

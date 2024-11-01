@@ -8,7 +8,6 @@ data class HeroesListScreenUiState(
     val userAvatar: String = "",
     val heroesList: List<Hero> = emptyList(),
     val filteredHeroesList: List<Hero> = emptyList(),
-    val search: Search = Search.HERO,
     val searchBarFocus: Boolean = false,
     val searchTextField: TextField = TextField(),
 ) : UiState

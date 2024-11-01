@@ -133,6 +133,7 @@
     <string name="healing_bonus">Бонус исцеления %</string>
     <string name="recovery_energy">Восст. энергии %</string>
     <string name="enter_name_hero">Имя персонажа</string>
+    <string name="enter_weapon_hero">Название конуса</string>
     <string name="enter_build_uid">UID сборки</string>
     <string name="enter_team_uid">UID команды</string>
     <string name="choose_hero">Выбери героя</string>

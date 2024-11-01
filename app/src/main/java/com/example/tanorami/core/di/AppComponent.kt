@@ -42,6 +42,8 @@ import com.example.tanorami.teams_and_builds.data.TeamsAndBuildsRepositoryImpl
 import com.example.tanorami.teams_and_builds.di.TeamsAndBuildsModule
 import com.example.tanorami.viewing_users_build.data.ViewingBuildHeroFromUserRepository
 import com.example.tanorami.viewing_users_build.di.ViewingBuildHeroFromUserModel
+import com.example.tanorami.weapons_list.data.WeaponsListRepositoryImpl
+import com.example.tanorami.weapons_list.di.WeaponsListModule
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -75,7 +77,8 @@ import javax.inject.Singleton
         LoginModule::class,
         RegistrationModule::class,
         SendFeedbackModule::class,
-        CreateBuildHeroesListModule::class
+        CreateBuildHeroesListModule::class,
+        WeaponsListModule::class,
     ]
 )
 interface AppComponent {
@@ -106,4 +109,5 @@ interface AppComponent {
     val sendFeedbackRepository: SendFeedbackRepository
     val mainScreenRepository: MainScreenRepositoryImpl
     val teamsAndBuildsRepository: TeamsAndBuildsRepositoryImpl
+    val weaponsListRepository: WeaponsListRepositoryImpl
 }

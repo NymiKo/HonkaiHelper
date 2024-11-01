@@ -1,4 +1,4 @@
-package com.example.tanorami.base_build_hero.data.model
+package com.example.tanorami.weapons_list.data.models
 
 import com.example.tanorami.create_build_hero.data.model.Equipment
 

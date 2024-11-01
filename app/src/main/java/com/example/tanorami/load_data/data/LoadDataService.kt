@@ -5,14 +5,14 @@ import com.example.tanorami.base_build_hero.data.model.BuildRelic
 import com.example.tanorami.base_build_hero.data.model.BuildStatsEquipment
 import com.example.tanorami.base_build_hero.data.model.BuildWeapon
 import com.example.tanorami.base_build_hero.data.model.OptimalStatsHero
-import com.example.tanorami.base_build_hero.data.model.Weapon
+import com.example.tanorami.heroes.data.model.Hero
 import com.example.tanorami.info_about_hero.data.model.Ability
+import com.example.tanorami.info_about_hero.data.model.Decoration
 import com.example.tanorami.info_about_hero.data.model.Eidolon
 import com.example.tanorami.info_about_hero.data.model.Element
 import com.example.tanorami.info_about_hero.data.model.Path
-import com.example.tanorami.heroes.data.model.Hero
-import com.example.tanorami.info_about_hero.data.model.Decoration
 import com.example.tanorami.info_about_hero.data.model.Relic
+import com.example.tanorami.weapons_list.data.models.Weapon
 import retrofit2.Response
 import retrofit2.http.GET
 
