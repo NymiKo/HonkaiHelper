@@ -23,15 +23,14 @@ class CreateBuildHeroViewModel @Inject constructor(
         when (event) {
             is CreateBuildHeroScreenEvents.DeleteBuild -> deleteBuild(idBuild = uiState.idBuild)
             is CreateBuildHeroScreenEvents.SaveBuild -> saveBuild(idBuild = uiState.idBuild)
-            is CreateBuildHeroScreenEvents.UpdateBuild -> saveBuild(idBuild = uiState.idBuild)
             is CreateBuildHeroScreenEvents.GetBuild -> {
                 val idBuild = event.idBuild ?: -1L
                 val idHero = event.idHero ?: -1
-                getHero(idHero)
                 if (idBuild != -1L) {
                     uiState = uiState.copy(idBuild = idBuild, isCreateBuildMode = false)
                     getBuild(idBuild)
                 } else {
+                    getHero(idHero)
                     uiState = uiState.copy(isCreateBuildMode = true)
                 }
             }
@@ -46,7 +45,16 @@ class CreateBuildHeroViewModel @Inject constructor(
             is CreateBuildHeroScreenEvents.ChangeStatsOnSphere -> changeStatSphere(event.value)
             is CreateBuildHeroScreenEvents.ChangeStatsOnRope -> changeStatRope(event.value)
             CreateBuildHeroScreenEvents.OnBack -> sendSideEffect(CreateBuildHeroScreenSideEffects.OnBack)
-            is CreateBuildHeroScreenEvents.ChangeStateEquipmentBottomSheet -> getEquipmentList(event.sheetState, event.equipmentType)
+            is CreateBuildHeroScreenEvents.ChangeStateEquipmentBottomSheet -> getEquipmentList(
+                event.sheetVisibilityState,
+                event.equipmentType
+            )
+
+            is CreateBuildHeroScreenEvents.ChangeVisibilityDialogSaveBuild -> uiState =
+                uiState.copy(dialogSaveBuildVisibilityState = event.visibility)
+
+            is CreateBuildHeroScreenEvents.ChangeVisibilityDialogDeleteBuild -> uiState =
+                uiState.copy(dialogDeleteBuildVisibilityState = event.visibility)
         }
     }
 
@@ -153,18 +161,23 @@ class CreateBuildHeroViewModel @Inject constructor(
                 is NetworkResult.Error -> {
                     uiState = uiState.copy(
                         isLoading = false,
-                        isSuccess = false,
                         isError = true,
                         errorMessage = errorHandler(result.code),
+                        dialogSaveBuildVisibilityState = false,
                     )
                 }
 
                 is NetworkResult.Success -> {
                     uiState = uiState.copy(
                         isLoading = false,
-                        isSuccess = true,
                         isError = false,
+                        dialogSaveBuildVisibilityState = false
                     )
+                    if (uiState.isCreateBuildMode) {
+                        sendSideEffect(CreateBuildHeroScreenSideEffects.OnMainScreen)
+                    } else {
+                        sendSideEffect(CreateBuildHeroScreenSideEffects.OnBack)
+                    }
                 }
             }
         }
@@ -174,7 +187,6 @@ class CreateBuildHeroViewModel @Inject constructor(
         return if (arg == null) {
             uiState = uiState.copy(
                 isLoading = false,
-                isSuccess = false,
                 isError = true,
                 errorMessage = message
             )
@@ -198,7 +210,6 @@ class CreateBuildHeroViewModel @Inject constructor(
             is NetworkResult.Error -> {
                 uiState = uiState.copy(
                     isLoading = false,
-                    isSuccess = false,
                     isError = true,
                     errorMessage = errorHandler(result.code)
                 )
@@ -207,7 +218,6 @@ class CreateBuildHeroViewModel @Inject constructor(
             is NetworkResult.Success -> {
                 uiState = uiState.copy(
                     isLoading = false,
-                    isSuccess = true,
                     isError = false,
                     hero = repository.getHero(result.data.hero!!.id),
                     buildHeroFromUser = uiState.buildHeroFromUser.copy(
@@ -247,9 +257,9 @@ class CreateBuildHeroViewModel @Inject constructor(
             is NetworkResult.Error -> {
                 uiState = uiState.copy(
                     isLoading = false,
-                    isSuccess = false,
                     isError = true,
-                    errorMessage = errorHandler(result.code)
+                    errorMessage = errorHandler(result.code),
+                    dialogDeleteBuildVisibilityState = false
                 )
             }
 
@@ -257,14 +267,15 @@ class CreateBuildHeroViewModel @Inject constructor(
                 uiState = uiState.copy(
                     isLoading = false,
                     isError = false,
-                    isSuccess = true
+                    dialogDeleteBuildVisibilityState = false,
                 )
+                sendSideEffect(CreateBuildHeroScreenSideEffects.OnBack)
             }
         }
     }
 
     private fun getEquipmentList(sheetState: Boolean, equipmentType: EquipmentType) = viewModelScope.launch {
-        uiState = uiState.copy(showBottomSheet = sheetState)
+        uiState = uiState.copy(bottomSheetEquipmentVisibilityState = sheetState)
         if (sheetState) {
             uiState = when(equipmentType) {
                 EquipmentType.WEAPON -> uiState.copy(equipmentList = repository.getWeapons(uiState.hero?.path ?: 0), equipmentType = equipmentType)

@@ -4,4 +4,5 @@ import com.example.tanorami.base.UiEffect
 
 sealed interface CreateBuildHeroScreenSideEffects: UiEffect {
     data object OnBack: CreateBuildHeroScreenSideEffects
+    data object OnMainScreen : CreateBuildHeroScreenSideEffects
 }

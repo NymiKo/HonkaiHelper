@@ -39,7 +39,7 @@ import coil.compose.AsyncImage
 import com.example.tanorami.R
 import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.core.theme.Orange
-import com.example.tanorami.create_build_hero.ui.CreateBuildForHeroNavArguments
+import com.example.tanorami.create_build_heroes_list.ui.CreateBuildHeroesListNavArguments
 import com.example.tanorami.createteam.ui.CreateTeamNavArguments
 import com.example.tanorami.heroes.ui.HeroesListScreen
 import com.example.tanorami.load_data.ui.LoadDataNavArguments
@@ -92,7 +92,7 @@ fun MainScreen(
         }
 
         MainScreenSideEffects.CreateBuildForHeroScreen -> {
-            rootNavController.navigate(route = CreateBuildForHeroNavArguments(idHero = 25))
+            rootNavController.navigate(route = CreateBuildHeroesListNavArguments)
             viewModel.clearEffect()
         }
 

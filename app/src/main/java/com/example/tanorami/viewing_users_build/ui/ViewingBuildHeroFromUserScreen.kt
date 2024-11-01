@@ -136,7 +136,8 @@ private fun ViewingBuildHeroFromUserScreenContent(
         ) {
             AvatarHeroImageAndName(
                 heroImage = uiState.buildHero.hero?.localAvatarPath,
-                heroName = uiState.buildHero.hero?.name
+                heroName = uiState.buildHero.hero?.name,
+                heroRarity = uiState.buildHero.hero?.rarity
             )
 
             EquipmentBuildComponent(

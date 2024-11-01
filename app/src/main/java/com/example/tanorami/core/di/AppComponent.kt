@@ -13,6 +13,7 @@ import com.example.tanorami.builds_hero_from_users.di.BuildsHeroFromUsersModule
 import com.example.tanorami.change_nickname.data.ChangeNicknameRepository
 import com.example.tanorami.change_nickname.di.ChangeNicknameModule
 import com.example.tanorami.create_build_hero.di.CreateBuildHeroModule
+import com.example.tanorami.create_build_heroes_list.di.CreateBuildHeroesListModule
 import com.example.tanorami.createteam.data.CreateTeamRepository
 import com.example.tanorami.createteam.di.CreateTeamModule
 import com.example.tanorami.heroes.data.HeroesListRepository
@@ -74,6 +75,7 @@ import javax.inject.Singleton
         LoginModule::class,
         RegistrationModule::class,
         SendFeedbackModule::class,
+        CreateBuildHeroesListModule::class
     ]
 )
 interface AppComponent {

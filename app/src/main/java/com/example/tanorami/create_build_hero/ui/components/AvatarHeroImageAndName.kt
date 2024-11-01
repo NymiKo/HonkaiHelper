@@ -1,5 +1,6 @@
 package com.example.tanorami.create_build_hero.ui.components
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,6 +16,8 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.core.theme.DarkGrey
+import com.example.tanorami.core.theme.Orange
+import com.example.tanorami.core.theme.Violet
 import com.example.tanorami.core.theme.White
 
 @Composable
@@ -22,25 +25,37 @@ fun AvatarHeroImageAndName(
     modifier: Modifier = Modifier,
     heroImage: String?,
     heroName: String?,
+    heroRarity: Boolean?,
 ) {
     Column(
         modifier = modifier.width(120.dp)
     ) {
         AsyncImage(
-            modifier = Modifier.height(150.dp),
+            modifier = Modifier
+                .height(150.dp)
+                .background(
+                    when (heroRarity) {
+                        false -> Violet
+                        true -> Orange
+                        else -> Orange
+                    }
+                ),
             model = heroImage,
             contentDescription = null,
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
         )
-        BaseDefaultText(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(DarkGrey)
-                .padding(8.dp),
-            text = heroName ?: "",
-            color = White,
-            textAlign = TextAlign.Center,
-            fontWeight = FontWeight.Bold
-        )
+
+        AnimatedVisibility(visible = !heroName.isNullOrEmpty()) {
+            BaseDefaultText(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(DarkGrey)
+                    .padding(8.dp),
+                text = heroName ?: "",
+                color = White,
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold
+            )
+        }
     }
 }

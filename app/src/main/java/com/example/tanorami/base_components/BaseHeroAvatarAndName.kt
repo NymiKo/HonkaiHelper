@@ -64,7 +64,7 @@ private fun HeroAvatar(
 }
 
 @Composable
-private fun HeroName(
+fun HeroName(
     modifier: Modifier = Modifier,
     nameHero: String,
 ) {

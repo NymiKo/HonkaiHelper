@@ -9,17 +9,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentCopy
@@ -28,19 +22,12 @@ import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -49,16 +36,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import coil.compose.AsyncImage
 import com.example.tanorami.R
 import com.example.tanorami.base_components.button.BaseSmallFloatingButton
 import com.example.tanorami.base_components.dialog.BaseSaveAlertDialog
 import com.example.tanorami.base_components.top_app_bar.BaseTopAppBar
 import com.example.tanorami.core.theme.AppTheme
-import com.example.tanorami.core.theme.Blue
-import com.example.tanorami.core.theme.Orange
 import com.example.tanorami.core.theme.Red
-import com.example.tanorami.core.theme.Violet
 import com.example.tanorami.create_build_hero.presentation.CreateBuildHeroViewModel
 import com.example.tanorami.create_build_hero.presentation.models.CreateBuildHeroScreenEvents
 import com.example.tanorami.create_build_hero.presentation.models.CreateBuildHeroScreenSideEffects
@@ -66,7 +49,10 @@ import com.example.tanorami.create_build_hero.presentation.models.CreateBuildHer
 import com.example.tanorami.create_build_hero.presentation.models.EquipmentType
 import com.example.tanorami.create_build_hero.ui.components.AvatarHeroImageAndName
 import com.example.tanorami.create_build_hero.ui.components.BuildStatsComponent
+import com.example.tanorami.create_build_hero.ui.components.CreateBuildBottomSheet
 import com.example.tanorami.create_build_hero.ui.components.EquipmentBuildComponent
+import com.example.tanorami.create_build_hero.ui.components.EquipmentItem
+import com.example.tanorami.main.ui.MainRoute
 import com.example.tanorami.utils.OnLifecycleEvent
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
@@ -84,13 +70,19 @@ fun CreateBuildHeroScreen(
     val state = viewModel.uiState().collectAsState().value
     val sideEffect = viewModel.uiEffect().collectAsState(initial = null).value
 
-    CreateBuildHeroScreenContent(uiState = state, onEvent = viewModel::onEvent,)
+    CreateBuildHeroScreenContent(uiState = state, onEvent = viewModel::onEvent)
 
     when (sideEffect) {
+        CreateBuildHeroScreenSideEffects.OnMainScreen -> {
+            navController.popBackStack(route = MainRoute, inclusive = false)
+            viewModel.clearEffect()
+        }
+
         CreateBuildHeroScreenSideEffects.OnBack -> {
             navController.popBackStack()
             viewModel.clearEffect()
         }
+
         null -> {}
     }
 
@@ -116,25 +108,36 @@ private fun CreateBuildHeroScreenContent(
     uiState: CreateBuildHeroScreenUiState,
     onEvent: (CreateBuildHeroScreenEvents) -> Unit,
 ) {
-    val sheetState = rememberModalBottomSheetState(
-        skipPartiallyExpanded = true
-    )
+    val equipmentSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val coroutineScope = rememberCoroutineScope()
 
     Scaffold(modifier = Modifier.background(MaterialTheme.colorScheme.background), topBar = {
         TopAppBar(
             isCreateBuild = uiState.isCreateBuildMode,
             uidBuild = uiState.buildHeroFromUser.uid,
+            dialogVisibilityState = uiState.dialogDeleteBuildVisibilityState,
             deleteBuild = { onEvent(CreateBuildHeroScreenEvents.DeleteBuild) },
-            onBack = { onEvent(CreateBuildHeroScreenEvents.OnBack) }
+            onBack = { onEvent(CreateBuildHeroScreenEvents.OnBack) },
+            changeVisibilityState = {
+                onEvent(
+                    CreateBuildHeroScreenEvents.ChangeVisibilityDialogDeleteBuild(
+                        it
+                    )
+                )
+            }
         )
     },
         floatingActionButton = {
             SaveOrUpdateBuildHeroButton(isCreateBuild = uiState.isCreateBuildMode,
+                dialogVisibilityState = uiState.dialogSaveBuildVisibilityState,
                 saveBuild = { onEvent(CreateBuildHeroScreenEvents.SaveBuild) },
-                updateBuild = { onEvent(CreateBuildHeroScreenEvents.UpdateBuild) },
-                isSuccess = uiState.isSuccess,
-                onBack = { onEvent(CreateBuildHeroScreenEvents.OnBack) }
+                changeVisibilityState = {
+                    onEvent(
+                        CreateBuildHeroScreenEvents.ChangeVisibilityDialogSaveBuild(
+                            it
+                        )
+                    )
+                }
             )
         }) { innerPadding ->
         Column(
@@ -147,7 +150,9 @@ private fun CreateBuildHeroScreenContent(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             AvatarHeroImageAndName(
-                heroImage = uiState.hero?.avatar, heroName = uiState.hero?.name
+                heroImage = uiState.hero?.avatar,
+                heroName = uiState.hero?.name,
+                heroRarity = uiState.hero?.rarity
             )
 
             EquipmentBuildComponent(
@@ -158,7 +163,7 @@ private fun CreateBuildHeroScreenContent(
                 onWeaponClick = {
                     onEvent(
                         CreateBuildHeroScreenEvents.ChangeStateEquipmentBottomSheet(
-                            sheetState = true,
+                            sheetVisibilityState = true,
                             equipmentType = EquipmentType.WEAPON
                         )
                     )
@@ -166,7 +171,7 @@ private fun CreateBuildHeroScreenContent(
                 onTwoPartsRelicClick = {
                     onEvent(
                         CreateBuildHeroScreenEvents.ChangeStateEquipmentBottomSheet(
-                            sheetState = true,
+                            sheetVisibilityState = true,
                             equipmentType = EquipmentType.RELIC_TWO_PARTS,
                         )
                     )
@@ -174,7 +179,7 @@ private fun CreateBuildHeroScreenContent(
                 onFourPartsRelicClick = {
                     onEvent(
                         CreateBuildHeroScreenEvents.ChangeStateEquipmentBottomSheet(
-                            sheetState = true,
+                            sheetVisibilityState = true,
                             equipmentType = EquipmentType.RELIC_FOUR_PARTS,
                         )
                     )
@@ -182,7 +187,7 @@ private fun CreateBuildHeroScreenContent(
                 onDecorationClick = {
                     onEvent(
                         CreateBuildHeroScreenEvents.ChangeStateEquipmentBottomSheet(
-                            sheetState = true,
+                            sheetVisibilityState = true,
                             equipmentType = EquipmentType.DECORATION,
                         )
                     )
@@ -205,75 +210,31 @@ private fun CreateBuildHeroScreenContent(
                 },
             )
 
-            if (uiState.showBottomSheet) {
-                ModalBottomSheet(
+            if (uiState.bottomSheetEquipmentVisibilityState) {
+                CreateBuildBottomSheet(
                     modifier = Modifier.padding(innerPadding),
-                    onDismissRequest = {
-                        onEvent(CreateBuildHeroScreenEvents.ChangeStateEquipmentBottomSheet(sheetState = false))
-                    },
-                    sheetState = sheetState
+                    sheetState = equipmentSheetState,
+                    onEvent = onEvent::invoke,
                 ) {
-                    LazyVerticalGrid(
-                        modifier = Modifier.fillMaxSize(),
-                        contentPadding = PaddingValues(horizontal = 16.dp),
-                        columns = GridCells.Adaptive(minSize = 80.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp),
-                    ) {
-                        items(uiState.equipmentList) { equipment ->
-                            AsyncImage(
-                                modifier = Modifier
-                                    .width(80.dp)
-                                    .height(120.dp)
-                                    .clip(RoundedCornerShape(10.dp))
-                                    .background(
-                                        when (equipment.rarity) {
-                                            0 -> Blue
-                                            1 -> Violet
-                                            2 -> Orange
-                                            else -> Orange
-                                        },
-                                        RoundedCornerShape(10.dp)
-                                    )
-                                    .clickable {
-                                        when (uiState.equipmentType) {
-                                            EquipmentType.WEAPON -> onEvent(
-                                                CreateBuildHeroScreenEvents.AddWeapon(equipment)
-                                            )
-
-                                            EquipmentType.RELIC_TWO_PARTS -> onEvent(
-                                                CreateBuildHeroScreenEvents.AddTwoPartsRelic(
-                                                    equipment
+                    items(uiState.equipmentList) { equipment ->
+                        EquipmentItem(
+                            equipment = equipment,
+                            equipmentType = uiState.equipmentType,
+                            onEvent = onEvent::invoke,
+                            hideBottomSheet = {
+                                coroutineScope
+                                    .launch { equipmentSheetState.hide() }
+                                    .invokeOnCompletion {
+                                        if (!equipmentSheetState.isVisible) {
+                                            onEvent(
+                                                CreateBuildHeroScreenEvents.ChangeStateEquipmentBottomSheet(
+                                                    sheetVisibilityState = false
                                                 )
-                                            )
-
-                                            EquipmentType.RELIC_FOUR_PARTS -> onEvent(
-                                                CreateBuildHeroScreenEvents.AddFourPartsRelic(
-                                                    equipment
-                                                )
-                                            )
-
-                                            EquipmentType.DECORATION -> onEvent(
-                                                CreateBuildHeroScreenEvents.AddDecoration(equipment)
                                             )
                                         }
-                                        coroutineScope
-                                            .launch { sheetState.hide() }
-                                            .invokeOnCompletion {
-                                                if (!sheetState.isVisible) {
-                                                    onEvent(
-                                                        CreateBuildHeroScreenEvents.ChangeStateEquipmentBottomSheet(
-                                                            sheetState = false
-                                                        )
-                                                    )
-                                                }
-                                            }
-                                    },
-                                model = equipment.image,
-                                contentDescription = null,
-                                contentScale = ContentScale.Crop
-                            )
-                        }
+                                    }
+                            }
+                        )
                     }
                 }
             }
@@ -286,11 +247,12 @@ private fun TopAppBar(
     modifier: Modifier = Modifier,
     isCreateBuild: Boolean,
     uidBuild: String,
+    dialogVisibilityState: Boolean,
     deleteBuild: () -> Unit,
+    changeVisibilityState: (visibility: Boolean) -> Unit,
     onBack: () -> Unit
 ) {
     val context = LocalContext.current
-    var openDeleteBuildAlertDialog by remember { mutableStateOf(false) }
 
     BaseTopAppBar(modifier = modifier,
         title = stringResource(id = if (isCreateBuild) R.string.adding_your_build else R.string.edit_build),
@@ -317,7 +279,7 @@ private fun TopAppBar(
                     )
 
                     Icon(
-                        modifier = Modifier.clickable { openDeleteBuildAlertDialog = true },
+                        modifier = Modifier.clickable { changeVisibilityState(true) },
                         imageVector = Icons.Default.Delete,
                         contentDescription = null,
                         tint = Red
@@ -327,15 +289,13 @@ private fun TopAppBar(
         },
         onBack = { onBack() })
 
-    if (openDeleteBuildAlertDialog) {
+    if (dialogVisibilityState) {
         BaseSaveAlertDialog(
             message = R.string.delete_the_build,
             onConfirmation = {
-                openDeleteBuildAlertDialog = false
                 deleteBuild()
-                onBack()
             },
-            onDismissRequest = { openDeleteBuildAlertDialog = false }
+            onDismissRequest = { changeVisibilityState(false) }
         )
     }
 }
@@ -344,34 +304,23 @@ private fun TopAppBar(
 private fun SaveOrUpdateBuildHeroButton(
     modifier: Modifier = Modifier,
     isCreateBuild: Boolean,
-    isSuccess: Boolean,
+    dialogVisibilityState: Boolean,
     saveBuild: () -> Unit,
-    updateBuild: () -> Unit,
-    onBack: () -> Unit,
+    changeVisibilityState: (visibility: Boolean) -> Unit,
 ) {
-    var openSaveBuildDialog by remember { mutableStateOf(false) }
-
     BaseSmallFloatingButton(
         modifier = modifier,
         icon = Icons.Default.Save,
-        onClick = { openSaveBuildDialog = true }
+        onClick = { changeVisibilityState(true) }
     )
 
-    if (openSaveBuildDialog) {
+    if (dialogVisibilityState) {
         BaseSaveAlertDialog(
             message = if (isCreateBuild) R.string.add_the_created_build else R.string.update_the_build,
             onConfirmation = {
-                if (isCreateBuild) {
-                    saveBuild()
-                } else {
-                    updateBuild()
-                }
-                if (isSuccess) {
-                    openSaveBuildDialog = false
-                    onBack()
-                }
+                saveBuild()
             },
-            onDismissRequest = { openSaveBuildDialog = false }
+            onDismissRequest = { changeVisibilityState(false) }
         )
     }
 }

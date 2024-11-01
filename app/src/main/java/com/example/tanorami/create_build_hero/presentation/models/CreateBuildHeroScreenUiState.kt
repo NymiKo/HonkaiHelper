@@ -16,7 +16,9 @@ data class CreateBuildHeroScreenUiState(
     val idBuild: Long = -1L,
     val idHero: Int = -1,
     val hero: Hero? = null,
-    val showBottomSheet: Boolean = false,
+    val bottomSheetEquipmentVisibilityState: Boolean = false,
     val equipmentType: EquipmentType = EquipmentType.WEAPON,
-    val equipmentList: List<Equipment> = emptyList()
+    val equipmentList: List<Equipment> = emptyList(),
+    val dialogSaveBuildVisibilityState: Boolean = false,
+    val dialogDeleteBuildVisibilityState: Boolean = false,
 ) : UiState

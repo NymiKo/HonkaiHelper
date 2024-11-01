@@ -7,8 +7,10 @@ sealed interface CreateBuildHeroScreenEvents : UiEvent {
     data object OnBack: CreateBuildHeroScreenEvents
     data object DeleteBuild: CreateBuildHeroScreenEvents
     data object SaveBuild: CreateBuildHeroScreenEvents
-    data object UpdateBuild: CreateBuildHeroScreenEvents
-    class ChangeStateEquipmentBottomSheet(val sheetState: Boolean, val equipmentType: EquipmentType = EquipmentType.WEAPON): CreateBuildHeroScreenEvents
+    class ChangeStateEquipmentBottomSheet(
+        val sheetVisibilityState: Boolean,
+        val equipmentType: EquipmentType = EquipmentType.WEAPON
+    ) : CreateBuildHeroScreenEvents
     class GetBuild(val idBuild: Long?, val idHero: Int?) : CreateBuildHeroScreenEvents
     class AddWeapon(val weapon: Equipment): CreateBuildHeroScreenEvents
     class AddTwoPartsRelic(val twoPartsRelic: Equipment): CreateBuildHeroScreenEvents
@@ -18,4 +20,6 @@ sealed interface CreateBuildHeroScreenEvents : UiEvent {
     class ChangeStatsOnLegs(val value: String): CreateBuildHeroScreenEvents
     class ChangeStatsOnSphere(val value: String): CreateBuildHeroScreenEvents
     class ChangeStatsOnRope(val value: String): CreateBuildHeroScreenEvents
+    class ChangeVisibilityDialogSaveBuild(val visibility: Boolean) : CreateBuildHeroScreenEvents
+    class ChangeVisibilityDialogDeleteBuild(val visibility: Boolean) : CreateBuildHeroScreenEvents
 }

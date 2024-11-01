@@ -23,6 +23,8 @@ import com.example.tanorami.change_nickname.ui.ChangeNicknameNavArguments
 import com.example.tanorami.change_nickname.ui.ChangeNicknameScreen
 import com.example.tanorami.create_build_hero.ui.CreateBuildForHeroNavArguments
 import com.example.tanorami.create_build_hero.ui.CreateBuildHeroScreen
+import com.example.tanorami.create_build_heroes_list.ui.CreateBuildHeroesListNavArguments
+import com.example.tanorami.create_build_heroes_list.ui.CreateBuildHeroesListScreen
 import com.example.tanorami.createteam.ui.CreateTeamNavArguments
 import com.example.tanorami.createteam.ui.CreateTeamScreen
 import com.example.tanorami.info_about_decoration.ui.InfoAboutDecorationNavArguments
@@ -194,6 +196,13 @@ fun AppNavigation(
 
         composable<SendFeedbackRoute> {
             SendFeedbackScreen(viewModelFactory = viewModelFactory, navController = navController)
+        }
+
+        composable<CreateBuildHeroesListNavArguments> { backStackEntry ->
+            CreateBuildHeroesListScreen(
+                viewModelFactory = viewModelFactory,
+                navController = navController
+            )
         }
     }
 }
