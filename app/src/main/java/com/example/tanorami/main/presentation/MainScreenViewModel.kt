@@ -84,6 +84,7 @@ class MainScreenViewModel @Inject constructor(
     }
 
     private fun getProfileAvatar() = viewModelScope.launch {
+        profileRepository.getProfile()
         profileRepository.profileFlow.collect { result ->
             when (result) {
                 is NetworkResult.Error -> {
@@ -94,7 +95,7 @@ class MainScreenViewModel @Inject constructor(
                     uiState = uiState.copy(userProfileAvatar = result.data.avatarUrl ?: "")
                 }
 
-                null -> {}
+                null -> uiState = uiState.copy(userProfileAvatar = "")
             }
         }
     }

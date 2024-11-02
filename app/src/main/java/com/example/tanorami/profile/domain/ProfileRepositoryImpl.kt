@@ -27,11 +27,11 @@ class ProfileRepositoryImpl @Inject constructor(
     private val heroDao: HeroDao,
     private val weaponDao: WeaponDao,
     private val relicDao: RelicDao,
-    private val decorationDao: DecorationDao
+    private val decorationDao: DecorationDao,
 ) : ProfileRepository {
 
     private val _profileFlow: MutableStateFlow<NetworkResult<User>?> = MutableStateFlow(null)
-    override val profileFlow: StateFlow<NetworkResult<User>?> get() = _profileFlow.asStateFlow()
+    override val profileFlow: StateFlow<NetworkResult<User>?> = _profileFlow.asStateFlow()
 
     override suspend fun getProfile() {
         withContext(ioDispatcher) {
@@ -88,5 +88,9 @@ class ProfileRepositoryImpl @Inject constructor(
                 is NetworkResult.Success -> NetworkResult.Success(result.data)
             }
         }
+    }
+
+    override fun clearProfile() {
+        _profileFlow.value = null
     }
 }

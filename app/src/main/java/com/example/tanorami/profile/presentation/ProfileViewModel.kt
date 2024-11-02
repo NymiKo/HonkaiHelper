@@ -9,10 +9,7 @@ import com.example.tanorami.profile.domain.ProfileRepository
 import com.example.tanorami.profile.presentation.models.ProfileScreenEvents
 import com.example.tanorami.profile.presentation.models.ProfileScreenSideEffects
 import com.example.tanorami.profile.presentation.models.ProfileScreenUiState
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
@@ -24,7 +21,6 @@ class ProfileViewModel @Inject constructor(
     initialState = ProfileScreenUiState()
 ) {
     init {
-        getProfile()
         getProfileFlow()
     }
 
@@ -55,45 +51,46 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    private fun getProfileFlow() {
-        appDataStore.tokenUser.onEach {
-            if (it.isEmpty()) {
-                uiState = uiState.copy(isAuthorized = false)
-            } else {
-                uiState = uiState.copy(isLoading = true)
-                repository.profileFlow.collect { result ->
-                    when (result) {
-                        is NetworkResult.Error -> uiState = uiState.copy(
-                            isLoading = false,
-                            isSuccess = false,
-                            isError = true,
-                            isAuthorized = true,
-                            message = errorHandler(result.code),
-                        )
+    private fun getProfileFlow() = viewModelScope.launch {
+        repository.profileFlow.collect { result ->
+            when (result) {
+                is NetworkResult.Error -> uiState = uiState.copy(
+                    isLoading = false,
+                    isSuccess = false,
+                    isError = true,
+                    message = errorHandler(result.code),
+                )
 
-                        is NetworkResult.Success -> uiState = uiState.copy(
-                            isLoading = false,
-                            isSuccess = true,
-                            isAuthorized = true,
-                            isError = false,
-                            user = result.data
-                        )
+                is NetworkResult.Success -> uiState = uiState.copy(
+                    isLoading = false,
+                    isSuccess = true,
+                    isError = false,
+                    user = result.data,
+                )
 
-                        null -> {}
-                    }
-                }
+                null -> uiState = uiState.copy(
+                    isLoading = false,
+                    isSuccess = false,
+                    isError = false,
+                    isAuthorized = false,
+                )
             }
         }
-            .flowOn(Dispatchers.Default)
-            .launchIn(viewModelScope)
     }
 
     private fun getProfile() = viewModelScope.launch {
-        repository.getProfile()
+        val token = appDataStore.tokenUser.first()
+        if (token.isNotEmpty()) {
+            uiState = uiState.copy(isLoading = true, isAuthorized = true)
+            repository.getProfile()
+        } else {
+            uiState = uiState.copy(isAuthorized = false)
+        }
     }
 
     private fun logoutAccount() = viewModelScope.launch {
         appDataStore.clearToken()
+        repository.clearProfile()
         uiState = uiState.copy(
             isAuthorized = false,
             isSuccess = false,

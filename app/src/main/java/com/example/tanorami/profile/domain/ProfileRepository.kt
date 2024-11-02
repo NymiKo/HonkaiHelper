@@ -10,4 +10,5 @@ interface ProfileRepository {
 
     suspend fun getProfile()
     suspend fun loadAvatar(file: File): NetworkResult<Unit>
+    fun clearProfile()
 }
