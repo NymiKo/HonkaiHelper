@@ -31,16 +31,12 @@ fun BuildsListLazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         items(buildsList) { buildHero ->
-            with(sharedTransitionScope) {
-                BuildItem(
-                    modifier = Modifier.sharedBounds(
-                        rememberSharedContentState(key = "buildHero-${buildHero.idBuild}"),
-                        animatedVisibilityScope = animatedVisibilityScope,
-                    ),
-                    buildHero = buildHero,
-                    onClick = { onBuildClick(buildHero.idBuild) }
-                )
-            }
+            BuildItem(
+                buildHero = buildHero,
+                sharedTransitionScope = sharedTransitionScope,
+                animatedVisibilityScope = animatedVisibilityScope,
+                onClick = { onBuildClick(buildHero.idBuild) }
+            )
         }
     }
 }

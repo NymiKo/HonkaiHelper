@@ -1,5 +1,8 @@
 package com.example.tanorami.profile.ui.components
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -18,18 +21,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.tanorami.R
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
 import com.example.tanorami.teams.data.model.TeamHero
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun TeamsAndBuildsInProfile(
     modifier: Modifier = Modifier,
     heroesBuildsList: List<BuildHeroWithUser>,
     teamsList: List<TeamHero>,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
     onEditBuildHeroScreen: (idBuild: Long) -> Unit,
     onEditTeamScreen: (idTeam: Long) -> Unit,
 ) {
@@ -73,6 +78,8 @@ fun TeamsAndBuildsInProfile(
             pagerState = pagerState,
             heroesBuildsList = heroesBuildsList,
             teamsList = teamsList,
+            sharedTransitionScope = sharedTransitionScope,
+            animatedVisibilityScope = animatedVisibilityScope,
             onEditBuildHeroScreen = onEditBuildHeroScreen::invoke,
             onEditTeamScreen = onEditTeamScreen::invoke
         )
@@ -98,12 +105,15 @@ private fun TabItem(
     }
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun TabsContent(
     modifier: Modifier = Modifier,
     pagerState: PagerState,
     heroesBuildsList: List<BuildHeroWithUser>,
     teamsList: List<TeamHero>,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
     onEditBuildHeroScreen: (idBuild: Long) -> Unit,
     onEditTeamScreen: (idTeam: Long) -> Unit,
 ) {
@@ -117,6 +127,8 @@ private fun TabsContent(
             0 -> {
                 UsersBuildsHeroesColumn(
                     heroesBuildsList = heroesBuildsList,
+                    sharedTransitionScope = sharedTransitionScope,
+                    animatedVisibilityScope = animatedVisibilityScope,
                     onEditBuildHeroScreen = onEditBuildHeroScreen::invoke
                 )
             }
@@ -131,12 +143,12 @@ private fun TabsContent(
     }
 }
 
-@Preview
-@Composable
-private fun TeamsAndBuildsInProfilePreview() {
-    TeamsAndBuildsInProfile(
-        heroesBuildsList = emptyList(),
-        teamsList = emptyList(),
-        onEditBuildHeroScreen = {},
-        onEditTeamScreen = {})
-}
+//@Preview
+//@Composable
+//private fun TeamsAndBuildsInProfilePreview() {
+//    TeamsAndBuildsInProfile(
+//        heroesBuildsList = emptyList(),
+//        teamsList = emptyList(),
+//        onEditBuildHeroScreen = {},
+//        onEditTeamScreen = {})
+//}

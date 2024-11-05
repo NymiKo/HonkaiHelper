@@ -5,6 +5,9 @@ import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import android.content.res.Configuration
 import android.widget.Toast
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -60,17 +63,29 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CreateBuildForHeroNavArguments(val idBuild: Long? = null, val idHero: Int? = null)
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun CreateBuildHeroScreen(
     navArguments: CreateBuildForHeroNavArguments,
     viewModelFactory: ViewModelProvider.Factory,
     viewModel: CreateBuildHeroViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
 ) {
     val state = viewModel.uiState().collectAsState().value
     val sideEffect = viewModel.uiEffect().collectAsState(initial = null).value
 
-    CreateBuildHeroScreenContent(uiState = state, onEvent = viewModel::onEvent)
+    with(sharedTransitionScope) {
+        CreateBuildHeroScreenContent(
+            modifier = Modifier.sharedBounds(
+                rememberSharedContentState(key = "buildHero-${navArguments.idBuild}"),
+                animatedVisibilityScope = animatedVisibilityScope
+            ),
+            uiState = state,
+            onEvent = viewModel::onEvent
+        )
+    }
 
     when (sideEffect) {
         CreateBuildHeroScreenSideEffects.OnMainScreen -> {
@@ -105,13 +120,15 @@ fun CreateBuildHeroScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun CreateBuildHeroScreenContent(
+    modifier: Modifier = Modifier,
     uiState: CreateBuildHeroScreenUiState,
     onEvent: (CreateBuildHeroScreenEvents) -> Unit,
 ) {
     val equipmentSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val coroutineScope = rememberCoroutineScope()
 
-    Scaffold(modifier = Modifier.background(MaterialTheme.colorScheme.background), topBar = {
+    Scaffold(
+        modifier = modifier.background(MaterialTheme.colorScheme.background), topBar = {
         TopAppBar(
             isCreateBuild = uiState.isCreateBuildMode,
             uidBuild = uiState.buildHeroFromUser.uid,

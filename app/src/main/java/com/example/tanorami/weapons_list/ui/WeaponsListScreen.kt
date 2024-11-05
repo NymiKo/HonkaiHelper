@@ -1,5 +1,8 @@
 package com.example.tanorami.weapons_list.ui
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -55,16 +58,24 @@ import com.example.tanorami.weapons_list.presentation.models.WeaponsListScreenEv
 import com.example.tanorami.weapons_list.presentation.models.WeaponsListScreenSideEffects
 import com.example.tanorami.weapons_list.presentation.models.WeaponsListScreenUiState
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun WeaponsListScreen(
     viewModelFactory: ViewModelProvider.Factory,
     viewModel: WeaponsListViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
 ) {
     val state = viewModel.uiState().collectAsState().value
     val sideEffects = viewModel.uiEffect().collectAsState(initial = null).value
 
-    WeaponsListScreenContent(uiState = state, onEvent = viewModel::onEvent)
+    WeaponsListScreenContent(
+        uiState = state,
+        sharedTransitionScope = sharedTransitionScope,
+        animatedVisibilityScope = animatedVisibilityScope,
+        onEvent = viewModel::onEvent
+    )
 
     when (sideEffects) {
         is WeaponsListScreenSideEffects.OnInfoAboutWeaponScreen -> {
@@ -76,10 +87,12 @@ fun WeaponsListScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
 @Composable
 private fun WeaponsListScreenContent(
     uiState: WeaponsListScreenUiState,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
     onEvent: (WeaponsListScreenEvents) -> Unit,
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
@@ -124,16 +137,21 @@ private fun WeaponsListScreenContent(
             items(if (uiState.searchTextField.value.isEmpty()) uiState.weaponsList else uiState.filteredWeaponsList) { weapon ->
                 WeaponItem(
                     weapon = weapon,
+                    sharedTransitionScope = sharedTransitionScope,
+                    animatedVisibilityScope = animatedVisibilityScope,
                     onClick = { onEvent(WeaponsListScreenEvents.OnWeaponClick(it)) })
             }
         }
     }
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun WeaponItem(
     modifier: Modifier = Modifier,
     weapon: Weapon,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
     onClick: (idWeapon: Int) -> Unit
 ) {
     Box(
@@ -154,10 +172,16 @@ private fun WeaponItem(
             .clickable { onClick(weapon.idWeapon) },
         contentAlignment = Alignment.Center,
     ) {
-        AsyncImage(
-            model = weapon.image,
-            contentDescription = null,
-        )
+        with(sharedTransitionScope) {
+            AsyncImage(
+                modifier = Modifier.sharedElement(
+                    rememberSharedContentState(key = "weapon-${weapon.idWeapon}"),
+                    animatedVisibilityScope = animatedVisibilityScope,
+                ),
+                model = weapon.image,
+                contentDescription = null,
+            )
+        }
 
         Box(
             modifier = Modifier

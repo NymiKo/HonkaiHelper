@@ -253,7 +253,9 @@ private fun MainScreenContent(
             ) {
                 WeaponsListScreen(
                     viewModelFactory = viewModelFactory,
-                    navController = rootNavController
+                    navController = rootNavController,
+                    sharedTransitionScope = sharedTransitionScope,
+                    animatedVisibilityScope = animatedVisibilityScope,
                 )
             }
 
@@ -273,7 +275,9 @@ private fun MainScreenContent(
             ) {
                 ProfileScreen(
                     viewModelFactory = viewModelFactory,
-                    navController = rootNavController
+                    navController = rootNavController,
+                    sharedTransitionScope = sharedTransitionScope,
+                    animatedVisibilityScope = animatedVisibilityScope,
                 )
             }
         }

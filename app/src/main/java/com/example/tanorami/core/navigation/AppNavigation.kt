@@ -217,7 +217,9 @@ fun AppNavigation(
                 InfoAboutWeaponScreen(
                     navArguments = infoAboutWeaponNavArguments,
                     viewModelFactory = viewModelFactory,
-                    navController = navController
+                    navController = navController,
+                    sharedTransitionScope = this@SharedTransitionLayout,
+                    animatedVisibilityScope = this@composable,
                 )
             }
 
@@ -246,7 +248,9 @@ fun AppNavigation(
                 CreateBuildHeroScreen(
                     navArguments = createBuildForHeroNavArguments,
                     viewModelFactory = viewModelFactory,
-                    navController = navController
+                    navController = navController,
+                    sharedTransitionScope = this@SharedTransitionLayout,
+                    animatedVisibilityScope = this@composable,
                 )
             }
 

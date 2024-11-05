@@ -1,5 +1,8 @@
 package com.example.tanorami.profile.ui.components
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -42,10 +45,13 @@ import com.example.tanorami.core.theme.White
 import com.example.tanorami.info_about_hero.data.model.Decoration
 import com.example.tanorami.weapons_list.domain.models.Weapon
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun UsersBuildsHeroesColumn(
     modifier: Modifier = Modifier,
     heroesBuildsList: List<BuildHeroWithUser>,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
     onEditBuildHeroScreen: (idBuild: Long) -> Unit,
 ) {
     BaseLazyColumn(modifier = modifier) {
@@ -55,85 +61,96 @@ fun UsersBuildsHeroesColumn(
                 onClick = {
                     onEditBuildHeroScreen(heroesBuildsList[index].idBuild)
                 },
+                sharedTransitionScope = sharedTransitionScope,
+                animatedVisibilityScope = animatedVisibilityScope,
             )
         }
     }
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun BuildItem(
     modifier: Modifier = Modifier,
     buildHero: BuildHeroWithUser,
     clickable: Boolean = true,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
     onClick: () -> Unit,
 ) {
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .shadow(
-                elevation = 4.dp,
-                shape = RoundedCornerShape(16.dp),
-                spotColor = GreyTransparent20,
-            )
-            .clickable(clickable) {
-                onClick()
-            },
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
-        border = BorderStroke(1.dp, DarkGrey),
-    ) {
-        Row(
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            verticalAlignment = Alignment.CenterVertically,
+    with(sharedTransitionScope) {
+        Card(
+            modifier = modifier
+                .fillMaxWidth()
+                .sharedBounds(
+                    rememberSharedContentState(key = "buildHero-${buildHero.idBuild}"),
+                    animatedVisibilityScope = animatedVisibilityScope,
+                )
+                .shadow(
+                    elevation = 4.dp,
+                    shape = RoundedCornerShape(16.dp),
+                    spotColor = GreyTransparent20,
+                )
+                .clickable(clickable) {
+                    onClick()
+                },
+            shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
+            border = BorderStroke(1.dp, DarkGrey),
         ) {
-            BaseHeroAvatarAndName(
-                hero = buildHero.hero,
-            )
+            Row(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                BaseHeroAvatarAndName(
+                    hero = buildHero.hero,
+                )
 
-            Column {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    HeroWeaponBuild(weapon = buildHero.weapon)
-
-                    RelicsColumnBuild(
-                        relicTwoParts = buildHero.relicTwoParts,
-                        relicFourParts = buildHero.relicFourParts
-                    )
-
-                    HeroDecorationBuild(decoration = buildHero.decoration)
-                }
-
-                if (buildHero.buildUser != null) {
+                Column {
                     Row(
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        BaseDefaultText(
-                            text = stringResource(
-                                id = R.string.build_from,
-                                buildHero.buildUser.nickname
-                            ),
-                            overflow = TextOverflow.Ellipsis,
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.SemiBold
+                        HeroWeaponBuild(weapon = buildHero.weapon)
+
+                        RelicsColumnBuild(
+                            relicTwoParts = buildHero.relicTwoParts,
+                            relicFourParts = buildHero.relicFourParts
                         )
 
-                        AsyncImage(
-                            modifier = Modifier
-                                .padding(top = 4.dp)
-                                .size(25.dp)
-                                .clip(CircleShape)
-                                .background(White, CircleShape),
-                            model = buildHero.buildUser.avatar,
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop,
-                        )
+                        HeroDecorationBuild(decoration = buildHero.decoration)
+                    }
+
+                    if (buildHero.buildUser != null) {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            BaseDefaultText(
+                                text = stringResource(
+                                    id = R.string.build_from,
+                                    buildHero.buildUser.nickname
+                                ),
+                                overflow = TextOverflow.Ellipsis,
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.SemiBold
+                            )
+
+                            AsyncImage(
+                                modifier = Modifier
+                                    .padding(top = 4.dp)
+                                    .size(25.dp)
+                                    .clip(CircleShape)
+                                    .background(White, CircleShape),
+                                model = buildHero.buildUser.avatar,
+                                contentDescription = null,
+                                contentScale = ContentScale.Crop,
+                            )
+                        }
                     }
                 }
             }

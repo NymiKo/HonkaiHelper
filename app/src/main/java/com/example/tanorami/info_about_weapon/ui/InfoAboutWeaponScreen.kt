@@ -1,5 +1,8 @@
 package com.example.tanorami.info_about_weapon.ui
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,18 +35,23 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class InfoAboutWeaponNavArguments(val idWeapon: Int)
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun InfoAboutWeaponScreen(
     navArguments: InfoAboutWeaponNavArguments,
     viewModelFactory: ViewModelProvider.Factory,
     viewModel: InfoAboutWeaponViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
 ) {
     val weapon = viewModel.weapon.collectAsStateWithLifecycle().value
-    
+
     InfoAboutWeaponScreenContent(
         weapon = weapon,
-        onBack = navController::popBackStack
+        sharedTransitionScope = sharedTransitionScope,
+        animatedVisibilityScope = animatedVisibilityScope,
+        onBack = navController::popBackStack,
     )
     
     OnLifecycleEvent { owner, event ->  
@@ -57,14 +65,17 @@ fun InfoAboutWeaponScreen(
     }
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun InfoAboutWeaponScreenContent(
+    modifier: Modifier = Modifier,
     weapon: FullInfoAboutWeapon?,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
     onBack: () -> Unit,
 ) {
     Scaffold(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
         topBar = {
             BaseCenterAlignedTopAppBar(
                 title = weapon?.weapon?.name ?: "",
@@ -80,8 +91,9 @@ private fun InfoAboutWeaponScreenContent(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             ImagesWeaponAndPath(
-                imageWeapon = weapon?.path?.image,
-                imagePath = weapon?.weapon?.image,
+                weapon = weapon,
+                sharedTransitionScope = sharedTransitionScope,
+                animatedVisibilityScope = animatedVisibilityScope,
             )
 
             ImageRarityWeapon(
