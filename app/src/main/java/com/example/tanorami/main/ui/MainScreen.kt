@@ -1,6 +1,9 @@
 package com.example.tanorami.main.ui
 
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -216,29 +219,46 @@ private fun MainScreenContent(
                 .background(MaterialTheme.colorScheme.background),
             navController = navController,
             startDestination = MainScreens.HeroesList.route,
+            enterTransition = {
+                slideInVertically(
+                    initialOffsetY = { it / 100 * 3 },
+                    animationSpec = tween(600)
+                )
+            },
+            exitTransition = {
+                fadeOut(animationSpec = tween(200))
+            },
         ) {
-            composable(MainScreens.HeroesList.route) {
+            composable(
+                route = MainScreens.HeroesList.route,
+            ) {
                 HeroesListScreen(
                     viewModelFactory = viewModelFactory,
                     navController = rootNavController
                 )
             }
 
-            composable(MainScreens.WeaponsList.route) {
+            composable(
+                route = MainScreens.WeaponsList.route,
+            ) {
                 WeaponsListScreen(
                     viewModelFactory = viewModelFactory,
                     navController = rootNavController
                 )
             }
 
-            composable(MainScreens.TeamsAndBuilds.route) {
+            composable(
+                route = MainScreens.TeamsAndBuilds.route,
+            ) {
                 TeamsAndBuildsScreen(
                     viewModelFactory = viewModelFactory,
                     navController = rootNavController
                 )
             }
 
-            composable(MainScreens.Profile.route) {
+            composable(
+                route = MainScreens.Profile.route,
+            ) {
                 ProfileScreen(
                     viewModelFactory = viewModelFactory,
                     navController = rootNavController

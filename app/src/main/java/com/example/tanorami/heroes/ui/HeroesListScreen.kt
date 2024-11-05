@@ -24,9 +24,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.isTraversalGroup
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.traversalIndex
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -75,16 +72,11 @@ private fun HeroesListScreenContent(
     uiState: HeroesListScreenUiState,
     onEvent: (HeroesListScreenEvents) -> Unit,
 ) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .semantics { isTraversalGroup = true }
-    ) {
+    Box(modifier = Modifier.fillMaxSize()) {
         SearchBar(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
-                .fillMaxWidth()
-                .semantics { traversalIndex = 0F },
+                .fillMaxWidth(),
             inputField = {
                 SearchBarDefaults.InputField(
                     query = uiState.searchTextField.value,
@@ -121,7 +113,6 @@ private fun HeroesListScreenContent(
         )
 
         LazyVerticalGrid(
-            modifier = Modifier.semantics { traversalIndex = 1F },
             columns = GridCells.Adaptive(minSize = 150.dp),
             contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 72.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp),

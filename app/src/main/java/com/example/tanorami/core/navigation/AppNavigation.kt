@@ -1,4 +1,4 @@
-package com.example.tanorami.navigation
+package com.example.tanorami.core.navigation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
