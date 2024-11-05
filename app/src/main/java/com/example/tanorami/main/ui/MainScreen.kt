@@ -1,5 +1,8 @@
 package com.example.tanorami.main.ui
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeOut
@@ -7,7 +10,6 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -67,11 +69,14 @@ enum class MainScreens(val route: String) {
 @Serializable
 object MainRoute
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun MainScreen(
     viewModelFactory: ViewModelProvider.Factory,
     viewModel: MainScreenViewModel = viewModel(factory = viewModelFactory),
     rootNavController: NavController,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
 ) {
     val state = viewModel.uiState().collectAsState().value
     val sideEffect = viewModel.uiEffect().collectAsState(initial = null).value
@@ -80,6 +85,8 @@ fun MainScreen(
         uiState = state,
         viewModelFactory = viewModelFactory,
         rootNavController = rootNavController,
+        sharedTransitionScope = sharedTransitionScope,
+        animatedVisibilityScope = animatedVisibilityScope,
         onEvent = viewModel::onEvent
     )
 
@@ -103,11 +110,14 @@ fun MainScreen(
     }
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun MainScreenContent(
     uiState: MainScreenUiState,
     viewModelFactory: ViewModelProvider.Factory,
     rootNavController: NavController,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
     onEvent: (MainScreenEvents) -> Unit,
 ) {
     val navController = rememberNavController()
@@ -215,7 +225,7 @@ private fun MainScreenContent(
         NavHost(
             modifier = Modifier
                 .padding(innerPadding)
-                .fillMaxHeight()
+                .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background),
             navController = navController,
             startDestination = MainScreens.HeroesList.route,
@@ -252,7 +262,9 @@ private fun MainScreenContent(
             ) {
                 TeamsAndBuildsScreen(
                     viewModelFactory = viewModelFactory,
-                    navController = rootNavController
+                    navController = rootNavController,
+                    sharedTransitionScope = sharedTransitionScope,
+                    animatedVisibilityScope = animatedVisibilityScope,
                 )
             }
 

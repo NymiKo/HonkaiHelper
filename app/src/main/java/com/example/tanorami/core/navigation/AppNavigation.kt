@@ -1,5 +1,12 @@
 package com.example.tanorami.core.navigation
 
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionLayout
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -48,161 +55,244 @@ import com.example.tanorami.teams.ui.TeamsFromUsersScreen
 import com.example.tanorami.viewing_users_build.ui.ViewingBuildHeroFromUserNavArguments
 import com.example.tanorami.viewing_users_build.ui.ViewingBuildHeroFromUserScreen
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun AppNavigation(
     navController: NavHostController = rememberNavController(),
     viewModelFactory: ViewModelProvider.Factory
 ) {
-    NavHost(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
-        navController = navController,
-        startDestination = MainRoute
-    ) {
-        composable<MainRoute> {
-            MainScreen(
-                viewModelFactory = viewModelFactory,
-                rootNavController = navController
-            )
-        }
+    SharedTransitionLayout {
+        NavHost(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background),
+            navController = navController,
+            startDestination = MainRoute
+        ) {
+            composable<MainRoute> {
+                MainScreen(
+                    viewModelFactory = viewModelFactory,
+                    rootNavController = navController,
+                    sharedTransitionScope = this@SharedTransitionLayout,
+                    animatedVisibilityScope = this@composable,
+                )
+            }
 
-        composable<LoadDataNavArguments> { backStackEntry ->
-            val loadDataNavArguments: LoadDataNavArguments = backStackEntry.toRoute()
-            LoadDataScreen(
-                navArguments = loadDataNavArguments,
-                viewModelFactory = viewModelFactory,
-                navController = navController,
-            )
-        }
+            composable<LoadDataNavArguments> { backStackEntry ->
+                val loadDataNavArguments: LoadDataNavArguments = backStackEntry.toRoute()
+                LoadDataScreen(
+                    navArguments = loadDataNavArguments,
+                    viewModelFactory = viewModelFactory,
+                    navController = navController,
+                )
+            }
 
-        composable<InfoAboutHeroNavArguments> { backStackEntry ->
-            val infoAboutHeroNavArguments: InfoAboutHeroNavArguments = backStackEntry.toRoute()
-            InfoAboutHeroScreen(
-                navArguments = infoAboutHeroNavArguments,
-                viewModelFactory = viewModelFactory,
-                navController = navController,
-            )
-        }
+            composable<InfoAboutHeroNavArguments>(
+                enterTransition = {
+                    slideInHorizontally(
+                        animationSpec = tween(500),
+                        initialOffsetX = { it }) + fadeIn()
+                },
+                exitTransition = {
+                    slideOutHorizontally(
+                        animationSpec = tween(500),
+                        targetOffsetX = { -it / 2 }) + fadeOut()
+                },
+                popExitTransition = {
+                    slideOutHorizontally(
+                        animationSpec = tween(500),
+                        targetOffsetX = { it / 2 }) + fadeOut()
+                },
+                popEnterTransition = {
+                    slideInHorizontally(
+                        animationSpec = tween(500),
+                        initialOffsetX = { -it / 2 }) + fadeIn()
+                }
+            ) { backStackEntry ->
+                val infoAboutHeroNavArguments: InfoAboutHeroNavArguments = backStackEntry.toRoute()
+                InfoAboutHeroScreen(
+                    navArguments = infoAboutHeroNavArguments,
+                    viewModelFactory = viewModelFactory,
+                    navController = navController,
+                )
+            }
 
-        composable<SettingsRoute> {
-            SettingsScreen(
-                viewModelFactory = viewModelFactory,
-                navController = navController
-            )
-        }
+            composable<SettingsRoute> {
+                SettingsScreen(
+                    viewModelFactory = viewModelFactory,
+                    navController = navController
+                )
+            }
 
-        composable<BaseBuildHeroNavArguments> { backStackEntry ->
-            val baseBuildHeroNavArguments: BaseBuildHeroNavArguments = backStackEntry.toRoute()
-            BaseBuildHeroScreen(
-                navArguments = baseBuildHeroNavArguments,
-                viewModelFactory = viewModelFactory,
-                navController = navController,
-            )
-        }
+            composable<BaseBuildHeroNavArguments>(
+                enterTransition = {
+                    slideInHorizontally(
+                        animationSpec = tween(500),
+                        initialOffsetX = { it / 2 }) + fadeIn()
+                },
+                exitTransition = {
+                    slideOutHorizontally(
+                        animationSpec = tween(500),
+                        targetOffsetX = { -it / 2 }) + fadeOut()
+                },
+                popExitTransition = {
+                    slideOutHorizontally(
+                        animationSpec = tween(500),
+                        targetOffsetX = { it / 2 }) + fadeOut()
+                },
+                popEnterTransition = {
+                    slideInHorizontally(
+                        animationSpec = tween(500),
+                        initialOffsetX = { -it / 2 }) + fadeIn()
+                }
+            ) { backStackEntry ->
+                val baseBuildHeroNavArguments: BaseBuildHeroNavArguments = backStackEntry.toRoute()
+                BaseBuildHeroScreen(
+                    navArguments = baseBuildHeroNavArguments,
+                    viewModelFactory = viewModelFactory,
+                    navController = navController,
+                )
+            }
 
-        composable<BuildsHeroFromUsersNavArguments> { backStackEntry ->
-            val buildsHeroFromUsersNavArguments: BuildsHeroFromUsersNavArguments =
-                backStackEntry.toRoute()
-            BuildsHeroFromUsersScreen(
-                navArguments = buildsHeroFromUsersNavArguments,
-                viewModelFactory = viewModelFactory,
-                navController = navController,
-            )
-        }
+            composable<BuildsHeroFromUsersNavArguments>(
+                enterTransition = {
+                    slideInHorizontally(
+                        animationSpec = tween(500),
+                        initialOffsetX = { it / 2 }) + fadeIn()
+                },
+                popExitTransition = {
+                    slideOutHorizontally(
+                        animationSpec = tween(500),
+                        targetOffsetX = { it / 2 }) + fadeOut()
+                },
+                popEnterTransition = null,
+            ) { backStackEntry ->
+                val buildsHeroFromUsersNavArguments: BuildsHeroFromUsersNavArguments =
+                    backStackEntry.toRoute()
+                BuildsHeroFromUsersScreen(
+                    navArguments = buildsHeroFromUsersNavArguments,
+                    viewModelFactory = viewModelFactory,
+                    navController = navController,
+                    sharedTransitionScope = this@SharedTransitionLayout,
+                    animatedVisibilityScope = this,
+                )
+            }
 
-        composable<ViewingBuildHeroFromUserNavArguments> { backStackEntry ->
-            val viewingBuildHeroFromUserNavArguments: ViewingBuildHeroFromUserNavArguments =
-                backStackEntry.toRoute()
-            ViewingBuildHeroFromUserScreen(
-                navArguments = viewingBuildHeroFromUserNavArguments,
-                viewModelFactory = viewModelFactory,
-                navController = navController
-            )
-        }
+            composable<ViewingBuildHeroFromUserNavArguments> { backStackEntry ->
+                val viewingBuildHeroFromUserNavArguments: ViewingBuildHeroFromUserNavArguments =
+                    backStackEntry.toRoute()
+                ViewingBuildHeroFromUserScreen(
+                    navArguments = viewingBuildHeroFromUserNavArguments,
+                    viewModelFactory = viewModelFactory,
+                    navController = navController,
+                    sharedTransitionScope = this@SharedTransitionLayout,
+                    animatedVisibilityScope = this,
+                )
+            }
 
-        composable<TeamsFromUsersNavArguments> { backStackEntry ->
-            val teamsFromUsersNavArguments: TeamsFromUsersNavArguments = backStackEntry.toRoute()
-            TeamsFromUsersScreen(
-                navArguments = teamsFromUsersNavArguments,
-                viewModelFactory = viewModelFactory,
-                navController = navController
-            )
-        }
+            composable<TeamsFromUsersNavArguments>(
+                enterTransition = {
+                    slideInHorizontally(
+                        animationSpec = tween(500),
+                        initialOffsetX = { it / 2 }) + fadeIn()
+                },
+                popExitTransition = {
+                    slideOutHorizontally(
+                        animationSpec = tween(500),
+                        targetOffsetX = { it / 2 }) + fadeOut()
+                },
+            ) { backStackEntry ->
+                val teamsFromUsersNavArguments: TeamsFromUsersNavArguments =
+                    backStackEntry.toRoute()
+                TeamsFromUsersScreen(
+                    navArguments = teamsFromUsersNavArguments,
+                    viewModelFactory = viewModelFactory,
+                    navController = navController
+                )
+            }
 
-        composable<InfoAboutWeaponNavArguments> { backStackEntry ->
-            val infoAboutWeaponNavArguments: InfoAboutWeaponNavArguments = backStackEntry.toRoute()
-            InfoAboutWeaponScreen(
-                navArguments = infoAboutWeaponNavArguments,
-                viewModelFactory = viewModelFactory,
-                navController = navController
-            )
-        }
+            composable<InfoAboutWeaponNavArguments> { backStackEntry ->
+                val infoAboutWeaponNavArguments: InfoAboutWeaponNavArguments =
+                    backStackEntry.toRoute()
+                InfoAboutWeaponScreen(
+                    navArguments = infoAboutWeaponNavArguments,
+                    viewModelFactory = viewModelFactory,
+                    navController = navController
+                )
+            }
 
-        composable<InfoAboutRelicNavArgument> { backStackEntry ->
-            val infoAboutRelicNavArgument: InfoAboutRelicNavArgument = backStackEntry.toRoute()
-            InfoAboutRelicScreen(
-                navArguments = infoAboutRelicNavArgument,
-                viewModelFactory = viewModelFactory,
-                navController = navController
-            )
-        }
+            composable<InfoAboutRelicNavArgument> { backStackEntry ->
+                val infoAboutRelicNavArgument: InfoAboutRelicNavArgument = backStackEntry.toRoute()
+                InfoAboutRelicScreen(
+                    navArguments = infoAboutRelicNavArgument,
+                    viewModelFactory = viewModelFactory,
+                    navController = navController
+                )
+            }
 
-        composable<InfoAboutDecorationNavArguments> { backStackEntry ->
-            val infoAboutDecorationNavArguments: InfoAboutDecorationNavArguments =
-                backStackEntry.toRoute()
-            InfoAboutDecorationScreen(
-                navArguments = infoAboutDecorationNavArguments,
-                viewModelFactory = viewModelFactory,
-                navController = navController
-            )
-        }
+            composable<InfoAboutDecorationNavArguments> { backStackEntry ->
+                val infoAboutDecorationNavArguments: InfoAboutDecorationNavArguments =
+                    backStackEntry.toRoute()
+                InfoAboutDecorationScreen(
+                    navArguments = infoAboutDecorationNavArguments,
+                    viewModelFactory = viewModelFactory,
+                    navController = navController
+                )
+            }
 
-        composable<CreateBuildForHeroNavArguments> { backStackEntry ->
-            val createBuildForHeroNavArguments: CreateBuildForHeroNavArguments =
-                backStackEntry.toRoute()
-            CreateBuildHeroScreen(
-                navArguments = createBuildForHeroNavArguments,
-                viewModelFactory = viewModelFactory,
-                navController = navController
-            )
-        }
+            composable<CreateBuildForHeroNavArguments> { backStackEntry ->
+                val createBuildForHeroNavArguments: CreateBuildForHeroNavArguments =
+                    backStackEntry.toRoute()
+                CreateBuildHeroScreen(
+                    navArguments = createBuildForHeroNavArguments,
+                    viewModelFactory = viewModelFactory,
+                    navController = navController
+                )
+            }
 
-        composable<CreateTeamNavArguments> { backStackEntry ->
-            val createTeamNavArguments: CreateTeamNavArguments = backStackEntry.toRoute()
-            CreateTeamScreen(
-                navArguments = createTeamNavArguments,
-                viewModelFactory = viewModelFactory,
-                navController = navController
-            )
-        }
+            composable<CreateTeamNavArguments> { backStackEntry ->
+                val createTeamNavArguments: CreateTeamNavArguments = backStackEntry.toRoute()
+                CreateTeamScreen(
+                    navArguments = createTeamNavArguments,
+                    viewModelFactory = viewModelFactory,
+                    navController = navController
+                )
+            }
 
-        composable<ChangeNicknameNavArguments> { backStackEntry ->
-            val changeNicknameNavArguments: ChangeNicknameNavArguments = backStackEntry.toRoute()
-            ChangeNicknameScreen(
-                navArguments = changeNicknameNavArguments,
-                viewModelFactory = viewModelFactory,
-                onBack = navController::popBackStack,
-            )
-        }
+            composable<ChangeNicknameNavArguments> { backStackEntry ->
+                val changeNicknameNavArguments: ChangeNicknameNavArguments =
+                    backStackEntry.toRoute()
+                ChangeNicknameScreen(
+                    navArguments = changeNicknameNavArguments,
+                    viewModelFactory = viewModelFactory,
+                    onBack = navController::popBackStack,
+                )
+            }
 
-        composable<LoginRoute> {
-            LoginScreen(viewModelFactory = viewModelFactory, navController = navController)
-        }
+            composable<LoginRoute> {
+                LoginScreen(viewModelFactory = viewModelFactory, navController = navController)
+            }
 
-        composable<RegistrationRoute> {
-            RegistrationScreen(viewModelFactory = viewModelFactory, navController = navController)
-        }
+            composable<RegistrationRoute> {
+                RegistrationScreen(
+                    viewModelFactory = viewModelFactory,
+                    navController = navController
+                )
+            }
 
-        composable<SendFeedbackRoute> {
-            SendFeedbackScreen(viewModelFactory = viewModelFactory, navController = navController)
-        }
+            composable<SendFeedbackRoute> {
+                SendFeedbackScreen(
+                    viewModelFactory = viewModelFactory,
+                    navController = navController
+                )
+            }
 
-        composable<CreateBuildHeroesListNavArguments> { backStackEntry ->
-            CreateBuildHeroesListScreen(
-                viewModelFactory = viewModelFactory,
-                navController = navController
-            )
+            composable<CreateBuildHeroesListNavArguments> { backStackEntry ->
+                CreateBuildHeroesListScreen(
+                    viewModelFactory = viewModelFactory,
+                    navController = navController
+                )
+            }
         }
     }
 }

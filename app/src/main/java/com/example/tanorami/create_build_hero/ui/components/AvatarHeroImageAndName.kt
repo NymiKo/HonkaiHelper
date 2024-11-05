@@ -1,6 +1,5 @@
 package com.example.tanorami.create_build_hero.ui.components
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -45,17 +44,15 @@ fun AvatarHeroImageAndName(
             contentScale = ContentScale.Crop,
         )
 
-        AnimatedVisibility(visible = !heroName.isNullOrEmpty()) {
-            BaseDefaultText(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(DarkGrey)
-                    .padding(8.dp),
-                text = heroName ?: "",
-                color = White,
-                textAlign = TextAlign.Center,
-                fontWeight = FontWeight.Bold
-            )
-        }
+        BaseDefaultText(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(DarkGrey)
+                .padding(8.dp),
+            text = heroName ?: "",
+            color = White,
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Bold
+        )
     }
 }
