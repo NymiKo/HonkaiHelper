@@ -1,6 +1,10 @@
 package com.example.tanorami.builds_hero_from_users.ui
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -84,8 +88,13 @@ private fun BuildsHeroFromUsersScreenContent(
         }
     ) { innerPadding ->
         when {
+            uiState.isLoading -> Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background)
+            )
             uiState.isError -> ErrorScreen()
-            uiState.buildsList.isEmpty() -> EmptyListScreen()
+            uiState.buildsList.isEmpty() && !uiState.isLoading -> EmptyListScreen()
             uiState.buildsList.isNotEmpty() -> {
                 BuildsListLazyColumn(
                     modifier = Modifier.padding(innerPadding),

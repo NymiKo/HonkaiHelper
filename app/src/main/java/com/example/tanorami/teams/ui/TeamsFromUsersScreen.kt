@@ -1,6 +1,10 @@
 package com.example.tanorami.teams.ui
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -81,9 +85,17 @@ private fun TeamsListScreenContents(
         }
     ) { innerPadding ->
         when {
-            uiState.isLoading -> {}
+            uiState.isLoading -> Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background)
+            )
             uiState.isError -> ErrorScreen(modifier = Modifier.padding(innerPadding))
-            uiState.teamsList.isEmpty() -> EmptyListScreen(modifier = Modifier.padding(innerPadding))
+            uiState.teamsList.isEmpty() && !uiState.isLoading -> EmptyListScreen(
+                modifier = Modifier.padding(
+                    innerPadding
+                )
+            )
             uiState.teamsList.isNotEmpty() -> {
                 TeamsListLazyColumn(
                     modifier = Modifier.padding(innerPadding),
