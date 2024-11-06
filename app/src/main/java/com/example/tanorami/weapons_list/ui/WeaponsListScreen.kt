@@ -1,8 +1,6 @@
 package com.example.tanorami.weapons_list.ui
 
-import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -46,6 +44,8 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.tanorami.R
 import com.example.tanorami.base_components.text.BaseDefaultText
+import com.example.tanorami.core.navigation.LocalNavAnimatedVisibilityScope
+import com.example.tanorami.core.navigation.LocalSharedTransitionScope
 import com.example.tanorami.core.theme.Black
 import com.example.tanorami.core.theme.Blue
 import com.example.tanorami.core.theme.Orange
@@ -58,22 +58,17 @@ import com.example.tanorami.weapons_list.presentation.models.WeaponsListScreenEv
 import com.example.tanorami.weapons_list.presentation.models.WeaponsListScreenSideEffects
 import com.example.tanorami.weapons_list.presentation.models.WeaponsListScreenUiState
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun WeaponsListScreen(
     viewModelFactory: ViewModelProvider.Factory,
     viewModel: WeaponsListViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
-    sharedTransitionScope: SharedTransitionScope,
-    animatedVisibilityScope: AnimatedVisibilityScope,
 ) {
     val state = viewModel.uiState().collectAsState().value
     val sideEffects = viewModel.uiEffect().collectAsState(initial = null).value
 
     WeaponsListScreenContent(
         uiState = state,
-        sharedTransitionScope = sharedTransitionScope,
-        animatedVisibilityScope = animatedVisibilityScope,
         onEvent = viewModel::onEvent
     )
 
@@ -87,12 +82,10 @@ fun WeaponsListScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun WeaponsListScreenContent(
     uiState: WeaponsListScreenUiState,
-    sharedTransitionScope: SharedTransitionScope,
-    animatedVisibilityScope: AnimatedVisibilityScope,
     onEvent: (WeaponsListScreenEvents) -> Unit,
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
@@ -137,8 +130,6 @@ private fun WeaponsListScreenContent(
             items(if (uiState.searchTextField.value.isEmpty()) uiState.weaponsList else uiState.filteredWeaponsList) { weapon ->
                 WeaponItem(
                     weapon = weapon,
-                    sharedTransitionScope = sharedTransitionScope,
-                    animatedVisibilityScope = animatedVisibilityScope,
                     onClick = { onEvent(WeaponsListScreenEvents.OnWeaponClick(it)) })
             }
         }
@@ -150,10 +141,13 @@ private fun WeaponsListScreenContent(
 private fun WeaponItem(
     modifier: Modifier = Modifier,
     weapon: Weapon,
-    sharedTransitionScope: SharedTransitionScope,
-    animatedVisibilityScope: AnimatedVisibilityScope,
     onClick: (idWeapon: Int) -> Unit
 ) {
+    val sharedTransitionScope = LocalSharedTransitionScope.current
+        ?: throw IllegalStateException("No SharedElementScope found")
+    val animatedVisibilityScope = LocalNavAnimatedVisibilityScope.current
+        ?: throw IllegalStateException("No AnimatedVisibility found")
+
     Box(
         modifier = modifier
             .height(120.dp)
@@ -175,7 +169,7 @@ private fun WeaponItem(
         with(sharedTransitionScope) {
             AsyncImage(
                 modifier = Modifier.sharedElement(
-                    rememberSharedContentState(key = "weapon-${weapon.idWeapon}"),
+                    rememberSharedContentState(key = "weapon-${weapon.idWeapon}-base-build"),
                     animatedVisibilityScope = animatedVisibilityScope,
                 ),
                 model = weapon.image,

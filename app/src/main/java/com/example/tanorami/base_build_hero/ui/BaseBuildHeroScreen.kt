@@ -134,7 +134,9 @@ private fun BaseBuildHeroScreenContent(
                                 },
                                 shape = RoundedCornerShape(10.dp)
                             ),
+                        equipmentId = weapon.idWeapon,
                         equipmentImage = weapon.image,
+                        sharedElementKeyTransition = "weapon-${weapon.idWeapon}-base-build",
                         onClick = { onEvent(BaseBuildHeroScreenEvents.OnInfoAboutWeaponScreen(weapon.idWeapon)) }
                     )
                 }
@@ -149,7 +151,9 @@ private fun BaseBuildHeroScreenContent(
                         modifier = Modifier
                             .size(90.dp)
                             .background(color = Orange, shape = RoundedCornerShape(10.dp)),
+                        equipmentId = relic.idRelic,
                         equipmentImage = relic.image,
+                        sharedElementKeyTransition = "relic-${relic.idRelic}-base-build",
                         onClick = { onEvent(BaseBuildHeroScreenEvents.OnInfoAboutRelicScreen(relic.idRelic)) }
                     )
                 }
@@ -164,7 +168,9 @@ private fun BaseBuildHeroScreenContent(
                         modifier = Modifier
                             .size(90.dp)
                             .background(color = Orange, shape = RoundedCornerShape(10.dp)),
+                        equipmentId = decoration.idDecoration,
                         equipmentImage = decoration.image,
+                        sharedElementKeyTransition = "decoration-${decoration.idDecoration}-base-build",
                         onClick = { onEvent(BaseBuildHeroScreenEvents.OnInfoAboutDecorationScreen(decoration.idDecoration)) }
                     )
                 }

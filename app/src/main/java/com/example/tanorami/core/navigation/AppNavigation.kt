@@ -11,6 +11,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavHostController
@@ -62,240 +63,289 @@ fun AppNavigation(
     viewModelFactory: ViewModelProvider.Factory
 ) {
     SharedTransitionLayout {
-        NavHost(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background),
-            navController = navController,
-            startDestination = MainRoute
-        ) {
-            composable<MainRoute> {
-                MainScreen(
-                    viewModelFactory = viewModelFactory,
-                    rootNavController = navController,
-                    sharedTransitionScope = this@SharedTransitionLayout,
-                    animatedVisibilityScope = this@composable,
-                )
-            }
-
-            composable<LoadDataNavArguments> { backStackEntry ->
-                val loadDataNavArguments: LoadDataNavArguments = backStackEntry.toRoute()
-                LoadDataScreen(
-                    navArguments = loadDataNavArguments,
-                    viewModelFactory = viewModelFactory,
-                    navController = navController,
-                )
-            }
-
-            composable<InfoAboutHeroNavArguments>(
-                enterTransition = {
-                    slideInHorizontally(
-                        animationSpec = tween(500),
-                        initialOffsetX = { it }) + fadeIn()
-                },
-                exitTransition = {
-                    slideOutHorizontally(
-                        animationSpec = tween(500),
-                        targetOffsetX = { -it / 2 }) + fadeOut()
-                },
-                popExitTransition = {
-                    slideOutHorizontally(
-                        animationSpec = tween(500),
-                        targetOffsetX = { it / 2 }) + fadeOut()
-                },
-                popEnterTransition = {
-                    slideInHorizontally(
-                        animationSpec = tween(500),
-                        initialOffsetX = { -it / 2 }) + fadeIn()
+        CompositionLocalProvider(value = LocalSharedTransitionScope provides this) {
+            NavHost(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background),
+                navController = navController,
+                startDestination = MainRoute
+            ) {
+                composable<MainRoute> {
+                    CompositionLocalProvider(value = LocalNavAnimatedVisibilityScope provides this@composable) {
+                        MainScreen(
+                            viewModelFactory = viewModelFactory,
+                            rootNavController = navController,
+                        )
+                    }
                 }
-            ) { backStackEntry ->
-                val infoAboutHeroNavArguments: InfoAboutHeroNavArguments = backStackEntry.toRoute()
-                InfoAboutHeroScreen(
-                    navArguments = infoAboutHeroNavArguments,
-                    viewModelFactory = viewModelFactory,
-                    navController = navController,
-                )
-            }
 
-            composable<SettingsRoute> {
-                SettingsScreen(
-                    viewModelFactory = viewModelFactory,
-                    navController = navController
-                )
-            }
-
-            composable<BaseBuildHeroNavArguments>(
-                enterTransition = {
-                    slideInHorizontally(
-                        animationSpec = tween(500),
-                        initialOffsetX = { it / 2 }) + fadeIn()
-                },
-                exitTransition = {
-                    slideOutHorizontally(
-                        animationSpec = tween(500),
-                        targetOffsetX = { -it / 2 }) + fadeOut()
-                },
-                popExitTransition = {
-                    slideOutHorizontally(
-                        animationSpec = tween(500),
-                        targetOffsetX = { it / 2 }) + fadeOut()
-                },
-                popEnterTransition = {
-                    slideInHorizontally(
-                        animationSpec = tween(500),
-                        initialOffsetX = { -it / 2 }) + fadeIn()
+                composable<LoadDataNavArguments> { backStackEntry ->
+                    val loadDataNavArguments: LoadDataNavArguments = backStackEntry.toRoute()
+                    LoadDataScreen(
+                        navArguments = loadDataNavArguments,
+                        viewModelFactory = viewModelFactory,
+                        navController = navController,
+                    )
                 }
-            ) { backStackEntry ->
-                val baseBuildHeroNavArguments: BaseBuildHeroNavArguments = backStackEntry.toRoute()
-                BaseBuildHeroScreen(
-                    navArguments = baseBuildHeroNavArguments,
-                    viewModelFactory = viewModelFactory,
-                    navController = navController,
-                )
-            }
 
-            composable<BuildsHeroFromUsersNavArguments>(
-                enterTransition = {
-                    slideInHorizontally(
-                        animationSpec = tween(500),
-                        initialOffsetX = { it / 2 }) + fadeIn()
-                },
-                popExitTransition = {
-                    slideOutHorizontally(
-                        animationSpec = tween(500),
-                        targetOffsetX = { it / 2 }) + fadeOut()
-                },
-                popEnterTransition = null,
-            ) { backStackEntry ->
-                val buildsHeroFromUsersNavArguments: BuildsHeroFromUsersNavArguments =
-                    backStackEntry.toRoute()
-                BuildsHeroFromUsersScreen(
-                    navArguments = buildsHeroFromUsersNavArguments,
-                    viewModelFactory = viewModelFactory,
-                    navController = navController,
-                    sharedTransitionScope = this@SharedTransitionLayout,
-                    animatedVisibilityScope = this,
-                )
-            }
+                composable<InfoAboutHeroNavArguments>(
+                    enterTransition = {
+                        slideInHorizontally(
+                            animationSpec = tween(500),
+                            initialOffsetX = { it }) + fadeIn(animationSpec = tween(500))
+                    },
+                    exitTransition = {
+                        slideOutHorizontally(
+                            animationSpec = tween(500),
+                            targetOffsetX = { -it / 2 }) + fadeOut()
+                    },
+                    popExitTransition = {
+                        slideOutHorizontally(
+                            animationSpec = tween(500),
+                            targetOffsetX = { it / 2 }) + fadeOut()
+                    },
+                    popEnterTransition = {
+                        slideInHorizontally(
+                            animationSpec = tween(500),
+                            initialOffsetX = { -it / 2 }) + fadeIn()
+                    }
+                ) { backStackEntry ->
+                    val infoAboutHeroNavArguments: InfoAboutHeroNavArguments =
+                        backStackEntry.toRoute()
+                    InfoAboutHeroScreen(
+                        navArguments = infoAboutHeroNavArguments,
+                        viewModelFactory = viewModelFactory,
+                        navController = navController,
+                    )
+                }
 
-            composable<ViewingBuildHeroFromUserNavArguments> { backStackEntry ->
-                val viewingBuildHeroFromUserNavArguments: ViewingBuildHeroFromUserNavArguments =
-                    backStackEntry.toRoute()
-                ViewingBuildHeroFromUserScreen(
-                    navArguments = viewingBuildHeroFromUserNavArguments,
-                    viewModelFactory = viewModelFactory,
-                    navController = navController,
-                    sharedTransitionScope = this@SharedTransitionLayout,
-                    animatedVisibilityScope = this,
-                )
-            }
+                composable<SettingsRoute> {
+                    SettingsScreen(
+                        viewModelFactory = viewModelFactory,
+                        navController = navController
+                    )
+                }
 
-            composable<TeamsFromUsersNavArguments>(
-                enterTransition = {
-                    slideInHorizontally(
-                        animationSpec = tween(500),
-                        initialOffsetX = { it / 2 }) + fadeIn()
-                },
-                popExitTransition = {
-                    slideOutHorizontally(
-                        animationSpec = tween(500),
-                        targetOffsetX = { it / 2 }) + fadeOut()
-                },
-            ) { backStackEntry ->
-                val teamsFromUsersNavArguments: TeamsFromUsersNavArguments =
-                    backStackEntry.toRoute()
-                TeamsFromUsersScreen(
-                    navArguments = teamsFromUsersNavArguments,
-                    viewModelFactory = viewModelFactory,
-                    navController = navController
-                )
-            }
+                composable<BaseBuildHeroNavArguments>(
+                    enterTransition = {
+                        slideInHorizontally(
+                            animationSpec = tween(500),
+                            initialOffsetX = { it / 2 }) + fadeIn()
+                    },
+                    exitTransition = {
+                        slideOutHorizontally(
+                            animationSpec = tween(500),
+                            targetOffsetX = { -it / 2 }) + fadeOut()
+                    },
+                    popExitTransition = {
+                        slideOutHorizontally(
+                            animationSpec = tween(500),
+                            targetOffsetX = { it / 2 }) + fadeOut()
+                    },
+                    popEnterTransition = {
+                        slideInHorizontally(
+                            animationSpec = tween(500),
+                            initialOffsetX = { -it / 2 }) + fadeIn()
+                    }
+                ) { backStackEntry ->
+                    val baseBuildHeroNavArguments: BaseBuildHeroNavArguments =
+                        backStackEntry.toRoute()
+                    CompositionLocalProvider(value = LocalNavAnimatedVisibilityScope provides this@composable) {
+                        BaseBuildHeroScreen(
+                            navArguments = baseBuildHeroNavArguments,
+                            viewModelFactory = viewModelFactory,
+                            navController = navController,
+                        )
+                    }
+                }
 
-            composable<InfoAboutWeaponNavArguments> { backStackEntry ->
-                val infoAboutWeaponNavArguments: InfoAboutWeaponNavArguments =
-                    backStackEntry.toRoute()
-                InfoAboutWeaponScreen(
-                    navArguments = infoAboutWeaponNavArguments,
-                    viewModelFactory = viewModelFactory,
-                    navController = navController,
-                    sharedTransitionScope = this@SharedTransitionLayout,
-                    animatedVisibilityScope = this@composable,
-                )
-            }
+                composable<BuildsHeroFromUsersNavArguments>(
+                    enterTransition = {
+                        slideInHorizontally(
+                            animationSpec = tween(500),
+                            initialOffsetX = { it / 2 }) + fadeIn()
+                    },
+                    exitTransition = {
+                        slideOutHorizontally(
+                            animationSpec = tween(500),
+                            targetOffsetX = { -it / 2 }) + fadeOut()
+                    },
+                    popExitTransition = {
+                        slideOutHorizontally(
+                            animationSpec = tween(500),
+                            targetOffsetX = { it / 2 }) + fadeOut()
+                    },
+                    popEnterTransition = {
+                        slideInHorizontally(
+                            animationSpec = tween(500),
+                            initialOffsetX = { -it / 2 }) + fadeIn()
+                    }
+                ) { backStackEntry ->
+                    val buildsHeroFromUsersNavArguments: BuildsHeroFromUsersNavArguments =
+                        backStackEntry.toRoute()
+                    BuildsHeroFromUsersScreen(
+                        navArguments = buildsHeroFromUsersNavArguments,
+                        viewModelFactory = viewModelFactory,
+                        navController = navController,
+                    )
+                }
 
-            composable<InfoAboutRelicNavArgument> { backStackEntry ->
-                val infoAboutRelicNavArgument: InfoAboutRelicNavArgument = backStackEntry.toRoute()
-                InfoAboutRelicScreen(
-                    navArguments = infoAboutRelicNavArgument,
-                    viewModelFactory = viewModelFactory,
-                    navController = navController
-                )
-            }
+                composable<ViewingBuildHeroFromUserNavArguments>(
+                    enterTransition = {
+                        slideInHorizontally(
+                            animationSpec = tween(500),
+                            initialOffsetX = { it / 2 }) + fadeIn()
+                    },
+                    popExitTransition = {
+                        slideOutHorizontally(
+                            animationSpec = tween(500),
+                            targetOffsetX = { it / 2 }) + fadeOut()
+                    },
+                    popEnterTransition = null,
+                ) { backStackEntry ->
+                    val viewingBuildHeroFromUserNavArguments: ViewingBuildHeroFromUserNavArguments =
+                        backStackEntry.toRoute()
+                    ViewingBuildHeroFromUserScreen(
+                        navArguments = viewingBuildHeroFromUserNavArguments,
+                        viewModelFactory = viewModelFactory,
+                        navController = navController,
+                    )
+                }
 
-            composable<InfoAboutDecorationNavArguments> { backStackEntry ->
-                val infoAboutDecorationNavArguments: InfoAboutDecorationNavArguments =
-                    backStackEntry.toRoute()
-                InfoAboutDecorationScreen(
-                    navArguments = infoAboutDecorationNavArguments,
-                    viewModelFactory = viewModelFactory,
-                    navController = navController
-                )
-            }
+                composable<TeamsFromUsersNavArguments>(
+                    enterTransition = {
+                        slideInHorizontally(
+                            animationSpec = tween(500),
+                            initialOffsetX = { it / 2 }) + fadeIn()
+                    },
+                    popExitTransition = {
+                        slideOutHorizontally(
+                            animationSpec = tween(500),
+                            targetOffsetX = { it / 2 }) + fadeOut()
+                    },
+                ) { backStackEntry ->
+                    val teamsFromUsersNavArguments: TeamsFromUsersNavArguments =
+                        backStackEntry.toRoute()
+                    TeamsFromUsersScreen(
+                        navArguments = teamsFromUsersNavArguments,
+                        viewModelFactory = viewModelFactory,
+                        navController = navController
+                    )
+                }
 
-            composable<CreateBuildForHeroNavArguments> { backStackEntry ->
-                val createBuildForHeroNavArguments: CreateBuildForHeroNavArguments =
-                    backStackEntry.toRoute()
-                CreateBuildHeroScreen(
-                    navArguments = createBuildForHeroNavArguments,
-                    viewModelFactory = viewModelFactory,
-                    navController = navController,
-                    sharedTransitionScope = this@SharedTransitionLayout,
-                    animatedVisibilityScope = this@composable,
-                )
-            }
+                composable<InfoAboutWeaponNavArguments> { backStackEntry ->
+                    val infoAboutWeaponNavArguments: InfoAboutWeaponNavArguments =
+                        backStackEntry.toRoute()
+                    CompositionLocalProvider(value = LocalNavAnimatedVisibilityScope provides this@composable) {
+                        InfoAboutWeaponScreen(
+                            navArguments = infoAboutWeaponNavArguments,
+                            viewModelFactory = viewModelFactory,
+                            navController = navController,
+                        )
+                    }
+                }
 
-            composable<CreateTeamNavArguments> { backStackEntry ->
-                val createTeamNavArguments: CreateTeamNavArguments = backStackEntry.toRoute()
-                CreateTeamScreen(
-                    navArguments = createTeamNavArguments,
-                    viewModelFactory = viewModelFactory,
-                    navController = navController
-                )
-            }
+                composable<InfoAboutRelicNavArgument> { backStackEntry ->
+                    val infoAboutRelicNavArgument: InfoAboutRelicNavArgument =
+                        backStackEntry.toRoute()
+                    CompositionLocalProvider(value = LocalNavAnimatedVisibilityScope provides this@composable) {
+                        InfoAboutRelicScreen(
+                            navArguments = infoAboutRelicNavArgument,
+                            viewModelFactory = viewModelFactory,
+                            navController = navController
+                        )
+                    }
+                }
 
-            composable<ChangeNicknameNavArguments> { backStackEntry ->
-                val changeNicknameNavArguments: ChangeNicknameNavArguments =
-                    backStackEntry.toRoute()
-                ChangeNicknameScreen(
-                    navArguments = changeNicknameNavArguments,
-                    viewModelFactory = viewModelFactory,
-                    onBack = navController::popBackStack,
-                )
-            }
+                composable<InfoAboutDecorationNavArguments> { backStackEntry ->
+                    val infoAboutDecorationNavArguments: InfoAboutDecorationNavArguments =
+                        backStackEntry.toRoute()
+                    CompositionLocalProvider(value = LocalNavAnimatedVisibilityScope provides this@composable) {
+                        InfoAboutDecorationScreen(
+                            navArguments = infoAboutDecorationNavArguments,
+                            viewModelFactory = viewModelFactory,
+                            navController = navController
+                        )
+                    }
+                }
 
-            composable<LoginRoute> {
-                LoginScreen(viewModelFactory = viewModelFactory, navController = navController)
-            }
+                composable<CreateBuildForHeroNavArguments>(
+                    enterTransition = {
+                        slideInHorizontally(
+                            animationSpec = tween(500),
+                            initialOffsetX = { it / 2 }) + fadeIn()
+                    },
+                    exitTransition = {
+                        slideOutHorizontally(
+                            animationSpec = tween(500),
+                            targetOffsetX = { -it / 2 }) + fadeOut()
+                    },
+                    popExitTransition = {
+                        slideOutHorizontally(
+                            animationSpec = tween(500),
+                            targetOffsetX = { it / 2 }) + fadeOut()
+                    },
+                    popEnterTransition = {
+                        slideInHorizontally(
+                            animationSpec = tween(500),
+                            initialOffsetX = { -it / 2 }) + fadeIn()
+                    }
+                ) { backStackEntry ->
+                    val createBuildForHeroNavArguments: CreateBuildForHeroNavArguments =
+                        backStackEntry.toRoute()
+                    CreateBuildHeroScreen(
+                        navArguments = createBuildForHeroNavArguments,
+                        viewModelFactory = viewModelFactory,
+                        navController = navController,
+                        sharedTransitionScope = this@SharedTransitionLayout,
+                        animatedVisibilityScope = this@composable,
+                    )
+                }
 
-            composable<RegistrationRoute> {
-                RegistrationScreen(
-                    viewModelFactory = viewModelFactory,
-                    navController = navController
-                )
-            }
+                composable<CreateTeamNavArguments> { backStackEntry ->
+                    val createTeamNavArguments: CreateTeamNavArguments = backStackEntry.toRoute()
+                    CreateTeamScreen(
+                        navArguments = createTeamNavArguments,
+                        viewModelFactory = viewModelFactory,
+                        navController = navController
+                    )
+                }
 
-            composable<SendFeedbackRoute> {
-                SendFeedbackScreen(
-                    viewModelFactory = viewModelFactory,
-                    navController = navController
-                )
-            }
+                composable<ChangeNicknameNavArguments> { backStackEntry ->
+                    val changeNicknameNavArguments: ChangeNicknameNavArguments =
+                        backStackEntry.toRoute()
+                    ChangeNicknameScreen(
+                        navArguments = changeNicknameNavArguments,
+                        viewModelFactory = viewModelFactory,
+                        onBack = navController::popBackStack,
+                    )
+                }
 
-            composable<CreateBuildHeroesListNavArguments> { backStackEntry ->
-                CreateBuildHeroesListScreen(
-                    viewModelFactory = viewModelFactory,
-                    navController = navController
-                )
+                composable<LoginRoute> {
+                    LoginScreen(viewModelFactory = viewModelFactory, navController = navController)
+                }
+
+                composable<RegistrationRoute> {
+                    RegistrationScreen(
+                        viewModelFactory = viewModelFactory,
+                        navController = navController
+                    )
+                }
+
+                composable<SendFeedbackRoute> {
+                    SendFeedbackScreen(
+                        viewModelFactory = viewModelFactory,
+                        navController = navController
+                    )
+                }
+
+                composable<CreateBuildHeroesListNavArguments> { backStackEntry ->
+                    CreateBuildHeroesListScreen(
+                        viewModelFactory = viewModelFactory,
+                        navController = navController
+                    )
+                }
             }
         }
     }

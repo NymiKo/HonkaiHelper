@@ -1,8 +1,5 @@
 package com.example.tanorami.teams_and_builds.ui
 
-import androidx.compose.animation.AnimatedVisibilityScope
-import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -38,22 +35,17 @@ import com.example.tanorami.teams_and_builds.presentation.models.TeamsAndBuildsS
 import com.example.tanorami.viewing_users_build.ui.ViewingBuildHeroFromUserNavArguments
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun TeamsAndBuildsScreen(
     viewModelFactory: ViewModelProvider.Factory,
     viewModel: TeamsAndBuildsViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
-    sharedTransitionScope: SharedTransitionScope,
-    animatedVisibilityScope: AnimatedVisibilityScope,
 ) {
     val state = viewModel.uiState().collectAsState().value
     val sideEffects = viewModel.uiEffect().collectAsState(initial = null).value
 
     TeamsAndBuildsScreenContent(
         uiState = state,
-        sharedTransitionScope = sharedTransitionScope,
-        animatedVisibilityScope = animatedVisibilityScope,
         onEvent = viewModel::onEvent
     )
 
@@ -67,12 +59,9 @@ fun TeamsAndBuildsScreen(
     }
 }
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun TeamsAndBuildsScreenContent(
     uiState: TeamsAndBuildsScreenUiState,
-    sharedTransitionScope: SharedTransitionScope,
-    animatedVisibilityScope: AnimatedVisibilityScope,
     onEvent: (TeamsAndBuildsScreenEvents) -> Unit,
 ) {
     val pagerState = rememberPagerState(initialPage = 0) { 2 }
@@ -121,8 +110,6 @@ private fun TeamsAndBuildsScreenContent(
                     TeamsAndBuildsScreenEvents.OnViewingBuildHeroFromUserScreen(idBuild)
                 )
             },
-            sharedTransitionScope = sharedTransitionScope,
-            animatedVisibilityScope = animatedVisibilityScope,
         )
     }
 }
@@ -146,7 +133,6 @@ private fun TabItem(
     }
 }
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun TabsContent(
     modifier: Modifier = Modifier,
@@ -154,8 +140,6 @@ private fun TabsContent(
     buildsList: List<BuildHeroWithUser>,
     onBuildClick: (idBuild: Long) -> Unit,
     pagerState: PagerState,
-    sharedTransitionScope: SharedTransitionScope,
-    animatedVisibilityScope: AnimatedVisibilityScope,
 ) {
     HorizontalPager(modifier = modifier, state = pagerState) { index ->
         when (index) {
@@ -163,8 +147,6 @@ private fun TabsContent(
                 BuildsListLazyColumn(
                     buildsList = buildsList,
                     onBuildClick = onBuildClick::invoke,
-                    sharedTransitionScope = sharedTransitionScope,
-                    animatedVisibilityScope = animatedVisibilityScope,
                 )
             }
 

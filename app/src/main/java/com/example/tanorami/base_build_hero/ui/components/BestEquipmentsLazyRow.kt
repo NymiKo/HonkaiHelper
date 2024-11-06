@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.example.tanorami.R
 
 @Composable
@@ -32,14 +33,15 @@ internal inline fun <T> BestEquipmentsLazyRow(
                 equipmentImage(equipment)
 
                 if (index != equipmentsList.lastIndex) {
-                    EquipmentImage(
+                    AsyncImage(
                         modifier = Modifier
                             .padding(start = 8.dp)
                             .width(15.dp)
                             .height(25.dp)
                             .align(Alignment.CenterVertically),
-                        equipmentImage = R.drawable.ic_arrow_forward,
-                        colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.secondary),
+                        model = R.drawable.ic_arrow_forward,
+                        contentDescription = null,
+                        colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.secondary)
                     )
                 }
             }

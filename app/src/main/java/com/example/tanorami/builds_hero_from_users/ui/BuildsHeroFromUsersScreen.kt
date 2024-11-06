@@ -1,8 +1,5 @@
 package com.example.tanorami.builds_hero_from_users.ui
 
-import androidx.compose.animation.AnimatedVisibilityScope
-import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -29,15 +26,12 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class BuildsHeroFromUsersNavArguments(val idHero: Int)
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun BuildsHeroFromUsersScreen(
     navArguments: BuildsHeroFromUsersNavArguments,
     viewModelFactory: ViewModelProvider.Factory,
     viewModel: BuildsHeroFromUsersViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
-    sharedTransitionScope: SharedTransitionScope,
-    animatedVisibilityScope: AnimatedVisibilityScope,
 ) {
     val state = viewModel.uiState().collectAsState().value
     val sideEffects = viewModel.uiEffect().collectAsState(initial = null).value
@@ -45,8 +39,6 @@ fun BuildsHeroFromUsersScreen(
     BuildsHeroFromUsersScreenContent(
         uiState = state,
         onEvent = viewModel::onEvent,
-        sharedTransitionScope = sharedTransitionScope,
-        animatedVisibilityScope = animatedVisibilityScope,
     )
 
     when (sideEffects) {
@@ -78,13 +70,10 @@ fun BuildsHeroFromUsersScreen(
     }
 }
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun BuildsHeroFromUsersScreenContent(
     uiState: BuildsHeroFromUsersScreenUiState,
     onEvent: (BuildsHeroFromUsersScreenEvents) -> Unit,
-    sharedTransitionScope: SharedTransitionScope,
-    animatedVisibilityScope: AnimatedVisibilityScope,
 ) {
     Scaffold(
         topBar = {
@@ -101,8 +90,6 @@ private fun BuildsHeroFromUsersScreenContent(
                 BuildsListLazyColumn(
                     modifier = Modifier.padding(innerPadding),
                     buildsList = uiState.buildsList,
-                    sharedTransitionScope = sharedTransitionScope,
-                    animatedVisibilityScope = animatedVisibilityScope,
                     onBuildClick = {
                         onEvent(
                             BuildsHeroFromUsersScreenEvents.OnViewingBuildHeroFromUserScreen(

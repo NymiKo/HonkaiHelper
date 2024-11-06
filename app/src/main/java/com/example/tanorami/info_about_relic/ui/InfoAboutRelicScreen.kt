@@ -71,7 +71,7 @@ internal fun InfoAboutRelicScreenContent(
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            ImageRelic(imageRelic = relic?.image)
+            ImageRelic(idRelic = relic?.idRelic, imageRelic = relic?.image)
 
             DescriptionRelicEffect(
                 descriptionTwoRelicEffect = relic?.descriptionTwoParts,

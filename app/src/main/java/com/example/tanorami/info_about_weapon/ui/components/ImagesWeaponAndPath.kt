@@ -1,8 +1,6 @@
 package com.example.tanorami.info_about_weapon.ui.components
 
-import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +12,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.tanorami.core.navigation.LocalNavAnimatedVisibilityScope
+import com.example.tanorami.core.navigation.LocalSharedTransitionScope
 import com.example.tanorami.info_about_weapon.data.model.FullInfoAboutWeapon
 
 @OptIn(ExperimentalSharedTransitionApi::class)
@@ -21,9 +21,12 @@ import com.example.tanorami.info_about_weapon.data.model.FullInfoAboutWeapon
 internal fun ImagesWeaponAndPath(
     modifier: Modifier = Modifier,
     weapon: FullInfoAboutWeapon?,
-    sharedTransitionScope: SharedTransitionScope,
-    animatedVisibilityScope: AnimatedVisibilityScope,
 ) {
+    val sharedTransitionScope = LocalSharedTransitionScope.current
+        ?: throw IllegalStateException("No SharedElementScope found")
+    val animatedVisibilityScope = LocalNavAnimatedVisibilityScope.current
+        ?: throw IllegalStateException("No AnimatedVisibility found")
+
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -43,7 +46,7 @@ internal fun ImagesWeaponAndPath(
                 modifier = Modifier
                     .fillMaxSize()
                     .sharedElement(
-                        rememberSharedContentState(key = "weapon-${weapon?.weapon?.idWeapon}"),
+                        rememberSharedContentState(key = "weapon-${weapon?.weapon?.idWeapon}-base-build"),
                         animatedVisibilityScope = animatedVisibilityScope,
                     ),
                 model = weapon?.weapon?.image,

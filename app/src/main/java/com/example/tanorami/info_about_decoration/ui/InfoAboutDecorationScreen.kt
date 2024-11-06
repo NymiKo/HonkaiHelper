@@ -1,5 +1,6 @@
 package com.example.tanorami.info_about_decoration.ui
 
+import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,6 +18,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.tanorami.base_components.top_app_bar.BaseCenterAlignedTopAppBar
+import com.example.tanorami.core.navigation.LocalNavAnimatedVisibilityScope
+import com.example.tanorami.core.navigation.LocalSharedTransitionScope
 import com.example.tanorami.info_about_decoration.presentation.InfoAboutDecorationViewModel
 import com.example.tanorami.info_about_decoration.ui.components.DescriptionDecorationEffect
 import com.example.tanorami.info_about_hero.data.model.Decoration
@@ -51,11 +54,17 @@ internal fun InfoAboutDecorationScreen(
     }
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun InfoAboutDecorationScreenContent(
     decoration: Decoration?,
     onBack: () -> Unit,
 ) {
+    val sharedTransitionScope = LocalSharedTransitionScope.current
+        ?: throw IllegalStateException("No SharedElementScope found")
+    val animatedVisibilityScope = LocalNavAnimatedVisibilityScope.current
+        ?: throw IllegalStateException("No AnimatedVisibility found")
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -69,13 +78,19 @@ private fun InfoAboutDecorationScreenContent(
             modifier = Modifier.padding(innerPadding),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            AsyncImage(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(250.dp),
-                model = decoration?.image,
-                contentDescription = null
-            )
+            with(sharedTransitionScope) {
+                AsyncImage(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(250.dp)
+                        .sharedElement(
+                            rememberSharedContentState(key = "decoration-${decoration?.idDecoration}-base-build"),
+                            animatedVisibilityScope = animatedVisibilityScope
+                        ),
+                    model = decoration?.image,
+                    contentDescription = null
+                )
+            }
 
             DescriptionDecorationEffect(descriptionDecorationEffect = decoration?.description)
         }

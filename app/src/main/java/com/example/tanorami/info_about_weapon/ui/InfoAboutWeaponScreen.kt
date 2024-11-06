@@ -1,8 +1,5 @@
 package com.example.tanorami.info_about_weapon.ui
 
-import androidx.compose.animation.AnimatedVisibilityScope
-import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -35,22 +32,17 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class InfoAboutWeaponNavArguments(val idWeapon: Int)
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun InfoAboutWeaponScreen(
     navArguments: InfoAboutWeaponNavArguments,
     viewModelFactory: ViewModelProvider.Factory,
     viewModel: InfoAboutWeaponViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
-    sharedTransitionScope: SharedTransitionScope,
-    animatedVisibilityScope: AnimatedVisibilityScope,
 ) {
     val weapon = viewModel.weapon.collectAsStateWithLifecycle().value
 
     InfoAboutWeaponScreenContent(
         weapon = weapon,
-        sharedTransitionScope = sharedTransitionScope,
-        animatedVisibilityScope = animatedVisibilityScope,
         onBack = navController::popBackStack,
     )
     
@@ -65,13 +57,10 @@ fun InfoAboutWeaponScreen(
     }
 }
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun InfoAboutWeaponScreenContent(
     modifier: Modifier = Modifier,
     weapon: FullInfoAboutWeapon?,
-    sharedTransitionScope: SharedTransitionScope,
-    animatedVisibilityScope: AnimatedVisibilityScope,
     onBack: () -> Unit,
 ) {
     Scaffold(
@@ -92,8 +81,6 @@ private fun InfoAboutWeaponScreenContent(
         ) {
             ImagesWeaponAndPath(
                 weapon = weapon,
-                sharedTransitionScope = sharedTransitionScope,
-                animatedVisibilityScope = animatedVisibilityScope,
             )
 
             ImageRarityWeapon(

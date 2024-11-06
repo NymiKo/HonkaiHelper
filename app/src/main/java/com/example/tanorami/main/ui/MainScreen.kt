@@ -1,8 +1,5 @@
 package com.example.tanorami.main.ui
 
-import androidx.compose.animation.AnimatedVisibilityScope
-import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeOut
@@ -69,14 +66,11 @@ enum class MainScreens(val route: String) {
 @Serializable
 object MainRoute
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun MainScreen(
     viewModelFactory: ViewModelProvider.Factory,
     viewModel: MainScreenViewModel = viewModel(factory = viewModelFactory),
     rootNavController: NavController,
-    sharedTransitionScope: SharedTransitionScope,
-    animatedVisibilityScope: AnimatedVisibilityScope,
 ) {
     val state = viewModel.uiState().collectAsState().value
     val sideEffect = viewModel.uiEffect().collectAsState(initial = null).value
@@ -85,8 +79,6 @@ fun MainScreen(
         uiState = state,
         viewModelFactory = viewModelFactory,
         rootNavController = rootNavController,
-        sharedTransitionScope = sharedTransitionScope,
-        animatedVisibilityScope = animatedVisibilityScope,
         onEvent = viewModel::onEvent
     )
 
@@ -110,14 +102,11 @@ fun MainScreen(
     }
 }
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun MainScreenContent(
     uiState: MainScreenUiState,
     viewModelFactory: ViewModelProvider.Factory,
     rootNavController: NavController,
-    sharedTransitionScope: SharedTransitionScope,
-    animatedVisibilityScope: AnimatedVisibilityScope,
     onEvent: (MainScreenEvents) -> Unit,
 ) {
     val navController = rememberNavController()
@@ -237,7 +226,7 @@ private fun MainScreenContent(
             },
             exitTransition = {
                 fadeOut(animationSpec = tween(200))
-            },
+            }
         ) {
             composable(
                 route = MainScreens.HeroesList.route,
@@ -254,8 +243,6 @@ private fun MainScreenContent(
                 WeaponsListScreen(
                     viewModelFactory = viewModelFactory,
                     navController = rootNavController,
-                    sharedTransitionScope = sharedTransitionScope,
-                    animatedVisibilityScope = animatedVisibilityScope,
                 )
             }
 
@@ -265,8 +252,6 @@ private fun MainScreenContent(
                 TeamsAndBuildsScreen(
                     viewModelFactory = viewModelFactory,
                     navController = rootNavController,
-                    sharedTransitionScope = sharedTransitionScope,
-                    animatedVisibilityScope = animatedVisibilityScope,
                 )
             }
 
@@ -276,8 +261,6 @@ private fun MainScreenContent(
                 ProfileScreen(
                     viewModelFactory = viewModelFactory,
                     navController = rootNavController,
-                    sharedTransitionScope = sharedTransitionScope,
-                    animatedVisibilityScope = animatedVisibilityScope,
                 )
             }
         }

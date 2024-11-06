@@ -3,13 +3,9 @@ package com.example.tanorami.viewing_users_build.ui
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
-import androidx.compose.animation.AnimatedVisibilityScope
-import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -47,32 +43,21 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ViewingBuildHeroFromUserNavArguments(val idBuild: Long)
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun ViewingBuildHeroFromUserScreen(
     navArguments: ViewingBuildHeroFromUserNavArguments,
     viewModelFactory: ViewModelProvider.Factory,
     viewModel: ViewingBuildHeroFromUserViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
-    sharedTransitionScope: SharedTransitionScope,
-    animatedVisibilityScope: AnimatedVisibilityScope,
 ) {
     val state = viewModel.uiState().collectAsState().value
     val sideEffects = viewModel.uiEffect().collectAsState(initial = null).value
     val context = LocalContext.current
 
-    with(sharedTransitionScope) {
-        ViewingBuildHeroFromUserScreenContent(
-            modifier = Modifier
-                .fillMaxSize()
-                .sharedBounds(
-                    rememberSharedContentState(key = "buildHero-${navArguments.idBuild}"),
-                    animatedVisibilityScope = animatedVisibilityScope,
-                ),
-            uiState = state,
-            onEvent = viewModel::onEvent,
-        )
-    }
+    ViewingBuildHeroFromUserScreenContent(
+        uiState = state,
+        onEvent = viewModel::onEvent,
+    )
 
     when (sideEffects) {
         ViewingBuildHeroFromUserScreenSideEffects.OnBack -> {
@@ -117,12 +102,10 @@ fun ViewingBuildHeroFromUserScreen(
 
 @Composable
 private fun ViewingBuildHeroFromUserScreenContent(
-    modifier: Modifier = Modifier,
     uiState: ViewingBuildHeroFromUserScreenUiState,
     onEvent: (ViewingBuildHeroFromUserScreenEvents) -> Unit,
 ) {
     Scaffold(
-        modifier = modifier,
         topBar = {
             BaseTopAppBar(
                 title = uiState.buildHero.hero?.let {

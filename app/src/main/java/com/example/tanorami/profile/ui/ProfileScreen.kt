@@ -3,9 +3,6 @@ package com.example.tanorami.profile.ui
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.animation.AnimatedVisibilityScope
-import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -60,14 +57,11 @@ import com.example.tanorami.utils.OnLifecycleEvent
 import com.example.tanorami.utils.toFile
 import com.example.tanorami.utils.toast
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun ProfileScreen(
     viewModelFactory: ViewModelProvider.Factory,
     viewModel: ProfileViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
-    sharedTransitionScope: SharedTransitionScope,
-    animatedVisibilityScope: AnimatedVisibilityScope,
 ) {
     val state = viewModel.uiState().collectAsState().value
     val sideEffects = viewModel.uiEffect().collectAsState(initial = null).value
@@ -75,8 +69,6 @@ fun ProfileScreen(
 
     ProfileScreenContent(
         uiState = state,
-        sharedTransitionScope = sharedTransitionScope,
-        animatedVisibilityScope = animatedVisibilityScope,
         onEvents = viewModel::onEvent,
     )
 
@@ -117,12 +109,9 @@ fun ProfileScreen(
     }
 }
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun ProfileScreenContent(
     uiState: ProfileScreenUiState,
-    sharedTransitionScope: SharedTransitionScope,
-    animatedVisibilityScope: AnimatedVisibilityScope,
     onEvents: (event: ProfileScreenEvents) -> Unit,
 ) {
     val context = LocalContext.current
@@ -158,8 +147,6 @@ private fun ProfileScreenContent(
                     TeamsAndBuildsInProfile(
                         heroesBuildsList = uiState.user.buildsHeroes,
                         teamsList = uiState.user.teamsList,
-                        sharedTransitionScope = sharedTransitionScope,
-                        animatedVisibilityScope = animatedVisibilityScope,
                         onEditBuildHeroScreen = {
                             onEvents(
                                 ProfileScreenEvents.OnEditBuildHeroScreen(
