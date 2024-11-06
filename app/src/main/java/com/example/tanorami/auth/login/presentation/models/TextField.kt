@@ -6,4 +6,5 @@ data class TextField(
     val value: String = "",
     val isError: Boolean = false,
     val errorMessage: Int = R.string.empty_login,
+    val visualTransformation: Boolean = false,
 )

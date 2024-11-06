@@ -36,6 +36,9 @@ class LoginViewModel @Inject constructor(
                     )
                 )
 
+            LoginScreenEvents.PasswordVisibilityChange -> uiState =
+                uiState.copy(passwordField = uiState.passwordField.copy(visualTransformation = !uiState.passwordField.visualTransformation))
+
             LoginScreenEvents.Authentication -> authentication()
             LoginScreenEvents.OnRegistrationScreen -> sendSideEffect(LoginScreenSideEffects.OnRegistrationScreen)
         }

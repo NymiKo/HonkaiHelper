@@ -7,6 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.sp
 import com.example.tanorami.core.theme.Grey
 import com.example.tanorami.core.theme.Red
@@ -21,8 +22,10 @@ fun BaseOutlinedTextField(
     isError: Boolean = false,
     supportingText: String = "",
     shape: Shape = OutlinedTextFieldDefaults.shape,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     onValueChanged: (newValue: String) -> Unit,
     leadingIcon: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
 ) {
     OutlinedTextField(
         modifier = modifier,
@@ -50,6 +53,8 @@ fun BaseOutlinedTextField(
         isError = isError,
         supportingText = {
             if (isError) Text(text = supportingText, fontSize = 14.sp)
-        }
+        },
+        visualTransformation = visualTransformation,
+        trailingIcon = trailingIcon,
     )
 }

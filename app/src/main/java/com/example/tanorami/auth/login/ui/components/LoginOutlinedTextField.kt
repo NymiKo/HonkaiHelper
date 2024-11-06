@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.tanorami.base_components.text_field.BaseOutlinedTextField
 
@@ -17,6 +18,8 @@ fun LoginOutlinedTextField(
     label: String,
     isError: Boolean = false,
     supportingText: String,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    trailingIcon: @Composable (() -> Unit)? = null,
 ) {
     BaseOutlinedTextField(
         modifier = modifier
@@ -30,5 +33,7 @@ fun LoginOutlinedTextField(
         singleLine = true,
         isError = isError,
         supportingText = supportingText,
+        visualTransformation = visualTransformation,
+        trailingIcon = trailingIcon,
     )
 }
