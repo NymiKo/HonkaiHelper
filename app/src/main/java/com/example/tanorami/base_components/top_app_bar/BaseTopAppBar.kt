@@ -37,7 +37,8 @@ fun BaseTopAppBar(
                 text = title,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.secondary,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1,
             )
         },
         actions = actions,

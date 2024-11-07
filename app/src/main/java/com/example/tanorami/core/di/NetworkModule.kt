@@ -11,7 +11,6 @@ import com.example.tanorami.core.data.image_loader.ImageLoader
 import com.example.tanorami.core.data.image_loader.ImageLoaderImpl
 import com.example.tanorami.create_build_hero.data.CreateBuildHeroService
 import com.example.tanorami.createteam.data.CreateTeamService
-import com.example.tanorami.heroes.data.HeroesListService
 import com.example.tanorami.load_data.data.LoadDataService
 import com.example.tanorami.main.data.MainScreenService
 import com.example.tanorami.profile.data.ProfileService
@@ -71,9 +70,6 @@ object NetworkModule {
 
     @Provides
     fun provideImageLoader(context: Context, @IODispatcher ioDispatcher: CoroutineDispatcher): ImageLoader = ImageLoaderImpl(context, ioDispatcher)
-
-    @Provides
-    fun providesHeroesListService(retrofit: Retrofit): HeroesListService = retrofit.create(HeroesListService::class.java)
 
     @Provides
     fun provideTeamsListService(retrofit: Retrofit): TeamsFromUsersService =

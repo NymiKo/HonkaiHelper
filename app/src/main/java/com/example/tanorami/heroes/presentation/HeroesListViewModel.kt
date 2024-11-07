@@ -2,13 +2,15 @@ package com.example.tanorami.heroes.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.example.tanorami.base.BaseViewModel
-import com.example.tanorami.core.data.NetworkResult
 import com.example.tanorami.core.data.data_store.AppDataStore
 import com.example.tanorami.heroes.data.HeroesListRepository
 import com.example.tanorami.heroes.presentation.models.HeroesListScreenEvents
 import com.example.tanorami.heroes.presentation.models.HeroesListScreenSideEffects
 import com.example.tanorami.heroes.presentation.models.HeroesListScreenUiState
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,9 +20,7 @@ class HeroesListViewModel @Inject constructor(
 ) : BaseViewModel<HeroesListScreenUiState, HeroesListScreenEvents, HeroesListScreenSideEffects>(
     initialState = HeroesListScreenUiState()
 ) {
-
     init {
-        getAvatar()
         getHeroesList()
     }
 
@@ -46,24 +46,10 @@ class HeroesListViewModel @Inject constructor(
     }
 
     fun getHeroesList() = viewModelScope.launch {
-        uiState = uiState.copy(heroesList = repository.getHeroesList())
-    }
-
-    private fun getAvatar() = viewModelScope.launch {
-        val token = appDataStore.tokenUser.first()
-
-        if (token.isNotEmpty()) {
-            when (val result = repository.getAvatar()) {
-                is NetworkResult.Error -> {
-
-                }
-
-                is NetworkResult.Success -> {
-                    uiState = uiState.copy(userAvatar = result.data)
-                }
-            }
-        } else {
-            uiState = uiState.copy(userAvatar = "")
+        appDataStore.versionDB.onEach {
+            uiState = uiState.copy(heroesList = repository.getHeroesList())
         }
+            .flowOn(Dispatchers.Default)
+            .launchIn(viewModelScope)
     }
 }

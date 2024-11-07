@@ -3,7 +3,6 @@ package com.example.tanorami.main.data
 import com.example.tanorami.core.data.NetworkResult
 import com.example.tanorami.core.data.handleApi
 import com.example.tanorami.core.di.IODispatcher
-import com.example.tanorami.heroes.data.HeroesListService
 import com.example.tanorami.main.presentation.models.NewDataModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -11,7 +10,6 @@ import javax.inject.Inject
 
 class MainScreenRepositoryImpl @Inject constructor(
     private val mainScreenService: MainScreenService,
-    private val heroesListService: HeroesListService,
     @IODispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : MainScreenRepository {
     override suspend fun getRemoteVersionDB(): NetworkResult<NewDataModel> =
@@ -35,7 +33,7 @@ class MainScreenRepositoryImpl @Inject constructor(
     override suspend fun getAvatar(): NetworkResult<String> {
         return withContext(ioDispatcher) {
             handleApi {
-                heroesListService.getAvatar()
+                mainScreenService.getAvatar()
             }
         }
     }
