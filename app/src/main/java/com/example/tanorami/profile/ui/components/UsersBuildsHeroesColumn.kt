@@ -48,14 +48,18 @@ fun UsersBuildsHeroesColumn(
     heroesBuildsList: List<BuildHeroWithUser>,
     onEditBuildHeroScreen: (idBuild: Long) -> Unit,
 ) {
-    BaseLazyColumn(modifier = modifier) {
-        items(count = heroesBuildsList.size, key = { heroesBuildsList[it].idBuild }) { index ->
-            BuildItem(
-                buildHero = heroesBuildsList[index],
-                onClick = {
-                    onEditBuildHeroScreen(heroesBuildsList[index].idBuild)
-                },
-            )
+    if (heroesBuildsList.isEmpty()) {
+        EmptyBuildsOrTeams()
+    } else {
+        BaseLazyColumn(modifier = modifier) {
+            items(count = heroesBuildsList.size, key = { heroesBuildsList[it].idBuild }) { index ->
+                BuildItem(
+                    buildHero = heroesBuildsList[index],
+                    onClick = {
+                        onEditBuildHeroScreen(heroesBuildsList[index].idBuild)
+                    },
+                )
+            }
         }
     }
 }

@@ -103,7 +103,7 @@
     <string name="delete">Удалить</string>
     <string name="team_deleted">Команда удалена</string>
     <string name="team_saved">Команда сохранена</string>
-    <string name="empty">Здесь пусто. Вы ничем не делились!</string>
+    <string name="empty">Здесь пока пусто</string>
     <string name="feedback_has_been_sent">Сообщение было отправлено. Спасибо!</string>
     <string name="message_uid_build_copied">Идентификатор сборки скопирован</string>
     <string name="message_uid_team_copied">Идентификатор команды скопирован</string>

@@ -211,7 +211,8 @@ private fun AvatarImage(
                     uploadAvatarOnServer()
                 }
                 .background(MaterialTheme.colorScheme.secondary, RoundedCornerShape(16.dp)),
-            model = avatarUrl,
+            model = avatarUrl.ifEmpty { R.drawable.ic_person },
+            colorFilter = if (avatarUrl.isEmpty()) ColorFilter.tint(MaterialTheme.colorScheme.onSecondary) else null,
             contentDescription = null,
             contentScale = ContentScale.Crop,
         )

@@ -45,12 +45,16 @@ fun TeamsColumn(
     teamsList: List<TeamHero>,
     onEditTeamScreen: (idTeam: Long) -> Unit,
 ) {
-    BaseLazyColumn(modifier = modifier) {
-        items(count = teamsList.size, key = { teamsList[it].idTeam }) {
-            TeamItem(
-                team = teamsList[it],
-                onEditTeamScreen = onEditTeamScreen::invoke
-            )
+    if (teamsList.isEmpty()) {
+        EmptyBuildsOrTeams()
+    } else {
+        BaseLazyColumn(modifier = modifier) {
+            items(count = teamsList.size, key = { teamsList[it].idTeam }) {
+                TeamItem(
+                    team = teamsList[it],
+                    onEditTeamScreen = onEditTeamScreen::invoke
+                )
+            }
         }
     }
 }
