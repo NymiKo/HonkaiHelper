@@ -14,7 +14,6 @@ import com.example.tanorami.core.navigation.LocalSharedTransitionScope
 @Composable
 internal fun EquipmentImage(
     modifier: Modifier = Modifier,
-    equipmentId: Int,
     equipmentImage: Any,
     sharedElementKeyTransition: String,
     colorFilter: ColorFilter? = null,

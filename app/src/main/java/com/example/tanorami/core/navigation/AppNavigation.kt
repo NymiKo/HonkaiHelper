@@ -92,22 +92,18 @@ fun AppNavigation(
                 composable<InfoAboutHeroNavArguments>(
                     enterTransition = {
                         slideInHorizontally(
-                            animationSpec = tween(500),
-                            initialOffsetX = { it }) + fadeIn(animationSpec = tween(500))
+                            initialOffsetX = { it }) + fadeIn()
                     },
                     exitTransition = {
                         slideOutHorizontally(
-                            animationSpec = tween(500),
                             targetOffsetX = { -it / 2 }) + fadeOut()
                     },
                     popExitTransition = {
                         slideOutHorizontally(
-                            animationSpec = tween(500),
                             targetOffsetX = { it / 2 }) + fadeOut()
                     },
                     popEnterTransition = {
                         slideInHorizontally(
-                            animationSpec = tween(500),
                             initialOffsetX = { -it / 2 }) + fadeIn()
                     }
                 ) { backStackEntry ->
