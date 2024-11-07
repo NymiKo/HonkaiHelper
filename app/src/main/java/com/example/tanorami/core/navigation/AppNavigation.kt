@@ -1,12 +1,15 @@
 package com.example.tanorami.core.navigation
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
+import androidx.compose.animation.core.EaseIn
+import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -72,12 +75,10 @@ fun AppNavigation(
                 startDestination = MainRoute
             ) {
                 composable<MainRoute> {
-                    CompositionLocalProvider(value = LocalNavAnimatedVisibilityScope provides this@composable) {
-                        MainScreen(
-                            viewModelFactory = viewModelFactory,
-                            rootNavController = navController,
-                        )
-                    }
+                    MainScreen(
+                        viewModelFactory = viewModelFactory,
+                        rootNavController = navController,
+                    )
                 }
 
                 composable<LoadDataNavArguments> { backStackEntry ->
@@ -91,21 +92,20 @@ fun AppNavigation(
 
                 composable<InfoAboutHeroNavArguments>(
                     enterTransition = {
-                        slideInHorizontally(
-                            initialOffsetX = { it }) + fadeIn()
+                        slideIntoContainer(
+                            animationSpec = tween(300, easing = EaseIn),
+                            towards = AnimatedContentTransitionScope.SlideDirection.Start
+                        ) +
+                                fadeIn(animationSpec = tween(300, easing = LinearEasing))
                     },
-                    exitTransition = {
-                        slideOutHorizontally(
-                            targetOffsetX = { -it / 2 }) + fadeOut()
-                    },
+                    exitTransition = { ExitTransition.None },
+                    popEnterTransition = { EnterTransition.None },
                     popExitTransition = {
-                        slideOutHorizontally(
-                            targetOffsetX = { it / 2 }) + fadeOut()
+                        slideOutOfContainer(
+                            animationSpec = tween(300, easing = EaseIn),
+                            towards = AnimatedContentTransitionScope.SlideDirection.End
+                        ) + fadeOut(animationSpec = tween(300, easing = LinearEasing))
                     },
-                    popEnterTransition = {
-                        slideInHorizontally(
-                            initialOffsetX = { -it / 2 }) + fadeIn()
-                    }
                 ) { backStackEntry ->
                     val infoAboutHeroNavArguments: InfoAboutHeroNavArguments =
                         backStackEntry.toRoute()
@@ -125,25 +125,21 @@ fun AppNavigation(
 
                 composable<BaseBuildHeroNavArguments>(
                     enterTransition = {
-                        slideInHorizontally(
-                            animationSpec = tween(500),
-                            initialOffsetX = { it / 2 }) + fadeIn()
+                        slideIntoContainer(
+                            animationSpec = tween(300, easing = EaseIn),
+                            towards = AnimatedContentTransitionScope.SlideDirection.Start,
+                            initialOffset = { it / 2 }
+                        ) + fadeIn(animationSpec = tween(300, easing = LinearEasing))
                     },
-                    exitTransition = {
-                        slideOutHorizontally(
-                            animationSpec = tween(500),
-                            targetOffsetX = { -it / 2 }) + fadeOut()
-                    },
+                    exitTransition = { ExitTransition.None },
+                    popEnterTransition = { EnterTransition.None },
                     popExitTransition = {
-                        slideOutHorizontally(
-                            animationSpec = tween(500),
-                            targetOffsetX = { it / 2 }) + fadeOut()
+                        slideOutOfContainer(
+                            animationSpec = tween(300, easing = EaseIn),
+                            towards = AnimatedContentTransitionScope.SlideDirection.End,
+                            targetOffset = { it / 2 }
+                        ) + fadeOut(animationSpec = tween(300, easing = LinearEasing))
                     },
-                    popEnterTransition = {
-                        slideInHorizontally(
-                            animationSpec = tween(500),
-                            initialOffsetX = { -it / 2 }) + fadeIn()
-                    }
                 ) { backStackEntry ->
                     val baseBuildHeroNavArguments: BaseBuildHeroNavArguments =
                         backStackEntry.toRoute()
@@ -158,25 +154,21 @@ fun AppNavigation(
 
                 composable<BuildsHeroFromUsersNavArguments>(
                     enterTransition = {
-                        slideInHorizontally(
-                            animationSpec = tween(500),
-                            initialOffsetX = { it / 2 }) + fadeIn()
-                    },
-                    exitTransition = {
-                        slideOutHorizontally(
-                            animationSpec = tween(500),
-                            targetOffsetX = { -it / 2 }) + fadeOut()
+                        slideIntoContainer(
+                            animationSpec = tween(300, easing = EaseIn),
+                            towards = AnimatedContentTransitionScope.SlideDirection.Start,
+                            initialOffset = { it / 2 }
+                        ) + fadeIn(animationSpec = tween(300, easing = LinearEasing))
                     },
                     popExitTransition = {
-                        slideOutHorizontally(
-                            animationSpec = tween(500),
-                            targetOffsetX = { it / 2 }) + fadeOut()
+                        slideOutOfContainer(
+                            animationSpec = tween(300, easing = EaseIn),
+                            towards = AnimatedContentTransitionScope.SlideDirection.End,
+                            targetOffset = { it / 2 }
+                        ) + fadeOut(animationSpec = tween(300, easing = LinearEasing))
                     },
-                    popEnterTransition = {
-                        slideInHorizontally(
-                            animationSpec = tween(500),
-                            initialOffsetX = { -it / 2 }) + fadeIn()
-                    }
+                    exitTransition = { ExitTransition.None },
+                    popEnterTransition = { EnterTransition.None },
                 ) { backStackEntry ->
                     val buildsHeroFromUsersNavArguments: BuildsHeroFromUsersNavArguments =
                         backStackEntry.toRoute()
@@ -189,16 +181,21 @@ fun AppNavigation(
 
                 composable<ViewingBuildHeroFromUserNavArguments>(
                     enterTransition = {
-                        slideInHorizontally(
-                            animationSpec = tween(500),
-                            initialOffsetX = { it / 2 }) + fadeIn()
+                        slideIntoContainer(
+                            animationSpec = tween(300, easing = EaseIn),
+                            towards = AnimatedContentTransitionScope.SlideDirection.Start,
+                            initialOffset = { it / 2 }
+                        ) + fadeIn(animationSpec = tween(300, easing = LinearEasing))
                     },
                     popExitTransition = {
-                        slideOutHorizontally(
-                            animationSpec = tween(500),
-                            targetOffsetX = { it / 2 }) + fadeOut()
+                        slideOutOfContainer(
+                            animationSpec = tween(300, easing = EaseIn),
+                            towards = AnimatedContentTransitionScope.SlideDirection.End,
+                            targetOffset = { it / 2 }
+                        ) + fadeOut(animationSpec = tween(300, easing = LinearEasing))
                     },
-                    popEnterTransition = null,
+                    exitTransition = { ExitTransition.None },
+                    popEnterTransition = { EnterTransition.None },
                 ) { backStackEntry ->
                     val viewingBuildHeroFromUserNavArguments: ViewingBuildHeroFromUserNavArguments =
                         backStackEntry.toRoute()
@@ -211,15 +208,21 @@ fun AppNavigation(
 
                 composable<TeamsFromUsersNavArguments>(
                     enterTransition = {
-                        slideInHorizontally(
-                            animationSpec = tween(500),
-                            initialOffsetX = { it / 2 }) + fadeIn()
+                        slideIntoContainer(
+                            animationSpec = tween(300, easing = EaseIn),
+                            towards = AnimatedContentTransitionScope.SlideDirection.Start,
+                            initialOffset = { it / 2 }
+                        ) + fadeIn(animationSpec = tween(300, easing = LinearEasing))
                     },
                     popExitTransition = {
-                        slideOutHorizontally(
-                            animationSpec = tween(500),
-                            targetOffsetX = { it / 2 }) + fadeOut()
+                        slideOutOfContainer(
+                            animationSpec = tween(300, easing = EaseIn),
+                            towards = AnimatedContentTransitionScope.SlideDirection.End,
+                            targetOffset = { it / 2 }
+                        ) + fadeOut(animationSpec = tween(300, easing = LinearEasing))
                     },
+                    exitTransition = { ExitTransition.None },
+                    popEnterTransition = { EnterTransition.None },
                 ) { backStackEntry ->
                     val teamsFromUsersNavArguments: TeamsFromUsersNavArguments =
                         backStackEntry.toRoute()
@@ -230,7 +233,24 @@ fun AppNavigation(
                     )
                 }
 
-                composable<InfoAboutWeaponNavArguments> { backStackEntry ->
+                composable<InfoAboutWeaponNavArguments>(
+                    enterTransition = {
+                        slideIntoContainer(
+                            animationSpec = tween(300, easing = EaseIn),
+                            towards = AnimatedContentTransitionScope.SlideDirection.Start,
+                            initialOffset = { it / 2 }
+                        ) + fadeIn(animationSpec = tween(300, easing = LinearEasing))
+                    },
+                    popExitTransition = {
+                        slideOutOfContainer(
+                            animationSpec = tween(300, easing = EaseIn),
+                            towards = AnimatedContentTransitionScope.SlideDirection.End,
+                            targetOffset = { it / 2 }
+                        ) + fadeOut(animationSpec = tween(300, easing = LinearEasing))
+                    },
+                    exitTransition = { ExitTransition.None },
+                    popEnterTransition = { EnterTransition.None },
+                ) { backStackEntry ->
                     val infoAboutWeaponNavArguments: InfoAboutWeaponNavArguments =
                         backStackEntry.toRoute()
                     CompositionLocalProvider(value = LocalNavAnimatedVisibilityScope provides this@composable) {
@@ -242,7 +262,24 @@ fun AppNavigation(
                     }
                 }
 
-                composable<InfoAboutRelicNavArgument> { backStackEntry ->
+                composable<InfoAboutRelicNavArgument>(
+                    enterTransition = {
+                        slideIntoContainer(
+                            animationSpec = tween(300, easing = EaseIn),
+                            towards = AnimatedContentTransitionScope.SlideDirection.Start,
+                            initialOffset = { it / 2 }
+                        ) + fadeIn(animationSpec = tween(300, easing = LinearEasing))
+                    },
+                    popExitTransition = {
+                        slideOutOfContainer(
+                            animationSpec = tween(300, easing = EaseIn),
+                            towards = AnimatedContentTransitionScope.SlideDirection.End,
+                            targetOffset = { it / 2 }
+                        ) + fadeOut(animationSpec = tween(300, easing = LinearEasing))
+                    },
+                    exitTransition = { ExitTransition.None },
+                    popEnterTransition = { EnterTransition.None },
+                ) { backStackEntry ->
                     val infoAboutRelicNavArgument: InfoAboutRelicNavArgument =
                         backStackEntry.toRoute()
                     CompositionLocalProvider(value = LocalNavAnimatedVisibilityScope provides this@composable) {
@@ -254,7 +291,24 @@ fun AppNavigation(
                     }
                 }
 
-                composable<InfoAboutDecorationNavArguments> { backStackEntry ->
+                composable<InfoAboutDecorationNavArguments>(
+                    enterTransition = {
+                        slideIntoContainer(
+                            animationSpec = tween(300, easing = EaseIn),
+                            towards = AnimatedContentTransitionScope.SlideDirection.Start,
+                            initialOffset = { it / 2 }
+                        ) + fadeIn(animationSpec = tween(300, easing = LinearEasing))
+                    },
+                    popExitTransition = {
+                        slideOutOfContainer(
+                            animationSpec = tween(300, easing = EaseIn),
+                            towards = AnimatedContentTransitionScope.SlideDirection.End,
+                            targetOffset = { it / 2 }
+                        ) + fadeOut(animationSpec = tween(300, easing = LinearEasing))
+                    },
+                    exitTransition = { ExitTransition.None },
+                    popEnterTransition = { EnterTransition.None },
+                ) { backStackEntry ->
                     val infoAboutDecorationNavArguments: InfoAboutDecorationNavArguments =
                         backStackEntry.toRoute()
                     CompositionLocalProvider(value = LocalNavAnimatedVisibilityScope provides this@composable) {
@@ -268,24 +322,31 @@ fun AppNavigation(
 
                 composable<CreateBuildForHeroNavArguments>(
                     enterTransition = {
-                        slideInHorizontally(
-                            animationSpec = tween(500),
-                            initialOffsetX = { it / 2 }) + fadeIn()
+                        slideIntoContainer(
+                            animationSpec = tween(300, easing = EaseIn),
+                            towards = AnimatedContentTransitionScope.SlideDirection.Start
+                        ) +
+                                fadeIn(animationSpec = tween(300, easing = LinearEasing))
                     },
                     exitTransition = {
-                        slideOutHorizontally(
-                            animationSpec = tween(500),
-                            targetOffsetX = { -it / 2 }) + fadeOut()
+                        slideOutOfContainer(
+                            animationSpec = tween(300, easing = EaseIn),
+                            towards = AnimatedContentTransitionScope.SlideDirection.Start,
+                            targetOffset = { it / 2 }
+                        ) + fadeOut(animationSpec = tween(300, easing = LinearEasing))
                     },
                     popExitTransition = {
-                        slideOutHorizontally(
-                            animationSpec = tween(500),
-                            targetOffsetX = { it / 2 }) + fadeOut()
+                        slideOutOfContainer(
+                            animationSpec = tween(300, easing = EaseIn),
+                            towards = AnimatedContentTransitionScope.SlideDirection.End
+                        ) + fadeOut(animationSpec = tween(300, easing = LinearEasing))
                     },
                     popEnterTransition = {
-                        slideInHorizontally(
-                            animationSpec = tween(500),
-                            initialOffsetX = { -it / 2 }) + fadeIn()
+                        slideIntoContainer(
+                            animationSpec = tween(300, easing = EaseIn),
+                            towards = AnimatedContentTransitionScope.SlideDirection.End,
+                            initialOffset = { it / 2 }) +
+                                fadeIn(animationSpec = tween(300, easing = LinearEasing))
                     }
                 ) { backStackEntry ->
                     val createBuildForHeroNavArguments: CreateBuildForHeroNavArguments =
@@ -336,7 +397,7 @@ fun AppNavigation(
                     )
                 }
 
-                composable<CreateBuildHeroesListNavArguments> { backStackEntry ->
+                composable<CreateBuildHeroesListNavArguments> {
                     CreateBuildHeroesListScreen(
                         viewModelFactory = viewModelFactory,
                         navController = navController

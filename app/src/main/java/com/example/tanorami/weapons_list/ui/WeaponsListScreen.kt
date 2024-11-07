@@ -1,6 +1,5 @@
 package com.example.tanorami.weapons_list.ui
 
-import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -44,8 +43,6 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.tanorami.R
 import com.example.tanorami.base_components.text.BaseDefaultText
-import com.example.tanorami.core.navigation.LocalNavAnimatedVisibilityScope
-import com.example.tanorami.core.navigation.LocalSharedTransitionScope
 import com.example.tanorami.core.theme.Black
 import com.example.tanorami.core.theme.Blue
 import com.example.tanorami.core.theme.Orange
@@ -136,18 +133,12 @@ private fun WeaponsListScreenContent(
     }
 }
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun WeaponItem(
     modifier: Modifier = Modifier,
     weapon: Weapon,
     onClick: (idWeapon: Int) -> Unit
 ) {
-    val sharedTransitionScope = LocalSharedTransitionScope.current
-        ?: throw IllegalStateException("No SharedElementScope found")
-    val animatedVisibilityScope = LocalNavAnimatedVisibilityScope.current
-        ?: throw IllegalStateException("No AnimatedVisibility found")
-
     Box(
         modifier = modifier
             .height(120.dp)
@@ -166,16 +157,10 @@ private fun WeaponItem(
             .clickable { onClick(weapon.idWeapon) },
         contentAlignment = Alignment.Center,
     ) {
-        with(sharedTransitionScope) {
-            AsyncImage(
-                modifier = Modifier.sharedElement(
-                    rememberSharedContentState(key = "weapon-${weapon.idWeapon}-base-build"),
-                    animatedVisibilityScope = animatedVisibilityScope,
-                ),
-                model = weapon.image,
-                contentDescription = null,
-            )
-        }
+        AsyncImage(
+            model = weapon.image,
+            contentDescription = null,
+        )
 
         Box(
             modifier = Modifier
