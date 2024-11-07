@@ -5,6 +5,6 @@ import com.example.tanorami.base.UiState
 
 data class RegistrationScreenUiState(
     val nicknameField: TextField = TextField(),
-    val passwordField: TextField = TextField(),
+    val passwordField: TextField = TextField(visualTransformation = true),
     val isCreatingAccount: Boolean = false,
 ) : UiState

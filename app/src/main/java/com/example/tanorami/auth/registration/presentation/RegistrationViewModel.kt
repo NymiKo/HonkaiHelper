@@ -35,6 +35,9 @@ class RegistrationViewModel @Inject constructor(
                     isError = false
                 )
             )
+
+            RegistrationScreenEvent.PasswordVisibilityChange -> uiState =
+                uiState.copy(passwordField = uiState.passwordField.copy(visualTransformation = !uiState.passwordField.visualTransformation))
         }
     }
 
