@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
@@ -52,6 +53,7 @@ import com.example.tanorami.main.ui.components.CreateBuildOrTeamDialog
 import com.example.tanorami.main.ui.components.UploadingDataDialog
 import com.example.tanorami.profile.ui.ProfileScreen
 import com.example.tanorami.teams_and_builds.ui.TeamsAndBuildsScreen
+import com.example.tanorami.utils.toast
 import com.example.tanorami.weapons_list.ui.WeaponsListScreen
 import kotlinx.serialization.Serializable
 
@@ -74,6 +76,7 @@ fun MainScreen(
 ) {
     val state = viewModel.uiState().collectAsState().value
     val sideEffect = viewModel.uiEffect().collectAsState(initial = null).value
+    val context = LocalContext.current
 
     MainScreenContent(
         uiState = state,
@@ -95,6 +98,11 @@ fun MainScreen(
 
         MainScreenSideEffects.CreateBuildForHeroScreen -> {
             rootNavController.navigate(route = CreateBuildHeroesListNavArguments)
+            viewModel.clearEffect()
+        }
+
+        is MainScreenSideEffects.ShowToast -> {
+            toast(context, sideEffect.message)
             viewModel.clearEffect()
         }
 

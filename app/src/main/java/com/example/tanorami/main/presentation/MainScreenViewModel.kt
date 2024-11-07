@@ -1,6 +1,7 @@
 package com.example.tanorami.main.presentation
 
 import androidx.lifecycle.viewModelScope
+import com.example.tanorami.R
 import com.example.tanorami.base.BaseViewModel
 import com.example.tanorami.core.data.NetworkResult
 import com.example.tanorami.core.data.data_store.AppDataStore
@@ -32,7 +33,6 @@ class MainScreenViewModel @Inject constructor(
 
         dataStore.tokenUser.onEach {
             if (it.isNotEmpty()) {
-                profileRepository.getProfile()
                 getProfileAvatar()
             } else {
                 uiState = uiState.copy(userProfileAvatar = "")
@@ -50,7 +50,12 @@ class MainScreenViewModel @Inject constructor(
             }
 
             is MainScreenEvents.ChangeVisibilityDialogCreateBuildOrTeam -> {
-                uiState = uiState.copy(dialogCreateBuildOrTeamVisibilityState = event.visibility)
+                if (uiState.userProfileAvatar.isNotEmpty()) {
+                    uiState =
+                        uiState.copy(dialogCreateBuildOrTeamVisibilityState = event.visibility)
+                } else {
+                    sendSideEffect(MainScreenSideEffects.ShowToast(R.string.this_feature_only_registered_users))
+                }
             }
 
             MainScreenEvents.OnDialogItemCreateTeamClick -> {
