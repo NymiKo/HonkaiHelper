@@ -7,6 +7,8 @@ data class TeamsFromUsersScreenUiState(
     val isLoading: Boolean = true,
     val isError: Boolean = false,
     val tokenUser: String = "",
+    val idHero: Int? = null,
     val nameHero: String = "",
-    val teamsList: List<TeamHero> = emptyList()
+    val teamsList: List<TeamHero> = emptyList(),
+    val refreshingTeamsList: Boolean = false,
 ) : UiState

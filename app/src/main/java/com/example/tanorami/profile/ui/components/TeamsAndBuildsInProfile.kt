@@ -8,22 +8,24 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SecondaryTabRow
 import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
-import androidx.compose.material3.TabRowDefaults
-import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import com.example.tanorami.R
+import com.example.tanorami.base_components.tabs.TabIndicator
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
 import com.example.tanorami.teams.data.model.TeamHero
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TeamsAndBuildsInProfile(
     modifier: Modifier = Modifier,
@@ -40,19 +42,19 @@ fun TeamsAndBuildsInProfile(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        TabRow(
+        SecondaryTabRow(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth(),
             selectedTabIndex = pagerState.currentPage,
             contentColor = MaterialTheme.colorScheme.secondary,
-            indicator = { tabPositions ->
-                if (pagerState.currentPage < tabPositions.size) {
-                    TabRowDefaults.SecondaryIndicator(
-                        modifier = Modifier.tabIndicatorOffset(tabPositions[pagerState.currentPage]),
-                        color = MaterialTheme.colorScheme.secondary,
-                    )
-                }
+            divider = {},
+            indicator = {
+                TabIndicator(
+                    modifier = Modifier
+                        .tabIndicatorOffset(pagerState.currentPage)
+                        .padding(vertical = 5.dp, horizontal = 15.dp)
+                )
             }
         ) {
             tabs.forEachIndexed { index, title ->
@@ -86,7 +88,7 @@ private fun TabItem(
     selectTab: () -> Unit,
 ) {
     Tab(
-        modifier = modifier,
+        modifier = modifier.zIndex(2F),
         selected = selected,
         onClick = { selectTab() }
     ) {

@@ -99,6 +99,8 @@ private fun TeamsListScreenContents(
             uiState.teamsList.isNotEmpty() -> {
                 TeamsListLazyColumn(
                     modifier = Modifier.padding(innerPadding),
+                    refreshingTeamsList = uiState.refreshingTeamsList,
+                    refreshTeamsList = { onEvent(TeamsFromUsersScreenEvents.RefreshTeamsList) },
                     teamsList = uiState.teamsList,
                 )
             }

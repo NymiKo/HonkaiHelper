@@ -6,4 +6,6 @@ sealed interface TeamsAndBuildsScreenEvents : UiEvent {
     class OnViewingBuildHeroFromUserScreen(val idBuild: Long) : TeamsAndBuildsScreenEvents
     class SearchTextChanged(val newValue: String) : TeamsAndBuildsScreenEvents
     class ChangeActivePage(val activePageIndex: Int) : TeamsAndBuildsScreenEvents
+    data object RefreshBuildsList : TeamsAndBuildsScreenEvents
+    data object RefreshTeamsList : TeamsAndBuildsScreenEvents
 }

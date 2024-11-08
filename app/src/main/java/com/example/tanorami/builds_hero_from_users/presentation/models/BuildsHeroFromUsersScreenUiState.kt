@@ -11,5 +11,6 @@ data class BuildsHeroFromUsersScreenUiState(
     val tokenUser: String = "",
     val uid: String = "",
     val hero: HeroWithNameAvatarRarity? = null,
-    val buildsList: List<BuildHeroWithUser> = emptyList()
+    val buildsList: List<BuildHeroWithUser> = emptyList(),
+    val refreshingBuildsList: Boolean = false,
 ) : UiState

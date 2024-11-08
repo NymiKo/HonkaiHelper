@@ -24,19 +24,27 @@ class BuildsHeroFromUsersViewModel @Inject constructor(
             }
             is BuildsHeroFromUsersScreenEvents.OnViewingBuildHeroFromUserScreen -> sendSideEffect(BuildsHeroFromUsersScreenSideEffects.OnViewingBuildHeroFromUserScreen(event.idBuild))
             BuildsHeroFromUsersScreenEvents.OnBack -> sendSideEffect(BuildsHeroFromUsersScreenSideEffects.OnBack)
+            BuildsHeroFromUsersScreenEvents.RefreshBuildsList -> getBuildsHeroList(uiState.hero?.id!!)
         }
     }
 
     private fun getBuildsHeroList(idHero: Int) = viewModelScope.launch {
+        uiState = uiState.copy(refreshingBuildsList = true)
         when (val result = repository.getBuildsHeroListByIdHero(idHero)) {
             is NetworkResult.Error -> {
-                uiState = uiState.copy(isLoading = false, isSuccess = false, isError = true)
+                uiState = uiState.copy(
+                    isLoading = false,
+                    isSuccess = false,
+                    isError = true,
+                    refreshingBuildsList = false
+                )
             }
             is NetworkResult.Success -> {
                 uiState = uiState.copy(
                     isLoading = false,
                     isSuccess = true,
                     isError = false,
+                    refreshingBuildsList = false,
                     buildsList = result.data
                 )
             }

@@ -25,25 +25,30 @@ class TeamsFromUsersViewModel @Inject constructor(
             TeamsFromUsersScreenEvents.OnBack -> {
                 sendSideEffect(TeamsFromUsersScreenSideEffects.OnBack)
             }
+
+            TeamsFromUsersScreenEvents.RefreshTeamsList -> getTeamsList(uiState.idHero!!)
         }
     }
 
     private fun getNameHero(idHero: Int) = viewModelScope.launch {
-        uiState = uiState.copy(nameHero = repository.getNameHero(idHero))
+        uiState = uiState.copy(nameHero = repository.getNameHero(idHero), idHero = idHero)
     }
 
     private fun getTeamsList(idHero: Int) = viewModelScope.launch {
+        uiState = uiState.copy(refreshingTeamsList = true)
         when (val result = repository.getTeamsListByID(idHero)) {
             is NetworkResult.Error -> {
                 uiState = uiState.copy(
                     isLoading = false,
-                    isError = true
+                    isError = true,
+                    refreshingTeamsList = false,
                 )
             }
             is NetworkResult.Success -> {
                 uiState = uiState.copy(
                     isLoading = false,
                     isError = false,
+                    refreshingTeamsList = false,
                     teamsList = result.data,
                 )
             }

@@ -1,5 +1,6 @@
 package com.example.tanorami.teams_and_builds.ui
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,25 +9,26 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SecondaryTabRow
 import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
-import androidx.compose.material3.TabRowDefaults
-import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.tanorami.R
-import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
+import com.example.tanorami.base_components.tabs.TabIndicator
 import com.example.tanorami.builds_hero_from_users.ui.components.BuildsListLazyColumn
-import com.example.tanorami.teams.data.model.TeamHero
 import com.example.tanorami.teams.ui.components.TeamsListLazyColumn
 import com.example.tanorami.teams_and_builds.presentation.TeamsAndBuildsViewModel
 import com.example.tanorami.teams_and_builds.presentation.models.TeamsAndBuildsScreenEvents
@@ -59,6 +61,7 @@ fun TeamsAndBuildsScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun TeamsAndBuildsScreenContent(
     uiState: TeamsAndBuildsScreenUiState,
@@ -68,23 +71,27 @@ private fun TeamsAndBuildsScreenContent(
     val scope = rememberCoroutineScope()
     val tabs = listOf(stringResource(id = R.string.builds), stringResource(id = R.string.teams))
 
+    LaunchedEffect(pagerState.currentPage) {
+        onEvent(TeamsAndBuildsScreenEvents.ChangeActivePage(pagerState.currentPage))
+    }
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        TabRow(
+        SecondaryTabRow(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth(),
             selectedTabIndex = uiState.activePageIndex,
             contentColor = MaterialTheme.colorScheme.secondary,
-            indicator = { tabPositions ->
-                if (uiState.activePageIndex < tabPositions.size) {
-                    TabRowDefaults.SecondaryIndicator(
-                        modifier = Modifier.tabIndicatorOffset(tabPositions[uiState.activePageIndex]),
-                        color = MaterialTheme.colorScheme.secondary,
-                    )
-                }
+            divider = {},
+            indicator = {
+                TabIndicator(
+                    modifier = Modifier
+                        .tabIndicatorOffset(uiState.activePageIndex)
+                        .padding(vertical = 15.dp, horizontal = 30.dp)
+                )
             }
         ) {
             tabs.forEachIndexed { index, title ->
@@ -95,7 +102,6 @@ private fun TeamsAndBuildsScreenContent(
                         scope.launch {
                             pagerState.animateScrollToPage(index)
                         }
-                        onEvent(TeamsAndBuildsScreenEvents.ChangeActivePage(index))
                     }
                 )
             }
@@ -103,13 +109,14 @@ private fun TeamsAndBuildsScreenContent(
 
         TabsContent(
             pagerState = pagerState,
-            buildsList = uiState.buildsList,
-            teamsList = uiState.teamsList,
+            uiState = uiState,
             onBuildClick = { idBuild ->
                 onEvent(
                     TeamsAndBuildsScreenEvents.OnViewingBuildHeroFromUserScreen(idBuild)
                 )
             },
+            refreshBuildsList = { onEvent(TeamsAndBuildsScreenEvents.RefreshBuildsList) },
+            refreshTeamsList = { onEvent(TeamsAndBuildsScreenEvents.RefreshTeamsList) }
         )
     }
 }
@@ -122,36 +129,45 @@ private fun TabItem(
     selectTab: () -> Unit,
 ) {
     Tab(
-        modifier = modifier,
+        modifier = modifier.zIndex(2F),
         selected = selected,
-        onClick = { selectTab() }
-    ) {
-        Text(
-            modifier = Modifier.padding(vertical = 12.dp),
-            text = title
-        )
-    }
+        onClick = { selectTab() },
+        text = {
+            Text(
+                modifier = Modifier.padding(vertical = 12.dp),
+                text = title
+            )
+        },
+        interactionSource = remember { MutableInteractionSource() },
+    )
 }
 
 @Composable
 private fun TabsContent(
     modifier: Modifier = Modifier,
-    teamsList: List<TeamHero>,
-    buildsList: List<BuildHeroWithUser>,
+    uiState: TeamsAndBuildsScreenUiState,
     onBuildClick: (idBuild: Long) -> Unit,
+    refreshBuildsList: () -> Unit,
+    refreshTeamsList: () -> Unit,
     pagerState: PagerState,
 ) {
     HorizontalPager(modifier = modifier, state = pagerState) { index ->
         when (index) {
             0 -> {
                 BuildsListLazyColumn(
-                    buildsList = buildsList,
+                    refreshingBuildsList = uiState.refreshingBuildsList,
+                    buildsList = uiState.buildsList,
+                    refreshBuildsList = refreshBuildsList::invoke,
                     onBuildClick = onBuildClick::invoke,
                 )
             }
 
             1 -> {
-                TeamsListLazyColumn(teamsList = teamsList)
+                TeamsListLazyColumn(
+                    refreshingTeamsList = uiState.refreshingTeamsList,
+                    refreshTeamsList = refreshTeamsList::invoke,
+                    teamsList = uiState.teamsList,
+                )
             }
         }
     }

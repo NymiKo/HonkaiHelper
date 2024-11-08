@@ -10,4 +10,6 @@ data class TeamsAndBuildsScreenUiState(
     val buildsList: List<BuildHeroWithUser> = emptyList(),
     val searchText: TextField = TextField(),
     val activePageIndex: Int = 0,
+    val refreshingBuildsList: Boolean = false,
+    val refreshingTeamsList: Boolean = false,
 ) : UiState

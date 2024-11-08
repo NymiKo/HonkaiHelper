@@ -31,29 +31,34 @@ class TeamsAndBuildsViewModel @Inject constructor(
 
             is TeamsAndBuildsScreenEvents.ChangeActivePage -> uiState =
                 uiState.copy(activePageIndex = event.activePageIndex)
+
+            TeamsAndBuildsScreenEvents.RefreshBuildsList -> getBuildsListFromUsers()
+            TeamsAndBuildsScreenEvents.RefreshTeamsList -> getTeamsListFromUsers()
         }
     }
 
     private fun getTeamsListFromUsers() = viewModelScope.launch {
+        uiState = uiState.copy(refreshingTeamsList = true)
         when (val result = repository.getTeamsListFromUsers()) {
             is NetworkResult.Error -> {
 
             }
 
             is NetworkResult.Success -> {
-                uiState = uiState.copy(teamsList = result.data)
+                uiState = uiState.copy(teamsList = result.data, refreshingTeamsList = false)
             }
         }
     }
 
     private fun getBuildsListFromUsers() = viewModelScope.launch {
+        uiState = uiState.copy(refreshingBuildsList = true)
         when (val result = repository.getBuildsListFromUsers()) {
             is NetworkResult.Error -> {
 
             }
 
             is NetworkResult.Success -> {
-                uiState = uiState.copy(buildsList = result.data)
+                uiState = uiState.copy(buildsList = result.data, refreshingBuildsList = false)
             }
         }
     }

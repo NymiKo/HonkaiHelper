@@ -23,13 +23,12 @@ class CreateTeamRepositoryImpl @Inject constructor(
     override suspend fun saveTeam(idTeam: Long, heroesList: List<HeroWithNameAvatarRarity>): NetworkResult<Unit> {
         return withContext(ioDispatcher) {
             if (idTeam != -1L) {
-                handleApi { createTeamService.updateTeam(idTeam,
-                    heroesList.sortedBy { hero -> hero.id }.map { hero -> hero.id })
+                handleApi {
+                    createTeamService.updateTeam(idTeam, heroesList.map { hero -> hero.id })
                 }
             } else {
                 handleApi {
-                    createTeamService.saveTeam(heroesList.sortedBy { hero -> hero.id }
-                        .map { hero -> hero.id })
+                    createTeamService.saveTeam(heroesList.map { hero -> hero.id })
                 }
             }
         }

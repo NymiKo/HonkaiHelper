@@ -99,6 +99,8 @@ private fun BuildsHeroFromUsersScreenContent(
                 BuildsListLazyColumn(
                     modifier = Modifier.padding(innerPadding),
                     buildsList = uiState.buildsList,
+                    refreshingBuildsList = uiState.refreshingBuildsList,
+                    refreshBuildsList = { onEvent(BuildsHeroFromUsersScreenEvents.RefreshBuildsList) },
                     onBuildClick = {
                         onEvent(
                             BuildsHeroFromUsersScreenEvents.OnViewingBuildHeroFromUserScreen(
