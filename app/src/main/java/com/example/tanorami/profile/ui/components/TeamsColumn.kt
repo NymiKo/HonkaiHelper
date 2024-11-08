@@ -1,8 +1,5 @@
 package com.example.tanorami.profile.ui.components
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context.CLIPBOARD_SERVICE
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -21,7 +18,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -125,19 +121,19 @@ fun TeamItem(
 
                     Spacer(modifier = Modifier.weight(1F))
 
-                    AsyncImage(
-                        modifier = Modifier
-                            .size(25.dp)
-                            .clickable {
-                                val clipboard =
-                                    context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-                                val clipData: ClipData = ClipData.newPlainText("UID", team.uid)
-                                clipboard.setPrimaryClip(clipData)
-                            },
-                        model = R.drawable.ic_baseline_content_copy,
-                        contentDescription = null,
-                        colorFilter = ColorFilter.tint(White)
-                    )
+//                    AsyncImage(
+//                        modifier = Modifier
+//                            .size(25.dp)
+//                            .clickable {
+//                                val clipboard =
+//                                    context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+//                                val clipData: ClipData = ClipData.newPlainText("UID", team.uid)
+//                                clipboard.setPrimaryClip(clipData)
+//                            },
+//                        model = R.drawable.ic_baseline_content_copy,
+//                        contentDescription = null,
+//                        colorFilter = ColorFilter.tint(White)
+//                    )
                 }
             }
         }

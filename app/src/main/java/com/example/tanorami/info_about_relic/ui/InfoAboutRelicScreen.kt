@@ -8,6 +8,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
@@ -71,7 +72,11 @@ internal fun InfoAboutRelicScreenContent(
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            ImageRelic(idRelic = relic?.idRelic, imageRelic = relic?.image)
+            ImageRelic(
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                idRelic = relic?.idRelic,
+                imageRelic = relic?.image
+            )
 
             DescriptionRelicEffect(
                 descriptionTwoRelicEffect = relic?.descriptionTwoParts,

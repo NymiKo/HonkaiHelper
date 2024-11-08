@@ -1,10 +1,11 @@
 package com.example.tanorami.info_about_relic.ui.components
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.tanorami.core.navigation.LocalNavAnimatedVisibilityScope
@@ -25,14 +26,15 @@ internal fun ImageRelic(
     with(sharedTransitionScope) {
         AsyncImage(
             modifier = modifier
-                .fillMaxWidth()
                 .height(250.dp)
+                .width(250.dp)
                 .sharedElement(
                     rememberSharedContentState(key = "relic-${idRelic}-base-build"),
                     animatedVisibilityScope = animatedVisibilityScope,
                 ),
             model = imageRelic ?: "",
-            contentDescription = null
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
         )
     }
 }

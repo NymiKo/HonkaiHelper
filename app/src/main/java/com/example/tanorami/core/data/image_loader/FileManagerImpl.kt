@@ -9,6 +9,7 @@ import okhttp3.Request
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.net.URL
 import javax.inject.Inject
 
 class FileManagerImpl @Inject constructor(
@@ -19,13 +20,12 @@ class FileManagerImpl @Inject constructor(
     override suspend fun saveImage(
         imageUrl: String,
         child: String,
-        fileName: String
     ): String = withContext(ioDispatcher) {
         val directory = File(context.filesDir, child)
         if (!directory.exists()) {
             directory.mkdirs()
         }
-        val file = File(directory, fileName)
+        val file = File(directory, getImageNameFromUrl(imageUrl))
 
         try {
             val request = Request.Builder().url(imageUrl).build()
@@ -44,5 +44,10 @@ class FileManagerImpl @Inject constructor(
         }
 
         return@withContext file.absolutePath
+    }
+
+    private fun getImageNameFromUrl(imageUrl: String): String {
+        val uri = URL(imageUrl).path
+        return uri.substring(uri.lastIndexOf('/') + 1)
     }
 }

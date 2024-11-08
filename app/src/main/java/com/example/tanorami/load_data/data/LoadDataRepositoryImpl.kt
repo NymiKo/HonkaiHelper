@@ -103,8 +103,11 @@ class LoadDataRepositoryImpl @Inject constructor(
                 is NetworkResult.Success -> {
                     val remoteElements = resultApi.data
                     val localElements = elementDao.getElements()
-                    val newElements = remoteElements.filter { element ->
-                        localElements.none { it.copy(image = element.image).toElement() == element }
+                    val newElements = remoteElements.filter { remoteElement ->
+                        localElements.none { localElement ->
+                            localElement.copy(image = remoteElement.image)
+                                .toElement() == remoteElement
+                        }
                     }
 
                     val localImageElements =
@@ -116,10 +119,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                         )
                     }
 
-                    insertEntitiesIntoLocalStorage(
-                        elementEntities,
-                        elementDao::insertElements
-                    ).join()
+                    elementDao.insertElements(elementEntities)
 
                     return@withContext true
                 }
@@ -483,9 +483,8 @@ class LoadDataRepositoryImpl @Inject constructor(
         list: List<T>, propertySelector: (T) -> String, folder: String
     ) = withContext(ioDispatcher) {
         async {
-            list.mapIndexed { index, item ->
-                val fileName = "hero_${index}_${System.currentTimeMillis()}.webp"
-                fileManager.saveImage(propertySelector(item), folder, fileName)
+            list.map { item ->
+                fileManager.saveImage(propertySelector(item), folder)
             }
         }
     }

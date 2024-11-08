@@ -4,12 +4,14 @@ import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
@@ -81,14 +83,16 @@ private fun InfoAboutDecorationScreenContent(
             with(sharedTransitionScope) {
                 AsyncImage(
                     modifier = Modifier
-                        .fillMaxWidth()
                         .height(250.dp)
+                        .width(250.dp)
+                        .align(Alignment.CenterHorizontally)
                         .sharedElement(
                             rememberSharedContentState(key = "decoration-${decoration?.idDecoration}-base-build"),
                             animatedVisibilityScope = animatedVisibilityScope
                         ),
                     model = decoration?.image,
-                    contentDescription = null
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
                 )
             }
 
