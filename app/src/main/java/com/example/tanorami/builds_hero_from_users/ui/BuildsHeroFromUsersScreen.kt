@@ -1,13 +1,15 @@
 package com.example.tanorami.builds_hero_from_users.ui
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.Lifecycle
@@ -74,11 +76,17 @@ fun BuildsHeroFromUsersScreen(
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun BuildsHeroFromUsersScreenContent(
     uiState: BuildsHeroFromUsersScreenUiState,
     onEvent: (BuildsHeroFromUsersScreenEvents) -> Unit,
 ) {
+    val refreshState = rememberPullRefreshState(
+        refreshing = uiState.refreshingBuildsList,
+        onRefresh = { onEvent(BuildsHeroFromUsersScreenEvents.RefreshBuildsList) }
+    )
+
     Scaffold(
         topBar = {
             BaseTopAppBar(
@@ -87,29 +95,32 @@ private fun BuildsHeroFromUsersScreenContent(
             )
         }
     ) { innerPadding ->
-        when {
-            uiState.isLoading -> Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(MaterialTheme.colorScheme.background)
-            )
-            uiState.isError -> ErrorScreen()
-            uiState.buildsList.isEmpty() && !uiState.isLoading -> EmptyListScreen()
-            uiState.buildsList.isNotEmpty() -> {
-                BuildsListLazyColumn(
-                    modifier = Modifier.padding(innerPadding),
-                    buildsList = uiState.buildsList,
-                    refreshingBuildsList = uiState.refreshingBuildsList,
-                    refreshBuildsList = { onEvent(BuildsHeroFromUsersScreenEvents.RefreshBuildsList) },
-                    onBuildClick = {
-                        onEvent(
-                            BuildsHeroFromUsersScreenEvents.OnViewingBuildHeroFromUserScreen(
-                                it
+        Box(
+            modifier = Modifier.pullRefresh(refreshState)
+        ) {
+            when {
+                uiState.isError -> ErrorScreen()
+                uiState.buildsList.isEmpty() && !uiState.refreshingBuildsList -> EmptyListScreen()
+                uiState.buildsList.isNotEmpty() -> {
+                    BuildsListLazyColumn(
+                        modifier = Modifier.padding(innerPadding),
+                        buildsList = uiState.buildsList,
+                        onBuildClick = {
+                            onEvent(
+                                BuildsHeroFromUsersScreenEvents.OnViewingBuildHeroFromUserScreen(
+                                    it
+                                )
                             )
-                        )
-                    }
-                )
+                        }
+                    )
+                }
             }
+
+            PullRefreshIndicator(
+                uiState.refreshingBuildsList,
+                refreshState,
+                Modifier.align(Alignment.TopCenter)
+            )
         }
     }
 }

@@ -1,13 +1,15 @@
 package com.example.tanorami.teams.ui
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.Lifecycle
@@ -68,11 +70,17 @@ fun TeamsFromUsersScreen(
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun TeamsListScreenContents(
     uiState: TeamsFromUsersScreenUiState,
     onEvent: (TeamsFromUsersScreenEvents) -> Unit,
 ) {
+    val refreshState = rememberPullRefreshState(
+        refreshing = uiState.refreshingTeamsList,
+        onRefresh = { onEvent(TeamsFromUsersScreenEvents.RefreshTeamsList) }
+    )
+
     Scaffold(
         topBar = {
             BaseTopAppBar(
@@ -84,26 +92,30 @@ private fun TeamsListScreenContents(
             )
         }
     ) { innerPadding ->
-        when {
-            uiState.isLoading -> Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(MaterialTheme.colorScheme.background)
-            )
-            uiState.isError -> ErrorScreen(modifier = Modifier.padding(innerPadding))
-            uiState.teamsList.isEmpty() && !uiState.isLoading -> EmptyListScreen(
-                modifier = Modifier.padding(
-                    innerPadding
+        Box(
+            modifier = Modifier.pullRefresh(refreshState)
+        ) {
+            when {
+                uiState.isError -> ErrorScreen(modifier = Modifier.padding(innerPadding))
+                uiState.teamsList.isEmpty() && !uiState.refreshingTeamsList -> EmptyListScreen(
+                    modifier = Modifier.padding(
+                        innerPadding
+                    )
                 )
-            )
-            uiState.teamsList.isNotEmpty() -> {
-                TeamsListLazyColumn(
-                    modifier = Modifier.padding(innerPadding),
-                    refreshingTeamsList = uiState.refreshingTeamsList,
-                    refreshTeamsList = { onEvent(TeamsFromUsersScreenEvents.RefreshTeamsList) },
-                    teamsList = uiState.teamsList,
-                )
+
+                uiState.teamsList.isNotEmpty() -> {
+                    TeamsListLazyColumn(
+                        modifier = Modifier.padding(innerPadding),
+                        teamsList = uiState.teamsList,
+                    )
+                }
             }
+
+            PullRefreshIndicator(
+                uiState.refreshingTeamsList,
+                refreshState,
+                Modifier.align(Alignment.TopCenter)
+            )
         }
     }
 }

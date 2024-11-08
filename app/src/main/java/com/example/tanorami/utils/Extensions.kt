@@ -22,7 +22,6 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.navigation.NavController
-import com.bumptech.glide.Glide
 import com.example.tanorami.R
 import com.example.tanorami.create_build_hero.data.model.Equipment
 import java.io.File
@@ -32,17 +31,17 @@ const val TOKEN = "token"
 const val USER = "USER"
 const val DB = "DB"
 
-fun <T> ImageView.load(image: T) = Glide.with(this).load(image).fitCenter().centerCrop().into(this)
-fun ImageView.loadImageRarity(rarity: Boolean) =
-    if (rarity) loadImageWithoutScale(R.drawable.icon_5_stars) else loadImageWithoutScale(R.drawable.icon_4_stars)
-
-fun <T> ImageView.loadWithPlaceholder(image: T, placeholder: Int) =
-    Glide.with(this).load(image).fitCenter().centerCrop()
-        .placeholder(placeholder).into(this)
-
-fun <T> ImageView.loadImageWithoutScale(image: T) {
-    Glide.with(this).load(image).into(this)
-}
+//fun <T> ImageView.load(image: T) = Glide.with(this).load(image).fitCenter().centerCrop().into(this)
+//fun ImageView.loadImageRarity(rarity: Boolean) =
+//    if (rarity) loadImageWithoutScale(R.drawable.icon_5_stars) else loadImageWithoutScale(R.drawable.icon_4_stars)
+//
+//fun <T> ImageView.loadWithPlaceholder(image: T, placeholder: Int) =
+//    Glide.with(this).load(image).fitCenter().centerCrop()
+//        .placeholder(placeholder).into(this)
+//
+//fun <T> ImageView.loadImageWithoutScale(image: T) {
+//    Glide.with(this).load(image).into(this)
+//}
 
 fun Fragment.getSharedPrefUser() =
     requireActivity().getSharedPreferences(USER, Context.MODE_PRIVATE)
@@ -76,12 +75,12 @@ fun ImageView.backgroundHero(rarity: Boolean) {
 }
 
 fun ImageView.backgroundEquipment(equipment: Equipment) {
-    this.load(equipment.image)
-    when (equipment.rarity) {
-        0 -> this.background = ContextCompat.getDrawable(this.context, R.color.blue)
-        1 -> this.background = ContextCompat.getDrawable(this.context, R.color.violet)
-        2 -> this.background = ContextCompat.getDrawable(this.context, R.color.orange)
-    }
+//    this.load(equipment.image)
+//    when (equipment.rarity) {
+//        0 -> this.background = ContextCompat.getDrawable(this.context, R.color.blue)
+//        1 -> this.background = ContextCompat.getDrawable(this.context, R.color.violet)
+//        2 -> this.background = ContextCompat.getDrawable(this.context, R.color.orange)
+//    }
 }
 
 fun View.backgroundRarity(rarity: Int) {

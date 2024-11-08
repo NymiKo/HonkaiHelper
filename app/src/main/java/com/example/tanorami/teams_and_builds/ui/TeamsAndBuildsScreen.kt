@@ -30,12 +30,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.tanorami.R
 import com.example.tanorami.base_components.tabs.TabIndicator
-import com.example.tanorami.builds_hero_from_users.ui.components.BuildsListLazyColumn
-import com.example.tanorami.teams.ui.components.TeamsListLazyColumn
 import com.example.tanorami.teams_and_builds.presentation.TeamsAndBuildsViewModel
 import com.example.tanorami.teams_and_builds.presentation.models.TeamsAndBuildsScreenEvents
 import com.example.tanorami.teams_and_builds.presentation.models.TeamsAndBuildsScreenSideEffects
 import com.example.tanorami.teams_and_builds.presentation.models.TeamsAndBuildsScreenUiState
+import com.example.tanorami.teams_and_builds.ui.components.BuildsListContent
+import com.example.tanorami.teams_and_builds.ui.components.TeamsListContent
 import com.example.tanorami.viewing_users_build.ui.ViewingBuildHeroFromUserNavArguments
 import kotlinx.coroutines.launch
 
@@ -156,22 +156,24 @@ private fun TabsContent(
     refreshTeamsList: () -> Unit,
     pagerState: PagerState,
 ) {
+
+
     HorizontalPager(modifier = modifier, state = pagerState) { index ->
         when (index) {
             0 -> {
-                BuildsListLazyColumn(
-                    refreshingBuildsList = uiState.refreshingBuildsList,
+                BuildsListContent(
                     buildsList = uiState.buildsList,
-                    refreshBuildsList = refreshBuildsList::invoke,
+                    refreshingBuildsList = uiState.refreshingBuildsList,
+                    refreshBuildsList = refreshBuildsList,
                     onBuildClick = onBuildClick::invoke,
                 )
             }
 
             1 -> {
-                TeamsListLazyColumn(
+                TeamsListContent(
+                    teamsList = uiState.teamsList,
                     refreshingTeamsList = uiState.refreshingTeamsList,
                     refreshTeamsList = refreshTeamsList::invoke,
-                    teamsList = uiState.teamsList,
                 )
             }
         }

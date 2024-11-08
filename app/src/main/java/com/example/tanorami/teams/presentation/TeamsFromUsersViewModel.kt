@@ -39,14 +39,12 @@ class TeamsFromUsersViewModel @Inject constructor(
         when (val result = repository.getTeamsListByID(idHero)) {
             is NetworkResult.Error -> {
                 uiState = uiState.copy(
-                    isLoading = false,
                     isError = true,
                     refreshingTeamsList = false,
                 )
             }
             is NetworkResult.Success -> {
                 uiState = uiState.copy(
-                    isLoading = false,
                     isError = false,
                     refreshingTeamsList = false,
                     teamsList = result.data,

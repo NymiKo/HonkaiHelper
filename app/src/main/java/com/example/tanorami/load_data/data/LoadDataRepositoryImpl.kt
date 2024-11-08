@@ -2,7 +2,7 @@ package com.example.tanorami.load_data.data
 
 import com.example.tanorami.core.data.NetworkResult
 import com.example.tanorami.core.data.handleApi
-import com.example.tanorami.core.data.image_loader.ImageLoader
+import com.example.tanorami.core.data.image_loader.FileManager
 import com.example.tanorami.core.data.local.dao.AbilityDao
 import com.example.tanorami.core.data.local.dao.BuildDecorationDao
 import com.example.tanorami.core.data.local.dao.BuildRelicDao
@@ -56,7 +56,7 @@ class LoadDataRepositoryImpl @Inject constructor(
     private val buildStatsEquipmentDao: BuildStatsEquipmentDao,
     private val weaponDao: WeaponDao,
     private val loadDataService: LoadDataService,
-    private val imageLoader: ImageLoader
+    private val fileManager: FileManager
 ) : LoadDataRepository {
 
     override suspend fun downloadingData(): Boolean = withContext(ioDispatcher) {
@@ -102,7 +102,7 @@ class LoadDataRepositoryImpl @Inject constructor(
 
                 is NetworkResult.Success -> {
                     val remoteElements = resultApi.data
-                    val localElements = getLocalEntities { elementDao.getElements() }
+                    val localElements = elementDao.getElements()
                     val newElements = remoteElements.filter { element ->
                         localElements.none { it.copy(image = element.image).toElement() == element }
                     }
@@ -136,7 +136,7 @@ class LoadDataRepositoryImpl @Inject constructor(
 
                 is NetworkResult.Success -> {
                     val remotePaths = resultApi.data
-                    val localPaths = getLocalEntities { pathDao.getPaths() }
+                    val localPaths = pathDao.getPaths()
                     val newPaths = remotePaths.filter { path ->
                         localPaths.none { it.copy(image = path.image).toPath() == path }
                     }
@@ -167,7 +167,7 @@ class LoadDataRepositoryImpl @Inject constructor(
 
                 is NetworkResult.Success -> {
                     val remoteAbilities = resultApi.data
-                    val localAbilities = getLocalEntities { abilityDao.getAbilities() }
+                    val localAbilities = abilityDao.getAbilities()
                     val newAbilities = remoteAbilities.filter { ability ->
                         localAbilities.none {
                             it.copy(image = ability.image).toAbility() == ability
@@ -203,7 +203,7 @@ class LoadDataRepositoryImpl @Inject constructor(
 
                 is NetworkResult.Success -> {
                     val remoteEidolons = resultApi.data
-                    val localEidolons = getLocalEntities { eidolonDao.getEidolons() }
+                    val localEidolons = eidolonDao.getEidolons()
                     val newEidolons = remoteEidolons.filter { eidolons ->
                         localEidolons.none { it.idEidolon == eidolons.idEidolon && it.title == eidolons.title && it.description == eidolons.description && it.idHero == eidolons.idHero }
                     }
@@ -237,7 +237,7 @@ class LoadDataRepositoryImpl @Inject constructor(
 
                 is NetworkResult.Success -> {
                     val remoteHeroes = resultApi.data
-                    val localHeroes = getLocalEntities { heroDao.getHeroes() }
+                    val localHeroes = heroDao.getHeroes()
                     val newHeroes = remoteHeroes.filter { hero ->
                         localHeroes.none { it.id == hero.id && it.name == hero.name && it.rarity == hero.rarity && it.idPath == hero.path && it.idElement == hero.element }
                     }
@@ -270,7 +270,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                 is NetworkResult.Error -> false
                 is NetworkResult.Success -> {
                     val remoteEntities = resultApi.data
-                    val localEntities = getLocalEntities { optimalStatsHeroDao.getOptimalStats() }
+                    val localEntities = optimalStatsHeroDao.getOptimalStats()
                     val newEntities = remoteEntities.filter { remoteOptimalStats ->
                         localEntities.none { remoteOptimalStats == it.toOptimalStatsHero() }
                     }
@@ -292,7 +292,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                 is NetworkResult.Error -> false
                 is NetworkResult.Success -> {
                     val remoteEntities = resultApi.data
-                    val localEntities = getLocalEntities { buildWeaponDao.getBuildWeapon() }
+                    val localEntities = buildWeaponDao.getBuildWeapon()
                     val newEntities = remoteEntities.filter { remoteBuildWeapon ->
                         localEntities.none { remoteBuildWeapon == it.toBuildWeapon() }
                     }
@@ -314,7 +314,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                 is NetworkResult.Error -> false
                 is NetworkResult.Success -> {
                     val remoteEntities = resultApi.data
-                    val localEntities = getLocalEntities { buildRelicDao.getBuildRelic() }
+                    val localEntities = buildRelicDao.getBuildRelic()
                     val newEntities = remoteEntities.filter { remoteBuildRelics ->
                         localEntities.none { remoteBuildRelics == it.toBuildRelic() }
                     }
@@ -336,8 +336,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                 is NetworkResult.Error -> false
                 is NetworkResult.Success -> {
                     val remoteEntities = resultApi.data
-                    val localEntities =
-                        getLocalEntities { buildDecorationDao.getBuildDecorations() }
+                    val localEntities = buildDecorationDao.getBuildDecorations()
                     val newEntities = remoteEntities.filter { remoteBuildDecorations ->
                         localEntities.none { remoteBuildDecorations == it.toBuildDecoration() }
                     }
@@ -359,7 +358,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                 is NetworkResult.Error -> false
                 is NetworkResult.Success -> {
                     val remoteEntities = resultApi.data
-                    val localEntities = getLocalEntities { decorationDao.getDecorations() }
+                    val localEntities = decorationDao.getDecorations()
                     val newEntities = remoteEntities.filter { remoteDecoration ->
                         localEntities.none { remoteDecoration == it.toDecoration() }
                     }
@@ -390,7 +389,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                 is NetworkResult.Error -> false
                 is NetworkResult.Success -> {
                     val remoteEntities = resultApi.data
-                    val localEntities = getLocalEntities { relicDao.getRelics() }
+                    val localEntities = relicDao.getRelics()
                     val newEntities = remoteEntities.filter { remoteRelic ->
                         localEntities.none { remoteRelic == it.toRelic() }
                     }
@@ -421,8 +420,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                 is NetworkResult.Error -> false
                 is NetworkResult.Success -> {
                     val remoteEntities = resultApi.data
-                    val localEntities =
-                        getLocalEntities { buildStatsEquipmentDao.getBuildStatsEquipment() }
+                    val localEntities = buildStatsEquipmentDao.getBuildStatsEquipment()
                     val newEntities = remoteEntities.filter { remoteStatsEquipment ->
                         localEntities.none { remoteStatsEquipment == it.toBuildStatsEquipment() }
                     }
@@ -444,7 +442,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                 is NetworkResult.Error -> false
                 is NetworkResult.Success -> {
                     val remoteEntities = resultApi.data
-                    val localEntities = getLocalEntities { weaponDao.getWeapons() }
+                    val localEntities = weaponDao.getWeapons()
                     val newEntities = remoteEntities.filter { weapon ->
                         localEntities.none { weapon == it.toWeapon() }
                     }
@@ -481,19 +479,13 @@ class LoadDataRepositoryImpl @Inject constructor(
         }
     }
 
-    private suspend fun <T> getLocalEntities(query: suspend () -> List<T>): List<T> {
-        return withContext(ioDispatcher) {
-            query()
-        }
-    }
-
     private suspend fun <T> downloadImages(
         list: List<T>, propertySelector: (T) -> String, folder: String
     ) = withContext(ioDispatcher) {
         async {
             list.mapIndexed { index, item ->
                 val fileName = "hero_${index}_${System.currentTimeMillis()}.webp"
-                imageLoader.downloadAndSaveImage(propertySelector(item), folder, fileName)
+                fileManager.saveImage(propertySelector(item), folder, fileName)
             }
         }
     }

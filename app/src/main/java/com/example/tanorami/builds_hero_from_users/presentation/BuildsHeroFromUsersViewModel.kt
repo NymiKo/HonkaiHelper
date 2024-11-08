@@ -15,7 +15,6 @@ class BuildsHeroFromUsersViewModel @Inject constructor(
 ): BaseViewModel<BuildsHeroFromUsersScreenUiState, BuildsHeroFromUsersScreenEvents, BuildsHeroFromUsersScreenSideEffects>(
     initialState = BuildsHeroFromUsersScreenUiState()
 ) {
-
     override fun onEvent(event: BuildsHeroFromUsersScreenEvents) {
         when(event) {
             is BuildsHeroFromUsersScreenEvents.GetBuildsHeroList -> {
@@ -33,7 +32,6 @@ class BuildsHeroFromUsersViewModel @Inject constructor(
         when (val result = repository.getBuildsHeroListByIdHero(idHero)) {
             is NetworkResult.Error -> {
                 uiState = uiState.copy(
-                    isLoading = false,
                     isSuccess = false,
                     isError = true,
                     refreshingBuildsList = false
@@ -41,7 +39,6 @@ class BuildsHeroFromUsersViewModel @Inject constructor(
             }
             is NetworkResult.Success -> {
                 uiState = uiState.copy(
-                    isLoading = false,
                     isSuccess = true,
                     isError = false,
                     refreshingBuildsList = false,

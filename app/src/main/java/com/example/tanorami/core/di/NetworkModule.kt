@@ -7,8 +7,8 @@ import com.example.tanorami.builds_hero_from_users.data.BuildsHeroListService
 import com.example.tanorami.change_nickname.data.ChangeNicknameService
 import com.example.tanorami.core.data.AuthInterceptor
 import com.example.tanorami.core.data.data_store.AppDataStore
-import com.example.tanorami.core.data.image_loader.ImageLoader
-import com.example.tanorami.core.data.image_loader.ImageLoaderImpl
+import com.example.tanorami.core.data.image_loader.FileManager
+import com.example.tanorami.core.data.image_loader.FileManagerImpl
 import com.example.tanorami.create_build_hero.data.CreateBuildHeroService
 import com.example.tanorami.createteam.data.CreateTeamService
 import com.example.tanorami.load_data.data.LoadDataService
@@ -69,7 +69,11 @@ object NetworkModule {
         .build()
 
     @Provides
-    fun provideImageLoader(context: Context, @IODispatcher ioDispatcher: CoroutineDispatcher): ImageLoader = ImageLoaderImpl(context, ioDispatcher)
+    fun provideImageLoader(
+        context: Context,
+        okHttpClient: OkHttpClient,
+        @IODispatcher ioDispatcher: CoroutineDispatcher
+    ): FileManager = FileManagerImpl(context, okHttpClient, ioDispatcher)
 
     @Provides
     fun provideTeamsListService(retrofit: Retrofit): TeamsFromUsersService =

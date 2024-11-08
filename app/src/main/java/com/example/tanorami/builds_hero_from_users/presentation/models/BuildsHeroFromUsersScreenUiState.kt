@@ -5,7 +5,6 @@ import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
 import com.example.tanorami.core.data.local.models.hero.HeroWithNameAvatarRarity
 
 data class BuildsHeroFromUsersScreenUiState(
-    val isLoading: Boolean = true,
     val isSuccess: Boolean = false,
     val isError: Boolean = false,
     val tokenUser: String = "",
