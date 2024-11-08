@@ -9,11 +9,13 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LocalRippleConfiguration
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SecondaryTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -80,6 +82,7 @@ fun TeamsAndBuildsInProfile(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun TabItem(
     modifier: Modifier = Modifier,
@@ -87,15 +90,17 @@ private fun TabItem(
     title: Int,
     selectTab: () -> Unit,
 ) {
-    Tab(
-        modifier = modifier.zIndex(2F),
-        selected = selected,
-        onClick = { selectTab() }
-    ) {
-        Text(
-            modifier = Modifier.padding(vertical = 12.dp),
-            text = stringResource(id = title)
-        )
+    CompositionLocalProvider(LocalRippleConfiguration provides null) {
+        Tab(
+            modifier = modifier.zIndex(2F),
+            selected = selected,
+            onClick = { selectTab() }
+        ) {
+            Text(
+                modifier = Modifier.padding(vertical = 12.dp),
+                text = stringResource(id = title)
+            )
+        }
     }
 }
 
