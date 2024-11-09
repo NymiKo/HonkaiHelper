@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Send
-import androidx.compose.material.icons.filled.Feedback
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -99,9 +97,6 @@ private fun SendFeedbackScreenContent(
                     )
                 },
                 enabled = !uiState.isSendingFeedback,
-                leadingIcon = {
-                    Icon(imageVector = Icons.Filled.Feedback, contentDescription = null)
-                },
                 label = stringResource(id = R.string.message)
             )
         }

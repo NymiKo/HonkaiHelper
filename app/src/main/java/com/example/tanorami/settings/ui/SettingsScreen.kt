@@ -181,6 +181,7 @@ private fun SettingsScreenContent(
             BaseButton(
                 modifier = Modifier.padding(top = 16.dp),
                 text = stringResource(id = R.string.report_an_error),
+                fontSize = 16.sp,
                 onClick = { onEvent(SettingsScreenEvents.OnSendFeedbackScreen) }
             )
 
