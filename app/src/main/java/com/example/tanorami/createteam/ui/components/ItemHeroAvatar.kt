@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.tanorami.core.data.local.models.hero.HeroWithNameAvatarRarity
-import com.example.tanorami.core.theme.Grey
+import com.example.tanorami.core.ui.theme.Grey
 
 @Composable
 fun ItemHeroAvatar(

@@ -3,8 +3,8 @@ package com.example.tanorami.profile.presentation
 import androidx.lifecycle.viewModelScope
 import com.example.tanorami.R
 import com.example.tanorami.base.BaseViewModel
-import com.example.tanorami.core.data.NetworkResult
 import com.example.tanorami.core.data.data_store.AppDataStore
+import com.example.tanorami.core.network.NetworkResult
 import com.example.tanorami.profile.domain.ProfileRepository
 import com.example.tanorami.profile.presentation.models.ProfileScreenEvents
 import com.example.tanorami.profile.presentation.models.ProfileScreenSideEffects

@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.tanorami.base_components.top_app_bar.BaseCenterAlignedTopAppBar
+import com.example.tanorami.core.ui.base_components.top_app_bar.BaseCenterAlignedTopAppBar
 import com.example.tanorami.info_about_hero.data.model.Relic
 import com.example.tanorami.info_about_relic.presentation.InfoAboutRelicViewModel
 import com.example.tanorami.info_about_relic.ui.components.DescriptionRelicEffect

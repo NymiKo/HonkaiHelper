@@ -1,8 +1,8 @@
 package com.example.tanorami.send_feedback.data
 
-import com.example.tanorami.core.data.NetworkResult
-import com.example.tanorami.core.data.handleApi
 import com.example.tanorami.core.di.IODispatcher
+import com.example.tanorami.core.network.NetworkResult
+import com.example.tanorami.core.network.handleApi
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

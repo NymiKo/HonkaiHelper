@@ -1,6 +1,6 @@
 package com.example.tanorami.auth.registration.data
 
-import com.example.tanorami.core.data.NetworkResult
+import com.example.tanorami.core.network.NetworkResult
 
 
 interface RegistrationRepository {

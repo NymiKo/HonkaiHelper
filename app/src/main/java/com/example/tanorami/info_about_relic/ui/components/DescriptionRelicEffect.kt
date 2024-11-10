@@ -21,9 +21,9 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tanorami.R
-import com.example.tanorami.base_components.text.BaseDefaultText
-import com.example.tanorami.core.theme.DarkGrey
-import com.example.tanorami.core.theme.Orange
+import com.example.tanorami.core.ui.base_components.text.BaseDefaultText
+import com.example.tanorami.core.ui.theme.DarkGrey
+import com.example.tanorami.core.ui.theme.Orange
 
 @Composable
 internal fun DescriptionRelicEffect(

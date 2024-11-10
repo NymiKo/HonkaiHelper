@@ -33,8 +33,8 @@ import com.example.tanorami.auth.registration.presentation.RegistrationViewModel
 import com.example.tanorami.auth.registration.presentation.models.RegistrationScreenEvent
 import com.example.tanorami.auth.registration.presentation.models.RegistrationScreenSideEffects
 import com.example.tanorami.auth.registration.presentation.models.RegistrationScreenUiState
-import com.example.tanorami.base_components.text.BaseDefaultText
-import com.example.tanorami.base_components.top_app_bar.BaseCenterAlignedTopAppBar
+import com.example.tanorami.core.ui.base_components.text.BaseDefaultText
+import com.example.tanorami.core.ui.base_components.top_app_bar.BaseCenterAlignedTopAppBar
 import com.example.tanorami.utils.toast
 import kotlinx.serialization.Serializable
 

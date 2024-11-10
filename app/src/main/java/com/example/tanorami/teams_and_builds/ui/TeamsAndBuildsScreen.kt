@@ -29,7 +29,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.tanorami.R
-import com.example.tanorami.base_components.tabs.TabIndicator
+import com.example.tanorami.core.ui.base_components.tabs.TabIndicator
 import com.example.tanorami.teams_and_builds.presentation.TeamsAndBuildsViewModel
 import com.example.tanorami.teams_and_builds.presentation.models.TeamsAndBuildsScreenEvents
 import com.example.tanorami.teams_and_builds.presentation.models.TeamsAndBuildsScreenSideEffects

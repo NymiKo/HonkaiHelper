@@ -7,7 +7,7 @@ import com.example.tanorami.auth.registration.presentation.models.RegistrationSc
 import com.example.tanorami.auth.registration.presentation.models.RegistrationScreenSideEffects
 import com.example.tanorami.auth.registration.presentation.models.RegistrationScreenUiState
 import com.example.tanorami.base.BaseViewModel
-import com.example.tanorami.core.data.NetworkResult
+import com.example.tanorami.core.network.NetworkResult
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

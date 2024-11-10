@@ -31,10 +31,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.tanorami.R
-import com.example.tanorami.base_components.button.BaseButton
-import com.example.tanorami.base_components.text.BaseDefaultText
-import com.example.tanorami.base_components.top_app_bar.BaseTopAppBar
-import com.example.tanorami.core.theme.DarkGrey
+import com.example.tanorami.core.ui.base_components.button.BaseButton
+import com.example.tanorami.core.ui.base_components.text.BaseDefaultText
+import com.example.tanorami.core.ui.base_components.top_app_bar.BaseTopAppBar
+import com.example.tanorami.core.ui.theme.DarkGrey
 import com.example.tanorami.load_data.ui.LoadDataNavArguments
 import com.example.tanorami.send_feedback.ui.SendFeedbackRoute
 import com.example.tanorami.settings.presentation.SettingsViewModel

@@ -8,7 +8,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.ViewModelProvider
 import com.example.tanorami.App
 import com.example.tanorami.core.navigation.AppNavigation
-import com.example.tanorami.core.theme.AppTheme
+import com.example.tanorami.core.ui.theme.AppTheme
 import javax.inject.Inject
 
 class MainActivity : ComponentActivity() {

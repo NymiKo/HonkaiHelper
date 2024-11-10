@@ -39,11 +39,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.tanorami.R
-import com.example.tanorami.base_components.button.BaseSmallFloatingButton
-import com.example.tanorami.base_components.dialog.BaseSaveAlertDialog
-import com.example.tanorami.base_components.top_app_bar.BaseTopAppBar
 import com.example.tanorami.core.data.local.models.hero.HeroWithNameAvatarRarity
-import com.example.tanorami.core.theme.Red
+import com.example.tanorami.core.ui.base_components.button.BaseSmallFloatingButton
+import com.example.tanorami.core.ui.base_components.dialog.BaseSaveAlertDialog
+import com.example.tanorami.core.ui.base_components.top_app_bar.BaseTopAppBar
+import com.example.tanorami.core.ui.theme.Red
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
 import com.example.tanorami.createteam.presentation.CreateTeamViewModel
 import com.example.tanorami.createteam.presentation.models.CreateTeamScreenEvents

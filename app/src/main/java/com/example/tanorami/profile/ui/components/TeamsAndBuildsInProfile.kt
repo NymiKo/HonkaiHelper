@@ -22,8 +22,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.example.tanorami.R
-import com.example.tanorami.base_components.tabs.TabIndicator
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
+import com.example.tanorami.core.ui.base_components.tabs.TabIndicator
 import com.example.tanorami.teams.data.model.TeamHero
 import kotlinx.coroutines.launch
 

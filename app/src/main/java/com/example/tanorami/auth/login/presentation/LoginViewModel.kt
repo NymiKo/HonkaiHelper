@@ -7,8 +7,8 @@ import com.example.tanorami.auth.login.presentation.models.LoginScreenEvents
 import com.example.tanorami.auth.login.presentation.models.LoginScreenSideEffects
 import com.example.tanorami.auth.login.presentation.models.LoginScreenUiState
 import com.example.tanorami.base.BaseViewModel
-import com.example.tanorami.core.data.NetworkResult
 import com.example.tanorami.core.data.data_store.AppDataStore
+import com.example.tanorami.core.network.NetworkResult
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

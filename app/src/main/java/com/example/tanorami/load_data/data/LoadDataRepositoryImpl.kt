@@ -1,8 +1,5 @@
 package com.example.tanorami.load_data.data
 
-import com.example.tanorami.core.data.NetworkResult
-import com.example.tanorami.core.data.handleApi
-import com.example.tanorami.core.data.image_loader.FileManager
 import com.example.tanorami.core.data.local.dao.AbilityDao
 import com.example.tanorami.core.data.local.dao.BuildDecorationDao
 import com.example.tanorami.core.data.local.dao.BuildRelicDao
@@ -30,6 +27,8 @@ import com.example.tanorami.core.data.local.entity.PathEntity
 import com.example.tanorami.core.data.local.entity.RelicEntity
 import com.example.tanorami.core.data.local.entity.WeaponEntity
 import com.example.tanorami.core.di.IODispatcher
+import com.example.tanorami.core.network.NetworkResult
+import com.example.tanorami.core.network.handleApi
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job

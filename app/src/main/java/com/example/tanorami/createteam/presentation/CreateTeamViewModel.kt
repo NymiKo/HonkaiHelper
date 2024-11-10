@@ -3,7 +3,7 @@ package com.example.tanorami.createteam.presentation
 import androidx.lifecycle.viewModelScope
 import com.example.tanorami.R
 import com.example.tanorami.base.BaseViewModel
-import com.example.tanorami.core.data.NetworkResult
+import com.example.tanorami.core.network.NetworkResult
 import com.example.tanorami.createteam.data.CreateTeamRepository
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
 import com.example.tanorami.createteam.presentation.models.CreateTeamScreenEvents

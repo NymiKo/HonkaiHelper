@@ -1,6 +1,6 @@
 package com.example.tanorami.change_nickname.data
 
-import com.example.tanorami.core.data.NetworkResult
+import com.example.tanorami.core.network.NetworkResult
 
 
 interface ChangeNicknameRepository {

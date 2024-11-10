@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.tanorami.core.theme.LightGray
+import com.example.tanorami.core.ui.theme.LightGray
 
 @Composable
 fun SplashArtHeroImage(

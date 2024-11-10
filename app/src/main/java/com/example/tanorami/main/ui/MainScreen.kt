@@ -40,7 +40,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.example.tanorami.R
-import com.example.tanorami.core.theme.Orange
+import com.example.tanorami.core.ui.theme.Orange
 import com.example.tanorami.create_build_heroes_list.ui.CreateBuildHeroesListNavArguments
 import com.example.tanorami.createteam.ui.CreateTeamNavArguments
 import com.example.tanorami.heroes.ui.HeroesListScreen

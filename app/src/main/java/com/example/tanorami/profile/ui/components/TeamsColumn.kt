@@ -27,12 +27,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.tanorami.R
-import com.example.tanorami.base_components.BaseHeroAvatarAndName
-import com.example.tanorami.base_components.lazy_column.BaseLazyColumn
-import com.example.tanorami.base_components.text.BaseDefaultText
-import com.example.tanorami.core.theme.Blue500
-import com.example.tanorami.core.theme.GreyTransparent20
-import com.example.tanorami.core.theme.White
+import com.example.tanorami.core.ui.base_components.BaseHeroAvatarAndName
+import com.example.tanorami.core.ui.base_components.lazy_column.BaseLazyColumn
+import com.example.tanorami.core.ui.base_components.text.BaseDefaultText
+import com.example.tanorami.core.ui.theme.Blue500
+import com.example.tanorami.core.ui.theme.GreyTransparent20
+import com.example.tanorami.core.ui.theme.White
 import com.example.tanorami.teams.data.model.TeamHero
 
 @Composable

@@ -19,11 +19,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.tanorami.base_components.text.BaseDefaultText
-import com.example.tanorami.core.theme.Black
-import com.example.tanorami.core.theme.Orange
-import com.example.tanorami.core.theme.Violet
-import com.example.tanorami.core.theme.White
+import com.example.tanorami.core.ui.base_components.text.BaseDefaultText
+import com.example.tanorami.core.ui.theme.Black
+import com.example.tanorami.core.ui.theme.Orange
+import com.example.tanorami.core.ui.theme.Violet
+import com.example.tanorami.core.ui.theme.White
 import com.example.tanorami.heroes.data.model.Hero
 
 @Composable

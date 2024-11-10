@@ -1,6 +1,6 @@
 package com.example.tanorami.heroes.data
 
-import com.example.tanorami.core.data.NetworkResult
+import com.example.tanorami.core.network.NetworkResult
 import com.example.tanorami.heroes.data.model.Hero
 import javax.inject.Inject
 

@@ -21,9 +21,9 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.tanorami.R
 import com.example.tanorami.base_build_hero.ui.BaseBuildHeroNavArguments
-import com.example.tanorami.base_components.button.BaseNextButton
-import com.example.tanorami.base_components.text.BaseDefaultText
-import com.example.tanorami.base_components.top_app_bar.BaseCenterAlignedTopAppBar
+import com.example.tanorami.core.ui.base_components.button.BaseNextButton
+import com.example.tanorami.core.ui.base_components.text.BaseDefaultText
+import com.example.tanorami.core.ui.base_components.top_app_bar.BaseCenterAlignedTopAppBar
 import com.example.tanorami.info_about_hero.presentation.InfoAboutHeroViewModel
 import com.example.tanorami.info_about_hero.presentation.models.InfoAboutHeroScreenEvents
 import com.example.tanorami.info_about_hero.presentation.models.InfoAboutHeroScreenSideEffects

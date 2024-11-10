@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.tanorami.R
-import com.example.tanorami.base_components.text.BaseDefaultText
+import com.example.tanorami.core.ui.base_components.text.BaseDefaultText
 
 @Composable
 fun ErrorComponent(

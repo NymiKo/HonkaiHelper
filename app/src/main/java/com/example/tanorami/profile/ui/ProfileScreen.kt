@@ -39,10 +39,10 @@ import coil.compose.AsyncImage
 import com.example.tanorami.R
 import com.example.tanorami.auth.login.ui.LoginRoute
 import com.example.tanorami.base.shimmerEffect
-import com.example.tanorami.base_components.text.BaseDefaultText
 import com.example.tanorami.change_nickname.ui.ChangeNicknameNavArguments
-import com.example.tanorami.core.theme.Blue
-import com.example.tanorami.core.theme.White
+import com.example.tanorami.core.ui.base_components.text.BaseDefaultText
+import com.example.tanorami.core.ui.theme.Blue
+import com.example.tanorami.core.ui.theme.White
 import com.example.tanorami.create_build_hero.ui.CreateBuildForHeroNavArguments
 import com.example.tanorami.createteam.ui.CreateTeamNavArguments
 import com.example.tanorami.profile.presentation.ProfileViewModel

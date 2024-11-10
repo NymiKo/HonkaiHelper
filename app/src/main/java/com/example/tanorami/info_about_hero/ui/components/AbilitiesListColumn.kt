@@ -21,10 +21,10 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.tanorami.R
 import com.example.tanorami.base_build_hero.ui.components.HeaderCategory
-import com.example.tanorami.base_components.text.BaseDefaultText
-import com.example.tanorami.core.theme.AppTheme
-import com.example.tanorami.core.theme.DarkGrey
-import com.example.tanorami.core.theme.Orange
+import com.example.tanorami.core.ui.base_components.text.BaseDefaultText
+import com.example.tanorami.core.ui.theme.AppTheme
+import com.example.tanorami.core.ui.theme.DarkGrey
+import com.example.tanorami.core.ui.theme.Orange
 import com.example.tanorami.info_about_hero.data.model.Ability
 
 @Composable

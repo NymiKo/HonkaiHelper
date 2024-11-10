@@ -11,9 +11,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.tanorami.core.theme.Blue
-import com.example.tanorami.core.theme.Orange
-import com.example.tanorami.core.theme.Violet
+import com.example.tanorami.core.ui.theme.Blue
+import com.example.tanorami.core.ui.theme.Orange
+import com.example.tanorami.core.ui.theme.Violet
 import com.example.tanorami.create_build_hero.data.model.Equipment
 import com.example.tanorami.create_build_hero.presentation.models.CreateBuildHeroScreenEvents
 import com.example.tanorami.create_build_hero.presentation.models.EquipmentType

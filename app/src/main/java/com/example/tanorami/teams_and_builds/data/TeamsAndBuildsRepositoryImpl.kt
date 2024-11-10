@@ -2,14 +2,14 @@ package com.example.tanorami.teams_and_builds.data
 
 import com.example.tanorami.builds_hero_from_users.data.BuildsHeroListService
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
-import com.example.tanorami.core.data.NetworkResult
-import com.example.tanorami.core.data.handleApi
 import com.example.tanorami.core.data.local.dao.DecorationDao
 import com.example.tanorami.core.data.local.dao.HeroDao
 import com.example.tanorami.core.data.local.dao.RelicDao
 import com.example.tanorami.core.data.local.dao.WeaponDao
 import com.example.tanorami.core.data.local.models.hero.HeroWithNameAvatarRarity
 import com.example.tanorami.core.di.IODispatcher
+import com.example.tanorami.core.network.NetworkResult
+import com.example.tanorami.core.network.handleApi
 import com.example.tanorami.teams.data.TeamsFromUsersService
 import com.example.tanorami.teams.data.model.TeamHero
 import kotlinx.coroutines.CoroutineDispatcher

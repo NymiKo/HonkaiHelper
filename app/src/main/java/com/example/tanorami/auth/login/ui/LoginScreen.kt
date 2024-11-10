@@ -36,9 +36,9 @@ import com.example.tanorami.auth.login.presentation.models.LoginScreenUiState
 import com.example.tanorami.auth.login.ui.components.LoginButton
 import com.example.tanorami.auth.login.ui.components.LoginOutlinedTextField
 import com.example.tanorami.auth.registration.ui.RegistrationRoute
-import com.example.tanorami.base_components.text.BaseDefaultText
-import com.example.tanorami.base_components.top_app_bar.BaseCenterAlignedTopAppBar
-import com.example.tanorami.core.theme.Grey
+import com.example.tanorami.core.ui.base_components.text.BaseDefaultText
+import com.example.tanorami.core.ui.base_components.top_app_bar.BaseCenterAlignedTopAppBar
+import com.example.tanorami.core.ui.theme.Grey
 import com.example.tanorami.utils.toast
 import kotlinx.serialization.Serializable
 
