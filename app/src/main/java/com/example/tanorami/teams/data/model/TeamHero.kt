@@ -1,7 +1,6 @@
 package com.example.tanorami.teams.data.model
 
-import com.example.tanorami.core.data.local.models.hero.HeroWithNameAvatarRarity
-
+import com.example.tanorami.core.database.models.hero.HeroWithNameAvatarRarity
 
 data class TeamHero(
     val idTeam: Long,

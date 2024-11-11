@@ -2,7 +2,7 @@ package com.example.tanorami.core.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.tanorami.core.data.local.contract.RoomContract
+import com.example.tanorami.core.database.contract.RoomContract
 import com.example.tanorami.info_about_hero.data.model.Element
 
 @Entity(

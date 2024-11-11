@@ -3,8 +3,8 @@ package com.example.tanorami.core.database.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.tanorami.core.data.local.contract.RoomContract
-import com.example.tanorami.core.data.local.entity.PathEntity
+import com.example.tanorami.core.database.contract.RoomContract
+import com.example.tanorami.core.database.entity.PathEntity
 
 @Dao
 interface PathDao {

@@ -5,11 +5,11 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import com.example.tanorami.core.data.local.contract.RoomContract
-import com.example.tanorami.core.data.local.entity.HeroEntity
-import com.example.tanorami.core.data.local.models.hero.FullBaseBuildHeroEntity
-import com.example.tanorami.core.data.local.models.hero.HeroWithNameAvatarRarity
-import com.example.tanorami.core.data.local.models.hero.HeroWithPathAndElement
+import com.example.tanorami.core.database.contract.RoomContract
+import com.example.tanorami.core.database.entity.HeroEntity
+import com.example.tanorami.core.database.models.hero.FullBaseBuildHeroEntity
+import com.example.tanorami.core.database.models.hero.HeroWithNameAvatarRarity
+import com.example.tanorami.core.database.models.hero.HeroWithPathAndElement
 
 @Dao
 interface HeroDao {

@@ -1,6 +1,6 @@
 package com.example.tanorami.info_about_hero.data
 
-import com.example.tanorami.core.data.local.dao.HeroDao
+import com.example.tanorami.core.database.dao.HeroDao
 import com.example.tanorami.core.di.IODispatcher
 import com.example.tanorami.info_about_hero.data.model.FullHeroInfo
 import kotlinx.coroutines.CoroutineDispatcher

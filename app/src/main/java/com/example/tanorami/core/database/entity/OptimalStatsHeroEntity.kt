@@ -3,7 +3,7 @@ package com.example.tanorami.core.database.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.tanorami.base_build_hero.data.model.OptimalStatsHero
-import com.example.tanorami.core.data.local.contract.RoomContract
+import com.example.tanorami.core.database.contract.RoomContract
 
 @Entity(tableName = RoomContract.tableOptimalStatsHero)
 data class OptimalStatsHeroEntity(

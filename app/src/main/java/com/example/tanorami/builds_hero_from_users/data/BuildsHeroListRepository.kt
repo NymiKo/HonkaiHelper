@@ -1,7 +1,7 @@
 package com.example.tanorami.builds_hero_from_users.data
 
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
-import com.example.tanorami.core.data.local.models.hero.HeroWithNameAvatarRarity
+import com.example.tanorami.core.database.models.hero.HeroWithNameAvatarRarity
 import com.example.tanorami.core.network.NetworkResult
 
 interface BuildsHeroListRepository {

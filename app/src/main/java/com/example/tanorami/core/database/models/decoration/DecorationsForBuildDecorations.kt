@@ -1,7 +1,7 @@
 package com.example.tanorami.core.database.models.decoration
 
 import androidx.room.Relation
-import com.example.tanorami.core.data.local.entity.DecorationEntity
+import com.example.tanorami.core.database.entity.DecorationEntity
 
 data class DecorationsForBuildDecorations(
     val idDecoration: Int,

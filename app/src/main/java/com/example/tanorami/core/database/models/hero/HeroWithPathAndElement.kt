@@ -2,11 +2,11 @@ package com.example.tanorami.core.database.models.hero
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.example.tanorami.core.data.local.entity.AbilityEntity
-import com.example.tanorami.core.data.local.entity.EidolonEntity
-import com.example.tanorami.core.data.local.entity.ElementEntity
-import com.example.tanorami.core.data.local.entity.HeroEntity
-import com.example.tanorami.core.data.local.entity.PathEntity
+import com.example.tanorami.core.database.entity.AbilityEntity
+import com.example.tanorami.core.database.entity.EidolonEntity
+import com.example.tanorami.core.database.entity.ElementEntity
+import com.example.tanorami.core.database.entity.HeroEntity
+import com.example.tanorami.core.database.entity.PathEntity
 
 data class HeroWithPathAndElement(
     @Embedded

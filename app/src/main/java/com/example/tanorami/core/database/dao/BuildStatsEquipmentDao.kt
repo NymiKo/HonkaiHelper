@@ -4,8 +4,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.tanorami.core.data.local.contract.RoomContract
-import com.example.tanorami.core.data.local.entity.BuildStatsEquipmentEntity
+import com.example.tanorami.core.database.contract.RoomContract
+import com.example.tanorami.core.database.entity.BuildStatsEquipmentEntity
 
 @Dao
 interface BuildStatsEquipmentDao {

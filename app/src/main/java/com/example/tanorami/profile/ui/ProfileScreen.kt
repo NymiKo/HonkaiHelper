@@ -31,6 +31,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.net.toFile
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -54,7 +55,6 @@ import com.example.tanorami.profile.ui.components.ProfileTopAppBar
 import com.example.tanorami.profile.ui.components.TeamsAndBuildsInProfile
 import com.example.tanorami.profile.ui.components.UserNotLoggedComponent
 import com.example.tanorami.utils.OnLifecycleEvent
-import com.example.tanorami.utils.toFile
 import com.example.tanorami.utils.toast
 
 @Composable
@@ -114,11 +114,10 @@ private fun ProfileScreenContent(
     uiState: ProfileScreenUiState,
     onEvents: (event: ProfileScreenEvents) -> Unit,
 ) {
-    val context = LocalContext.current
     val launcher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let {
-                onEvents(ProfileScreenEvents.UploadAvatarOnServer(uri.toFile(context)))
+                onEvents(ProfileScreenEvents.UploadAvatarOnServer(uri.toFile()))
             }
         }
 

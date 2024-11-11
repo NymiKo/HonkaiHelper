@@ -1,31 +1,31 @@
 package com.example.tanorami.load_data.data
 
-import com.example.tanorami.core.data.local.dao.AbilityDao
-import com.example.tanorami.core.data.local.dao.BuildDecorationDao
-import com.example.tanorami.core.data.local.dao.BuildRelicDao
-import com.example.tanorami.core.data.local.dao.BuildStatsEquipmentDao
-import com.example.tanorami.core.data.local.dao.BuildWeaponDao
-import com.example.tanorami.core.data.local.dao.DecorationDao
-import com.example.tanorami.core.data.local.dao.EidolonDao
-import com.example.tanorami.core.data.local.dao.ElementDao
-import com.example.tanorami.core.data.local.dao.HeroDao
-import com.example.tanorami.core.data.local.dao.OptimalStatsHeroDao
-import com.example.tanorami.core.data.local.dao.PathDao
-import com.example.tanorami.core.data.local.dao.RelicDao
-import com.example.tanorami.core.data.local.dao.WeaponDao
-import com.example.tanorami.core.data.local.entity.AbilityEntity
-import com.example.tanorami.core.data.local.entity.BuildDecorationEntity
-import com.example.tanorami.core.data.local.entity.BuildRelicEntity
-import com.example.tanorami.core.data.local.entity.BuildStatsEquipmentEntity
-import com.example.tanorami.core.data.local.entity.BuildWeaponEntity
-import com.example.tanorami.core.data.local.entity.DecorationEntity
-import com.example.tanorami.core.data.local.entity.EidolonEntity
-import com.example.tanorami.core.data.local.entity.ElementEntity
-import com.example.tanorami.core.data.local.entity.HeroEntity
-import com.example.tanorami.core.data.local.entity.OptimalStatsHeroEntity
-import com.example.tanorami.core.data.local.entity.PathEntity
-import com.example.tanorami.core.data.local.entity.RelicEntity
-import com.example.tanorami.core.data.local.entity.WeaponEntity
+import com.example.tanorami.core.database.dao.AbilityDao
+import com.example.tanorami.core.database.dao.BuildDecorationDao
+import com.example.tanorami.core.database.dao.BuildRelicDao
+import com.example.tanorami.core.database.dao.BuildStatsEquipmentDao
+import com.example.tanorami.core.database.dao.BuildWeaponDao
+import com.example.tanorami.core.database.dao.DecorationDao
+import com.example.tanorami.core.database.dao.EidolonDao
+import com.example.tanorami.core.database.dao.ElementDao
+import com.example.tanorami.core.database.dao.HeroDao
+import com.example.tanorami.core.database.dao.OptimalStatsHeroDao
+import com.example.tanorami.core.database.dao.PathDao
+import com.example.tanorami.core.database.dao.RelicDao
+import com.example.tanorami.core.database.dao.WeaponDao
+import com.example.tanorami.core.database.entity.AbilityEntity
+import com.example.tanorami.core.database.entity.BuildDecorationEntity
+import com.example.tanorami.core.database.entity.BuildRelicEntity
+import com.example.tanorami.core.database.entity.BuildStatsEquipmentEntity
+import com.example.tanorami.core.database.entity.BuildWeaponEntity
+import com.example.tanorami.core.database.entity.DecorationEntity
+import com.example.tanorami.core.database.entity.EidolonEntity
+import com.example.tanorami.core.database.entity.ElementEntity
+import com.example.tanorami.core.database.entity.HeroEntity
+import com.example.tanorami.core.database.entity.OptimalStatsHeroEntity
+import com.example.tanorami.core.database.entity.PathEntity
+import com.example.tanorami.core.database.entity.RelicEntity
+import com.example.tanorami.core.database.entity.WeaponEntity
 import com.example.tanorami.core.di.IODispatcher
 import com.example.tanorami.core.network.NetworkResult
 import com.example.tanorami.core.network.handleApi
@@ -469,7 +469,7 @@ class LoadDataRepositoryImpl @Inject constructor(
     private suspend fun <T> getRemoteData(getData: suspend () -> Response<T>) =
         handleApi { getData() }
 
-    private suspend fun <T> insertEntitiesIntoLocalStorage(
+    private fun <T> insertEntitiesIntoLocalStorage(
         entityList: List<T>,
         insertFunction: suspend (List<T>) -> Unit
     ): Job {

@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.tanorami.core.data.local.models.hero.HeroWithNameAvatarRarity
+import com.example.tanorami.core.database.models.hero.HeroWithNameAvatarRarity
 import com.example.tanorami.core.ui.base_components.text.BaseDefaultText
 import com.example.tanorami.core.ui.theme.DarkGrey
 import com.example.tanorami.core.ui.theme.Green

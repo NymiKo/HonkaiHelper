@@ -1,13 +1,13 @@
 package com.example.tanorami.core.database.models.hero
 
 import androidx.room.Relation
-import com.example.tanorami.core.data.local.entity.BuildDecorationEntity
-import com.example.tanorami.core.data.local.entity.BuildRelicEntity
-import com.example.tanorami.core.data.local.entity.BuildStatsEquipmentEntity
-import com.example.tanorami.core.data.local.entity.BuildWeaponEntity
-import com.example.tanorami.core.data.local.models.decoration.DecorationsForBuildDecorations
-import com.example.tanorami.core.data.local.models.relic.RelicsForBuildRelics
-import com.example.tanorami.core.data.local.models.weapon.WeaponsForBuildWeapons
+import com.example.tanorami.core.database.entity.BuildDecorationEntity
+import com.example.tanorami.core.database.entity.BuildRelicEntity
+import com.example.tanorami.core.database.entity.BuildStatsEquipmentEntity
+import com.example.tanorami.core.database.entity.BuildWeaponEntity
+import com.example.tanorami.core.database.models.decoration.DecorationsForBuildDecorations
+import com.example.tanorami.core.database.models.relic.RelicsForBuildRelics
+import com.example.tanorami.core.database.models.weapon.WeaponsForBuildWeapons
 
 data class FullBaseBuildHeroEntity(
 

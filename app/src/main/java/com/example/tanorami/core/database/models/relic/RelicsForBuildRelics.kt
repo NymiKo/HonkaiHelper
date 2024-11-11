@@ -1,7 +1,7 @@
 package com.example.tanorami.core.database.models.relic
 
 import androidx.room.Relation
-import com.example.tanorami.core.data.local.entity.RelicEntity
+import com.example.tanorami.core.database.entity.RelicEntity
 
 data class RelicsForBuildRelics(
     val idRelic: Int,
