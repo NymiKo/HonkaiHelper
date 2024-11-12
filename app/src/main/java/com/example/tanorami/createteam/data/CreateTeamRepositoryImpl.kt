@@ -17,7 +17,8 @@ class CreateTeamRepositoryImpl @Inject constructor(
 ) : CreateTeamRepository {
 
     override suspend fun getHeroesList(): List<ActiveHeroInTeam> = withContext(ioDispatcher) {
-        return@withContext heroDao.getHeroWithNameAvatarRarityList().sortedBy { it.name }.map { ActiveHeroInTeam(it, false) }
+        return@withContext heroDao.getHeroesListWithNameAvatarRarity().sortedBy { it.name }
+            .map { ActiveHeroInTeam(it, false) }
     }
 
     override suspend fun saveTeam(idTeam: Long, heroesList: List<HeroWithNameAvatarRarity>): NetworkResult<Unit> {

@@ -2,7 +2,7 @@ package com.example.tanorami.heroes.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.example.tanorami.base.BaseViewModel
-import com.example.tanorami.core.data.data_store.AppDataStore
+import com.example.tanorami.core.data.source.local.data_store.AppDataStore
 import com.example.tanorami.heroes.data.HeroesListRepository
 import com.example.tanorami.heroes.presentation.models.HeroesListScreenEvents
 import com.example.tanorami.heroes.presentation.models.HeroesListScreenSideEffects

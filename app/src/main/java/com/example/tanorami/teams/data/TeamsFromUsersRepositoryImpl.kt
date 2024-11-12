@@ -61,6 +61,6 @@ class TeamsFromUsersRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getNameHero(idHero: Int): String = withContext(ioDispatcher) {
-        return@withContext heroDao.getName(idHero)
+        return@withContext heroDao.getHeroNameById(idHero)
     }
 }

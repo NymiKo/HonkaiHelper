@@ -25,8 +25,8 @@ data class HeroEntity(
             name = hero.name,
             story = hero.story,
             rarity = hero.rarity,
-            idPath = hero.path,
-            idElement = hero.element
+            idPath = hero.idPath,
+            idElement = hero.idElement
         )
     }
 
@@ -37,7 +37,7 @@ data class HeroEntity(
         avatar = localAvatarPath,
         splashArt = localSplashArtPath,
         rarity = rarity,
-        path = idPath,
-        element = idElement
+        idPath = idPath,
+        idElement = idElement
     )
 }

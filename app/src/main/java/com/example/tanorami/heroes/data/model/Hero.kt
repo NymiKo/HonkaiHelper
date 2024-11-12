@@ -11,6 +11,6 @@ data class Hero(
     val avatar: String,
     val splashArt: String,
     val rarity: Boolean,
-    val path: Int,
-    val element: Int
+    val idPath: Int,
+    val idElement: Int
 ): Parcelable

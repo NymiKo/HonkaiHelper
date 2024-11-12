@@ -15,7 +15,7 @@ import com.example.tanorami.core.database.models.hero.HeroWithPathAndElement
 interface HeroDao {
 
     @Query("SELECT * FROM ${RoomContract.tableHeroes}")
-    suspend fun getHeroes(): List<HeroEntity>
+    suspend fun getHeroesList(): List<HeroEntity>
 
     @Transaction
     @Query("SELECT * FROM ${RoomContract.tableHeroes} WHERE id = :idHero")
@@ -29,14 +29,14 @@ interface HeroDao {
     suspend fun getHeroWithNameAvatarRarity(idHero: Int): HeroWithNameAvatarRarity
 
     @Query("SELECT id, name, localAvatarPath, rarity FROM ${RoomContract.tableHeroes}")
-    suspend fun getHeroWithNameAvatarRarityList(): List<HeroWithNameAvatarRarity>
+    suspend fun getHeroesListWithNameAvatarRarity(): List<HeroWithNameAvatarRarity>
 
     @Query("SELECT * FROM ${RoomContract.tableHeroes} WHERE id = :idHero")
-    suspend fun getHero(idHero: Int): HeroEntity
+    suspend fun getHeroById(idHero: Int): HeroEntity
 
     @Query("SELECT name FROM ${RoomContract.tableHeroes} WHERE id = :idHero")
-    suspend fun getName(idHero: Int): String
+    suspend fun getHeroNameById(idHero: Int): String
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertHeroes(heroes: List<HeroEntity>)
+    suspend fun insertHeroesList(heroes: List<HeroEntity>)
 }

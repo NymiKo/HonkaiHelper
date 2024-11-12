@@ -24,7 +24,7 @@ class CreateBuildHeroRepositoryImpl @Inject constructor(
     private val decorationDao: DecorationDao
 ): CreateBuildHeroRepository {
     override suspend fun getHero(idHero: Int): Hero = withContext(ioDispatcher) {
-        return@withContext heroDao.getHero(idHero).toHero()
+        return@withContext heroDao.getHeroById(idHero).toHero()
     }
 
     override suspend fun saveBuild(buildHeroFromUser: BuildHeroFromUser): NetworkResult<Boolean> = withContext(ioDispatcher) {

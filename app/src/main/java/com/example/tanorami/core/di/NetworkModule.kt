@@ -5,7 +5,7 @@ import com.example.tanorami.auth.login.data.LoginService
 import com.example.tanorami.auth.registration.data.RegistrationService
 import com.example.tanorami.builds_hero_from_users.data.BuildsHeroListService
 import com.example.tanorami.change_nickname.data.ChangeNicknameService
-import com.example.tanorami.core.data.data_store.AppDataStore
+import com.example.tanorami.core.data.source.local.data_store.AppDataStore
 import com.example.tanorami.core.network.AuthInterceptor
 import com.example.tanorami.create_build_hero.data.CreateBuildHeroService
 import com.example.tanorami.createteam.data.CreateTeamService

@@ -236,9 +236,9 @@ class LoadDataRepositoryImpl @Inject constructor(
 
                 is NetworkResult.Success -> {
                     val remoteHeroes = resultApi.data
-                    val localHeroes = heroDao.getHeroes()
+                    val localHeroes = heroDao.getHeroesList()
                     val newHeroes = remoteHeroes.filter { hero ->
-                        localHeroes.none { it.id == hero.id && it.name == hero.name && it.rarity == hero.rarity && it.idPath == hero.path && it.idElement == hero.element }
+                        localHeroes.none { it.id == hero.id && it.name == hero.name && it.rarity == hero.rarity && it.idPath == hero.idPath && it.idElement == hero.idElement }
                     }
 
                     val localAvatarPaths =
@@ -255,7 +255,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                         )
                     }
 
-                    insertEntitiesIntoLocalStorage(heroEntities, heroDao::insertHeroes).join()
+                    insertEntitiesIntoLocalStorage(heroEntities, heroDao::insertHeroesList).join()
 
                     return@withContext true
                 }

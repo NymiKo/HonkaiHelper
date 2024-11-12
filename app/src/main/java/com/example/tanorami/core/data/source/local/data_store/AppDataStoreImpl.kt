@@ -1,4 +1,4 @@
-package com.example.tanorami.core.data.data_store
+package com.example.tanorami.core.data.source.local.data_store
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences

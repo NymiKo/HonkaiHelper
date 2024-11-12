@@ -3,7 +3,7 @@ package com.example.tanorami.main.presentation
 import androidx.lifecycle.viewModelScope
 import com.example.tanorami.R
 import com.example.tanorami.base.BaseViewModel
-import com.example.tanorami.core.data.data_store.AppDataStore
+import com.example.tanorami.core.data.source.local.data_store.AppDataStore
 import com.example.tanorami.core.network.NetworkResult
 import com.example.tanorami.main.data.MainScreenRepository
 import com.example.tanorami.main.presentation.models.MainScreenEvents

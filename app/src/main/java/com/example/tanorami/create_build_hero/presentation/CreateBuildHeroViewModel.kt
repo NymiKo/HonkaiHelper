@@ -278,7 +278,11 @@ class CreateBuildHeroViewModel @Inject constructor(
         uiState = uiState.copy(bottomSheetEquipmentVisibilityState = sheetState)
         if (sheetState) {
             uiState = when(equipmentType) {
-                EquipmentType.WEAPON -> uiState.copy(equipmentList = repository.getWeapons(uiState.hero?.path ?: 0), equipmentType = equipmentType)
+                EquipmentType.WEAPON -> uiState.copy(
+                    equipmentList = repository.getWeapons(
+                        uiState.hero?.idPath ?: 0
+                    ), equipmentType = equipmentType
+                )
                 EquipmentType.RELIC_TWO_PARTS -> uiState.copy(equipmentList = repository.getRelics(), equipmentType = equipmentType)
                 EquipmentType.RELIC_FOUR_PARTS -> uiState.copy(equipmentList = repository.getRelics(), equipmentType = equipmentType)
                 EquipmentType.DECORATION -> uiState.copy(equipmentList = repository.getDecorations(), equipmentType = equipmentType)
