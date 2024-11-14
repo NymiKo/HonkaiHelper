@@ -1,8 +1,8 @@
 package com.example.tanorami.create_build_heroes_list.presentation.models
 
-import com.example.tanorami.base.UiState
-import com.example.tanorami.heroes.data.model.Hero
+import com.example.core.base.UiState
+import com.example.core.domain.repository.hero.model.HeroBaseInfoModel
 
 data class CreateBuildHeroesListScreenUiState(
-    val heroesList: List<Hero> = emptyList()
+    val heroesList: List<HeroBaseInfoModel> = emptyList()
 ) : UiState

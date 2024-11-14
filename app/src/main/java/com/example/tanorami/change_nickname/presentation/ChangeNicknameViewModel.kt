@@ -5,11 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tanorami.R
+import com.example.core.network.NetworkResult
+import com.example.core.R
 import com.example.tanorami.change_nickname.data.ChangeNicknameRepository
 import com.example.tanorami.change_nickname.presentation.models.ChangeNicknameScreenEvents
 import com.example.tanorami.change_nickname.presentation.models.ChangeNicknameScreenUiState
-import com.example.tanorami.core.network.NetworkResult
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

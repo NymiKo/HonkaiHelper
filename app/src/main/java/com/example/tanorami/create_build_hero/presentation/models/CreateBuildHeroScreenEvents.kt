@@ -1,7 +1,7 @@
 package com.example.tanorami.create_build_hero.presentation.models
 
-import com.example.tanorami.base.UiEvent
-import com.example.tanorami.create_build_hero.data.model.Equipment
+import com.example.core.base.UiEvent
+import com.example.core.domain.repository.equipment.Equipment
 
 sealed interface CreateBuildHeroScreenEvents : UiEvent {
     data object OnBack: CreateBuildHeroScreenEvents

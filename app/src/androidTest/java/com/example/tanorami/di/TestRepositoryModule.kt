@@ -4,8 +4,6 @@ import com.example.tanorami.auth.login.domain.LoginRepository
 import com.example.tanorami.auth.registration.data.RegistrationRepository
 import com.example.tanorami.createteam.data.CreateTeamRepository
 import com.example.tanorami.createteam.data.FakeCreateTeamRepository
-import com.example.tanorami.heroes.data.FakeHeroesListRepository
-import com.example.tanorami.heroes.data.HeroesListRepository
 import com.example.tanorami.login.data.FakeLoginRepository
 import com.example.tanorami.profile.data.FakeProfileRepository
 import com.example.tanorami.profile.domain.ProfileRepository
@@ -17,9 +15,6 @@ import dagger.Module
 
 @Module
 interface TestRepositoryModule {
-
-    @Binds
-    fun bindFakeHeroesListRepository(repository: FakeHeroesListRepository): HeroesListRepository
 
     @Binds
     fun bindFakeTeamsListRepository(repository: FakeTeamsFromUsersRepository): TeamsFromUsersRepository

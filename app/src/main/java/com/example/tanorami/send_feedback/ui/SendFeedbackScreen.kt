@@ -16,10 +16,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.tanorami.R
-import com.example.tanorami.core.ui.base_components.button.BaseSmallFloatingButton
-import com.example.tanorami.core.ui.base_components.text_field.BaseOutlinedTextField
-import com.example.tanorami.core.ui.base_components.top_app_bar.BaseTopAppBar
+import com.example.core.ui.base_components.button.BaseSmallFloatingButton
+import com.example.core.ui.base_components.text_field.BaseOutlinedTextField
+import com.example.core.ui.base_components.top_app_bar.BaseTopAppBar
+import com.example.core.R
 import com.example.tanorami.send_feedback.presentation.SendFeedbackViewModel
 import com.example.tanorami.send_feedback.presentation.models.SendFeedbackScreenEvents
 import com.example.tanorami.send_feedback.presentation.models.SendFeedbackScreenSideEffects

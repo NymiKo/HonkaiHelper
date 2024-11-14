@@ -1,7 +1,7 @@
 package com.example.tanorami.change_nickname.presentation.models
 
-import com.example.tanorami.R
-import com.example.tanorami.auth.login.presentation.models.TextField
+import com.example.core.R
+import com.example.core.base.models.TextField
 
 data class ChangeNicknameScreenUiState(
     val oldNickname: String = "",

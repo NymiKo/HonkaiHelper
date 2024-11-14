@@ -25,13 +25,13 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.tanorami.R
+import com.example.core.R
+import com.example.core.ui.base_components.top_app_bar.BaseTopAppBar
+import com.example.core.ui.theme.AppTheme
+import com.example.core.ui.theme.Red
 import com.example.tanorami.change_nickname.presentation.ChangeNicknameViewModel
 import com.example.tanorami.change_nickname.presentation.models.ChangeNicknameScreenEvents
 import com.example.tanorami.change_nickname.presentation.models.ChangeNicknameScreenUiState
-import com.example.tanorami.core.ui.base_components.top_app_bar.BaseTopAppBar
-import com.example.tanorami.core.ui.theme.AppTheme
-import com.example.tanorami.core.ui.theme.Red
 import com.example.tanorami.utils.OnLifecycleEvent
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable

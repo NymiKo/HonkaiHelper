@@ -1,24 +1,24 @@
 package com.example.tanorami.load_data.data
 
-import com.example.tanorami.base_build_hero.data.model.BuildDecoration
-import com.example.tanorami.base_build_hero.data.model.BuildRelic
-import com.example.tanorami.base_build_hero.data.model.BuildStatsEquipment
-import com.example.tanorami.base_build_hero.data.model.BuildWeapon
-import com.example.tanorami.base_build_hero.data.model.OptimalStatsHero
-import com.example.tanorami.heroes.data.model.Hero
-import com.example.tanorami.info_about_hero.data.model.Ability
-import com.example.tanorami.info_about_hero.data.model.Decoration
-import com.example.tanorami.info_about_hero.data.model.Eidolon
-import com.example.tanorami.info_about_hero.data.model.Element
-import com.example.tanorami.info_about_hero.data.model.Path
-import com.example.tanorami.info_about_hero.data.model.Relic
-import com.example.tanorami.weapons_list.domain.models.Weapon
+import com.example.core.domain.repository.decoration.BuildDecoration
+import com.example.core.domain.repository.relic.BuildRelic
+import com.example.core.domain.repository.stats_equipment.BuildStatsEquipment
+import com.example.core.domain.repository.weapon.BuildWeapon
+import com.example.core.domain.repository.optimal_stats_hero.OptimalStatsHero
+import com.example.core.domain.repository.ability.Ability
+import com.example.core.domain.repository.decoration.Decoration
+import com.example.core.domain.repository.eidolon.Eidolon
+import com.example.core.domain.repository.element.Element
+import com.example.core.domain.repository.hero.model.HeroModel
+import com.example.core.domain.repository.path.Path
+import com.example.core.domain.repository.relic.Relic
+import com.example.core.domain.repository.weapon.Weapon
 import retrofit2.Response
 import retrofit2.http.GET
 
 interface LoadDataService {
     @GET("/getHeroes.php")
-    suspend fun getHeroesList(): Response<List<Hero>>
+    suspend fun getHeroesList(): Response<List<HeroModel>>
 
     @GET("/getPaths.php")
     suspend fun getPathsList(): Response<List<Path>>

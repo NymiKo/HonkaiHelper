@@ -1,6 +1,6 @@
 package com.example.tanorami.profile.presentation.models
 
-import com.example.tanorami.base.UiEvent
+import com.example.core.base.UiEvent
 import java.io.File
 
 sealed interface ProfileScreenEvents : UiEvent {

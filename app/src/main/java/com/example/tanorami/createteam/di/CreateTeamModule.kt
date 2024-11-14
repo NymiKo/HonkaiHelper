@@ -1,7 +1,7 @@
 package com.example.tanorami.createteam.di
 
 import androidx.lifecycle.ViewModel
-import com.example.tanorami.core.di.ViewModelKey
+import com.example.core.di.ViewModelKey
 import com.example.tanorami.createteam.presentation.CreateTeamViewModel
 import dagger.Binds
 import dagger.Module

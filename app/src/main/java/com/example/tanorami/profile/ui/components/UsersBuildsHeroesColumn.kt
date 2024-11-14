@@ -28,19 +28,19 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.tanorami.R
+import com.example.core.R
+import com.example.core.domain.repository.decoration.Decoration
+import com.example.core.domain.repository.weapon.Weapon
+import com.example.core.ui.base_components.BaseHeroAvatarAndName
+import com.example.core.ui.base_components.lazy_column.BaseLazyColumn
+import com.example.core.ui.base_components.text.BaseDefaultText
+import com.example.core.ui.theme.Blue
+import com.example.core.ui.theme.DarkGrey
+import com.example.core.ui.theme.GreyTransparent20
+import com.example.core.ui.theme.Orange
+import com.example.core.ui.theme.Violet
+import com.example.core.ui.theme.White
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
-import com.example.tanorami.core.ui.base_components.BaseHeroAvatarAndName
-import com.example.tanorami.core.ui.base_components.lazy_column.BaseLazyColumn
-import com.example.tanorami.core.ui.base_components.text.BaseDefaultText
-import com.example.tanorami.core.ui.theme.Blue
-import com.example.tanorami.core.ui.theme.DarkGrey
-import com.example.tanorami.core.ui.theme.GreyTransparent20
-import com.example.tanorami.core.ui.theme.Orange
-import com.example.tanorami.core.ui.theme.Violet
-import com.example.tanorami.core.ui.theme.White
-import com.example.tanorami.info_about_hero.data.model.Decoration
-import com.example.tanorami.weapons_list.domain.models.Weapon
 
 @Composable
 fun UsersBuildsHeroesColumn(

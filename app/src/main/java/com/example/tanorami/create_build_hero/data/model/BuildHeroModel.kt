@@ -1,5 +1,7 @@
 package com.example.tanorami.create_build_hero.data.model
 
+import com.example.core.domain.repository.equipment.Equipment
+
 data class BuildHeroModel(
     val idBuild: Long? = null,
     val weapon: Equipment? = null,

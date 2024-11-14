@@ -1,7 +1,7 @@
 package com.example.tanorami.createteam.presentation.models
 
-import com.example.tanorami.base.UiState
-import com.example.tanorami.core.database.models.hero.HeroWithNameAvatarRarity
+import com.example.core.base.UiState
+import com.example.core.database.models.hero.HeroBaseInfoProjection
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
 
 data class CreateTeamScreenUiState(
@@ -10,7 +10,7 @@ data class CreateTeamScreenUiState(
     val isSuccess: Boolean = false,
     val isError: Boolean = false,
     val heroesList: List<ActiveHeroInTeam> = emptyList(),
-    val heroesListInTeam: List<HeroWithNameAvatarRarity> = emptyList(),
+    val heroesListInTeam: List<HeroBaseInfoProjection> = emptyList(),
     val uidTeam: String = "",
     val isCreateTeamMode: Boolean = idTeam == -1L,
     val dialogDeleteTeamVisibilityState: Boolean = false,

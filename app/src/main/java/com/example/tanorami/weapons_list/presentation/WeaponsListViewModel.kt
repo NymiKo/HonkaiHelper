@@ -1,7 +1,7 @@
 package com.example.tanorami.weapons_list.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.example.tanorami.base.BaseViewModel
+import com.example.core.base.BaseViewModel
 import com.example.tanorami.weapons_list.domain.WeaponsListRepository
 import com.example.tanorami.weapons_list.presentation.models.WeaponsListScreenEvents
 import com.example.tanorami.weapons_list.presentation.models.WeaponsListScreenSideEffects

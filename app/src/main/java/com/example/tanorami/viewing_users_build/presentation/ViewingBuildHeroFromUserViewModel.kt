@@ -1,9 +1,9 @@
 package com.example.tanorami.viewing_users_build.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.example.tanorami.R
-import com.example.tanorami.base.BaseViewModel
-import com.example.tanorami.core.network.NetworkResult
+import com.example.core.R
+import com.example.core.base.BaseViewModel
+import com.example.core.network.NetworkResult
 import com.example.tanorami.viewing_users_build.data.ViewingBuildHeroFromUserRepository
 import com.example.tanorami.viewing_users_build.presentation.models.ViewingBuildHeroFromUserScreenEvents
 import com.example.tanorami.viewing_users_build.presentation.models.ViewingBuildHeroFromUserScreenSideEffects

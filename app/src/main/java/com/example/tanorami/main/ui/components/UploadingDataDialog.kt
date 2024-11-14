@@ -1,6 +1,6 @@
 package com.example.tanorami.main.ui.components
 
-import androidx.compose.material.Icon
+import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.AlertDialog
@@ -12,9 +12,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import com.example.tanorami.R
-import com.example.tanorami.core.ui.base_components.text.BaseDefaultText
-import com.example.tanorami.core.ui.theme.Orange
+import com.example.core.ui.base_components.text.BaseDefaultText
+import com.example.core.ui.theme.Orange
+import com.example.core.R
 
 @Composable
 fun UploadingDataDialog(

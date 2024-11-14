@@ -9,20 +9,20 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.tanorami.core.database.models.hero.HeroWithNameAvatarRarity
-import com.example.tanorami.core.ui.theme.Grey
+import com.example.core.database.models.hero.HeroBaseInfoProjection
+import com.example.core.ui.theme.Grey
 
 @Composable
 fun ItemHeroAvatar(
     modifier: Modifier = Modifier,
-    heroWithNameAvatarRarity: HeroWithNameAvatarRarity,
+    heroBaseInfoProjection: HeroBaseInfoProjection,
 ) {
     AsyncImage(
         modifier = modifier
             .size(80.dp)
             .clip(CircleShape)
             .border(3.dp, Grey, CircleShape),
-        model = heroWithNameAvatarRarity.localAvatarPath,
+        model = heroBaseInfoProjection.localAvatarPath,
         contentDescription = null
     )
 }
@@ -30,5 +30,5 @@ fun ItemHeroAvatar(
 @Preview
 @Composable
 private fun ItemHeroAvatarPreview() {
-    ItemHeroAvatar(heroWithNameAvatarRarity = HeroWithNameAvatarRarity(1, "", "", false))
+    ItemHeroAvatar(heroBaseInfoProjection = HeroBaseInfoProjection(1, "", "", false))
 }

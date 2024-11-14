@@ -11,8 +11,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.tanorami.core.ui.theme.Orange
-import com.example.tanorami.info_about_hero.data.model.Relic
+import com.example.core.domain.repository.relic.Relic
+import com.example.core.ui.theme.Orange
 
 @Composable
 fun RelicsColumnBuild(

@@ -1,15 +1,15 @@
 package com.example.tanorami.teams_and_builds.data
 
+import com.example.core.database.dao.DecorationDao
+import com.example.core.database.dao.HeroDao
+import com.example.core.database.dao.RelicDao
+import com.example.core.database.dao.WeaponDao
+import com.example.core.database.models.hero.HeroBaseInfoProjection
+import com.example.core.di.IODispatcher
+import com.example.core.network.NetworkResult
+import com.example.core.network.handleApi
 import com.example.tanorami.builds_hero_from_users.data.BuildsHeroListService
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
-import com.example.tanorami.core.database.dao.DecorationDao
-import com.example.tanorami.core.database.dao.HeroDao
-import com.example.tanorami.core.database.dao.RelicDao
-import com.example.tanorami.core.database.dao.WeaponDao
-import com.example.tanorami.core.database.models.hero.HeroWithNameAvatarRarity
-import com.example.tanorami.core.di.IODispatcher
-import com.example.tanorami.core.network.NetworkResult
-import com.example.tanorami.core.network.handleApi
 import com.example.tanorami.teams.data.TeamsFromUsersService
 import com.example.tanorami.teams.data.model.TeamHero
 import kotlinx.coroutines.CoroutineDispatcher
@@ -25,7 +25,7 @@ class TeamsAndBuildsRepositoryImpl @Inject constructor(
     private val decorationDao: DecorationDao,
     @IODispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : TeamsAndBuildsRepository {
-    override suspend fun getHero(idHero: Int): HeroWithNameAvatarRarity =
+    override suspend fun getHero(idHero: Int): HeroBaseInfoProjection =
         withContext(ioDispatcher) {
             return@withContext heroDao.getHeroWithNameAvatarRarity(idHero)
         }

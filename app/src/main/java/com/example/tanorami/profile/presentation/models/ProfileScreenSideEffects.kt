@@ -1,6 +1,6 @@
 package com.example.tanorami.profile.presentation.models
 
-import com.example.tanorami.base.UiEffect
+import com.example.core.base.UiEffect
 
 sealed interface ProfileScreenSideEffects : UiEffect {
     data object OnLoginScreen : ProfileScreenSideEffects

@@ -19,8 +19,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.tanorami.core.ui.base_components.text.BaseDefaultText
-import com.example.tanorami.core.ui.base_components.top_app_bar.BaseCenterAlignedTopAppBar
+import com.example.core.ui.base_components.text.BaseDefaultText
+import com.example.core.ui.base_components.top_app_bar.BaseCenterAlignedTopAppBar
 import com.example.tanorami.info_about_weapon.data.model.FullInfoAboutWeapon
 import com.example.tanorami.info_about_weapon.presentation.InfoAboutWeaponViewModel
 import com.example.tanorami.info_about_weapon.ui.components.DescriptionWeaponSkill

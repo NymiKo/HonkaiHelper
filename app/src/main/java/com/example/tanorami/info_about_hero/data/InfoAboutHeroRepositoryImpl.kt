@@ -1,7 +1,7 @@
 package com.example.tanorami.info_about_hero.data
 
-import com.example.tanorami.core.database.dao.HeroDao
-import com.example.tanorami.core.di.IODispatcher
+import com.example.core.database.dao.HeroDao
+import com.example.core.di.IODispatcher
 import com.example.tanorami.info_about_hero.data.model.FullHeroInfo
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -15,7 +15,7 @@ class InfoAboutHeroRepositoryImpl @Inject constructor(
         return withContext(ioDispatcher) {
             val result = heroDao.getHeroWithPathAndElement(idHero)
             return@withContext FullHeroInfo(
-                result.heroEntity.toHero(),
+                result.heroEntity.toHeroModel(),
                 result.pathEntity.toPath(),
                 result.elementEntity.toElement(),
                 result.abilityEntity.map { it.toAbility() },

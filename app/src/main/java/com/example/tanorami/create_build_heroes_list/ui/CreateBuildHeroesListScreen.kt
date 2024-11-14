@@ -12,8 +12,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material.Scaffold
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
@@ -25,11 +25,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.tanorami.R
-import com.example.tanorami.core.ui.base_components.HeroName
-import com.example.tanorami.core.ui.base_components.top_app_bar.BaseTopAppBar
-import com.example.tanorami.core.ui.theme.Orange
-import com.example.tanorami.core.ui.theme.Violet
+import com.example.core.R
+import com.example.core.ui.base_components.HeroName
+import com.example.core.ui.base_components.top_app_bar.BaseTopAppBar
+import com.example.core.ui.theme.Orange
+import com.example.core.ui.theme.Violet
 import com.example.tanorami.create_build_hero.ui.CreateBuildForHeroNavArguments
 import com.example.tanorami.create_build_heroes_list.presentation.CreateBuildHeroesListViewModel
 import com.example.tanorami.create_build_heroes_list.presentation.models.CreateBuildHeroesListScreenEvents
@@ -118,7 +118,7 @@ private fun CreateBuildHeroesListContent(
                                     true -> Orange
                                 }
                             ),
-                        model = hero.avatar,
+                        model = hero.localAvatarPath,
                         contentDescription = null,
                         contentScale = ContentScale.Crop,
                     )

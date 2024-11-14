@@ -1,12 +1,12 @@
 package com.example.tanorami.builds_hero_from_users.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.example.tanorami.base.BaseViewModel
+import com.example.core.base.BaseViewModel
+import com.example.core.network.NetworkResult
 import com.example.tanorami.builds_hero_from_users.data.BuildsHeroListRepository
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenEvents
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenSideEffects
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenUiState
-import com.example.tanorami.core.network.NetworkResult
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

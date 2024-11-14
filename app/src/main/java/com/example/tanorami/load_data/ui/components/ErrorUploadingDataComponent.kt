@@ -9,9 +9,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.tanorami.R
-import com.example.tanorami.core.ui.base_components.button.BaseButton
-import com.example.tanorami.core.ui.base_components.text.BaseDefaultText
+import com.example.core.ui.base_components.button.BaseButton
+import com.example.core.ui.base_components.text.BaseDefaultText
+import com.example.core.R
 
 @Composable
 fun ErrorUploadingDataComponent(

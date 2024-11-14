@@ -1,12 +1,12 @@
 package com.example.tanorami.create_build_hero.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.example.tanorami.R
-import com.example.tanorami.base.BaseViewModel
-import com.example.tanorami.core.network.NetworkResult
+import com.example.core.R
+import com.example.core.base.BaseViewModel
+import com.example.core.domain.repository.equipment.Equipment
+import com.example.core.network.NetworkResult
 import com.example.tanorami.create_build_hero.data.CreateBuildHeroRepository
 import com.example.tanorami.create_build_hero.data.model.BuildHeroFromUser
-import com.example.tanorami.create_build_hero.data.model.Equipment
 import com.example.tanorami.create_build_hero.presentation.models.CreateBuildHeroScreenEvents
 import com.example.tanorami.create_build_hero.presentation.models.CreateBuildHeroScreenSideEffects
 import com.example.tanorami.create_build_hero.presentation.models.CreateBuildHeroScreenUiState
@@ -60,7 +60,7 @@ class CreateBuildHeroViewModel @Inject constructor(
 
     private fun getHero(idHero: Int) = viewModelScope.launch {
         if (idHero != -1) {
-            uiState = uiState.copy(idHero = idHero, hero = repository.getHero(idHero))
+            uiState = uiState.copy(idHero = idHero, heroModel = repository.getHero(idHero))
         }
     }
 
@@ -219,25 +219,25 @@ class CreateBuildHeroViewModel @Inject constructor(
                 uiState = uiState.copy(
                     isLoading = false,
                     isError = false,
-                    hero = repository.getHero(result.data.hero!!.id),
+                    heroModel = repository.getHero(result.data.hero!!.id),
                     buildHeroFromUser = uiState.buildHeroFromUser.copy(
                         idBuild = idBuild,
                         weapon = Equipment(
                             result.data.weapon!!.idWeapon,
-                            result.data.weapon.image,
-                            result.data.weapon.rarity
+                            result.data.weapon!!.image,
+                            result.data.weapon!!.rarity
                         ),
                         relicTwoParts = Equipment(
                             result.data.relicTwoParts!!.idRelic,
-                            result.data.relicTwoParts.image
+                            result.data.relicTwoParts!!.image
                         ),
                         relicFourParts = Equipment(
                             result.data.relicFourParts!!.idRelic,
-                            result.data.relicFourParts.image
+                            result.data.relicFourParts!!.image
                         ),
                         decoration = Equipment(
                             result.data.decoration!!.idDecoration,
-                            result.data.decoration.image
+                            result.data.decoration!!.image
                         ),
                         statsEquipmentList = uiState.buildHeroFromUser.statsEquipmentList.copy(
                             statBody = result.data.statsEquipment[0],
@@ -280,7 +280,7 @@ class CreateBuildHeroViewModel @Inject constructor(
             uiState = when(equipmentType) {
                 EquipmentType.WEAPON -> uiState.copy(
                     equipmentList = repository.getWeapons(
-                        uiState.hero?.idPath ?: 0
+                        uiState.heroModel?.idPath ?: 0
                     ), equipmentType = equipmentType
                 )
                 EquipmentType.RELIC_TWO_PARTS -> uiState.copy(equipmentList = repository.getRelics(), equipmentType = equipmentType)

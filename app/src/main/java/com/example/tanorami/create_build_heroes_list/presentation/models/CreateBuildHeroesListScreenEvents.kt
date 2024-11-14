@@ -1,6 +1,6 @@
 package com.example.tanorami.create_build_heroes_list.presentation.models
 
-import com.example.tanorami.base.UiEvent
+import com.example.core.base.UiEvent
 
 sealed interface CreateBuildHeroesListScreenEvents : UiEvent {
     data object GetHeroesList : CreateBuildHeroesListScreenEvents

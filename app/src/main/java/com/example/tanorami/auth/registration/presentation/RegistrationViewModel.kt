@@ -1,13 +1,13 @@
 package com.example.tanorami.auth.registration.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.example.tanorami.R
+import com.example.core.R
 import com.example.tanorami.auth.registration.data.RegistrationRepository
 import com.example.tanorami.auth.registration.presentation.models.RegistrationScreenEvent
 import com.example.tanorami.auth.registration.presentation.models.RegistrationScreenSideEffects
 import com.example.tanorami.auth.registration.presentation.models.RegistrationScreenUiState
-import com.example.tanorami.base.BaseViewModel
-import com.example.tanorami.core.network.NetworkResult
+import com.example.core.base.BaseViewModel
+import com.example.core.network.NetworkResult
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

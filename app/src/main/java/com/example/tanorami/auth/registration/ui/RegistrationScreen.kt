@@ -26,15 +26,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.tanorami.R
+import com.example.core.ui.base_components.text.BaseDefaultText
+import com.example.core.ui.base_components.top_app_bar.BaseCenterAlignedTopAppBar
+import com.example.core.R
 import com.example.tanorami.auth.login.ui.components.LoginButton
 import com.example.tanorami.auth.login.ui.components.LoginOutlinedTextField
 import com.example.tanorami.auth.registration.presentation.RegistrationViewModel
 import com.example.tanorami.auth.registration.presentation.models.RegistrationScreenEvent
 import com.example.tanorami.auth.registration.presentation.models.RegistrationScreenSideEffects
 import com.example.tanorami.auth.registration.presentation.models.RegistrationScreenUiState
-import com.example.tanorami.core.ui.base_components.text.BaseDefaultText
-import com.example.tanorami.core.ui.base_components.top_app_bar.BaseCenterAlignedTopAppBar
 import com.example.tanorami.utils.toast
 import kotlinx.serialization.Serializable
 

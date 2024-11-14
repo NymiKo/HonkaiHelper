@@ -2,7 +2,7 @@ package com.example.tanorami.info_about_relic.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tanorami.info_about_hero.data.model.Relic
+import com.example.core.domain.repository.relic.Relic
 import com.example.tanorami.info_about_relic.data.InfoAboutRelicRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

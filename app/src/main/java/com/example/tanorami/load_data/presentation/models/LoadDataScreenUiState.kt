@@ -1,6 +1,6 @@
 package com.example.tanorami.load_data.presentation.models
 
-import com.example.tanorami.base.UiState
+import com.example.core.base.UiState
 
 data class LoadDataScreenUiState(
     val isUploadingData: Boolean = false,

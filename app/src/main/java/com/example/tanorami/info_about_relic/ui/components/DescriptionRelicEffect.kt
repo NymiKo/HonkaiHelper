@@ -20,10 +20,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.tanorami.R
-import com.example.tanorami.core.ui.base_components.text.BaseDefaultText
-import com.example.tanorami.core.ui.theme.DarkGrey
-import com.example.tanorami.core.ui.theme.Orange
+import com.example.core.ui.base_components.text.BaseDefaultText
+import com.example.core.ui.theme.DarkGrey
+import com.example.core.ui.theme.Orange
+import com.example.core.R
 
 @Composable
 internal fun DescriptionRelicEffect(

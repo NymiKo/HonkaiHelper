@@ -1,14 +1,14 @@
 package com.example.tanorami.auth.login.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.example.tanorami.R
+import com.example.core.R
+import com.example.core.base.BaseViewModel
+import com.example.core.data.source.local.data_store.AppDataStore
+import com.example.core.network.NetworkResult
 import com.example.tanorami.auth.login.domain.LoginRepository
 import com.example.tanorami.auth.login.presentation.models.LoginScreenEvents
 import com.example.tanorami.auth.login.presentation.models.LoginScreenSideEffects
 import com.example.tanorami.auth.login.presentation.models.LoginScreenUiState
-import com.example.tanorami.base.BaseViewModel
-import com.example.tanorami.core.data.source.local.data_store.AppDataStore
-import com.example.tanorami.core.network.NetworkResult
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

@@ -14,9 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.tanorami.core.navigation.LocalNavAnimatedVisibilityScope
-import com.example.tanorami.core.navigation.LocalSharedTransitionScope
 import com.example.tanorami.info_about_weapon.data.model.FullInfoAboutWeapon
+import com.example.tanorami.navigation.LocalNavAnimatedVisibilityScope
+import com.example.tanorami.navigation.LocalSharedTransitionScope
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable

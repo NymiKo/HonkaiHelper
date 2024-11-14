@@ -1,6 +1,6 @@
 package com.example.tanorami.base_build_hero.presentation.models
 
-import com.example.tanorami.base.UiEffect
+import com.example.core.base.UiEffect
 
 sealed interface BaseBuildHeroScreenSideEffects : UiEffect {
     class OnBuildsHeroFromUsersScreen(val idHero: Int): BaseBuildHeroScreenSideEffects

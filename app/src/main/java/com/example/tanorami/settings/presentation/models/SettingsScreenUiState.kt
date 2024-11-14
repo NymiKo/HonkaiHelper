@@ -1,6 +1,6 @@
 package com.example.tanorami.settings.presentation.models
 
-import com.example.tanorami.base.UiState
+import com.example.core.base.UiState
 
 data class SettingsScreenUiState(
     val isLoading: Boolean = false,

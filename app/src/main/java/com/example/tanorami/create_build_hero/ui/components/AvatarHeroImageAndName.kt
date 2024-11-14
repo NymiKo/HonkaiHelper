@@ -13,11 +13,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.tanorami.core.ui.base_components.text.BaseDefaultText
-import com.example.tanorami.core.ui.theme.DarkGrey
-import com.example.tanorami.core.ui.theme.Orange
-import com.example.tanorami.core.ui.theme.Violet
-import com.example.tanorami.core.ui.theme.White
+import com.example.core.ui.base_components.text.BaseDefaultText
+import com.example.core.ui.theme.DarkGrey
+import com.example.core.ui.theme.Orange
+import com.example.core.ui.theme.Violet
+import com.example.core.ui.theme.White
 
 @Composable
 fun AvatarHeroImageAndName(

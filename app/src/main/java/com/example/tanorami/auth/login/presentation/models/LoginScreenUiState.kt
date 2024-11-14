@@ -1,6 +1,7 @@
 package com.example.tanorami.auth.login.presentation.models
 
-import com.example.tanorami.base.UiState
+import com.example.core.base.UiState
+import com.example.core.base.models.TextField
 
 data class LoginScreenUiState(
     val nicknameField: TextField = TextField(),

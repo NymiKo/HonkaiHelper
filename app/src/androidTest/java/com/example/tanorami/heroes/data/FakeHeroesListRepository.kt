@@ -1,14 +1,10 @@
 package com.example.tanorami.heroes.data
 
-import com.example.tanorami.heroes.data.model.Hero
+import com.example.core.domain.repository.hero.model.HeroModel
 import javax.inject.Inject
 
-class FakeHeroesListRepository @Inject constructor(): HeroesListRepository {
+class FakeHeroesListRepository @Inject constructor() {
 
-    var state: List<Hero> = listOf()
-
-    override suspend fun getHeroesList(): List<Hero> {
-        return state
-    }
+    var state: List<HeroModel> = listOf()
 
 }

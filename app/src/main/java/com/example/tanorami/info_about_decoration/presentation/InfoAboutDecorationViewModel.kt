@@ -3,7 +3,7 @@ package com.example.tanorami.info_about_decoration.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tanorami.info_about_decoration.data.InfoAboutDecorationRepository
-import com.example.tanorami.info_about_hero.data.model.Decoration
+import com.example.core.domain.repository.decoration.Decoration
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

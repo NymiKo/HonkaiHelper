@@ -1,8 +1,8 @@
 package com.example.tanorami
 
 import android.app.Application
-import com.example.tanorami.core.di.AppComponent
-import com.example.tanorami.core.di.DaggerAppComponent
+import com.example.tanorami.di.AppComponent
+import com.example.tanorami.di.DaggerAppComponent
 
 open class App: Application() {
 

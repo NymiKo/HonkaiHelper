@@ -1,6 +1,6 @@
 package com.example.tanorami.teams.presentation.models
 
-import com.example.tanorami.base.UiState
+import com.example.core.base.UiState
 import com.example.tanorami.teams.data.model.TeamHero
 
 data class TeamsFromUsersScreenUiState(

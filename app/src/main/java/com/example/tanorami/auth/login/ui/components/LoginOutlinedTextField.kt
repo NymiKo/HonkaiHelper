@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import com.example.tanorami.core.ui.base_components.text_field.BaseOutlinedTextField
+import com.example.core.ui.base_components.text_field.BaseOutlinedTextField
 
 @Composable
 fun LoginOutlinedTextField(

@@ -6,9 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.ViewModelProvider
+import com.example.core.ui.theme.AppTheme
 import com.example.tanorami.App
-import com.example.tanorami.core.navigation.AppNavigation
-import com.example.tanorami.core.ui.theme.AppTheme
+import com.example.tanorami.navigation.AppNavigation
 import javax.inject.Inject
 
 class MainActivity : ComponentActivity() {
@@ -19,7 +19,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
-        (application as App).appComponent.mainComponent().create().inject(this)
+        (application as App).appComponent.inject(this)
         enableEdgeToEdge()
         setContent {
             AppTheme {

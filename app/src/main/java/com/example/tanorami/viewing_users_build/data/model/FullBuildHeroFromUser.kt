@@ -1,13 +1,13 @@
 package com.example.tanorami.viewing_users_build.data.model
 
-import com.example.tanorami.core.database.models.hero.HeroWithNameAvatarRarity
-import com.example.tanorami.info_about_hero.data.model.Decoration
-import com.example.tanorami.info_about_hero.data.model.Relic
-import com.example.tanorami.weapons_list.domain.models.Weapon
+import com.example.core.database.models.hero.HeroBaseInfoProjection
+import com.example.core.domain.repository.decoration.Decoration
+import com.example.core.domain.repository.relic.Relic
+import com.example.core.domain.repository.weapon.Weapon
 
 data class FullBuildHeroFromUser(
     val idBuild: Long = -1L,
-    val hero: HeroWithNameAvatarRarity? = null,
+    val hero: HeroBaseInfoProjection? = null,
     val weapon: Weapon? = null,
     val relicTwoParts: Relic? = null,
     val relicFourParts: Relic? = null,

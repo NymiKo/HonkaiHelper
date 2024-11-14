@@ -1,12 +1,12 @@
 package com.example.tanorami.viewing_users_build.data
 
-import com.example.tanorami.core.database.dao.DecorationDao
-import com.example.tanorami.core.database.dao.HeroDao
-import com.example.tanorami.core.database.dao.RelicDao
-import com.example.tanorami.core.database.dao.WeaponDao
-import com.example.tanorami.core.di.IODispatcher
-import com.example.tanorami.core.network.NetworkResult
-import com.example.tanorami.core.network.handleApi
+import com.example.core.database.dao.DecorationDao
+import com.example.core.database.dao.HeroDao
+import com.example.core.database.dao.RelicDao
+import com.example.core.database.dao.WeaponDao
+import com.example.core.di.IODispatcher
+import com.example.core.network.NetworkResult
+import com.example.core.network.handleApi
 import com.example.tanorami.viewing_users_build.data.model.FullBuildHeroFromUser
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

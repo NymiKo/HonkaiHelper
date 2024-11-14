@@ -1,7 +1,7 @@
 package com.example.tanorami.info_about_hero.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.example.tanorami.base.BaseViewModel
+import com.example.core.base.BaseViewModel
 import com.example.tanorami.info_about_hero.data.InfoAboutHeroRepository
 import com.example.tanorami.info_about_hero.presentation.models.InfoAboutHeroScreenEvents
 import com.example.tanorami.info_about_hero.presentation.models.InfoAboutHeroScreenSideEffects
@@ -22,12 +22,12 @@ class InfoAboutHeroViewModel @Inject constructor(
                 sendSideEffect(InfoAboutHeroScreenSideEffects.OnBack)
             }
             InfoAboutHeroScreenEvents.OnBaseBuildHeroScreen -> {
-                uiState.hero?.let {
+                uiState.heroModel?.let {
                     sendSideEffect(InfoAboutHeroScreenSideEffects.OnBaseBuildHeroScreen(it.id))
                 }
             }
             InfoAboutHeroScreenEvents.OnTeamsListScreen -> {
-                uiState.hero?.let {
+                uiState.heroModel?.let {
                     sendSideEffect(InfoAboutHeroScreenSideEffects.OnTeamsListScreen(it.id))
                 }
             }
@@ -37,7 +37,7 @@ class InfoAboutHeroViewModel @Inject constructor(
     private fun getHeroInfo(idHero: Int) = viewModelScope.launch {
         val result = repository.getHero(idHero)
         uiState = uiState.copy(
-            hero = result.hero,
+            heroModel = result.heroModel,
             path = result.path,
             element = result.element,
             abilitiesList = result.abilitiesList,

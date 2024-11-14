@@ -14,9 +14,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.tanorami.R
-import com.example.tanorami.core.ui.base_components.text.BaseDefaultText
-import com.example.tanorami.core.ui.theme.AppTheme
+import com.example.core.ui.base_components.text.BaseDefaultText
+import com.example.core.ui.theme.AppTheme
+import com.example.core.R
 
 @Composable
 fun EmptyListScreen(

@@ -1,10 +1,10 @@
 package com.example.tanorami.createteam.data
 
-import com.example.tanorami.core.database.dao.HeroDao
-import com.example.tanorami.core.database.models.hero.HeroWithNameAvatarRarity
-import com.example.tanorami.core.di.IODispatcher
-import com.example.tanorami.core.network.NetworkResult
-import com.example.tanorami.core.network.handleApi
+import com.example.core.database.dao.HeroDao
+import com.example.core.database.models.hero.HeroBaseInfoProjection
+import com.example.core.di.IODispatcher
+import com.example.core.network.NetworkResult
+import com.example.core.network.handleApi
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -21,7 +21,10 @@ class CreateTeamRepositoryImpl @Inject constructor(
             .map { ActiveHeroInTeam(it, false) }
     }
 
-    override suspend fun saveTeam(idTeam: Long, heroesList: List<HeroWithNameAvatarRarity>): NetworkResult<Unit> {
+    override suspend fun saveTeam(
+        idTeam: Long,
+        heroesList: List<HeroBaseInfoProjection>
+    ): NetworkResult<Unit> {
         return withContext(ioDispatcher) {
             if (idTeam != -1L) {
                 handleApi {
@@ -35,7 +38,8 @@ class CreateTeamRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getTeam(idTeam: Long): NetworkResult<Pair<String, List<HeroWithNameAvatarRarity>>> = withContext(ioDispatcher) {
+    override suspend fun getTeam(idTeam: Long): NetworkResult<Pair<String, List<HeroBaseInfoProjection>>> =
+        withContext(ioDispatcher) {
         when(val result = handleApi { createTeamService.getTeam(idTeam) }) {
             is NetworkResult.Error -> {
                 return@withContext NetworkResult.Error(result.code)
@@ -44,7 +48,7 @@ class CreateTeamRepositoryImpl @Inject constructor(
                 return@withContext NetworkResult.Success(
                     Pair(
                         result.data.uid,
-                        listOf<HeroWithNameAvatarRarity>(
+                        listOf<HeroBaseInfoProjection>(
                             heroDao.getHeroWithNameAvatarRarity(result.data.idHeroOne),
                             heroDao.getHeroWithNameAvatarRarity(result.data.idHeroTwo),
                             heroDao.getHeroWithNameAvatarRarity(result.data.idHeroThree),

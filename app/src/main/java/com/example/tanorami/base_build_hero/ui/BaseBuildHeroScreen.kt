@@ -20,7 +20,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.tanorami.R
+import com.example.core.R
+import com.example.core.ui.base_components.button.BaseNextButton
+import com.example.core.ui.base_components.top_app_bar.BaseCenterAlignedTopAppBar
+import com.example.core.ui.theme.Blue
+import com.example.core.ui.theme.Orange
+import com.example.core.ui.theme.Violet
 import com.example.tanorami.base_build_hero.presentation.BaseBuildHeroViewModel
 import com.example.tanorami.base_build_hero.presentation.models.BaseBuildHeroScreenEvents
 import com.example.tanorami.base_build_hero.presentation.models.BaseBuildHeroScreenSideEffects
@@ -29,11 +34,6 @@ import com.example.tanorami.base_build_hero.ui.components.CategoryBestEquipments
 import com.example.tanorami.base_build_hero.ui.components.EquipmentImage
 import com.example.tanorami.base_build_hero.ui.components.StatsListColumn
 import com.example.tanorami.builds_hero_from_users.ui.BuildsHeroFromUsersNavArguments
-import com.example.tanorami.core.ui.base_components.button.BaseNextButton
-import com.example.tanorami.core.ui.base_components.top_app_bar.BaseCenterAlignedTopAppBar
-import com.example.tanorami.core.ui.theme.Blue
-import com.example.tanorami.core.ui.theme.Orange
-import com.example.tanorami.core.ui.theme.Violet
 import com.example.tanorami.info_about_decoration.ui.InfoAboutDecorationNavArguments
 import com.example.tanorami.info_about_relic.ui.InfoAboutRelicNavArgument
 import com.example.tanorami.info_about_weapon.ui.InfoAboutWeaponNavArguments

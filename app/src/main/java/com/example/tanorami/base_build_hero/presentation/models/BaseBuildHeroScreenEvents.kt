@@ -1,6 +1,6 @@
 package com.example.tanorami.base_build_hero.presentation.models
 
-import com.example.tanorami.base.UiEvent
+import com.example.core.base.UiEvent
 
 sealed interface BaseBuildHeroScreenEvents : UiEvent {
     class GetFullBaseBuildHero(val idHero: Int): BaseBuildHeroScreenEvents

@@ -1,8 +1,8 @@
 package com.example.tanorami.base_build_hero.data
 
+import com.example.core.database.dao.HeroDao
+import com.example.core.di.IODispatcher
 import com.example.tanorami.base_build_hero.data.model.FullBaseBuildHero
-import com.example.tanorami.core.database.dao.HeroDao
-import com.example.tanorami.core.di.IODispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

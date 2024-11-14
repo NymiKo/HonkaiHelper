@@ -1,10 +1,10 @@
 package com.example.tanorami.profile.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.example.tanorami.R
-import com.example.tanorami.base.BaseViewModel
-import com.example.tanorami.core.data.source.local.data_store.AppDataStore
-import com.example.tanorami.core.network.NetworkResult
+import com.example.core.R
+import com.example.core.base.BaseViewModel
+import com.example.core.data.source.local.data_store.AppDataStore
+import com.example.core.network.NetworkResult
 import com.example.tanorami.profile.domain.ProfileRepository
 import com.example.tanorami.profile.presentation.models.ProfileScreenEvents
 import com.example.tanorami.profile.presentation.models.ProfileScreenSideEffects

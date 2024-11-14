@@ -1,9 +1,9 @@
 package com.example.tanorami.auth.registration.data
 
+import com.example.core.di.IODispatcher
+import com.example.core.network.NetworkResult
+import com.example.core.network.handleApi
 import com.example.tanorami.auth.registration.data.model.RegistrationRequest
-import com.example.tanorami.core.di.IODispatcher
-import com.example.tanorami.core.network.NetworkResult
-import com.example.tanorami.core.network.handleApi
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

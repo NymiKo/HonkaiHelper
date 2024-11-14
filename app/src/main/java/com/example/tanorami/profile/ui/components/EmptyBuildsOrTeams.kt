@@ -14,8 +14,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.tanorami.R
-import com.example.tanorami.core.ui.base_components.text.BaseDefaultText
+import com.example.core.ui.base_components.text.BaseDefaultText
+import com.example.core.R
 
 @Composable
 fun EmptyBuildsOrTeams(

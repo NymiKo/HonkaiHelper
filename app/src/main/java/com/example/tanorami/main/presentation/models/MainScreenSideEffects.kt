@@ -1,6 +1,6 @@
 package com.example.tanorami.main.presentation.models
 
-import com.example.tanorami.base.UiEffect
+import com.example.core.base.UiEffect
 
 sealed interface MainScreenSideEffects : UiEffect {
     class OnLoadDataScreen(val remoteVersionDB: String) : MainScreenSideEffects

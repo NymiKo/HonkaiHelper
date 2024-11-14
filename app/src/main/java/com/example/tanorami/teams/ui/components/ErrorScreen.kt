@@ -13,9 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.tanorami.R
-import com.example.tanorami.core.ui.base_components.text.BaseDefaultText
-import com.example.tanorami.core.ui.theme.AppTheme
+import com.example.core.ui.base_components.text.BaseDefaultText
+import com.example.core.ui.theme.AppTheme
+import com.example.core.R
 
 @Composable
 fun ErrorScreen(

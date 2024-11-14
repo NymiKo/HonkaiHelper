@@ -1,15 +1,15 @@
 package com.example.tanorami.create_build_hero.data
 
-import com.example.tanorami.core.database.dao.DecorationDao
-import com.example.tanorami.core.database.dao.HeroDao
-import com.example.tanorami.core.database.dao.RelicDao
-import com.example.tanorami.core.database.dao.WeaponDao
-import com.example.tanorami.core.di.IODispatcher
-import com.example.tanorami.core.network.NetworkResult
-import com.example.tanorami.core.network.handleApi
+import com.example.core.database.dao.DecorationDao
+import com.example.core.database.dao.HeroDao
+import com.example.core.database.dao.RelicDao
+import com.example.core.database.dao.WeaponDao
+import com.example.core.di.IODispatcher
 import com.example.tanorami.create_build_hero.data.model.BuildHeroFromUser
-import com.example.tanorami.create_build_hero.data.model.Equipment
-import com.example.tanorami.heroes.data.model.Hero
+import com.example.core.domain.repository.equipment.Equipment
+import com.example.core.domain.repository.hero.model.HeroModel
+import com.example.core.network.NetworkResult
+import com.example.core.network.handleApi
 import com.example.tanorami.viewing_users_build.data.model.FullBuildHeroFromUser
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -23,8 +23,8 @@ class CreateBuildHeroRepositoryImpl @Inject constructor(
     private val relicDao: RelicDao,
     private val decorationDao: DecorationDao
 ): CreateBuildHeroRepository {
-    override suspend fun getHero(idHero: Int): Hero = withContext(ioDispatcher) {
-        return@withContext heroDao.getHeroById(idHero).toHero()
+    override suspend fun getHero(idHero: Int): HeroModel = withContext(ioDispatcher) {
+        return@withContext heroDao.getHeroById(idHero).toHeroModel()
     }
 
     override suspend fun saveBuild(buildHeroFromUser: BuildHeroFromUser): NetworkResult<Boolean> = withContext(ioDispatcher) {

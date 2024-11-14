@@ -1,13 +1,13 @@
 package com.example.tanorami.teams.data.model
 
-import com.example.tanorami.core.database.models.hero.HeroWithNameAvatarRarity
+import com.example.core.database.models.hero.HeroBaseInfoProjection
 
 data class TeamHero(
     val idTeam: Long,
-    val heroOne: HeroWithNameAvatarRarity,
-    val heroTwo: HeroWithNameAvatarRarity,
-    val heroThree: HeroWithNameAvatarRarity,
-    val heroFour: HeroWithNameAvatarRarity,
+    val heroOne: HeroBaseInfoProjection,
+    val heroTwo: HeroBaseInfoProjection,
+    val heroThree: HeroBaseInfoProjection,
+    val heroFour: HeroBaseInfoProjection,
     val nickname: String? = null,
     val avatar: String? = null,
     val uid: String = ""

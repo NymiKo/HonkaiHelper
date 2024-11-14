@@ -1,6 +1,6 @@
 package com.example.tanorami.builds_hero_from_users.presentation.models
 
-import com.example.tanorami.base.UiEvent
+import com.example.core.base.UiEvent
 
 sealed interface BuildsHeroFromUsersScreenEvents : UiEvent {
     class GetBuildsHeroList(val idHero: Int): BuildsHeroFromUsersScreenEvents

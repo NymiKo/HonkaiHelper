@@ -1,7 +1,7 @@
 package com.example.tanorami.create_build_heroes_list.di
 
 import androidx.lifecycle.ViewModel
-import com.example.tanorami.core.di.ViewModelKey
+import com.example.core.di.ViewModelKey
 import com.example.tanorami.create_build_heroes_list.presentation.CreateBuildHeroesListViewModel
 import dagger.Binds
 import dagger.Module

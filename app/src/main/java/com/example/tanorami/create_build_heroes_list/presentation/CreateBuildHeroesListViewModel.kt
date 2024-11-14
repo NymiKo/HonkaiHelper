@@ -1,16 +1,16 @@
 package com.example.tanorami.create_build_heroes_list.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.example.tanorami.base.BaseViewModel
+import com.example.core.base.BaseViewModel
+import com.example.core.domain.usecase.GetHeroesListWithBaseInfoUseCase
 import com.example.tanorami.create_build_heroes_list.presentation.models.CreateBuildHeroesListScreenEvents
 import com.example.tanorami.create_build_heroes_list.presentation.models.CreateBuildHeroesListScreenSideEffects
 import com.example.tanorami.create_build_heroes_list.presentation.models.CreateBuildHeroesListScreenUiState
-import com.example.tanorami.heroes.data.HeroesListRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CreateBuildHeroesListViewModel @Inject constructor(
-    private val repository: HeroesListRepository,
+    private val getHeroesListWithBaseInfoUseCase: GetHeroesListWithBaseInfoUseCase,
 ) : BaseViewModel<CreateBuildHeroesListScreenUiState, CreateBuildHeroesListScreenEvents, CreateBuildHeroesListScreenSideEffects>(
     initialState = CreateBuildHeroesListScreenUiState()
 ) {
@@ -28,6 +28,6 @@ class CreateBuildHeroesListViewModel @Inject constructor(
     }
 
     private fun getHeroesList() = viewModelScope.launch {
-        uiState = uiState.copy(heroesList = repository.getHeroesList())
+        uiState = uiState.copy(heroesList = getHeroesListWithBaseInfoUseCase.invoke())
     }
 }

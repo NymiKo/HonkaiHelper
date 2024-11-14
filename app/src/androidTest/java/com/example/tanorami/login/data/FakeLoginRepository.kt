@@ -1,8 +1,8 @@
 package com.example.tanorami.login.data
 
+import com.example.core.network.NetworkResult
 import com.example.tanorami.auth.login.data.models.LoginResponse
 import com.example.tanorami.auth.login.domain.LoginRepository
-import com.example.tanorami.core.network.NetworkResult
 import com.example.tanorami.profile.data.model.UserResponse
 import javax.inject.Inject
 

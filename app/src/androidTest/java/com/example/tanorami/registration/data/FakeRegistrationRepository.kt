@@ -1,7 +1,7 @@
 package com.example.tanorami.registration.data
 
+import com.example.core.network.NetworkResult
 import com.example.tanorami.auth.registration.data.RegistrationRepository
-import com.example.tanorami.core.network.NetworkResult
 import javax.inject.Inject
 
 class FakeRegistrationRepository @Inject constructor(): RegistrationRepository {

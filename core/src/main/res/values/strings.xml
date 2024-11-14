@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tanorami</string>
+    <string name="team_for_hero">Команды для героя: %1$s</string>
+    <string name="creating_a_team">Создание команды</string>
+    <string name="add_the_created_command">Поделиться созданной командой?</string>
+    <string name="add_the_created_build">Поделиться сборкой?</string>
+    <string name="update_the_build">Обновить сборку?</string>
+    <string name="update_the_command">Сохранить изменения в команде?</string>
+    <string name="delete_the_command">Вы действительно хотите удалить команду?</string>
+    <string name="delete_the_build">Вы действительно хотите удалить сборку?</string>
+    <string name="add">Добавить</string>
+    <string name="cancellation">Отмена</string>
+    <string name="list_of_heroes">Список героев</string>
+    <string name="error">Что-то пошло не так...</string>
+    <string name="retry">Повторить</string>
+    <string name="search">Поиск</string>
+    <string name="settings">Настройки</string>
+    <string name="about_app">О приложении</string>
+    <string name="log_in_account">Вход в аккаунт</string>
+    <string name="welcome">Добро пожаловать!</string>
+    <string name="nickname">Никнейм</string>
+    <string name="new_nickname">Новый никнейм</string>
+    <string name="message">Сообщение</string>
+    <string name="nickname_change">Изменение никнейма</string>
+    <string name="nickname_changed">Никнейм изменен</string>
+    <string name="nickname_already_in_use">Этот никнейм уже используется</string>
+    <string name="empty_new_nickname">Введите новый никнейм</string>
+    <string name="already_have_nickname">У вас уже такой никнейм</string>
+    <string name="password">Пароль</string>
+    <string name="log_in">Войти</string>
+    <string name="heroes">Герои</string>
+    <string name="profile">Профиль</string>
+    <string name="not_authorized">Вы не авторизованы</string>
+    <string name="enter">Войти</string>
+    <string name="empty_login">Логин не может быть пустым</string>
+    <string name="empty_password">Пароль не может быть пустым</string>
+    <string name="incorrect_password">Пароль должен содержать не менее 4 символов</string>
+    <string name="create_account">Создать аккаунт</string>
+    <string name="creating_account">Создание аккаунта</string>
+    <string name="join_us">Присоединяйся!</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="success_creating_account">Теперь вы можете войти в аккаунт!</string>
+    <string name="want_to_logout_of_your_account">Вы действительно хотите выйти из аккаунта?</string>
+    <string name="logout_of_your_account">Выход из аккаунта</string>
+    <string name="yes">Да</string>
+    <string name="error_login">Произошла ошибка. Повторите попытку.</string>
+    <string name="check_your_internet_connection">Проверьте подключение к интернету</string>
+    <string name="login_already_exists">Пользователь с таким логином уже существует</string>
+    <string name="unknown_error">Неизвестная ошибка</string>
+    <string name="unknown_user">Пользователь не найден</string>
+    <string name="should_be_4_heroes_in_the_team">В команде должно быть 4 героя"</string>
+    <string name="team_has_been_added">Команда добавлена</string>
+    <string name="adding_a_command">Добавление команды</string>
+    <string name="update_a_command">Обновление команды</string>
+    <string name="delete_a_command">Удаление команды</string>
+    <string name="team_already_exists">Вы уже добавляли такую команду.</string>
+    <string name="team_from">Команда от: <b>%1$s</b></string>
+    <string name="my_teams">Мои команды</string>
+    <string name="incorrect_login">Логин должен содержать не более 20 символов</string>
+    <string name="you_need_login">Необходимо авторизоваться</string>
+    <string name="level_hero">Уровень героя:</string>
+    <string name="eidolon_hero">Эйдолон героя:</string>
+    <string name="setup_hero">Настройка героев</string>
+    <string name="build_from">Сборка от: %1$s</string>
+    <string name="builds_for_hero">Сборки для героя: %1$s</string>
+    <string name="weapon">Оружие</string>
+    <string name="update_resource">Обновление ресурсов...\nПожалуйста, не закрывайте приложение</string>
+    <string name="empty_data">Похоже данные не были загружены :(</string>
+    <string name="download">Загрузить</string>
+    <string name="unexpected_error">Возникла непредвиденная ошибка</string>
+    <string name="build">Билд</string>
+    <string name="go_back">Вернуться назад</string>
+    <string name="abilities">Таланты</string>
+    <string name="eidolons">Эйдолоны</string>
+    <string name="best_weapons">Лучшие конусы</string>
+    <string name="best_relics">Лучшие реликвии</string>
+    <string name="best_decorations">Лучшие планарные украшения</string>
+    <string name="stats_equipment">Основные статы</string>
+    <string name="skill_weapon">Навык конуса</string>
+    <string name="effect_relic">Эффект набора</string>
+    <string name="effect_relic_two_parts">Эффект от 2-х частей:</string>
+    <string name="effect_relic_four_parts">Эффект от 4-х частей:</string>
+    <string name="builds_from_users">Сборки героя от игроков</string>
+    <string name="teams_from_users">Команды с героем от игроков</string>
+    <string name="empty_here">Пока что здесь пусто. Будь первопроходцем!</string>
+    <string name="empty_weapon_in_create_build">Нужно выбрать конус</string>
+    <string name="empty_relic_in_create_build">Нужно выбрать реликвию</string>
+    <string name="empty_decoration_in_create_build">Нужно выбрать украшение</string>
+    <string name="already_shared_the_build">Вы уже делились сборкой этого героя</string>
+    <string name="error_save_in_server">Ошибка сохранения на сервере, пожалуйста, попробуйте позже</string>
+    <string name="success_create_build">Вы успешно поделились сборкой</string>
+    <string name="success_delete_build">Сборка удалена</string>
+    <string name="adding_your_build">Добавление сборки</string>
+    <string name="update_your_build">Обновление сборки</string>
+    <string name="hero_build_from">%1$s от %2$s</string>
+    <string name="edit_nickname">Изменить никнейм</string>
+    <string name="copy_uid_build">Скопировать идентификатор сборки</string>
+    <string name="copy_uid_team">Скопировать идентификатор команды</string>
+    <string name="my_builds">Мои сборки</string>
+    <string name="edit_build">Редактирование сборки</string>
+    <string name="delete_build">Удаление сборки</string>
+    <string name="edit_team">Редактирование команды</string>
+    <string name="delete">Удалить</string>
+    <string name="team_deleted">Команда удалена</string>
+    <string name="team_saved">Команда сохранена</string>
+    <string name="empty">Здесь пока пусто</string>
+    <string name="feedback_has_been_sent">Сообщение было отправлено. Спасибо!</string>
+    <string name="message_uid_build_copied">Идентификатор сборки скопирован</string>
+    <string name="message_uid_team_copied">Идентификатор команды скопирован</string>
+    <string name="team_for_uid">Команда по идентификатору</string>
+    <string name="teams">Команды</string>
+    <string name="builds">Сборки</string>
+    <string name="ok">Ок</string>
+    <string name="data_needs_updated">Необходимо обновить данные</string>
+    <string name="add_a_build">Добавить сборку</string>
+    <string name="add_a_team">Добавить команду</string>
+
+    <string name="hp">HP %</string>
+    <string name="defense">Защита %</string>
+    <string name="attack_power">Сила атаки %</string>
+    <string name="speed">Скорость</string>
+    <string name="penetration_effect">Эффект пробития %</string>
+    <string name="bonus_physical_damage">Бонус физ.урона %</string>
+    <string name="bonus_fire_damage">Бонус огн.урона %</string>
+    <string name="bonus_electric_damage">Бонус элек.урона %</string>
+    <string name="bonus_quantum_damage">Бонус квант.урона %</string>
+    <string name="bonus_ice_damage">Бонус лед.урона %</string>
+    <string name="bonus_wind_damage">Бонус ветр.урона %</string>
+    <string name="bonus_imaginary_damage">Бонус мним.урона %</string>
+    <string name="crit_damage">Крит.урон %</string>
+    <string name="crit_chance">Крит.шанс %</string>
+    <string name="chance_of_hitting_effects">Шанс попадания эффектов %</string>
+    <string name="healing_bonus">Бонус исцеления %</string>
+    <string name="recovery_energy">Восст. энергии %</string>
+    <string name="enter_weapon_hero">Название конуса</string>
+    <string name="enter_build_uid">UID сборки</string>
+    <string name="enter_team_uid">UID команды</string>
+    <string name="choose_hero">Выбери героя</string>
+    <string name="error_upload_avatar">Произошла ошибка</string>
+    <string name="this_feature_only_registered_users">Эта функция доступна только авторизованным пользователям</string>
+
+
+    <string name="base_build_weapon_transition_name" translatable="false">base_build_weapon_transition_name_%d</string>
+    <string name="weapon_info_transition_name" translatable="false">weapon_info_transition_name</string>
+    <string name="base_build_relic_transition_name" translatable="false">base_build_relic_transition_name_%d</string>
+    <string name="relic_info_transition_name" translatable="false">relic_info_transition_name</string>
+    <string name="base_build_decoration_transition_name" translatable="false">base_build_decoration_transition_name_%d</string>
+    <string name="decoration_info_transition_name" translatable="false">decoration_info_transition_name</string>
+    <string name="heroes_list_transition_name" translatable="false">heroes_list_transition_name_%d</string>
+    <string name="heroes_info_transition_name" translatable="false">heroes_info_transition_name</string>
+    <string name="users_build_weapon_transition_name" translatable="false">users_build_weapon_transition_name</string>
+    <string name="users_build_relic_two_parts_transition_name" translatable="false">users_build_relic_two_parts_transition_name</string>
+    <string name="users_build_relic_four_parts_transition_name" translatable="false">users_build_relic_four_parts_transition_name</string>
+    <string name="users_build_decoration_transition_name" translatable="false">users_build_decoration_transition_name</string>
+
+    <string-array name="hero_level">
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+        <item>60</item>
+        <item>70</item>
+        <item>80</item>
+    </string-array>
+
+    <string-array name="hero_eidolon">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+    <string-array name="stats_in_legs">
+        <item>HP %</item>
+        <item>Защита %</item>
+        <item>Сила атаки %</item>
+        <item>Скорость</item>
+    </string-array>
+
+    <string-array name="stats_in_rope">
+        <item>Эффект пробития %</item>
+        <item>HP %</item>
+        <item>Защита %</item>
+        <item>Восст. энергии %</item>
+        <item>Сила атаки %</item>
+    </string-array>
+
+    <string-array name="stats_in_sphere">
+        <item>HP %</item>
+        <item>Защита %</item>
+        <item>Сила атаки %</item>
+        <item>Бонус физ.урона %</item>
+        <item>Бонус огн.урона %</item>
+        <item>Бонус элек.урона %</item>
+        <item>Бонус квант.урона %</item>
+        <item>Бонус лед.урона %</item>
+        <item>Бонус ветр.урона %</item>
+        <item>Бонус мним.урона %</item>
+    </string-array>
+
+    <string-array name="stats_in_body">
+        <item>HP %</item>
+        <item>Защита %</item>
+        <item>Крит.урон %</item>
+        <item>Сила атаки %</item>
+        <item>Крит.шанс %</item>
+        <item>Шанс попадания эффектов %</item>
+        <item>Бонус исцеления %</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="relic">Реликвия</string>
+    <string name="decoration">Украшение</string>
+    <string name="relic_two_parts">2 части</string>
+    <string name="relic_four_parts">4 части</string>
+    <string name="version_app">Версия приложения: 1.0.2</string>
+    <string name="version_db">Версия базы данных: %1$s</string>
+    <string name="about_developers"><b>Дизайнеры:</b> Nymiko, SindelJ\n<b>Разработчик:</b> Nymiko\n<b>Тестировщик:</b> Xander408</string>
+    <string name="check_update_db">Проверить обновления базы данных</string>
+    <string name="report_an_error">Сообщить о баге или предложить улучшения</string>
+    <string name="donat_for_coffee">Скинуть на кофе</string>
+    <string name="discovered_new_version_db">Обнаружена новая версия базы данных</string>
+    <string name="already_have_latest_version_db">У вас уже последняя версия базы данных</string>
+    <string name="data_updated">Данные обновлены</string>
+    <string name="thank_the_developer">Поддержать</string>
+
+</resources>

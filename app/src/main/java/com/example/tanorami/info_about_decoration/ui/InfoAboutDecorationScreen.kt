@@ -19,12 +19,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.tanorami.core.navigation.LocalNavAnimatedVisibilityScope
-import com.example.tanorami.core.navigation.LocalSharedTransitionScope
-import com.example.tanorami.core.ui.base_components.top_app_bar.BaseCenterAlignedTopAppBar
 import com.example.tanorami.info_about_decoration.presentation.InfoAboutDecorationViewModel
 import com.example.tanorami.info_about_decoration.ui.components.DescriptionDecorationEffect
-import com.example.tanorami.info_about_hero.data.model.Decoration
+import com.example.core.domain.repository.decoration.Decoration
+import com.example.core.ui.base_components.top_app_bar.BaseCenterAlignedTopAppBar
+import com.example.tanorami.navigation.LocalNavAnimatedVisibilityScope
+import com.example.tanorami.navigation.LocalSharedTransitionScope
 import com.example.tanorami.utils.OnLifecycleEvent
 import kotlinx.serialization.Serializable
 

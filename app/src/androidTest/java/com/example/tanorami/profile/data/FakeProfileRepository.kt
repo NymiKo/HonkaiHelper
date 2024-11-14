@@ -1,6 +1,6 @@
 package com.example.tanorami.profile.data
 
-import com.example.tanorami.core.network.NetworkResult
+import com.example.core.network.NetworkResult
 import com.example.tanorami.profile.data.model.User
 import com.example.tanorami.profile.domain.ProfileRepository
 import kotlinx.coroutines.flow.MutableStateFlow

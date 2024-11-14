@@ -30,11 +30,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.tanorami.R
-import com.example.tanorami.core.ui.base_components.button.BaseButton
-import com.example.tanorami.core.ui.base_components.text.BaseDefaultText
-import com.example.tanorami.core.ui.base_components.top_app_bar.BaseTopAppBar
-import com.example.tanorami.core.ui.theme.DarkGrey
+import com.example.core.R
+import com.example.core.ui.base_components.button.BaseButton
+import com.example.core.ui.base_components.text.BaseDefaultText
+import com.example.core.ui.base_components.top_app_bar.BaseTopAppBar
+import com.example.core.ui.theme.DarkGrey
+import com.example.tanorami.R.*
 import com.example.tanorami.load_data.ui.LoadDataNavArguments
 import com.example.tanorami.send_feedback.ui.SendFeedbackRoute
 import com.example.tanorami.settings.presentation.SettingsViewModel
@@ -124,7 +125,7 @@ private fun SettingsScreenContent(
                 ) {
                     AsyncImage(
                         modifier = Modifier.size(50.dp),
-                        model = R.mipmap.ic_launcher_round,
+                        model = mipmap.ic_launcher_round,
                         contentDescription = null
                     )
 

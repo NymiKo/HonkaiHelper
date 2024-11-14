@@ -7,8 +7,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
-import com.example.tanorami.core.navigation.LocalNavAnimatedVisibilityScope
-import com.example.tanorami.core.navigation.LocalSharedTransitionScope
+import com.example.tanorami.navigation.LocalNavAnimatedVisibilityScope
+import com.example.tanorami.navigation.LocalSharedTransitionScope
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
