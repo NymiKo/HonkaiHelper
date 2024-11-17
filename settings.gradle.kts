@@ -17,5 +17,8 @@ dependencyResolutionManagement {
 rootProject.name = "HonkaiHelper"
 include(":app")
 include(":feature")
-include(":feature:heroes_list")
+include(":feature:heroes-list")
+include(":core-common")
 include(":core")
+include(":core:data-local")
+include(":core:domain")

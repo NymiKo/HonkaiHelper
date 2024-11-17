@@ -39,7 +39,7 @@ internal fun ImagesWeaponAndPath(
                 .padding(end = 16.dp)
                 .size(30.dp)
                 .align(Alignment.TopEnd),
-            model = weapon?.weapon?.path,
+            model = com.example.domain.repository.weapon.Weapon.path,
             contentDescription = null
         )
 
@@ -50,10 +50,10 @@ internal fun ImagesWeaponAndPath(
                     .width(200.dp)
                     .align(Alignment.Center)
                     .sharedElement(
-                        rememberSharedContentState(key = "weapon-${weapon?.weapon?.idWeapon}-base-build"),
+                        rememberSharedContentState(key = "weapon-${com.example.domain.repository.weapon.Weapon.idWeapon}-base-build"),
                         animatedVisibilityScope = animatedVisibilityScope,
                     ),
-                model = weapon?.weapon?.image,
+                model = com.example.domain.repository.weapon.Weapon.image,
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
             )

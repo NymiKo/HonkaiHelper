@@ -1,15 +1,14 @@
 package com.example.tanorami.create_build_hero.data
 
-import com.example.core.database.dao.DecorationDao
-import com.example.core.database.dao.HeroDao
-import com.example.core.database.dao.RelicDao
-import com.example.core.database.dao.WeaponDao
 import com.example.core.di.IODispatcher
-import com.example.tanorami.create_build_hero.data.model.BuildHeroFromUser
-import com.example.core.domain.repository.equipment.Equipment
-import com.example.core.domain.repository.hero.model.HeroModel
+import com.example.core.local.dao.DecorationDao
+import com.example.core.local.dao.HeroDao
+import com.example.core.local.dao.RelicDao
+import com.example.core.local.dao.WeaponDao
 import com.example.core.network.NetworkResult
 import com.example.core.network.handleApi
+import com.example.domain.repository.equipment.Equipment
+import com.example.tanorami.create_build_hero.data.model.BuildHeroFromUser
 import com.example.tanorami.viewing_users_build.data.model.FullBuildHeroFromUser
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -23,7 +22,8 @@ class CreateBuildHeroRepositoryImpl @Inject constructor(
     private val relicDao: RelicDao,
     private val decorationDao: DecorationDao
 ): CreateBuildHeroRepository {
-    override suspend fun getHero(idHero: Int): HeroModel = withContext(ioDispatcher) {
+    override suspend fun getHero(idHero: Int): com.example.domain.repository.hero.model.HeroModel =
+        withContext(ioDispatcher) {
         return@withContext heroDao.getHeroById(idHero).toHeroModel()
     }
 
@@ -59,21 +59,24 @@ class CreateBuildHeroRepositoryImpl @Inject constructor(
         return@withContext handleApi { createBuildHeroService.deleteBuild(idBuild) }
     }
 
-    override suspend fun getWeapons(path: Int): List<Equipment> = withContext(ioDispatcher) {
+    override suspend fun getWeapons(path: Int): List<com.example.domain.repository.equipment.Equipment> =
+        withContext(ioDispatcher) {
         weaponDao.getWeaponByPath(path).sortedByDescending { it.rarity }.map {
-            Equipment(it.idWeapon, it.image, it.rarity)
+            com.example.domain.repository.equipment.Equipment(it.idWeapon, it.image, it.rarity)
         }
     }
 
-    override suspend fun getRelics(): List<Equipment> = withContext(ioDispatcher) {
+    override suspend fun getRelics(): List<com.example.domain.repository.equipment.Equipment> =
+        withContext(ioDispatcher) {
         relicDao.getRelics().map {
-            Equipment(it.idRelic, it.image)
+            com.example.domain.repository.equipment.Equipment(it.idRelic, it.image)
         }
     }
 
-    override suspend fun getDecorations(): List<Equipment> = withContext(ioDispatcher) {
+    override suspend fun getDecorations(): List<com.example.domain.repository.equipment.Equipment> =
+        withContext(ioDispatcher) {
         decorationDao.getDecorations().map {
-            Equipment(it.idDecoration, it.image)
+            com.example.domain.repository.equipment.Equipment(it.idDecoration, it.image)
         }
     }
 }

@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -104,7 +103,7 @@ private fun CreateBuildHeroesListContent(
                         .clickable {
                             onEvent(
                                 CreateBuildHeroesListScreenEvents.OnCreateBuildForHeroScreen(
-                                    hero.id
+                                    com.example.domain.repository.hero.model.HeroBaseInfoModel.id
                                 )
                             )
                         }
@@ -113,17 +112,17 @@ private fun CreateBuildHeroesListContent(
                         modifier = Modifier
                             .height(120.dp)
                             .background(
-                                when (hero.rarity) {
+                                when (com.example.domain.repository.hero.model.HeroBaseInfoModel.rarity) {
                                     false -> Violet
                                     true -> Orange
                                 }
                             ),
-                        model = hero.localAvatarPath,
+                        model = com.example.domain.repository.hero.model.HeroBaseInfoModel.localAvatarPath,
                         contentDescription = null,
                         contentScale = ContentScale.Crop,
                     )
 
-                    HeroName(nameHero = hero.name)
+                    HeroName(nameHero = com.example.domain.repository.hero.model.HeroBaseInfoModel.name)
                 }
             }
         }

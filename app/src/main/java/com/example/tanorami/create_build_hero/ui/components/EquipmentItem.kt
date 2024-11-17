@@ -11,7 +11,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.core.domain.repository.equipment.Equipment
 import com.example.core.ui.theme.Blue
 import com.example.core.ui.theme.Orange
 import com.example.core.ui.theme.Violet
@@ -21,7 +20,7 @@ import com.example.tanorami.create_build_hero.presentation.models.EquipmentType
 @Composable
 fun EquipmentItem(
     modifier: Modifier = Modifier,
-    equipment: Equipment,
+    equipment: com.example.domain.repository.equipment.Equipment,
     equipmentType: EquipmentType,
     onEvent: (CreateBuildHeroScreenEvents) -> Unit,
     hideBottomSheet: () -> Unit,
@@ -32,7 +31,7 @@ fun EquipmentItem(
             .height(120.dp)
             .clip(RoundedCornerShape(10.dp))
             .background(
-                when (equipment.rarity) {
+                when (com.example.domain.repository.equipment.Equipment.rarity) {
                     0 -> Blue
                     1 -> Violet
                     2 -> Orange
@@ -64,7 +63,7 @@ fun EquipmentItem(
                 }
                 hideBottomSheet()
             },
-        model = equipment.image,
+        model = com.example.domain.repository.equipment.Equipment.image,
         contentDescription = null,
         contentScale = ContentScale.Crop
     )

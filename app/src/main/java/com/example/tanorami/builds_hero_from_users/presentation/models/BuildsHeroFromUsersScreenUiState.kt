@@ -1,7 +1,7 @@
 package com.example.tanorami.builds_hero_from_users.presentation.models
 
 import com.example.core.base.UiState
-import com.example.core.database.models.hero.HeroBaseInfoProjection
+import com.example.core.local.models.hero.HeroBaseInfoProjection
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
 
 data class BuildsHeroFromUsersScreenUiState(

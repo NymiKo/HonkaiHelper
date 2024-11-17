@@ -39,7 +39,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.core.R
-import com.example.core.database.models.hero.HeroBaseInfoProjection
+import com.example.core.local.models.hero.HeroBaseInfoProjection
 import com.example.core.ui.base_components.button.BaseSmallFloatingButton
 import com.example.core.ui.base_components.dialog.BaseSaveAlertDialog
 import com.example.core.ui.base_components.top_app_bar.BaseTopAppBar

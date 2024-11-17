@@ -23,12 +23,12 @@ class InfoAboutHeroViewModel @Inject constructor(
             }
             InfoAboutHeroScreenEvents.OnBaseBuildHeroScreen -> {
                 uiState.heroModel?.let {
-                    sendSideEffect(InfoAboutHeroScreenSideEffects.OnBaseBuildHeroScreen(it.id))
+                    sendSideEffect(InfoAboutHeroScreenSideEffects.OnBaseBuildHeroScreen(com.example.domain.repository.hero.model.HeroModel.id))
                 }
             }
             InfoAboutHeroScreenEvents.OnTeamsListScreen -> {
                 uiState.heroModel?.let {
-                    sendSideEffect(InfoAboutHeroScreenSideEffects.OnTeamsListScreen(it.id))
+                    sendSideEffect(InfoAboutHeroScreenSideEffects.OnTeamsListScreen(com.example.domain.repository.hero.model.HeroModel.id))
                 }
             }
         }

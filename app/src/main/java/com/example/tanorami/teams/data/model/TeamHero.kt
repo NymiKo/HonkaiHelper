@@ -1,6 +1,6 @@
 package com.example.tanorami.teams.data.model
 
-import com.example.core.database.models.hero.HeroBaseInfoProjection
+import com.example.core.local.models.hero.HeroBaseInfoProjection
 
 data class TeamHero(
     val idTeam: Long,

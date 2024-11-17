@@ -19,10 +19,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.example.core.R
 import com.example.core.ui.base_components.button.BaseNextButton
 import com.example.core.ui.base_components.text.BaseDefaultText
 import com.example.core.ui.base_components.top_app_bar.BaseCenterAlignedTopAppBar
-import com.example.core.R
 import com.example.tanorami.base_build_hero.ui.BaseBuildHeroNavArguments
 import com.example.tanorami.info_about_hero.presentation.InfoAboutHeroViewModel
 import com.example.tanorami.info_about_hero.presentation.models.InfoAboutHeroScreenEvents
@@ -89,7 +89,7 @@ private fun InfoAboutHeroScreenContent(
     Scaffold(
         topBar = {
             BaseCenterAlignedTopAppBar(
-                title = uiState.heroModel?.name,
+                title = com.example.domain.repository.hero.model.HeroModel.name,
                 onBack = { onEvent(InfoAboutHeroScreenEvents.OnBack) }
             )
         }
@@ -100,16 +100,16 @@ private fun InfoAboutHeroScreenContent(
                 .verticalScroll(rememberScrollState())
         ) {
             SplashArtHeroImage(
-                splashArtHero = uiState.heroModel?.splashArt,
-                elementHero = uiState.element?.image,
-                pathHero = uiState.path?.image
+                splashArtHero = com.example.domain.repository.hero.model.HeroModel.splashArt,
+                elementHero = com.example.domain.repository.element.Element.image,
+                pathHero = com.example.domain.repository.path.Path.image
             )
 
             AsyncImage(
                 modifier = Modifier
                     .height(20.dp)
                     .fillMaxWidth(),
-                model = when (uiState.heroModel?.rarity) {
+                model = when (com.example.domain.repository.hero.model.HeroModel.rarity) {
                     false -> R.drawable.icon_4_stars
                     true-> R.drawable.icon_5_stars
                     else -> R.drawable.icon_4_stars
@@ -121,7 +121,7 @@ private fun InfoAboutHeroScreenContent(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .padding(top = 8.dp),
-                text = uiState.heroModel?.story ?: "",
+                text = com.example.domain.repository.hero.model.HeroModel.story ?: "",
                 fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold,
                 lineHeight = 20.sp

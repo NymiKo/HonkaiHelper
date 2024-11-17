@@ -1,8 +1,8 @@
 package com.example.tanorami.createteam.data
 
-import com.example.core.database.dao.HeroDao
-import com.example.core.database.models.hero.HeroBaseInfoProjection
 import com.example.core.di.IODispatcher
+import com.example.core.local.dao.HeroDao
+import com.example.core.local.models.hero.HeroBaseInfoProjection
 import com.example.core.network.NetworkResult
 import com.example.core.network.handleApi
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam

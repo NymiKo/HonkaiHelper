@@ -9,7 +9,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.core.database.models.hero.HeroBaseInfoProjection
+import com.example.core.local.models.hero.HeroBaseInfoProjection
 import com.example.core.ui.theme.Grey
 
 @Composable

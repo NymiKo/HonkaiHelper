@@ -17,16 +17,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.core.R
-import com.example.tanorami.base_build_hero.ui.components.HeaderCategory
-import com.example.core.domain.repository.eidolon.Eidolon
 import com.example.core.ui.base_components.text.BaseDefaultText
 import com.example.core.ui.theme.AppTheme
 import com.example.core.ui.theme.DarkGrey
+import com.example.tanorami.base_build_hero.ui.components.HeaderCategory
 
 @Composable
 fun EidolonsListColumn(
     modifier: Modifier = Modifier,
-    eidolonsList: List<Eidolon>,
+    eidolonsList: List<com.example.domain.repository.eidolon.Eidolon>,
 ) {
     HeaderCategory(
         modifier = modifier.padding(top = 24.dp),
@@ -41,9 +40,9 @@ fun EidolonsListColumn(
     ) {
         eidolonsList.forEach { eidolon ->
             EidolonItem(
-                eidolonImage = eidolon.image,
-                eidolonTitle = eidolon.title,
-                eidolonDescription = eidolon.description
+                eidolonImage = com.example.domain.repository.eidolon.Eidolon.image,
+                eidolonTitle = com.example.domain.repository.eidolon.Eidolon.title,
+                eidolonDescription = com.example.domain.repository.eidolon.Eidolon.description
             )
         }
     }

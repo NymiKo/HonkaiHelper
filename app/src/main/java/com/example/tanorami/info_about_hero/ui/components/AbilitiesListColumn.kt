@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.core.R
-import com.example.core.domain.repository.ability.Ability
 import com.example.core.ui.base_components.text.BaseDefaultText
 import com.example.core.ui.theme.AppTheme
 import com.example.core.ui.theme.DarkGrey
@@ -30,7 +29,7 @@ import com.example.tanorami.base_build_hero.ui.components.HeaderCategory
 @Composable
 fun AbilitiesListColumn(
     modifier: Modifier = Modifier,
-    abilitiesList: List<Ability>,
+    abilitiesList: List<com.example.domain.repository.ability.Ability>,
 ) {
     HeaderCategory(
         modifier = modifier.padding(top = 24.dp),
@@ -45,10 +44,10 @@ fun AbilitiesListColumn(
     ) {
         abilitiesList.forEach { ability ->
             AbilityItem(
-                abilityImage = ability.image,
-                abilityType = ability.type,
-                abilityTitle = ability.title,
-                abilityDescription = ability.description
+                abilityImage = com.example.domain.repository.ability.Ability.image,
+                abilityType = com.example.domain.repository.ability.Ability.type,
+                abilityTitle = com.example.domain.repository.ability.Ability.title,
+                abilityDescription = com.example.domain.repository.ability.Ability.description
             )
         }
     }

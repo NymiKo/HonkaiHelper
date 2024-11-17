@@ -29,8 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.core.R
-import com.example.core.domain.repository.decoration.Decoration
-import com.example.core.domain.repository.weapon.Weapon
 import com.example.core.ui.base_components.BaseHeroAvatarAndName
 import com.example.core.ui.base_components.lazy_column.BaseLazyColumn
 import com.example.core.ui.base_components.text.BaseDefaultText
@@ -148,7 +146,7 @@ fun BuildItem(
 @Composable
 private fun HeroWeaponBuild(
     modifier: Modifier = Modifier,
-    weapon: Weapon,
+    weapon: com.example.domain.repository.weapon.Weapon,
 ) {
     val backgroundColor = arrayOf(Blue, Violet, Orange)
 
@@ -157,8 +155,11 @@ private fun HeroWeaponBuild(
             .height(104.dp)
             .width(65.dp)
             .clip(RoundedCornerShape(16.dp))
-            .background(backgroundColor[weapon.rarity], RoundedCornerShape(16.dp)),
-        model = weapon.image,
+            .background(
+                backgroundColor[com.example.domain.repository.weapon.Weapon.rarity],
+                RoundedCornerShape(16.dp)
+            ),
+        model = com.example.domain.repository.weapon.Weapon.image,
         contentDescription = null,
         contentScale = ContentScale.Crop,
     )
@@ -167,14 +168,14 @@ private fun HeroWeaponBuild(
 @Composable
 fun HeroDecorationBuild(
     modifier: Modifier = Modifier,
-    decoration: Decoration
+    decoration: com.example.domain.repository.decoration.Decoration
 ) {
     AsyncImage(
         modifier = modifier
             .size(65.dp)
             .clip(RoundedCornerShape(16.dp))
             .background(Orange, RoundedCornerShape(16.dp)),
-        model = decoration.image,
+        model = com.example.domain.repository.decoration.Decoration.image,
         contentDescription = null,
         contentScale = ContentScale.Crop,
     )

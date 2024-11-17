@@ -19,10 +19,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.example.core.ui.base_components.top_app_bar.BaseCenterAlignedTopAppBar
 import com.example.tanorami.info_about_decoration.presentation.InfoAboutDecorationViewModel
 import com.example.tanorami.info_about_decoration.ui.components.DescriptionDecorationEffect
-import com.example.core.domain.repository.decoration.Decoration
-import com.example.core.ui.base_components.top_app_bar.BaseCenterAlignedTopAppBar
 import com.example.tanorami.navigation.LocalNavAnimatedVisibilityScope
 import com.example.tanorami.navigation.LocalSharedTransitionScope
 import com.example.tanorami.utils.OnLifecycleEvent
@@ -59,7 +58,7 @@ internal fun InfoAboutDecorationScreen(
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun InfoAboutDecorationScreenContent(
-    decoration: Decoration?,
+    decoration: com.example.domain.repository.decoration.Decoration?,
     onBack: () -> Unit,
 ) {
     val sharedTransitionScope = LocalSharedTransitionScope.current
@@ -71,7 +70,7 @@ private fun InfoAboutDecorationScreenContent(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             BaseCenterAlignedTopAppBar(
-                title = decoration?.title,
+                title = com.example.domain.repository.decoration.Decoration.title,
                 onBack = onBack::invoke
             )
         }
@@ -87,16 +86,16 @@ private fun InfoAboutDecorationScreenContent(
                         .width(250.dp)
                         .align(Alignment.CenterHorizontally)
                         .sharedElement(
-                            rememberSharedContentState(key = "decoration-${decoration?.idDecoration}-base-build"),
+                            rememberSharedContentState(key = "decoration-${com.example.domain.repository.decoration.Decoration.idDecoration}-base-build"),
                             animatedVisibilityScope = animatedVisibilityScope
                         ),
-                    model = decoration?.image,
+                    model = com.example.domain.repository.decoration.Decoration.image,
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                 )
             }
 
-            DescriptionDecorationEffect(descriptionDecorationEffect = decoration?.description)
+            DescriptionDecorationEffect(descriptionDecorationEffect = com.example.domain.repository.decoration.Decoration.description)
         }
     }
 }

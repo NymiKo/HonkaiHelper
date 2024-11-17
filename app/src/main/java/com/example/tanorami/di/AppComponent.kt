@@ -32,12 +32,7 @@ import com.example.tanorami.viewing_users_build.di.ViewingBuildHeroFromUserModel
 import com.example.tanorami.weapons_list.di.WeaponsListModule
 import dagger.BindsInstance
 import dagger.Component
-import javax.inject.Scope
 import javax.inject.Singleton
-
-@Scope
-@Retention(AnnotationRetention.RUNTIME)
-annotation class AppScope
 
 @Singleton
 @Component(
@@ -54,7 +49,6 @@ annotation class AppScope
         UseCaseModule::class,
         ViewModelFactoryModule::class,
         ProfileModule::class,
-        HeroesListModule::class,
         BuildsHeroFromUsersModule::class,
         TeamsFromUsersModule::class,
         InfoAboutHeroModule::class,
@@ -75,6 +69,7 @@ annotation class AppScope
         SendFeedbackModule::class,
         CreateBuildHeroesListModule::class,
         WeaponsListModule::class,
+        HeroesListModule::class,
     ],
 )
 interface AppComponent {

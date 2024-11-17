@@ -1,7 +1,7 @@
 package com.example.tanorami.createteam.presentation.models
 
 import com.example.core.base.UiState
-import com.example.core.database.models.hero.HeroBaseInfoProjection
+import com.example.core.local.models.hero.HeroBaseInfoProjection
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
 
 data class CreateTeamScreenUiState(

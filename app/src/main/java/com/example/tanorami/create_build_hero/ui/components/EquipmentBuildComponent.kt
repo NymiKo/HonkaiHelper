@@ -29,20 +29,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.core.R
-import com.example.core.domain.repository.equipment.Equipment
 import com.example.core.ui.base_components.text.BaseDefaultText
 import com.example.core.ui.theme.Blue
 import com.example.core.ui.theme.GreyTransparent20
 import com.example.core.ui.theme.Orange
 import com.example.core.ui.theme.Violet
+import com.example.domain.repository.equipment.Equipment
 
 @Composable
 fun EquipmentBuildComponent(
     modifier: Modifier = Modifier,
-    weapon: Equipment?,
-    relicTwoParts: Equipment?,
-    relicFourParts: Equipment?,
-    decoration: Equipment?,
+    weapon: com.example.domain.repository.equipment.Equipment?,
+    relicTwoParts: com.example.domain.repository.equipment.Equipment?,
+    relicFourParts: com.example.domain.repository.equipment.Equipment?,
+    decoration: com.example.domain.repository.equipment.Equipment?,
     onWeaponClick: () -> Unit,
     onTwoPartsRelicClick: () -> Unit,
     onFourPartsRelicClick: () -> Unit,
@@ -73,7 +73,7 @@ fun EquipmentBuildComponent(
 @Composable
 fun CategoryWeapon(
     modifier: Modifier = Modifier,
-    equipment: Equipment?,
+    equipment: com.example.domain.repository.equipment.Equipment?,
     onWeaponClick: () -> Unit,
 ) {
     Column(
@@ -88,7 +88,7 @@ fun CategoryWeapon(
                     .height(120.dp)
                     .width(80.dp)
                     .background(
-                        color = when (equipment?.rarity) {
+                        color = when (com.example.domain.repository.equipment.Equipment.rarity) {
                             0 -> Blue
                             1 -> Violet
                             2 -> Orange
@@ -107,8 +107,8 @@ fun CategoryWeapon(
 @Composable
 fun CategoryRelics(
     modifier: Modifier = Modifier,
-    relicTwoPartsEquipment: Equipment?,
-    relicFourPartsEquipment: Equipment?,
+    relicTwoPartsEquipment: com.example.domain.repository.equipment.Equipment?,
+    relicFourPartsEquipment: com.example.domain.repository.equipment.Equipment?,
     onTwoPartsRelicClick: () -> Unit,
     onFourPartsRelicClick: () -> Unit,
 ) {
@@ -134,7 +134,7 @@ fun CategoryRelics(
 @Composable
 fun CategoryDecoration(
     modifier: Modifier = Modifier,
-    equipment: Equipment?,
+    equipment: com.example.domain.repository.equipment.Equipment?,
     onDecorationClick: () -> Unit,
 ) {
     Column(
@@ -172,7 +172,7 @@ fun EquipmentCategoryText(
 @Composable
 fun RelicImage(
     modifier: Modifier = Modifier,
-    equipment: Equipment?,
+    equipment: com.example.domain.repository.equipment.Equipment?,
     textRelicParts: String,
     onEquipmentScreen: () -> Unit,
 ) {
@@ -201,7 +201,7 @@ fun RelicImage(
 @Composable
 fun EquipmentImage(
     modifier: Modifier = Modifier,
-    equipment: Equipment?,
+    equipment: com.example.domain.repository.equipment.Equipment?,
     contentScale: ContentScale = ContentScale.Fit,
     onEquipmentScreen: () -> Unit,
 ) {
@@ -212,7 +212,7 @@ fun EquipmentImage(
             .clickable {
                 onEquipmentScreen()
             },
-        model = equipment?.image ?: R.drawable.ic_add,
+        model = com.example.domain.repository.equipment.Equipment.image ?: R.drawable.ic_add,
         contentDescription = null,
         colorFilter = if (equipment == null) ColorFilter.tint(MaterialTheme.colorScheme.secondary) else null,
         contentScale = contentScale,

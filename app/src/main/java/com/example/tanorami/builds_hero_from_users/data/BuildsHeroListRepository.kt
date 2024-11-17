@@ -1,6 +1,6 @@
 package com.example.tanorami.builds_hero_from_users.data
 
-import com.example.core.database.models.hero.HeroBaseInfoProjection
+import com.example.core.local.models.hero.HeroBaseInfoProjection
 import com.example.core.network.NetworkResult
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
 

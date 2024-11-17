@@ -52,14 +52,15 @@ dependencies {
     implementation("androidx.compose.foundation:foundation-layout")
     implementation("androidx.compose.runtime:runtime-livedata")
     implementation("androidx.compose.ui:ui-tooling")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
 
     implementation("androidx.core:core-ktx:1.15.0")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.activity:activity-compose:1.9.3")
 
-    //Dagger_Compiler
+    //Dagger2
+    implementation("com.google.dagger:dagger:2.52")
     ksp("com.google.dagger:dagger-compiler:2.52")
 
     //Compose
@@ -78,6 +79,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-contrib:3.6.1")
     androidTestImplementation("com.google.dagger:dagger:2.52")
 
-    implementation(project(":core"))
-    implementation(project(":feature:heroes_list"))
+    implementation(project(":core-common"))
+    implementation(project(":core:data-local"))
+    implementation(project(":feature:heroes-list"))
 }

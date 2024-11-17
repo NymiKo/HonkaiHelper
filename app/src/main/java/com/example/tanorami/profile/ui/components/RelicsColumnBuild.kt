@@ -11,24 +11,23 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.core.domain.repository.relic.Relic
 import com.example.core.ui.theme.Orange
 
 @Composable
 fun RelicsColumnBuild(
     modifier: Modifier = Modifier,
-    relicTwoParts: Relic,
-    relicFourParts: Relic,
+    relicTwoParts: com.example.domain.repository.relic.Relic,
+    relicFourParts: com.example.domain.repository.relic.Relic,
 ) {
     Column(
         modifier = modifier,
         verticalArrangement  = Arrangement.spacedBy(4.dp),
     ) {
         RelicImage(
-            relicImage = relicTwoParts.image
+            relicImage = com.example.domain.repository.relic.Relic.image
         )
         RelicImage(
-            relicImage = relicFourParts.image
+            relicImage = com.example.domain.repository.relic.Relic.image
         )
     }
 }

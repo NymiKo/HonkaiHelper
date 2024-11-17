@@ -39,9 +39,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
+import com.example.core.R
 import com.example.core.ui.theme.Orange
 import com.example.heroes_list.heroes.ui.HeroesListScreen
-import com.example.core.R
 import com.example.tanorami.create_build_heroes_list.ui.CreateBuildHeroesListNavArguments
 import com.example.tanorami.createteam.ui.CreateTeamNavArguments
 import com.example.tanorami.load_data.ui.LoadDataNavArguments
@@ -241,7 +241,7 @@ private fun MainScreenContent(
             ) {
                 HeroesListScreen(
                     viewModelFactory = viewModelFactory,
-                    navController = rootNavController
+                    navController = rootNavController,
                 )
             }
 

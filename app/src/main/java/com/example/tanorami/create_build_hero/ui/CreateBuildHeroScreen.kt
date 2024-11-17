@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -34,12 +33,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.core.R
 import com.example.core.ui.base_components.button.BaseSmallFloatingButton
 import com.example.core.ui.base_components.dialog.BaseSaveAlertDialog
 import com.example.core.ui.base_components.top_app_bar.BaseTopAppBar
 import com.example.core.ui.theme.AppTheme
 import com.example.core.ui.theme.Red
-import com.example.core.R
 import com.example.tanorami.create_build_hero.presentation.CreateBuildHeroViewModel
 import com.example.tanorami.create_build_hero.presentation.models.CreateBuildHeroScreenEvents
 import com.example.tanorami.create_build_hero.presentation.models.CreateBuildHeroScreenSideEffects
@@ -163,9 +162,9 @@ private fun CreateBuildHeroScreenContent(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             AvatarHeroImageAndName(
-                heroImage = uiState.heroModel?.avatar,
-                heroName = uiState.heroModel?.name,
-                heroRarity = uiState.heroModel?.rarity
+                heroImage = com.example.domain.repository.hero.model.HeroModel.avatar,
+                heroName = com.example.domain.repository.hero.model.HeroModel.name,
+                heroRarity = com.example.domain.repository.hero.model.HeroModel.rarity
             )
 
             EquipmentBuildComponent(

@@ -67,7 +67,7 @@ private fun InfoAboutWeaponScreenContent(
         modifier = modifier.fillMaxSize(),
         topBar = {
             BaseCenterAlignedTopAppBar(
-                title = weapon?.weapon?.name ?: "",
+                title = com.example.domain.repository.weapon.Weapon.name ?: "",
                 onBack = onBack::invoke
             )
         }
@@ -85,17 +85,17 @@ private fun InfoAboutWeaponScreenContent(
 
             ImageRarityWeapon(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                rarity = weapon?.weapon?.rarity
+                rarity = com.example.domain.repository.weapon.Weapon.rarity
             )
 
-            DescriptionWeaponSkill(descriptionWeaponSkill = weapon?.weapon?.description)
+            DescriptionWeaponSkill(descriptionWeaponSkill = com.example.domain.repository.weapon.Weapon.description)
 
             BaseDefaultText(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .padding(top = 8.dp)
                     .fillMaxWidth(),
-                text = weapon?.weapon?.story ?: "",
+                text = com.example.domain.repository.weapon.Weapon.story ?: "",
                 fontSize = 16.sp,
                 fontFamily = FontFamily.SansSerif,
             )

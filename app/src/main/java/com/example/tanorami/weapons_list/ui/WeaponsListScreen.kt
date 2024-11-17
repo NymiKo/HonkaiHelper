@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -42,7 +41,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.core.R
-import com.example.core.domain.repository.weapon.Weapon
 import com.example.core.ui.base_components.text.BaseDefaultText
 import com.example.core.ui.theme.Black
 import com.example.core.ui.theme.Blue
@@ -136,7 +134,7 @@ private fun WeaponsListScreenContent(
 @Composable
 private fun WeaponItem(
     modifier: Modifier = Modifier,
-    weapon: Weapon,
+    weapon: com.example.domain.repository.weapon.Weapon,
     onClick: (idWeapon: Int) -> Unit
 ) {
     Box(
@@ -146,7 +144,7 @@ private fun WeaponItem(
             .clip(RoundedCornerShape(16.dp))
             .border(
                 4.dp,
-                when (weapon.rarity) {
+                when (com.example.domain.repository.weapon.Weapon.rarity) {
                     0 -> Blue
                     1 -> Violet
                     2 -> Orange
@@ -154,11 +152,11 @@ private fun WeaponItem(
                 },
                 RoundedCornerShape(16.dp)
             )
-            .clickable { onClick(weapon.idWeapon) },
+            .clickable { onClick(com.example.domain.repository.weapon.Weapon.idWeapon) },
         contentAlignment = Alignment.Center,
     ) {
         AsyncImage(
-            model = weapon.image,
+            model = com.example.domain.repository.weapon.Weapon.image,
             contentDescription = null,
         )
 
@@ -180,7 +178,7 @@ private fun WeaponItem(
             modifier = Modifier
                 .padding(bottom = 12.dp, start = 4.dp, end = 4.dp)
                 .align(Alignment.BottomCenter),
-            text = weapon.name,
+            text = com.example.domain.repository.weapon.Weapon.name,
             textAlign = TextAlign.Center,
             fontSize = 12.sp,
             lineHeight = 12.sp,

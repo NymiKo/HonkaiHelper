@@ -1,11 +1,11 @@
 package com.example.tanorami.teams_and_builds.data
 
-import com.example.core.database.dao.DecorationDao
-import com.example.core.database.dao.HeroDao
-import com.example.core.database.dao.RelicDao
-import com.example.core.database.dao.WeaponDao
-import com.example.core.database.models.hero.HeroBaseInfoProjection
 import com.example.core.di.IODispatcher
+import com.example.core.local.dao.DecorationDao
+import com.example.core.local.dao.HeroDao
+import com.example.core.local.dao.RelicDao
+import com.example.core.local.dao.WeaponDao
+import com.example.core.local.models.hero.HeroBaseInfoProjection
 import com.example.core.network.NetworkResult
 import com.example.core.network.handleApi
 import com.example.tanorami.builds_hero_from_users.data.BuildsHeroListService
