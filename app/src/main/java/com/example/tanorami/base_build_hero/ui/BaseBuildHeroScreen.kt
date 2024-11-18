@@ -126,7 +126,7 @@ private fun BaseBuildHeroScreenContent(
                             .width(72.dp)
                             .height(100.dp)
                             .background(
-                                color = when (com.example.domain.repository.weapon.Weapon.rarity) {
+                                color = when (weapon.rarity) {
                                     0 -> Blue
                                     1 -> Violet
                                     2 -> Orange
@@ -134,9 +134,9 @@ private fun BaseBuildHeroScreenContent(
                                 },
                                 shape = RoundedCornerShape(10.dp)
                             ),
-                        equipmentImage = com.example.domain.repository.weapon.Weapon.image,
-                        sharedElementKeyTransition = "weapon-${com.example.domain.repository.weapon.Weapon.idWeapon}-base-build",
-                        onClick = { onEvent(BaseBuildHeroScreenEvents.OnInfoAboutWeaponScreen(com.example.domain.repository.weapon.Weapon.idWeapon)) }
+                        equipmentImage = weapon.image,
+                        sharedElementKeyTransition = "weapon-${weapon.idWeapon}-base-build",
+                        onClick = { onEvent(BaseBuildHeroScreenEvents.OnInfoAboutWeaponScreen(weapon.idWeapon)) }
                     )
                 }
             )
@@ -150,9 +150,9 @@ private fun BaseBuildHeroScreenContent(
                         modifier = Modifier
                             .size(90.dp)
                             .background(color = Orange, shape = RoundedCornerShape(10.dp)),
-                        equipmentImage = com.example.domain.repository.relic.Relic.image,
-                        sharedElementKeyTransition = "relic-${com.example.domain.repository.relic.Relic.idRelic}-base-build",
-                        onClick = { onEvent(BaseBuildHeroScreenEvents.OnInfoAboutRelicScreen(com.example.domain.repository.relic.Relic.idRelic)) }
+                        equipmentImage = relic.image,
+                        sharedElementKeyTransition = "relic-${relic.idRelic}-base-build",
+                        onClick = { onEvent(BaseBuildHeroScreenEvents.OnInfoAboutRelicScreen(relic.idRelic)) }
                     )
                 }
             )
@@ -166,13 +166,11 @@ private fun BaseBuildHeroScreenContent(
                         modifier = Modifier
                             .size(90.dp)
                             .background(color = Orange, shape = RoundedCornerShape(10.dp)),
-                        equipmentImage = com.example.domain.repository.decoration.Decoration.image,
-                        sharedElementKeyTransition = "decoration-${com.example.domain.repository.decoration.Decoration.idDecoration}-base-build",
+                        equipmentImage = decoration.image,
+                        sharedElementKeyTransition = "decoration-${decoration.idDecoration}-base-build",
                         onClick = {
                             onEvent(
-                                BaseBuildHeroScreenEvents.OnInfoAboutDecorationScreen(
-                                    com.example.domain.repository.decoration.Decoration.idDecoration
-                                )
+                                BaseBuildHeroScreenEvents.OnInfoAboutDecorationScreen(decoration.idDecoration)
                             )
                         }
                     )

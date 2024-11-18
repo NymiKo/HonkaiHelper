@@ -42,7 +42,7 @@ fun InfoAboutWeaponScreen(
     val weapon = viewModel.weapon.collectAsStateWithLifecycle().value
 
     InfoAboutWeaponScreenContent(
-        weapon = weapon,
+        fullInfoAboutWeapon = weapon,
         onBack = navController::popBackStack,
     )
     
@@ -60,14 +60,14 @@ fun InfoAboutWeaponScreen(
 @Composable
 private fun InfoAboutWeaponScreenContent(
     modifier: Modifier = Modifier,
-    weapon: FullInfoAboutWeapon?,
+    fullInfoAboutWeapon: FullInfoAboutWeapon?,
     onBack: () -> Unit,
 ) {
     Scaffold(
         modifier = modifier.fillMaxSize(),
         topBar = {
             BaseCenterAlignedTopAppBar(
-                title = com.example.domain.repository.weapon.Weapon.name ?: "",
+                title = fullInfoAboutWeapon?.weapon?.name ?: "",
                 onBack = onBack::invoke
             )
         }
@@ -80,22 +80,22 @@ private fun InfoAboutWeaponScreenContent(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             ImagesWeaponAndPath(
-                weapon = weapon,
+                weapon = fullInfoAboutWeapon,
             )
 
             ImageRarityWeapon(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                rarity = com.example.domain.repository.weapon.Weapon.rarity
+                rarity = fullInfoAboutWeapon?.weapon?.rarity
             )
 
-            DescriptionWeaponSkill(descriptionWeaponSkill = com.example.domain.repository.weapon.Weapon.description)
+            DescriptionWeaponSkill(descriptionWeaponSkill = fullInfoAboutWeapon?.weapon?.description)
 
             BaseDefaultText(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .padding(top = 8.dp)
                     .fillMaxWidth(),
-                text = com.example.domain.repository.weapon.Weapon.story ?: "",
+                text = fullInfoAboutWeapon?.weapon?.story ?: "",
                 fontSize = 16.sp,
                 fontFamily = FontFamily.SansSerif,
             )

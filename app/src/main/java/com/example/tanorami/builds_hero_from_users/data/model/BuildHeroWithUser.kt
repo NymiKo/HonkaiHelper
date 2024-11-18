@@ -1,13 +1,17 @@
 package com.example.tanorami.builds_hero_from_users.data.model
 
-import com.example.core.local.models.hero.HeroBaseInfoProjection
+import com.example.domain.repository.decoration.DecorationModel
+import com.example.domain.repository.hero.model.HeroBaseInfoModel
+import com.example.domain.repository.relic.RelicModel
+import com.example.domain.repository.weapon.WeaponModel
+
 
 data class BuildHeroWithUser(
     val idBuild: Long,
-    val hero: HeroBaseInfoProjection,
-    val weapon: com.example.domain.repository.weapon.Weapon,
-    val relicTwoParts: com.example.domain.repository.relic.Relic,
-    val relicFourParts: com.example.domain.repository.relic.Relic,
-    val decoration: com.example.domain.repository.decoration.Decoration,
+    val hero: HeroBaseInfoModel,
+    val weapon: WeaponModel,
+    val relicTwoParts: RelicModel,
+    val relicFourParts: RelicModel,
+    val decoration: DecorationModel,
     val buildUser: BuildUser?
 )

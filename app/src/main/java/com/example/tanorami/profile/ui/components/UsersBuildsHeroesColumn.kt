@@ -38,6 +38,8 @@ import com.example.core.ui.theme.GreyTransparent20
 import com.example.core.ui.theme.Orange
 import com.example.core.ui.theme.Violet
 import com.example.core.ui.theme.White
+import com.example.domain.repository.decoration.DecorationModel
+import com.example.domain.repository.weapon.WeaponModel
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
 
 @Composable
@@ -146,7 +148,7 @@ fun BuildItem(
 @Composable
 private fun HeroWeaponBuild(
     modifier: Modifier = Modifier,
-    weapon: com.example.domain.repository.weapon.Weapon,
+    weapon: WeaponModel,
 ) {
     val backgroundColor = arrayOf(Blue, Violet, Orange)
 
@@ -156,10 +158,10 @@ private fun HeroWeaponBuild(
             .width(65.dp)
             .clip(RoundedCornerShape(16.dp))
             .background(
-                backgroundColor[com.example.domain.repository.weapon.Weapon.rarity],
+                backgroundColor[weapon.rarity],
                 RoundedCornerShape(16.dp)
             ),
-        model = com.example.domain.repository.weapon.Weapon.image,
+        model = weapon.image,
         contentDescription = null,
         contentScale = ContentScale.Crop,
     )
@@ -168,14 +170,14 @@ private fun HeroWeaponBuild(
 @Composable
 fun HeroDecorationBuild(
     modifier: Modifier = Modifier,
-    decoration: com.example.domain.repository.decoration.Decoration
+    decoration: DecorationModel
 ) {
     AsyncImage(
         modifier = modifier
             .size(65.dp)
             .clip(RoundedCornerShape(16.dp))
             .background(Orange, RoundedCornerShape(16.dp)),
-        model = com.example.domain.repository.decoration.Decoration.image,
+        model = decoration.image,
         contentDescription = null,
         contentScale = ContentScale.Crop,
     )

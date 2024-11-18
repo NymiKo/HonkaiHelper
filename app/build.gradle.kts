@@ -81,5 +81,6 @@ dependencies {
 
     implementation(project(":core-common"))
     implementation(project(":core:data-local"))
+    implementation(project(":core:domain"))
     implementation(project(":feature:heroes-list"))
 }

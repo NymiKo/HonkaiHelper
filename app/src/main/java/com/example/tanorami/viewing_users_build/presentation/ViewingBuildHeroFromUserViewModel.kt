@@ -31,25 +31,25 @@ class ViewingBuildHeroFromUserViewModel @Inject constructor(
 
             ViewingBuildHeroFromUserScreenEvents.OnInfoAboutDecorationScreen -> sendSideEffect(
                 ViewingBuildHeroFromUserScreenSideEffects.OnInfoAboutDecorationScreen(
-                    com.example.domain.repository.decoration.Decoration.idDecoration ?: 0
+                    uiState.buildHero.decoration?.idDecoration ?: 0
                 )
             )
 
             ViewingBuildHeroFromUserScreenEvents.OnTwoPartRelicClick -> sendSideEffect(
                 ViewingBuildHeroFromUserScreenSideEffects.OnInfoAboutRelicScreen(
-                    com.example.domain.repository.relic.Relic.idRelic ?: 0
+                    uiState.buildHero.relicTwoParts?.idRelic ?: 0
                 )
             )
 
             ViewingBuildHeroFromUserScreenEvents.OnFourPartRelicClick -> sendSideEffect(
                 ViewingBuildHeroFromUserScreenSideEffects.OnInfoAboutRelicScreen(
-                    com.example.domain.repository.relic.Relic.idRelic ?: 0
+                    uiState.buildHero.relicFourParts?.idRelic ?: 0
                 )
             )
 
             ViewingBuildHeroFromUserScreenEvents.OnInfoAboutWeaponScreen -> sendSideEffect(
                 ViewingBuildHeroFromUserScreenSideEffects.OnInfoAboutWeaponScreen(
-                    com.example.domain.repository.weapon.Weapon.idWeapon ?: 0
+                    uiState.buildHero.weapon?.idWeapon ?: 0
                 )
             )
         }

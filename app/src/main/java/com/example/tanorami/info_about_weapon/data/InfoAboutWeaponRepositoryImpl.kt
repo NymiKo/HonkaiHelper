@@ -1,7 +1,7 @@
 package com.example.tanorami.info_about_weapon.data
 
 import com.example.core.di.IODispatcher
-import com.example.core.local.dao.WeaponDao
+import com.example.data.local.dao.WeaponDao
 import com.example.tanorami.info_about_weapon.data.model.FullInfoAboutWeapon
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

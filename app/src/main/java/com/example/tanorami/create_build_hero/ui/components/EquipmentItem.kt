@@ -14,13 +14,14 @@ import coil.compose.AsyncImage
 import com.example.core.ui.theme.Blue
 import com.example.core.ui.theme.Orange
 import com.example.core.ui.theme.Violet
+import com.example.domain.repository.equipment.Equipment
 import com.example.tanorami.create_build_hero.presentation.models.CreateBuildHeroScreenEvents
 import com.example.tanorami.create_build_hero.presentation.models.EquipmentType
 
 @Composable
 fun EquipmentItem(
     modifier: Modifier = Modifier,
-    equipment: com.example.domain.repository.equipment.Equipment,
+    equipment: Equipment,
     equipmentType: EquipmentType,
     onEvent: (CreateBuildHeroScreenEvents) -> Unit,
     hideBottomSheet: () -> Unit,
@@ -31,7 +32,7 @@ fun EquipmentItem(
             .height(120.dp)
             .clip(RoundedCornerShape(10.dp))
             .background(
-                when (com.example.domain.repository.equipment.Equipment.rarity) {
+                when (equipment.rarity) {
                     0 -> Blue
                     1 -> Violet
                     2 -> Orange
@@ -63,7 +64,7 @@ fun EquipmentItem(
                 }
                 hideBottomSheet()
             },
-        model = com.example.domain.repository.equipment.Equipment.image,
+        model = equipment.image,
         contentDescription = null,
         contentScale = ContentScale.Crop
     )

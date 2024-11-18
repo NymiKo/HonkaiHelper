@@ -24,12 +24,13 @@ import com.example.core.ui.base_components.text.BaseDefaultText
 import com.example.core.ui.theme.AppTheme
 import com.example.core.ui.theme.DarkGrey
 import com.example.core.ui.theme.Orange
+import com.example.domain.repository.ability.AbilityModel
 import com.example.tanorami.base_build_hero.ui.components.HeaderCategory
 
 @Composable
 fun AbilitiesListColumn(
     modifier: Modifier = Modifier,
-    abilitiesList: List<com.example.domain.repository.ability.Ability>,
+    abilitiesList: List<AbilityModel>,
 ) {
     HeaderCategory(
         modifier = modifier.padding(top = 24.dp),
@@ -44,10 +45,10 @@ fun AbilitiesListColumn(
     ) {
         abilitiesList.forEach { ability ->
             AbilityItem(
-                abilityImage = com.example.domain.repository.ability.Ability.image,
-                abilityType = com.example.domain.repository.ability.Ability.type,
-                abilityTitle = com.example.domain.repository.ability.Ability.title,
-                abilityDescription = com.example.domain.repository.ability.Ability.description
+                abilityImage = ability.image,
+                abilityType = ability.type,
+                abilityTitle = ability.title,
+                abilityDescription = ability.description
             )
         }
     }

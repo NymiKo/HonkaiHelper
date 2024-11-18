@@ -1,12 +1,13 @@
 package com.example.tanorami.viewing_users_build.data
 
+import com.example.core.data.source.local.hero.mapper.toHeroBaseInfoModel
 import com.example.core.di.IODispatcher
-import com.example.core.local.dao.DecorationDao
-import com.example.core.local.dao.HeroDao
-import com.example.core.local.dao.RelicDao
-import com.example.core.local.dao.WeaponDao
 import com.example.core.network.NetworkResult
 import com.example.core.network.handleApi
+import com.example.data.local.dao.DecorationDao
+import com.example.data.local.dao.HeroDao
+import com.example.data.local.dao.RelicDao
+import com.example.data.local.dao.WeaponDao
 import com.example.tanorami.viewing_users_build.data.model.FullBuildHeroFromUser
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -30,7 +31,8 @@ class ViewingBuildHeroFromUserRepositoryImpl @Inject constructor(
                 return@withContext NetworkResult.Success(
                     FullBuildHeroFromUser(
                         idBuild = idBuild,
-                        hero = heroDao.getHeroWithNameAvatarRarity(result.data.idHero),
+                        hero = heroDao.getHeroWithNameAvatarRarity(result.data.idHero)
+                            .toHeroBaseInfoModel(),
                         weapon = weaponDao.getWeapon(result.data.idWeapon).toWeapon(),
                         relicTwoParts = relicDao.getRelic(result.data.idRelicTwoParts).toRelic(),
                         relicFourParts = relicDao.getRelic(result.data.idRelicFourParts).toRelic(),

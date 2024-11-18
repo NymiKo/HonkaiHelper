@@ -6,13 +6,17 @@ plugins {
 
 android {
     namespace = "com.example.data.local"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 24
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas_local_db")
+        }
     }
 
     buildTypes {

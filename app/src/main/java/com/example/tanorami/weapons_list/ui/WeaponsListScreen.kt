@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -47,6 +48,7 @@ import com.example.core.ui.theme.Blue
 import com.example.core.ui.theme.Orange
 import com.example.core.ui.theme.Violet
 import com.example.core.ui.theme.White
+import com.example.domain.repository.weapon.WeaponModel
 import com.example.tanorami.info_about_weapon.ui.InfoAboutWeaponNavArguments
 import com.example.tanorami.weapons_list.presentation.WeaponsListViewModel
 import com.example.tanorami.weapons_list.presentation.models.WeaponsListScreenEvents
@@ -134,7 +136,7 @@ private fun WeaponsListScreenContent(
 @Composable
 private fun WeaponItem(
     modifier: Modifier = Modifier,
-    weapon: com.example.domain.repository.weapon.Weapon,
+    weapon: WeaponModel,
     onClick: (idWeapon: Int) -> Unit
 ) {
     Box(
@@ -144,7 +146,7 @@ private fun WeaponItem(
             .clip(RoundedCornerShape(16.dp))
             .border(
                 4.dp,
-                when (com.example.domain.repository.weapon.Weapon.rarity) {
+                when (weapon.rarity) {
                     0 -> Blue
                     1 -> Violet
                     2 -> Orange
@@ -152,11 +154,11 @@ private fun WeaponItem(
                 },
                 RoundedCornerShape(16.dp)
             )
-            .clickable { onClick(com.example.domain.repository.weapon.Weapon.idWeapon) },
+            .clickable { onClick(weapon.idWeapon) },
         contentAlignment = Alignment.Center,
     ) {
         AsyncImage(
-            model = com.example.domain.repository.weapon.Weapon.image,
+            model = weapon.image,
             contentDescription = null,
         )
 
@@ -178,7 +180,7 @@ private fun WeaponItem(
             modifier = Modifier
                 .padding(bottom = 12.dp, start = 4.dp, end = 4.dp)
                 .align(Alignment.BottomCenter),
-            text = com.example.domain.repository.weapon.Weapon.name,
+            text = weapon.name,
             textAlign = TextAlign.Center,
             fontSize = 12.sp,
             lineHeight = 12.sp,

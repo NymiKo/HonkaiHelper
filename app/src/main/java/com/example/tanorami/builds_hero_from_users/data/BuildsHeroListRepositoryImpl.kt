@@ -1,13 +1,14 @@
 package com.example.tanorami.builds_hero_from_users.data
 
+import com.example.core.data.source.local.hero.mapper.toHeroBaseInfoModel
 import com.example.core.di.IODispatcher
-import com.example.core.local.dao.DecorationDao
-import com.example.core.local.dao.HeroDao
-import com.example.core.local.dao.RelicDao
-import com.example.core.local.dao.WeaponDao
-import com.example.core.local.models.hero.HeroBaseInfoProjection
 import com.example.core.network.NetworkResult
 import com.example.core.network.handleApi
+import com.example.data.local.dao.DecorationDao
+import com.example.data.local.dao.HeroDao
+import com.example.data.local.dao.RelicDao
+import com.example.data.local.dao.WeaponDao
+import com.example.domain.repository.hero.model.HeroBaseInfoModel
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -21,8 +22,8 @@ class BuildsHeroListRepositoryImpl @Inject constructor(
     private val relicDao: RelicDao,
     private val decorationDao: DecorationDao
 ): BuildsHeroListRepository {
-    override suspend fun getHero(idHero: Int): HeroBaseInfoProjection = withContext(ioDispatcher) {
-        return@withContext heroDao.getHeroWithNameAvatarRarity(idHero)
+    override suspend fun getHero(idHero: Int): HeroBaseInfoModel = withContext(ioDispatcher) {
+        return@withContext heroDao.getHeroWithNameAvatarRarity(idHero).toHeroBaseInfoModel()
     }
 
     override suspend fun getBuildsHeroListByIdHero(idHero: Int): NetworkResult<List<BuildHeroWithUser>> =

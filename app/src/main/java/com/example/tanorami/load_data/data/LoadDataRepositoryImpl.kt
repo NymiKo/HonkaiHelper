@@ -1,34 +1,34 @@
 package com.example.tanorami.load_data.data
 
+import com.example.core.data.source.local.build_stats_equipment.toBuildStatsEquipmentEntity
 import com.example.core.di.IODispatcher
-import com.example.core.local.dao.AbilityDao
-import com.example.core.local.dao.BuildDecorationDao
-import com.example.core.local.dao.BuildRelicDao
-import com.example.core.local.dao.BuildStatsEquipmentDao
-import com.example.core.local.dao.BuildWeaponDao
-import com.example.core.local.dao.DecorationDao
-import com.example.core.local.dao.EidolonDao
-import com.example.core.local.dao.ElementDao
-import com.example.core.local.dao.HeroDao
-import com.example.core.local.dao.OptimalStatsHeroDao
-import com.example.core.local.dao.PathDao
-import com.example.core.local.dao.RelicDao
-import com.example.core.local.dao.WeaponDao
-import com.example.core.local.entity.AbilityEntity
-import com.example.core.local.entity.BuildDecorationEntity
-import com.example.core.local.entity.BuildRelicEntity
-import com.example.core.local.entity.BuildStatsEquipmentEntity
-import com.example.core.local.entity.BuildWeaponEntity
-import com.example.core.local.entity.DecorationEntity
-import com.example.core.local.entity.EidolonEntity
-import com.example.core.local.entity.ElementEntity
-import com.example.core.local.entity.HeroEntity
-import com.example.core.local.entity.OptimalStatsHeroEntity
-import com.example.core.local.entity.PathEntity
-import com.example.core.local.entity.RelicEntity
-import com.example.core.local.entity.WeaponEntity
 import com.example.core.network.NetworkResult
 import com.example.core.network.handleApi
+import com.example.data.local.dao.AbilityDao
+import com.example.data.local.dao.BuildDecorationDao
+import com.example.data.local.dao.BuildRelicDao
+import com.example.data.local.dao.BuildStatsEquipmentDao
+import com.example.data.local.dao.BuildWeaponDao
+import com.example.data.local.dao.DecorationDao
+import com.example.data.local.dao.EidolonDao
+import com.example.data.local.dao.ElementDao
+import com.example.data.local.dao.HeroDao
+import com.example.data.local.dao.OptimalStatsHeroDao
+import com.example.data.local.dao.PathDao
+import com.example.data.local.dao.RelicDao
+import com.example.data.local.dao.WeaponDao
+import com.example.data.local.entity.AbilityEntity
+import com.example.data.local.entity.BuildDecorationEntity
+import com.example.data.local.entity.BuildRelicEntity
+import com.example.data.local.entity.BuildWeaponEntity
+import com.example.data.local.entity.DecorationEntity
+import com.example.data.local.entity.EidolonEntity
+import com.example.data.local.entity.ElementEntity
+import com.example.data.local.entity.HeroEntity
+import com.example.data.local.entity.OptimalStatsHeroEntity
+import com.example.data.local.entity.PathEntity
+import com.example.data.local.entity.RelicEntity
+import com.example.data.local.entity.WeaponEntity
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -104,7 +104,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                     val localElements = elementDao.getElements()
                     val newElements = remoteElements.filter { remoteElement ->
                         localElements.none { localElement ->
-                            localElement.copy(image = com.example.domain.repository.element.Element.image)
+                            localElement.copy(image = localElement.image)
                                 .toElement() == remoteElement
                         }
                     }
@@ -112,7 +112,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                     val localImageElements =
                         downloadImages(
                             newElements,
-                            { com.example.domain.repository.element.Element.image },
+                            { it.image },
                             CHILD_ELEMENTS_IMAGE
                         ).await()
 
@@ -142,7 +142,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                     val localPaths = pathDao.getPaths()
                     val newPaths = remotePaths.filter { path ->
                         localPaths.none {
-                            it.copy(image = com.example.domain.repository.path.Path.image)
+                            it.copy(image = it.image)
                                 .toPath() == path
                         }
                     }
@@ -150,7 +150,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                     val localImagePaths =
                         downloadImages(
                             newPaths,
-                            { com.example.domain.repository.path.Path.image },
+                            { it.image },
                             CHILD_PATHS_IMAGE
                         ).await()
 
@@ -180,7 +180,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                     val localAbilities = abilityDao.getAbilities()
                     val newAbilities = remoteAbilities.filter { ability ->
                         localAbilities.none {
-                            it.copy(image = com.example.domain.repository.ability.Ability.image)
+                            it.copy(image = it.image)
                                 .toAbility() == ability
                         }
                     }
@@ -188,7 +188,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                     val localImageAbilities =
                         downloadImages(
                             newAbilities,
-                            { com.example.domain.repository.ability.Ability.image },
+                            { it.image },
                             CHILD_ABILITIES_IMAGE
                         ).await()
 
@@ -220,13 +220,13 @@ class LoadDataRepositoryImpl @Inject constructor(
                     val remoteEidolons = resultApi.data
                     val localEidolons = eidolonDao.getEidolons()
                     val newEidolons = remoteEidolons.filter { eidolons ->
-                        localEidolons.none { it.idEidolon == com.example.domain.repository.eidolon.Eidolon.idEidolon && it.title == com.example.domain.repository.eidolon.Eidolon.title && it.description == com.example.domain.repository.eidolon.Eidolon.description && it.idHero == com.example.domain.repository.eidolon.Eidolon.idHero }
+                        localEidolons.none { it.idEidolon == eidolons.idEidolon && it.title == eidolons.title && it.description == eidolons.description && it.idHero == eidolons.idHero }
                     }
 
                     val localImageEidolons =
                         downloadImages(
                             newEidolons,
-                            { com.example.domain.repository.eidolon.Eidolon.image },
+                            { it.image },
                             CHILD_EIDOLONS_IMAGE
                         ).await()
 
@@ -258,19 +258,19 @@ class LoadDataRepositoryImpl @Inject constructor(
                     val remoteHeroes = resultApi.data
                     val localHeroes = heroDao.getHeroesList()
                     val newHeroes = remoteHeroes.filter { hero ->
-                        localHeroes.none { it.id == com.example.domain.repository.hero.model.HeroModel.id && it.name == com.example.domain.repository.hero.model.HeroModel.name && it.rarity == com.example.domain.repository.hero.model.HeroModel.rarity && it.idPath == com.example.domain.repository.hero.model.HeroModel.idPath && it.idElement == com.example.domain.repository.hero.model.HeroModel.idElement }
+                        localHeroes.none { it.id == hero.id && it.name == hero.name && it.rarity == hero.rarity && it.idPath == hero.idPath && it.idElement == hero.idElement }
                     }
 
                     val localAvatarPaths =
                         downloadImages(
                             newHeroes,
-                            { com.example.domain.repository.hero.model.HeroModel.avatar },
+                            { it.avatar },
                             CHILD_HEROES_AVATARS
                         ).await()
 
                     val localSplashArtsPaths = downloadImages(
                         newHeroes,
-                        { com.example.domain.repository.hero.model.HeroModel.splashArt },
+                        { it.splashArt },
                         CHILD_HEROES_SPLASH_ARTS
                     ).await()
 
@@ -391,7 +391,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                     val localImageDecorations =
                         downloadImages(
                             newEntities,
-                            { com.example.domain.repository.decoration.Decoration.image },
+                            { it.image },
                             CHILD_DECORATIONS_IMAGE
                         ).await()
 
@@ -426,7 +426,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                     val localImageRelics =
                         downloadImages(
                             newEntities,
-                            { com.example.domain.repository.relic.Relic.image },
+                            { it.image },
                             CHILD_RELICS_IMAGE
                         ).await()
 
@@ -459,7 +459,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                     }
 
                     insertEntitiesIntoLocalStorage(
-                        newEntities.map { BuildStatsEquipmentEntity.toBuildStatsEquipmentEntity(it) },
+                        newEntities.map { it.toBuildStatsEquipmentEntity() },
                         buildStatsEquipmentDao::insertBuildStatsEquipment
                     ).join()
 
@@ -483,7 +483,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                     val localImageWeapons =
                         downloadImages(
                             newEntities,
-                            { com.example.domain.repository.weapon.Weapon.image },
+                            { it.image },
                             CHILD_WEAPONS_IMAGE
                         ).await()
 

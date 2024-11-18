@@ -73,7 +73,7 @@ fun EquipmentBuildComponent(
 @Composable
 fun CategoryWeapon(
     modifier: Modifier = Modifier,
-    equipment: com.example.domain.repository.equipment.Equipment?,
+    equipment: Equipment?,
     onWeaponClick: () -> Unit,
 ) {
     Column(
@@ -88,7 +88,7 @@ fun CategoryWeapon(
                     .height(120.dp)
                     .width(80.dp)
                     .background(
-                        color = when (com.example.domain.repository.equipment.Equipment.rarity) {
+                        color = when (equipment?.rarity) {
                             0 -> Blue
                             1 -> Violet
                             2 -> Orange
@@ -201,7 +201,7 @@ fun RelicImage(
 @Composable
 fun EquipmentImage(
     modifier: Modifier = Modifier,
-    equipment: com.example.domain.repository.equipment.Equipment?,
+    equipment: Equipment?,
     contentScale: ContentScale = ContentScale.Fit,
     onEquipmentScreen: () -> Unit,
 ) {
@@ -212,7 +212,7 @@ fun EquipmentImage(
             .clickable {
                 onEquipmentScreen()
             },
-        model = com.example.domain.repository.equipment.Equipment.image ?: R.drawable.ic_add,
+        model = equipment?.image ?: R.drawable.ic_add,
         contentDescription = null,
         colorFilter = if (equipment == null) ColorFilter.tint(MaterialTheme.colorScheme.secondary) else null,
         contentScale = contentScale,

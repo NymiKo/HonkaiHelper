@@ -1,8 +1,9 @@
 package com.example.domain.repository.hero.model
 
 import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-@kotlinx.parcelize.Parcelize
+@Parcelize
 data class HeroModel(
     val id: Int,
     val name: String,

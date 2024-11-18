@@ -28,6 +28,6 @@ class CreateBuildHeroesListViewModel @Inject constructor(
 
     private fun getHeroesList() = viewModelScope.launch {
         uiState =
-            uiState.copy(heroesList = com.example.domain.usecase.GetHeroesListWithBaseInfoUseCase.invoke())
+            uiState.copy(heroesList = getHeroesListWithBaseInfoUseCase.invoke())
     }
 }

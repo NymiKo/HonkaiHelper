@@ -89,7 +89,7 @@ private fun InfoAboutHeroScreenContent(
     Scaffold(
         topBar = {
             BaseCenterAlignedTopAppBar(
-                title = com.example.domain.repository.hero.model.HeroModel.name,
+                title = uiState.heroModel?.name,
                 onBack = { onEvent(InfoAboutHeroScreenEvents.OnBack) }
             )
         }
@@ -100,16 +100,16 @@ private fun InfoAboutHeroScreenContent(
                 .verticalScroll(rememberScrollState())
         ) {
             SplashArtHeroImage(
-                splashArtHero = com.example.domain.repository.hero.model.HeroModel.splashArt,
-                elementHero = com.example.domain.repository.element.Element.image,
-                pathHero = com.example.domain.repository.path.Path.image
+                splashArtHero = uiState.heroModel?.splashArt,
+                elementHero = uiState.element?.image,
+                pathHero = uiState.path?.image
             )
 
             AsyncImage(
                 modifier = Modifier
                     .height(20.dp)
                     .fillMaxWidth(),
-                model = when (com.example.domain.repository.hero.model.HeroModel.rarity) {
+                model = when (uiState.heroModel?.rarity) {
                     false -> R.drawable.icon_4_stars
                     true-> R.drawable.icon_5_stars
                     else -> R.drawable.icon_4_stars
@@ -121,7 +121,7 @@ private fun InfoAboutHeroScreenContent(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .padding(top = 8.dp),
-                text = com.example.domain.repository.hero.model.HeroModel.story ?: "",
+                text = uiState.heroModel?.story ?: "",
                 fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold,
                 lineHeight = 20.sp

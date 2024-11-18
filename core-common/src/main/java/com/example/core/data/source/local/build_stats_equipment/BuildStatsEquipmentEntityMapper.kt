@@ -11,3 +11,12 @@ fun BuildStatsEquipmentEntity.toBuildStatsEquipmentModel() = BuildStatsEquipment
     rope,
     idHero,
 )
+
+fun BuildStatsEquipmentModel.toBuildStatsEquipmentEntity() = BuildStatsEquipmentEntity(
+    idBuildStatsEquipment,
+    body,
+    legs,
+    sphere,
+    rope,
+    idHero,
+)

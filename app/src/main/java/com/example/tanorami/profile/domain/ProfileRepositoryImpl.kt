@@ -1,12 +1,13 @@
 package com.example.tanorami.profile.domain
 
+import com.example.core.data.source.local.hero.mapper.toHeroBaseInfoModel
 import com.example.core.di.IODispatcher
-import com.example.core.local.dao.DecorationDao
-import com.example.core.local.dao.HeroDao
-import com.example.core.local.dao.RelicDao
-import com.example.core.local.dao.WeaponDao
 import com.example.core.network.NetworkResult
 import com.example.core.network.handleApi
+import com.example.data.local.dao.DecorationDao
+import com.example.data.local.dao.HeroDao
+import com.example.data.local.dao.RelicDao
+import com.example.data.local.dao.WeaponDao
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
 import com.example.tanorami.profile.data.ProfileService
 import com.example.tanorami.profile.data.model.User
@@ -47,10 +48,14 @@ class ProfileRepositoryImpl @Inject constructor(
                         teamsList = result.data.teamsList.map {
                             TeamHero(
                                 idTeam = it.idTeam,
-                                heroOne = heroDao.getHeroWithNameAvatarRarity(it.idHeroOne),
-                                heroTwo = heroDao.getHeroWithNameAvatarRarity(it.idHeroTwo),
-                                heroThree = heroDao.getHeroWithNameAvatarRarity(it.idHeroThree),
-                                heroFour = heroDao.getHeroWithNameAvatarRarity(it.idHeroFour),
+                                heroOne = heroDao.getHeroWithNameAvatarRarity(it.idHeroOne)
+                                    .toHeroBaseInfoModel(),
+                                heroTwo = heroDao.getHeroWithNameAvatarRarity(it.idHeroTwo)
+                                    .toHeroBaseInfoModel(),
+                                heroThree = heroDao.getHeroWithNameAvatarRarity(it.idHeroThree)
+                                    .toHeroBaseInfoModel(),
+                                heroFour = heroDao.getHeroWithNameAvatarRarity(it.idHeroFour)
+                                    .toHeroBaseInfoModel(),
                                 nickname = it.nickname,
                                 avatar = it.avatar
                             )
@@ -58,7 +63,8 @@ class ProfileRepositoryImpl @Inject constructor(
                         buildsHeroes = result.data.buildsHeroes.map {
                             BuildHeroWithUser(
                                 idBuild = it.idBuild,
-                                hero = heroDao.getHeroWithNameAvatarRarity(it.idHero),
+                                hero = heroDao.getHeroWithNameAvatarRarity(it.idHero)
+                                    .toHeroBaseInfoModel(),
                                 weapon = weaponDao.getWeapon(it.idWeapon).toWeapon(),
                                 relicTwoParts = relicDao.getRelic(it.idRelicTwoParts).toRelic(),
                                 relicFourParts = relicDao.getRelic(it.idRelicFourParts).toRelic(),

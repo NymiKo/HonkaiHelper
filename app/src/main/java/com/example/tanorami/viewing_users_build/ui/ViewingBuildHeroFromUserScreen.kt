@@ -139,10 +139,10 @@ private fun ViewingBuildHeroFromUserScreenContent(
             )
 
             EquipmentBuildComponent(
-                weapon = com.example.domain.repository.weapon.Weapon.toEquipment(),
-                relicTwoParts = com.example.domain.repository.relic.Relic.toEquipment(),
-                relicFourParts = com.example.domain.repository.relic.Relic.toEquipment(),
-                decoration = com.example.domain.repository.decoration.Decoration.toEquipment(),
+                weapon = uiState.buildHero.weapon?.toEquipment(),
+                relicTwoParts = uiState.buildHero.relicTwoParts?.toEquipment(),
+                relicFourParts = uiState.buildHero.relicFourParts?.toEquipment(),
+                decoration = uiState.buildHero.decoration?.toEquipment(),
                 onWeaponClick = { onEvent(ViewingBuildHeroFromUserScreenEvents.OnInfoAboutWeaponScreen) },
                 onTwoPartsRelicClick = { onEvent(ViewingBuildHeroFromUserScreenEvents.OnTwoPartRelicClick) },
                 onFourPartsRelicClick = { onEvent(ViewingBuildHeroFromUserScreenEvents.OnFourPartRelicClick) },

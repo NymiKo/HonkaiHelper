@@ -20,12 +20,13 @@ import com.example.core.R
 import com.example.core.ui.base_components.text.BaseDefaultText
 import com.example.core.ui.theme.AppTheme
 import com.example.core.ui.theme.DarkGrey
+import com.example.domain.repository.eidolon.EidolonModel
 import com.example.tanorami.base_build_hero.ui.components.HeaderCategory
 
 @Composable
 fun EidolonsListColumn(
     modifier: Modifier = Modifier,
-    eidolonsList: List<com.example.domain.repository.eidolon.Eidolon>,
+    eidolonsList: List<EidolonModel>,
 ) {
     HeaderCategory(
         modifier = modifier.padding(top = 24.dp),
@@ -40,9 +41,9 @@ fun EidolonsListColumn(
     ) {
         eidolonsList.forEach { eidolon ->
             EidolonItem(
-                eidolonImage = com.example.domain.repository.eidolon.Eidolon.image,
-                eidolonTitle = com.example.domain.repository.eidolon.Eidolon.title,
-                eidolonDescription = com.example.domain.repository.eidolon.Eidolon.description
+                eidolonImage = eidolon.image,
+                eidolonTitle = eidolon.title,
+                eidolonDescription = eidolon.description
             )
         }
     }

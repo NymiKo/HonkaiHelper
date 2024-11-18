@@ -17,6 +17,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.core.ui.base_components.top_app_bar.BaseCenterAlignedTopAppBar
+import com.example.domain.repository.relic.RelicModel
 import com.example.tanorami.info_about_relic.presentation.InfoAboutRelicViewModel
 import com.example.tanorami.info_about_relic.ui.components.DescriptionRelicEffect
 import com.example.tanorami.info_about_relic.ui.components.ImageRelic
@@ -53,14 +54,14 @@ fun InfoAboutRelicScreen(
 
 @Composable
 internal fun InfoAboutRelicScreenContent(
-    relic: com.example.domain.repository.relic.Relic?,
+    relic: RelicModel?,
     onBack: () -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             BaseCenterAlignedTopAppBar(
-                title = com.example.domain.repository.relic.Relic.title,
+                title = relic?.title,
                 onBack = onBack::invoke
             )
         }
@@ -73,13 +74,13 @@ internal fun InfoAboutRelicScreenContent(
         ) {
             ImageRelic(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                idRelic = com.example.domain.repository.relic.Relic.idRelic,
-                imageRelic = com.example.domain.repository.relic.Relic.image
+                idRelic = relic?.idRelic,
+                imageRelic = relic?.image
             )
 
             DescriptionRelicEffect(
-                descriptionTwoRelicEffect = com.example.domain.repository.relic.Relic.descriptionTwoParts,
-                descriptionFourRelicEffect = com.example.domain.repository.relic.Relic.descriptionFourParts
+                descriptionTwoRelicEffect = relic?.descriptionTwoParts,
+                descriptionFourRelicEffect = relic?.descriptionFourParts
             )
         }
     }

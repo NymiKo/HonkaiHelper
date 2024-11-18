@@ -39,11 +39,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.core.R
-import com.example.core.local.models.hero.HeroBaseInfoProjection
 import com.example.core.ui.base_components.button.BaseSmallFloatingButton
 import com.example.core.ui.base_components.dialog.BaseSaveAlertDialog
 import com.example.core.ui.base_components.top_app_bar.BaseTopAppBar
 import com.example.core.ui.theme.Red
+import com.example.domain.repository.hero.model.HeroBaseInfoModel
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
 import com.example.tanorami.createteam.presentation.CreateTeamViewModel
 import com.example.tanorami.createteam.presentation.models.CreateTeamScreenEvents
@@ -206,7 +206,7 @@ private fun TopAppBar(
 @Composable
 private fun HeroesListInTeam(
     modifier: Modifier = Modifier,
-    heroesListInTeam: List<HeroBaseInfoProjection>,
+    heroesListInTeam: List<HeroBaseInfoModel>,
 ) {
     LazyRow(
         modifier = modifier

@@ -1,13 +1,14 @@
 package com.example.tanorami.teams_and_builds.data
 
+import com.example.core.data.source.local.hero.mapper.toHeroBaseInfoModel
 import com.example.core.di.IODispatcher
-import com.example.core.local.dao.DecorationDao
-import com.example.core.local.dao.HeroDao
-import com.example.core.local.dao.RelicDao
-import com.example.core.local.dao.WeaponDao
-import com.example.core.local.models.hero.HeroBaseInfoProjection
 import com.example.core.network.NetworkResult
 import com.example.core.network.handleApi
+import com.example.data.local.dao.DecorationDao
+import com.example.data.local.dao.HeroDao
+import com.example.data.local.dao.RelicDao
+import com.example.data.local.dao.WeaponDao
+import com.example.domain.repository.hero.model.HeroBaseInfoModel
 import com.example.tanorami.builds_hero_from_users.data.BuildsHeroListService
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
 import com.example.tanorami.teams.data.TeamsFromUsersService
@@ -25,9 +26,9 @@ class TeamsAndBuildsRepositoryImpl @Inject constructor(
     private val decorationDao: DecorationDao,
     @IODispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : TeamsAndBuildsRepository {
-    override suspend fun getHero(idHero: Int): HeroBaseInfoProjection =
+    override suspend fun getHero(idHero: Int): HeroBaseInfoModel =
         withContext(ioDispatcher) {
-            return@withContext heroDao.getHeroWithNameAvatarRarity(idHero)
+            return@withContext heroDao.getHeroWithNameAvatarRarity(idHero).toHeroBaseInfoModel()
         }
 
     override suspend fun getTeamsListFromUsers(): NetworkResult<List<TeamHero>> =
@@ -41,10 +42,14 @@ class TeamsAndBuildsRepositoryImpl @Inject constructor(
                     return@withContext NetworkResult.Success(result.data.map {
                         TeamHero(
                             idTeam = it.idTeam,
-                            heroOne = heroDao.getHeroWithNameAvatarRarity(it.idHeroOne),
-                            heroTwo = heroDao.getHeroWithNameAvatarRarity(it.idHeroTwo),
-                            heroThree = heroDao.getHeroWithNameAvatarRarity(it.idHeroThree),
-                            heroFour = heroDao.getHeroWithNameAvatarRarity(it.idHeroFour),
+                            heroOne = heroDao.getHeroWithNameAvatarRarity(it.idHeroOne)
+                                .toHeroBaseInfoModel(),
+                            heroTwo = heroDao.getHeroWithNameAvatarRarity(it.idHeroTwo)
+                                .toHeroBaseInfoModel(),
+                            heroThree = heroDao.getHeroWithNameAvatarRarity(it.idHeroThree)
+                                .toHeroBaseInfoModel(),
+                            heroFour = heroDao.getHeroWithNameAvatarRarity(it.idHeroFour)
+                                .toHeroBaseInfoModel(),
                             nickname = it.nickname,
                             avatar = it.avatar,
                             uid = it.uid,

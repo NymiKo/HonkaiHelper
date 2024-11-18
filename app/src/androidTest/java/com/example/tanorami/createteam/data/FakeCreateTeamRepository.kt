@@ -1,7 +1,7 @@
 package com.example.tanorami.createteam.data
 
-import com.example.core.local.models.hero.HeroBaseInfoProjection
 import com.example.core.network.NetworkResult
+import com.example.domain.repository.hero.model.HeroBaseInfoModel
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
 import javax.inject.Inject
 
@@ -12,12 +12,12 @@ class FakeCreateTeamRepository @Inject constructor(): CreateTeamRepository {
 
     override suspend fun saveTeam(
         idTeam: Long,
-        heroesList: List<HeroBaseInfoProjection>
+        heroesList: List<HeroBaseInfoModel>
     ): NetworkResult<Unit> {
         return NetworkResult.Success(Unit)
     }
 
-    override suspend fun getTeam(idTeam: Long): NetworkResult<Pair<String, List<HeroBaseInfoProjection>>> {
+    override suspend fun getTeam(idTeam: Long): NetworkResult<Pair<String, List<HeroBaseInfoModel>>> {
         return NetworkResult.Success(Pair("", emptyList()))
     }
 

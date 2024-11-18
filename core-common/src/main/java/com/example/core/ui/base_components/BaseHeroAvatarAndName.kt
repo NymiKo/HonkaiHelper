@@ -24,12 +24,12 @@ import com.example.core.ui.theme.DarkGrey
 import com.example.core.ui.theme.Orange
 import com.example.core.ui.theme.Violet
 import com.example.core.ui.theme.White
-import com.example.data.local.models.hero.HeroBaseInfoProjection
+import com.example.domain.repository.hero.model.HeroBaseInfoModel
 
 @Composable
 fun BaseHeroAvatarAndName(
     modifier: Modifier = Modifier,
-    hero: HeroBaseInfoProjection,
+    hero: HeroBaseInfoModel,
 ) {
     Box(
         modifier = modifier
@@ -86,7 +86,7 @@ fun HeroName(
 @Composable
 private fun HeroAvatarAndNamePreview() {
     BaseHeroAvatarAndName(
-        hero = HeroBaseInfoProjection(
+        hero = HeroBaseInfoModel(
             id = 1,
             name = "Hero 1",
             localAvatarPath = "",

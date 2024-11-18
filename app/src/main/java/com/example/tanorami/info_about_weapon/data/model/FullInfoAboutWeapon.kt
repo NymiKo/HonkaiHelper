@@ -1,6 +1,9 @@
 package com.example.tanorami.info_about_weapon.data.model
 
+import com.example.domain.repository.path.PathModel
+import com.example.domain.repository.weapon.WeaponModel
+
 data class FullInfoAboutWeapon(
-    val weapon: com.example.domain.repository.weapon.Weapon,
-    val path: com.example.domain.repository.path.Path
+    val weapon: WeaponModel,
+    val path: PathModel
 )

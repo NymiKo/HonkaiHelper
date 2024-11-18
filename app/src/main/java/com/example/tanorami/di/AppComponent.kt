@@ -4,9 +4,9 @@ import android.content.Context
 import com.example.core.di.AppModule
 import com.example.core.di.DataStoreModule
 import com.example.core.di.LocalDataSourceModule
-import com.example.core.di.RoomModule
 import com.example.core.di.UseCaseModule
 import com.example.core.di.ViewModelFactoryModule
+import com.example.data.di.DataLocalModule
 import com.example.heroes_list.heroes.di.HeroesListModule
 import com.example.tanorami.activity.MainActivity
 import com.example.tanorami.auth.login.di.LoginModule
@@ -45,7 +45,7 @@ import javax.inject.Singleton
         DataStoreModule::class,
         com.example.core.di.RepositoryModule::class,
         LocalDataSourceModule::class,
-        RoomModule::class,
+        DataLocalModule::class,
         UseCaseModule::class,
         ViewModelFactoryModule::class,
         ProfileModule::class,

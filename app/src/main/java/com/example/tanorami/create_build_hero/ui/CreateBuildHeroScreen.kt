@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -162,9 +163,9 @@ private fun CreateBuildHeroScreenContent(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             AvatarHeroImageAndName(
-                heroImage = com.example.domain.repository.hero.model.HeroModel.avatar,
-                heroName = com.example.domain.repository.hero.model.HeroModel.name,
-                heroRarity = com.example.domain.repository.hero.model.HeroModel.rarity
+                heroImage = uiState.heroModel?.avatar,
+                heroName = uiState.heroModel?.name,
+                heroRarity = uiState.heroModel?.rarity
             )
 
             EquipmentBuildComponent(

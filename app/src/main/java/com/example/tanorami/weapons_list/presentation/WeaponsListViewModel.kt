@@ -29,7 +29,7 @@ class WeaponsListViewModel @Inject constructor(
             is WeaponsListScreenEvents.SearchTextChanged -> uiState = uiState.copy(
                 searchTextField = uiState.searchTextField.copy(value = event.newValue),
                 filteredWeaponsList = uiState.weaponsList.filter { weapon ->
-                    com.example.domain.repository.weapon.Weapon.name.lowercase()
+                    weapon.name.lowercase()
                         .contains(event.newValue.lowercase())
                 }
             )

@@ -2,11 +2,12 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
+    id("kotlin-parcelize")
 }
 
 android {
     namespace = "com.example.domain"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 24

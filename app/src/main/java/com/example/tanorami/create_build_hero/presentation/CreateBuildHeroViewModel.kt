@@ -143,11 +143,11 @@ class CreateBuildHeroViewModel @Inject constructor(
         viewModelScope.launch {
             val build = BuildHeroFromUser(
                 uiState.idHero,
-                com.example.domain.repository.equipment.Equipment.id,
-                com.example.domain.repository.equipment.Equipment.id,
-                com.example.domain.repository.equipment.Equipment.id
-                    ?: com.example.domain.repository.equipment.Equipment.id,
-                com.example.domain.repository.equipment.Equipment.id,
+                uiState.buildHeroFromUser.weapon!!.id,
+                uiState.buildHeroFromUser.relicTwoParts!!.id,
+                uiState.buildHeroFromUser.relicFourParts?.id
+                    ?: uiState.buildHeroFromUser.relicTwoParts!!.id,
+                uiState.buildHeroFromUser.decoration!!.id,
                 arrayOf(
                     uiState.buildHeroFromUser.statsEquipmentList.statBody,
                     uiState.buildHeroFromUser.statsEquipmentList.statLegs,
@@ -225,22 +225,22 @@ class CreateBuildHeroViewModel @Inject constructor(
                     heroModel = repository.getHero(result.data.hero!!.id),
                     buildHeroFromUser = uiState.buildHeroFromUser.copy(
                         idBuild = idBuild,
-                        weapon = com.example.domain.repository.equipment.Equipment(
-                            com.example.domain.repository.weapon.Weapon.idWeapon,
-                            com.example.domain.repository.weapon.Weapon.image,
-                            com.example.domain.repository.weapon.Weapon.rarity
+                        weapon = Equipment(
+                            result.data.weapon!!.idWeapon,
+                            result.data.weapon!!.image,
+                            result.data.weapon!!.rarity
                         ),
-                        relicTwoParts = com.example.domain.repository.equipment.Equipment(
-                            com.example.domain.repository.relic.Relic.idRelic,
-                            com.example.domain.repository.relic.Relic.image
+                        relicTwoParts = Equipment(
+                            result.data.relicTwoParts!!.idRelic,
+                            result.data.relicTwoParts!!.image
                         ),
-                        relicFourParts = com.example.domain.repository.equipment.Equipment(
-                            com.example.domain.repository.relic.Relic.idRelic,
-                            com.example.domain.repository.relic.Relic.image
+                        relicFourParts = Equipment(
+                            result.data.relicFourParts!!.idRelic,
+                            result.data.relicFourParts!!.image
                         ),
-                        decoration = com.example.domain.repository.equipment.Equipment(
-                            com.example.domain.repository.decoration.Decoration.idDecoration,
-                            com.example.domain.repository.decoration.Decoration.image
+                        decoration = Equipment(
+                            result.data.decoration!!.idDecoration,
+                            result.data.decoration!!.image
                         ),
                         statsEquipmentList = uiState.buildHeroFromUser.statsEquipmentList.copy(
                             statBody = result.data.statsEquipment[0],
@@ -283,7 +283,7 @@ class CreateBuildHeroViewModel @Inject constructor(
             uiState = when(equipmentType) {
                 EquipmentType.WEAPON -> uiState.copy(
                     equipmentList = repository.getWeapons(
-                        com.example.domain.repository.hero.model.HeroModel.idPath ?: 0
+                        uiState.heroModel?.idPath ?: 0
                     ), equipmentType = equipmentType
                 )
                 EquipmentType.RELIC_TWO_PARTS -> uiState.copy(equipmentList = repository.getRelics(), equipmentType = equipmentType)
