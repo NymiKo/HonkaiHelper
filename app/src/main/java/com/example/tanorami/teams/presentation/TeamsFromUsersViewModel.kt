@@ -2,7 +2,6 @@ package com.example.tanorami.teams.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.example.core.base.BaseViewModel
-import com.example.core.network.NetworkResult
 import com.example.tanorami.teams.data.TeamsFromUsersRepository
 import com.example.tanorami.teams.presentation.models.TeamsFromUsersScreenEvents
 import com.example.tanorami.teams.presentation.models.TeamsFromUsersScreenSideEffects
@@ -16,7 +15,7 @@ class TeamsFromUsersViewModel @Inject constructor(
     initialState = TeamsFromUsersScreenUiState()
 ) {
     override fun onEvent(event: TeamsFromUsersScreenEvents) {
-        when(event) {
+        when (event) {
             is TeamsFromUsersScreenEvents.GetTeamsFromUsers -> {
                 getNameHero(event.idHero)
                 getTeamsList(event.idHero)
@@ -37,13 +36,14 @@ class TeamsFromUsersViewModel @Inject constructor(
     private fun getTeamsList(idHero: Int) = viewModelScope.launch {
         uiState = uiState.copy(refreshingTeamsList = true)
         when (val result = repository.getTeamsListByID(idHero)) {
-            is NetworkResult.Error -> {
+            is com.example.data.remote.NetworkResult.Error -> {
                 uiState = uiState.copy(
                     isError = true,
                     refreshingTeamsList = false,
                 )
             }
-            is NetworkResult.Success -> {
+
+            is com.example.data.remote.NetworkResult.Success -> {
                 uiState = uiState.copy(
                     isError = false,
                     refreshingTeamsList = false,

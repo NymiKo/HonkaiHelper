@@ -1,6 +1,5 @@
 package com.example.tanorami.profile.data
 
-import com.example.core.network.NetworkResult
 import com.example.tanorami.profile.data.model.User
 import com.example.tanorami.profile.domain.ProfileRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -10,15 +9,17 @@ import java.io.File
 import javax.inject.Inject
 
 class FakeProfileRepository @Inject constructor(): ProfileRepository {
-    private val _profileFlow: MutableStateFlow<NetworkResult<User>?> = MutableStateFlow(null)
-    override val profileFlow: StateFlow<NetworkResult<User>?> = _profileFlow.asStateFlow()
+    private val _profileFlow: MutableStateFlow<com.example.data.remote.NetworkResult<User>?> =
+        MutableStateFlow(null)
+    override val profileFlow: StateFlow<com.example.data.remote.NetworkResult<User>?> =
+        _profileFlow.asStateFlow()
 
     override suspend fun getProfile() {
 
     }
 
-    override suspend fun loadAvatar(file: File): NetworkResult<Unit> {
-        return NetworkResult.Success(Unit)
+    override suspend fun loadAvatar(file: File): com.example.data.remote.NetworkResult<Unit> {
+        return com.example.data.remote.NetworkResult.Success(Unit)
     }
 
     override fun clearProfile() {

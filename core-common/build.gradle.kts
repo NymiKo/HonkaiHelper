@@ -80,6 +80,7 @@ dependencies {
     api("androidx.datastore:datastore-preferences:1.1.1")
 
     implementation(project(":core:data-local"))
+    implementation(project(":core:data-remote"))
     implementation(project(":core:domain"))
 
 

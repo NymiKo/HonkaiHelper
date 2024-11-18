@@ -2,7 +2,7 @@ package com.example.tanorami.load_data.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.example.core.base.BaseViewModel
-import com.example.core.data.source.local.data_store.AppDataStore
+import com.example.domain.data_store.AppDataStore
 import com.example.tanorami.load_data.data.LoadDataRepository
 import com.example.tanorami.load_data.presentation.models.LoadDataScreenEvents
 import com.example.tanorami.load_data.presentation.models.LoadDataScreenSideEffects

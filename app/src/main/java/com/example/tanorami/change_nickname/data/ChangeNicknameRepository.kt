@@ -1,7 +1,5 @@
 package com.example.tanorami.change_nickname.data
 
-import com.example.core.network.NetworkResult
-
 interface ChangeNicknameRepository {
-    suspend fun changeNickname(newNickname: String): NetworkResult<Boolean>
+    suspend fun changeNickname(newNickname: String): com.example.data.remote.NetworkResult<Boolean>
 }

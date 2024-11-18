@@ -1,8 +1,8 @@
 package com.example.tanorami.main.data
 
 import com.example.core.di.IODispatcher
-import com.example.core.network.NetworkResult
-import com.example.core.network.handleApi
+import com.example.data.remote.NetworkResult
+import com.example.data.remote.handleApi
 import com.example.tanorami.main.presentation.models.NewDataModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -27,8 +27,8 @@ class MainScreenRepositoryImpl @Inject constructor(
                         )
                     )
                 }
+            }
         }
-    }
 
     override suspend fun getAvatar(): NetworkResult<String> {
         return withContext(ioDispatcher) {

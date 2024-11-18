@@ -8,8 +8,8 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
-import com.example.core.data.source.local.data_store.AppDataStore
-import com.example.core.data.source.local.data_store.AppDataStoreImpl
+import com.example.data.local.data_store.AppDataStoreImpl
+import com.example.domain.data_store.AppDataStore
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -47,5 +47,5 @@ interface DataStoreModule {
 
     @Binds
     @Singleton
-    fun bindUserDataStore(userDataStore: AppDataStoreImpl): AppDataStore
+    fun bindDataStore(appDataStoreImpl: AppDataStoreImpl): AppDataStore
 }

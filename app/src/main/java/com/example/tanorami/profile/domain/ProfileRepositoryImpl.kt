@@ -2,12 +2,12 @@ package com.example.tanorami.profile.domain
 
 import com.example.core.data.source.local.hero.mapper.toHeroBaseInfoModel
 import com.example.core.di.IODispatcher
-import com.example.core.network.NetworkResult
-import com.example.core.network.handleApi
 import com.example.data.local.dao.DecorationDao
 import com.example.data.local.dao.HeroDao
 import com.example.data.local.dao.RelicDao
 import com.example.data.local.dao.WeaponDao
+import com.example.data.remote.NetworkResult
+import com.example.data.remote.handleApi
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
 import com.example.tanorami.profile.data.ProfileService
 import com.example.tanorami.profile.data.model.User
@@ -31,14 +31,17 @@ class ProfileRepositoryImpl @Inject constructor(
     private val decorationDao: DecorationDao,
 ) : ProfileRepository {
 
-    private val _profileFlow: MutableStateFlow<NetworkResult<User>?> = MutableStateFlow(null)
-    override val profileFlow: StateFlow<NetworkResult<User>?> = _profileFlow.asStateFlow()
+    private val _profileFlow: MutableStateFlow<NetworkResult<User>?> =
+        MutableStateFlow(null)
+    override val profileFlow: StateFlow<NetworkResult<User>?> =
+        _profileFlow.asStateFlow()
 
     override suspend fun getProfile() {
         withContext(ioDispatcher) {
             when (val result = handleApi { profileService.getProfile() }) {
                 is NetworkResult.Error -> {
-                    _profileFlow.value = NetworkResult.Error(result.code)
+                    _profileFlow.value =
+                        NetworkResult.Error(result.code)
                 }
 
                 is NetworkResult.Success -> {
@@ -90,8 +93,13 @@ class ProfileRepositoryImpl @Inject constructor(
                     )
                 )
             }) {
-                is NetworkResult.Error -> NetworkResult.Error(result.code)
-                is NetworkResult.Success -> NetworkResult.Success(result.data)
+                is NetworkResult.Error -> NetworkResult.Error(
+                    result.code
+                )
+
+                is NetworkResult.Success -> NetworkResult.Success(
+                    result.data
+                )
             }
         }
     }

@@ -1,7 +1,7 @@
-package com.example.tanorami.di
+package com.example.data.di
 
-import com.example.core.data.source.local.data_store.AppDataStore
-import com.example.core.network.AuthInterceptor
+import com.example.data.remote.AuthInterceptor
+import com.example.domain.data_store.AppDataStore
 import dagger.Module
 import dagger.Provides
 import okhttp3.ConnectionPool
@@ -14,8 +14,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-object NetworkModule {
-
+object RetrofitModule {
     @Provides
     @Singleton
     fun provideInterceptor(): HttpLoggingInterceptor =

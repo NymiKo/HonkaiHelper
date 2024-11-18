@@ -2,12 +2,11 @@ package com.example.tanorami.auth.registration.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.example.core.R
+import com.example.core.base.BaseViewModel
 import com.example.tanorami.auth.registration.data.RegistrationRepository
 import com.example.tanorami.auth.registration.presentation.models.RegistrationScreenEvent
 import com.example.tanorami.auth.registration.presentation.models.RegistrationScreenSideEffects
 import com.example.tanorami.auth.registration.presentation.models.RegistrationScreenUiState
-import com.example.core.base.BaseViewModel
-import com.example.core.network.NetworkResult
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -104,12 +103,12 @@ class RegistrationViewModel @Inject constructor(
         when (val result =
             repository.register(uiState.nicknameField.value, uiState.passwordField.value)) {
 
-            is NetworkResult.Success -> {
+            is com.example.data.remote.NetworkResult.Success -> {
                 sendSideEffect(RegistrationScreenSideEffects.SuccessCreatingAccount)
                 uiState = uiState.copy(isCreatingAccount = false)
             }
 
-            is NetworkResult.Error -> {
+            is com.example.data.remote.NetworkResult.Error -> {
                 sendSideEffect(RegistrationScreenSideEffects.ShowToast(errorHandler(result.code)))
                 uiState = uiState.copy(isCreatingAccount = false)
             }

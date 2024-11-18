@@ -3,8 +3,8 @@ package com.example.tanorami.auth.login.presentation
 import androidx.lifecycle.viewModelScope
 import com.example.core.R
 import com.example.core.base.BaseViewModel
-import com.example.core.data.source.local.data_store.AppDataStore
-import com.example.core.network.NetworkResult
+import com.example.data.remote.NetworkResult
+import com.example.domain.data_store.AppDataStore
 import com.example.tanorami.auth.login.domain.LoginRepository
 import com.example.tanorami.auth.login.presentation.models.LoginScreenEvents
 import com.example.tanorami.auth.login.presentation.models.LoginScreenSideEffects

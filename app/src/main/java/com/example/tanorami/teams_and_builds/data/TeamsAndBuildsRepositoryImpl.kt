@@ -2,12 +2,12 @@ package com.example.tanorami.teams_and_builds.data
 
 import com.example.core.data.source.local.hero.mapper.toHeroBaseInfoModel
 import com.example.core.di.IODispatcher
-import com.example.core.network.NetworkResult
-import com.example.core.network.handleApi
 import com.example.data.local.dao.DecorationDao
 import com.example.data.local.dao.HeroDao
 import com.example.data.local.dao.RelicDao
 import com.example.data.local.dao.WeaponDao
+import com.example.data.remote.NetworkResult
+import com.example.data.remote.handleApi
 import com.example.domain.repository.hero.model.HeroBaseInfoModel
 import com.example.tanorami.builds_hero_from_users.data.BuildsHeroListService
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
@@ -33,7 +33,8 @@ class TeamsAndBuildsRepositoryImpl @Inject constructor(
 
     override suspend fun getTeamsListFromUsers(): NetworkResult<List<TeamHero>> =
         withContext(ioDispatcher) {
-            when (val result = handleApi { teamsFromUsersService.getTeamsList() }) {
+            when (val result =
+                handleApi { teamsFromUsersService.getTeamsList() }) {
                 is NetworkResult.Error -> {
                     return@withContext NetworkResult.Error(result.code)
                 }

@@ -3,7 +3,7 @@ package com.example.tanorami.create_build_hero.presentation
 import androidx.lifecycle.viewModelScope
 import com.example.core.R
 import com.example.core.base.BaseViewModel
-import com.example.core.network.NetworkResult
+import com.example.data.remote.NetworkResult
 import com.example.domain.repository.equipment.Equipment
 import com.example.tanorami.create_build_hero.data.CreateBuildHeroRepository
 import com.example.tanorami.create_build_hero.data.model.BuildHeroFromUser
@@ -64,21 +64,21 @@ class CreateBuildHeroViewModel @Inject constructor(
         }
     }
 
-    private fun addWeapon(weapon: com.example.domain.repository.equipment.Equipment) {
+    private fun addWeapon(weapon: Equipment) {
         uiState = uiState.copy(buildHeroFromUser = uiState.buildHeroFromUser.copy(weapon = weapon))
     }
 
-    private fun addRelicTwoParts(twoPartsRelic: com.example.domain.repository.equipment.Equipment) {
+    private fun addRelicTwoParts(twoPartsRelic: Equipment) {
         uiState =
             uiState.copy(buildHeroFromUser = uiState.buildHeroFromUser.copy(relicTwoParts = twoPartsRelic))
     }
 
-    private fun addRelicFourParts(fourPartsRelic: com.example.domain.repository.equipment.Equipment) {
+    private fun addRelicFourParts(fourPartsRelic: Equipment) {
         uiState =
             uiState.copy(buildHeroFromUser = uiState.buildHeroFromUser.copy(relicFourParts = fourPartsRelic))
     }
 
-    private fun addDecoration(decoration: com.example.domain.repository.equipment.Equipment) {
+    private fun addDecoration(decoration: Equipment) {
         uiState =
             uiState.copy(buildHeroFromUser = uiState.buildHeroFromUser.copy(decoration = decoration))
     }
@@ -184,7 +184,7 @@ class CreateBuildHeroViewModel @Inject constructor(
     }
 
     private fun checkForNull(
-        arg: com.example.domain.repository.equipment.Equipment?,
+        arg: Equipment?,
         message: Int
     ): Boolean {
         return if (arg == null) {
@@ -277,19 +277,32 @@ class CreateBuildHeroViewModel @Inject constructor(
         }
     }
 
-    private fun getEquipmentList(sheetState: Boolean, equipmentType: EquipmentType) = viewModelScope.launch {
-        uiState = uiState.copy(bottomSheetEquipmentVisibilityState = sheetState)
-        if (sheetState) {
-            uiState = when(equipmentType) {
-                EquipmentType.WEAPON -> uiState.copy(
-                    equipmentList = repository.getWeapons(
-                        uiState.heroModel?.idPath ?: 0
-                    ), equipmentType = equipmentType
-                )
-                EquipmentType.RELIC_TWO_PARTS -> uiState.copy(equipmentList = repository.getRelics(), equipmentType = equipmentType)
-                EquipmentType.RELIC_FOUR_PARTS -> uiState.copy(equipmentList = repository.getRelics(), equipmentType = equipmentType)
-                EquipmentType.DECORATION -> uiState.copy(equipmentList = repository.getDecorations(), equipmentType = equipmentType)
+    private fun getEquipmentList(sheetState: Boolean, equipmentType: EquipmentType) =
+        viewModelScope.launch {
+            uiState = uiState.copy(bottomSheetEquipmentVisibilityState = sheetState)
+            if (sheetState) {
+                uiState = when (equipmentType) {
+                    EquipmentType.WEAPON -> uiState.copy(
+                        equipmentList = repository.getWeapons(
+                            uiState.heroModel?.idPath ?: 0
+                        ), equipmentType = equipmentType
+                    )
+
+                    EquipmentType.RELIC_TWO_PARTS -> uiState.copy(
+                        equipmentList = repository.getRelics(),
+                        equipmentType = equipmentType
+                    )
+
+                    EquipmentType.RELIC_FOUR_PARTS -> uiState.copy(
+                        equipmentList = repository.getRelics(),
+                        equipmentType = equipmentType
+                    )
+
+                    EquipmentType.DECORATION -> uiState.copy(
+                        equipmentList = repository.getDecorations(),
+                        equipmentType = equipmentType
+                    )
+                }
             }
         }
-    }
 }

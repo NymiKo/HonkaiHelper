@@ -2,9 +2,9 @@ package com.example.tanorami.createteam.data
 
 import com.example.core.data.source.local.hero.mapper.toHeroBaseInfoModel
 import com.example.core.di.IODispatcher
-import com.example.core.network.NetworkResult
-import com.example.core.network.handleApi
 import com.example.data.local.dao.HeroDao
+import com.example.data.remote.NetworkResult
+import com.example.data.remote.handleApi
 import com.example.domain.repository.hero.model.HeroBaseInfoModel
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
 import kotlinx.coroutines.CoroutineDispatcher
@@ -41,31 +41,37 @@ class CreateTeamRepositoryImpl @Inject constructor(
 
     override suspend fun getTeam(idTeam: Long): NetworkResult<Pair<String, List<HeroBaseInfoModel>>> =
         withContext(ioDispatcher) {
-        when(val result = handleApi { createTeamService.getTeam(idTeam) }) {
-            is NetworkResult.Error -> {
-                return@withContext NetworkResult.Error(result.code)
-            }
-            is NetworkResult.Success -> {
-                return@withContext NetworkResult.Success(
-                    Pair(
-                        result.data.uid,
-                        listOf<HeroBaseInfoModel>(
-                            heroDao.getHeroWithNameAvatarRarity(result.data.idHeroOne)
-                                .toHeroBaseInfoModel(),
-                            heroDao.getHeroWithNameAvatarRarity(result.data.idHeroTwo)
-                                .toHeroBaseInfoModel(),
-                            heroDao.getHeroWithNameAvatarRarity(result.data.idHeroThree)
-                                .toHeroBaseInfoModel(),
-                            heroDao.getHeroWithNameAvatarRarity(result.data.idHeroFour)
-                                .toHeroBaseInfoModel()
+            when (val result = handleApi { createTeamService.getTeam(idTeam) }) {
+                is NetworkResult.Error -> {
+                    return@withContext NetworkResult.Error(result.code)
+                }
+
+                is NetworkResult.Success -> {
+                    return@withContext NetworkResult.Success(
+                        Pair(
+                            result.data.uid,
+                            listOf<HeroBaseInfoModel>(
+                                heroDao.getHeroWithNameAvatarRarity(result.data.idHeroOne)
+                                    .toHeroBaseInfoModel(),
+                                heroDao.getHeroWithNameAvatarRarity(result.data.idHeroTwo)
+                                    .toHeroBaseInfoModel(),
+                                heroDao.getHeroWithNameAvatarRarity(result.data.idHeroThree)
+                                    .toHeroBaseInfoModel(),
+                                heroDao.getHeroWithNameAvatarRarity(result.data.idHeroFour)
+                                    .toHeroBaseInfoModel()
+                            )
                         )
                     )
+                }
+            }
+        }
+
+    override suspend fun deleteTeam(idTeam: Long): NetworkResult<Boolean> =
+        withContext(ioDispatcher) {
+            return@withContext handleApi {
+                createTeamService.deleteTeam(
+                    idTeam
                 )
             }
         }
-    }
-
-    override suspend fun deleteTeam(idTeam: Long): NetworkResult<Boolean> = withContext(ioDispatcher) {
-        return@withContext handleApi { createTeamService.deleteTeam(idTeam) }
-    }
 }

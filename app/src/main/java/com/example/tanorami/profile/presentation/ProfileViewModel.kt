@@ -3,8 +3,7 @@ package com.example.tanorami.profile.presentation
 import androidx.lifecycle.viewModelScope
 import com.example.core.R
 import com.example.core.base.BaseViewModel
-import com.example.core.data.source.local.data_store.AppDataStore
-import com.example.core.network.NetworkResult
+import com.example.domain.data_store.AppDataStore
 import com.example.tanorami.profile.domain.ProfileRepository
 import com.example.tanorami.profile.presentation.models.ProfileScreenEvents
 import com.example.tanorami.profile.presentation.models.ProfileScreenSideEffects
@@ -54,14 +53,14 @@ class ProfileViewModel @Inject constructor(
     private fun getProfileFlow() = viewModelScope.launch {
         repository.profileFlow.collect { result ->
             when (result) {
-                is NetworkResult.Error -> uiState = uiState.copy(
+                is com.example.data.remote.NetworkResult.Error -> uiState = uiState.copy(
                     isLoading = false,
                     isSuccess = false,
                     isError = true,
                     message = errorHandler(result.code),
                 )
 
-                is NetworkResult.Success -> uiState = uiState.copy(
+                is com.example.data.remote.NetworkResult.Success -> uiState = uiState.copy(
                     isLoading = false,
                     isSuccess = true,
                     isError = false,
@@ -101,11 +100,11 @@ class ProfileViewModel @Inject constructor(
 
     private fun loadAvatar(file: File) = viewModelScope.launch {
         when (repository.loadAvatar(file)) {
-            is NetworkResult.Error -> {
+            is com.example.data.remote.NetworkResult.Error -> {
                 sendSideEffect(ProfileScreenSideEffects.ShowToastError(R.string.error_upload_avatar))
             }
 
-            is NetworkResult.Success -> {
+            is com.example.data.remote.NetworkResult.Success -> {
                 getProfile()
             }
         }

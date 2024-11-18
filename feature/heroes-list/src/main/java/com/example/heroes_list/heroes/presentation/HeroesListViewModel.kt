@@ -3,7 +3,7 @@ package com.example.heroes_list.heroes.presentation
 import androidx.lifecycle.viewModelScope
 import com.example.core.base.BaseViewModel
 import com.example.core.base.models.TextField
-import com.example.core.data.source.local.data_store.AppDataStore
+import com.example.domain.data_store.AppDataStore
 import com.example.domain.usecase.GetHeroesListWithBaseInfoUseCase
 import com.example.heroes_list.heroes.presentation.models.HeroesListScreenEvents
 import com.example.heroes_list.heroes.presentation.models.HeroesListScreenSideEffects

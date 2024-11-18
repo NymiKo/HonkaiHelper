@@ -1,7 +1,5 @@
 package com.example.tanorami.settings.data
 
-import com.example.core.network.NetworkResult
-
 interface SettingsRepository {
-    suspend fun checkUpdate(): NetworkResult<String>
+    suspend fun checkUpdate(): com.example.data.remote.NetworkResult<String>
 }

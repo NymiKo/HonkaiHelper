@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core-common" />
             <option value="$PROJECT_DIR$/core/data-local" />
+            <option value="$PROJECT_DIR$/core/data-remote" />
             <option value="$PROJECT_DIR$/core/domain" />
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/heroes-list" />

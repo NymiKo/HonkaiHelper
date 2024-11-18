@@ -3,8 +3,8 @@ package com.example.tanorami.settings.presentation
 import androidx.lifecycle.viewModelScope
 import com.example.core.R
 import com.example.core.base.BaseViewModel
-import com.example.core.data.source.local.data_store.AppDataStore
-import com.example.core.network.NetworkResult
+import com.example.data.remote.NetworkResult
+import com.example.domain.data_store.AppDataStore
 import com.example.tanorami.settings.data.SettingsRepository
 import com.example.tanorami.settings.presentation.models.SettingsScreenEvents
 import com.example.tanorami.settings.presentation.models.SettingsScreenSideEffects
@@ -19,7 +19,7 @@ import javax.inject.Inject
 class SettingsViewModel @Inject constructor(
     private val repository: SettingsRepository,
     private val dataStore: AppDataStore,
-): BaseViewModel<SettingsScreenUiState, SettingsScreenEvents, SettingsScreenSideEffects>(
+) : BaseViewModel<SettingsScreenUiState, SettingsScreenEvents, SettingsScreenSideEffects>(
     initialState = SettingsScreenUiState()
 ) {
     init {
@@ -32,7 +32,7 @@ class SettingsViewModel @Inject constructor(
     }
 
     override fun onEvent(event: SettingsScreenEvents) {
-        when(event) {
+        when (event) {
             SettingsScreenEvents.CheckUpdate -> checkUpdate()
             SettingsScreenEvents.OnBack -> sendSideEffect(SettingsScreenSideEffects.OnBack)
             SettingsScreenEvents.OnSendFeedbackScreen -> sendSideEffect(SettingsScreenSideEffects.OnSendFeedbackScreen)
@@ -43,11 +43,12 @@ class SettingsViewModel @Inject constructor(
 
     private fun checkUpdate() = viewModelScope.launch {
         uiState = uiState.copy(isLoading = true)
-        when(val result = repository.checkUpdate()) {
+        when (val result = repository.checkUpdate()) {
             is NetworkResult.Error -> {
                 uiState = uiState.copy(isLoading = false, isError = true)
                 sendSideEffect(SettingsScreenSideEffects.ShowToast(errorHandler(result.code)))
             }
+
             is NetworkResult.Success -> {
                 uiState = uiState.copy(isLoading = false, isError = false)
                 if (uiState.versionDB == result.data) {

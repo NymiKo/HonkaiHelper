@@ -3,7 +3,7 @@ package com.example.tanorami.createteam.presentation
 import androidx.lifecycle.viewModelScope
 import com.example.core.R
 import com.example.core.base.BaseViewModel
-import com.example.core.network.NetworkResult
+import com.example.data.remote.NetworkResult
 import com.example.tanorami.createteam.data.CreateTeamRepository
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
 import com.example.tanorami.createteam.presentation.models.CreateTeamScreenEvents
@@ -51,7 +51,8 @@ class CreateTeamViewModel @Inject constructor(
     private fun removeHeroFromTeam(activeHeroInTeam: ActiveHeroInTeam) {
         if (uiState.heroesListInTeam.isNotEmpty()) {
             activeHeroInTeam.active = false
-            uiState = uiState.copy(heroesListInTeam = uiState.heroesListInTeam.minus(activeHeroInTeam.hero))
+            uiState =
+                uiState.copy(heroesListInTeam = uiState.heroesListInTeam.minus(activeHeroInTeam.hero))
         }
     }
 

@@ -1,4 +1,4 @@
-package com.example.core.data.source.local.data_store
+package com.example.domain.data_store
 
 import kotlinx.coroutines.flow.Flow
 

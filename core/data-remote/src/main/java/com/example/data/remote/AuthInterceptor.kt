@@ -1,15 +1,16 @@
-package com.example.core.network
+package com.example.data.remote
 
-import com.example.core.data.source.local.data_store.AppDataStore
+import com.example.domain.data_store.AppDataStore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
+import okhttp3.Interceptor.Chain
 import okhttp3.Response
 
 class AuthInterceptor(
     private val appDataStore: AppDataStore,
 ) : Interceptor {
-    override fun intercept(chain: Interceptor.Chain): Response {
+    override fun intercept(chain: Chain): Response {
         val requestBuilder = chain.request().newBuilder()
 
         val token = runBlocking {

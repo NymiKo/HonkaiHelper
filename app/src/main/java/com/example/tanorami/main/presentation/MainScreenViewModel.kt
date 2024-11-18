@@ -3,8 +3,8 @@ package com.example.tanorami.main.presentation
 import androidx.lifecycle.viewModelScope
 import com.example.core.R
 import com.example.core.base.BaseViewModel
-import com.example.core.data.source.local.data_store.AppDataStore
-import com.example.core.network.NetworkResult
+import com.example.data.remote.NetworkResult
+import com.example.domain.data_store.AppDataStore
 import com.example.tanorami.main.data.MainScreenRepository
 import com.example.tanorami.main.presentation.models.MainScreenEvents
 import com.example.tanorami.main.presentation.models.MainScreenSideEffects
@@ -97,7 +97,10 @@ class MainScreenViewModel @Inject constructor(
                 }
 
                 is NetworkResult.Success -> {
-                    uiState = uiState.copy(userProfileAvatar = result.data.avatarUrl ?: "")
+                    uiState = uiState.copy(
+                        userProfileAvatar = result.data.avatarUrl
+                            ?: ""
+                    )
                 }
 
                 null -> uiState = uiState.copy(userProfileAvatar = "")

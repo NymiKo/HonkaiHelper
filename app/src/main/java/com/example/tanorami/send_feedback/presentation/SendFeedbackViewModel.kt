@@ -3,7 +3,7 @@ package com.example.tanorami.send_feedback.presentation
 import androidx.lifecycle.viewModelScope
 import com.example.core.R
 import com.example.core.base.BaseViewModel
-import com.example.core.network.NetworkResult
+import com.example.data.remote.NetworkResult
 import com.example.tanorami.send_feedback.data.SendFeedbackRepository
 import com.example.tanorami.send_feedback.presentation.models.SendFeedbackScreenEvents
 import com.example.tanorami.send_feedback.presentation.models.SendFeedbackScreenSideEffects
@@ -13,13 +13,15 @@ import javax.inject.Inject
 
 class SendFeedbackViewModel @Inject constructor(
     private val repository: SendFeedbackRepository
-): BaseViewModel<SendFeedbackScreenUiState, SendFeedbackScreenEvents, SendFeedbackScreenSideEffects>(
+) : BaseViewModel<SendFeedbackScreenUiState, SendFeedbackScreenEvents, SendFeedbackScreenSideEffects>(
     initialState = SendFeedbackScreenUiState()
 ) {
 
     override fun onEvent(event: SendFeedbackScreenEvents) {
-        when(event) {
-            is SendFeedbackScreenEvents.MessageChanged -> uiState = uiState.copy(messageValue = event.newValue)
+        when (event) {
+            is SendFeedbackScreenEvents.MessageChanged -> uiState =
+                uiState.copy(messageValue = event.newValue)
+
             SendFeedbackScreenEvents.OnBack -> sendSideEffect(SendFeedbackScreenSideEffects.OnBack)
             SendFeedbackScreenEvents.SendFeedbackClick -> if (uiState.messageValue.isNotEmpty()) sendFeedback()
         }
@@ -27,11 +29,12 @@ class SendFeedbackViewModel @Inject constructor(
 
     private fun sendFeedback() = viewModelScope.launch {
         uiState = uiState.copy(isSendingFeedback = true)
-        when(val result = repository.sendFeedback(uiState.messageValue)) {
+        when (val result = repository.sendFeedback(uiState.messageValue)) {
             is NetworkResult.Error -> {
                 sendSideEffect(SendFeedbackScreenSideEffects.ShowToast(errorHandler(result.code)))
                 uiState = uiState.copy(isSendingFeedback = false)
             }
+
             is NetworkResult.Success -> {
                 sendSideEffect(SendFeedbackScreenSideEffects.ShowToast(R.string.feedback_has_been_sent))
                 uiState = uiState.copy(isSendingFeedback = false, messageValue = "")

@@ -2,8 +2,6 @@ package com.example.tanorami.load_data.data
 
 import com.example.core.data.source.local.build_stats_equipment.toBuildStatsEquipmentEntity
 import com.example.core.di.IODispatcher
-import com.example.core.network.NetworkResult
-import com.example.core.network.handleApi
 import com.example.data.local.dao.AbilityDao
 import com.example.data.local.dao.BuildDecorationDao
 import com.example.data.local.dao.BuildRelicDao
@@ -29,6 +27,8 @@ import com.example.data.local.entity.OptimalStatsHeroEntity
 import com.example.data.local.entity.PathEntity
 import com.example.data.local.entity.RelicEntity
 import com.example.data.local.entity.WeaponEntity
+import com.example.data.remote.NetworkResult
+import com.example.data.remote.handleApi
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job

@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.core.network.NetworkResult
 import com.example.core.R
 import com.example.tanorami.change_nickname.data.ChangeNicknameRepository
 import com.example.tanorami.change_nickname.presentation.models.ChangeNicknameScreenEvents
@@ -51,7 +50,7 @@ class ChangeNicknameViewModel @Inject constructor(
         ) {
             uiState = uiState.copy(isLoading = true, isSuccess = false, isError = false)
             when (val result = repository.changeNickname(uiState.newNickname.value)) {
-                is NetworkResult.Error -> {
+                is com.example.data.remote.NetworkResult.Error -> {
                     uiState = uiState.copy(
                         isLoading = false,
                         isSuccess = false,
@@ -60,7 +59,7 @@ class ChangeNicknameViewModel @Inject constructor(
                     )
                 }
 
-                is NetworkResult.Success -> {
+                is com.example.data.remote.NetworkResult.Success -> {
                     uiState = uiState.copy(
                         isLoading = false,
                         isSuccess = true,

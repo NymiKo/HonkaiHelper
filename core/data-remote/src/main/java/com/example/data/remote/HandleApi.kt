@@ -1,4 +1,4 @@
-package com.example.core.network
+package com.example.data.remote
 
 import retrofit2.Response
 import java.net.SocketTimeoutException
