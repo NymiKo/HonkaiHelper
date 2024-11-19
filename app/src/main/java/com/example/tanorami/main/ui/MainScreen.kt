@@ -1,5 +1,6 @@
 package com.example.tanorami.main.ui
 
+import android.content.Context
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeOut
@@ -40,7 +41,11 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.example.core.R
+import com.example.core.base.injectedViewModel
 import com.example.core.ui.theme.Orange
+import com.example.heroes_list.heroes.di.DaggerHeroesListComponent
+import com.example.heroes_list.heroes.di.HeroesListComponentDependenciesProvider
+import com.example.heroes_list.heroes.presentation.HeroesListViewModel
 import com.example.heroes_list.heroes.ui.HeroesListScreen
 import com.example.tanorami.create_build_heroes_list.ui.CreateBuildHeroesListNavArguments
 import com.example.tanorami.createteam.ui.CreateTeamNavArguments
@@ -82,6 +87,7 @@ fun MainScreen(
         uiState = state,
         viewModelFactory = viewModelFactory,
         rootNavController = rootNavController,
+        context = context,
         onEvent = viewModel::onEvent
     )
 
@@ -115,6 +121,7 @@ private fun MainScreenContent(
     uiState: MainScreenUiState,
     viewModelFactory: ViewModelProvider.Factory,
     rootNavController: NavController,
+    context: Context,
     onEvent: (MainScreenEvents) -> Unit,
 ) {
     val navController = rememberNavController()
@@ -239,9 +246,19 @@ private fun MainScreenContent(
             composable(
                 route = MainScreens.HeroesList.route,
             ) {
+                val heroesListComponentDependencies =
+                    (context.applicationContext as HeroesListComponentDependenciesProvider).getHeroesListComponentDependencies()
+
+                val component = DaggerHeroesListComponent.builder()
+                    .heroesListComponentDependencies(heroesListComponentDependencies).build()
+                val viewModel: HeroesListViewModel = injectedViewModel {
+                    component.getViewModel()
+                }
+
                 HeroesListScreen(
                     viewModelFactory = viewModelFactory,
                     navController = rootNavController,
+                    viewModel = viewModel,
                 )
             }
 

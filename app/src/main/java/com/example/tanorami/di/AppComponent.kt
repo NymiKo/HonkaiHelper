@@ -3,8 +3,10 @@ package com.example.tanorami.di
 import android.content.Context
 import com.example.core.di.ViewModelFactoryModule
 import com.example.data.di.DataModule
+import com.example.domain.data_store.AppDataStore
 import com.example.domain.di.DomainModule
-import com.example.heroes_list.heroes.di.HeroesListModule
+import com.example.domain.usecase.GetHeroesListWithBaseInfoUseCase
+import com.example.heroes_list.heroes.di.HeroesListComponentDependencies
 import com.example.tanorami.activity.MainActivity
 import com.example.tanorami.auth.login.di.LoginModule
 import com.example.tanorami.auth.registration.di.RegistrationModule
@@ -61,10 +63,12 @@ import javax.inject.Singleton
         SendFeedbackModule::class,
         CreateBuildHeroesListModule::class,
         WeaponsListModule::class,
-        HeroesListModule::class,
     ],
 )
-interface AppComponent {
+interface AppComponent : HeroesListComponentDependencies {
+
+    override val getUseCase: GetHeroesListWithBaseInfoUseCase
+    override val getAppDataStore: AppDataStore
 
     @Component.Factory
     interface Factory {
