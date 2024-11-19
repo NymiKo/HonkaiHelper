@@ -8,14 +8,14 @@ import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.example.tanorami.teams.data.model.TeamHero
+import com.example.tanorami.teams.data.model.TeamHeroes
 import com.example.tanorami.teams.ui.components.TeamsListLazyColumn
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun TeamsListContent(
     modifier: Modifier = Modifier,
-    teamsList: List<TeamHero>,
+    teamsList: List<TeamHeroes>,
     refreshingTeamsList: Boolean,
     refreshTeamsList: () -> Unit,
 ) {

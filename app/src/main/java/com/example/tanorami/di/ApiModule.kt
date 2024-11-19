@@ -1,7 +1,7 @@
 package com.example.tanorami.di
 
 import android.content.Context
-import com.example.core.di.IODispatcher
+import com.example.domain.di.IODispatcher
 import com.example.tanorami.auth.login.data.LoginService
 import com.example.tanorami.auth.registration.data.RegistrationService
 import com.example.tanorami.builds_hero_from_users.data.BuildsHeroListService

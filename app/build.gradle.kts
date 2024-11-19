@@ -80,8 +80,12 @@ dependencies {
     androidTestImplementation("com.google.dagger:dagger:2.52")
 
     implementation(project(":core-common"))
+    implementation(project(":core:data"))
     implementation(project(":core:data-local"))
     implementation(project(":core:data-remote"))
     implementation(project(":core:domain"))
+    implementation(project(":core:ui-components"))
+    implementation(project(":core:ui-theme"))
+    implementation(project(":core:strings"))
     implementation(project(":feature:heroes-list"))
 }

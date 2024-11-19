@@ -1,9 +1,9 @@
 package com.example.tanorami.info_about_hero.data
 
-import com.example.core.data.source.local.ability.toAbilityModel
-import com.example.core.data.source.local.eidolon.toEidolonModel
-import com.example.core.data.source.local.hero.HeroLocalDataSource
-import com.example.core.di.IODispatcher
+import com.example.data.source.ability.toAbilityModel
+import com.example.data.source.eidolon.toEidolonModel
+import com.example.data.source.hero.HeroLocalDataSource
+import com.example.domain.di.IODispatcher
 import com.example.tanorami.info_about_hero.data.model.FullHeroInfo
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

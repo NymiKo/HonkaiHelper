@@ -21,7 +21,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.core.ui.base_components.text.BaseDefaultText
 import com.example.core.ui.theme.DarkGrey
 import com.example.core.ui.theme.Green
 import com.example.core.ui.theme.Orange
@@ -64,7 +63,7 @@ fun ItemHeroAvatarWithName(
             contentDescription = null,
             contentScale = ContentScale.Crop
         )
-        BaseDefaultText(
+        com.example.ui.components.text.BaseDefaultText(
             modifier = Modifier
                 .height(30.dp)
                 .fillMaxWidth()

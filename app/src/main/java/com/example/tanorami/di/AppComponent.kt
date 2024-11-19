@@ -1,13 +1,13 @@
 package com.example.tanorami.di
 
 import android.content.Context
-import com.example.core.di.AppModule
 import com.example.core.di.DataStoreModule
-import com.example.core.di.LocalDataSourceModule
-import com.example.core.di.UseCaseModule
 import com.example.core.di.ViewModelFactoryModule
 import com.example.data.di.DataLocalModule
+import com.example.data.di.LocalDataSourceModule
 import com.example.data.di.RetrofitModule
+import com.example.domain.di.DispatcherModule
+import com.example.domain.di.UseCaseModule
 import com.example.heroes_list.heroes.di.HeroesListModule
 import com.example.tanorami.activity.MainActivity
 import com.example.tanorami.auth.login.di.LoginModule
@@ -40,11 +40,11 @@ import javax.inject.Singleton
     modules = [
         MainScreenModule::class,
         RepositoryModule::class,
-        AppModule::class,
+        DispatcherModule::class,
         RetrofitModule::class,
         ApiModule::class,
         DataStoreModule::class,
-        com.example.core.di.RepositoryModule::class,
+        com.example.data.di.RepositoryModule::class,
         LocalDataSourceModule::class,
         DataLocalModule::class,
         UseCaseModule::class,

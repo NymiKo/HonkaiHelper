@@ -26,25 +26,24 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.core.R
-import com.example.core.ui.base_components.BaseHeroAvatarAndName
-import com.example.core.ui.base_components.lazy_column.BaseLazyColumn
-import com.example.core.ui.base_components.text.BaseDefaultText
+import com.example.core.R.drawable
 import com.example.core.ui.theme.Blue500
 import com.example.core.ui.theme.GreyTransparent20
 import com.example.core.ui.theme.White
-import com.example.tanorami.teams.data.model.TeamHero
+import com.example.strings.R
+import com.example.tanorami.teams.data.model.TeamHeroes
+import com.example.tanorami.ui_components.common.BaseHeroAvatarAndName
 
 @Composable
 fun TeamsColumn(
     modifier: Modifier = Modifier,
-    teamsList: List<TeamHero>,
+    teamsList: List<TeamHeroes>,
     onEditTeamScreen: (idTeam: Long) -> Unit,
 ) {
     if (teamsList.isEmpty()) {
         EmptyBuildsOrTeams()
     } else {
-        BaseLazyColumn(modifier = modifier) {
+        com.example.ui.components.lazy_column.BaseLazyColumn(modifier = modifier) {
             items(count = teamsList.size, key = { teamsList[it].idTeam }) {
                 TeamItem(
                     team = teamsList[it],
@@ -58,7 +57,7 @@ fun TeamsColumn(
 @Composable
 fun TeamItem(
     modifier: Modifier = Modifier,
-    team: TeamHero,
+    team: TeamHeroes,
     clickable: Boolean = true,
     onEditTeamScreen: (idTeam: Long) -> Unit
 ) {
@@ -99,7 +98,7 @@ fun TeamItem(
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    BaseDefaultText(
+                    com.example.ui.components.text.BaseDefaultText(
                         text = stringResource(id = R.string.team_from, team.nickname),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
@@ -114,7 +113,7 @@ fun TeamItem(
                             .size(30.dp)
                             .clip(CircleShape)
                             .background(White, CircleShape),
-                        model = if (team.avatar.isNullOrEmpty()) R.drawable.ic_person else team.avatar,
+                        model = if (team.avatar.isNullOrEmpty()) drawable.ic_person else team.avatar,
                         contentDescription = null,
                         contentScale = ContentScale.Crop,
                     )

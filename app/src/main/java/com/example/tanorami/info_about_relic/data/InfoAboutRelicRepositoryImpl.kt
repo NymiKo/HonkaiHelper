@@ -1,7 +1,7 @@
 package com.example.tanorami.info_about_relic.data
 
-import com.example.core.di.IODispatcher
-import com.example.data.local.dao.RelicDao
+import com.example.data.db.dao.RelicDao
+import com.example.domain.di.IODispatcher
 import com.example.domain.repository.relic.RelicModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

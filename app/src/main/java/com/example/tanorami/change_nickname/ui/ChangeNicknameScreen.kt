@@ -25,14 +25,13 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.core.R
-import com.example.core.ui.base_components.top_app_bar.BaseTopAppBar
-import com.example.core.ui.theme.AppTheme
 import com.example.core.ui.theme.Red
+import com.example.strings.R
 import com.example.tanorami.change_nickname.presentation.ChangeNicknameViewModel
 import com.example.tanorami.change_nickname.presentation.models.ChangeNicknameScreenEvents
 import com.example.tanorami.change_nickname.presentation.models.ChangeNicknameScreenUiState
 import com.example.tanorami.utils.OnLifecycleEvent
+import com.example.ui.theme.AppTheme
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 
@@ -115,7 +114,7 @@ private fun TopAppBar(
     modifier: Modifier = Modifier,
     onBack: () -> Unit
 ) {
-    BaseTopAppBar(
+    com.example.ui.components.top_app_bar.BaseTopAppBar(
         modifier = modifier,
         title = stringResource(id = R.string.nickname_change),
         onBack = { onBack() },
@@ -192,7 +191,7 @@ private fun EditNicknameField(
 
 @Preview
 @Composable
-private fun ChangeNicknameScreenPreview(modifier: Modifier = Modifier) {
+private fun ChangeNicknameScreenPreview() {
     AppTheme {
         ChangeNicknameScreenContent(uiState = ChangeNicknameScreenUiState(), onEvent = {})
     }

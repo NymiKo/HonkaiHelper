@@ -16,9 +16,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.core.ui.base_components.text.BaseDefaultText
 import com.example.core.ui.theme.DarkGrey
-import com.example.core.R
+import com.example.strings.R
 
 @Composable
 internal fun DescriptionWeaponSkill(
@@ -38,7 +37,7 @@ internal fun DescriptionWeaponSkill(
             modifier = Modifier.padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            BaseDefaultText(
+            com.example.ui.components.text.BaseDefaultText(
                 modifier = Modifier.fillMaxWidth(),
                 text = stringResource(id = R.string.skill_weapon),
                 fontWeight = FontWeight.ExtraBold,
@@ -46,7 +45,7 @@ internal fun DescriptionWeaponSkill(
                 textAlign = TextAlign.Center,
             )
 
-            BaseDefaultText(
+            com.example.ui.components.text.BaseDefaultText(
                 modifier = Modifier.fillMaxWidth(),
                 text = descriptionWeaponSkill ?: "",
                 fontSize = 17.sp,

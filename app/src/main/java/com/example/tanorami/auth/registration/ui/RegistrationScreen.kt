@@ -26,9 +26,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.core.ui.base_components.text.BaseDefaultText
-import com.example.core.ui.base_components.top_app_bar.BaseCenterAlignedTopAppBar
-import com.example.core.R
+import com.example.core.R.drawable
+import com.example.strings.R
 import com.example.tanorami.auth.login.ui.components.LoginButton
 import com.example.tanorami.auth.login.ui.components.LoginOutlinedTextField
 import com.example.tanorami.auth.registration.presentation.RegistrationViewModel
@@ -83,7 +82,7 @@ private fun RegistrationScreenContent(
 ) {
     Scaffold(
         topBar = {
-            BaseCenterAlignedTopAppBar(
+            com.example.ui.components.top_app_bar.BaseCenterAlignedTopAppBar(
                 title = stringResource(id = R.string.creating_account),
                 onBack = { onEvent(RegistrationScreenEvent.OnBack) }
             )
@@ -96,7 +95,7 @@ private fun RegistrationScreenContent(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            BaseDefaultText(
+            com.example.ui.components.text.BaseDefaultText(
                 text = stringResource(id = R.string.join_us),
                 fontSize = 26.sp,
                 fontWeight = FontWeight.Bold,
@@ -106,7 +105,7 @@ private fun RegistrationScreenContent(
                 modifier = Modifier
                     .padding(vertical = 16.dp)
                     .size(130.dp),
-                model = R.drawable.pom_pom_heart,
+                model = drawable.pom_pom_heart,
                 contentDescription = null
             )
 

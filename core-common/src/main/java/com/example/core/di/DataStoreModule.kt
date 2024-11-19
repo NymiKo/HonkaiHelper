@@ -8,8 +8,9 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
-import com.example.data.local.data_store.AppDataStoreImpl
+import com.example.data.db.data_store.AppDataStoreImpl
 import com.example.domain.data_store.AppDataStore
+import com.example.domain.di.IODispatcher
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

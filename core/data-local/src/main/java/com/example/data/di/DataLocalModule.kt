@@ -2,8 +2,8 @@ package com.example.data.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.data.local.RoomDatabaseApp
-import com.example.data.local.contract.RoomContract
+import com.example.data.db.RoomDatabaseApp
+import com.example.data.db.contract.RoomContract
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

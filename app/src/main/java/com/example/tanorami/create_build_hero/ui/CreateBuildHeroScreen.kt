@@ -34,12 +34,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.core.R
-import com.example.core.ui.base_components.button.BaseSmallFloatingButton
-import com.example.core.ui.base_components.dialog.BaseSaveAlertDialog
-import com.example.core.ui.base_components.top_app_bar.BaseTopAppBar
-import com.example.core.ui.theme.AppTheme
 import com.example.core.ui.theme.Red
+import com.example.strings.R
 import com.example.tanorami.create_build_hero.presentation.CreateBuildHeroViewModel
 import com.example.tanorami.create_build_hero.presentation.models.CreateBuildHeroScreenEvents
 import com.example.tanorami.create_build_hero.presentation.models.CreateBuildHeroScreenSideEffects
@@ -52,6 +48,7 @@ import com.example.tanorami.create_build_hero.ui.components.EquipmentBuildCompon
 import com.example.tanorami.create_build_hero.ui.components.EquipmentItem
 import com.example.tanorami.main.ui.MainRoute
 import com.example.tanorami.utils.OnLifecycleEvent
+import com.example.ui.theme.AppTheme
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 
@@ -267,7 +264,8 @@ private fun TopAppBar(
 ) {
     val context = LocalContext.current
 
-    BaseTopAppBar(modifier = modifier,
+    com.example.ui.components.top_app_bar.BaseTopAppBar(
+        modifier = modifier,
         title = stringResource(id = if (isCreateBuild) R.string.adding_your_build else R.string.edit_build),
         actions = {
             if (!isCreateBuild) {
@@ -303,7 +301,7 @@ private fun TopAppBar(
         onBack = { onBack() })
 
     if (dialogVisibilityState) {
-        BaseSaveAlertDialog(
+        com.example.ui.components.dialog.BaseSaveAlertDialog(
             message = R.string.delete_the_build,
             onConfirmation = {
                 deleteBuild()
@@ -321,14 +319,14 @@ private fun SaveOrUpdateBuildHeroButton(
     saveBuild: () -> Unit,
     changeVisibilityState: (visibility: Boolean) -> Unit,
 ) {
-    BaseSmallFloatingButton(
+    com.example.ui.components.button.BaseSmallFloatingButton(
         modifier = modifier,
         icon = Icons.Default.Save,
         onClick = { changeVisibilityState(true) }
     )
 
     if (dialogVisibilityState) {
-        BaseSaveAlertDialog(
+        com.example.ui.components.dialog.BaseSaveAlertDialog(
             message = if (isCreateBuild) R.string.add_the_created_build else R.string.update_the_build,
             onConfirmation = {
                 saveBuild()

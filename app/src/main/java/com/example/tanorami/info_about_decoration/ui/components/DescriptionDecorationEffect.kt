@@ -15,9 +15,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.core.ui.base_components.text.BaseDefaultText
 import com.example.core.ui.theme.DarkGrey
-import com.example.core.R
+import com.example.strings.R
 
 @Composable
 internal fun DescriptionDecorationEffect(
@@ -35,7 +34,7 @@ internal fun DescriptionDecorationEffect(
             modifier = Modifier.padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            BaseDefaultText(
+            com.example.ui.components.text.BaseDefaultText(
                 modifier = Modifier.fillMaxWidth(),
                 text = stringResource(id = R.string.effect_relic),
                 fontSize = 20.sp,
@@ -43,7 +42,7 @@ internal fun DescriptionDecorationEffect(
                 textAlign = TextAlign.Center
             )
 
-            BaseDefaultText(
+            com.example.ui.components.text.BaseDefaultText(
                 modifier = Modifier.fillMaxWidth(),
                 text = descriptionDecorationEffect ?: "",
                 fontSize = 17.sp,

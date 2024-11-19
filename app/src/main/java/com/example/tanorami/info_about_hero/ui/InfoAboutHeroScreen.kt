@@ -19,10 +19,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.core.R
-import com.example.core.ui.base_components.button.BaseNextButton
-import com.example.core.ui.base_components.text.BaseDefaultText
-import com.example.core.ui.base_components.top_app_bar.BaseCenterAlignedTopAppBar
+import com.example.core.R.drawable
+import com.example.strings.R
 import com.example.tanorami.base_build_hero.ui.BaseBuildHeroNavArguments
 import com.example.tanorami.info_about_hero.presentation.InfoAboutHeroViewModel
 import com.example.tanorami.info_about_hero.presentation.models.InfoAboutHeroScreenEvents
@@ -88,7 +86,7 @@ private fun InfoAboutHeroScreenContent(
 ) {
     Scaffold(
         topBar = {
-            BaseCenterAlignedTopAppBar(
+            com.example.ui.components.top_app_bar.BaseCenterAlignedTopAppBar(
                 title = uiState.heroModel?.name,
                 onBack = { onEvent(InfoAboutHeroScreenEvents.OnBack) }
             )
@@ -110,14 +108,14 @@ private fun InfoAboutHeroScreenContent(
                     .height(20.dp)
                     .fillMaxWidth(),
                 model = when (uiState.heroModel?.rarity) {
-                    false -> R.drawable.icon_4_stars
-                    true-> R.drawable.icon_5_stars
-                    else -> R.drawable.icon_4_stars
+                    false -> drawable.icon_4_stars
+                    true -> drawable.icon_5_stars
+                    else -> drawable.icon_4_stars
                 },
                 contentDescription = null
             )
 
-            BaseDefaultText(
+            com.example.ui.components.text.BaseDefaultText(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .padding(top = 8.dp),
@@ -127,7 +125,7 @@ private fun InfoAboutHeroScreenContent(
                 lineHeight = 20.sp
             )
 
-            BaseNextButton(
+            com.example.ui.components.button.BaseNextButton(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .padding(top = 16.dp),
@@ -137,7 +135,7 @@ private fun InfoAboutHeroScreenContent(
                 }
             )
 
-            BaseNextButton(
+            com.example.ui.components.button.BaseNextButton(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .padding(top = 8.dp),

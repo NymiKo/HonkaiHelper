@@ -30,11 +30,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.core.R
-import com.example.core.ui.base_components.button.BaseButton
-import com.example.core.ui.base_components.text.BaseDefaultText
-import com.example.core.ui.base_components.top_app_bar.BaseTopAppBar
+import com.example.core.R.drawable
 import com.example.core.ui.theme.DarkGrey
+import com.example.strings.R
 import com.example.tanorami.R.*
 import com.example.tanorami.load_data.ui.LoadDataNavArguments
 import com.example.tanorami.send_feedback.ui.SendFeedbackRoute
@@ -101,7 +99,7 @@ private fun SettingsScreenContent(
 ) {
     Scaffold(
         topBar = {
-            BaseTopAppBar(
+            com.example.ui.components.top_app_bar.BaseTopAppBar(
                 title = stringResource(id = R.string.about_app),
                 onBack = { onEvent(SettingsScreenEvents.OnBack) },
             )
@@ -130,25 +128,25 @@ private fun SettingsScreenContent(
                     )
 
                     Column {
-                        BaseDefaultText(
+                        com.example.ui.components.text.BaseDefaultText(
                             text = stringResource(id = R.string.app_name),
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold,
                         )
 
-                        BaseDefaultText(
+                        com.example.ui.components.text.BaseDefaultText(
                             text = stringResource(id = R.string.version_app),
                             fontSize = 16.sp,
                         )
 
-                        BaseDefaultText(
+                        com.example.ui.components.text.BaseDefaultText(
                             text = stringResource(id = R.string.version_db, uiState.versionDB),
                             fontSize = 16.sp,
                         )
                     }
                 }
 
-                BaseDefaultText(
+                com.example.ui.components.text.BaseDefaultText(
                     modifier = Modifier.padding(top = 8.dp),
                     text = stringResource(id = R.string.about_developers),
                     fontSize = 16.sp,
@@ -169,7 +167,7 @@ private fun SettingsScreenContent(
                             color = MaterialTheme.colorScheme.secondary,
                         )
                     } else {
-                        BaseButton(
+                        com.example.ui.components.button.BaseButton(
                             modifier = Modifier.padding(top = 16.dp),
                             fontSize = 14.sp,
                             text = stringResource(id = R.string.check_update_db),
@@ -179,7 +177,7 @@ private fun SettingsScreenContent(
                 }
             }
 
-            BaseButton(
+            com.example.ui.components.button.BaseButton(
                 modifier = Modifier.padding(top = 16.dp),
                 text = stringResource(id = R.string.report_an_error),
                 fontSize = 16.sp,
@@ -188,7 +186,7 @@ private fun SettingsScreenContent(
 
             Spacer(modifier = Modifier.weight(1F))
 
-            BaseDefaultText(
+            com.example.ui.components.text.BaseDefaultText(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
                 text = stringResource(id = R.string.thank_the_developer),
                 fontSize = 12.sp,
@@ -201,7 +199,7 @@ private fun SettingsScreenContent(
                     .clickable {
                         onEvent(SettingsScreenEvents.CLickDonateButton)
                     },
-                model = R.drawable.donate,
+                model = drawable.donate,
                 contentDescription = null,
             )
         }

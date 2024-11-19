@@ -14,9 +14,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.core.ui.base_components.text.BaseDefaultText
+import com.example.core.R.drawable
 import com.example.core.ui.theme.DarkGrey
-import com.example.core.R
+import com.example.strings.R
 
 @Composable
 internal fun StatsListColumn(
@@ -33,10 +33,10 @@ internal fun StatsListColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         val iconList = listOf(
-            R.drawable.relic_piece_body,
-            R.drawable.relic_piece_legs,
-            R.drawable.relic_piece_sphere,
-            R.drawable.relic_piece_rope
+            drawable.relic_piece_body,
+            drawable.relic_piece_legs,
+            drawable.relic_piece_sphere,
+            drawable.relic_piece_rope
         )
 
         statsList.forEachIndexed { index, stat ->
@@ -54,7 +54,7 @@ internal fun StatsListColumn(
                     contentDescription = null
                 )
 
-                BaseDefaultText(
+                com.example.ui.components.text.BaseDefaultText(
                     modifier = Modifier.padding(start = 8.dp),
                     text = stat,
                     fontWeight = FontWeight.SemiBold

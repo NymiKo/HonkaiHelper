@@ -18,8 +18,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.core.ui.base_components.text.BaseDefaultText
-import com.example.core.R
+import com.example.core.R.drawable
+import com.example.strings.R
 
 @Composable
 fun ErrorComponent(
@@ -36,14 +36,14 @@ fun ErrorComponent(
             verticalArrangement = Arrangement.spacedBy(8.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            BaseDefaultText(
+            com.example.ui.components.text.BaseDefaultText(
                 text = stringResource(id = R.string.error),
                 fontSize = 24.sp,
                 color = MaterialTheme.colorScheme.secondary
             )
             AsyncImage(
                 modifier = Modifier.size(150.dp),
-                model = R.drawable.pom_pom_shock,
+                model = drawable.pom_pom_shock,
                 contentDescription = "",
                 contentScale = ContentScale.Crop
             )

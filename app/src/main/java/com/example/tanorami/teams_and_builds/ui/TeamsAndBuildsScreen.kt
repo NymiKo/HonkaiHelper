@@ -28,8 +28,7 @@ import androidx.compose.ui.zIndex
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.core.ui.base_components.tabs.TabIndicator
-import com.example.core.R
+import com.example.strings.R
 import com.example.tanorami.teams_and_builds.presentation.TeamsAndBuildsViewModel
 import com.example.tanorami.teams_and_builds.presentation.models.TeamsAndBuildsScreenEvents
 import com.example.tanorami.teams_and_builds.presentation.models.TeamsAndBuildsScreenSideEffects
@@ -89,7 +88,7 @@ private fun TeamsAndBuildsScreenContent(
             contentColor = MaterialTheme.colorScheme.secondary,
             divider = {},
             indicator = {
-                TabIndicator(
+                com.example.ui.components.tabs.TabIndicator(
                     modifier = Modifier
                         .tabIndicatorOffset(uiState.activePageIndex)
                         .padding(vertical = 15.dp, horizontal = 30.dp)

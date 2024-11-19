@@ -1,18 +1,18 @@
 package com.example.tanorami.teams_and_builds.data
 
-import com.example.core.data.source.local.hero.mapper.toHeroBaseInfoModel
-import com.example.core.di.IODispatcher
-import com.example.data.local.dao.DecorationDao
-import com.example.data.local.dao.HeroDao
-import com.example.data.local.dao.RelicDao
-import com.example.data.local.dao.WeaponDao
+import com.example.data.db.dao.DecorationDao
+import com.example.data.db.dao.HeroDao
+import com.example.data.db.dao.RelicDao
+import com.example.data.db.dao.WeaponDao
 import com.example.data.remote.NetworkResult
 import com.example.data.remote.handleApi
+import com.example.data.source.hero.mapper.toHeroBaseInfoModel
+import com.example.domain.di.IODispatcher
 import com.example.domain.repository.hero.model.HeroBaseInfoModel
 import com.example.tanorami.builds_hero_from_users.data.BuildsHeroListService
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
 import com.example.tanorami.teams.data.TeamsFromUsersService
-import com.example.tanorami.teams.data.model.TeamHero
+import com.example.tanorami.teams.data.model.TeamHeroes
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -31,7 +31,7 @@ class TeamsAndBuildsRepositoryImpl @Inject constructor(
             return@withContext heroDao.getHeroWithNameAvatarRarity(idHero).toHeroBaseInfoModel()
         }
 
-    override suspend fun getTeamsListFromUsers(): NetworkResult<List<TeamHero>> =
+    override suspend fun getTeamsListFromUsers(): NetworkResult<List<TeamHeroes>> =
         withContext(ioDispatcher) {
             when (val result =
                 handleApi { teamsFromUsersService.getTeamsList() }) {
@@ -41,7 +41,7 @@ class TeamsAndBuildsRepositoryImpl @Inject constructor(
 
                 is NetworkResult.Success -> {
                     return@withContext NetworkResult.Success(result.data.map {
-                        TeamHero(
+                        TeamHeroes(
                             idTeam = it.idTeam,
                             heroOne = heroDao.getHeroWithNameAvatarRarity(it.idHeroOne)
                                 .toHeroBaseInfoModel(),

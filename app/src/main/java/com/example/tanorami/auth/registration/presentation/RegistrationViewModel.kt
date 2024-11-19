@@ -1,8 +1,8 @@
 package com.example.tanorami.auth.registration.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.example.core.R
 import com.example.core.base.BaseViewModel
+import com.example.strings.R
 import com.example.tanorami.auth.registration.data.RegistrationRepository
 import com.example.tanorami.auth.registration.presentation.models.RegistrationScreenEvent
 import com.example.tanorami.auth.registration.presentation.models.RegistrationScreenSideEffects

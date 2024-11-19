@@ -28,10 +28,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.core.R
-import com.example.core.ui.base_components.text.BaseDefaultText
-import com.example.core.ui.base_components.top_app_bar.BaseCenterAlignedTopAppBar
+import com.example.core.R.drawable
 import com.example.core.ui.theme.Grey
+import com.example.strings.R
 import com.example.tanorami.auth.login.presentation.LoginViewModel
 import com.example.tanorami.auth.login.presentation.models.LoginScreenEvents
 import com.example.tanorami.auth.login.presentation.models.LoginScreenSideEffects
@@ -40,6 +39,8 @@ import com.example.tanorami.auth.login.ui.components.LoginButton
 import com.example.tanorami.auth.login.ui.components.LoginOutlinedTextField
 import com.example.tanorami.auth.registration.ui.RegistrationRoute
 import com.example.tanorami.utils.toast
+import com.example.ui.components.text.BaseDefaultText
+import com.example.ui.components.top_app_bar.BaseCenterAlignedTopAppBar
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -110,7 +111,7 @@ private fun LoginScreenContent(
                 modifier = Modifier
                     .padding(vertical = 16.dp)
                     .size(130.dp),
-                model = R.drawable.pom_pom_hey,
+                model = drawable.pom_pom_hey,
                 contentDescription = null
             )
 

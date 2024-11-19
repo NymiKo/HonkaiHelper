@@ -14,9 +14,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.core.ui.base_components.text.BaseDefaultText
-import com.example.core.ui.theme.AppTheme
-import com.example.core.R
+import com.example.core.R.drawable
+import com.example.strings.R
+import com.example.ui.theme.AppTheme
 
 @Composable
 fun EmptyListScreen(
@@ -30,7 +30,7 @@ fun EmptyListScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            BaseDefaultText(
+            com.example.ui.components.text.BaseDefaultText(
                 text = stringResource(id = R.string.empty_here),
                 fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold
@@ -38,7 +38,7 @@ fun EmptyListScreen(
 
             AsyncImage(
                 modifier = Modifier.size(150.dp),
-                model = R.drawable.pom_pom,
+                model = drawable.pom_pom,
                 contentDescription = null,
             )
         }

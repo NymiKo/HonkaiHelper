@@ -3,6 +3,9 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="21">
       <module name="HonkaiHelper.core.main" target="11" />
+      <module name="HonkaiHelper.core.stringss" target="11" />
+      <module name="HonkaiHelper.core.stringss.main" target="11" />
+      <module name="HonkaiHelper.core.stringss.test" target="11" />
       <module name="HonkaiHelper.core.test" target="11" />
       <module name="HonkaiHelper.feature.main" target="11" />
       <module name="HonkaiHelper.feature.test" target="11" />

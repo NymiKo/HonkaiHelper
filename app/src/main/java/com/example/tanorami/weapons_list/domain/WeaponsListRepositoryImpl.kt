@@ -1,7 +1,7 @@
 package com.example.tanorami.weapons_list.domain
 
-import com.example.core.di.IODispatcher
-import com.example.data.local.dao.WeaponDao
+import com.example.data.db.dao.WeaponDao
+import com.example.domain.di.IODispatcher
 import com.example.domain.repository.weapon.WeaponModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

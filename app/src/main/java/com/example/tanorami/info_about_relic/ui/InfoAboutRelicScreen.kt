@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.core.ui.base_components.top_app_bar.BaseCenterAlignedTopAppBar
 import com.example.domain.repository.relic.RelicModel
 import com.example.tanorami.info_about_relic.presentation.InfoAboutRelicViewModel
 import com.example.tanorami.info_about_relic.ui.components.DescriptionRelicEffect
@@ -60,7 +59,7 @@ internal fun InfoAboutRelicScreenContent(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            BaseCenterAlignedTopAppBar(
+            com.example.ui.components.top_app_bar.BaseCenterAlignedTopAppBar(
                 title = relic?.title,
                 onBack = onBack::invoke
             )

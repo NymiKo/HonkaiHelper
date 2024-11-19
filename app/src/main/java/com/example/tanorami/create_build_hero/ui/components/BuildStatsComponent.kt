@@ -30,12 +30,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.core.R
-import com.example.core.ui.base_components.text.BaseDefaultText
-import com.example.core.ui.theme.AppTheme
+import com.example.core.R.drawable
 import com.example.core.ui.theme.DarkGrey
 import com.example.core.ui.theme.White
+import com.example.strings.R
 import com.example.tanorami.create_build_hero.data.model.BuildStatsEquipment
+import com.example.ui.theme.AppTheme
 
 @Composable
 fun BuildStatsComponent(
@@ -51,28 +51,28 @@ fun BuildStatsComponent(
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         ItemStat(
-            statIcon = R.drawable.relic_piece_body,
+            statIcon = drawable.relic_piece_body,
             statsList = stringArrayResource(id = R.array.stats_in_body),
             currentValue = currentValue.statBody,
             changeStatOnEquipment = changeStatOnBody::invoke
         )
 
         ItemStat(
-            statIcon = R.drawable.relic_piece_legs,
+            statIcon = drawable.relic_piece_legs,
             statsList = stringArrayResource(id = R.array.stats_in_legs),
             currentValue = currentValue.statLegs,
             changeStatOnEquipment = changeStatOnLegs::invoke
         )
 
         ItemStat(
-            statIcon = R.drawable.relic_piece_sphere,
+            statIcon = drawable.relic_piece_sphere,
             statsList = stringArrayResource(id = R.array.stats_in_sphere),
             currentValue = currentValue.statSphere,
             changeStatOnEquipment = changeStatOnSphere::invoke
         )
 
         ItemStat(
-            statIcon = R.drawable.relic_piece_rope,
+            statIcon = drawable.relic_piece_rope,
             statsList = stringArrayResource(id = R.array.stats_in_rope),
             currentValue = currentValue.statRope,
             changeStatOnEquipment = changeStatOnRope::invoke
@@ -137,7 +137,7 @@ fun StatsSpinner(
         modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        BaseDefaultText(text = currentValue, fontSize = 18.sp)
+        com.example.ui.components.text.BaseDefaultText(text = currentValue, fontSize = 18.sp)
         Spacer(modifier = Modifier.weight(1F))
         Icon(
             imageVector = Icons.Filled.ArrowDropDown,
@@ -148,7 +148,10 @@ fun StatsSpinner(
         DropdownMenu(expanded = expanded.value, onDismissRequest = { expanded.value = false }) {
             statsList.forEach { titleItem ->
                 DropdownMenuItem(text = {
-                    BaseDefaultText(text = titleItem, fontSize = 16.sp)
+                    com.example.ui.components.text.BaseDefaultText(
+                        text = titleItem,
+                        fontSize = 16.sp
+                    )
                 }, onClick = {
                     expanded.value = false
                     changeStatOnEquipment(titleItem)
@@ -161,7 +164,7 @@ fun StatsSpinner(
 @Preview
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-private fun BuildStatsComponentPreview(modifier: Modifier = Modifier) {
+private fun BuildStatsComponentPreview() {
     AppTheme {
         BuildStatsComponent(
             changeStatOnBody = { },

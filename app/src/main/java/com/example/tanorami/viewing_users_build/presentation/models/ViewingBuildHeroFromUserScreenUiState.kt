@@ -1,7 +1,7 @@
 package com.example.tanorami.viewing_users_build.presentation.models
 
-import com.example.core.R
 import com.example.core.base.UiState
+import com.example.strings.R
 import com.example.tanorami.viewing_users_build.data.model.FullBuildHeroFromUser
 
 data class ViewingBuildHeroFromUserScreenUiState(

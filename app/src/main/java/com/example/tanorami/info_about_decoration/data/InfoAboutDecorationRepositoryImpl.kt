@@ -1,7 +1,7 @@
 package com.example.tanorami.info_about_decoration.data
 
-import com.example.core.di.IODispatcher
-import com.example.data.local.dao.DecorationDao
+import com.example.data.db.dao.DecorationDao
+import com.example.domain.di.IODispatcher
 import com.example.domain.repository.decoration.DecorationModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

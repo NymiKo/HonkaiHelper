@@ -19,7 +19,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.core.ui.base_components.top_app_bar.BaseCenterAlignedTopAppBar
 import com.example.domain.repository.decoration.DecorationModel
 import com.example.tanorami.info_about_decoration.presentation.InfoAboutDecorationViewModel
 import com.example.tanorami.info_about_decoration.ui.components.DescriptionDecorationEffect
@@ -70,7 +69,7 @@ private fun InfoAboutDecorationScreenContent(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            BaseCenterAlignedTopAppBar(
+            com.example.ui.components.top_app_bar.BaseCenterAlignedTopAppBar(
                 title = decoration?.title,
                 onBack = onBack::invoke
             )

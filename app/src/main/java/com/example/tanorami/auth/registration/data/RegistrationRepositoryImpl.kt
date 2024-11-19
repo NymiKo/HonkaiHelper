@@ -1,6 +1,6 @@
 package com.example.tanorami.auth.registration.data
 
-import com.example.core.di.IODispatcher
+import com.example.domain.di.IODispatcher
 import com.example.tanorami.auth.registration.data.model.RegistrationRequest
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

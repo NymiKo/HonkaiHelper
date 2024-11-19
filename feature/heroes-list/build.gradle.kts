@@ -55,6 +55,8 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 
     implementation(project(":core-common"))
-    implementation(project(":core:data-local"))
     implementation(project(":core:domain"))
+    implementation(project(":core:di"))
+    implementation(project(":core:ui-theme"))
+    implementation(project(":core:ui-components"))
 }

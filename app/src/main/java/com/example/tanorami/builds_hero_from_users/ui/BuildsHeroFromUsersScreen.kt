@@ -16,8 +16,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.core.ui.base_components.top_app_bar.BaseTopAppBar
-import com.example.core.R
+import com.example.strings.R
 import com.example.tanorami.builds_hero_from_users.presentation.BuildsHeroFromUsersViewModel
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenEvents
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenSideEffects
@@ -89,7 +88,7 @@ private fun BuildsHeroFromUsersScreenContent(
 
     Scaffold(
         topBar = {
-            BaseTopAppBar(
+            com.example.ui.components.top_app_bar.BaseTopAppBar(
                 title = stringResource(id = R.string.builds_for_hero, uiState.hero?.name ?: ""),
                 onBack = { onEvent(BuildsHeroFromUsersScreenEvents.OnBack) }
             )

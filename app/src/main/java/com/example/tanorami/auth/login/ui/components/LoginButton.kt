@@ -8,7 +8,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.core.ui.base_components.button.BaseButton
 
 @Composable
 fun LoginButton(
@@ -22,7 +21,7 @@ fun LoginButton(
             color = MaterialTheme.colorScheme.secondary,
         )
     } else {
-        BaseButton(
+        com.example.ui.components.button.BaseButton(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .height(45.dp),

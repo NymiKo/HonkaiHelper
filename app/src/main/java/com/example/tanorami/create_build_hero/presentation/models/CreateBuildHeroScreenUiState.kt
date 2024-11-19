@@ -1,7 +1,7 @@
 package com.example.tanorami.create_build_hero.presentation.models
 
-import com.example.core.R
 import com.example.core.base.UiState
+import com.example.strings.R
 import com.example.tanorami.create_build_hero.data.model.BuildHeroModel
 
 data class CreateBuildHeroScreenUiState(

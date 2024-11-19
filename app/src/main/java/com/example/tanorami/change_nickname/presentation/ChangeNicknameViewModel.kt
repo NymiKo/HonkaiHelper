@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.core.R
+import com.example.strings.R
 import com.example.tanorami.change_nickname.data.ChangeNicknameRepository
 import com.example.tanorami.change_nickname.presentation.models.ChangeNicknameScreenEvents
 import com.example.tanorami.change_nickname.presentation.models.ChangeNicknameScreenUiState

@@ -9,12 +9,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.tanorami.profile.ui.components.TeamItem
-import com.example.tanorami.teams.data.model.TeamHero
+import com.example.tanorami.teams.data.model.TeamHeroes
 
 @Composable
 fun TeamsListLazyColumn(
     modifier: Modifier = Modifier,
-    teamsList: List<TeamHero>,
+    teamsList: List<TeamHeroes>,
 ) {
     LazyColumn(
         modifier = modifier

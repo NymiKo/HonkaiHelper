@@ -39,7 +39,6 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.core.R
 import com.example.core.base.shimmerEffect
-import com.example.core.ui.base_components.text.BaseDefaultText
 import com.example.core.ui.theme.Blue
 import com.example.core.ui.theme.White
 import com.example.tanorami.auth.login.ui.LoginRoute
@@ -234,7 +233,7 @@ private fun NicknameText(
     modifier: Modifier = Modifier,
     nickname: String,
 ) {
-    BaseDefaultText(
+    com.example.ui.components.text.BaseDefaultText(
         modifier = modifier.fillMaxWidth(),
         text = nickname,
         fontSize = 24.sp,

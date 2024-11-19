@@ -1,6 +1,6 @@
 package com.example.tanorami.change_nickname.data
 
-import com.example.core.di.IODispatcher
+import com.example.domain.di.IODispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

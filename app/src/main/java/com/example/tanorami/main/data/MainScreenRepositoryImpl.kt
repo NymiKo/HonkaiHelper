@@ -1,8 +1,8 @@
 package com.example.tanorami.main.data
 
-import com.example.core.di.IODispatcher
 import com.example.data.remote.NetworkResult
 import com.example.data.remote.handleApi
+import com.example.domain.di.IODispatcher
 import com.example.tanorami.main.presentation.models.NewDataModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

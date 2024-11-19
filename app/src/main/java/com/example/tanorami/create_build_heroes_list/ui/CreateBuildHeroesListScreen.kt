@@ -25,16 +25,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.core.R
-import com.example.core.ui.base_components.HeroName
-import com.example.core.ui.base_components.top_app_bar.BaseTopAppBar
 import com.example.core.ui.theme.Orange
 import com.example.core.ui.theme.Violet
+import com.example.strings.R
 import com.example.tanorami.create_build_hero.ui.CreateBuildForHeroNavArguments
 import com.example.tanorami.create_build_heroes_list.presentation.CreateBuildHeroesListViewModel
 import com.example.tanorami.create_build_heroes_list.presentation.models.CreateBuildHeroesListScreenEvents
 import com.example.tanorami.create_build_heroes_list.presentation.models.CreateBuildHeroesListScreenSideEffects
 import com.example.tanorami.create_build_heroes_list.presentation.models.CreateBuildHeroesListScreenUiState
+import com.example.tanorami.ui_components.common.HeroName
 import com.example.tanorami.utils.OnLifecycleEvent
 import kotlinx.serialization.Serializable
 
@@ -82,7 +81,7 @@ private fun CreateBuildHeroesListContent(
     Scaffold(
         modifier = Modifier.navigationBarsPadding(),
         topBar = {
-            BaseTopAppBar(
+            com.example.ui.components.top_app_bar.BaseTopAppBar(
                 title = stringResource(id = R.string.choose_hero),
                 onBack = { onEvent(CreateBuildHeroesListScreenEvents.OnBack) }
             )

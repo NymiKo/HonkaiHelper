@@ -1,7 +1,7 @@
 package com.example.tanorami.profile.presentation.models
 
-import com.example.core.R
 import com.example.core.base.UiState
+import com.example.strings.R
 import com.example.tanorami.profile.data.model.User
 
 data class ProfileScreenUiState(

@@ -21,10 +21,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import com.example.core.ui.base_components.tabs.TabIndicator
-import com.example.core.R
+import com.example.strings.R
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
-import com.example.tanorami.teams.data.model.TeamHero
+import com.example.tanorami.teams.data.model.TeamHeroes
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -32,7 +31,7 @@ import kotlinx.coroutines.launch
 fun TeamsAndBuildsInProfile(
     modifier: Modifier = Modifier,
     heroesBuildsList: List<BuildHeroWithUser>,
-    teamsList: List<TeamHero>,
+    teamsList: List<TeamHeroes>,
     onEditBuildHeroScreen: (idBuild: Long) -> Unit,
     onEditTeamScreen: (idTeam: Long) -> Unit,
 ) {
@@ -52,7 +51,7 @@ fun TeamsAndBuildsInProfile(
             contentColor = MaterialTheme.colorScheme.secondary,
             divider = {},
             indicator = {
-                TabIndicator(
+                com.example.ui.components.tabs.TabIndicator(
                     modifier = Modifier
                         .tabIndicatorOffset(pagerState.currentPage)
                         .padding(vertical = 5.dp, horizontal = 15.dp)
@@ -109,7 +108,7 @@ private fun TabsContent(
     modifier: Modifier = Modifier,
     pagerState: PagerState,
     heroesBuildsList: List<BuildHeroWithUser>,
-    teamsList: List<TeamHero>,
+    teamsList: List<TeamHeroes>,
     onEditBuildHeroScreen: (idBuild: Long) -> Unit,
     onEditTeamScreen: (idTeam: Long) -> Unit,
 ) {

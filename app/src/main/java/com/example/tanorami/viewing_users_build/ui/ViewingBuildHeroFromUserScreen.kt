@@ -19,8 +19,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.core.R
-import com.example.core.ui.base_components.top_app_bar.BaseTopAppBar
+import com.example.strings.R
 import com.example.tanorami.create_build_hero.ui.components.AvatarHeroImageAndName
 import com.example.tanorami.create_build_hero.ui.components.EquipmentBuildComponent
 import com.example.tanorami.info_about_decoration.ui.InfoAboutDecorationNavArguments
@@ -33,6 +32,7 @@ import com.example.tanorami.viewing_users_build.presentation.models.ViewingBuild
 import com.example.tanorami.viewing_users_build.presentation.models.ViewingBuildHeroFromUserScreenSideEffects
 import com.example.tanorami.viewing_users_build.presentation.models.ViewingBuildHeroFromUserScreenUiState
 import com.example.tanorami.viewing_users_build.ui.components.BuildStatsColumn
+import com.example.ui.components.top_app_bar.BaseTopAppBar
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -59,6 +59,7 @@ fun ViewingBuildHeroFromUserScreen(
             navController.popBackStack()
             viewModel.clearEffect()
         }
+
         ViewingBuildHeroFromUserScreenSideEffects.OnCopyUIDClick -> {
             val clipboard = context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
             val clipData: ClipData = ClipData.newPlainText("UID", state.buildHero.uid)
@@ -76,6 +77,7 @@ fun ViewingBuildHeroFromUserScreen(
             navController.navigate(route = InfoAboutRelicNavArgument(sideEffects.idRelic))
             viewModel.clearEffect()
         }
+
         is ViewingBuildHeroFromUserScreenSideEffects.OnInfoAboutWeaponScreen -> {
             navController.navigate(route = InfoAboutWeaponNavArguments(sideEffects.idWeapon))
             viewModel.clearEffect()

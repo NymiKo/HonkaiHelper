@@ -41,19 +41,19 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.core.R
-import com.example.core.ui.base_components.text.BaseDefaultText
 import com.example.core.ui.theme.Black
 import com.example.core.ui.theme.Blue
 import com.example.core.ui.theme.Orange
 import com.example.core.ui.theme.Violet
 import com.example.core.ui.theme.White
 import com.example.domain.repository.weapon.WeaponModel
+import com.example.strings.R
 import com.example.tanorami.info_about_weapon.ui.InfoAboutWeaponNavArguments
 import com.example.tanorami.weapons_list.presentation.WeaponsListViewModel
 import com.example.tanorami.weapons_list.presentation.models.WeaponsListScreenEvents
 import com.example.tanorami.weapons_list.presentation.models.WeaponsListScreenSideEffects
 import com.example.tanorami.weapons_list.presentation.models.WeaponsListScreenUiState
+import com.example.ui.components.text.BaseDefaultText
 
 @Composable
 fun WeaponsListScreen(

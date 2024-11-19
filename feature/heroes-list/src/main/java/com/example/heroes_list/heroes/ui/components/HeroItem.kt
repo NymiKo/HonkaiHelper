@@ -8,24 +8,25 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush.Companion.verticalGradient
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.core.ui.base_components.text.BaseDefaultText
 import com.example.core.ui.theme.Black
 import com.example.core.ui.theme.Orange
 import com.example.core.ui.theme.Violet
-import com.example.core.ui.theme.White
 import com.example.domain.repository.hero.model.HeroBaseInfoModel
+import com.example.ui.components.text.BaseDefaultText
 
-@androidx.compose.runtime.Composable
+@Composable
 fun HeroItem(
     modifier: Modifier = Modifier,
     heroModel: HeroBaseInfoModel,

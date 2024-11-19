@@ -13,8 +13,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.core.ui.base_components.text.BaseDefaultText
-import com.example.core.R
+import com.example.strings.R
+import com.example.ui.components.text.BaseDefaultText
 
 @Composable
 fun UploadingDataComponent() {

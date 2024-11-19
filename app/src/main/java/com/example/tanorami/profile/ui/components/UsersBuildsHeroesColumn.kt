@@ -28,10 +28,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.core.R
-import com.example.core.ui.base_components.BaseHeroAvatarAndName
-import com.example.core.ui.base_components.lazy_column.BaseLazyColumn
-import com.example.core.ui.base_components.text.BaseDefaultText
 import com.example.core.ui.theme.Blue
 import com.example.core.ui.theme.DarkGrey
 import com.example.core.ui.theme.GreyTransparent20
@@ -40,7 +36,9 @@ import com.example.core.ui.theme.Violet
 import com.example.core.ui.theme.White
 import com.example.domain.repository.decoration.DecorationModel
 import com.example.domain.repository.weapon.WeaponModel
+import com.example.strings.R
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
+import com.example.tanorami.ui_components.common.BaseHeroAvatarAndName
 
 @Composable
 fun UsersBuildsHeroesColumn(
@@ -51,7 +49,7 @@ fun UsersBuildsHeroesColumn(
     if (heroesBuildsList.isEmpty()) {
         EmptyBuildsOrTeams()
     } else {
-        BaseLazyColumn(modifier = modifier) {
+        com.example.ui.components.lazy_column.BaseLazyColumn(modifier = modifier) {
             items(count = heroesBuildsList.size, key = { heroesBuildsList[it].idBuild }) { index ->
                 BuildItem(
                     buildHero = heroesBuildsList[index],
@@ -118,7 +116,7 @@ fun BuildItem(
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        BaseDefaultText(
+                        com.example.ui.components.text.BaseDefaultText(
                             text = stringResource(
                                 id = R.string.build_from,
                                 buildHero.buildUser.nickname

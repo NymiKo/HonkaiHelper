@@ -13,9 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.core.ui.base_components.text.BaseDefaultText
-import com.example.core.ui.theme.AppTheme
-import com.example.core.R
+import com.example.strings.R
+import com.example.ui.theme.AppTheme
 
 @Composable
 fun ErrorScreen(
@@ -28,7 +27,7 @@ fun ErrorScreen(
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            BaseDefaultText(
+            com.example.ui.components.text.BaseDefaultText(
                 text = stringResource(id = R.string.error),
                 fontWeight = FontWeight.SemiBold,
             )

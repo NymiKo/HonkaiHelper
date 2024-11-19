@@ -28,21 +28,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.core.R
-import com.example.core.ui.base_components.text.BaseDefaultText
+import com.example.core.R.drawable
 import com.example.core.ui.theme.Blue
 import com.example.core.ui.theme.GreyTransparent20
 import com.example.core.ui.theme.Orange
 import com.example.core.ui.theme.Violet
 import com.example.domain.repository.equipment.Equipment
+import com.example.strings.R
 
 @Composable
 fun EquipmentBuildComponent(
     modifier: Modifier = Modifier,
-    weapon: com.example.domain.repository.equipment.Equipment?,
-    relicTwoParts: com.example.domain.repository.equipment.Equipment?,
-    relicFourParts: com.example.domain.repository.equipment.Equipment?,
-    decoration: com.example.domain.repository.equipment.Equipment?,
+    weapon: Equipment?,
+    relicTwoParts: Equipment?,
+    relicFourParts: Equipment?,
+    decoration: Equipment?,
     onWeaponClick: () -> Unit,
     onTwoPartsRelicClick: () -> Unit,
     onFourPartsRelicClick: () -> Unit,
@@ -107,8 +107,8 @@ fun CategoryWeapon(
 @Composable
 fun CategoryRelics(
     modifier: Modifier = Modifier,
-    relicTwoPartsEquipment: com.example.domain.repository.equipment.Equipment?,
-    relicFourPartsEquipment: com.example.domain.repository.equipment.Equipment?,
+    relicTwoPartsEquipment: Equipment?,
+    relicFourPartsEquipment: Equipment?,
     onTwoPartsRelicClick: () -> Unit,
     onFourPartsRelicClick: () -> Unit,
 ) {
@@ -134,7 +134,7 @@ fun CategoryRelics(
 @Composable
 fun CategoryDecoration(
     modifier: Modifier = Modifier,
-    equipment: com.example.domain.repository.equipment.Equipment?,
+    equipment: Equipment?,
     onDecorationClick: () -> Unit,
 ) {
     Column(
@@ -162,7 +162,7 @@ fun EquipmentCategoryText(
     modifier: Modifier = Modifier,
     categoryText: String,
 ) {
-    BaseDefaultText(
+    com.example.ui.components.text.BaseDefaultText(
         modifier = modifier.padding(top = 16.dp),
         text = categoryText,
         fontSize = 18.sp,
@@ -172,7 +172,7 @@ fun EquipmentCategoryText(
 @Composable
 fun RelicImage(
     modifier: Modifier = Modifier,
-    equipment: com.example.domain.repository.equipment.Equipment?,
+    equipment: Equipment?,
     textRelicParts: String,
     onEquipmentScreen: () -> Unit,
 ) {
@@ -190,7 +190,7 @@ fun RelicImage(
             equipment = equipment,
             onEquipmentScreen = onEquipmentScreen::invoke
         )
-        BaseDefaultText(
+        com.example.ui.components.text.BaseDefaultText(
             text = textRelicParts,
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
@@ -212,7 +212,7 @@ fun EquipmentImage(
             .clickable {
                 onEquipmentScreen()
             },
-        model = equipment?.image ?: R.drawable.ic_add,
+        model = equipment?.image ?: drawable.ic_add,
         contentDescription = null,
         colorFilter = if (equipment == null) ColorFilter.tint(MaterialTheme.colorScheme.secondary) else null,
         contentScale = contentScale,

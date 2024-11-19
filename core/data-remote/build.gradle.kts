@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.example.data.remote"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 24
@@ -45,7 +45,7 @@ dependencies {
 
     //Retrofit
     api("com.squareup.retrofit2:retrofit:2.9.0")
-    api("com.squareup.retrofit2:converter-gson:2.5.0")
+    api("com.squareup.retrofit2:converter-gson:2.6.0")
 
     //OkHttp
     api(platform("com.squareup.okhttp3:okhttp-bom:4.11.0"))

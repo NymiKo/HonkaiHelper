@@ -1,17 +1,17 @@
 package com.example.tanorami.profile.domain
 
-import com.example.core.data.source.local.hero.mapper.toHeroBaseInfoModel
-import com.example.core.di.IODispatcher
-import com.example.data.local.dao.DecorationDao
-import com.example.data.local.dao.HeroDao
-import com.example.data.local.dao.RelicDao
-import com.example.data.local.dao.WeaponDao
+import com.example.data.db.dao.DecorationDao
+import com.example.data.db.dao.HeroDao
+import com.example.data.db.dao.RelicDao
+import com.example.data.db.dao.WeaponDao
 import com.example.data.remote.NetworkResult
 import com.example.data.remote.handleApi
+import com.example.data.source.hero.mapper.toHeroBaseInfoModel
+import com.example.domain.di.IODispatcher
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
 import com.example.tanorami.profile.data.ProfileService
 import com.example.tanorami.profile.data.model.User
-import com.example.tanorami.teams.data.model.TeamHero
+import com.example.tanorami.teams.data.model.TeamHeroes
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -49,7 +49,7 @@ class ProfileRepositoryImpl @Inject constructor(
                         nickname = result.data.login,
                         avatarUrl = result.data.avatarUrl,
                         teamsList = result.data.teamsList.map {
-                            TeamHero(
+                            TeamHeroes(
                                 idTeam = it.idTeam,
                                 heroOne = heroDao.getHeroWithNameAvatarRarity(it.idHeroOne)
                                     .toHeroBaseInfoModel(),

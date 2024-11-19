@@ -19,8 +19,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.core.ui.base_components.text.BaseDefaultText
-import com.example.core.ui.base_components.top_app_bar.BaseCenterAlignedTopAppBar
 import com.example.tanorami.info_about_weapon.data.model.FullInfoAboutWeapon
 import com.example.tanorami.info_about_weapon.presentation.InfoAboutWeaponViewModel
 import com.example.tanorami.info_about_weapon.ui.components.DescriptionWeaponSkill
@@ -66,7 +64,7 @@ private fun InfoAboutWeaponScreenContent(
     Scaffold(
         modifier = modifier.fillMaxSize(),
         topBar = {
-            BaseCenterAlignedTopAppBar(
+            com.example.ui.components.top_app_bar.BaseCenterAlignedTopAppBar(
                 title = fullInfoAboutWeapon?.weapon?.name ?: "",
                 onBack = onBack::invoke
             )
@@ -90,7 +88,7 @@ private fun InfoAboutWeaponScreenContent(
 
             DescriptionWeaponSkill(descriptionWeaponSkill = fullInfoAboutWeapon?.weapon?.description)
 
-            BaseDefaultText(
+            com.example.ui.components.text.BaseDefaultText(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .padding(top = 8.dp)

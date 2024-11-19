@@ -9,9 +9,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.core.ui.base_components.button.BaseButton
-import com.example.core.ui.base_components.text.BaseDefaultText
-import com.example.core.R
+import com.example.strings.R
 
 @Composable
 fun ErrorUploadingDataComponent(
@@ -22,18 +20,18 @@ fun ErrorUploadingDataComponent(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        BaseDefaultText(
+        com.example.ui.components.text.BaseDefaultText(
             text = stringResource(id = R.string.unexpected_error),
             fontSize = 20.sp,
             fontWeight = FontWeight.SemiBold,
         )
 
-        BaseButton(
+        com.example.ui.components.button.BaseButton(
             text = stringResource(id = R.string.retry),
             onClick = onRetryClick::invoke
         )
 
-        BaseButton(
+        com.example.ui.components.button.BaseButton(
             text = stringResource(id = R.string.go_back),
             onClick = onBack::invoke
         )

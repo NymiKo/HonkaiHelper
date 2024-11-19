@@ -1,9 +1,9 @@
 package com.example.tanorami.profile.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.example.core.R
 import com.example.core.base.BaseViewModel
 import com.example.domain.data_store.AppDataStore
+import com.example.strings.R
 import com.example.tanorami.profile.domain.ProfileRepository
 import com.example.tanorami.profile.presentation.models.ProfileScreenEvents
 import com.example.tanorami.profile.presentation.models.ProfileScreenSideEffects

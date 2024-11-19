@@ -16,12 +16,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.core.R
-import com.example.core.ui.base_components.text.BaseDefaultText
-import com.example.core.ui.theme.AppTheme
 import com.example.core.ui.theme.DarkGrey
 import com.example.domain.repository.eidolon.EidolonModel
+import com.example.strings.R
 import com.example.tanorami.base_build_hero.ui.components.HeaderCategory
+import com.example.ui.theme.AppTheme
 
 @Composable
 fun EidolonsListColumn(
@@ -74,13 +73,13 @@ private fun EidolonItem(
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            BaseDefaultText(
+            com.example.ui.components.text.BaseDefaultText(
                 text = eidolonTitle,
                 fontWeight = FontWeight.Bold,
                 lineHeight = 20.sp
             )
 
-            BaseDefaultText(
+            com.example.ui.components.text.BaseDefaultText(
                 text = eidolonDescription,
                 fontSize = 16.sp,
                 lineHeight = 18.sp

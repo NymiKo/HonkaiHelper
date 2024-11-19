@@ -1,6 +1,6 @@
 package com.example.tanorami.auth.login.domain
 
-import com.example.core.di.IODispatcher
+import com.example.domain.di.IODispatcher
 import com.example.tanorami.auth.login.data.LoginService
 import com.example.tanorami.auth.login.data.models.LoginRequest
 import com.example.tanorami.auth.login.data.models.LoginResponse

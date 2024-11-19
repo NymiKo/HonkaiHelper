@@ -16,10 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.core.ui.base_components.button.BaseSmallFloatingButton
-import com.example.core.ui.base_components.text_field.BaseOutlinedTextField
-import com.example.core.ui.base_components.top_app_bar.BaseTopAppBar
-import com.example.core.R
+import com.example.strings.R
 import com.example.tanorami.send_feedback.presentation.SendFeedbackViewModel
 import com.example.tanorami.send_feedback.presentation.models.SendFeedbackScreenEvents
 import com.example.tanorami.send_feedback.presentation.models.SendFeedbackScreenSideEffects
@@ -66,13 +63,13 @@ private fun SendFeedbackScreenContent(
 ) {
     Scaffold(
         topBar = {
-            BaseTopAppBar(
+            com.example.ui.components.top_app_bar.BaseTopAppBar(
                 title = stringResource(id = R.string.report_an_error),
                 onBack = { onEvent(SendFeedbackScreenEvents.OnBack) },
             )
         },
         floatingActionButton = {
-            BaseSmallFloatingButton(
+            com.example.ui.components.button.BaseSmallFloatingButton(
                 icon = Icons.AutoMirrored.Filled.Send,
                 onClick = {
                     onEvent(SendFeedbackScreenEvents.SendFeedbackClick)
@@ -84,7 +81,7 @@ private fun SendFeedbackScreenContent(
             modifier = Modifier.padding(innerPadding),
             contentAlignment = Alignment.Center,
         ) {
-            BaseOutlinedTextField(
+            com.example.ui.components.text_field.BaseOutlinedTextField(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .fillMaxWidth(),

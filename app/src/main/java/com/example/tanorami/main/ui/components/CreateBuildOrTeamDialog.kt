@@ -13,9 +13,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.example.core.ui.base_components.text.BaseDefaultText
 import com.example.core.ui.theme.DarkGrey
-import com.example.core.R
+import com.example.strings.R
 import com.example.tanorami.main.presentation.models.MainScreenEvents
 
 @Composable
@@ -57,7 +56,7 @@ private fun DialogItem(
     text: String,
     onClick: () -> Unit,
 ) {
-    BaseDefaultText(
+    com.example.ui.components.text.BaseDefaultText(
         modifier = modifier
             .fillMaxWidth()
             .clickable { onClick() }

@@ -1,10 +1,10 @@
 package com.example.tanorami.settings.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.example.core.R
 import com.example.core.base.BaseViewModel
 import com.example.data.remote.NetworkResult
 import com.example.domain.data_store.AppDataStore
+import com.example.strings.R
 import com.example.tanorami.settings.data.SettingsRepository
 import com.example.tanorami.settings.presentation.models.SettingsScreenEvents
 import com.example.tanorami.settings.presentation.models.SettingsScreenSideEffects

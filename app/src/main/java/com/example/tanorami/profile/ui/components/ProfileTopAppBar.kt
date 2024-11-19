@@ -20,10 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.core.ui.base_components.icon.BaseIcon
-import com.example.core.ui.base_components.text.BaseDefaultText
-import com.example.core.ui.base_components.top_app_bar.BaseTopAppBar
-import com.example.core.R
+import com.example.strings.R
 
 @Composable
 fun ProfileTopAppBar(
@@ -33,13 +30,13 @@ fun ProfileTopAppBar(
 ) {
     var showMenu by remember { mutableStateOf(false) }
 
-    BaseTopAppBar(
+    com.example.ui.components.top_app_bar.BaseTopAppBar(
         modifier = modifier,
         navigationIcon = false,
         title = stringResource(id = R.string.profile),
         actions = {
             IconButton(onClick = { showMenu = !showMenu }) {
-                BaseIcon(icon = Icons.Default.MoreVert)
+                com.example.ui.components.icon.BaseIcon(icon = Icons.Default.MoreVert)
             }
             DropdownMenu(expanded = showMenu, onDismissRequest = { showMenu = false }) {
                 MenuItemChangeNickname(onEditNicknameScreen = onEditNicknameScreen::invoke)
@@ -120,7 +117,7 @@ private fun ExitAccountAlertDialog(
     AlertDialog(
         modifier = modifier,
         text = {
-            BaseDefaultText(
+            com.example.ui.components.text.BaseDefaultText(
                 text = stringResource(id = R.string.want_to_logout_of_your_account),
                 color = MaterialTheme.colorScheme.secondary,
             )
@@ -130,7 +127,7 @@ private fun ExitAccountAlertDialog(
             TextButton(
                 onClick = { onConfirmation() }
             ) {
-                BaseDefaultText(
+                com.example.ui.components.text.BaseDefaultText(
                     text = stringResource(id = R.string.yes),
                     color = MaterialTheme.colorScheme.secondary
                 )
@@ -140,7 +137,7 @@ private fun ExitAccountAlertDialog(
             TextButton(
                 onClick = { onDismissRequest() }
             ) {
-                BaseDefaultText(
+                com.example.ui.components.text.BaseDefaultText(
                     text = stringResource(id = R.string.cancellation),
                     color = MaterialTheme.colorScheme.secondary
                 )

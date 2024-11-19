@@ -1,7 +1,7 @@
 package com.example.tanorami.load_data.data
 
 import android.content.Context
-import com.example.core.di.IODispatcher
+import com.example.domain.di.IODispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient

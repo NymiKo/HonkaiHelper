@@ -11,7 +11,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.core.R
-import com.example.core.ui.base_components.text.BaseDefaultText
 import com.example.tanorami.create_build_hero.ui.components.IconStatEquipment
 
 @Composable
@@ -46,7 +45,7 @@ fun StatItem(
     ) {
         IconStatEquipment(statIcon = statIcon)
 
-        BaseDefaultText(
+        com.example.ui.components.text.BaseDefaultText(
             text = statText,
             fontSize = 17.sp,
             fontWeight = FontWeight.SemiBold

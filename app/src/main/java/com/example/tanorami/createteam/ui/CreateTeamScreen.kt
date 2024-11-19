@@ -38,12 +38,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.core.R
-import com.example.core.ui.base_components.button.BaseSmallFloatingButton
-import com.example.core.ui.base_components.dialog.BaseSaveAlertDialog
-import com.example.core.ui.base_components.top_app_bar.BaseTopAppBar
 import com.example.core.ui.theme.Red
 import com.example.domain.repository.hero.model.HeroBaseInfoModel
+import com.example.strings.R
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
 import com.example.tanorami.createteam.presentation.CreateTeamViewModel
 import com.example.tanorami.createteam.presentation.models.CreateTeamScreenEvents
@@ -151,7 +148,8 @@ private fun TopAppBar(
 ) {
     val context = LocalContext.current
 
-    BaseTopAppBar(modifier = modifier,
+    com.example.ui.components.top_app_bar.BaseTopAppBar(
+        modifier = modifier,
         title = stringResource(id = if (uiState.isCreateTeamMode) R.string.creating_a_team else R.string.edit_team),
         actions = {
             if (!uiState.isCreateTeamMode) {
@@ -160,7 +158,8 @@ private fun TopAppBar(
                 ) {
                     Icon(
                         modifier = Modifier.clickable {
-                            val clipboard = context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                            val clipboard =
+                                context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
                             val clipData: ClipData = ClipData.newPlainText("UID", uiState.uidTeam)
                             clipboard.setPrimaryClip(clipData)
                             toast(context, R.string.message_uid_team_copied)
@@ -189,7 +188,7 @@ private fun TopAppBar(
     )
 
     if (uiState.dialogDeleteTeamVisibilityState) {
-        BaseSaveAlertDialog(
+        com.example.ui.components.dialog.BaseSaveAlertDialog(
             message = R.string.delete_the_command,
             onConfirmation = { onEvent(CreateTeamScreenEvents.DeleteTeam) },
             onDismissRequest = {
@@ -256,10 +255,14 @@ private fun SaveAndUpdateTeamButton(
 ) {
     var openSaveTeamDialog by remember { mutableStateOf(false) }
 
-    BaseSmallFloatingButton(modifier = modifier, icon = Icons.Default.Save, onClick = { openSaveTeamDialog = true })
+    com.example.ui.components.button.BaseSmallFloatingButton(
+        modifier = modifier,
+        icon = Icons.Default.Save,
+        onClick = { openSaveTeamDialog = true })
 
     if (openSaveTeamDialog) {
-        BaseSaveAlertDialog(message = if (isCreateTeam) R.string.add_the_created_command else R.string.update_the_command,
+        com.example.ui.components.dialog.BaseSaveAlertDialog(
+            message = if (isCreateTeam) R.string.add_the_created_command else R.string.update_the_command,
             onConfirmation = {
                 saveTeam()
                 openSaveTeamDialog = false

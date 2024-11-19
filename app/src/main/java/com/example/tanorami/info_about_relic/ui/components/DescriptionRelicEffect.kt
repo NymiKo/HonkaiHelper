@@ -20,10 +20,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.core.ui.base_components.text.BaseDefaultText
 import com.example.core.ui.theme.DarkGrey
 import com.example.core.ui.theme.Orange
-import com.example.core.R
+import com.example.strings.R
 
 @Composable
 internal fun DescriptionRelicEffect(
@@ -44,7 +43,7 @@ internal fun DescriptionRelicEffect(
             modifier = Modifier.padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            BaseDefaultText(
+            com.example.ui.components.text.BaseDefaultText(
                 modifier = Modifier.fillMaxWidth(),
                 text = stringResource(id = R.string.effect_relic),
                 fontWeight = FontWeight.ExtraBold,
