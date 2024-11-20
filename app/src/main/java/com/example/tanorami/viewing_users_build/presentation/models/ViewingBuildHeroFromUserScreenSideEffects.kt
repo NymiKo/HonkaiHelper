@@ -1,6 +1,6 @@
 package com.example.tanorami.viewing_users_build.presentation.models
 
-import com.example.core.base.UiEffect
+import com.example.base.UiEffect
 
 sealed interface ViewingBuildHeroFromUserScreenSideEffects: UiEffect {
     class OnInfoAboutWeaponScreen(val idWeapon: Int): ViewingBuildHeroFromUserScreenSideEffects

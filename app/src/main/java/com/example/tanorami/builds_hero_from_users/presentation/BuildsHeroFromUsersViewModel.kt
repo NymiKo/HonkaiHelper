@@ -1,7 +1,7 @@
 package com.example.tanorami.builds_hero_from_users.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.example.core.base.BaseViewModel
+import com.example.base.BaseViewModel
 import com.example.tanorami.builds_hero_from_users.data.BuildsHeroListRepository
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenEvents
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenSideEffects

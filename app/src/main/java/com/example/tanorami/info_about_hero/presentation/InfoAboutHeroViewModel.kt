@@ -1,7 +1,7 @@
 package com.example.tanorami.info_about_hero.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.example.core.base.BaseViewModel
+import com.example.base.BaseViewModel
 import com.example.tanorami.info_about_hero.data.InfoAboutHeroRepository
 import com.example.tanorami.info_about_hero.presentation.models.InfoAboutHeroScreenEvents
 import com.example.tanorami.info_about_hero.presentation.models.InfoAboutHeroScreenSideEffects

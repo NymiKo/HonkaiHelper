@@ -1,6 +1,6 @@
 package com.example.tanorami.send_feedback.presentation.models
 
-import com.example.core.base.UiState
+import com.example.base.UiState
 
 data class SendFeedbackScreenUiState(
     val isSendingFeedback: Boolean = false,

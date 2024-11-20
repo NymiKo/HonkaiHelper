@@ -1,8 +1,6 @@
 package com.example.tanorami.settings.presentation.models
 
-import com.example.core.base.UiEvent
-
-sealed interface SettingsScreenEvents: UiEvent {
+sealed interface SettingsScreenEvents : com.example.base.UiEvent {
     data object CheckUpdate: SettingsScreenEvents
     data object DataUpdated: SettingsScreenEvents
     data object OnSendFeedbackScreen: SettingsScreenEvents

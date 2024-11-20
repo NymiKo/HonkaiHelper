@@ -1,4 +1,4 @@
-package com.example.core.base.models
+package com.example.base.models
 
 data class TextField(
     val value: String = "",

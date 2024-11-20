@@ -1,6 +1,6 @@
 package com.example.tanorami.viewing_users_build.presentation.models
 
-import com.example.core.base.UiState
+import com.example.base.UiState
 import com.example.strings.R
 import com.example.tanorami.viewing_users_build.data.model.FullBuildHeroFromUser
 

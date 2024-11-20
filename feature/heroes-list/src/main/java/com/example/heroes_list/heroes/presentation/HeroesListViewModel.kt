@@ -1,8 +1,8 @@
 package com.example.heroes_list.heroes.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.example.core.base.BaseViewModel
-import com.example.core.base.models.TextField
+import com.example.base.BaseViewModel
+import com.example.base.models.TextField
 import com.example.domain.data_store.AppDataStore
 import com.example.domain.usecase.GetHeroesListWithBaseInfoUseCase
 import com.example.heroes_list.heroes.presentation.models.HeroesListScreenEvents

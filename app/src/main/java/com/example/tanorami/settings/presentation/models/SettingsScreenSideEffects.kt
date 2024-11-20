@@ -1,8 +1,6 @@
 package com.example.tanorami.settings.presentation.models
 
-import com.example.core.base.UiEffect
-
-sealed interface SettingsScreenSideEffects: UiEffect {
+sealed interface SettingsScreenSideEffects : com.example.base.UiEffect {
     class ShowToast(val message: Int): SettingsScreenSideEffects
     data object CLickDonateButton: SettingsScreenSideEffects
     class OnLoadDataScreen(val versionDB: String): SettingsScreenSideEffects

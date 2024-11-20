@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core-common" />
+            <option value="$PROJECT_DIR$/core/base" />
             <option value="$PROJECT_DIR$/core/data" />
             <option value="$PROJECT_DIR$/core/data-local" />
             <option value="$PROJECT_DIR$/core/data-remote" />
@@ -21,6 +22,7 @@
             <option value="$PROJECT_DIR$/core/strings" />
             <option value="$PROJECT_DIR$/core/ui-components" />
             <option value="$PROJECT_DIR$/core/ui-theme" />
+            <option value="$PROJECT_DIR$/core/utils" />
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/heroes-list" />
           </set>

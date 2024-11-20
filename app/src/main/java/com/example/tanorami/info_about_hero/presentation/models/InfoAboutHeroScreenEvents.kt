@@ -1,6 +1,6 @@
 package com.example.tanorami.info_about_hero.presentation.models
 
-import com.example.core.base.UiEvent
+import com.example.base.UiEvent
 
 sealed interface InfoAboutHeroScreenEvents : UiEvent {
     class GetHeroInfo(val idHero: Int): InfoAboutHeroScreenEvents

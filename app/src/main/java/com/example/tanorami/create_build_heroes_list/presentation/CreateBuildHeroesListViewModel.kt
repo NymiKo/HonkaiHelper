@@ -1,7 +1,7 @@
 package com.example.tanorami.create_build_heroes_list.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.example.core.base.BaseViewModel
+import com.example.base.BaseViewModel
 import com.example.tanorami.create_build_heroes_list.presentation.models.CreateBuildHeroesListScreenEvents
 import com.example.tanorami.create_build_heroes_list.presentation.models.CreateBuildHeroesListScreenSideEffects
 import com.example.tanorami.create_build_heroes_list.presentation.models.CreateBuildHeroesListScreenUiState

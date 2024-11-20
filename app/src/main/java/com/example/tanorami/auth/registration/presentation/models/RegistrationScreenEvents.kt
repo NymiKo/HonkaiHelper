@@ -1,6 +1,6 @@
 package com.example.tanorami.auth.registration.presentation.models
 
-import com.example.core.base.UiEvent
+import com.example.base.UiEvent
 
 sealed interface RegistrationScreenEvent : UiEvent {
     class LoginChanged(val newValue: String) : RegistrationScreenEvent

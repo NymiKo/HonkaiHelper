@@ -87,5 +87,7 @@ dependencies {
     implementation(project(":core:ui-components"))
     implementation(project(":core:ui-theme"))
     implementation(project(":core:strings"))
+    implementation(project(":core:utils"))
+    implementation(project(":core:base"))
     implementation(project(":feature:heroes-list"))
 }

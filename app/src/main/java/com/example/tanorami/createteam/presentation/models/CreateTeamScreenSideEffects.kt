@@ -1,6 +1,6 @@
 package com.example.tanorami.createteam.presentation.models
 
-import com.example.core.base.UiEffect
+import com.example.base.UiEffect
 
 sealed interface CreateTeamScreenSideEffects : UiEffect {
     data object TeamDeleted : CreateTeamScreenSideEffects

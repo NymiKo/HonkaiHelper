@@ -1,8 +1,6 @@
 package com.example.tanorami.main.presentation.models
 
-import com.example.core.base.UiEvent
-
-sealed interface MainScreenEvents : UiEvent {
+sealed interface MainScreenEvents : com.example.base.UiEvent {
     data object DialogUploadingDataButtonOkClick : MainScreenEvents
     class ChangeVisibilityDialogCreateBuildOrTeam(val visibility: Boolean) : MainScreenEvents
     data object OnDialogItemCreateBuildClick : MainScreenEvents

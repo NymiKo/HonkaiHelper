@@ -1,6 +1,6 @@
 package com.example.tanorami.teams_and_builds.presentation.models
 
-import com.example.core.base.UiEvent
+import com.example.base.UiEvent
 
 sealed interface TeamsAndBuildsScreenEvents : UiEvent {
     class OnViewingBuildHeroFromUserScreen(val idBuild: Long) : TeamsAndBuildsScreenEvents

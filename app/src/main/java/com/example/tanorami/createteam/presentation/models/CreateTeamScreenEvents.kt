@@ -1,6 +1,6 @@
 package com.example.tanorami.createteam.presentation.models
 
-import com.example.core.base.UiEvent
+import com.example.base.UiEvent
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
 
 sealed interface CreateTeamScreenEvents : UiEvent {

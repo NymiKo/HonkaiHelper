@@ -38,7 +38,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.core.R
-import com.example.core.base.shimmerEffect
 import com.example.core.ui.theme.Blue
 import com.example.core.ui.theme.White
 import com.example.tanorami.auth.login.ui.LoginRoute
@@ -55,6 +54,7 @@ import com.example.tanorami.profile.ui.components.TeamsAndBuildsInProfile
 import com.example.tanorami.profile.ui.components.UserNotLoggedComponent
 import com.example.tanorami.utils.OnLifecycleEvent
 import com.example.tanorami.utils.toast
+import com.example.utils.shimmerEffect
 
 @Composable
 fun ProfileScreen(

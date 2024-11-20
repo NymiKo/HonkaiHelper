@@ -1,6 +1,6 @@
 package com.example.tanorami.builds_hero_from_users.presentation.models
 
-import com.example.core.base.UiState
+import com.example.base.UiState
 import com.example.domain.repository.hero.model.HeroBaseInfoModel
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
 

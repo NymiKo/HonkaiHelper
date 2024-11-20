@@ -1,6 +1,6 @@
 package com.example.tanorami.change_nickname.presentation.models
 
-import com.example.core.base.models.TextField
+import com.example.base.models.TextField
 import com.example.strings.R
 
 data class ChangeNicknameScreenUiState(

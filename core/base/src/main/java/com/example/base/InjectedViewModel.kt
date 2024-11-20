@@ -1,4 +1,4 @@
-package com.example.core.base
+package com.example.base
 
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel

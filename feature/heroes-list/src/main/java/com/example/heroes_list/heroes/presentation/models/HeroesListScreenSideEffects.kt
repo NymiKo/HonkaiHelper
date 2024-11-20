@@ -1,8 +1,6 @@
 package com.example.heroes_list.heroes.presentation.models
 
-import com.example.core.base.UiEffect
-
-sealed interface HeroesListScreenSideEffects : UiEffect {
+sealed interface HeroesListScreenSideEffects : com.example.base.UiEffect {
     data object OnSettingsScreen : HeroesListScreenSideEffects
     class OnInfoAboutHeroScreen(val idHero: Int) : HeroesListScreenSideEffects
 }

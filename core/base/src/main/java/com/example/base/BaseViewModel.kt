@@ -1,4 +1,4 @@
-package com.example.core.base
+package com.example.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,7 +20,8 @@ interface UiEffect
 abstract class BaseViewModel<S : UiState, E : UiEvent, F : UiEffect>(initialState: S) : ViewModel() {
 
     private val _uiState = MutableStateFlow(initialState)
-    private val _uiEffect: MutableSharedFlow<F?> = MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+    private val _uiEffect: MutableSharedFlow<F?> =
+        MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
 
     fun uiState(): StateFlow<S> = _uiState.asStateFlow()
     fun uiEffect(): SharedFlow<F?> = _uiEffect.asSharedFlow()
