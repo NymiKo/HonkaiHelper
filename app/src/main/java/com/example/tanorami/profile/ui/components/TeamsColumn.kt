@@ -26,11 +26,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.core.R.drawable
 import com.example.core.ui.theme.Blue500
 import com.example.core.ui.theme.GreyTransparent20
 import com.example.core.ui.theme.White
 import com.example.strings.R
+import com.example.tanorami.R.drawable
 import com.example.tanorami.teams.data.model.TeamHeroes
 import com.example.tanorami.ui_components.common.BaseHeroAvatarAndName
 

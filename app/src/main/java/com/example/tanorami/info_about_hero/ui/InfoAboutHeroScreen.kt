@@ -19,8 +19,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.core.R.drawable
 import com.example.strings.R
+import com.example.tanorami.R.drawable
 import com.example.tanorami.base_build_hero.ui.BaseBuildHeroNavArguments
 import com.example.tanorami.info_about_hero.presentation.InfoAboutHeroViewModel
 import com.example.tanorami.info_about_hero.presentation.models.InfoAboutHeroScreenEvents

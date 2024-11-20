@@ -1,7 +1,7 @@
 package com.example.tanorami.di
 
 import android.content.Context
-import com.example.core.di.ViewModelFactoryModule
+import com.example.base.ViewModelFactoryModule
 import com.example.data.di.DataModule
 import com.example.domain.data_store.AppDataStore
 import com.example.domain.di.DomainModule

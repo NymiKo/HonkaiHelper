@@ -1,7 +1,7 @@
 package com.example.tanorami.create_build_hero.di
 
 import androidx.lifecycle.ViewModel
-import com.example.core.di.ViewModelKey
+import com.example.base.ViewModelKey
 import com.example.tanorami.create_build_hero.presentation.CreateBuildHeroViewModel
 import dagger.Binds
 import dagger.Module

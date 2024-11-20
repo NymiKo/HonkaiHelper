@@ -69,9 +69,17 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:1.7.5")
     implementation("androidx.compose.material:material:1.7.5")
     implementation("androidx.compose.material3:material3:1.3.1")
+    implementation("androidx.navigation:navigation-compose:2.8.4")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
+
+    //Coil
+    implementation("io.coil-kt:coil-compose:2.6.0")
 
     //SplashScreen
     implementation("androidx.core:core-splashscreen:1.0.1")
+
+    //DataStore
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
@@ -79,7 +87,6 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-contrib:3.6.1")
     androidTestImplementation("com.google.dagger:dagger:2.52")
 
-    implementation(project(":core-common"))
     implementation(project(":core:data"))
     implementation(project(":core:data-local"))
     implementation(project(":core:data-remote"))

@@ -1,7 +1,7 @@
 package com.example.tanorami.main.di
 
 import androidx.lifecycle.ViewModel
-import com.example.core.di.ViewModelKey
+import com.example.base.ViewModelKey
 import com.example.tanorami.main.presentation.MainScreenViewModel
 import dagger.Binds
 import dagger.Module

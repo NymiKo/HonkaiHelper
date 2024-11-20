@@ -18,7 +18,6 @@ rootProject.name = "HonkaiHelper"
 include(":app")
 include(":feature")
 include(":feature:heroes-list")
-include(":core-common")
 include(":core")
 include(":core:data-local")
 include(":core:domain")

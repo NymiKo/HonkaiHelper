@@ -28,13 +28,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.core.R.drawable
 import com.example.core.ui.theme.Blue
 import com.example.core.ui.theme.GreyTransparent20
 import com.example.core.ui.theme.Orange
 import com.example.core.ui.theme.Violet
 import com.example.domain.repository.equipment.Equipment
 import com.example.strings.R
+import com.example.tanorami.R.drawable
 
 @Composable
 fun EquipmentBuildComponent(

@@ -18,8 +18,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.core.R.drawable
 import com.example.strings.R
+import com.example.tanorami.R.drawable
 
 @Composable
 fun ErrorComponent(

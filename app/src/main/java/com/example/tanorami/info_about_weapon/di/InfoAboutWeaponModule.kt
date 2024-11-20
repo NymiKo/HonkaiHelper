@@ -1,7 +1,7 @@
 package com.example.tanorami.info_about_weapon.di
 
 import androidx.lifecycle.ViewModel
-import com.example.core.di.ViewModelKey
+import com.example.base.ViewModelKey
 import com.example.tanorami.info_about_weapon.presentation.InfoAboutWeaponViewModel
 import dagger.Binds
 import dagger.Module

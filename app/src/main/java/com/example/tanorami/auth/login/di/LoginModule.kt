@@ -1,7 +1,7 @@
 package com.example.tanorami.auth.login.di
 
 import androidx.lifecycle.ViewModel
-import com.example.core.di.ViewModelKey
+import com.example.base.ViewModelKey
 import com.example.tanorami.auth.login.presentation.LoginViewModel
 import dagger.Binds
 import dagger.Module

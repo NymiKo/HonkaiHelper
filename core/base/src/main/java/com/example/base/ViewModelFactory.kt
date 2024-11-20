@@ -1,4 +1,4 @@
-package com.example.core.di
+package com.example.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

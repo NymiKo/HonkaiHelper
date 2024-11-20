@@ -30,10 +30,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.core.R.drawable
 import com.example.core.ui.theme.DarkGrey
 import com.example.strings.R
 import com.example.tanorami.R.*
+import com.example.tanorami.R.drawable
 import com.example.tanorami.load_data.ui.LoadDataNavArguments
 import com.example.tanorami.send_feedback.ui.SendFeedbackRoute
 import com.example.tanorami.settings.presentation.SettingsViewModel

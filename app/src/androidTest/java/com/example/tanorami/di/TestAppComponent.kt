@@ -1,7 +1,7 @@
 package com.example.tanorami.di
 
 import android.content.Context
-import com.example.core.di.ViewModelFactoryModule
+import com.example.base.ViewModelFactoryModule
 import com.example.domain.di.DispatcherModule
 import dagger.BindsInstance
 import dagger.Component

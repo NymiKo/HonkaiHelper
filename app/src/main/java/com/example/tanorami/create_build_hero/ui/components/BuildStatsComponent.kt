@@ -30,10 +30,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.core.R.drawable
 import com.example.core.ui.theme.DarkGrey
 import com.example.core.ui.theme.White
 import com.example.strings.R
+import com.example.tanorami.R.drawable
 import com.example.tanorami.create_build_hero.data.model.BuildStatsEquipment
 import com.example.ui.theme.AppTheme
 

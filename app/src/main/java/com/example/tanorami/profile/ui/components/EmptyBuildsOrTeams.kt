@@ -14,8 +14,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.core.R.drawable
 import com.example.strings.R
+import com.example.tanorami.R.drawable
 
 @Composable
 fun EmptyBuildsOrTeams(
