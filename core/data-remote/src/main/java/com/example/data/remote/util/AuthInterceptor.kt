@@ -1,4 +1,4 @@
-package com.example.data.remote
+package com.example.data.remote.util
 
 import com.example.domain.data_store.AppDataStore
 import kotlinx.coroutines.flow.first

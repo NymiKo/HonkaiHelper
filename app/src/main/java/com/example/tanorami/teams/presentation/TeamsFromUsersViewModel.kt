@@ -2,6 +2,7 @@ package com.example.tanorami.teams.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.example.base.BaseViewModel
+import com.example.data.remote.util.NetworkResult
 import com.example.tanorami.teams.data.TeamsFromUsersRepository
 import com.example.tanorami.teams.presentation.models.TeamsFromUsersScreenEvents
 import com.example.tanorami.teams.presentation.models.TeamsFromUsersScreenSideEffects
@@ -36,14 +37,14 @@ class TeamsFromUsersViewModel @Inject constructor(
     private fun getTeamsList(idHero: Int) = viewModelScope.launch {
         uiState = uiState.copy(refreshingTeamsList = true)
         when (val result = repository.getTeamsListByID(idHero)) {
-            is com.example.data.remote.NetworkResult.Error -> {
+            is NetworkResult.Error -> {
                 uiState = uiState.copy(
                     isError = true,
                     refreshingTeamsList = false,
                 )
             }
 
-            is com.example.data.remote.NetworkResult.Success -> {
+            is NetworkResult.Success -> {
                 uiState = uiState.copy(
                     isError = false,
                     refreshingTeamsList = false,

@@ -7,9 +7,9 @@ import dagger.Module
 import javax.inject.Singleton
 
 @Module
-interface LocalDataSourceModule {
+internal interface LocalDataSourceModule {
 
     @Binds
     @Singleton
-    fun provideHeroLocalDataSource(heroLocalDataSourceImpl: HeroLocalDataSourceImpl): HeroLocalDataSource
+    fun bindHeroLocalDataSource(heroLocalDataSourceImpl: HeroLocalDataSourceImpl): HeroLocalDataSource
 }

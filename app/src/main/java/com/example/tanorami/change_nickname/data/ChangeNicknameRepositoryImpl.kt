@@ -1,5 +1,7 @@
 package com.example.tanorami.change_nickname.data
 
+import com.example.data.remote.util.NetworkResult
+import com.example.data.remote.util.handleApi
 import com.example.domain.di.IODispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -9,9 +11,9 @@ class ChangeNicknameRepositoryImpl @Inject constructor(
     @IODispatcher private val ioDispatcher: CoroutineDispatcher,
     private val changeNicknameService: ChangeNicknameService
 ): ChangeNicknameRepository {
-    override suspend fun changeNickname(newNickname: String): com.example.data.remote.NetworkResult<Boolean> =
+    override suspend fun changeNickname(newNickname: String): NetworkResult<Boolean> =
         withContext(ioDispatcher) {
-            return@withContext com.example.data.remote.handleApi {
+            return@withContext handleApi {
                 changeNicknameService.changeNickname(
                     newNickname
                 )

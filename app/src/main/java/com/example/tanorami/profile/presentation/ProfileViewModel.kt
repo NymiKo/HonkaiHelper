@@ -2,6 +2,7 @@ package com.example.tanorami.profile.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.example.base.BaseViewModel
+import com.example.data.remote.util.NetworkResult
 import com.example.domain.data_store.AppDataStore
 import com.example.strings.R
 import com.example.tanorami.profile.domain.ProfileRepository
@@ -53,14 +54,14 @@ class ProfileViewModel @Inject constructor(
     private fun getProfileFlow() = viewModelScope.launch {
         repository.profileFlow.collect { result ->
             when (result) {
-                is com.example.data.remote.NetworkResult.Error -> uiState = uiState.copy(
+                is NetworkResult.Error -> uiState = uiState.copy(
                     isLoading = false,
                     isSuccess = false,
                     isError = true,
                     message = errorHandler(result.code),
                 )
 
-                is com.example.data.remote.NetworkResult.Success -> uiState = uiState.copy(
+                is NetworkResult.Success -> uiState = uiState.copy(
                     isLoading = false,
                     isSuccess = true,
                     isError = false,
@@ -100,11 +101,11 @@ class ProfileViewModel @Inject constructor(
 
     private fun loadAvatar(file: File) = viewModelScope.launch {
         when (repository.loadAvatar(file)) {
-            is com.example.data.remote.NetworkResult.Error -> {
+            is NetworkResult.Error -> {
                 sendSideEffect(ProfileScreenSideEffects.ShowToastError(R.string.error_upload_avatar))
             }
 
-            is com.example.data.remote.NetworkResult.Success -> {
+            is NetworkResult.Success -> {
                 getProfile()
             }
         }

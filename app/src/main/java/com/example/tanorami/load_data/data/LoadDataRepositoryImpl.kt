@@ -20,14 +20,14 @@ import com.example.data.db.entity.BuildWeaponEntity
 import com.example.data.db.entity.DecorationEntity
 import com.example.data.db.entity.EidolonEntity
 import com.example.data.db.entity.ElementEntity
-import com.example.data.db.entity.HeroEntity
 import com.example.data.db.entity.OptimalStatsHeroEntity
 import com.example.data.db.entity.PathEntity
 import com.example.data.db.entity.RelicEntity
 import com.example.data.db.entity.WeaponEntity
-import com.example.data.remote.NetworkResult
-import com.example.data.remote.handleApi
+import com.example.data.remote.util.NetworkResult
+import com.example.data.remote.util.handleApi
 import com.example.data.source.build_stats_equipment.toBuildStatsEquipmentEntity
+import com.example.data.source.hero.mapper.toHeroEntity
 import com.example.domain.di.IODispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -275,7 +275,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                     ).await()
 
                     val heroEntities = newHeroes.mapIndexed { index, hero ->
-                        HeroEntity.toHeroEntity(hero).copy(
+                        hero.toHeroEntity().copy(
                             localAvatarPath = localAvatarPaths[index],
                             localSplashArtPath = localSplashArtsPaths[index]
                         )

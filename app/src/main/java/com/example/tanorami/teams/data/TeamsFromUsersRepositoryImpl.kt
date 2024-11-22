@@ -1,8 +1,8 @@
 package com.example.tanorami.teams.data
 
 import com.example.data.db.dao.HeroDao
-import com.example.data.remote.NetworkResult
-import com.example.data.remote.handleApi
+import com.example.data.remote.util.NetworkResult
+import com.example.data.remote.util.handleApi
 import com.example.data.source.hero.mapper.toHeroBaseInfoModel
 import com.example.domain.di.IODispatcher
 import com.example.tanorami.teams.data.model.TeamHeroes

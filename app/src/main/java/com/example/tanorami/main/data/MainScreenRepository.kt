@@ -1,8 +1,9 @@
 package com.example.tanorami.main.data
 
+import com.example.data.remote.util.NetworkResult
 import com.example.tanorami.main.presentation.models.NewDataModel
 
 interface MainScreenRepository {
-    suspend fun getRemoteVersionDB(): com.example.data.remote.NetworkResult<NewDataModel>
-    suspend fun getAvatar(): com.example.data.remote.NetworkResult<String>
+    suspend fun getRemoteVersionDB(): NetworkResult<NewDataModel>
+    suspend fun getAvatar(): NetworkResult<String>
 }

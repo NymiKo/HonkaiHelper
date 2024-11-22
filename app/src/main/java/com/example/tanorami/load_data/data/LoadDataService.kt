@@ -6,6 +6,7 @@ import com.example.domain.repository.decoration.BuildDecorationModel
 import com.example.domain.repository.decoration.DecorationModel
 import com.example.domain.repository.eidolon.EidolonModel
 import com.example.domain.repository.element.ElementModel
+import com.example.domain.repository.hero.model.HeroModel
 import com.example.domain.repository.optimal_stats_hero.OptimalStatsHero
 import com.example.domain.repository.path.PathModel
 import com.example.domain.repository.relic.BuildRelicModel
@@ -17,7 +18,7 @@ import retrofit2.http.GET
 
 interface LoadDataService {
     @GET("/getHeroes.php")
-    suspend fun getHeroesList(): Response<List<com.example.domain.repository.hero.model.HeroModel>>
+    suspend fun getHeroesList(): Response<List<HeroModel>>
 
     @GET("/getPaths.php")
     suspend fun getPathsList(): Response<List<PathModel>>

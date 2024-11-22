@@ -2,6 +2,7 @@ package com.example.tanorami.builds_hero_from_users.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.example.base.BaseViewModel
+import com.example.data.remote.util.NetworkResult
 import com.example.tanorami.builds_hero_from_users.data.BuildsHeroListRepository
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenEvents
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenSideEffects
@@ -29,7 +30,7 @@ class BuildsHeroFromUsersViewModel @Inject constructor(
     private fun getBuildsHeroList(idHero: Int) = viewModelScope.launch {
         uiState = uiState.copy(refreshingBuildsList = true)
         when (val result = repository.getBuildsHeroListByIdHero(idHero)) {
-            is com.example.data.remote.NetworkResult.Error -> {
+            is NetworkResult.Error -> {
                 uiState = uiState.copy(
                     isSuccess = false,
                     isError = true,
@@ -37,7 +38,7 @@ class BuildsHeroFromUsersViewModel @Inject constructor(
                 )
             }
 
-            is com.example.data.remote.NetworkResult.Success -> {
+            is NetworkResult.Success -> {
                 uiState = uiState.copy(
                     isSuccess = true,
                     isError = false,

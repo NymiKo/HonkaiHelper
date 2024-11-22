@@ -1,5 +1,7 @@
 package com.example.tanorami.auth.login.domain
 
+import com.example.data.remote.util.NetworkResult
+import com.example.data.remote.util.handleApi
 import com.example.domain.di.IODispatcher
 import com.example.tanorami.auth.login.data.LoginService
 import com.example.tanorami.auth.login.data.models.LoginRequest
@@ -14,10 +16,10 @@ class LoginRepositoryImpl @Inject constructor(
 ) : LoginRepository {
     override suspend fun login(
         login: String,
-        password: String
-    ): com.example.data.remote.NetworkResult<LoginResponse> {
+        password: String,
+    ): NetworkResult<LoginResponse> {
         return withContext(ioDispatcher) {
-            com.example.data.remote.handleApi { loginService.login(LoginRequest(login, password)) }
+            handleApi { loginService.login(LoginRequest(login, password)) }
         }
     }
 }

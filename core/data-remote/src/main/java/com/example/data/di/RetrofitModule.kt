@@ -1,6 +1,6 @@
 package com.example.data.di
 
-import com.example.data.remote.AuthInterceptor
+import com.example.data.remote.util.AuthInterceptor
 import com.example.domain.data_store.AppDataStore
 import dagger.Module
 import dagger.Provides
@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-object RetrofitModule {
+internal object RetrofitModule {
     @Provides
     @Singleton
     fun provideInterceptor(): HttpLoggingInterceptor =

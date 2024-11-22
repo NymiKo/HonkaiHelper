@@ -4,8 +4,8 @@ import com.example.data.db.dao.DecorationDao
 import com.example.data.db.dao.HeroDao
 import com.example.data.db.dao.RelicDao
 import com.example.data.db.dao.WeaponDao
-import com.example.data.remote.NetworkResult
-import com.example.data.remote.handleApi
+import com.example.data.remote.util.NetworkResult
+import com.example.data.remote.util.handleApi
 import com.example.data.source.hero.mapper.toHeroBaseInfoModel
 import com.example.domain.di.IODispatcher
 import com.example.domain.repository.hero.model.HeroBaseInfoModel

@@ -1,13 +1,11 @@
 package com.example.data.source.hero
 
 import com.example.data.db.dao.HeroDao
+import com.example.data.db.entity.HeroEntity
+import com.example.data.db.models.hero.HeroBaseInfoProjection
 import com.example.data.db.models.hero.HeroFullBaseBuildRelations
 import com.example.data.db.models.hero.HeroFullInfoRelations
-import com.example.data.source.hero.mapper.toHeroBaseInfoModel
-import com.example.data.source.hero.mapper.toHeroEntity
 import com.example.domain.di.IODispatcher
-import com.example.domain.repository.hero.model.HeroBaseInfoModel
-import com.example.domain.repository.hero.model.HeroModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -16,9 +14,9 @@ class HeroLocalDataSourceImpl @Inject constructor(
     @IODispatcher private val ioDispatcher: CoroutineDispatcher,
     private val heroDao: HeroDao,
 ) : HeroLocalDataSource {
-    override suspend fun getHeroesList(): List<HeroModel> {
+    override suspend fun getHeroesList(): List<HeroEntity> {
         return withContext(ioDispatcher) {
-            heroDao.getHeroesList().map { heroEntity -> heroEntity.toHeroModel() }
+            heroDao.getHeroesList()
         }
     }
 
@@ -34,23 +32,21 @@ class HeroLocalDataSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun getHeroBaseInfo(idHero: Int): HeroBaseInfoModel {
+    override suspend fun getHeroBaseInfo(idHero: Int): HeroBaseInfoProjection {
         return withContext(ioDispatcher) {
-            heroDao.getHeroWithNameAvatarRarity(idHero).toHeroBaseInfoModel()
+            heroDao.getHeroWithNameAvatarRarity(idHero)
         }
     }
 
-    override suspend fun getHeroesListWithBaseInfo(): List<HeroBaseInfoModel> {
+    override suspend fun getHeroesListWithBaseInfo(): List<HeroBaseInfoProjection> {
         return withContext(ioDispatcher) {
-            heroDao.getHeroesListWithNameAvatarRarity().map { heroBaseInfoProjection ->
-                heroBaseInfoProjection.toHeroBaseInfoModel()
-            }
+            heroDao.getHeroesListWithNameAvatarRarity()
         }
     }
 
-    override suspend fun getHeroById(idHero: Int): HeroModel {
+    override suspend fun getHeroById(idHero: Int): HeroEntity {
         return withContext(ioDispatcher) {
-            heroDao.getHeroById(idHero).toHeroModel()
+            heroDao.getHeroById(idHero)
         }
     }
 
@@ -60,9 +56,9 @@ class HeroLocalDataSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun insertHeroesList(heroesList: List<HeroModel>) {
+    override suspend fun insertHeroesList(heroesList: List<HeroEntity>) {
         withContext(ioDispatcher) {
-            heroDao.insertHeroesList(heroesList.map { hero -> hero.toHeroEntity() })
+            heroDao.insertHeroesList(heroesList)
         }
     }
 }

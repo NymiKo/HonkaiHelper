@@ -2,7 +2,7 @@ package com.example.tanorami.teams_and_builds.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.example.base.BaseViewModel
-import com.example.data.remote.NetworkResult
+import com.example.data.remote.util.NetworkResult
 import com.example.tanorami.teams_and_builds.data.TeamsAndBuildsRepository
 import com.example.tanorami.teams_and_builds.presentation.models.TeamsAndBuildsScreenEvents
 import com.example.tanorami.teams_and_builds.presentation.models.TeamsAndBuildsScreenSideEffects

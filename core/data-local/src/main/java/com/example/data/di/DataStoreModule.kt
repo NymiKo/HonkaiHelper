@@ -20,7 +20,7 @@ import kotlinx.coroutines.SupervisorJob
 import javax.inject.Singleton
 
 @Module
-interface DataStoreModule {
+internal interface DataStoreModule {
 
     companion object {
         @Provides

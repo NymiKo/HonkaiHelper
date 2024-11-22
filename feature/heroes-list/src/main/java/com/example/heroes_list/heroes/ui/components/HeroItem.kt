@@ -27,7 +27,7 @@ import com.example.domain.repository.hero.model.HeroBaseInfoModel
 import com.example.ui.components.text.BaseDefaultText
 
 @Composable
-fun HeroItem(
+internal fun HeroItem(
     modifier: Modifier = Modifier,
     heroModel: HeroBaseInfoModel,
     onClick: () -> Unit,

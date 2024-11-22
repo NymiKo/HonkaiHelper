@@ -2,6 +2,7 @@ package com.example.tanorami.auth.registration.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.example.base.BaseViewModel
+import com.example.data.remote.util.NetworkResult
 import com.example.strings.R
 import com.example.tanorami.auth.registration.data.RegistrationRepository
 import com.example.tanorami.auth.registration.presentation.models.RegistrationScreenEvent
@@ -103,12 +104,12 @@ class RegistrationViewModel @Inject constructor(
         when (val result =
             repository.register(uiState.nicknameField.value, uiState.passwordField.value)) {
 
-            is com.example.data.remote.NetworkResult.Success -> {
+            is NetworkResult.Success -> {
                 sendSideEffect(RegistrationScreenSideEffects.SuccessCreatingAccount)
                 uiState = uiState.copy(isCreatingAccount = false)
             }
 
-            is com.example.data.remote.NetworkResult.Error -> {
+            is NetworkResult.Error -> {
                 sendSideEffect(RegistrationScreenSideEffects.ShowToast(errorHandler(result.code)))
                 uiState = uiState.copy(isCreatingAccount = false)
             }

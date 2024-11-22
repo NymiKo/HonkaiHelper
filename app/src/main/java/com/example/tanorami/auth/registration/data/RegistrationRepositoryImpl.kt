@@ -1,5 +1,7 @@
 package com.example.tanorami.auth.registration.data
 
+import com.example.data.remote.util.NetworkResult
+import com.example.data.remote.util.handleApi
 import com.example.domain.di.IODispatcher
 import com.example.tanorami.auth.registration.data.model.RegistrationRequest
 import kotlinx.coroutines.CoroutineDispatcher
@@ -12,10 +14,10 @@ class RegistrationRepositoryImpl @Inject constructor(
 ) : RegistrationRepository {
     override suspend fun register(
         login: String,
-        password: String
-    ): com.example.data.remote.NetworkResult<Unit> {
+        password: String,
+    ): NetworkResult<Unit> {
         return withContext(ioDispatcher) {
-            com.example.data.remote.handleApi {
+            handleApi {
                 registrationService.registration(RegistrationRequest(login, password))
             }
         }

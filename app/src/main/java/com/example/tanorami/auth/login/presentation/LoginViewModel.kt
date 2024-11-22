@@ -2,7 +2,7 @@ package com.example.tanorami.auth.login.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.example.base.BaseViewModel
-import com.example.data.remote.NetworkResult
+import com.example.data.remote.util.NetworkResult
 import com.example.domain.data_store.AppDataStore
 import com.example.strings.R
 import com.example.tanorami.auth.login.domain.LoginRepository
