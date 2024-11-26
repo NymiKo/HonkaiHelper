@@ -1,0 +1,604 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "dcc85c386d2a7a55eadbb9f48233ffeb",
+    "entities": [
+      {
+        "tableName": "heroes",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `story` TEXT NOT NULL, `rarity` INTEGER NOT NULL, `idPath` INTEGER NOT NULL, `idElement` INTEGER NOT NULL, `localAvatarPath` TEXT NOT NULL, `localSplashArtPath` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "story",
+            "columnName": "story",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rarity",
+            "columnName": "rarity",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idPath",
+            "columnName": "idPath",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idElement",
+            "columnName": "idElement",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "localAvatarPath",
+            "columnName": "localAvatarPath",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "localSplashArtPath",
+            "columnName": "localSplashArtPath",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "paths",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idPath` INTEGER NOT NULL, `title` TEXT NOT NULL, `image` TEXT NOT NULL, PRIMARY KEY(`idPath`))",
+        "fields": [
+          {
+            "fieldPath": "idPath",
+            "columnName": "idPath",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "image",
+            "columnName": "image",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "idPath"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "elements",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idElement` INTEGER NOT NULL, `title` TEXT NOT NULL, `image` TEXT NOT NULL, PRIMARY KEY(`idElement`))",
+        "fields": [
+          {
+            "fieldPath": "idElement",
+            "columnName": "idElement",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "image",
+            "columnName": "image",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "idElement"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "abilities",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idAbility` INTEGER NOT NULL, `type` TEXT NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `image` TEXT NOT NULL, `idHero` INTEGER NOT NULL, PRIMARY KEY(`idAbility`))",
+        "fields": [
+          {
+            "fieldPath": "idAbility",
+            "columnName": "idAbility",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "image",
+            "columnName": "image",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idHero",
+            "columnName": "idHero",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "idAbility"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "eidolons",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idEidolon` INTEGER NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `image` TEXT NOT NULL, `idHero` INTEGER NOT NULL, PRIMARY KEY(`idEidolon`))",
+        "fields": [
+          {
+            "fieldPath": "idEidolon",
+            "columnName": "idEidolon",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "image",
+            "columnName": "image",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idHero",
+            "columnName": "idHero",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "idEidolon"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "relics",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idRelic` INTEGER NOT NULL, `title` TEXT NOT NULL, `descriptionTwoParts` TEXT NOT NULL, `descriptionFourParts` TEXT NOT NULL, `image` TEXT NOT NULL, PRIMARY KEY(`idRelic`))",
+        "fields": [
+          {
+            "fieldPath": "idRelic",
+            "columnName": "idRelic",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "descriptionTwoParts",
+            "columnName": "descriptionTwoParts",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "descriptionFourParts",
+            "columnName": "descriptionFourParts",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "image",
+            "columnName": "image",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "idRelic"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "decorations",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idDecoration` INTEGER NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `image` TEXT NOT NULL, PRIMARY KEY(`idDecoration`))",
+        "fields": [
+          {
+            "fieldPath": "idDecoration",
+            "columnName": "idDecoration",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "image",
+            "columnName": "image",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "idDecoration"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "optimal_stats",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idOptimalStats` INTEGER NOT NULL, `attack` TEXT NOT NULL, `speed` TEXT NOT NULL, `energy` TEXT NOT NULL, `hp` TEXT NOT NULL, `defence` TEXT NOT NULL, `critRate` TEXT NOT NULL, `critDamage` TEXT NOT NULL, `idHero` INTEGER NOT NULL, PRIMARY KEY(`idOptimalStats`))",
+        "fields": [
+          {
+            "fieldPath": "idOptimalStats",
+            "columnName": "idOptimalStats",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "attack",
+            "columnName": "attack",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "speed",
+            "columnName": "speed",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "energy",
+            "columnName": "energy",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "hp",
+            "columnName": "hp",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "defence",
+            "columnName": "defence",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "critRate",
+            "columnName": "critRate",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "critDamage",
+            "columnName": "critDamage",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idHero",
+            "columnName": "idHero",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "idOptimalStats"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "build_weapon",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idBuildWeapon` INTEGER NOT NULL, `idWeapon` INTEGER NOT NULL, `top` INTEGER NOT NULL, `idHero` INTEGER NOT NULL, PRIMARY KEY(`idBuildWeapon`))",
+        "fields": [
+          {
+            "fieldPath": "idBuildWeapon",
+            "columnName": "idBuildWeapon",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idWeapon",
+            "columnName": "idWeapon",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "top",
+            "columnName": "top",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idHero",
+            "columnName": "idHero",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "idBuildWeapon"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "build_relic",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idBuildRelic` INTEGER NOT NULL, `idRelic` INTEGER NOT NULL, `top` INTEGER NOT NULL, `idHero` INTEGER NOT NULL, PRIMARY KEY(`idBuildRelic`))",
+        "fields": [
+          {
+            "fieldPath": "idBuildRelic",
+            "columnName": "idBuildRelic",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idRelic",
+            "columnName": "idRelic",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "top",
+            "columnName": "top",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idHero",
+            "columnName": "idHero",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "idBuildRelic"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "build_decoration",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idBuildDecoration` INTEGER NOT NULL, `idDecoration` INTEGER NOT NULL, `top` INTEGER NOT NULL, `idHero` INTEGER NOT NULL, PRIMARY KEY(`idBuildDecoration`))",
+        "fields": [
+          {
+            "fieldPath": "idBuildDecoration",
+            "columnName": "idBuildDecoration",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idDecoration",
+            "columnName": "idDecoration",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "top",
+            "columnName": "top",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idHero",
+            "columnName": "idHero",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "idBuildDecoration"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "build_stats_equipment",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idBuildStatsEquipment` INTEGER NOT NULL, `body` TEXT NOT NULL, `legs` TEXT NOT NULL, `sphere` TEXT NOT NULL, `rope` TEXT NOT NULL, `idHero` INTEGER NOT NULL, PRIMARY KEY(`idBuildStatsEquipment`))",
+        "fields": [
+          {
+            "fieldPath": "idBuildStatsEquipment",
+            "columnName": "idBuildStatsEquipment",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "body",
+            "columnName": "body",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "legs",
+            "columnName": "legs",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sphere",
+            "columnName": "sphere",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rope",
+            "columnName": "rope",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idHero",
+            "columnName": "idHero",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "idBuildStatsEquipment"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "weapons",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idWeapon` INTEGER NOT NULL, `name` TEXT NOT NULL, `story` TEXT NOT NULL, `description` TEXT NOT NULL, `image` TEXT NOT NULL, `path` INTEGER NOT NULL, `rarity` INTEGER NOT NULL, PRIMARY KEY(`idWeapon`))",
+        "fields": [
+          {
+            "fieldPath": "idWeapon",
+            "columnName": "idWeapon",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "story",
+            "columnName": "story",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "image",
+            "columnName": "image",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "path",
+            "columnName": "path",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rarity",
+            "columnName": "rarity",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "idWeapon"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'dcc85c386d2a7a55eadbb9f48233ffeb')"
+    ]
+  }
+}

@@ -9,6 +9,6 @@ import dagger.Component
     modules = [HeroesListModule::class],
     dependencies = [HeroesListComponentDependencies::class]
 )
-interface HeroesListComponent {
+internal interface HeroesListComponent {
     fun getViewModel(): HeroesListViewModel
 }

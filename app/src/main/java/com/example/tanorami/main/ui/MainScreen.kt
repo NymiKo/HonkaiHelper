@@ -40,15 +40,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
-import com.example.base.injectedViewModel
 import com.example.core.ui.theme.Orange
-import com.example.heroes_list.heroes.di.DaggerHeroesListComponent
-import com.example.heroes_list.heroes.di.HeroesListComponentDependenciesProvider
-import com.example.heroes_list.heroes.presentation.HeroesListViewModel
-import com.example.heroes_list.heroes.ui.HeroesListScreen
+import com.example.heroes_list.heroes.navigation.heroesListScreen
 import com.example.tanorami.R
 import com.example.tanorami.create_build_heroes_list.ui.CreateBuildHeroesListNavArguments
 import com.example.tanorami.createteam.ui.CreateTeamNavArguments
+import com.example.tanorami.info_about_hero.ui.InfoAboutHeroNavArguments
 import com.example.tanorami.load_data.ui.LoadDataNavArguments
 import com.example.tanorami.main.presentation.MainScreenViewModel
 import com.example.tanorami.main.presentation.models.MainScreenEvents
@@ -57,6 +54,7 @@ import com.example.tanorami.main.presentation.models.MainScreenUiState
 import com.example.tanorami.main.ui.components.CreateBuildOrTeamDialog
 import com.example.tanorami.main.ui.components.UploadingDataDialog
 import com.example.tanorami.profile.ui.ProfileScreen
+import com.example.tanorami.settings.ui.SettingsRoute
 import com.example.tanorami.teams_and_builds.ui.TeamsAndBuildsScreen
 import com.example.tanorami.utils.toast
 import com.example.tanorami.weapons_list.ui.WeaponsListScreen
@@ -243,24 +241,10 @@ private fun MainScreenContent(
                 fadeOut(animationSpec = tween(200))
             }
         ) {
-            composable(
-                route = MainScreens.HeroesList.route,
-            ) {
-                val heroesListComponentDependencies =
-                    (context.applicationContext as HeroesListComponentDependenciesProvider).getHeroesListComponentDependencies()
-
-                val component = DaggerHeroesListComponent.builder()
-                    .heroesListComponentDependencies(heroesListComponentDependencies).build()
-                val viewModel: HeroesListViewModel = injectedViewModel {
-                    component.getViewModel()
-                }
-
-                HeroesListScreen(
-                    viewModelFactory = viewModelFactory,
-                    navController = rootNavController,
-                    viewModel = viewModel,
-                )
-            }
+            heroesListScreen(
+                onHeroClick = { navController.navigate(InfoAboutHeroNavArguments(it)) },
+                onSettingsIconClick = { navController.navigate(SettingsRoute) }
+            )
 
             composable(
                 route = MainScreens.WeaponsList.route,

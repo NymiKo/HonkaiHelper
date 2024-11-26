@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class HeroesListViewModel @Inject constructor(
+internal class HeroesListViewModel @Inject constructor(
     private val getHeroesListWithBaseInfoUseCase: GetHeroesListWithBaseInfoUseCase,
     private val appDataStore: AppDataStore,
 ) : BaseViewModel<HeroesListScreenUiState, HeroesListScreenEvents, HeroesListScreenSideEffects>(

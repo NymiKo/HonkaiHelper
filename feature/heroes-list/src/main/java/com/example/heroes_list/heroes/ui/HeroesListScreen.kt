@@ -24,9 +24,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.example.heroes_list.R
 import com.example.heroes_list.heroes.presentation.HeroesListViewModel
 import com.example.heroes_list.heroes.presentation.models.HeroesListScreenEvents
@@ -35,10 +32,10 @@ import com.example.heroes_list.heroes.presentation.models.HeroesListScreenUiStat
 import com.example.heroes_list.heroes.ui.components.HeroItem
 
 @Composable
-fun HeroesListScreen(
-    viewModelFactory: ViewModelProvider.Factory,
-    viewModel: HeroesListViewModel = viewModel(factory = viewModelFactory),
-    navController: NavController,
+internal fun HeroesListScreen(
+    viewModel: HeroesListViewModel,
+    onHeroClick: (idHero: Int) -> Unit,
+    onSettingsIconClick: () -> Unit,
 ) {
     val state = viewModel.uiState().collectAsState().value
     val sideEffect = viewModel.uiEffect().collectAsState(null).value
@@ -50,12 +47,12 @@ fun HeroesListScreen(
 
     when (sideEffect) {
         HeroesListScreenSideEffects.OnSettingsScreen -> {
-            //navController.navigate(route = SettingsRoute)
+            onSettingsIconClick()
             viewModel.clearEffect()
         }
 
         is HeroesListScreenSideEffects.OnInfoAboutHeroScreen -> {
-            //navController.navigate(route = InfoAboutHeroNavArguments(sideEffect.idHero))
+            onHeroClick(sideEffect.idHero)
             viewModel.clearEffect()
         }
 
