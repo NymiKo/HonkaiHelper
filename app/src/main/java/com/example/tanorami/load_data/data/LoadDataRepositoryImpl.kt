@@ -28,7 +28,7 @@ import com.example.data.remote.util.NetworkResult
 import com.example.data.remote.util.handleApi
 import com.example.data.source.build_stats_equipment.toBuildStatsEquipmentEntity
 import com.example.data.source.hero.mapper.toHeroEntity
-import com.example.domain.di.IODispatcher
+import com.example.domain.di.DispatcherIo
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -40,7 +40,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class LoadDataRepositoryImpl @Inject constructor(
-    @IODispatcher private val ioDispatcher: CoroutineDispatcher,
+    @DispatcherIo private val ioDispatcher: CoroutineDispatcher,
     private val heroDao: HeroDao,
     private val pathDao: PathDao,
     private val abilityDao: AbilityDao,
@@ -55,7 +55,7 @@ class LoadDataRepositoryImpl @Inject constructor(
     private val buildStatsEquipmentDao: BuildStatsEquipmentDao,
     private val weaponDao: WeaponDao,
     private val loadDataService: LoadDataService,
-    private val fileManager: FileManager
+    private val fileManager: FileManager,
 ) : LoadDataRepository {
 
     override suspend fun downloadingData(): Boolean = withContext(ioDispatcher) {

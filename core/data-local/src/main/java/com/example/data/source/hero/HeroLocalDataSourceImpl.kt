@@ -5,13 +5,13 @@ import com.example.data.db.entity.HeroEntity
 import com.example.data.db.models.hero.HeroBaseInfoProjection
 import com.example.data.db.models.hero.HeroFullBaseBuildRelations
 import com.example.data.db.models.hero.HeroFullInfoRelations
-import com.example.domain.di.IODispatcher
+import com.example.domain.di.DispatcherIo
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class HeroLocalDataSourceImpl @Inject constructor(
-    @IODispatcher private val ioDispatcher: CoroutineDispatcher,
+    @DispatcherIo private val ioDispatcher: CoroutineDispatcher,
     private val heroDao: HeroDao,
 ) : HeroLocalDataSource {
     override suspend fun getHeroesList(): List<HeroEntity> {

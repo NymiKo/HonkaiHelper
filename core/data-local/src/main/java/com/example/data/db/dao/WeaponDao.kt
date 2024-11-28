@@ -7,7 +7,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import com.example.data.db.contract.RoomContract
 import com.example.data.db.entity.WeaponEntity
-import com.example.data.db.models.weapon.WeaponWithPath
+import com.example.data.db.models.weapon.WeaponWithPathRelation
 
 @Dao
 interface WeaponDao {
@@ -16,7 +16,7 @@ interface WeaponDao {
 
     @Transaction
     @Query("SELECT * FROM ${RoomContract.tableWeapons} WHERE idWeapon = :idWeapon")
-    suspend fun getWeaponWithPath(idWeapon: Int): WeaponWithPath
+    suspend fun getWeaponWithPath(idWeapon: Int): WeaponWithPathRelation
 
     @Query("SELECT * FROM ${RoomContract.tableWeapons} WHERE idWeapon = :idWeapon")
     suspend fun getWeapon(idWeapon: Int): WeaponEntity

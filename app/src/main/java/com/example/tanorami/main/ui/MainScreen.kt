@@ -46,6 +46,7 @@ import com.example.tanorami.R
 import com.example.tanorami.create_build_heroes_list.ui.CreateBuildHeroesListNavArguments
 import com.example.tanorami.createteam.ui.CreateTeamNavArguments
 import com.example.tanorami.info_about_hero.ui.InfoAboutHeroNavArguments
+import com.example.tanorami.info_about_weapon.ui.InfoAboutWeaponNavArguments
 import com.example.tanorami.load_data.ui.LoadDataNavArguments
 import com.example.tanorami.main.presentation.MainScreenViewModel
 import com.example.tanorami.main.presentation.models.MainScreenEvents
@@ -57,7 +58,7 @@ import com.example.tanorami.profile.ui.ProfileScreen
 import com.example.tanorami.settings.ui.SettingsRoute
 import com.example.tanorami.teams_and_builds.ui.TeamsAndBuildsScreen
 import com.example.tanorami.utils.toast
-import com.example.tanorami.weapons_list.ui.WeaponsListScreen
+import com.example.weapons_list.navigation.weaponsListScreen
 import kotlinx.serialization.Serializable
 
 enum class MainScreens(val route: String) {
@@ -242,18 +243,13 @@ private fun MainScreenContent(
             }
         ) {
             heroesListScreen(
-                onHeroClick = { navController.navigate(InfoAboutHeroNavArguments(it)) },
-                onSettingsIconClick = { navController.navigate(SettingsRoute) }
+                onHeroClick = { rootNavController.navigate(InfoAboutHeroNavArguments(it)) },
+                onSettingsIconClick = { rootNavController.navigate(SettingsRoute) }
             )
 
-            composable(
-                route = MainScreens.WeaponsList.route,
-            ) {
-                WeaponsListScreen(
-                    viewModelFactory = viewModelFactory,
-                    navController = rootNavController,
-                )
-            }
+            weaponsListScreen(
+                onWeaponClick = { rootNavController.navigate(InfoAboutWeaponNavArguments(it)) }
+            )
 
             composable(
                 route = MainScreens.TeamsAndBuilds.route,

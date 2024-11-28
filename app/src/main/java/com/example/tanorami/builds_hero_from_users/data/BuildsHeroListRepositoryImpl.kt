@@ -7,7 +7,7 @@ import com.example.data.db.dao.WeaponDao
 import com.example.data.remote.util.NetworkResult
 import com.example.data.remote.util.handleApi
 import com.example.data.source.hero.mapper.toHeroBaseInfoModel
-import com.example.domain.di.IODispatcher
+import com.example.domain.di.DispatcherIo
 import com.example.domain.repository.hero.model.HeroBaseInfoModel
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
 import kotlinx.coroutines.CoroutineDispatcher
@@ -15,12 +15,12 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class BuildsHeroListRepositoryImpl @Inject constructor(
-    @IODispatcher private val ioDispatcher: CoroutineDispatcher,
+    @DispatcherIo private val ioDispatcher: CoroutineDispatcher,
     private val heroDao: HeroDao,
     private val buildsHeroListService: BuildsHeroListService,
     private val weaponDao: WeaponDao,
     private val relicDao: RelicDao,
-    private val decorationDao: DecorationDao
+    private val decorationDao: DecorationDao,
 ) : BuildsHeroListRepository {
     override suspend fun getHero(idHero: Int): HeroBaseInfoModel = withContext(ioDispatcher) {
         return@withContext heroDao.getHeroWithNameAvatarRarity(idHero).toHeroBaseInfoModel()

@@ -1,15 +1,15 @@
 package com.example.tanorami.base_build_hero.data
 
 import com.example.data.db.dao.HeroDao
-import com.example.domain.di.IODispatcher
+import com.example.domain.di.DispatcherIo
 import com.example.tanorami.base_build_hero.data.model.FullBaseBuildHero
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class BaseBuildHeroRepositoryImpl @Inject constructor(
-    @IODispatcher private val ioDispatcher: CoroutineDispatcher,
-    private val heroDao: HeroDao
+    @DispatcherIo private val ioDispatcher: CoroutineDispatcher,
+    private val heroDao: HeroDao,
 ) : BaseBuildHeroRepository {
     override suspend fun getBaseBuildHero(idHero: Int): FullBaseBuildHero =
         withContext(ioDispatcher) {

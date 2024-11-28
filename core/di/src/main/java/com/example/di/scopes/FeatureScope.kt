@@ -2,6 +2,6 @@ package com.example.di.scopes
 
 import javax.inject.Scope
 
-@Scope
 @Retention(AnnotationRetention.RUNTIME)
+@Scope
 annotation class FeatureScope

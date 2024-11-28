@@ -1,7 +1,7 @@
 package com.example.tanorami.load_data.data
 
 import android.content.Context
-import com.example.domain.di.IODispatcher
+import com.example.domain.di.DispatcherIo
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
@@ -15,7 +15,7 @@ import javax.inject.Inject
 class FileManagerImpl @Inject constructor(
     private val context: Context,
     private val okHttpClient: OkHttpClient,
-    @IODispatcher private val ioDispatcher: CoroutineDispatcher
+    @DispatcherIo private val ioDispatcher: CoroutineDispatcher,
 ) : FileManager {
     override suspend fun saveImage(
         imageUrl: String,

@@ -7,7 +7,7 @@ import com.example.data.db.dao.WeaponDao
 import com.example.data.remote.util.NetworkResult
 import com.example.data.remote.util.handleApi
 import com.example.data.source.hero.mapper.toHeroBaseInfoModel
-import com.example.domain.di.IODispatcher
+import com.example.domain.di.DispatcherIo
 import com.example.domain.repository.hero.model.HeroBaseInfoModel
 import com.example.tanorami.builds_hero_from_users.data.BuildsHeroListService
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
@@ -24,7 +24,7 @@ class TeamsAndBuildsRepositoryImpl @Inject constructor(
     private val weaponDao: WeaponDao,
     private val relicDao: RelicDao,
     private val decorationDao: DecorationDao,
-    @IODispatcher private val ioDispatcher: CoroutineDispatcher,
+    @DispatcherIo private val ioDispatcher: CoroutineDispatcher,
 ) : TeamsAndBuildsRepository {
     override suspend fun getHero(idHero: Int): HeroBaseInfoModel =
         withContext(ioDispatcher) {

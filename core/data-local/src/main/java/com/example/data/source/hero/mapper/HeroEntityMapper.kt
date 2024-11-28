@@ -11,7 +11,7 @@ import com.example.data.source.eidolon.toEidolonModel
 import com.example.data.source.element.toElementModel
 import com.example.data.source.path.toPathModel
 import com.example.data.source.relic.toRelicForBuildModel
-import com.example.data.source.weapon.toWeaponForBuildModel
+import com.example.data.source.weapon.mapper.toWeaponForBuildModel
 import com.example.domain.repository.hero.model.HeroBaseInfoModel
 import com.example.domain.repository.hero.model.HeroFullBaseBuildModel
 import com.example.domain.repository.hero.model.HeroFullInfoModel

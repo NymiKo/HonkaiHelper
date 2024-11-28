@@ -4,7 +4,7 @@ import com.example.data.db.dao.HeroDao
 import com.example.data.remote.util.NetworkResult
 import com.example.data.remote.util.handleApi
 import com.example.data.source.hero.mapper.toHeroBaseInfoModel
-import com.example.domain.di.IODispatcher
+import com.example.domain.di.DispatcherIo
 import com.example.domain.repository.hero.model.HeroBaseInfoModel
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
 import kotlinx.coroutines.CoroutineDispatcher
@@ -14,7 +14,7 @@ import javax.inject.Inject
 class CreateTeamRepositoryImpl @Inject constructor(
     private val createTeamService: CreateTeamService,
     private val heroDao: HeroDao,
-    @IODispatcher private val ioDispatcher: CoroutineDispatcher
+    @DispatcherIo private val ioDispatcher: CoroutineDispatcher,
 ) : CreateTeamRepository {
 
     override suspend fun getHeroesList(): List<ActiveHeroInTeam> = withContext(ioDispatcher) {

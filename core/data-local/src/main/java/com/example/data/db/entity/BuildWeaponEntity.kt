@@ -3,7 +3,7 @@ package com.example.data.db.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.data.db.contract.RoomContract
-import com.example.domain.repository.weapon.BuildWeaponModel
+import com.example.domain.repository.weapon.models.BuildWeaponModel
 
 @Entity(tableName = RoomContract.tableBuildWeapon)
 data class BuildWeaponEntity(

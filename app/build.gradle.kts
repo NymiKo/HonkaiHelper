@@ -97,4 +97,5 @@ dependencies {
     implementation(project(":core:utils"))
     implementation(project(":core:base"))
     implementation(project(":feature:heroes-list"))
+    implementation(project(":feature:weapons-list"))
 }

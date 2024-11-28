@@ -10,7 +10,7 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.example.data.db.data_store.AppDataStoreImpl
 import com.example.domain.data_store.AppDataStore
-import com.example.domain.di.IODispatcher
+import com.example.domain.di.DispatcherIo
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -27,7 +27,7 @@ internal interface DataStoreModule {
         @Singleton
         fun providesDataStore(
             appContext: Context,
-            @IODispatcher dispatcherIO: CoroutineDispatcher
+            @DispatcherIo dispatcherIO: CoroutineDispatcher,
         ): DataStore<Preferences> {
             return PreferenceDataStoreFactory.create(
                 corruptionHandler = ReplaceFileCorruptionHandler(

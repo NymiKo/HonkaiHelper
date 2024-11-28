@@ -6,7 +6,7 @@ import com.example.data.source.hero.mapper.toHeroEntity
 import com.example.data.source.hero.mapper.toHeroFullBaseBuildModel
 import com.example.data.source.hero.mapper.toHeroFullInfoModel
 import com.example.data.source.hero.mapper.toHeroModel
-import com.example.domain.di.IODispatcher
+import com.example.domain.di.DispatcherIo
 import com.example.domain.repository.hero.HeroRepository
 import com.example.domain.repository.hero.model.HeroBaseInfoModel
 import com.example.domain.repository.hero.model.HeroFullBaseBuildModel
@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 class HeroRepositoryImpl @Inject constructor(
     private val heroLocalDataSource: HeroLocalDataSource,
-    @IODispatcher private val ioDispatcher: CoroutineDispatcher,
+    @DispatcherIo private val ioDispatcher: CoroutineDispatcher,
 ) : HeroRepository {
     override suspend fun getHeroesList(): List<HeroModel> {
         return withContext(ioDispatcher) {

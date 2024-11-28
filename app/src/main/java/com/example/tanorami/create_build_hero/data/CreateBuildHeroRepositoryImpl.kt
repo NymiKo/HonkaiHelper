@@ -8,7 +8,7 @@ import com.example.data.remote.util.NetworkResult
 import com.example.data.remote.util.handleApi
 import com.example.data.source.hero.mapper.toHeroBaseInfoModel
 import com.example.data.source.hero.mapper.toHeroModel
-import com.example.domain.di.IODispatcher
+import com.example.domain.di.DispatcherIo
 import com.example.tanorami.create_build_hero.data.model.BuildHeroFromUser
 import com.example.tanorami.viewing_users_build.data.model.FullBuildHeroFromUser
 import kotlinx.coroutines.CoroutineDispatcher
@@ -16,12 +16,12 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class CreateBuildHeroRepositoryImpl @Inject constructor(
-    @IODispatcher private val ioDispatcher: CoroutineDispatcher,
+    @DispatcherIo private val ioDispatcher: CoroutineDispatcher,
     private val heroDao: HeroDao,
     private val createBuildHeroService: CreateBuildHeroService,
     private val weaponDao: WeaponDao,
     private val relicDao: RelicDao,
-    private val decorationDao: DecorationDao
+    private val decorationDao: DecorationDao,
 ) : CreateBuildHeroRepository {
     override suspend fun getHero(idHero: Int): com.example.domain.repository.hero.model.HeroModel =
         withContext(ioDispatcher) {

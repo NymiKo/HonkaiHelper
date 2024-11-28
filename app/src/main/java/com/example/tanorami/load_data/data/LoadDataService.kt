@@ -11,8 +11,8 @@ import com.example.domain.repository.optimal_stats_hero.OptimalStatsHero
 import com.example.domain.repository.path.PathModel
 import com.example.domain.repository.relic.BuildRelicModel
 import com.example.domain.repository.relic.RelicModel
-import com.example.domain.repository.weapon.BuildWeaponModel
-import com.example.domain.repository.weapon.WeaponModel
+import com.example.domain.repository.weapon.models.BuildWeaponModel
+import com.example.domain.repository.weapon.models.WeaponModel
 import retrofit2.Response
 import retrofit2.http.GET
 

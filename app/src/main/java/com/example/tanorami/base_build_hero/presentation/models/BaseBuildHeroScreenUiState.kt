@@ -3,7 +3,7 @@ package com.example.tanorami.base_build_hero.presentation.models
 import com.example.base.UiState
 import com.example.domain.repository.decoration.DecorationModel
 import com.example.domain.repository.relic.RelicModel
-import com.example.domain.repository.weapon.WeaponModel
+import com.example.domain.repository.weapon.models.WeaponModel
 
 data class BaseBuildHeroScreenUiState(
     val idHero: Int = 0,

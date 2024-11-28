@@ -35,7 +35,7 @@ import com.example.core.ui.theme.Orange
 import com.example.core.ui.theme.Violet
 import com.example.core.ui.theme.White
 import com.example.domain.repository.decoration.DecorationModel
-import com.example.domain.repository.weapon.WeaponModel
+import com.example.domain.repository.weapon.models.WeaponModel
 import com.example.strings.R
 import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
 import com.example.tanorami.ui_components.common.BaseHeroAvatarAndName

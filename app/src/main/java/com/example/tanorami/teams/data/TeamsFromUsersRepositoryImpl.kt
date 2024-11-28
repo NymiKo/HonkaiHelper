@@ -4,7 +4,7 @@ import com.example.data.db.dao.HeroDao
 import com.example.data.remote.util.NetworkResult
 import com.example.data.remote.util.handleApi
 import com.example.data.source.hero.mapper.toHeroBaseInfoModel
-import com.example.domain.di.IODispatcher
+import com.example.domain.di.DispatcherIo
 import com.example.tanorami.teams.data.model.TeamHeroes
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -13,7 +13,7 @@ import javax.inject.Inject
 class TeamsFromUsersRepositoryImpl @Inject constructor(
     private val teamsFromUsersService: TeamsFromUsersService,
     private val heroDao: HeroDao,
-    @IODispatcher private val ioDispatcher: CoroutineDispatcher
+    @DispatcherIo private val ioDispatcher: CoroutineDispatcher,
 ) : TeamsFromUsersRepository {
 
     override suspend fun getTeamsListByID(idHero: Int): NetworkResult<List<TeamHeroes>> =

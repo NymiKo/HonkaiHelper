@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -20,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.ui.components.text.BaseDefaultText
+import com.example.ui_components.R
 
 @Composable
 fun BaseNextButton(
@@ -54,7 +53,7 @@ fun BaseNextButton(
             modifier = Modifier.Companion
                 .width(10.dp)
                 .height(15.dp),
-            model = Icons.AutoMirrored.Filled.ArrowForward,
+            model = R.drawable.ic_arrow_back,
             contentDescription = null,
             contentScale = ContentScale.Crop,
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSecondary)

@@ -2,7 +2,7 @@ package com.example.tanorami.main.data
 
 import com.example.data.remote.util.NetworkResult
 import com.example.data.remote.util.handleApi
-import com.example.domain.di.IODispatcher
+import com.example.domain.di.DispatcherIo
 import com.example.tanorami.main.presentation.models.NewDataModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class MainScreenRepositoryImpl @Inject constructor(
     private val mainScreenService: MainScreenService,
-    @IODispatcher private val ioDispatcher: CoroutineDispatcher,
+    @DispatcherIo private val ioDispatcher: CoroutineDispatcher,
 ) : MainScreenRepository {
     override suspend fun getRemoteVersionDB(): NetworkResult<NewDataModel> =
         withContext(ioDispatcher) {

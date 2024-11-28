@@ -7,19 +7,19 @@ import com.example.data.db.dao.WeaponDao
 import com.example.data.remote.util.NetworkResult
 import com.example.data.remote.util.handleApi
 import com.example.data.source.hero.mapper.toHeroBaseInfoModel
-import com.example.domain.di.IODispatcher
+import com.example.domain.di.DispatcherIo
 import com.example.tanorami.viewing_users_build.data.model.FullBuildHeroFromUser
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class ViewingBuildHeroFromUserRepositoryImpl @Inject constructor(
-    @IODispatcher private val ioDispatcher: CoroutineDispatcher,
+    @DispatcherIo private val ioDispatcher: CoroutineDispatcher,
     private val viewingBuildHeroFromUserService: ViewingBuildHeroFromUserService,
     private val heroDao: HeroDao,
     private val weaponDao: WeaponDao,
     private val relicDao: RelicDao,
-    private val decorationDao: DecorationDao
+    private val decorationDao: DecorationDao,
 ) : ViewingBuildHeroFromUserRepository {
     override suspend fun getHeroBuildByID(idBuild: Long): NetworkResult<FullBuildHeroFromUser> =
         withContext(ioDispatcher) {

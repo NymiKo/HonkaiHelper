@@ -4,15 +4,15 @@ import com.example.data.source.ability.toAbilityModel
 import com.example.data.source.eidolon.toEidolonModel
 import com.example.data.source.hero.HeroLocalDataSource
 import com.example.data.source.hero.mapper.toHeroModel
-import com.example.domain.di.IODispatcher
+import com.example.domain.di.DispatcherIo
 import com.example.tanorami.info_about_hero.data.model.FullHeroInfo
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class InfoAboutHeroRepositoryImpl @Inject constructor(
-    @IODispatcher private val ioDispatcher: CoroutineDispatcher,
-    private val heroLocalDataSource: HeroLocalDataSource
+    @DispatcherIo private val ioDispatcher: CoroutineDispatcher,
+    private val heroLocalDataSource: HeroLocalDataSource,
 ) : InfoAboutHeroRepository {
     override suspend fun getHero(idHero: Int): FullHeroInfo {
         return withContext(ioDispatcher) {

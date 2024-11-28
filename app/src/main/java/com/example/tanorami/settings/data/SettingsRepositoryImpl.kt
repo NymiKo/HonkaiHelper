@@ -2,15 +2,15 @@ package com.example.tanorami.settings.data
 
 import com.example.data.remote.util.NetworkResult
 import com.example.data.remote.util.handleApi
-import com.example.domain.di.IODispatcher
+import com.example.domain.di.DispatcherIo
 import com.example.tanorami.main.data.MainScreenService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class SettingsRepositoryImpl @Inject constructor(
-    @IODispatcher private val ioDispatcher: CoroutineDispatcher,
-    private val mainScreenService: MainScreenService
+    @DispatcherIo private val ioDispatcher: CoroutineDispatcher,
+    private val mainScreenService: MainScreenService,
 ) : SettingsRepository {
     override suspend fun checkUpdate(): NetworkResult<String> =
         withContext(ioDispatcher) {
