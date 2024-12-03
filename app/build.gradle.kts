@@ -1,20 +1,12 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.compose)
-    alias(libs.plugins.ksp)
-    id("kotlin-parcelize")
-    alias(libs.plugins.kotlin.serialization)
+    id("tanorami.android.application")
 }
 
 android {
     namespace = "com.example.tanorami"
-    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.tanorami"
-        minSdk = 24
-        targetSdk = 35
         versionCode = 3
         versionName = "1.0.2"
         testInstrumentationRunner = "com.example.tanorami.AppTestRunner"
@@ -29,13 +21,6 @@ android {
             )
             signingConfig = signingConfigs.getByName("debug")
         }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
     }
     buildFeatures {
         compose = true

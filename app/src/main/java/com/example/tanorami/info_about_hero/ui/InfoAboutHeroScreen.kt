@@ -31,6 +31,8 @@ import com.example.tanorami.info_about_hero.ui.components.EidolonsListColumn
 import com.example.tanorami.info_about_hero.ui.components.SplashArtHeroImage
 import com.example.tanorami.teams.ui.TeamsFromUsersNavArguments
 import com.example.tanorami.utils.OnLifecycleEvent
+import com.example.ui.components.button.BaseNextButton
+import com.example.ui.components.text.BaseDefaultText
 import kotlinx.serialization.Serializable
 
 
@@ -115,7 +117,7 @@ private fun InfoAboutHeroScreenContent(
                 contentDescription = null
             )
 
-            com.example.ui.components.text.BaseDefaultText(
+            BaseDefaultText(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .padding(top = 8.dp),
@@ -125,7 +127,7 @@ private fun InfoAboutHeroScreenContent(
                 lineHeight = 20.sp
             )
 
-            com.example.ui.components.button.BaseNextButton(
+            BaseNextButton(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .padding(top = 16.dp),
@@ -135,7 +137,7 @@ private fun InfoAboutHeroScreenContent(
                 }
             )
 
-            com.example.ui.components.button.BaseNextButton(
+            BaseNextButton(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .padding(top = 8.dp),

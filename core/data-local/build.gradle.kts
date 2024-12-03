@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.ksp)
+    id("tanorami.android.room")
 }
 
 android {
@@ -13,10 +13,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
-
-        ksp {
-            arg("room.schemaLocation", "$projectDir/schemas_local_db")
-        }
     }
 
     buildTypes {
@@ -29,15 +25,16 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 }
 
 dependencies {
+    implementation(project(":core:domain"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -47,15 +44,8 @@ dependencies {
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
 
-    //Room
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
-
     //DataStore
     implementation(libs.androidx.datastore.preferences)
-
-    implementation(project(":core:domain"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

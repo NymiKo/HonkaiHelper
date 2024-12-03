@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.tanorami.R
 
 @Composable
 internal inline fun <T> BestEquipmentsLazyRow(
@@ -40,7 +39,7 @@ internal inline fun <T> BestEquipmentsLazyRow(
                             .width(15.dp)
                             .height(25.dp)
                             .align(Alignment.CenterVertically),
-                        model = Icons.AutoMirrored.Filled.ArrowForward,
+                        model = R.drawable.ic_arrow_forward,
                         contentDescription = null,
                         colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.secondary)
                     )

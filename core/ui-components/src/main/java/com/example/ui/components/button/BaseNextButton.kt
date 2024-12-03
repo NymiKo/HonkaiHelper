@@ -53,7 +53,7 @@ fun BaseNextButton(
             modifier = Modifier.Companion
                 .width(10.dp)
                 .height(15.dp),
-            model = R.drawable.ic_arrow_back,
+            model = R.drawable.ic_arrow_forward,
             contentDescription = null,
             contentScale = ContentScale.Crop,
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSecondary)
