@@ -8,7 +8,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class WeaponLocalDataSourceImpl @Inject constructor(
+internal class WeaponLocalDataSourceImpl @Inject constructor(
     private val weaponDao: WeaponDao,
     @DispatcherIo private val ioDispatcher: CoroutineDispatcher,
 ) : WeaponLocalDataSource {

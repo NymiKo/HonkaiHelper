@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class TeamsFromUsersRemoteDataSourceImpl @Inject constructor(
+internal class TeamsFromUsersRemoteDataSourceImpl @Inject constructor(
     private val teamsFromUsersApi: TeamsFromUsersApi,
     @DispatcherIo private val ioDispatcher: CoroutineDispatcher,
 ) : TeamsFromUsersRemoteDataSource {

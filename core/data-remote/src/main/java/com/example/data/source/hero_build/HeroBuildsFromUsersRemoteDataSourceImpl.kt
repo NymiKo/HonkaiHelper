@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class HeroBuildsFromUsersRemoteDataSourceImpl @Inject constructor(
+internal class HeroBuildsFromUsersRemoteDataSourceImpl @Inject constructor(
     private val heroBuildsFromUsersApi: HeroBuildsFromUsersApi,
     @DispatcherIo private val ioDispatcher: CoroutineDispatcher,
 ) : HeroBuildsFromUsersRemoteDataSource {

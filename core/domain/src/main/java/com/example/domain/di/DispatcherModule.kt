@@ -7,7 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import javax.inject.Qualifier
 
 @Module
-object DispatcherModule {
+internal object DispatcherModule {
     @Provides
     fun provideIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
 

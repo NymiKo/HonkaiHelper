@@ -7,7 +7,7 @@ import dagger.Module
 import javax.inject.Singleton
 
 @Module
-interface RepositoryModule {
+internal interface RepositoryModule {
     @Singleton
     @Binds
     fun bindHeroRepository(repository: HeroRepositoryImpl): HeroRepository

@@ -10,7 +10,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class HeroLocalDataSourceImpl @Inject constructor(
+internal class HeroLocalDataSourceImpl @Inject constructor(
     @DispatcherIo private val ioDispatcher: CoroutineDispatcher,
     private val heroDao: HeroDao,
 ) : HeroLocalDataSource {

@@ -7,7 +7,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class DecorationLocalDataSourceImpl @Inject constructor(
+internal class DecorationLocalDataSourceImpl @Inject constructor(
     private val decorationDao: DecorationDao,
     @DispatcherIo private val ioDispatcher: CoroutineDispatcher,
 ) : DecorationLocalDataSource {

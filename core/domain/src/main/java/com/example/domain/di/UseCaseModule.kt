@@ -6,8 +6,7 @@ import dagger.Binds
 import dagger.Module
 
 @Module
-interface UseCaseModule {
-
+internal interface UseCaseModule {
     @Binds
     fun bindGetHeroesListWithBaseInfoUseCase(getHeroesListWithBaseInfoUseCase: GetHeroesListWithBaseInfoUseCaseImpl): GetHeroesListWithBaseInfoUseCase
 }

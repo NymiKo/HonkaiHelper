@@ -7,7 +7,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class RelicLocalDataSourceImpl @Inject constructor(
+internal class RelicLocalDataSourceImpl @Inject constructor(
     private val relicDao: RelicDao,
     @DispatcherIo private val ioDispatcher: CoroutineDispatcher,
 ) : RelicLocalDataSource {

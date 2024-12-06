@@ -17,7 +17,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
-class HeroRepositoryImpl @Inject constructor(
+internal class HeroRepositoryImpl @Inject constructor(
     private val heroLocalDataSource: HeroLocalDataSource,
     @DispatcherIo private val ioDispatcher: CoroutineDispatcher,
 ) : HeroRepository {
