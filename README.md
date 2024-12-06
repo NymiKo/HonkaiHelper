@@ -2,10 +2,10 @@
 Приложение для игры Honkai: Star Rail (https://hsr.hoyoverse.com/ru-ru/home). 
 
 Разработано с помощью:
-- Navigaton Component
+- Jetpack Compose
 - архитектурный паттерн MVVM
-- Hilt (DI)
-- Glide (Загрузка изображений)
+- Dagger (DI)
+- Coil (Загрузка изображений)
 - Retrofit, OkHttp (Работа с сетью)
 - Room (БД для хранения локальных данных)
 
