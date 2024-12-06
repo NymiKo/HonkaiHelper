@@ -1,8 +1,8 @@
 package com.example.weapons_list.data
 
+import com.example.common.WeaponModel
 import com.example.data.source.weapon.WeaponLocalDataSource
 import com.example.data.source.weapon.mapper.toWeaponModel
-import com.example.domain.repository.weapon.models.WeaponModel
 import com.example.weapons_list.domain.WeaponsListRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

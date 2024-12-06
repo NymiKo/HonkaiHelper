@@ -2,7 +2,7 @@ package com.example.tanorami.viewing_users_build.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.example.base.BaseViewModel
-import com.example.data.remote.util.NetworkResult
+import com.example.domain.util.NetworkResult
 import com.example.strings.R
 import com.example.tanorami.viewing_users_build.data.ViewingBuildHeroFromUserRepository
 import com.example.tanorami.viewing_users_build.presentation.models.ViewingBuildHeroFromUserScreenEvents

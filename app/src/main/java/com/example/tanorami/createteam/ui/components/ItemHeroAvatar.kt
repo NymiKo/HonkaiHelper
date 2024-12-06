@@ -9,8 +9,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.common.HeroBaseInfoModel
 import com.example.core.ui.theme.Grey
-import com.example.domain.repository.hero.model.HeroBaseInfoModel
 
 @Composable
 fun ItemHeroAvatar(
@@ -30,5 +30,5 @@ fun ItemHeroAvatar(
 @Preview
 @Composable
 private fun ItemHeroAvatarPreview() {
-    ItemHeroAvatar(heroBaseInfoProjection = HeroBaseInfoModel(1, "", "", false))
+    ItemHeroAvatar(heroBaseInfoProjection = com.example.common.HeroBaseInfoModel(1, "", "", false))
 }

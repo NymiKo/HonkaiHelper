@@ -23,8 +23,8 @@ import com.example.tanorami.teams.presentation.models.TeamsFromUsersScreenSideEf
 import com.example.tanorami.teams.presentation.models.TeamsFromUsersScreenUiState
 import com.example.tanorami.teams.ui.components.EmptyListScreen
 import com.example.tanorami.teams.ui.components.ErrorScreen
-import com.example.tanorami.teams.ui.components.TeamsListLazyColumn
 import com.example.tanorami.utils.OnLifecycleEvent
+import com.example.ui.components.team.TeamsListLazyColumn
 import com.example.ui.components.top_app_bar.BaseTopAppBar
 import kotlinx.serialization.Serializable
 

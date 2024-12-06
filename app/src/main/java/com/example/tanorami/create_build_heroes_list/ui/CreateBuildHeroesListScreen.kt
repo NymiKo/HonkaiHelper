@@ -33,8 +33,8 @@ import com.example.tanorami.create_build_heroes_list.presentation.CreateBuildHer
 import com.example.tanorami.create_build_heroes_list.presentation.models.CreateBuildHeroesListScreenEvents
 import com.example.tanorami.create_build_heroes_list.presentation.models.CreateBuildHeroesListScreenSideEffects
 import com.example.tanorami.create_build_heroes_list.presentation.models.CreateBuildHeroesListScreenUiState
-import com.example.tanorami.ui_components.common.HeroName
 import com.example.tanorami.utils.OnLifecycleEvent
+import com.example.ui.components.hero.HeroName
 import kotlinx.serialization.Serializable
 
 @Serializable

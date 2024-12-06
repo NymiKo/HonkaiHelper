@@ -1,6 +1,6 @@
 package com.example.tanorami.auth.login.domain
 
-import com.example.data.remote.util.NetworkResult
+import com.example.domain.util.NetworkResult
 import com.example.tanorami.auth.login.data.models.LoginResponse
 
 interface LoginRepository {

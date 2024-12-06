@@ -9,8 +9,9 @@ android {
 
 dependencies {
     implementation(project(":core:data-local"))
-    implementation(project(":core:strings"))
+    implementation(project(":core:resources"))
     implementation(project(":core:ui-components"))
+    implementation(project(":core:models:common"))
 
     implementation(libs.material)
 

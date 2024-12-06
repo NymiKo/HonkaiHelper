@@ -1,10 +1,9 @@
 package com.example.tanorami.builds_hero_from_users.data.model
 
-import com.example.domain.repository.decoration.DecorationModel
-import com.example.domain.repository.hero.model.HeroBaseInfoModel
-import com.example.domain.repository.relic.RelicModel
-import com.example.domain.repository.weapon.models.WeaponModel
-
+import com.example.common.DecorationModel
+import com.example.common.HeroBaseInfoModel
+import com.example.common.RelicModel
+import com.example.common.WeaponModel
 
 data class BuildHeroWithUser(
     val idBuild: Long,

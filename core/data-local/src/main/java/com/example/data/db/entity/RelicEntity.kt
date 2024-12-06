@@ -2,8 +2,8 @@ package com.example.data.db.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.common.RelicModel
 import com.example.data.db.contract.RoomContract
-import com.example.domain.repository.relic.RelicModel
 
 @Entity(tableName = RoomContract.tableRelics)
 data class RelicEntity(

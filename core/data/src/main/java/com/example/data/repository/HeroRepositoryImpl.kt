@@ -1,5 +1,6 @@
 package com.example.data.repository
 
+import com.example.common.HeroBaseInfoModel
 import com.example.data.source.hero.HeroLocalDataSource
 import com.example.data.source.hero.mapper.toHeroBaseInfoModel
 import com.example.data.source.hero.mapper.toHeroEntity
@@ -8,7 +9,6 @@ import com.example.data.source.hero.mapper.toHeroFullInfoModel
 import com.example.data.source.hero.mapper.toHeroModel
 import com.example.domain.di.DispatcherIo
 import com.example.domain.repository.hero.HeroRepository
-import com.example.domain.repository.hero.model.HeroBaseInfoModel
 import com.example.domain.repository.hero.model.HeroFullBaseBuildModel
 import com.example.domain.repository.hero.model.HeroFullInfoModel
 import com.example.domain.repository.hero.model.HeroModel

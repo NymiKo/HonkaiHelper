@@ -39,7 +39,7 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.core.ui.theme.Blue
 import com.example.core.ui.theme.White
-import com.example.tanorami.R
+import com.example.strings.R
 import com.example.tanorami.auth.login.ui.LoginRoute
 import com.example.tanorami.change_nickname.ui.ChangeNicknameNavArguments
 import com.example.tanorami.create_build_hero.ui.CreateBuildForHeroNavArguments

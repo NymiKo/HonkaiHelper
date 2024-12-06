@@ -21,7 +21,6 @@ import com.example.tanorami.profile.di.ProfileModule
 import com.example.tanorami.send_feedback.di.SendFeedbackModule
 import com.example.tanorami.settings.di.SettingsModule
 import com.example.tanorami.teams.di.TeamsFromUsersModule
-import com.example.tanorami.teams_and_builds.di.TeamsAndBuildsModule
 import com.example.tanorami.viewing_users_build.di.ViewingBuildHeroFromUserModel
 import dagger.Module
 
@@ -39,7 +38,6 @@ import dagger.Module
         InfoAboutHeroModule::class,
         LoadDataModule::class,
         MainScreenModule::class,
-        TeamsAndBuildsModule::class,
         SettingsModule::class,
         BaseBuildHeroModule::class,
         ViewingBuildHeroFromUserModel::class,

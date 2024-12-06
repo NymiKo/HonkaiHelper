@@ -30,7 +30,6 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.core.ui.theme.Grey
 import com.example.strings.R
-import com.example.tanorami.R.drawable
 import com.example.tanorami.auth.login.presentation.LoginViewModel
 import com.example.tanorami.auth.login.presentation.models.LoginScreenEvents
 import com.example.tanorami.auth.login.presentation.models.LoginScreenSideEffects
@@ -111,7 +110,7 @@ private fun LoginScreenContent(
                 modifier = Modifier
                     .padding(vertical = 16.dp)
                     .size(130.dp),
-                model = drawable.pom_pom_hey,
+                model = R.drawable.pom_pom_hey,
                 contentDescription = null
             )
 

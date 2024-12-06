@@ -6,6 +6,8 @@
       <module name="HonkaiHelper.convention.main" target="11" />
       <module name="HonkaiHelper.convention.test" target="11" />
       <module name="HonkaiHelper.core.main" target="11" />
+      <module name="HonkaiHelper.core.models.main" target="11" />
+      <module name="HonkaiHelper.core.models.test" target="11" />
       <module name="HonkaiHelper.core.stringss" target="11" />
       <module name="HonkaiHelper.core.stringss.main" target="11" />
       <module name="HonkaiHelper.core.stringss.test" target="11" />

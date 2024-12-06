@@ -1,6 +1,7 @@
 package com.example.weapons_list.di
 
 import com.example.data.source.weapon.WeaponLocalDataSource
+import com.example.di.scopes.FeatureScope
 import com.example.weapons_list.data.WeaponsListRepositoryImpl
 import com.example.weapons_list.domain.WeaponsListRepository
 import dagger.Module
@@ -10,6 +11,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 @Module
 internal object WeaponsListModule {
     @Provides
+    @FeatureScope
     fun provideWeaponsListRepository(
         weaponLocalDataSource: WeaponLocalDataSource,
         ioDispatcher: CoroutineDispatcher,

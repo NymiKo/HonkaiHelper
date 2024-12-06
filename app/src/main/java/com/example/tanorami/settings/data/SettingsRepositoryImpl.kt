@@ -1,8 +1,8 @@
 package com.example.tanorami.settings.data
 
-import com.example.data.remote.util.NetworkResult
 import com.example.data.remote.util.handleApi
 import com.example.domain.di.DispatcherIo
+import com.example.domain.util.NetworkResult
 import com.example.tanorami.main.data.MainScreenService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

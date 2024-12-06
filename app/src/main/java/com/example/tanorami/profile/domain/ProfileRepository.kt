@@ -1,6 +1,6 @@
 package com.example.tanorami.profile.domain
 
-import com.example.data.remote.util.NetworkResult
+import com.example.domain.util.NetworkResult
 import com.example.tanorami.profile.data.model.User
 import kotlinx.coroutines.flow.StateFlow
 import java.io.File

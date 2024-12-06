@@ -39,11 +39,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.common.WeaponModel
 import com.example.core.ui.theme.Black
 import com.example.core.ui.theme.Blue
 import com.example.core.ui.theme.Orange
 import com.example.core.ui.theme.Violet
-import com.example.domain.repository.weapon.models.WeaponModel
 import com.example.strings.R
 import com.example.ui.components.text.BaseDefaultText
 import com.example.weapons_list.presentation.WeaponsListViewModel

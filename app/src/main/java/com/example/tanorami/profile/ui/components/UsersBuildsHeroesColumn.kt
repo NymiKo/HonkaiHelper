@@ -1,49 +1,14 @@
 package com.example.tanorami.profile.ui.components
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
-import com.example.core.ui.theme.Blue
-import com.example.core.ui.theme.DarkGrey
-import com.example.core.ui.theme.GreyTransparent20
-import com.example.core.ui.theme.Orange
-import com.example.core.ui.theme.Violet
-import com.example.core.ui.theme.White
-import com.example.domain.repository.decoration.DecorationModel
-import com.example.domain.repository.weapon.models.WeaponModel
-import com.example.strings.R
-import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
-import com.example.tanorami.ui_components.common.BaseHeroAvatarAndName
+import com.example.common.HeroBuildModel
+import com.example.ui.components.hero_build.BuildItem
 
 @Composable
 fun UsersBuildsHeroesColumn(
     modifier: Modifier = Modifier,
-    heroesBuildsList: List<BuildHeroWithUser>,
+    heroesBuildsList: List<HeroBuildModel>,
     onEditBuildHeroScreen: (idBuild: Long) -> Unit,
 ) {
     if (heroesBuildsList.isEmpty()) {
@@ -52,7 +17,7 @@ fun UsersBuildsHeroesColumn(
         com.example.ui.components.lazy_column.BaseLazyColumn(modifier = modifier) {
             items(count = heroesBuildsList.size, key = { heroesBuildsList[it].idBuild }) { index ->
                 BuildItem(
-                    buildHero = heroesBuildsList[index],
+                    heroBuild = heroesBuildsList[index],
                     onClick = {
                         onEditBuildHeroScreen(heroesBuildsList[index].idBuild)
                     },
@@ -60,123 +25,4 @@ fun UsersBuildsHeroesColumn(
             }
         }
     }
-}
-
-@Composable
-fun BuildItem(
-    modifier: Modifier = Modifier,
-    buildHero: BuildHeroWithUser,
-    clickable: Boolean = true,
-    onClick: () -> Unit,
-) {
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .shadow(
-                elevation = 4.dp,
-                shape = RoundedCornerShape(16.dp),
-                spotColor = GreyTransparent20,
-            )
-            .clickable(clickable) {
-                onClick()
-            },
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
-        border = BorderStroke(1.dp, DarkGrey),
-    ) {
-        Row(
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            BaseHeroAvatarAndName(
-                hero = buildHero.hero,
-            )
-
-            Column {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    HeroWeaponBuild(weapon = buildHero.weapon)
-
-                    RelicsColumnBuild(
-                        relicTwoParts = buildHero.relicTwoParts,
-                        relicFourParts = buildHero.relicFourParts
-                    )
-
-                    HeroDecorationBuild(decoration = buildHero.decoration)
-                }
-
-                if (buildHero.buildUser != null) {
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        com.example.ui.components.text.BaseDefaultText(
-                            text = stringResource(
-                                id = R.string.build_from,
-                                buildHero.buildUser.nickname
-                            ),
-                            overflow = TextOverflow.Ellipsis,
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.SemiBold
-                        )
-
-                        AsyncImage(
-                            modifier = Modifier
-                                .padding(top = 4.dp)
-                                .size(25.dp)
-                                .clip(CircleShape)
-                                .background(White, CircleShape),
-                            model = buildHero.buildUser.avatar,
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop,
-                        )
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun HeroWeaponBuild(
-    modifier: Modifier = Modifier,
-    weapon: WeaponModel,
-) {
-    val backgroundColor = arrayOf(Blue, Violet, Orange)
-
-    AsyncImage(
-        modifier = modifier
-            .height(104.dp)
-            .width(65.dp)
-            .clip(RoundedCornerShape(16.dp))
-            .background(
-                backgroundColor[weapon.rarity],
-                RoundedCornerShape(16.dp)
-            ),
-        model = weapon.image,
-        contentDescription = null,
-        contentScale = ContentScale.Crop,
-    )
-}
-
-@Composable
-fun HeroDecorationBuild(
-    modifier: Modifier = Modifier,
-    decoration: DecorationModel
-) {
-    AsyncImage(
-        modifier = modifier
-            .size(65.dp)
-            .clip(RoundedCornerShape(16.dp))
-            .background(Orange, RoundedCornerShape(16.dp)),
-        model = decoration.image,
-        contentDescription = null,
-        contentScale = ContentScale.Crop,
-    )
 }

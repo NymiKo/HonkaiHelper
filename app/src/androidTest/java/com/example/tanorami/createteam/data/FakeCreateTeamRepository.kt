@@ -1,10 +1,5 @@
 package com.example.tanorami.createteam.data
 
-import com.example.data.remote.util.NetworkResult
-import com.example.domain.repository.hero.model.HeroBaseInfoModel
-import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
-import javax.inject.Inject
-
 //class FakeCreateTeamRepository @Inject constructor(): CreateTeamRepository {
 //    override suspend fun getHeroesList(): List<ActiveHeroInTeam> {
 //        return emptyList()

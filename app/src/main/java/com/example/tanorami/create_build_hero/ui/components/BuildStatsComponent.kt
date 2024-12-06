@@ -33,7 +33,6 @@ import coil.compose.AsyncImage
 import com.example.core.ui.theme.DarkGrey
 import com.example.core.ui.theme.White
 import com.example.strings.R
-import com.example.tanorami.R.drawable
 import com.example.tanorami.create_build_hero.data.model.BuildStatsEquipment
 import com.example.ui.theme.AppTheme
 
@@ -51,28 +50,28 @@ fun BuildStatsComponent(
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         ItemStat(
-            statIcon = drawable.relic_piece_body,
+            statIcon = R.drawable.relic_piece_body,
             statsList = stringArrayResource(id = R.array.stats_in_body),
             currentValue = currentValue.statBody,
             changeStatOnEquipment = changeStatOnBody::invoke
         )
 
         ItemStat(
-            statIcon = drawable.relic_piece_legs,
+            statIcon = R.drawable.relic_piece_legs,
             statsList = stringArrayResource(id = R.array.stats_in_legs),
             currentValue = currentValue.statLegs,
             changeStatOnEquipment = changeStatOnLegs::invoke
         )
 
         ItemStat(
-            statIcon = drawable.relic_piece_sphere,
+            statIcon = R.drawable.relic_piece_sphere,
             statsList = stringArrayResource(id = R.array.stats_in_sphere),
             currentValue = currentValue.statSphere,
             changeStatOnEquipment = changeStatOnSphere::invoke
         )
 
         ItemStat(
-            statIcon = drawable.relic_piece_rope,
+            statIcon = R.drawable.relic_piece_rope,
             statsList = stringArrayResource(id = R.array.stats_in_rope),
             currentValue = currentValue.statRope,
             changeStatOnEquipment = changeStatOnRope::invoke

@@ -1,10 +1,9 @@
 package com.example.tanorami.builds_hero_from_users.data
 
-import com.example.data.remote.util.NetworkResult
-import com.example.domain.repository.hero.model.HeroBaseInfoModel
-import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
+import com.example.common.HeroBuildModel
+import com.example.domain.util.NetworkResult
 
 interface BuildsHeroListRepository {
-    suspend fun getHero(idHero: Int): HeroBaseInfoModel
-    suspend fun getBuildsHeroListByIdHero(idHero: Int): NetworkResult<List<BuildHeroWithUser>>
+    suspend fun getHero(idHero: Int): com.example.common.HeroBaseInfoModel
+    suspend fun getBuildsHeroListByIdHero(idHero: Int): NetworkResult<List<HeroBuildModel>>
 }

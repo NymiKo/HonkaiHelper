@@ -1,11 +1,12 @@
 package com.example.tanorami.teams.data
 
+import com.example.common.TeamHeroModel
 import com.example.data.db.dao.HeroDao
-import com.example.data.remote.util.NetworkResult
 import com.example.data.remote.util.handleApi
 import com.example.data.source.hero.mapper.toHeroBaseInfoModel
+import com.example.data.source.user.mapper.toUserAvatarAndNicknameModel
 import com.example.domain.di.DispatcherIo
-import com.example.tanorami.teams.data.model.TeamHeroes
+import com.example.domain.util.NetworkResult
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -16,7 +17,7 @@ class TeamsFromUsersRepositoryImpl @Inject constructor(
     @DispatcherIo private val ioDispatcher: CoroutineDispatcher,
 ) : TeamsFromUsersRepository {
 
-    override suspend fun getTeamsListByID(idHero: Int): NetworkResult<List<TeamHeroes>> =
+    override suspend fun getTeamsListByID(idHero: Int): NetworkResult<List<TeamHeroModel>> =
         withContext(ioDispatcher) {
             when (val result = handleApi { teamsFromUsersService.getTeamsListByID(idHero) }) {
                 is NetworkResult.Error -> {
@@ -25,7 +26,7 @@ class TeamsFromUsersRepositoryImpl @Inject constructor(
 
                 is NetworkResult.Success -> {
                     return@withContext NetworkResult.Success(result.data.map {
-                        TeamHeroes(
+                        TeamHeroModel(
                             idTeam = it.idTeam,
                             heroOne = heroDao.getHeroWithNameAvatarRarity(it.idHeroOne)
                                 .toHeroBaseInfoModel(),
@@ -35,16 +36,15 @@ class TeamsFromUsersRepositoryImpl @Inject constructor(
                                 .toHeroBaseInfoModel(),
                             heroFour = heroDao.getHeroWithNameAvatarRarity(it.idHeroFour)
                                 .toHeroBaseInfoModel(),
-                            nickname = it.nickname,
-                            avatar = it.avatar,
                             uid = it.uid,
+                            userInfo = it.userInfo.toUserAvatarAndNicknameModel()
                         )
                     })
                 }
             }
         }
 
-    override suspend fun getTeamsList(): NetworkResult<List<TeamHeroes>> =
+    override suspend fun getTeamsList(): NetworkResult<List<TeamHeroModel>> =
         withContext(ioDispatcher) {
             when (val result = handleApi { teamsFromUsersService.getTeamsList() }) {
                 is NetworkResult.Error -> {
@@ -53,7 +53,7 @@ class TeamsFromUsersRepositoryImpl @Inject constructor(
 
                 is NetworkResult.Success -> {
                     return@withContext NetworkResult.Success(result.data.map {
-                        TeamHeroes(
+                        TeamHeroModel(
                             idTeam = it.idTeam,
                             heroOne = heroDao.getHeroWithNameAvatarRarity(it.idHeroOne)
                                 .toHeroBaseInfoModel(),
@@ -63,9 +63,8 @@ class TeamsFromUsersRepositoryImpl @Inject constructor(
                                 .toHeroBaseInfoModel(),
                             heroFour = heroDao.getHeroWithNameAvatarRarity(it.idHeroFour)
                                 .toHeroBaseInfoModel(),
-                            nickname = it.nickname,
-                            avatar = it.avatar,
                             uid = it.uid,
+                            userInfo = it.userInfo.toUserAvatarAndNicknameModel()
                         )
                     })
                 }

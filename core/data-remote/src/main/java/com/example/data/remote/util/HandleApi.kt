@@ -1,5 +1,6 @@
 package com.example.data.remote.util
 
+import com.example.domain.util.NetworkResult
 import retrofit2.Response
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException

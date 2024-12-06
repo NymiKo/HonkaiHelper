@@ -7,6 +7,6 @@ data class HeroDto(
     val avatar: String,
     val splashArt: String,
     val rarity: Boolean,
-    val idPath: Int,
-    val idElement: Int,
+    val path: Int,
+    val element: Int,
 )

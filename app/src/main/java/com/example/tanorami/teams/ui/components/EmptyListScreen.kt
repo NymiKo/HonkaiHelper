@@ -15,7 +15,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.strings.R
-import com.example.tanorami.R.drawable
 import com.example.ui.theme.AppTheme
 
 @Composable
@@ -38,7 +37,7 @@ fun EmptyListScreen(
 
             AsyncImage(
                 modifier = Modifier.size(150.dp),
-                model = drawable.pom_pom,
+                model = R.drawable.pom_pom,
                 contentDescription = null,
             )
         }

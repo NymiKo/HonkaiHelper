@@ -1,6 +1,6 @@
 package com.example.tanorami.create_build_hero.data
 
-import com.example.data.remote.util.NetworkResult
+import com.example.domain.util.NetworkResult
 import com.example.tanorami.create_build_hero.data.model.BuildHeroFromUser
 import com.example.tanorami.viewing_users_build.data.model.FullBuildHeroFromUser
 

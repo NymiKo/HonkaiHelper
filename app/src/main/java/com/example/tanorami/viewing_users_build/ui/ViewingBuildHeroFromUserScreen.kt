@@ -19,6 +19,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.domain.repository.equipment.Equipment
 import com.example.strings.R
 import com.example.tanorami.create_build_hero.ui.components.AvatarHeroImageAndName
 import com.example.tanorami.create_build_hero.ui.components.EquipmentBuildComponent
@@ -141,10 +142,23 @@ private fun ViewingBuildHeroFromUserScreenContent(
             )
 
             EquipmentBuildComponent(
-                weapon = uiState.buildHero.weapon?.toEquipment(),
-                relicTwoParts = uiState.buildHero.relicTwoParts?.toEquipment(),
-                relicFourParts = uiState.buildHero.relicFourParts?.toEquipment(),
-                decoration = uiState.buildHero.decoration?.toEquipment(),
+                weapon = Equipment(
+                    uiState.buildHero.weapon?.idWeapon ?: 0,
+                    uiState.buildHero.weapon?.image,
+                    uiState.buildHero.weapon?.rarity
+                ),
+                relicTwoParts = Equipment(
+                    uiState.buildHero.relicTwoParts?.idRelic ?: 0,
+                    uiState.buildHero.relicTwoParts?.image
+                ),
+                relicFourParts = Equipment(
+                    uiState.buildHero.relicFourParts?.idRelic ?: 0,
+                    uiState.buildHero.relicFourParts?.image
+                ),
+                decoration = Equipment(
+                    uiState.buildHero.decoration?.idDecoration ?: 0,
+                    uiState.buildHero.decoration?.image
+                ),
                 onWeaponClick = { onEvent(ViewingBuildHeroFromUserScreenEvents.OnInfoAboutWeaponScreen) },
                 onTwoPartsRelicClick = { onEvent(ViewingBuildHeroFromUserScreenEvents.OnTwoPartRelicClick) },
                 onFourPartsRelicClick = { onEvent(ViewingBuildHeroFromUserScreenEvents.OnFourPartRelicClick) },

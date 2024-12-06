@@ -1,6 +1,6 @@
 package com.example.tanorami.send_feedback.data
 
-import com.example.data.remote.util.NetworkResult
+import com.example.domain.util.NetworkResult
 
 interface SendFeedbackRepository {
 

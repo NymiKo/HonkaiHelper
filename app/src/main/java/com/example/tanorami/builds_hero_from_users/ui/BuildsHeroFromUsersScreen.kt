@@ -21,11 +21,11 @@ import com.example.tanorami.builds_hero_from_users.presentation.BuildsHeroFromUs
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenEvents
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenSideEffects
 import com.example.tanorami.builds_hero_from_users.presentation.models.BuildsHeroFromUsersScreenUiState
-import com.example.tanorami.builds_hero_from_users.ui.components.BuildsListLazyColumn
 import com.example.tanorami.teams.ui.components.EmptyListScreen
 import com.example.tanorami.teams.ui.components.ErrorScreen
 import com.example.tanorami.utils.OnLifecycleEvent
 import com.example.tanorami.viewing_users_build.ui.ViewingBuildHeroFromUserNavArguments
+import com.example.ui.components.hero_build.BuildsListLazyColumn
 import kotlinx.serialization.Serializable
 
 @Serializable

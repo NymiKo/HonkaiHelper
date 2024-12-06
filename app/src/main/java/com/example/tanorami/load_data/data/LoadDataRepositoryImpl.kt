@@ -24,11 +24,13 @@ import com.example.data.db.entity.OptimalStatsHeroEntity
 import com.example.data.db.entity.PathEntity
 import com.example.data.db.entity.RelicEntity
 import com.example.data.db.entity.WeaponEntity
-import com.example.data.remote.util.NetworkResult
 import com.example.data.remote.util.handleApi
 import com.example.data.source.build_stats_equipment.toBuildStatsEquipmentEntity
 import com.example.data.source.hero.mapper.toHeroEntity
+import com.example.data.source.hero.mapper.toHeroModel
+import com.example.data.source.stats_equipment.mapper.toBuildStatsEquipmentModel
 import com.example.domain.di.DispatcherIo
+import com.example.domain.util.NetworkResult
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -258,7 +260,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                     val remoteHeroes = resultApi.data
                     val localHeroes = heroDao.getHeroesList()
                     val newHeroes = remoteHeroes.filter { hero ->
-                        localHeroes.none { it.id == hero.id && it.name == hero.name && it.rarity == hero.rarity && it.idPath == hero.idPath && it.idElement == hero.idElement }
+                        localHeroes.none { it.id == hero.id && it.name == hero.name && it.rarity == hero.rarity && it.idPath == hero.path && it.idElement == hero.element }
                     }
 
                     val localAvatarPaths =
@@ -275,7 +277,7 @@ class LoadDataRepositoryImpl @Inject constructor(
                     ).await()
 
                     val heroEntities = newHeroes.mapIndexed { index, hero ->
-                        hero.toHeroEntity().copy(
+                        hero.toHeroModel().toHeroEntity().copy(
                             localAvatarPath = localAvatarPaths[index],
                             localSplashArtPath = localSplashArtsPaths[index]
                         )
@@ -459,7 +461,9 @@ class LoadDataRepositoryImpl @Inject constructor(
                     }
 
                     insertEntitiesIntoLocalStorage(
-                        newEntities.map { it.toBuildStatsEquipmentEntity() },
+                        newEntities.map {
+                            it.toBuildStatsEquipmentModel().toBuildStatsEquipmentEntity()
+                        },
                         buildStatsEquipmentDao::insertBuildStatsEquipment
                     ).join()
 

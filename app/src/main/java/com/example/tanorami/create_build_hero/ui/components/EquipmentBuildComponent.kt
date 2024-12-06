@@ -34,7 +34,6 @@ import com.example.core.ui.theme.Orange
 import com.example.core.ui.theme.Violet
 import com.example.domain.repository.equipment.Equipment
 import com.example.strings.R
-import com.example.tanorami.R.drawable
 
 @Composable
 fun EquipmentBuildComponent(
@@ -212,7 +211,7 @@ fun EquipmentImage(
             .clickable {
                 onEquipmentScreen()
             },
-        model = equipment?.image ?: drawable.ic_add,
+        model = equipment?.image ?: R.drawable.ic_add,
         contentDescription = null,
         colorFilter = if (equipment == null) ColorFilter.tint(MaterialTheme.colorScheme.secondary) else null,
         contentScale = contentScale,

@@ -34,8 +34,6 @@ import com.example.tanorami.settings.data.SettingsRepository
 import com.example.tanorami.settings.data.SettingsRepositoryImpl
 import com.example.tanorami.teams.data.TeamsFromUsersRepository
 import com.example.tanorami.teams.data.TeamsFromUsersRepositoryImpl
-import com.example.tanorami.teams_and_builds.data.TeamsAndBuildsRepository
-import com.example.tanorami.teams_and_builds.data.TeamsAndBuildsRepositoryImpl
 import com.example.tanorami.viewing_users_build.data.ViewingBuildHeroFromUserRepository
 import com.example.tanorami.viewing_users_build.data.ViewingBuildHeroFromUserRepositoryImpl
 import dagger.Binds
@@ -116,8 +114,4 @@ interface RepositoryModule {
     @Singleton
     @Binds
     fun bindMainScreenRepository(repository: MainScreenRepositoryImpl): MainScreenRepository
-
-    @Singleton
-    @Binds
-    fun bindTeamsAndBuildsRepository(repository: TeamsAndBuildsRepositoryImpl): TeamsAndBuildsRepository
 }

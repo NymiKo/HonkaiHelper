@@ -2,8 +2,8 @@ package com.example.tanorami.create_build_hero.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.example.base.BaseViewModel
-import com.example.data.remote.util.NetworkResult
 import com.example.domain.repository.equipment.Equipment
+import com.example.domain.util.NetworkResult
 import com.example.strings.R
 import com.example.tanorami.create_build_hero.data.CreateBuildHeroRepository
 import com.example.tanorami.create_build_hero.data.model.BuildHeroFromUser

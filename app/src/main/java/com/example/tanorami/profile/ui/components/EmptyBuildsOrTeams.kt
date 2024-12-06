@@ -15,7 +15,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.strings.R
-import com.example.tanorami.R.drawable
 
 @Composable
 fun EmptyBuildsOrTeams(
@@ -37,7 +36,7 @@ fun EmptyBuildsOrTeams(
             )
             AsyncImage(
                 modifier = Modifier.size(150.dp),
-                model = drawable.pom_pom_empty,
+                model = R.drawable.pom_pom_empty,
                 contentDescription = null,
             )
         }

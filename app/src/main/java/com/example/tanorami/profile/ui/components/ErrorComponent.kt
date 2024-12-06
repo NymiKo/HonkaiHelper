@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.strings.R
-import com.example.tanorami.R.drawable
 
 @Composable
 fun ErrorComponent(
@@ -43,7 +42,7 @@ fun ErrorComponent(
             )
             AsyncImage(
                 modifier = Modifier.size(150.dp),
-                model = drawable.pom_pom_shock,
+                model = R.drawable.pom_pom_shock,
                 contentDescription = "",
                 contentScale = ContentScale.Crop
             )

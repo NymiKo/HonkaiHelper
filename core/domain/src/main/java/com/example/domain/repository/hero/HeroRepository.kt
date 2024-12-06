@@ -1,6 +1,6 @@
 package com.example.domain.repository.hero
 
-import com.example.domain.repository.hero.model.HeroBaseInfoModel
+import com.example.common.HeroBaseInfoModel
 import com.example.domain.repository.hero.model.HeroFullBaseBuildModel
 import com.example.domain.repository.hero.model.HeroFullInfoModel
 import com.example.domain.repository.hero.model.HeroModel

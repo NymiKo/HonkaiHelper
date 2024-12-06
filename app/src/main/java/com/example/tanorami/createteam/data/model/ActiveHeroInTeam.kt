@@ -1,5 +1,6 @@
 package com.example.tanorami.createteam.data.model
 
-import com.example.domain.repository.hero.model.HeroBaseInfoModel
-
-data class ActiveHeroInTeam(val hero: HeroBaseInfoModel, var active: Boolean = false)
+data class ActiveHeroInTeam(
+    val hero: com.example.common.HeroBaseInfoModel,
+    var active: Boolean = false,
+)

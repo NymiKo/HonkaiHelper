@@ -9,6 +9,7 @@ android {
 
 dependencies {
     implementation(project(":core:ui-components"))
+    implementation(project(":core:models:common"))
 
     implementation(libs.material)
 

@@ -21,17 +21,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import com.example.common.HeroBuildModel
+import com.example.common.TeamHeroModel
 import com.example.strings.R
-import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
-import com.example.tanorami.teams.data.model.TeamHeroes
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TeamsAndBuildsInProfile(
     modifier: Modifier = Modifier,
-    heroesBuildsList: List<BuildHeroWithUser>,
-    teamsList: List<TeamHeroes>,
+    heroesBuildsList: List<HeroBuildModel>,
+    teamsList: List<TeamHeroModel>,
     onEditBuildHeroScreen: (idBuild: Long) -> Unit,
     onEditTeamScreen: (idTeam: Long) -> Unit,
 ) {
@@ -107,8 +107,8 @@ private fun TabItem(
 private fun TabsContent(
     modifier: Modifier = Modifier,
     pagerState: PagerState,
-    heroesBuildsList: List<BuildHeroWithUser>,
-    teamsList: List<TeamHeroes>,
+    heroesBuildsList: List<HeroBuildModel>,
+    teamsList: List<TeamHeroModel>,
     onEditBuildHeroScreen: (idBuild: Long) -> Unit,
     onEditTeamScreen: (idTeam: Long) -> Unit,
 ) {

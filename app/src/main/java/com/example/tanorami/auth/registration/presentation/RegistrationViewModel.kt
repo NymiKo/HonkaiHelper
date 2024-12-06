@@ -2,7 +2,7 @@ package com.example.tanorami.auth.registration.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.example.base.BaseViewModel
-import com.example.data.remote.util.NetworkResult
+import com.example.domain.util.NetworkResult
 import com.example.strings.R
 import com.example.tanorami.auth.registration.data.RegistrationRepository
 import com.example.tanorami.auth.registration.presentation.models.RegistrationScreenEvent

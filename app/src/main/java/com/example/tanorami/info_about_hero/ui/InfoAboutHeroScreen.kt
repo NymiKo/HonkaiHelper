@@ -20,7 +20,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.strings.R
-import com.example.tanorami.R.drawable
 import com.example.tanorami.base_build_hero.ui.BaseBuildHeroNavArguments
 import com.example.tanorami.info_about_hero.presentation.InfoAboutHeroViewModel
 import com.example.tanorami.info_about_hero.presentation.models.InfoAboutHeroScreenEvents
@@ -110,9 +109,9 @@ private fun InfoAboutHeroScreenContent(
                     .height(20.dp)
                     .fillMaxWidth(),
                 model = when (uiState.heroModel?.rarity) {
-                    false -> drawable.icon_4_stars
-                    true -> drawable.icon_5_stars
-                    else -> drawable.icon_4_stars
+                    false -> R.drawable.icon_4_stars
+                    true -> R.drawable.icon_5_stars
+                    else -> R.drawable.icon_4_stars
                 },
                 contentDescription = null
             )

@@ -1,11 +1,11 @@
 package com.example.tanorami.createteam.data
 
+import com.example.common.HeroBaseInfoModel
 import com.example.data.db.dao.HeroDao
-import com.example.data.remote.util.NetworkResult
 import com.example.data.remote.util.handleApi
 import com.example.data.source.hero.mapper.toHeroBaseInfoModel
 import com.example.domain.di.DispatcherIo
-import com.example.domain.repository.hero.model.HeroBaseInfoModel
+import com.example.domain.util.NetworkResult
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -39,7 +39,7 @@ class CreateTeamRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getTeam(idTeam: Long): NetworkResult<Pair<String, List<HeroBaseInfoModel>>> =
+    override suspend fun getTeam(idTeam: Long): NetworkResult<Pair<String, List<com.example.common.HeroBaseInfoModel>>> =
         withContext(ioDispatcher) {
             when (val result = handleApi { createTeamService.getTeam(idTeam) }) {
                 is NetworkResult.Error -> {

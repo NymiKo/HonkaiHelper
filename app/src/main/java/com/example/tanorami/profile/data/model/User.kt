@@ -1,11 +1,11 @@
 package com.example.tanorami.profile.data.model
 
-import com.example.tanorami.builds_hero_from_users.data.model.BuildHeroWithUser
-import com.example.tanorami.teams.data.model.TeamHeroes
+import com.example.common.HeroBuildModel
+import com.example.common.TeamHeroModel
 
-data class User (
+data class User(
     val nickname: String = "",
     val avatarUrl: String? = "",
-    val teamsList: List<TeamHeroes> = emptyList(),
-    val buildsHeroes: List<BuildHeroWithUser> = emptyList()
+    val teamsList: List<TeamHeroModel> = emptyList(),
+    val buildsHeroes: List<HeroBuildModel> = emptyList(),
 )

@@ -1,9 +1,5 @@
 package com.example.tanorami.registration.data
 
-import com.example.data.remote.util.NetworkResult
-import com.example.tanorami.auth.registration.data.RegistrationRepository
-import javax.inject.Inject
-
 //class FakeRegistrationRepository @Inject constructor(): RegistrationRepository {
 //    override suspend fun register(
 //        login: String,

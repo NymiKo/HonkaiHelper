@@ -42,7 +42,7 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.example.core.ui.theme.Orange
 import com.example.heroes_list.heroes.navigation.heroesListScreen
-import com.example.tanorami.R
+import com.example.strings.R
 import com.example.tanorami.create_build_heroes_list.ui.CreateBuildHeroesListNavArguments
 import com.example.tanorami.createteam.ui.CreateTeamNavArguments
 import com.example.tanorami.info_about_hero.ui.InfoAboutHeroNavArguments
@@ -56,8 +56,9 @@ import com.example.tanorami.main.ui.components.CreateBuildOrTeamDialog
 import com.example.tanorami.main.ui.components.UploadingDataDialog
 import com.example.tanorami.profile.ui.ProfileScreen
 import com.example.tanorami.settings.ui.SettingsRoute
-import com.example.tanorami.teams_and_builds.ui.TeamsAndBuildsScreen
 import com.example.tanorami.utils.toast
+import com.example.tanorami.viewing_users_build.ui.ViewingBuildHeroFromUserNavArguments
+import com.example.teams_and_builds.navigation.teamsAndBuildsScreen
 import com.example.weapons_list.navigation.weaponsListScreen
 import kotlinx.serialization.Serializable
 
@@ -251,14 +252,15 @@ private fun MainScreenContent(
                 onWeaponClick = { rootNavController.navigate(InfoAboutWeaponNavArguments(it)) }
             )
 
-            composable(
-                route = MainScreens.TeamsAndBuilds.route,
-            ) {
-                TeamsAndBuildsScreen(
-                    viewModelFactory = viewModelFactory,
-                    navController = rootNavController,
-                )
-            }
+            teamsAndBuildsScreen(
+                onBuildHeroClick = {
+                    rootNavController.navigate(
+                        ViewingBuildHeroFromUserNavArguments(
+                            idBuild = it
+                        )
+                    )
+                }
+            )
 
             composable(
                 route = MainScreens.Profile.route,

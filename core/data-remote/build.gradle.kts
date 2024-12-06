@@ -53,6 +53,7 @@ dependencies {
     api(libs.logging.interceptor)
 
     implementation(project(":core:domain"))
+    implementation(project(":core:models:common"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

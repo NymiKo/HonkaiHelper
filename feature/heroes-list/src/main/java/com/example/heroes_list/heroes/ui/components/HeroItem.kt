@@ -20,10 +20,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.common.HeroBaseInfoModel
 import com.example.core.ui.theme.Black
 import com.example.core.ui.theme.Orange
 import com.example.core.ui.theme.Violet
-import com.example.domain.repository.hero.model.HeroBaseInfoModel
 import com.example.ui.components.text.BaseDefaultText
 
 @Composable

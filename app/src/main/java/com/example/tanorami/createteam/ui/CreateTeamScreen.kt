@@ -38,8 +38,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.common.HeroBaseInfoModel
 import com.example.core.ui.theme.Red
-import com.example.domain.repository.hero.model.HeroBaseInfoModel
 import com.example.strings.R
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
 import com.example.tanorami.createteam.presentation.CreateTeamViewModel

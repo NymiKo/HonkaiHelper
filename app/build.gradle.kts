@@ -78,9 +78,11 @@ dependencies {
     implementation(project(":core:domain"))
     implementation(project(":core:ui-components"))
     implementation(project(":core:ui-theme"))
-    implementation(project(":core:strings"))
+    implementation(project(":core:resources"))
     implementation(project(":core:utils"))
     implementation(project(":core:base"))
+    implementation(project(":core:models:common"))
     implementation(project(":feature:heroes-list"))
     implementation(project(":feature:weapons-list"))
+    implementation(project(":feature:teams-and-builds"))
 }

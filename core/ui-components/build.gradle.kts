@@ -68,5 +68,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 
     implementation(project(":core:ui-theme"))
-    implementation(project(":core:strings"))
+    implementation(project(":core:resources"))
+    implementation(project(":core:models:common"))
+    implementation(project(":core:resources"))
 }

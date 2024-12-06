@@ -4,10 +4,10 @@ import com.example.data.db.dao.DecorationDao
 import com.example.data.db.dao.HeroDao
 import com.example.data.db.dao.RelicDao
 import com.example.data.db.dao.WeaponDao
-import com.example.data.remote.util.NetworkResult
 import com.example.data.remote.util.handleApi
 import com.example.data.source.hero.mapper.toHeroBaseInfoModel
 import com.example.domain.di.DispatcherIo
+import com.example.domain.util.NetworkResult
 import com.example.tanorami.viewing_users_build.data.model.FullBuildHeroFromUser
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

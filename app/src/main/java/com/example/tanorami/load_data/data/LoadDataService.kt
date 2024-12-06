@@ -1,24 +1,24 @@
 package com.example.tanorami.load_data.data
 
+import com.example.common.DecorationModel
+import com.example.common.RelicModel
+import com.example.common.WeaponModel
+import com.example.data.remote.api.hero.model.HeroDto
+import com.example.data.remote.api.stats_equipment.BuildStatsEquipmentDto
 import com.example.domain.repository.ability.AbilityModel
-import com.example.domain.repository.build_stats_equipment.BuildStatsEquipmentModel
 import com.example.domain.repository.decoration.BuildDecorationModel
-import com.example.domain.repository.decoration.DecorationModel
 import com.example.domain.repository.eidolon.EidolonModel
 import com.example.domain.repository.element.ElementModel
-import com.example.domain.repository.hero.model.HeroModel
 import com.example.domain.repository.optimal_stats_hero.OptimalStatsHero
 import com.example.domain.repository.path.PathModel
 import com.example.domain.repository.relic.BuildRelicModel
-import com.example.domain.repository.relic.RelicModel
 import com.example.domain.repository.weapon.models.BuildWeaponModel
-import com.example.domain.repository.weapon.models.WeaponModel
 import retrofit2.Response
 import retrofit2.http.GET
 
 interface LoadDataService {
     @GET("/getHeroes.php")
-    suspend fun getHeroesList(): Response<List<HeroModel>>
+    suspend fun getHeroesList(): Response<List<HeroDto>>
 
     @GET("/getPaths.php")
     suspend fun getPathsList(): Response<List<PathModel>>
@@ -51,7 +51,7 @@ interface LoadDataService {
     suspend fun getRelics(): Response<List<RelicModel>>
 
     @GET("/getStatsEquipment.php")
-    suspend fun getStatsEquipment(): Response<List<BuildStatsEquipmentModel>>
+    suspend fun getStatsEquipment(): Response<List<BuildStatsEquipmentDto>>
 
     @GET("/getWeapons.php")
     suspend fun getWeapons(): Response<List<WeaponModel>>

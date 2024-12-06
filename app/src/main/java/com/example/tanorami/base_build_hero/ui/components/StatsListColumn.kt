@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.core.ui.theme.DarkGrey
 import com.example.strings.R
-import com.example.tanorami.R.drawable
 
 @Composable
 internal fun StatsListColumn(
@@ -33,10 +32,10 @@ internal fun StatsListColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         val iconList = listOf(
-            drawable.relic_piece_body,
-            drawable.relic_piece_legs,
-            drawable.relic_piece_sphere,
-            drawable.relic_piece_rope
+            R.drawable.relic_piece_body,
+            R.drawable.relic_piece_legs,
+            R.drawable.relic_piece_sphere,
+            R.drawable.relic_piece_rope
         )
 
         statsList.forEachIndexed { index, stat ->

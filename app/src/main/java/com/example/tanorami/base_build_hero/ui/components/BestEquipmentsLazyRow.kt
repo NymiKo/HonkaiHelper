@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.tanorami.R
+import com.example.strings.R
 
 @Composable
 internal inline fun <T> BestEquipmentsLazyRow(

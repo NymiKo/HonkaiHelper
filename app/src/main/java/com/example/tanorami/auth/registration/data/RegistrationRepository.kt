@@ -1,6 +1,6 @@
 package com.example.tanorami.auth.registration.data
 
-import com.example.data.remote.util.NetworkResult
+import com.example.domain.util.NetworkResult
 
 interface RegistrationRepository {
     suspend fun register(

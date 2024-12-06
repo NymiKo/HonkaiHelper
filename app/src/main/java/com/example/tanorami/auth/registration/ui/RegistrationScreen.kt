@@ -27,7 +27,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.strings.R
-import com.example.tanorami.R.drawable
 import com.example.tanorami.auth.login.ui.components.LoginButton
 import com.example.tanorami.auth.login.ui.components.LoginOutlinedTextField
 import com.example.tanorami.auth.registration.presentation.RegistrationViewModel
@@ -105,7 +104,7 @@ private fun RegistrationScreenContent(
                 modifier = Modifier
                     .padding(vertical = 16.dp)
                     .size(130.dp),
-                model = drawable.pom_pom_heart,
+                model = R.drawable.pom_pom_heart,
                 contentDescription = null
             )
 

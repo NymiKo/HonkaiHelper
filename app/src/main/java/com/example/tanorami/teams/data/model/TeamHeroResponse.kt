@@ -1,12 +1,13 @@
 package com.example.tanorami.teams.data.model
 
+import com.example.data.remote.api.user.model.UserAvatarAndNicknameDto
+
 data class TeamHeroResponse(
     val idTeam: Long,
     val idHeroOne: Int,
     val idHeroTwo: Int,
     val idHeroThree: Int,
     val idHeroFour: Int,
-    val nickname: String? = null,
-    val avatar: String? = null,
-    val uid: String = ""
+    val userInfo: UserAvatarAndNicknameDto,
+    val uid: String = "",
 )
