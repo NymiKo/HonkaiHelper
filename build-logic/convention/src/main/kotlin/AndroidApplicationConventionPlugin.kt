@@ -14,6 +14,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 apply("com.google.devtools.ksp")
                 apply("kotlin-parcelize")
                 apply("org.jetbrains.kotlin.plugin.serialization")
+                apply("com.autonomousapps.dependency-analysis")
             }
             extensions.configure<ApplicationExtension> {
                 configureKotlinAndroid(this)

@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     id("tanorami.android.room")
+    alias(libs.plugins.dependency.analysis)
 }
 
 android {
@@ -37,16 +38,15 @@ dependencies {
     implementation(project(":core:domain"))
     implementation(project(":core:models:common"))
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-
     //Dagger2
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
 
     //DataStore
     implementation(libs.androidx.datastore.preferences)
+
+    //Coroutines
+    implementation(libs.kotlinx.coroutines.core)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

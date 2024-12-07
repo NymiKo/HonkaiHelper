@@ -50,7 +50,7 @@ fun BaseNextButton(
             )
         )
         AsyncImage(
-            modifier = Modifier.Companion
+            modifier = Modifier
                 .width(10.dp)
                 .height(15.dp),
             model = R.drawable.ic_arrow_forward,

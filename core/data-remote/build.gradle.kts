@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.dependency.analysis)
 }
 
 android {
@@ -25,35 +26,33 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 }
 
 dependencies {
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
+    implementation(project(":core:domain"))
+    implementation(project(":core:models:common"))
 
     //Dagger2
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
 
     //Retrofit
-    api(libs.retrofit)
-    api(libs.converter.gson)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 
     //OkHttp
-    api(platform(libs.okhttp.bom))
-    api(libs.okhttp)
-    api(libs.logging.interceptor)
+    implementation(platform(libs.okhttp.bom))
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
 
-    implementation(project(":core:domain"))
-    implementation(project(":core:models:common"))
+    //Coroutines
+    implementation(libs.kotlinx.coroutines.core)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

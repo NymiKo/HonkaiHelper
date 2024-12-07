@@ -12,11 +12,10 @@ dependencies {
     implementation(project(":core:resources"))
     implementation(project(":core:ui-components"))
     implementation(project(":core:models:common"))
+    implementation(project(":core:ui-theme"))
 
-    implementation(libs.material)
-
-    //Compose
-    implementation(libs.androidx.material.icons.extended)
+    //Coil
+    implementation(libs.coil.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -35,14 +35,22 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.foundation)
     implementation(libs.androidx.foundation.layout)
-    implementation(libs.androidx.runtime.livedata)
     implementation(libs.androidx.ui.tooling)
-    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.kotlinx.serialization.core)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity.compose)
+
+    //Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    //OkHttp
+    implementation(platform(libs.okhttp.bom))
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
 
     //Dagger2
     implementation(libs.dagger)
@@ -64,7 +72,7 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
 
     //DataStore
-    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.datastore.preferences.core)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

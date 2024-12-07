@@ -1,10 +1,10 @@
 package com.example.tanorami.teams.data
 
 import com.example.common.TeamHeroModel
+import com.example.common.UserAvatarAndNicknameModel
 import com.example.data.db.dao.HeroDao
 import com.example.data.remote.util.handleApi
 import com.example.data.source.hero.mapper.toHeroBaseInfoModel
-import com.example.data.source.user.mapper.toUserAvatarAndNicknameModel
 import com.example.domain.di.DispatcherIo
 import com.example.domain.util.NetworkResult
 import kotlinx.coroutines.CoroutineDispatcher
@@ -37,7 +37,10 @@ class TeamsFromUsersRepositoryImpl @Inject constructor(
                             heroFour = heroDao.getHeroWithNameAvatarRarity(it.idHeroFour)
                                 .toHeroBaseInfoModel(),
                             uid = it.uid,
-                            userInfo = it.userInfo.toUserAvatarAndNicknameModel()
+                            userInfo = UserAvatarAndNicknameModel(
+                                it.avatar ?: "",
+                                it.nickname ?: ""
+                            )
                         )
                     })
                 }
@@ -64,7 +67,10 @@ class TeamsFromUsersRepositoryImpl @Inject constructor(
                             heroFour = heroDao.getHeroWithNameAvatarRarity(it.idHeroFour)
                                 .toHeroBaseInfoModel(),
                             uid = it.uid,
-                            userInfo = it.userInfo.toUserAvatarAndNicknameModel()
+                            userInfo = UserAvatarAndNicknameModel(
+                                it.avatar ?: "",
+                                it.nickname ?: ""
+                            )
                         )
                     })
                 }

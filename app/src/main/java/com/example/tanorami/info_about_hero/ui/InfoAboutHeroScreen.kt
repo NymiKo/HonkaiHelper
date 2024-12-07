@@ -32,6 +32,7 @@ import com.example.tanorami.teams.ui.TeamsFromUsersNavArguments
 import com.example.tanorami.utils.OnLifecycleEvent
 import com.example.ui.components.button.BaseNextButton
 import com.example.ui.components.text.BaseDefaultText
+import com.example.ui.components.top_app_bar.BaseCenterAlignedTopAppBar
 import kotlinx.serialization.Serializable
 
 
@@ -87,7 +88,7 @@ private fun InfoAboutHeroScreenContent(
 ) {
     Scaffold(
         topBar = {
-            com.example.ui.components.top_app_bar.BaseCenterAlignedTopAppBar(
+            BaseCenterAlignedTopAppBar(
                 title = uiState.heroModel?.name,
                 onBack = { onEvent(InfoAboutHeroScreenEvents.OnBack) }
             )
