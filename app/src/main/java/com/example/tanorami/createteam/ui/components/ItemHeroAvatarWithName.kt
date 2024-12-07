@@ -29,6 +29,7 @@ import com.example.core.ui.theme.Violet
 import com.example.core.ui.theme.White
 import com.example.tanorami.createteam.data.model.ActiveHeroInTeam
 import com.example.tanorami.createteam.presentation.models.CreateTeamScreenEvents
+import com.example.ui.components.text.BaseDefaultText
 
 @Composable
 fun ItemHeroAvatarWithName(
@@ -41,8 +42,10 @@ fun ItemHeroAvatarWithName(
             .height(120.dp)
             .width(120.dp)
             .border(
-                border = if (activeHeroInTeam.active) BorderStroke(3.dp, Green)
-                else BorderStroke(1.dp, DarkGrey),
+                border = if (activeHeroInTeam.active) BorderStroke(
+                    3.dp,
+                    Green
+                ) else BorderStroke(1.dp, DarkGrey),
                 shape = if (activeHeroInTeam.active) RoundedCornerShape(15.dp) else RectangleShape
             )
             .clip(if (activeHeroInTeam.active) RoundedCornerShape(15.dp) else RectangleShape)
@@ -63,7 +66,7 @@ fun ItemHeroAvatarWithName(
             contentDescription = null,
             contentScale = ContentScale.Crop
         )
-        com.example.ui.components.text.BaseDefaultText(
+        BaseDefaultText(
             modifier = Modifier
                 .height(30.dp)
                 .fillMaxWidth()

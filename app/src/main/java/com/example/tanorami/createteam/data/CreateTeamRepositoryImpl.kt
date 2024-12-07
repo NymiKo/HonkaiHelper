@@ -19,7 +19,7 @@ class CreateTeamRepositoryImpl @Inject constructor(
 
     override suspend fun getHeroesList(): List<ActiveHeroInTeam> = withContext(ioDispatcher) {
         return@withContext heroDao.getHeroesListWithNameAvatarRarity().sortedBy { it.name }
-            .map { ActiveHeroInTeam(it.toHeroBaseInfoModel(), false) }
+            .map { ActiveHeroInTeam(it.toHeroBaseInfoModel()) }
     }
 
     override suspend fun saveTeam(

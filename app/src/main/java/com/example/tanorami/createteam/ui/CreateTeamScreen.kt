@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Delete
@@ -50,6 +51,9 @@ import com.example.tanorami.createteam.ui.components.ItemHeroAvatar
 import com.example.tanorami.createteam.ui.components.ItemHeroAvatarWithName
 import com.example.tanorami.utils.OnLifecycleEvent
 import com.example.tanorami.utils.toast
+import com.example.ui.components.button.BaseSmallFloatingButton
+import com.example.ui.components.dialog.BaseSaveAlertDialog
+import com.example.ui.components.top_app_bar.BaseTopAppBar
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -60,7 +64,7 @@ fun CreateTeamScreen(
     navArguments: CreateTeamNavArguments,
     viewModelFactory: ViewModelProvider.Factory,
     viewModel: CreateTeamViewModel = viewModel(factory = viewModelFactory),
-    navController: NavController
+    navController: NavController,
 ) {
     val state = viewModel.uiState().collectAsState().value
     val sideEffects = viewModel.uiEffect().collectAsState(null).value
@@ -71,25 +75,29 @@ fun CreateTeamScreen(
         onEvent = viewModel::onEvent
     )
 
-    when(sideEffects) {
+    when (sideEffects) {
         CreateTeamScreenSideEffects.OnBack -> {
             navController.popBackStack()
             viewModel.clearEffect()
         }
+
         CreateTeamScreenSideEffects.TeamDeleted -> {
             toast(context, R.string.team_deleted)
             navController.popBackStack()
             viewModel.clearEffect()
         }
+
         CreateTeamScreenSideEffects.TeamSaved -> {
             toast(context, R.string.team_saved)
             navController.popBackStack()
             viewModel.clearEffect()
         }
+
         is CreateTeamScreenSideEffects.ShowToastError -> {
             toast(context, sideEffects.message)
             viewModel.clearEffect()
         }
+
         null -> {}
     }
 
@@ -107,7 +115,7 @@ fun CreateTeamScreen(
 @Composable
 private fun CreateTeamScreenContent(
     uiState: CreateTeamScreenUiState,
-    onEvent: (CreateTeamScreenEvents) -> Unit
+    onEvent: (CreateTeamScreenEvents) -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.background(MaterialTheme.colorScheme.background),
@@ -148,7 +156,7 @@ private fun TopAppBar(
 ) {
     val context = LocalContext.current
 
-    com.example.ui.components.top_app_bar.BaseTopAppBar(
+    BaseTopAppBar(
         modifier = modifier,
         title = stringResource(id = if (uiState.isCreateTeamMode) R.string.creating_a_team else R.string.edit_team),
         actions = {
@@ -172,9 +180,7 @@ private fun TopAppBar(
                     Icon(
                         modifier = Modifier.clickable {
                             onEvent(
-                                CreateTeamScreenEvents.ChangeVisibilityDialogDeleteTeam(
-                                    true
-                                )
+                                CreateTeamScreenEvents.ChangeVisibilityDialogDeleteTeam(true)
                             )
                         },
                         imageVector = Icons.Default.Delete,
@@ -188,14 +194,12 @@ private fun TopAppBar(
     )
 
     if (uiState.dialogDeleteTeamVisibilityState) {
-        com.example.ui.components.dialog.BaseSaveAlertDialog(
+        BaseSaveAlertDialog(
             message = R.string.delete_the_command,
             onConfirmation = { onEvent(CreateTeamScreenEvents.DeleteTeam) },
             onDismissRequest = {
                 onEvent(
-                    CreateTeamScreenEvents.ChangeVisibilityDialogDeleteTeam(
-                        false
-                    )
+                    CreateTeamScreenEvents.ChangeVisibilityDialogDeleteTeam(false)
                 )
             }
         )
@@ -230,7 +234,7 @@ private fun HeroesListInTeam(
 private fun HeroesList(
     modifier: Modifier = Modifier,
     heroesList: List<ActiveHeroInTeam>,
-    onEvent: (CreateTeamScreenEvents) -> Unit
+    onEvent: (CreateTeamScreenEvents) -> Unit,
 ) {
     LazyVerticalGrid(
         modifier = modifier,
@@ -239,9 +243,9 @@ private fun HeroesList(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         contentPadding = PaddingValues(16.dp)
     ) {
-        items(count = heroesList.size, key = { heroesList[it].hero.id }) {
+        items(items = heroesList, key = { it.hero.id }) { hero ->
             ItemHeroAvatarWithName(
-                activeHeroInTeam = heroesList[it], onEvent = onEvent::invoke
+                activeHeroInTeam = hero, onEvent = onEvent::invoke
             )
         }
     }
@@ -255,13 +259,13 @@ private fun SaveAndUpdateTeamButton(
 ) {
     var openSaveTeamDialog by remember { mutableStateOf(false) }
 
-    com.example.ui.components.button.BaseSmallFloatingButton(
+    BaseSmallFloatingButton(
         modifier = modifier,
         icon = Icons.Default.Save,
         onClick = { openSaveTeamDialog = true })
 
     if (openSaveTeamDialog) {
-        com.example.ui.components.dialog.BaseSaveAlertDialog(
+        BaseSaveAlertDialog(
             message = if (isCreateTeam) R.string.add_the_created_command else R.string.update_the_command,
             onConfirmation = {
                 saveTeam()

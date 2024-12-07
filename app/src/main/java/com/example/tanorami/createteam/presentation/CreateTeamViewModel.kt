@@ -40,19 +40,29 @@ class CreateTeamViewModel @Inject constructor(
     }
 
     private fun addHeroInTeam(activeHeroInTeam: ActiveHeroInTeam) {
-        if (uiState.heroesListInTeam.size < 4) {
-            activeHeroInTeam.active = true
-            val newList = uiState.heroesListInTeam.toMutableList()
-            newList.add(activeHeroInTeam.hero)
-            uiState = uiState.copy(heroesListInTeam = newList)
-        }
+        if (uiState.heroesListInTeam.size >= 4) return
+        val updatedHero = activeHeroInTeam.copy(active = true)
+        val updatedHeroesListInTeam = uiState.heroesListInTeam + updatedHero.hero
+        uiState = uiState.copy(
+            heroesList = updateHero(updatedHero),
+            heroesListInTeam = updatedHeroesListInTeam
+        )
     }
 
     private fun removeHeroFromTeam(activeHeroInTeam: ActiveHeroInTeam) {
         if (uiState.heroesListInTeam.isNotEmpty()) {
-            activeHeroInTeam.active = false
-            uiState =
-                uiState.copy(heroesListInTeam = uiState.heroesListInTeam.minus(activeHeroInTeam.hero))
+            val updatedHero = activeHeroInTeam.copy(active = false)
+            val updatedHeroesListInTeam = uiState.heroesListInTeam - updatedHero.hero
+            uiState = uiState.copy(
+                heroesList = updateHero(updatedHero),
+                heroesListInTeam = updatedHeroesListInTeam
+            )
+        }
+    }
+
+    private fun updateHero(updatedHero: ActiveHeroInTeam): List<ActiveHeroInTeam> {
+        return uiState.heroesList.map {
+            if (it.hero.id == updatedHero.hero.id) updatedHero else it
         }
     }
 
