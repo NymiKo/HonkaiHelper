@@ -2,6 +2,7 @@ package com.example.data.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.data.db.MIGRATION_1_2
 import com.example.data.db.RoomDatabaseApp
 import com.example.data.db.contract.RoomContract
 import dagger.Module
@@ -14,7 +15,9 @@ internal object RoomModule {
     @Provides
     @Singleton
     fun provideRoom(context: Context): RoomDatabaseApp =
-        Room.databaseBuilder(context, RoomDatabaseApp::class.java, RoomContract.databaseApp).build()
+        Room.databaseBuilder(context, RoomDatabaseApp::class.java, RoomContract.databaseApp)
+            .addMigrations(MIGRATION_1_2)
+            .build()
 
     @Provides
     @Singleton
@@ -68,4 +71,12 @@ internal object RoomModule {
     @Provides
     @Singleton
     fun providesWeaponDao(database: RoomDatabaseApp) = database.weaponsDao()
+
+    @Provides
+    @Singleton
+    fun providesStatDao(database: RoomDatabaseApp) = database.statDao()
+
+    @Provides
+    @Singleton
+    fun providesAdditionalStatDao(database: RoomDatabaseApp) = database.additionalStat()
 }

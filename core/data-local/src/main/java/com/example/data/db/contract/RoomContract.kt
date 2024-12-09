@@ -11,10 +11,12 @@ object RoomContract {
     const val tableEidolons = "eidolons"
     const val tableRelics = "relics"
     const val tableDecorations = "decorations"
-    const val tableOptimalStatsHero = "optimal_stats"
+    const val tableOptimalStatsHero = "optimal_stats_hero"
     const val tableBuildWeapon = "build_weapon"
     const val tableBuildRelic = "build_relic"
     const val tableBuildDecoration = "build_decoration"
     const val tableBuildStatsEquipment = "build_stats_equipment"
+    const val tableStats = "stats"
+    const val tableAdditionalStats = "additional_stats"
     const val tableWeapons = "weapons"
 }
