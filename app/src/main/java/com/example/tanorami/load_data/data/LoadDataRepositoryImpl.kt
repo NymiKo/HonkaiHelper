@@ -20,7 +20,6 @@ import com.example.data.db.entity.BuildWeaponEntity
 import com.example.data.db.entity.DecorationEntity
 import com.example.data.db.entity.EidolonEntity
 import com.example.data.db.entity.ElementEntity
-import com.example.data.db.entity.OptimalStatsHeroEntity
 import com.example.data.db.entity.PathEntity
 import com.example.data.db.entity.RelicEntity
 import com.example.data.db.entity.WeaponEntity
@@ -28,6 +27,9 @@ import com.example.data.remote.util.handleApi
 import com.example.data.source.build_stats_equipment.toBuildStatsEquipmentEntity
 import com.example.data.source.hero.mapper.toHeroEntity
 import com.example.data.source.hero.mapper.toHeroModel
+import com.example.data.source.stat.StatLocalDataSource
+import com.example.data.source.stat.mapper.toStatEntity
+import com.example.data.source.stat.mapper.toStatModel
 import com.example.data.source.stats_equipment.mapper.toBuildStatsEquipmentModel
 import com.example.domain.di.DispatcherIo
 import com.example.domain.util.NetworkResult
@@ -56,6 +58,7 @@ class LoadDataRepositoryImpl @Inject constructor(
     private val relicDao: RelicDao,
     private val buildStatsEquipmentDao: BuildStatsEquipmentDao,
     private val weaponDao: WeaponDao,
+    private val statLocalDataSource: StatLocalDataSource,
     private val loadDataService: LoadDataService,
     private val fileManager: FileManager,
 ) : LoadDataRepository {
@@ -66,7 +69,7 @@ class LoadDataRepositoryImpl @Inject constructor(
         val deferredElements = async { getElementsHeroes() }
         val deferredAbilities = async { getAbilitiesHeroes() }
         val deferredEidolons = async { getEidolonsHero() }
-        val deferredOptimalStats = async { getOptimalStatsList() }
+        //val deferredOptimalStats = async { getOptimalStatsList() }
         val deferredBuildWeapon = async { getBuildWeaponsList() }
         val deferredBuildRelic = async { getBuildRelicsList() }
         val deferredBuildDecorations = async { getBuildDecorationsList() }
@@ -74,6 +77,7 @@ class LoadDataRepositoryImpl @Inject constructor(
         val deferredRelics = async { getRelicsList() }
         val deferredBuildStatsEquipment = async { getStatsEquipmentList() }
         val deferredWeapons = async { getWeaponsList() }
+        val deferredStats = async { getStatsList() }
 
         val results = awaitAll(
             deferredPaths,
@@ -81,14 +85,15 @@ class LoadDataRepositoryImpl @Inject constructor(
             deferredElements,
             deferredAbilities,
             deferredEidolons,
-            deferredOptimalStats,
+            //deferredOptimalStats,
             deferredBuildWeapon,
             deferredBuildRelic,
             deferredBuildDecorations,
             deferredDecorations,
             deferredRelics,
             deferredBuildStatsEquipment,
-            deferredWeapons
+            deferredWeapons,
+            deferredStats
         )
 
         results.all { it }
@@ -291,20 +296,42 @@ class LoadDataRepositoryImpl @Inject constructor(
         }
     }
 
-    private suspend fun getOptimalStatsList(): Boolean {
+//    private suspend fun getOptimalStatsList(): Boolean {
+//        return withContext(ioDispatcher) {
+//            when (val resultApi = getRemoteData { loadDataService.getOptimalStats() }) {
+//                is NetworkResult.Error -> false
+//                is NetworkResult.Success -> {
+//                    val remoteEntities = resultApi.data
+//                    val localEntities = optimalStatsHeroDao.getOptimalStats()
+//                    val newEntities = remoteEntities.filter { remoteOptimalStats ->
+//                        localEntities.none { remoteOptimalStats == it.toOptimalStatsHero() }
+//                    }
+//
+//                    insertEntitiesIntoLocalStorage(
+//                        newEntities.map { OptimalStatsHeroEntity.toOptimalStatsHeroEntity(it) },
+//                        optimalStatsHeroDao::insertOptimalStatsHero
+//                    ).join()
+//
+//                    return@withContext true
+//                }
+//            }
+//        }
+//    }
+
+    private suspend fun getStatsList(): Boolean {
         return withContext(ioDispatcher) {
-            when (val resultApi = getRemoteData { loadDataService.getOptimalStats() }) {
+            when (val resultApi = getRemoteData { loadDataService.getStats() }) {
                 is NetworkResult.Error -> false
                 is NetworkResult.Success -> {
                     val remoteEntities = resultApi.data
-                    val localEntities = optimalStatsHeroDao.getOptimalStats()
-                    val newEntities = remoteEntities.filter { remoteOptimalStats ->
-                        localEntities.none { remoteOptimalStats == it.toOptimalStatsHero() }
+                    val localEntities = statLocalDataSource.getStatsList()
+                    val newEntities = remoteEntities.filter { remoteStats ->
+                        localEntities.none { remoteStats.toStatModel() == it.toStatModel() }
                     }
 
                     insertEntitiesIntoLocalStorage(
-                        newEntities.map { OptimalStatsHeroEntity.toOptimalStatsHeroEntity(it) },
-                        optimalStatsHeroDao::insertOptimalStatsHero
+                        newEntities.map { it.toStatModel().toStatEntity() },
+                        statLocalDataSource::insertHeroesList
                     ).join()
 
                     return@withContext true

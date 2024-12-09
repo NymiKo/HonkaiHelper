@@ -6,6 +6,8 @@ import com.example.data.source.hero.HeroLocalDataSource
 import com.example.data.source.hero.HeroLocalDataSourceImpl
 import com.example.data.source.relic.RelicLocalDataSource
 import com.example.data.source.relic.RelicLocalDataSourceImpl
+import com.example.data.source.stat.StatLocalDataSource
+import com.example.data.source.stat.StatLocalDataSourceImpl
 import com.example.data.source.weapon.WeaponLocalDataSource
 import com.example.data.source.weapon.WeaponLocalDataSourceImpl
 import dagger.Binds
@@ -30,4 +32,8 @@ internal interface LocalDataSourceModule {
     @Binds
     @Singleton
     fun bindDecorationLocalDataSource(decorationLocalDataSourceImpl: DecorationLocalDataSourceImpl): DecorationLocalDataSource
+
+    @Binds
+    @Singleton
+    fun bindStatLocalDataSource(statLocalDataSourceImpl: StatLocalDataSourceImpl): StatLocalDataSource
 }

@@ -23,5 +23,11 @@ data class HeroFullBaseBuildRelations(
     val decorationsForBuild: List<DecorationForBuildRelation>,
 
     @Relation(parentColumn = "id", entityColumn = "idHero", entity = BuildStatsEquipmentEntity::class)
-    val buildStatsEquipmentEntity: BuildStatsEquipmentEntity
+    val buildStatsEquipmentEntity: BuildStatsEquipmentEntity,
+
+//    @Relation(parentColumn = "id", entityColumn = "idHero", entity = AdditionalStatEntity::class)
+//    val buildAdditionalStatsEntity: AdditionalStatEntity,
+//
+//    @Relation(parentColumn = "id", entityColumn = "idHero", entity = OptimalStatsHeroEntity::class)
+//    val buildOptimalStatsHeroEntity: OptimalStatsHeroEntity,
 )

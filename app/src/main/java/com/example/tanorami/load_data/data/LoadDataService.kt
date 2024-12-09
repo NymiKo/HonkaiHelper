@@ -4,12 +4,12 @@ import com.example.common.DecorationModel
 import com.example.common.RelicModel
 import com.example.common.WeaponModel
 import com.example.data.remote.api.hero.model.HeroDto
+import com.example.data.remote.api.stat.model.StatDto
 import com.example.data.remote.api.stats_equipment.BuildStatsEquipmentDto
 import com.example.domain.repository.ability.AbilityModel
 import com.example.domain.repository.decoration.BuildDecorationModel
 import com.example.domain.repository.eidolon.EidolonModel
 import com.example.domain.repository.element.ElementModel
-import com.example.domain.repository.optimal_stats_hero.OptimalStatsHero
 import com.example.domain.repository.path.PathModel
 import com.example.domain.repository.relic.BuildRelicModel
 import com.example.domain.repository.weapon.models.BuildWeaponModel
@@ -32,8 +32,8 @@ interface LoadDataService {
     @GET("/getEidolons.php")
     suspend fun getEidolonsList(): Response<List<EidolonModel>>
 
-    @GET("/getOptimalStats.php")
-    suspend fun getOptimalStats(): Response<List<OptimalStatsHero>>
+//    @GET("/getOptimalStats.php")
+//    suspend fun getOptimalStats(): Response<List<OptimalStatsHero>>
 
     @GET("/getBuildWeapons.php")
     suspend fun getBuildWeapons(): Response<List<BuildWeaponModel>>
@@ -55,4 +55,7 @@ interface LoadDataService {
 
     @GET("/getWeapons.php")
     suspend fun getWeapons(): Response<List<WeaponModel>>
+
+    @GET("tables/getStats.php")
+    suspend fun getStats(): Response<List<StatDto>>
 }

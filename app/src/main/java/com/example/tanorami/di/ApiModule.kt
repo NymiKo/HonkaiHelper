@@ -2,6 +2,7 @@ package com.example.tanorami.di
 
 import android.content.Context
 import com.example.data.remote.api.build.HeroBuildsFromUsersApi
+import com.example.data.remote.api.stat.StatApi
 import com.example.data.remote.api.team.TeamsFromUsersApi
 import com.example.domain.di.DispatcherIo
 import com.example.tanorami.auth.login.data.LoginService
@@ -90,4 +91,7 @@ object ApiModule {
     @Provides
     fun providesTeamsFromUsersApi(retrofit: Retrofit): TeamsFromUsersApi =
         retrofit.create(TeamsFromUsersApi::class.java)
+
+    @Provides
+    fun providesStatApi(retrofit: Retrofit): StatApi = retrofit.create(StatApi::class.java)
 }
