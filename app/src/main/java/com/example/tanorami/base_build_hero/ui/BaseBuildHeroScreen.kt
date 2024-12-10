@@ -30,12 +30,13 @@ import com.example.tanorami.base_build_hero.presentation.models.BaseBuildHeroScr
 import com.example.tanorami.base_build_hero.presentation.models.BaseBuildHeroScreenUiState
 import com.example.tanorami.base_build_hero.ui.components.CategoryBestEquipments
 import com.example.tanorami.base_build_hero.ui.components.EquipmentImage
-import com.example.tanorami.base_build_hero.ui.components.StatsListColumn
+import com.example.tanorami.base_build_hero.ui.components.EquipmentStatsColumn
 import com.example.tanorami.builds_hero_from_users.ui.BuildsHeroFromUsersNavArguments
 import com.example.tanorami.info_about_decoration.ui.InfoAboutDecorationNavArguments
 import com.example.tanorami.info_about_relic.ui.InfoAboutRelicNavArgument
 import com.example.tanorami.info_about_weapon.ui.InfoAboutWeaponNavArguments
 import com.example.tanorami.utils.OnLifecycleEvent
+import com.example.ui.components.button.BaseNextButton
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -175,12 +176,14 @@ private fun BaseBuildHeroScreenContent(
                 }
             )
 
-            StatsListColumn(
+            EquipmentStatsColumn(
                 modifier = Modifier.padding(top = 16.dp),
                 statsList = uiState.buildStatsEquipment
             )
 
-            com.example.ui.components.button.BaseNextButton(
+
+
+            BaseNextButton(
                 modifier = Modifier
                     .padding(top = 8.dp)
                     .padding(horizontal = 16.dp)

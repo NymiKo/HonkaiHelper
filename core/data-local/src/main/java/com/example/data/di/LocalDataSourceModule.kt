@@ -1,9 +1,13 @@
 package com.example.data.di
 
+import com.example.data.source.additional_stat.AdditionalStatLocalDataSource
+import com.example.data.source.additional_stat.AdditionalStatLocalDataSourceImpl
 import com.example.data.source.decoration.DecorationLocalDataSource
 import com.example.data.source.decoration.DecorationLocalDataSourceImpl
 import com.example.data.source.hero.HeroLocalDataSource
 import com.example.data.source.hero.HeroLocalDataSourceImpl
+import com.example.data.source.optimal_stat_hero.OptimalStatLocalDataSource
+import com.example.data.source.optimal_stat_hero.OptimalStatLocalDataSourceImpl
 import com.example.data.source.relic.RelicLocalDataSource
 import com.example.data.source.relic.RelicLocalDataSourceImpl
 import com.example.data.source.stat.StatLocalDataSource
@@ -36,4 +40,12 @@ internal interface LocalDataSourceModule {
     @Binds
     @Singleton
     fun bindStatLocalDataSource(statLocalDataSourceImpl: StatLocalDataSourceImpl): StatLocalDataSource
+
+    @Binds
+    @Singleton
+    fun bindAdditionalStatLocalDataSource(additionalStatLocalDataSourceImpl: AdditionalStatLocalDataSourceImpl): AdditionalStatLocalDataSource
+
+    @Binds
+    @Singleton
+    fun bindOptimalStatLocalDataSource(optimalStatLocalDataSourceImpl: OptimalStatLocalDataSourceImpl): OptimalStatLocalDataSource
 }

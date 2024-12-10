@@ -27,7 +27,7 @@ import com.example.data.db.entity.DecorationEntity
 import com.example.data.db.entity.EidolonEntity
 import com.example.data.db.entity.ElementEntity
 import com.example.data.db.entity.HeroEntity
-import com.example.data.db.entity.OptimalStatsHeroEntity
+import com.example.data.db.entity.OptimalStatHeroEntity
 import com.example.data.db.entity.PathEntity
 import com.example.data.db.entity.RelicEntity
 import com.example.data.db.entity.StatEntity
@@ -42,7 +42,7 @@ import com.example.data.db.entity.WeaponEntity
         EidolonEntity::class,
         RelicEntity::class,
         DecorationEntity::class,
-        OptimalStatsHeroEntity::class,
+        OptimalStatHeroEntity::class,
         BuildWeaponEntity::class,
         BuildRelicEntity::class,
         BuildDecorationEntity::class,

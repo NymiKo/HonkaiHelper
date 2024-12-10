@@ -3,7 +3,9 @@ package com.example.tanorami.load_data.data
 import com.example.common.DecorationModel
 import com.example.common.RelicModel
 import com.example.common.WeaponModel
+import com.example.data.remote.api.additional_stat.model.AdditionalStatDto
 import com.example.data.remote.api.hero.model.HeroDto
+import com.example.data.remote.api.optimal_stat.model.OptimalStatHeroDto
 import com.example.data.remote.api.stat.model.StatDto
 import com.example.data.remote.api.stats_equipment.BuildStatsEquipmentDto
 import com.example.domain.repository.ability.AbilityModel
@@ -32,8 +34,8 @@ interface LoadDataService {
     @GET("/getEidolons.php")
     suspend fun getEidolonsList(): Response<List<EidolonModel>>
 
-//    @GET("/getOptimalStats.php")
-//    suspend fun getOptimalStats(): Response<List<OptimalStatsHero>>
+    @GET("/tables/getOptimalStatsHero.php")
+    suspend fun getOptimalStatsHeroes(): Response<List<OptimalStatHeroDto>>
 
     @GET("/getBuildWeapons.php")
     suspend fun getBuildWeapons(): Response<List<BuildWeaponModel>>
@@ -56,6 +58,9 @@ interface LoadDataService {
     @GET("/getWeapons.php")
     suspend fun getWeapons(): Response<List<WeaponModel>>
 
-    @GET("tables/getStats.php")
+    @GET("/tables/getStats.php")
     suspend fun getStats(): Response<List<StatDto>>
+
+    @GET("/tables/getAdditionalStats.php")
+    suspend fun getAdditionalStats(): Response<List<AdditionalStatDto>>
 }
