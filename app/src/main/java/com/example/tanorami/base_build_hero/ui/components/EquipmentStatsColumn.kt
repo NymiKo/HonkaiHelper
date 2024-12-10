@@ -16,13 +16,14 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.core.ui.theme.DarkGrey
 import com.example.strings.R
+import com.example.ui.components.text.BaseDefaultText
 
 @Composable
-internal fun StatsListColumn(
+internal fun EquipmentStatsColumn(
     modifier: Modifier = Modifier,
-    statsList: List<String>
+    statsList: List<String>,
 ) {
-    HeaderCategory(
+    HeaderStats(
         modifier = modifier,
         headerCategory = R.string.stats_equipment
     )
@@ -53,7 +54,7 @@ internal fun StatsListColumn(
                     contentDescription = null
                 )
 
-                com.example.ui.components.text.BaseDefaultText(
+                BaseDefaultText(
                     modifier = Modifier.padding(start = 8.dp),
                     text = stat,
                     fontWeight = FontWeight.SemiBold

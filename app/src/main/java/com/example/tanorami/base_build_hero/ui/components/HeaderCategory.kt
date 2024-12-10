@@ -8,18 +8,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.ui.components.text.BaseDefaultText
 
 @Composable
 internal fun HeaderCategory(
     modifier: Modifier = Modifier,
     headerCategory: Int,
 ) {
-    com.example.ui.components.text.BaseDefaultText(
+    BaseDefaultText(
         modifier = modifier
             .padding(horizontal = 16.dp)
             .fillMaxWidth(),
         text = stringResource(id = headerCategory),
         fontSize = 18.sp,
-        fontWeight = FontWeight.Bold
+        fontWeight = FontWeight.Bold,
     )
 }

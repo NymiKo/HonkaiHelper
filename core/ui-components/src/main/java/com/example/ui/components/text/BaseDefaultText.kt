@@ -1,22 +1,33 @@
 package com.example.ui.components.text
 
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 
-@androidx.compose.runtime.Composable
+@Composable
 fun BaseDefaultText(
-    modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier.Companion,
+    modifier: Modifier = Modifier,
     text: String,
-    fontSize: androidx.compose.ui.unit.TextUnit = 18.sp,
-    color: androidx.compose.ui.graphics.Color = androidx.compose.material3.MaterialTheme.colorScheme.secondary,
-    textAlign: androidx.compose.ui.text.style.TextAlign? = null,
-    fontWeight: androidx.compose.ui.text.font.FontWeight? = null,
-    fontFamily: androidx.compose.ui.text.font.FontFamily = androidx.compose.ui.text.font.FontFamily.Companion.Default,
-    lineHeight: androidx.compose.ui.unit.TextUnit = androidx.compose.ui.unit.TextUnit.Companion.Unspecified,
+    fontSize: TextUnit = 18.sp,
+    color: Color = MaterialTheme.colorScheme.secondary,
+    textAlign: TextAlign? = null,
+    fontWeight: FontWeight? = null,
+    fontFamily: FontFamily = FontFamily.Companion.Default,
+    lineHeight: TextUnit = TextUnit.Companion.Unspecified,
     maxLines: Int = Int.MAX_VALUE,
-    overflow: androidx.compose.ui.text.style.TextOverflow = androidx.compose.ui.text.style.TextOverflow.Companion.Clip,
-    textDecoration: androidx.compose.ui.text.style.TextDecoration? = null,
+    overflow: TextOverflow = TextOverflow.Companion.Clip,
+    textDecoration: TextDecoration? = null,
 ) {
-    androidx.compose.material3.Text(
+    Text(
         modifier = modifier,
         text = text,
         style = com.example.core.ui.theme.Typography.bodyMedium,

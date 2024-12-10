@@ -77,6 +77,8 @@
     <string name="best_relics">Лучшие реликвии</string>
     <string name="best_decorations">Лучшие планарные украшения</string>
     <string name="stats_equipment">Основные статы</string>
+    <string name="additional_stats">Дополнительные статы</string>
+    <string name="optimal_stats">Оптимальные статы</string>
     <string name="skill_weapon">Навык конуса</string>
     <string name="effect_relic">Эффект набора</string>
     <string name="effect_relic_two_parts">Эффект от 2-х частей:</string>
@@ -112,6 +114,7 @@
     <string name="teams">Команды</string>
     <string name="builds">Сборки</string>
     <string name="ok">Ок</string>
+    <string name="close">Закрыть</string>
     <string name="data_needs_updated">Необходимо обновить данные</string>
     <string name="add_a_build">Добавить сборку</string>
     <string name="add_a_team">Добавить команду</string>

@@ -5,6 +5,7 @@ import com.example.base.BaseViewModel
 import com.example.tanorami.base_build_hero.data.BaseBuildHeroRepository
 import com.example.tanorami.base_build_hero.presentation.models.BaseBuildHeroScreenEvents
 import com.example.tanorami.base_build_hero.presentation.models.BaseBuildHeroScreenSideEffects
+import com.example.tanorami.base_build_hero.presentation.models.BaseBuildHeroScreenSideEffects.*
 import com.example.tanorami.base_build_hero.presentation.models.BaseBuildHeroScreenUiState
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,30 +18,30 @@ class BaseBuildHeroViewModel @Inject constructor(
     override fun onEvent(event: BaseBuildHeroScreenEvents) {
         when (event) {
             is BaseBuildHeroScreenEvents.GetFullBaseBuildHero -> getFullBaseBuildHero(event.idHero)
-            BaseBuildHeroScreenEvents.OnBack -> sendSideEffect(BaseBuildHeroScreenSideEffects.OnBack)
+            BaseBuildHeroScreenEvents.OnBack -> sendSideEffect(OnBack)
             BaseBuildHeroScreenEvents.OnBuildsHeroFromUsersScreen -> sendSideEffect(
-                BaseBuildHeroScreenSideEffects.OnBuildsHeroFromUsersScreen(uiState.idHero)
+                OnBuildsHeroFromUsersScreen(uiState.fullBaseBuildHero.idHero)
             )
             is BaseBuildHeroScreenEvents.OnInfoAboutDecorationScreen -> {
-                sendSideEffect(BaseBuildHeroScreenSideEffects.OnInfoAboutDecorationScreen(event.idDecoration))
+                sendSideEffect(OnInfoAboutDecorationScreen(event.idDecoration))
             }
             is BaseBuildHeroScreenEvents.OnInfoAboutRelicScreen -> {
-                sendSideEffect(BaseBuildHeroScreenSideEffects.OnInfoAboutRelicScreen(event.idRelic))
+                sendSideEffect(OnInfoAboutRelicScreen(event.idRelic))
             }
             is BaseBuildHeroScreenEvents.OnInfoAboutWeaponScreen -> {
-                sendSideEffect(BaseBuildHeroScreenSideEffects.OnInfoAboutWeaponScreen(event.idWeapon))
+                sendSideEffect(OnInfoAboutWeaponScreen(event.idWeapon))
             }
+
+            is BaseBuildHeroScreenEvents.ChangeVisibilityRemarkDialog ->
+                uiState = uiState.copy(
+                    visibilityRemarkDialog = event.visibility,
+                    remarkTextInRemarkDialog = event.remark
+                )
         }
     }
 
     private fun getFullBaseBuildHero(idHero: Int) = viewModelScope.launch {
         val result = repository.getBaseBuildHero(idHero)
-        uiState = uiState.copy(
-            idHero = idHero,
-            weaponsList = result.weapons,
-            relicsList = result.relics,
-            decorationsList = result.decoration,
-            buildStatsEquipment = result.buildStatsEquipment
-        )
+        uiState = uiState.copy(fullBaseBuildHero = result)
     }
 }

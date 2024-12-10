@@ -1,6 +1,7 @@
 package com.example.tanorami.base_build_hero.data
 
 import com.example.data.db.dao.HeroDao
+import com.example.data.source.optimal_stat_hero.mapper.toOptimalStatHeroForBuildModel
 import com.example.domain.di.DispatcherIo
 import com.example.tanorami.base_build_hero.data.model.FullBaseBuildHero
 import kotlinx.coroutines.CoroutineDispatcher
@@ -24,7 +25,9 @@ class BaseBuildHeroRepositoryImpl @Inject constructor(
                     result.buildStatsEquipmentEntity.legs,
                     result.buildStatsEquipmentEntity.sphere,
                     result.buildStatsEquipmentEntity.rope
-                )
+                ),
+                result.buildAdditionalStatsEntity.map { it.statEntity.statName },
+                result.buildOptimalStatsHeroEntity.map { it.toOptimalStatHeroForBuildModel() }
             )
         }
 }

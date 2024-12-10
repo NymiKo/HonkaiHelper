@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.strings.R
+import com.example.ui.components.text.BaseDefaultText
 
 @Composable
 fun ProfileTopAppBar(
@@ -117,7 +118,7 @@ private fun ExitAccountAlertDialog(
     AlertDialog(
         modifier = modifier,
         text = {
-            com.example.ui.components.text.BaseDefaultText(
+            BaseDefaultText(
                 text = stringResource(id = R.string.want_to_logout_of_your_account),
                 color = MaterialTheme.colorScheme.secondary,
             )
@@ -127,7 +128,7 @@ private fun ExitAccountAlertDialog(
             TextButton(
                 onClick = { onConfirmation() }
             ) {
-                com.example.ui.components.text.BaseDefaultText(
+                BaseDefaultText(
                     text = stringResource(id = R.string.yes),
                     color = MaterialTheme.colorScheme.secondary
                 )
@@ -137,7 +138,7 @@ private fun ExitAccountAlertDialog(
             TextButton(
                 onClick = { onDismissRequest() }
             ) {
-                com.example.ui.components.text.BaseDefaultText(
+                BaseDefaultText(
                     text = stringResource(id = R.string.cancellation),
                     color = MaterialTheme.colorScheme.secondary
                 )

@@ -28,9 +28,11 @@ import com.example.tanorami.base_build_hero.presentation.BaseBuildHeroViewModel
 import com.example.tanorami.base_build_hero.presentation.models.BaseBuildHeroScreenEvents
 import com.example.tanorami.base_build_hero.presentation.models.BaseBuildHeroScreenSideEffects
 import com.example.tanorami.base_build_hero.presentation.models.BaseBuildHeroScreenUiState
+import com.example.tanorami.base_build_hero.ui.components.AdditionalStatsColumn
 import com.example.tanorami.base_build_hero.ui.components.CategoryBestEquipments
 import com.example.tanorami.base_build_hero.ui.components.EquipmentImage
 import com.example.tanorami.base_build_hero.ui.components.EquipmentStatsColumn
+import com.example.tanorami.base_build_hero.ui.components.OptimalStatsHeroColumn
 import com.example.tanorami.builds_hero_from_users.ui.BuildsHeroFromUsersNavArguments
 import com.example.tanorami.info_about_decoration.ui.InfoAboutDecorationNavArguments
 import com.example.tanorami.info_about_relic.ui.InfoAboutRelicNavArgument
@@ -117,7 +119,7 @@ private fun BaseBuildHeroScreenContent(
                 .verticalScroll(rememberScrollState()),
         ) {
             CategoryBestEquipments(
-                equipmentsList = uiState.weaponsList,
+                equipmentsList = uiState.fullBaseBuildHero.weaponsList,
                 headerCategory = R.string.best_weapons,
                 equipmentImage = { weapon ->
                     EquipmentImage(
@@ -143,7 +145,7 @@ private fun BaseBuildHeroScreenContent(
             CategoryBestEquipments(
                 modifier = Modifier.padding(top = 16.dp),
                 headerCategory = R.string.best_relics,
-                equipmentsList = uiState.relicsList,
+                equipmentsList = uiState.fullBaseBuildHero.relicsList,
                 equipmentImage = { relic ->
                     EquipmentImage(
                         modifier = Modifier
@@ -159,7 +161,7 @@ private fun BaseBuildHeroScreenContent(
             CategoryBestEquipments(
                 modifier = Modifier.padding(top = 16.dp),
                 headerCategory = R.string.best_decorations,
-                equipmentsList = uiState.decorationsList,
+                equipmentsList = uiState.fullBaseBuildHero.decorationsList,
                 equipmentImage = { decoration ->
                     EquipmentImage(
                         modifier = Modifier
@@ -178,10 +180,28 @@ private fun BaseBuildHeroScreenContent(
 
             EquipmentStatsColumn(
                 modifier = Modifier.padding(top = 16.dp),
-                statsList = uiState.buildStatsEquipment
+                statsList = uiState.fullBaseBuildHero.buildStatsEquipment,
             )
 
+            AdditionalStatsColumn(
+                modifier = Modifier.padding(top = 16.dp),
+                additionalStatsList = uiState.fullBaseBuildHero.buildAdditionalStatsList,
+            )
 
+            OptimalStatsHeroColumn(
+                modifier = Modifier.padding(top = 16.dp),
+                optimalStatsHeroList = uiState.fullBaseBuildHero.buildOptimalStatsHeroList,
+                visibilityRemarkDialog = uiState.visibilityRemarkDialog,
+                remark = uiState.remarkTextInRemarkDialog,
+                changeVisibilityRemarkDialog = { visibility, remark ->
+                    onEvent(
+                        BaseBuildHeroScreenEvents.ChangeVisibilityRemarkDialog(
+                            visibility,
+                            remark
+                        )
+                    )
+                }
+            )
 
             BaseNextButton(
                 modifier = Modifier
