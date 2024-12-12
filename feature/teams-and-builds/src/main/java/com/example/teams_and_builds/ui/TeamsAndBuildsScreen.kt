@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.strings.R
 import com.example.teams_and_builds.presentation.TeamsAndBuildsViewModel
 import com.example.teams_and_builds.presentation.models.TeamsAndBuildsScreenEvents
@@ -45,7 +46,8 @@ internal fun TeamsAndBuildsScreen(
 
     TeamsAndBuildsScreenContent(
         uiState = state,
-        onEvent = viewModel::onEvent
+        onEvent = viewModel::onEvent,
+        viewModel = viewModel,
     )
 
     when (sideEffects) {
@@ -63,6 +65,7 @@ internal fun TeamsAndBuildsScreen(
 private fun TeamsAndBuildsScreenContent(
     uiState: TeamsAndBuildsScreenUiState,
     onEvent: (TeamsAndBuildsScreenEvents) -> Unit,
+    viewModel: TeamsAndBuildsViewModel,
 ) {
     val pagerState = rememberPagerState(initialPage = 0) { 2 }
     val scope = rememberCoroutineScope()
@@ -113,7 +116,7 @@ private fun TeamsAndBuildsScreenContent(
                 )
             },
             refreshBuildsList = { onEvent(TeamsAndBuildsScreenEvents.RefreshBuildsList) },
-            refreshTeamsList = { onEvent(TeamsAndBuildsScreenEvents.RefreshTeamsList) }
+            refreshTeamsList = { onEvent(TeamsAndBuildsScreenEvents.RefreshTeamsList) },
         )
     }
 }
@@ -164,7 +167,7 @@ private fun TabsContent(
 
             1 -> {
                 TeamsListContent(
-                    teamsList = uiState.teamsList,
+                    teamsList = uiState.teamsList.collectAsLazyPagingItems(),
                     refreshingTeamsList = uiState.refreshingTeamsList,
                     refreshTeamsList = refreshTeamsList::invoke,
                 )

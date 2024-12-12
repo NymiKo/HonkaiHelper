@@ -9,6 +9,6 @@ interface TeamsFromUsersApi {
     @GET("/getTeamsByID.php")
     suspend fun getTeamsFromUsersListByIdHero(@Query("idHero") idHero: Int): Response<List<TeamFromUserDto>>
 
-    @GET("/getTeamsList.php")
-    suspend fun getTeamsFromUsersList(): Response<List<TeamFromUserDto>>
+    @GET("/getTeamsListPaging.php")
+    suspend fun getTeamsFromUsersList(@Query("page") page: Int): List<TeamFromUserDto>
 }

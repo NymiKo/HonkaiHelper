@@ -1,6 +1,7 @@
 package com.example.teams_and_builds.presentation
 
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.example.base.BaseViewModel
 import com.example.domain.util.NetworkResult
 import com.example.teams_and_builds.data.TeamsAndBuildsRepository
@@ -39,17 +40,8 @@ internal class TeamsAndBuildsViewModel @Inject constructor(
 
     private fun getTeamsListFromUsers() = viewModelScope.launch {
         uiState = uiState.copy(refreshingTeamsList = true)
-        when (val result = repository.getTeamsListFromUsers()) {
-            is NetworkResult.Error -> {
-
-            }
-            is NetworkResult.Success -> {
-                uiState = uiState.copy(
-                    teamsList = result.data,
-                    refreshingTeamsList = false
-                )
-            }
-        }
+        val result = repository.getTeamsListFromUsers().cachedIn(viewModelScope)
+        uiState = uiState.copy(teamsList = result, refreshingTeamsList = false)
     }
 
     private fun getBuildsListFromUsers() = viewModelScope.launch {
