@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.tanorami.info_about_weapon.data.model.FullInfoAboutWeapon
+import com.example.common.WeaponModel
 import com.example.tanorami.navigation.LocalNavAnimatedVisibilityScope
 import com.example.tanorami.navigation.LocalSharedTransitionScope
 
@@ -22,7 +22,7 @@ import com.example.tanorami.navigation.LocalSharedTransitionScope
 @Composable
 internal fun ImagesWeaponAndPath(
     modifier: Modifier = Modifier,
-    weapon: FullInfoAboutWeapon?,
+    weapon: WeaponModel?,
 ) {
     val sharedTransitionScope = LocalSharedTransitionScope.current
         ?: throw IllegalStateException("No SharedElementScope found")
@@ -50,10 +50,10 @@ internal fun ImagesWeaponAndPath(
                     .width(200.dp)
                     .align(Alignment.Center)
                     .sharedElement(
-                        rememberSharedContentState(key = "weapon-${weapon?.weapon?.idWeapon}-base-build"),
+                        rememberSharedContentState(key = "weapon-${weapon?.idWeapon}-base-build"),
                         animatedVisibilityScope = animatedVisibilityScope,
                     ),
-                model = weapon?.weapon?.image,
+                model = weapon?.image,
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
             )

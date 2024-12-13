@@ -2,6 +2,7 @@ package com.example.data.source.weapon
 
 import com.example.data.db.dao.WeaponDao
 import com.example.data.db.entity.WeaponEntity
+import com.example.data.db.models.weapon.WeaponWithHeroesRelation
 import com.example.data.db.models.weapon.WeaponWithPathRelation
 import com.example.domain.di.DispatcherIo
 import kotlinx.coroutines.CoroutineDispatcher
@@ -27,6 +28,13 @@ internal class WeaponLocalDataSourceImpl @Inject constructor(
     override suspend fun getWeapon(idWeapon: Int): WeaponEntity {
         return withContext(ioDispatcher) {
             weaponDao.getWeapon(idWeapon)
+        }
+    }
+
+    override suspend fun getWeaponWithHeroes(idWeapon: Int): WeaponWithHeroesRelation {
+        return withContext(ioDispatcher) {
+            val weaponWithHeroes = weaponDao.getWeaponWithHeroes(idWeapon)
+            return@withContext weaponWithHeroes.copy(heroesList = weaponWithHeroes.heroesList.sortedBy { it.top })
         }
     }
 

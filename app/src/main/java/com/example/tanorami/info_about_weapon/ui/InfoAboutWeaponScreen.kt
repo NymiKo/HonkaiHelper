@@ -1,14 +1,19 @@
 package com.example.tanorami.info_about_weapon.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
@@ -19,12 +24,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.tanorami.info_about_weapon.data.model.FullInfoAboutWeapon
+import com.example.tanorami.info_about_hero.ui.InfoAboutHeroNavArguments
 import com.example.tanorami.info_about_weapon.presentation.InfoAboutWeaponViewModel
+import com.example.tanorami.info_about_weapon.presentation.models.InfoAboutWeaponEvents
+import com.example.tanorami.info_about_weapon.presentation.models.InfoAboutWeaponUiSideEffects
+import com.example.tanorami.info_about_weapon.presentation.models.InfoAboutWeaponUiState
 import com.example.tanorami.info_about_weapon.ui.components.DescriptionWeaponSkill
 import com.example.tanorami.info_about_weapon.ui.components.ImageRarityWeapon
 import com.example.tanorami.info_about_weapon.ui.components.ImagesWeaponAndPath
 import com.example.tanorami.utils.OnLifecycleEvent
+import com.example.ui.components.hero.BaseHeroAvatarAndName
+import com.example.ui.components.text.BaseDefaultText
+import com.example.ui.components.top_app_bar.BaseCenterAlignedTopAppBar
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -37,17 +48,31 @@ fun InfoAboutWeaponScreen(
     viewModel: InfoAboutWeaponViewModel = viewModel(factory = viewModelFactory),
     navController: NavController,
 ) {
-    val weapon = viewModel.weapon.collectAsStateWithLifecycle().value
+    val uiState = viewModel.uiState().collectAsStateWithLifecycle().value
+    val sideEffects = viewModel.uiEffect().collectAsState(null).value
+
+    when (sideEffects) {
+        is InfoAboutWeaponUiSideEffects.OnInfoAboutHeroScreen -> {
+            navController.navigate(InfoAboutHeroNavArguments(idHero = sideEffects.idHero))
+            viewModel.clearEffect()
+        }
+
+        InfoAboutWeaponUiSideEffects.OnBackClick -> {
+            navController.popBackStack()
+        }
+
+        null -> {}
+    }
 
     InfoAboutWeaponScreenContent(
-        fullInfoAboutWeapon = weapon,
-        onBack = navController::popBackStack,
+        uiState = uiState,
+        onEvents = viewModel::onEvent,
     )
     
     OnLifecycleEvent { owner, event ->  
         when(event) {
             Lifecycle.Event.ON_CREATE -> {
-                viewModel.getWeapon(navArguments.idWeapon)
+                viewModel.onEvent(InfoAboutWeaponEvents.GetWeaponByID(navArguments.idWeapon))
             }
             
             else -> {}
@@ -57,16 +82,15 @@ fun InfoAboutWeaponScreen(
 
 @Composable
 private fun InfoAboutWeaponScreenContent(
-    modifier: Modifier = Modifier,
-    fullInfoAboutWeapon: FullInfoAboutWeapon?,
-    onBack: () -> Unit,
+    uiState: InfoAboutWeaponUiState?,
+    onEvents: (InfoAboutWeaponEvents) -> Unit,
 ) {
     Scaffold(
-        modifier = modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         topBar = {
-            com.example.ui.components.top_app_bar.BaseCenterAlignedTopAppBar(
-                title = fullInfoAboutWeapon?.weapon?.name ?: "",
-                onBack = onBack::invoke
+            BaseCenterAlignedTopAppBar(
+                title = uiState?.weaponInfo?.weapon?.name ?: "",
+                onBack = { onEvents(InfoAboutWeaponEvents.OnBackClick) }
             )
         }
     ) { innerPadding ->
@@ -78,22 +102,37 @@ private fun InfoAboutWeaponScreenContent(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             ImagesWeaponAndPath(
-                weapon = fullInfoAboutWeapon,
+                weapon = uiState?.weaponInfo?.weapon,
             )
 
             ImageRarityWeapon(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                rarity = fullInfoAboutWeapon?.weapon?.rarity
+                rarity = uiState?.weaponInfo?.weapon?.rarity
             )
 
-            DescriptionWeaponSkill(descriptionWeaponSkill = fullInfoAboutWeapon?.weapon?.description)
+            LazyRow(
+                modifier = Modifier.padding(top = 8.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                contentPadding = PaddingValues(horizontal = 16.dp),
+            ) {
+                items(items = uiState?.weaponInfo?.heroesList ?: emptyList()) { hero ->
+                    BaseHeroAvatarAndName(
+                        modifier = Modifier.clickable {
+                            onEvents(InfoAboutWeaponEvents.OnHeroClick(hero.id))
+                        },
+                        hero = hero
+                    )
+                }
+            }
 
-            com.example.ui.components.text.BaseDefaultText(
+            DescriptionWeaponSkill(descriptionWeaponSkill = uiState?.weaponInfo?.weapon?.description)
+
+            BaseDefaultText(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .padding(top = 8.dp)
                     .fillMaxWidth(),
-                text = fullInfoAboutWeapon?.weapon?.story ?: "",
+                text = uiState?.weaponInfo?.weapon?.story ?: "",
                 fontSize = 16.sp,
                 fontFamily = FontFamily.SansSerif,
             )
