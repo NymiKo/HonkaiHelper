@@ -1,5 +1,8 @@
 package com.example.ui.components.team
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -16,6 +19,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,6 +27,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -133,19 +138,19 @@ fun TeamItem(
 
                     Spacer(modifier = Modifier.weight(1F))
 
-//                    AsyncImage(
-//                        modifier = Modifier
-//                            .size(25.dp)
-//                            .clickable {
-//                                val clipboard =
-//                                    context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-//                                val clipData: ClipData = ClipData.newPlainText("UID", team.uid)
-//                                clipboard.setPrimaryClip(clipData)
-//                            },
-//                        model = R.drawable.ic_baseline_content_copy,
-//                        contentDescription = null,
-//                        colorFilter = ColorFilter.tint(White)
-//                    )
+                    Icon(
+                        modifier = Modifier
+                            .size(25.dp)
+                            .clickable {
+                                val clipboard =
+                                    context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                                val clipData: ClipData = ClipData.newPlainText("UID", team.uid)
+                                clipboard.setPrimaryClip(clipData)
+                            },
+                        painter = painterResource(R.drawable.ic_baseline_content_copy),
+                        contentDescription = null,
+                        tint = White
+                    )
                 }
             }
         }

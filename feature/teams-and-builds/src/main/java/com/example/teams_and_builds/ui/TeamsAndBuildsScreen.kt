@@ -47,7 +47,6 @@ internal fun TeamsAndBuildsScreen(
     TeamsAndBuildsScreenContent(
         uiState = state,
         onEvent = viewModel::onEvent,
-        viewModel = viewModel,
     )
 
     when (sideEffects) {
@@ -65,7 +64,6 @@ internal fun TeamsAndBuildsScreen(
 private fun TeamsAndBuildsScreenContent(
     uiState: TeamsAndBuildsScreenUiState,
     onEvent: (TeamsAndBuildsScreenEvents) -> Unit,
-    viewModel: TeamsAndBuildsViewModel,
 ) {
     val pagerState = rememberPagerState(initialPage = 0) { 2 }
     val scope = rememberCoroutineScope()
@@ -110,13 +108,7 @@ private fun TeamsAndBuildsScreenContent(
         TabsContent(
             pagerState = pagerState,
             uiState = uiState,
-            onBuildClick = { idBuild ->
-                onEvent(
-                    TeamsAndBuildsScreenEvents.OnViewingBuildHeroFromUserScreen(idBuild)
-                )
-            },
-            refreshBuildsList = { onEvent(TeamsAndBuildsScreenEvents.RefreshBuildsList) },
-            refreshTeamsList = { onEvent(TeamsAndBuildsScreenEvents.RefreshTeamsList) },
+            onEvent = onEvent::invoke
         )
     }
 }
@@ -149,9 +141,7 @@ private fun TabItem(
 private fun TabsContent(
     modifier: Modifier = Modifier,
     uiState: TeamsAndBuildsScreenUiState,
-    onBuildClick: (idBuild: Long) -> Unit,
-    refreshBuildsList: () -> Unit,
-    refreshTeamsList: () -> Unit,
+    onEvent: (TeamsAndBuildsScreenEvents) -> Unit,
     pagerState: PagerState,
 ) {
     HorizontalPager(modifier = modifier, state = pagerState) { index ->
@@ -160,8 +150,19 @@ private fun TabsContent(
                 BuildsListContent(
                     buildsList = uiState.buildsList,
                     refreshingBuildsList = uiState.refreshingBuildsList,
-                    refreshBuildsList = refreshBuildsList,
-                    onBuildClick = onBuildClick::invoke,
+                    uidBuildFieldValue = uiState.uidBuildField.value,
+                    uidBuildFieldChanged = {
+                        onEvent(
+                            TeamsAndBuildsScreenEvents.UidBuildFieldChanged(
+                                it
+                            )
+                        )
+                    },
+                    refreshBuildsList = { onEvent(TeamsAndBuildsScreenEvents.RefreshBuildsList) },
+                    onBuildClick = { idBuild ->
+                        onEvent(TeamsAndBuildsScreenEvents.OnViewingBuildHeroFromUserScreen(idBuild))
+                    },
+                    onDoneButtonClick = { onEvent(TeamsAndBuildsScreenEvents.OnDoneButtonBuildsFilersClick()) }
                 )
             }
 
@@ -169,7 +170,16 @@ private fun TabsContent(
                 TeamsListContent(
                     teamsList = uiState.teamsList.collectAsLazyPagingItems(),
                     refreshingTeamsList = uiState.refreshingTeamsList,
-                    refreshTeamsList = refreshTeamsList::invoke,
+                    uidTeamFieldValue = uiState.uidTeamField.value,
+                    refreshTeamsList = { onEvent(TeamsAndBuildsScreenEvents.RefreshTeamsList) },
+                    uidTeamFieldChanged = {
+                        onEvent(
+                            TeamsAndBuildsScreenEvents.UidTeamFieldChanged(
+                                it
+                            )
+                        )
+                    },
+                    onDoneButtonClick = { onEvent(TeamsAndBuildsScreenEvents.OnDoneButtonTeamsFilersClick()) },
                 )
             }
         }

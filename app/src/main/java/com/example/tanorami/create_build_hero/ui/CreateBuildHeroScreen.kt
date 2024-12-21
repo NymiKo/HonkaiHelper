@@ -1,5 +1,8 @@
 package com.example.tanorami.create_build_hero.ui
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
 import android.content.res.Configuration
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
@@ -15,6 +18,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -48,6 +52,7 @@ import com.example.tanorami.create_build_hero.ui.components.EquipmentBuildCompon
 import com.example.tanorami.create_build_hero.ui.components.EquipmentItem
 import com.example.tanorami.main.ui.MainRoute
 import com.example.tanorami.utils.OnLifecycleEvent
+import com.example.tanorami.utils.toast
 import com.example.ui.theme.AppTheme
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
@@ -272,22 +277,18 @@ private fun TopAppBar(
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-//                    Icon(
-//                        modifier = Modifier.clickable {
-//                            val clipboard =
-//                                context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-//                            val clipData: ClipData = ClipData.newPlainText("UID", uidBuild)
-//                            clipboard.setPrimaryClip(clipData)
-//                            Toast.makeText(
-//                                context,
-//                                R.string.message_uid_build_copied,
-//                                Toast.LENGTH_SHORT
-//                            ).show()
-//                        },
-//                        imageVector = Icons.Default.ContentCopy,
-//                        contentDescription = null,
-//                        tint = MaterialTheme.colorScheme.secondary
-//                    )
+                    Icon(
+                        modifier = Modifier.clickable {
+                            val clipboard =
+                                context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                            val clipData: ClipData = ClipData.newPlainText("UID", uidBuild)
+                            clipboard.setPrimaryClip(clipData)
+                            toast(context, R.string.message_uid_build_copied)
+                        },
+                        imageVector = Icons.Default.ContentCopy,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.secondary
+                    )
 
                     Icon(
                         modifier = Modifier.clickable { changeVisibilityState(true) },

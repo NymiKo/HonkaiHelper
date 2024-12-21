@@ -19,9 +19,9 @@ internal class TeamsFromUsersRemoteDataSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun getTeamsFromUsersList(page: Int): List<TeamFromUserDto> {
+    override suspend fun getTeamsFromUsersList(page: Int, uid: String): List<TeamFromUserDto> {
         return withContext(ioDispatcher) {
-            teamsFromUsersApi.getTeamsFromUsersList(page = page)
+            teamsFromUsersApi.getTeamsFromUsersList(page = page, uid)
         }
     }
 }

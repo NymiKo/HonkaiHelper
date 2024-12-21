@@ -4,7 +4,9 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
+import com.example.common.BuildFilterModel
 import com.example.common.HeroBuildModel
+import com.example.common.TeamFilterModel
 import com.example.common.TeamHeroModel
 import com.example.common.UserAvatarAndNicknameModel
 import com.example.data.source.decoration.DecorationLocalDataSource
@@ -32,7 +34,7 @@ internal class TeamsAndBuildsRepositoryImpl @Inject constructor(
     private val decorationLocalDataSource: DecorationLocalDataSource,
     private val ioDispatcher: CoroutineDispatcher,
 ) : TeamsAndBuildsRepository {
-    override fun getTeamsListFromUsers(): Flow<PagingData<TeamHeroModel>> =
+    override fun getTeamsListFromUsers(uid: String, idHero: Int?): Flow<PagingData<TeamHeroModel>> =
         Pager(
             config = PagingConfig(
                 pageSize = 10,
@@ -40,7 +42,10 @@ internal class TeamsAndBuildsRepositoryImpl @Inject constructor(
                 initialLoadSize = 10
             ),
             pagingSourceFactory = {
-                TeamsFromUsersPagingSourceImpl(teamsFromUsersRemoteDataSource)
+                TeamsFromUsersPagingSourceImpl(
+                    teamsFromUsersRemoteDataSource,
+                    TeamFilterModel(uid, idHero)
+                )
             }
         ).flow.map { pagingData ->
             pagingData.map { teamFromUserDto ->
@@ -63,9 +68,14 @@ internal class TeamsAndBuildsRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun getBuildsListFromUsers(): NetworkResult<List<com.example.common.HeroBuildModel>> =
+    override suspend fun getBuildsListFromUsers(
+        uid: String,
+        idHero: Int?,
+    ): NetworkResult<List<HeroBuildModel>> =
         withContext(ioDispatcher) {
-            when (val result = heroBuildsFromUsersRemoteDataSource.getBuildsListFromUsers()) {
+            when (val result = heroBuildsFromUsersRemoteDataSource.getBuildsListFromUsers(
+                BuildFilterModel(uid, idHero)
+            )) {
                 is NetworkResult.Error -> {
                     return@withContext NetworkResult.Error(result.code)
                 }

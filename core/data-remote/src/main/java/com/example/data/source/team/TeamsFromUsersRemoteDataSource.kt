@@ -5,5 +5,5 @@ import com.example.domain.util.NetworkResult
 
 interface TeamsFromUsersRemoteDataSource {
     suspend fun getTeamsFromUsersListByIdHero(idHero: Int): NetworkResult<List<TeamFromUserDto>>
-    suspend fun getTeamsFromUsersList(page: Int): List<TeamFromUserDto>
+    suspend fun getTeamsFromUsersList(page: Int, uid: String): List<TeamFromUserDto>
 }

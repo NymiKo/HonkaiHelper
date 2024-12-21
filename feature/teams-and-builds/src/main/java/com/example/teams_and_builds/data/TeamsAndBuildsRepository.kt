@@ -7,6 +7,9 @@ import com.example.domain.util.NetworkResult
 import kotlinx.coroutines.flow.Flow
 
 internal interface TeamsAndBuildsRepository {
-    fun getTeamsListFromUsers(): Flow<PagingData<TeamHeroModel>>
-    suspend fun getBuildsListFromUsers(): NetworkResult<List<HeroBuildModel>>
+    fun getTeamsListFromUsers(uid: String, idHero: Int?): Flow<PagingData<TeamHeroModel>>
+    suspend fun getBuildsListFromUsers(
+        uid: String,
+        idHero: Int?,
+    ): NetworkResult<List<HeroBuildModel>>
 }

@@ -3,11 +3,16 @@ package com.example.tanorami.viewing_users_build.ui
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ContentCopy
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -114,14 +119,14 @@ private fun ViewingBuildHeroFromUserScreenContent(
                     )
                 } ?: "",
                 actions = {
-//                    Icon(
-//                        modifier = Modifier.clickable {
-//                            onEvent(ViewingBuildHeroFromUserScreenEvents.OnCopyUIDClick)
-//                        },
-//                        imageVector = Icons.Default.ContentCopy,
-//                        contentDescription = null,
-//                        tint = MaterialTheme.colorScheme.secondary
-//                    )
+                    Icon(
+                        modifier = Modifier.clickable {
+                            onEvent(ViewingBuildHeroFromUserScreenEvents.OnCopyUIDClick)
+                        },
+                        imageVector = Icons.Default.ContentCopy,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.secondary
+                    )
                 },
                 onBack = { onEvent(ViewingBuildHeroFromUserScreenEvents.OnBack) }
             )

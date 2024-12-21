@@ -9,6 +9,6 @@ interface HeroBuildsFromUsersApi {
     @GET("/getBuildsHeroByID.php")
     suspend fun getHeroBuildsFromUsersByIdHero(@Query("idHero") idHero: Int): Response<List<HeroBuildFromUserDto>>
 
-    @GET("/getBuildsHeroList.php")
-    suspend fun getHeroBuildsFromUsersList(): Response<List<HeroBuildFromUserDto>>
+    @GET("/getBuildsHeroList2.php")
+    suspend fun getHeroBuildsFromUsersList(@Query("uid") uid: String): Response<List<HeroBuildFromUserDto>>
 }

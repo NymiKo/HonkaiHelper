@@ -1,5 +1,6 @@
 package com.example.data.source.hero_build
 
+import com.example.common.BuildFilterModel
 import com.example.data.remote.api.build.HeroBuildsFromUsersApi
 import com.example.data.remote.api.build.model.HeroBuildFromUserDto
 import com.example.data.remote.util.handleApi
@@ -19,9 +20,9 @@ internal class HeroBuildsFromUsersRemoteDataSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun getBuildsListFromUsers(): NetworkResult<List<HeroBuildFromUserDto>> {
+    override suspend fun getBuildsListFromUsers(filter: BuildFilterModel): NetworkResult<List<HeroBuildFromUserDto>> {
         return withContext(ioDispatcher) {
-            handleApi { heroBuildsFromUsersApi.getHeroBuildsFromUsersList() }
+            handleApi { heroBuildsFromUsersApi.getHeroBuildsFromUsersList(filter.uid) }
         }
     }
 }

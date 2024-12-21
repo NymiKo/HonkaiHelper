@@ -142,6 +142,8 @@
     <string name="choose_hero">Выбери героя</string>
     <string name="error_upload_avatar">Произошла ошибка</string>
     <string name="this_feature_only_registered_users">Эта функция доступна только авторизованным пользователям</string>
+    <string name="filters">Фильтры</string>
+    <string name="done">Готово</string>
 
 
     <string name="base_build_weapon_transition_name" translatable="false">base_build_weapon_transition_name_%d</string>

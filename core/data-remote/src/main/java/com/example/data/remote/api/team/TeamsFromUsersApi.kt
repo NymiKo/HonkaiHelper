@@ -10,5 +10,8 @@ interface TeamsFromUsersApi {
     suspend fun getTeamsFromUsersListByIdHero(@Query("idHero") idHero: Int): Response<List<TeamFromUserDto>>
 
     @GET("/getTeamsListPaging.php")
-    suspend fun getTeamsFromUsersList(@Query("page") page: Int): List<TeamFromUserDto>
+    suspend fun getTeamsFromUsersList(
+        @Query("page") page: Int,
+        @Query("uid") uid: String? = null,
+    ): List<TeamFromUserDto>
 }
