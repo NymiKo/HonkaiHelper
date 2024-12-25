@@ -53,6 +53,7 @@ import com.example.tanorami.main.presentation.models.MainScreenEvents
 import com.example.tanorami.main.presentation.models.MainScreenSideEffects
 import com.example.tanorami.main.presentation.models.MainScreenUiState
 import com.example.tanorami.main.ui.components.CreateBuildOrTeamDialog
+import com.example.tanorami.main.ui.components.ImportantMessageDialog
 import com.example.tanorami.main.ui.components.UploadingDataDialog
 import com.example.tanorami.profile.ui.ProfileScreen
 import com.example.tanorami.settings.ui.SettingsRoute
@@ -274,6 +275,14 @@ private fun MainScreenContent(
 
         if (uiState.dialogCreateBuildOrTeamVisibilityState) {
             CreateBuildOrTeamDialog(onEvent = onEvent::invoke)
+        }
+
+        if (uiState.dialogImportantMessageVisibilityState) {
+            ImportantMessageDialog(
+                title = uiState.importantMessageModel.headerImportantMessage,
+                text = uiState.importantMessageModel.importantMessage,
+                onOkButtonClick = { onEvent(MainScreenEvents.DialogImportantMessageButtonOkClick) }
+            )
         }
     }
 }

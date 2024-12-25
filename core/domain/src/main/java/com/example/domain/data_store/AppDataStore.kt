@@ -2,7 +2,7 @@ package com.example.domain.data_store
 
 import kotlinx.coroutines.flow.Flow
 
-interface AppDataStore {
+interface AppDataStore : ImportantMessageDataStore {
     val tokenUser: Flow<String>
     val versionDB: Flow<String>
 

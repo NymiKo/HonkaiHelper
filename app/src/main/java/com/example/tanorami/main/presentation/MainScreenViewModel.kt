@@ -8,6 +8,7 @@ import com.example.strings.R
 import com.example.tanorami.main.data.MainScreenRepository
 import com.example.tanorami.main.presentation.models.MainScreenEvents
 import com.example.tanorami.main.presentation.models.MainScreenSideEffects
+import com.example.tanorami.main.presentation.models.MainScreenSideEffects.*
 import com.example.tanorami.main.presentation.models.MainScreenUiState
 import com.example.tanorami.profile.domain.ProfileRepository
 import kotlinx.coroutines.Dispatchers
@@ -46,7 +47,7 @@ class MainScreenViewModel @Inject constructor(
         when (event) {
             MainScreenEvents.DialogUploadingDataButtonOkClick -> {
                 uiState = uiState.copy(dialogUploadingDataVisibilityState = false)
-                sendSideEffect(MainScreenSideEffects.OnLoadDataScreen(remoteVersionDB = uiState.remoteVersionDB))
+                sendSideEffect(OnLoadDataScreen(remoteVersionDB = uiState.remoteVersionDB))
             }
 
             is MainScreenEvents.ChangeVisibilityDialogCreateBuildOrTeam -> {
@@ -54,18 +55,23 @@ class MainScreenViewModel @Inject constructor(
                     uiState =
                         uiState.copy(dialogCreateBuildOrTeamVisibilityState = event.visibility)
                 } else {
-                    sendSideEffect(MainScreenSideEffects.ShowToast(R.string.this_feature_only_registered_users))
+                    sendSideEffect(ShowToast(R.string.this_feature_only_registered_users))
                 }
             }
 
             MainScreenEvents.OnDialogItemCreateTeamClick -> {
-                sendSideEffect(MainScreenSideEffects.OnCreateTeamScreen)
+                sendSideEffect(OnCreateTeamScreen)
                 uiState = uiState.copy(dialogCreateBuildOrTeamVisibilityState = false)
             }
 
             MainScreenEvents.OnDialogItemCreateBuildClick -> {
-                sendSideEffect(MainScreenSideEffects.CreateBuildForHeroScreen)
+                sendSideEffect(CreateBuildForHeroScreen)
                 uiState = uiState.copy(dialogCreateBuildOrTeamVisibilityState = false)
+            }
+
+            MainScreenEvents.DialogImportantMessageButtonOkClick -> {
+                uiState = uiState.copy(dialogImportantMessageVisibilityState = false)
+                saveVersionImportantMessage()
             }
         }
     }
@@ -81,7 +87,13 @@ class MainScreenViewModel @Inject constructor(
                     uiState = uiState.copy(
                         dialogUploadingDataVisibilityState = true,
                         remoteVersionDB = result.data.remoteVersionDB,
-                        message = result.data.message
+                        message = result.data.message,
+                    )
+                }
+                if (result.data.importantMessageModel.show && dataStore.versionImportantMessage.first() != result.data.importantMessageModel.versionImportantMessage) {
+                    uiState = uiState.copy(
+                        dialogImportantMessageVisibilityState = true,
+                        importantMessageModel = result.data.importantMessageModel,
                     )
                 }
             }
@@ -106,5 +118,9 @@ class MainScreenViewModel @Inject constructor(
                 null -> uiState = uiState.copy(userProfileAvatar = "")
             }
         }
+    }
+
+    private fun saveVersionImportantMessage() = viewModelScope.launch {
+        dataStore.saveVersionImportantMessage(uiState.importantMessageModel.versionImportantMessage)
     }
 }

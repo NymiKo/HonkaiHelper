@@ -3,6 +3,8 @@ package com.example.data.db.data_store
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import com.example.domain.data_store.AppDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -13,8 +15,9 @@ class AppDataStoreImpl @Inject constructor(
 ) : AppDataStore {
 
     private companion object {
-        val TOKEN = androidx.datastore.preferences.core.stringPreferencesKey("token")
-        val VERSION_DB = androidx.datastore.preferences.core.stringPreferencesKey("VERSION_DB")
+        val TOKEN = stringPreferencesKey("token")
+        val VERSION_DB = stringPreferencesKey("VERSION_DB")
+        val VERSION_IMPORTANT_MESSAGE = intPreferencesKey("VERSION_IMPORTANT_MESSAGE")
     }
 
     override val tokenUser: Flow<String> = dataStore.data.map { preferences ->
@@ -25,6 +28,10 @@ class AppDataStoreImpl @Inject constructor(
         dataStore.data.map { preferences ->
             preferences[VERSION_DB] ?: ""
         }
+
+    override val versionImportantMessage: Flow<Int> = dataStore.data.map { preference ->
+        preference[VERSION_IMPORTANT_MESSAGE] ?: 0
+    }
 
     override suspend fun saveToken(token: String) {
         dataStore.edit { preferences ->
@@ -41,6 +48,12 @@ class AppDataStoreImpl @Inject constructor(
     override suspend fun saveVersionDB(versionDB: String) {
         dataStore.edit { preferences ->
             preferences[VERSION_DB] = versionDB
+        }
+    }
+
+    override suspend fun saveVersionImportantMessage(version: Int) {
+        dataStore.edit { preference ->
+            preference[VERSION_IMPORTANT_MESSAGE] = version
         }
     }
 }

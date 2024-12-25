@@ -3,6 +3,7 @@ package com.example.tanorami.main.data
 import com.example.data.remote.util.handleApi
 import com.example.domain.di.DispatcherIo
 import com.example.domain.util.NetworkResult
+import com.example.tanorami.main.presentation.models.ImportantMessageModel
 import com.example.tanorami.main.presentation.models.NewDataModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -23,7 +24,13 @@ class MainScreenRepositoryImpl @Inject constructor(
                     return@withContext NetworkResult.Success(
                         NewDataModel(
                             remoteVersionDB = result.data.remoteVersionDB,
-                            message = result.data.message
+                            message = result.data.message,
+                            importantMessageModel = ImportantMessageModel(
+                                importantMessage = result.data.importantMessage,
+                                headerImportantMessage = result.data.headerImportantMessage,
+                                show = result.data.show,
+                                versionImportantMessage = result.data.versionImportantMessage,
+                            ),
                         )
                     )
                 }
