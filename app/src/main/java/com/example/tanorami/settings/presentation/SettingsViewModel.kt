@@ -8,9 +8,9 @@ import com.example.strings.R
 import com.example.tanorami.settings.data.SettingsRepository
 import com.example.tanorami.settings.presentation.models.SettingsScreenEvents
 import com.example.tanorami.settings.presentation.models.SettingsScreenSideEffects
+import com.example.tanorami.settings.presentation.models.SettingsScreenSideEffects.*
 import com.example.tanorami.settings.presentation.models.SettingsScreenUiState
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -27,17 +27,36 @@ class SettingsViewModel @Inject constructor(
             .onEach { versionDB ->
                 uiState = uiState.copy(versionDB = versionDB)
             }
-            .flowOn(Dispatchers.Default)
             .launchIn(viewModelScope)
+        dataStore.showSnowfallAnimation
+            .onEach {
+                uiState = uiState.copy(showSnowfallAnimation = it)
+            }
+            .launchIn(viewModelScope)
+        viewModelScope.launch {
+            uiState = uiState.copy(countSnowflakes = dataStore.countSnowflakes.first())
+        }
     }
 
     override fun onEvent(event: SettingsScreenEvents) {
         when (event) {
             SettingsScreenEvents.CheckUpdate -> checkUpdate()
-            SettingsScreenEvents.OnBack -> sendSideEffect(SettingsScreenSideEffects.OnBack)
-            SettingsScreenEvents.OnSendFeedbackScreen -> sendSideEffect(SettingsScreenSideEffects.OnSendFeedbackScreen)
-            SettingsScreenEvents.DataUpdated -> sendSideEffect(SettingsScreenSideEffects.ShowToast(R.string.data_updated))
-            SettingsScreenEvents.CLickDonateButton -> sendSideEffect(SettingsScreenSideEffects.CLickDonateButton)
+            SettingsScreenEvents.OnBack -> sendSideEffect(OnBack)
+            SettingsScreenEvents.OnSendFeedbackScreen -> sendSideEffect(OnSendFeedbackScreen)
+            SettingsScreenEvents.DataUpdated -> sendSideEffect(ShowToast(R.string.data_updated))
+            SettingsScreenEvents.CLickDonateButton -> sendSideEffect(CLickDonateButton)
+            SettingsScreenEvents.ChangeStateSnowfallAnimation -> {
+                viewModelScope.launch {
+                    dataStore.saveSettingsSnowfallAnimation(!dataStore.showSnowfallAnimation.first())
+                }
+            }
+
+            is SettingsScreenEvents.ChangeCountSnowflakesAnimation -> {
+                viewModelScope.launch {
+                    uiState = uiState.copy(countSnowflakes = event.count)
+                    dataStore.saveCountSnowflakesAnimation(event.count)
+                }
+            }
         }
     }
 

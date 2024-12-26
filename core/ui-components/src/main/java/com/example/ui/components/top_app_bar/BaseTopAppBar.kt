@@ -1,47 +1,61 @@
 package com.example.ui.components.top_app_bar
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 
-@OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
-@androidx.compose.runtime.Composable
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
 fun BaseTopAppBar(
-    modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier.Companion,
-    containerColor: androidx.compose.ui.graphics.Color = androidx.compose.ui.graphics.Color.Companion.Unspecified,
+    modifier: Modifier = Modifier,
+    containerColor: Color = Color.Unspecified,
     title: String,
     navigationIcon: Boolean = true,
-    actions: @androidx.compose.runtime.Composable androidx.compose.foundation.layout.RowScope.() -> Unit = {},
+    actions: @Composable RowScope.() -> Unit = {},
     onBack: () -> Unit = {},
 ) {
-    androidx.compose.material3.TopAppBar(
+    TopAppBar(
         modifier = modifier,
         title = {
-            androidx.compose.material3.Text(
+            Text(
                 text = title,
-                fontWeight = androidx.compose.ui.text.font.FontWeight.Companion.Bold,
-                color = androidx.compose.material3.MaterialTheme.colorScheme.secondary,
-                overflow = androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.secondary,
+                overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
             )
         },
         actions = actions,
         navigationIcon = {
             if (navigationIcon) {
-                androidx.compose.material3.Icon(
-                    modifier = androidx.compose.ui.Modifier.Companion
-                        .clip(androidx.compose.foundation.shape.CircleShape)
+                Icon(
+                    modifier = Modifier.Companion
+                        .clip(CircleShape)
                         .clickable { onBack() }
                         .padding(8.dp),
-                    imageVector = androidx.compose.material.icons.Icons.AutoMirrored.Filled.ArrowBack,
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "",
-                    tint = androidx.compose.material3.MaterialTheme.colorScheme.secondary,
+                    tint = MaterialTheme.colorScheme.secondary,
                 )
             }
         },
-        colors = androidx.compose.material3.TopAppBarDefaults.topAppBarColors(
+        colors = TopAppBarDefaults.topAppBarColors(
             containerColor = containerColor,
         )
     )

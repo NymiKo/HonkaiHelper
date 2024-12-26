@@ -15,6 +15,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -31,6 +35,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.core.ui.theme.DarkGrey
+import com.example.core.ui.theme.Orange
 import com.example.strings.R
 import com.example.tanorami.R.*
 import com.example.tanorami.load_data.ui.LoadDataNavArguments
@@ -40,6 +45,7 @@ import com.example.tanorami.settings.presentation.models.SettingsScreenEvents
 import com.example.tanorami.settings.presentation.models.SettingsScreenSideEffects
 import com.example.tanorami.settings.presentation.models.SettingsScreenUiState
 import com.example.tanorami.utils.toast
+import com.example.ui.components.text.BaseDefaultText
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -127,25 +133,25 @@ private fun SettingsScreenContent(
                     )
 
                     Column {
-                        com.example.ui.components.text.BaseDefaultText(
+                        BaseDefaultText(
                             text = stringResource(id = R.string.app_name),
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold,
                         )
 
-                        com.example.ui.components.text.BaseDefaultText(
+                        BaseDefaultText(
                             text = stringResource(id = R.string.version_app),
                             fontSize = 16.sp,
                         )
 
-                        com.example.ui.components.text.BaseDefaultText(
+                        BaseDefaultText(
                             text = stringResource(id = R.string.version_db, uiState.versionDB),
                             fontSize = 16.sp,
                         )
                     }
                 }
 
-                com.example.ui.components.text.BaseDefaultText(
+                BaseDefaultText(
                     modifier = Modifier.padding(top = 8.dp),
                     text = stringResource(id = R.string.about_developers),
                     fontSize = 16.sp,
@@ -176,6 +182,35 @@ private fun SettingsScreenContent(
                 }
             }
 
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                BaseDefaultText(text = "Снегопад")
+                Spacer(modifier = Modifier.weight(1F))
+                Switch(
+                    checked = uiState.showSnowfallAnimation,
+                    colors = SwitchDefaults.colors(
+                        checkedThumbColor = Orange,
+                    ),
+                    onCheckedChange = { onEvent(SettingsScreenEvents.ChangeStateSnowfallAnimation) }
+                )
+            }
+
+            Column {
+                BaseDefaultText(text = "Количество снежинок", fontSize = 14.sp)
+                Slider(
+                    value = uiState.countSnowflakes,
+                    valueRange = 1F..150F,
+                    steps = 9,
+                    colors = SliderDefaults.colors(
+                        thumbColor = Orange,
+                        inactiveTrackColor = Orange,
+                        activeTickColor = Orange,
+                    ),
+                    onValueChange = { onEvent(SettingsScreenEvents.ChangeCountSnowflakesAnimation(it)) }
+                )
+            }
+
             com.example.ui.components.button.BaseButton(
                 modifier = Modifier.padding(top = 16.dp),
                 text = stringResource(id = R.string.report_an_error),
@@ -185,7 +220,7 @@ private fun SettingsScreenContent(
 
             Spacer(modifier = Modifier.weight(1F))
 
-            com.example.ui.components.text.BaseDefaultText(
+            BaseDefaultText(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
                 text = stringResource(id = R.string.thank_the_developer),
                 fontSize = 12.sp,

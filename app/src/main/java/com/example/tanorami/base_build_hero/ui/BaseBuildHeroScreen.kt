@@ -39,6 +39,7 @@ import com.example.tanorami.info_about_relic.ui.InfoAboutRelicNavArgument
 import com.example.tanorami.info_about_weapon.ui.InfoAboutWeaponNavArguments
 import com.example.tanorami.utils.OnLifecycleEvent
 import com.example.ui.components.button.BaseNextButton
+import com.example.ui.components.top_app_bar.BaseCenterAlignedTopAppBar
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -107,7 +108,7 @@ private fun BaseBuildHeroScreenContent(
 ) {
     Scaffold(
         topBar = {
-            com.example.ui.components.top_app_bar.BaseCenterAlignedTopAppBar(
+            BaseCenterAlignedTopAppBar(
                 title = stringResource(id = R.string.build),
                 onBack = { onEvent(BaseBuildHeroScreenEvents.OnBack) }
             )

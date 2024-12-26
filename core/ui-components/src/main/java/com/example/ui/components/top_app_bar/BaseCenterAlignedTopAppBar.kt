@@ -2,40 +2,56 @@ package com.example.ui.components.top_app_bar
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-@OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
-@androidx.compose.runtime.Composable
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
 fun BaseCenterAlignedTopAppBar(
-    modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier.Companion,
+    modifier: Modifier = Modifier,
     title: String?,
     onBack: () -> Unit,
 ) {
-    androidx.compose.material3.CenterAlignedTopAppBar(
+    CenterAlignedTopAppBar(
         modifier = modifier,
         title = {
-            androidx.compose.material3.Text(
+            Text(
                 text = title ?: "",
-                fontWeight = androidx.compose.ui.text.font.FontWeight.Companion.Bold,
-                color = androidx.compose.material3.MaterialTheme.colorScheme.secondary,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.secondary,
                 maxLines = 1,
                 fontSize = 20.sp,
-                overflow = androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
+                overflow = TextOverflow.Ellipsis
             )
         },
         navigationIcon = {
-            androidx.compose.material3.Icon(
-                modifier = androidx.compose.ui.Modifier.Companion
-                    .clip(androidx.compose.foundation.shape.CircleShape)
+            Icon(
+                modifier = Modifier
+                    .clip(CircleShape)
                     .clickable { onBack() }
                     .padding(8.dp),
-                imageVector = androidx.compose.material.icons.Icons.AutoMirrored.Filled.ArrowBack,
+                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = "",
-                tint = androidx.compose.material3.MaterialTheme.colorScheme.secondary,
+                tint = MaterialTheme.colorScheme.secondary,
             )
-        }
+        },
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+            containerColor = Color.Transparent,
+        )
     )
 }

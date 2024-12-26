@@ -1,6 +1,5 @@
 package com.example.tanorami.main.ui
 
-import android.content.Context
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeOut
@@ -88,7 +87,6 @@ fun MainScreen(
         uiState = state,
         viewModelFactory = viewModelFactory,
         rootNavController = rootNavController,
-        context = context,
         onEvent = viewModel::onEvent
     )
 
@@ -122,7 +120,6 @@ private fun MainScreenContent(
     uiState: MainScreenUiState,
     viewModelFactory: ViewModelProvider.Factory,
     rootNavController: NavController,
-    context: Context,
     onEvent: (MainScreenEvents) -> Unit,
 ) {
     val navController = rememberNavController()
@@ -227,62 +224,65 @@ private fun MainScreenContent(
             }
         }
     ) { innerPadding ->
-        NavHost(
-            modifier = Modifier
-                .padding(innerPadding)
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background),
-            navController = navController,
-            startDestination = MainScreens.HeroesList.route,
-            enterTransition = {
-                slideInVertically(
-                    initialOffsetY = { it / 100 * 3 },
-                    animationSpec = tween(600)
+        Box(modifier = Modifier.fillMaxSize()) {
+            NavHost(
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background),
+                navController = navController,
+                startDestination = MainScreens.HeroesList.route,
+                enterTransition = {
+                    slideInVertically(
+                        initialOffsetY = { it / 100 * 3 },
+                        animationSpec = tween(600)
+                    )
+                },
+                exitTransition = {
+                    fadeOut(animationSpec = tween(200))
+                }
+            ) {
+                heroesListScreen(
+                    onHeroClick = { rootNavController.navigate(InfoAboutHeroNavArguments(it)) },
+                    onSettingsIconClick = { rootNavController.navigate(SettingsRoute) }
                 )
-            },
-            exitTransition = {
-                fadeOut(animationSpec = tween(200))
-            }
-        ) {
-            heroesListScreen(
-                onHeroClick = { rootNavController.navigate(InfoAboutHeroNavArguments(it)) },
-                onSettingsIconClick = { rootNavController.navigate(SettingsRoute) }
-            )
 
-            weaponsListScreen(
-                onWeaponClick = { rootNavController.navigate(InfoAboutWeaponNavArguments(it)) }
-            )
+                weaponsListScreen(
+                    onWeaponClick = { rootNavController.navigate(InfoAboutWeaponNavArguments(it)) }
+                )
 
-            teamsAndBuildsScreen(
-                onBuildHeroClick = {
-                    rootNavController.navigate(
-                        ViewingBuildHeroFromUserNavArguments(
-                            idBuild = it
+                teamsAndBuildsScreen(
+                    onBuildHeroClick = {
+                        rootNavController.navigate(
+                            ViewingBuildHeroFromUserNavArguments(
+                                idBuild = it
+                            )
                         )
+                    }
+                )
+
+                composable(
+                    route = MainScreens.Profile.route,
+                ) {
+                    ProfileScreen(
+                        viewModelFactory = viewModelFactory,
+                        navController = rootNavController,
                     )
                 }
-            )
+            }
 
-            composable(
-                route = MainScreens.Profile.route,
-            ) {
-                ProfileScreen(
-                    viewModelFactory = viewModelFactory,
-                    navController = rootNavController,
+            if (uiState.dialogCreateBuildOrTeamVisibilityState) {
+                CreateBuildOrTeamDialog(onEvent = onEvent::invoke)
+            }
+
+            if (uiState.dialogImportantMessageVisibilityState) {
+                ImportantMessageDialog(
+                    title = uiState.importantMessageModel.headerImportantMessage,
+                    text = uiState.importantMessageModel.importantMessage,
+                    onOkButtonClick = { onEvent(MainScreenEvents.DialogImportantMessageButtonOkClick) }
                 )
             }
-        }
 
-        if (uiState.dialogCreateBuildOrTeamVisibilityState) {
-            CreateBuildOrTeamDialog(onEvent = onEvent::invoke)
-        }
-
-        if (uiState.dialogImportantMessageVisibilityState) {
-            ImportantMessageDialog(
-                title = uiState.importantMessageModel.headerImportantMessage,
-                text = uiState.importantMessageModel.importantMessage,
-                onOkButtonClick = { onEvent(MainScreenEvents.DialogImportantMessageButtonOkClick) }
-            )
         }
     }
 }
