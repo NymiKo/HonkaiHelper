@@ -7,6 +7,7 @@ data class WeaponForBuildRelation(
 
     val idWeapon: Int,
     val top: Int,
+    val tier: Int,
 
     @Relation(parentColumn = "idWeapon", entityColumn = "idWeapon", entity = WeaponEntity::class)
     val weaponEntity: WeaponEntity,

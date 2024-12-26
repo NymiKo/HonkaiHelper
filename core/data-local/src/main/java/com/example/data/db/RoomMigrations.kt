@@ -22,5 +22,6 @@ val MIGRATION_1_2 = object : Migration(1, 2) {
                     "idStat INTEGER NOT NULL, statValue TEXT NOT NULL," +
                     "remark TEXT, idHero INTEGER NOT NULL)"
         )
+        db.execSQL("ALTER TABLE ${RoomContract.tableBuildWeapon} ADD COLUMN tier INTEGER NOT NULL DEFAULT 1")
     }
 }

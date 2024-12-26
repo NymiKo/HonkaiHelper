@@ -128,7 +128,7 @@ private fun BaseBuildHeroScreenContent(
                             .width(72.dp)
                             .height(100.dp)
                             .background(
-                                color = when (weapon.rarity) {
+                                color = when (weapon.weapon.rarity) {
                                     0 -> Blue
                                     1 -> Violet
                                     2 -> Orange
@@ -136,9 +136,10 @@ private fun BaseBuildHeroScreenContent(
                                 },
                                 shape = RoundedCornerShape(10.dp)
                             ),
-                        equipmentImage = weapon.image,
-                        sharedElementKeyTransition = "weapon-${weapon.idWeapon}-base-build",
-                        onClick = { onEvent(BaseBuildHeroScreenEvents.OnInfoAboutWeaponScreen(weapon.idWeapon)) }
+                        tier = weapon.tier,
+                        equipmentImage = weapon.weapon.image,
+                        sharedElementKeyTransition = "weapon-${weapon.weapon.idWeapon}-base-build",
+                        onClick = { onEvent(BaseBuildHeroScreenEvents.OnInfoAboutWeaponScreen(weapon.weapon.idWeapon)) }
                     )
                 }
             )

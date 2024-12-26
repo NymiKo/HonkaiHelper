@@ -11,6 +11,7 @@ data class BuildWeaponEntity(
     val idBuildWeapon: Int,
     val idWeapon: Int,
     val top: Int,
+    val tier: Int,
     val idHero: Int,
 ) {
     companion object {
@@ -18,6 +19,7 @@ data class BuildWeaponEntity(
             idBuildWeapon = buildWeapon.idBuildWeapon,
             idWeapon = buildWeapon.idWeapon,
             top = buildWeapon.top,
+            tier = buildWeapon.tier,
             idHero = buildWeapon.idHero
         )
     }
@@ -26,6 +28,7 @@ data class BuildWeaponEntity(
         idBuildWeapon = idBuildWeapon,
         idWeapon = idWeapon,
         top = top,
+        tier = tier,
         idHero = idHero
     )
 }
