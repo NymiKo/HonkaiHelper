@@ -3,6 +3,7 @@ package com.example.tanorami.main.presentation
 import androidx.lifecycle.viewModelScope
 import com.example.base.BaseViewModel
 import com.example.domain.data_store.AppDataStore
+import com.example.domain.usecase.profile.GetProfileUseCase
 import com.example.domain.util.NetworkResult
 import com.example.strings.R
 import com.example.tanorami.main.data.MainScreenRepository
@@ -10,7 +11,6 @@ import com.example.tanorami.main.presentation.models.MainScreenEvents
 import com.example.tanorami.main.presentation.models.MainScreenSideEffects
 import com.example.tanorami.main.presentation.models.MainScreenSideEffects.*
 import com.example.tanorami.main.presentation.models.MainScreenUiState
-import com.example.tanorami.profile.domain.ProfileRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOn
@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 class MainScreenViewModel @Inject constructor(
     private val repository: MainScreenRepository,
-    private val profileRepository: ProfileRepository,
+    private val getProfileUseCase: GetProfileUseCase,
     private val dataStore: AppDataStore,
 ) : BaseViewModel<MainScreenUiState, MainScreenEvents, MainScreenSideEffects>(
     initialState = MainScreenUiState()
@@ -101,8 +101,8 @@ class MainScreenViewModel @Inject constructor(
     }
 
     private fun getProfileAvatar() = viewModelScope.launch {
-        profileRepository.getProfile()
-        profileRepository.profileFlow.collect { result ->
+        getProfileUseCase.invoke()
+        getProfileUseCase.profileFlow.collect { result ->
             when (result) {
                 is NetworkResult.Error -> {
                     uiState = uiState.copy(userProfileAvatar = "")

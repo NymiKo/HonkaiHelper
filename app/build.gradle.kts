@@ -93,4 +93,5 @@ dependencies {
     implementation(project(":feature:heroes-list"))
     implementation(project(":feature:weapons-list"))
     implementation(project(":feature:teams-and-builds"))
+    implementation(project(":feature:profile"))
 }

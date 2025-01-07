@@ -26,8 +26,6 @@ import com.example.tanorami.load_data.data.LoadDataRepository
 import com.example.tanorami.load_data.data.LoadDataRepositoryImpl
 import com.example.tanorami.main.data.MainScreenRepository
 import com.example.tanorami.main.data.MainScreenRepositoryImpl
-import com.example.tanorami.profile.domain.ProfileRepository
-import com.example.tanorami.profile.domain.ProfileRepositoryImpl
 import com.example.tanorami.send_feedback.data.SendFeedbackRepository
 import com.example.tanorami.send_feedback.data.SendFeedbackRepositoryImpl
 import com.example.tanorami.settings.data.SettingsRepository
@@ -58,10 +56,6 @@ interface RepositoryModule {
     @Singleton
     @Binds
     fun bindRegistrationRepository(repository: RegistrationRepositoryImpl): RegistrationRepository
-
-    @Singleton
-    @Binds
-    fun bindProfileRepository(repository: ProfileRepositoryImpl): ProfileRepository
 
     @Singleton
     @Binds

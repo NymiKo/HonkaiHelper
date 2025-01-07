@@ -4,12 +4,16 @@ import android.content.Context
 import com.example.data.source.decoration.DecorationLocalDataSource
 import com.example.data.source.hero.HeroLocalDataSource
 import com.example.data.source.hero_build.HeroBuildsFromUsersRemoteDataSource
+import com.example.data.source.profile.ProfileRemoteDataSource
 import com.example.data.source.relic.RelicLocalDataSource
 import com.example.data.source.team.TeamsFromUsersRemoteDataSource
 import com.example.data.source.weapon.WeaponLocalDataSource
 import com.example.domain.data_store.AppDataStore
-import com.example.domain.usecase.GetHeroesListWithBaseInfoUseCase
+import com.example.domain.usecase.hero.GetHeroesListWithBaseInfoUseCase
+import com.example.domain.usecase.profile.GetProfileUseCase
+import com.example.domain.usecase.profile.LogoutAccountUseCase
 import com.example.heroes_list.heroes.di.HeroesListComponentDependencies
+import com.example.profile.di.ProfileComponentDependencies
 import com.example.tanorami.activity.MainActivity
 import com.example.teams_and_builds.di.TeamsAndBuildsComponentDependencies
 import com.example.weapons_list.di.WeaponsListComponentDependencies
@@ -23,7 +27,7 @@ import javax.inject.Singleton
     modules = [AppModule::class],
 )
 interface AppComponent : HeroesListComponentDependencies, WeaponsListComponentDependencies,
-    TeamsAndBuildsComponentDependencies {
+    TeamsAndBuildsComponentDependencies, ProfileComponentDependencies {
 
     override val getUseCase: GetHeroesListWithBaseInfoUseCase
     override val getAppDataStore: AppDataStore
@@ -36,6 +40,10 @@ interface AppComponent : HeroesListComponentDependencies, WeaponsListComponentDe
     override val getHeroLocalDataSource: HeroLocalDataSource
     override val getRelicLocalDataSource: RelicLocalDataSource
     override val getDecorationLocalDataSource: DecorationLocalDataSource
+
+    override val getProfileRemoteDataSource: ProfileRemoteDataSource
+    override val getGetProfileUseCase: GetProfileUseCase
+    override val getLogoutAccountUseCase: LogoutAccountUseCase
 
     @Component.Factory
     interface Factory {

@@ -1,8 +1,8 @@
 package com.example.tanorami.auth.login.data.models
 
-import com.example.tanorami.profile.data.model.UserResponse
+import com.example.data.remote.api.profile.model.ProfileDto
 
 data class LoginResponse(
     val token: String,
-    val user: UserResponse
+    val user: ProfileDto,
 )

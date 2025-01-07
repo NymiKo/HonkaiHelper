@@ -2,6 +2,7 @@ package com.example.tanorami.di
 
 import android.content.Context
 import com.example.data.remote.api.build.HeroBuildsFromUsersApi
+import com.example.data.remote.api.profile.ProfileApi
 import com.example.data.remote.api.stat.StatApi
 import com.example.data.remote.api.team.TeamsFromUsersApi
 import com.example.domain.di.DispatcherIo
@@ -15,7 +16,6 @@ import com.example.tanorami.load_data.data.FileManager
 import com.example.tanorami.load_data.data.FileManagerImpl
 import com.example.tanorami.load_data.data.LoadDataService
 import com.example.tanorami.main.data.MainScreenService
-import com.example.tanorami.profile.data.ProfileService
 import com.example.tanorami.send_feedback.data.SendFeedbackService
 import com.example.tanorami.teams.data.TeamsFromUsersService
 import com.example.tanorami.viewing_users_build.data.ViewingBuildHeroFromUserService
@@ -51,10 +51,6 @@ object ApiModule {
         retrofit.create(
             RegistrationService::class.java
         )
-
-    @Provides
-    fun provideProfileService(retrofit: Retrofit): ProfileService =
-        retrofit.create(ProfileService::class.java)
 
     @Provides
     fun providesLoadDataService(retrofit: Retrofit): LoadDataService =
@@ -94,4 +90,7 @@ object ApiModule {
 
     @Provides
     fun providesStatApi(retrofit: Retrofit): StatApi = retrofit.create(StatApi::class.java)
+
+    @Provides
+    fun providesProfileApi(retrofit: Retrofit): ProfileApi = retrofit.create(ProfileApi::class.java)
 }

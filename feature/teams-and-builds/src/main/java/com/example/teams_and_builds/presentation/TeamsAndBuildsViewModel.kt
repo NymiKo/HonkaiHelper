@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.example.base.BaseViewModel
 import com.example.domain.util.NetworkResult
-import com.example.teams_and_builds.data.TeamsAndBuildsRepository
+import com.example.teams_and_builds.domain.TeamsAndBuildsRepository
 import com.example.teams_and_builds.presentation.models.TeamsAndBuildsScreenEvents
 import com.example.teams_and_builds.presentation.models.TeamsAndBuildsScreenSideEffects
 import com.example.teams_and_builds.presentation.models.TeamsAndBuildsScreenSideEffects.*

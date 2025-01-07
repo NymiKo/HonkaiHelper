@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.base.BaseViewModel
 import com.example.base.models.TextField
 import com.example.domain.data_store.AppDataStore
-import com.example.domain.usecase.GetHeroesListWithBaseInfoUseCase
+import com.example.domain.usecase.hero.GetHeroesListWithBaseInfoUseCase
 import com.example.heroes_list.heroes.presentation.models.HeroesListScreenEvents
 import com.example.heroes_list.heroes.presentation.models.HeroesListScreenSideEffects
 import com.example.heroes_list.heroes.presentation.models.HeroesListScreenUiState

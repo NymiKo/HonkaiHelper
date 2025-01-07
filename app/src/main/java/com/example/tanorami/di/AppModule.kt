@@ -17,7 +17,6 @@ import com.example.tanorami.info_about_relic.di.InfoAboutRelicModule
 import com.example.tanorami.info_about_weapon.di.InfoAboutWeaponModule
 import com.example.tanorami.load_data.di.LoadDataModule
 import com.example.tanorami.main.di.MainScreenModule
-import com.example.tanorami.profile.di.ProfileModule
 import com.example.tanorami.send_feedback.di.SendFeedbackModule
 import com.example.tanorami.settings.di.SettingsModule
 import com.example.tanorami.teams.di.TeamsFromUsersModule
@@ -32,7 +31,6 @@ import dagger.Module
         DataModule::class,
         DomainModule::class,
         ViewModelFactoryModule::class,
-        ProfileModule::class,
         BuildsHeroFromUsersModule::class,
         TeamsFromUsersModule::class,
         InfoAboutHeroModule::class,

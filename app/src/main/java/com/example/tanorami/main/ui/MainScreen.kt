@@ -35,13 +35,16 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.example.core.ui.theme.Orange
 import com.example.heroes_list.heroes.navigation.heroesListScreen
+import com.example.profile.navigation.profileScreen
 import com.example.strings.R
+import com.example.tanorami.auth.login.ui.LoginRoute
+import com.example.tanorami.change_nickname.ui.ChangeNicknameNavArguments
+import com.example.tanorami.create_build_hero.ui.CreateBuildForHeroNavArguments
 import com.example.tanorami.create_build_heroes_list.ui.CreateBuildHeroesListNavArguments
 import com.example.tanorami.createteam.ui.CreateTeamNavArguments
 import com.example.tanorami.info_about_hero.ui.InfoAboutHeroNavArguments
@@ -54,7 +57,6 @@ import com.example.tanorami.main.presentation.models.MainScreenUiState
 import com.example.tanorami.main.ui.components.CreateBuildOrTeamDialog
 import com.example.tanorami.main.ui.components.ImportantMessageDialog
 import com.example.tanorami.main.ui.components.UploadingDataDialog
-import com.example.tanorami.profile.ui.ProfileScreen
 import com.example.tanorami.settings.ui.SettingsRoute
 import com.example.tanorami.utils.toast
 import com.example.tanorami.viewing_users_build.ui.ViewingBuildHeroFromUserNavArguments
@@ -261,14 +263,20 @@ private fun MainScreenContent(
                     }
                 )
 
-                composable(
-                    route = MainScreens.Profile.route,
-                ) {
-                    ProfileScreen(
-                        viewModelFactory = viewModelFactory,
-                        navController = rootNavController,
-                    )
-                }
+                profileScreen(
+                    onChangeNicknameScreen = {
+                        rootNavController.navigate(route = ChangeNicknameNavArguments(nickname = it))
+                    },
+                    onEditBuildHeroScreen = {
+                        rootNavController.navigate(route = CreateBuildForHeroNavArguments(idBuild = it))
+                    },
+                    onEditTeamScreen = {
+                        rootNavController.navigate(route = CreateTeamNavArguments(idTeam = it))
+                    },
+                    onLoginScreen = {
+                        rootNavController.navigate(route = LoginRoute)
+                    }
+                )
             }
 
             if (uiState.dialogCreateBuildOrTeamVisibilityState) {
