@@ -236,6 +236,9 @@ private fun SettingsScreenContent(
                 model = R.drawable.donate,
                 contentDescription = null,
             )
+            Spacer(modifier = Modifier
+                .fillMaxWidth()
+                .height(70.dp))
         }
     }
 }

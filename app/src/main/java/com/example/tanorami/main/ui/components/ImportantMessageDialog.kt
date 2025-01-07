@@ -5,11 +5,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import com.example.strings.R
 import com.example.ui.components.text.BaseDefaultText
 
 @Composable
@@ -33,7 +31,7 @@ fun ImportantMessageDialog(
         onDismissRequest = { },
         confirmButton = {
             TextButton(onClick = { onOkButtonClick(false) }) {
-                BaseDefaultText(text = stringResource(id = R.string.ok))
+                BaseDefaultText(text = "Закрыть")
             }
         },
         containerColor = MaterialTheme.colorScheme.background,

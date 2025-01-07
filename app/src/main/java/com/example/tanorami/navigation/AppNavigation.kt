@@ -115,7 +115,10 @@ fun AppNavigation(
                     )
                 }
 
-                composable<SettingsRoute> {
+                composable<SettingsRoute>(
+                    enterTransition = { fadeIn(tween(400)) },
+                    exitTransition = { fadeOut(tween(400)) },
+                ) {
                     SettingsScreen(
                         viewModelFactory = viewModelFactory,
                         navController = navController

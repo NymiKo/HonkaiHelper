@@ -28,13 +28,16 @@ class SettingsViewModel @Inject constructor(
                 uiState = uiState.copy(versionDB = versionDB)
             }
             .launchIn(viewModelScope)
-        dataStore.showSnowfallAnimation
-            .onEach {
-                uiState = uiState.copy(showSnowfallAnimation = it)
-            }
-            .launchIn(viewModelScope)
+//        dataStore.showSnowfallAnimation
+//            .onEach {
+//                uiState = uiState.copy(showSnowfallAnimation = it)
+//            }
+//            .launchIn(viewModelScope)
         viewModelScope.launch {
-            uiState = uiState.copy(countSnowflakes = dataStore.countSnowflakes.first())
+            uiState = uiState.copy(
+                countSnowflakes = dataStore.countSnowflakes.first(),
+                showSnowfallAnimation = dataStore.showSnowfallAnimation.first()
+            )
         }
     }
 
@@ -47,7 +50,8 @@ class SettingsViewModel @Inject constructor(
             SettingsScreenEvents.CLickDonateButton -> sendSideEffect(CLickDonateButton)
             SettingsScreenEvents.ChangeStateSnowfallAnimation -> {
                 viewModelScope.launch {
-                    dataStore.saveSettingsSnowfallAnimation(!dataStore.showSnowfallAnimation.first())
+                    dataStore.saveSettingsSnowfallAnimation(!uiState.showSnowfallAnimation)
+                    uiState = uiState.copy(showSnowfallAnimation = !uiState.showSnowfallAnimation)
                 }
             }
 
